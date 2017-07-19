@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace SSISTeam2
 {
@@ -14,6 +15,12 @@ namespace SSISTeam2
 
         }
 
-        
+        protected void CreateUserWizard1_CreatedUser(object sender, EventArgs e)
+        {
+            
+
+            Response.Redirect("notifysuccess.aspx?");
+        }
+
     }
 }

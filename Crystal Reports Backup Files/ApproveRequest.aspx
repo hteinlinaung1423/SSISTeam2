@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DelegateAuthority.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.DelegateAuthority" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApproveRequest.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ApproveRequest" %>
 
 <!DOCTYPE html>
 
@@ -9,8 +9,13 @@
 <body>
     <form id="form1" runat="server">
     <div>
-            <h1>DepartmentHead</h1>
+
+        <p>Approve Request</p>
+
+
+    
     </div>
     </form>
+
 </body>
 </html>

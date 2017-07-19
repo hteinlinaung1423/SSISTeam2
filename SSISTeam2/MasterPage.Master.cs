@@ -29,5 +29,10 @@ namespace SSISTeam2
             
             Response.Redirect("Login.aspx");
         }
+
+        protected void Default(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
+        }
     }
 }
