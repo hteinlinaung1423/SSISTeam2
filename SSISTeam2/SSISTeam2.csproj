@@ -43,6 +43,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -76,6 +84,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -94,11 +104,28 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\SSISModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+      <LastGenOutput>SSISModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_Code\SSISModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+      <LastGenOutput>SSISModel.cs</LastGenOutput>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MasterPage.Master" />
+    <EntityDeploy Include="App_Code\SSISModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SSISModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="App_Code\SSISModel.edmx.diagram">
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -115,6 +142,84 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Adjustment_Details.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Alert.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Approval_Duties.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Category.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Collection_Point.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Delivery_Details.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Delivery_Orders.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Department.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Dept_Registry.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Favourite.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Inventory_Adjustment.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Monthly_Check_Records.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Purchase_Order.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Purchase_Order_Details.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Request.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Request_Details.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Request_Event.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\SSISModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SSISModel.Context.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\SSISModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\SSISModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Stock_Inventory.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Supplier.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Tender_List.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Tender_List_Details.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Content>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -152,8 +257,9 @@
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App_Code\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
