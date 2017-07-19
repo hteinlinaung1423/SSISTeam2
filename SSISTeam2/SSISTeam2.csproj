@@ -149,64 +149,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
-      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.designer.cs">
-      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
-    </Compile>
-    <Content Include="App_Code\Adjustment_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Alert.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Approval_Duties.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Category.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Collection_Point.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Delivery_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Delivery_Orders.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Department.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Dept_Registry.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Favourite.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Inventory_Adjustment.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Monthly_Check_Records.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Purchase_Order.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Purchase_Order_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Request.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Request_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Request_Event.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
     <Content Include="App_Code\SSISModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -222,18 +164,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SSISModel.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Code\Stock_Inventory.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Supplier.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Tender_List.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Tender_List_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
+    <Compile Include="MonthlyCheck.aspx.cs">
+      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MonthlyCheck.aspx.designer.cs">
+      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
+      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.designer.cs">
+      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
+    </Compile>
     <Content Include="App_Code\DAOServices\IAllocatedService.cs" />
     <Content Include="App_Code\DAOServices\IRequestService.cs" />
     <Content Include="App_Code\DAOServices\RequestService.cs" />
