@@ -102,6 +102,7 @@
     </Content>
     <Content Include="MasterPage.Master" />
     <Content Include="HengTiong.aspx" />
+    <Content Include="xinyi.aspx" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -174,6 +175,13 @@
     </Compile>
     <Compile Include="HengTiong.aspx.designer.cs">
       <DependentUpon>HengTiong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xinyi.aspx.cs">
+      <DependentUpon>xinyi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xinyi.aspx.designer.cs">
+      <DependentUpon>xinyi.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
