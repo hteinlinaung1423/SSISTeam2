@@ -34,6 +34,5 @@ namespace SSISTeam2
         public virtual ICollection<Purchase_Order_Details> Purchase_Order_Details { get; set; }
         public virtual Stock_Inventory Stock_Inventory { get; set; }
         public virtual Tender_List Tender_List { get; set; }
-        public virtual Tender_List Tender_List1 { get; set; }
     }
 }

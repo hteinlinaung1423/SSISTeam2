@@ -11,7 +11,9 @@ namespace SSISTeam2.Views.DepartmentHead
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SSISEntities s = new SSISEntities();
+            
+            
         }
     }
 }
