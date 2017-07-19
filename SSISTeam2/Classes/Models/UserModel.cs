@@ -1,4 +1,8 @@
-﻿namespace SSISTeam2.Classes.Models
+﻿using System.Linq;
+using System.Web.Security;
+
+
+namespace SSISTeam2.Classes.Models
 {
     public class UserModel
     {
@@ -8,6 +12,21 @@
         private Department department;
         private string role;
 
+        public UserModel(string username, SSISEntities context)
+        {
+            context = new SSISEntities();
+            Dept_Registry user = context.Dept_Registry.Where(x => x.username == username).ToList().First();
+            Department dept = context.Departments.Where(x => x.dept_code == user.dept_code).ToList().First();
+            
+                //Membership.FindUsersByName(username);
+            
+
+            this.username = user.username;
+            this.email = Membership.GetUser(username).Email;
+            this.department = dept;
+            this.role = "worker";
+
+        }
         public string Username
         {
             get

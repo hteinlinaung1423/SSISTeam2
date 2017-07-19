@@ -207,6 +207,7 @@
     <Compile Include="Classes\Exceptions\DateNotFoundException.cs" />
     <Compile Include="Classes\Exceptions\IdentifierAlreadySet.cs" />
     <Compile Include="Classes\Exceptions\ItemNotFoundException.cs" />
+    <Compile Include="Classes\Exceptions\RequestAlreadyApprovedException.cs" />
     <Compile Include="Classes\Models\AllocatedModel.cs" />
     <Compile Include="Classes\Models\DisbursementModel.cs" />
     <Compile Include="Classes\Models\ItemModel.cs" />
