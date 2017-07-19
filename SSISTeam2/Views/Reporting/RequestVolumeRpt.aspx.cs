@@ -28,7 +28,7 @@ namespace SSISTeam2.Views.Reporting
 
                 //Fill Months
                 DateTime month = Convert.ToDateTime("1/1/2000");
-                for (int i = 1; i <= 12; i++)
+                for (int i = 0; i <= 11; i++)
                 {
                     DateTime NextMont = month.AddMonths(i);
                     ListItem list = new ListItem();

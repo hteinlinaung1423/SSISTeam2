@@ -29,6 +29,8 @@
                     <asp:DropDownList DataSourceID="sdsCategory" DataTextField="cat_name" DataValueField="cat_name" runat="server" Width="193px"></asp:DropDownList>
 
                 </td>
+                <td>
+                    <asp:Button ID="Generate" runat="server" Text="Generate" /></td>
             </tr>
         </table>
     
