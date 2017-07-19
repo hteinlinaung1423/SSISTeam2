@@ -114,6 +114,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApproveStockAdjustment.aspx" />
+    <Content Include="CreateChartReport.aspx" />
+    <Content Include="FileDiscrepency.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -121,7 +124,6 @@
     </Content>
     <Content Include="MasterPage.Master" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
-    <Content Include="Service1.svc" />
     <EntityDeploy Include="SSISModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SSISModel.Designer.cs</LastGenOutput>
@@ -150,6 +152,7 @@
       <DependentUpon>SSISModel.edmx</DependentUpon>
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
+    <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
@@ -175,11 +178,25 @@
     <Compile Include="Approval_Duties.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApproveStockAdjustment.aspx.cs">
+      <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApproveStockAdjustment.aspx.designer.cs">
+      <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Collection_Point.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreateChartReport.aspx.cs">
+      <DependentUpon>CreateChartReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateChartReport.aspx.designer.cs">
+      <DependentUpon>CreateChartReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Delivery_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -196,10 +213,16 @@
     <Compile Include="Favourite.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FileDiscrepency.aspx.cs">
+      <DependentUpon>FileDiscrepency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FileDiscrepency.aspx.designer.cs">
+      <DependentUpon>FileDiscrepency.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inventory_Adjustment.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
     <Compile Include="MonthlyCheck.aspx.cs">
       <DependentUpon>MonthlyCheck.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -224,9 +247,6 @@
     </Compile>
     <Compile Include="Request_Event.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
     <Compile Include="SSISModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -354,11 +374,12 @@
     <Compile Include="Views\Home\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Work.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="Views\Reporting\Reports\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
