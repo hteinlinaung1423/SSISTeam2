@@ -157,7 +157,9 @@
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Home\Home.aspx" />
-    <Content Include="Views\Reporting\Report Generation.aspx" />
+    <Content Include="Views\Reporting\Reports Main.aspx" />
+    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <Content Include="Views\Reporting\TrendAnalysis.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -253,12 +255,26 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Report Generation.aspx.cs">
-      <DependentUpon>Report Generation.aspx</DependentUpon>
+    <Compile Include="Views\Reporting\Reports Main.aspx.cs">
+      <DependentUpon>Reports Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Reporting\Report Generation.aspx.designer.cs">
-      <DependentUpon>Report Generation.aspx</DependentUpon>
+    <Compile Include="Views\Reporting\Reports Main.aspx.designer.cs">
+      <DependentUpon>Reports Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
+      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
+      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\TrendAnalysis.aspx.cs">
+      <DependentUpon>TrendAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\TrendAnalysis.aspx.designer.cs">
+      <DependentUpon>TrendAnalysis.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
