@@ -145,6 +145,7 @@
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Home\Home.aspx" />
+    <Content Include="Views\Reporting\Report Generation.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -236,6 +237,18 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reporting\Report Generation.aspx.cs">
+      <DependentUpon>Report Generation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\Report Generation.aspx.designer.cs">
+      <DependentUpon>Report Generation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\Reports\CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -320,6 +333,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reporting\Reports\CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
