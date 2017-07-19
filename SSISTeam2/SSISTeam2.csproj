@@ -121,6 +121,22 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\DAOServices\IAllocatedService.cs" />
+    <Content Include="App_Code\DAOServices\IRequestService.cs" />
+    <Content Include="App_Code\DAOServices\RequestService.cs" />
+    <Content Include="App_Code\DTOModels\AllocatedDTO.cs" />
+    <Content Include="App_Code\DTOModels\CategoryDTO.cs" />
+    <Content Include="App_Code\DTOModels\DisbursementDTO.cs" />
+    <Content Include="App_Code\DTOModels\ItemDTO.cs" />
+    <Content Include="App_Code\DTOModels\RecordDTO.cs" />
+    <Content Include="App_Code\DTOModels\RecordDTOCollection.cs" />
+    <Content Include="App_Code\DTOModels\RequestDTO.cs" />
+    <Content Include="App_Code\DTOModels\RequestDTOCollection.cs" />
+    <Content Include="App_Code\DTOModels\RetrievalDTO.cs" />
+    <Content Include="App_Code\DTOModels\StatusEnums.cs" />
+    <Content Include="App_Code\DTOModels\SupplierDTO.cs" />
+    <Content Include="App_Code\DTOModels\UserDTO.cs" />
+    <Content Include="App_Code\Exceptions\IdentifierAlreadySet.cs" />
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,9 +209,7 @@
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Code\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
