@@ -104,7 +104,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MonthlyCheck.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -184,13 +183,6 @@
     <Compile Include="Inventory_Adjustment.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MonthlyCheck.aspx.cs">
-      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MonthlyCheck.aspx.designer.cs">
-      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Monthly_Check_Records.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
@@ -243,22 +235,6 @@
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.designer.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
     </Compile>
-    <Content Include="App_Code\DAOServices\IAllocatedService.cs" />
-    <Content Include="App_Code\DAOServices\IRequestService.cs" />
-    <Content Include="App_Code\DAOServices\RequestService.cs" />
-    <Content Include="App_Code\DTOModels\AllocatedDTO.cs" />
-    <Content Include="App_Code\DTOModels\CategoryDTO.cs" />
-    <Content Include="App_Code\DTOModels\DisbursementDTO.cs" />
-    <Content Include="App_Code\DTOModels\ItemDTO.cs" />
-    <Content Include="App_Code\DTOModels\RecordDTO.cs" />
-    <Content Include="App_Code\DTOModels\RecordDTOCollection.cs" />
-    <Content Include="App_Code\DTOModels\RequestDTO.cs" />
-    <Content Include="App_Code\DTOModels\RequestDTOCollection.cs" />
-    <Content Include="App_Code\DTOModels\RetrievalDTO.cs" />
-    <Content Include="App_Code\DTOModels\StatusEnums.cs" />
-    <Content Include="App_Code\DTOModels\SupplierDTO.cs" />
-    <Content Include="App_Code\DTOModels\UserDTO.cs" />
-    <Content Include="App_Code\Exceptions\IdentifierAlreadySet.cs" />
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -331,7 +307,9 @@
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

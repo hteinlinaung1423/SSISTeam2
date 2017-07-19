@@ -25,6 +25,7 @@ namespace SSISTeam2
         public System.DateTime date_time { get; set; }
         public string username { get; set; }
         public string deleted { get; set; }
+        public string day_of_week { get; set; }
     
         public virtual Dept_Registry Dept_Registry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
