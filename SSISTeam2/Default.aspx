@@ -9,6 +9,7 @@
             <div class="jumbotron">
                 <h1>Hello, world!</h1>
                 <p>Welcome From Logic University</p>
+                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
             </div>
         </div>
