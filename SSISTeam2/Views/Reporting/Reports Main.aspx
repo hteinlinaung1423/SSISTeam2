@@ -13,7 +13,7 @@
         
     </div>
     <div>
-        <p><h3>Please indicate the type of report to generate</h3></p>
+        <h3>Please indicate the type of report to generate</h3>
         <table>
             <tr>
                 <th>Report Type</th>
@@ -22,12 +22,12 @@
             
             <tr>
             <td>Generate Request Volume Reports</td>
-            <td><asp:Button ID="GRVReportBtn" value="Select" runat="server" OnClick="GRVReportBtn_Click"/></td>
+            <td><asp:Button ID="GRVReportBtn" Text="Select" width="142px" runat="server" OnClick="GRVReportBtn_Click"/></td>
             </tr>
            
             <tr>
             <td>Generate Trend Analysis Report </td>
-            <td><asp:Button ID="GTAReportBtn" width="142px" value="Select" runat="server" OnClick="GTAReportBtn_Click" /></td>
+            <td><asp:Button ID="GTAReportBtn" Text="Select" width="142px" runat="server" OnClick="GTAReportBtn_Click" /></td>
             
             </tr>
         </table>        
