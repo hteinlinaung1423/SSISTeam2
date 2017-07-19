@@ -151,7 +151,7 @@
     </Content>
     <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
-    <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
+    <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
@@ -298,12 +298,12 @@
     <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.cs">
-      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
+    <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.cs">
+      <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.designer.cs">
-      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
+    <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.designer.cs">
+      <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>

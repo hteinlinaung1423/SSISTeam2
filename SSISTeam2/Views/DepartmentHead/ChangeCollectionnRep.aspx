@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DepartmentInfo.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.DepartmentInfo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeCollectionnRep.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ChangeCollection_Rep" %>
 
 <!DOCTYPE html>
 
@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-
+    
     Department Name: 
     <asp:Label ID="LabelDeptName" runat="server" Text="Label"></asp:Label>
     <br />
@@ -31,15 +31,17 @@
     <br />
 
     Collection Point: 
-    <asp:Label ID="LabelCollectP" runat="server" Text="Label"></asp:Label>
+    <asp:DropDownList ID="ddlCollectPoint" runat="server"></asp:DropDownList>
     <br />
  
     Representative Name: 
-    <asp:Label ID="LabelRepName" runat="server" Text="Label"></asp:Label>
+    <asp:DropDownList ID="ddlRepName" runat="server"></asp:DropDownList>
     <br />  
 
-        <asp:Button ID="BtnChangeCpRn" runat="server" Text="Change CollectionPoint and RepresentativeName" OnClick="BtnChangeCpRn_Click" />
-         
+        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />       
+        &nbsp;
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+
     </div>
     </form>
 </body>
