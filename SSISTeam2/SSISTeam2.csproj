@@ -112,6 +112,11 @@
     <Content Include="Default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
+    <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
+    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
+    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
+    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Home\Home.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -144,6 +149,41 @@
     </Compile>
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
+      <DependentUpon>ApproveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
+      <DependentUpon>ApproveRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.cs">
+      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.designer.cs">
+      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.cs">
+      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
+      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.cs">
+      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.designer.cs">
+      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
+      <DependentUpon>ViewAllPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
+      <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
