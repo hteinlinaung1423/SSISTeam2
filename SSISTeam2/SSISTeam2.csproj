@@ -145,9 +145,17 @@
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Home\Home.aspx" />
+    <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
+      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.designer.cs">
+      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
+    </Compile>
     <Content Include="App_Code\Adjustment_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Content>
