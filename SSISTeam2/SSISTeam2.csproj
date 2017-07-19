@@ -115,6 +115,7 @@
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
     <Content Include="Views\Home\Home.aspx" />
+    <Content Include="waddy.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,13 @@
     </Compile>
     <Compile Include="HengTiong.aspx.designer.cs">
       <DependentUpon>HengTiong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="waddy.aspx.cs">
+      <DependentUpon>waddy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="waddy.aspx.designer.cs">
+      <DependentUpon>waddy.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
