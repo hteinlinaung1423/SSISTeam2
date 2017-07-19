@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="leonard.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -116,6 +117,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="leonard.aspx.cs">
+      <DependentUpon>leonard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="leonard.aspx.designer.cs">
+      <DependentUpon>leonard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
