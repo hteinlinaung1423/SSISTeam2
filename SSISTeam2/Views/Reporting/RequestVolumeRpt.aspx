@@ -20,8 +20,15 @@
             <tr>
                 <td><asp:DropDownList ID="Year" runat="server" Width="95px"></asp:DropDownList></td>
                 <td><asp:DropDownList ID="Month" runat="server" Width="95px"></asp:DropDownList></td>
-                <td><asp:DropDownList ID="Department" runat="server" Width="193px"></asp:DropDownList></td>
-                <td><asp:DropDownList ID="Category" runat="server" Width="193px"></asp:DropDownList></td>
+                <td>
+                    <asp:SqlDataSource ID="sdsDepartment" runat="server" DataSourceMode="DataReader" ConnectionString="data source=(local);initial catalog=SSIS;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" SelectCommand="SELECT name FROM SSIS.dbo.Department"></asp:SqlDataSource>
+                    <asp:DropDownList DataSourceID="sdsDepartment" runat="server" DataTextField="name" DataValueField="name" Width="193px"></asp:DropDownList>
+                     </td>
+                <td>
+                    <asp:SqlDataSource ID="sdsCategory" runat="server" DataSourceMode="DataReader" ConnectionString="data source=(local);initial catalog=SSIS;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" SelectCommand="SELECT cat_name FROM SSIS.dbo.Category"></asp:SqlDataSource>
+                    <asp:DropDownList DataSourceID="sdsCategory" DataTextField="cat_name" DataValueField="cat_name" runat="server" Width="193px"></asp:DropDownList>
+
+                </td>
             </tr>
         </table>
     
