@@ -7,36 +7,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Supplier
+    public partial class Purchase_Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Supplier()
+        public Purchase_Order()
         {
-            this.Purchase_Order = new HashSet<Purchase_Order>();
-            this.Stock_Inventory = new HashSet<Stock_Inventory>();
-            this.Tender_List = new HashSet<Tender_List>();
+            this.Delivery_Orders = new HashSet<Delivery_Orders>();
+            this.Purchase_Order_Details = new HashSet<Purchase_Order_Details>();
         }
     
+        public int order_id { get; set; }
+        public string clerk_user { get; set; }
+        public System.DateTime order_date { get; set; }
+        public System.DateTime delivery_by { get; set; }
+        public string deliver_address { get; set; }
         public string supplier_id { get; set; }
-        public string name { get; set; }
-        public string contact_name { get; set; }
-        public string contact_num { get; set; }
-        public string fax_num { get; set; }
-        public string address { get; set; }
-        public string gst_reg_num { get; set; }
-        public string logo_path { get; set; }
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Purchase_Order> Purchase_Order { get; set; }
+        public virtual ICollection<Delivery_Orders> Delivery_Orders { get; set; }
+        public virtual Dept_Registry Dept_Registry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stock_Inventory> Stock_Inventory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tender_List> Tender_List { get; set; }
+        public virtual ICollection<Purchase_Order_Details> Purchase_Order_Details { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

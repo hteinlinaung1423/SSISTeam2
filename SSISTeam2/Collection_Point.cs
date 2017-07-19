@@ -7,22 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Request_Event
+    public partial class Collection_Point
     {
-        public int request_event_id { get; set; }
-        public int request_detail_id { get; set; }
-        public string status { get; set; }
-        public int quantity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Collection_Point()
+        {
+            this.Departments = new HashSet<Department>();
+        }
+    
+        public int collection_pt_id { get; set; }
+        public string location { get; set; }
         public System.DateTime date_time { get; set; }
-        public string deleted { get; set; }
         public string username { get; set; }
+        public string deleted { get; set; }
     
         public virtual Dept_Registry Dept_Registry { get; set; }
-        public virtual Request_Details Request_Details { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments { get; set; }
     }
 }

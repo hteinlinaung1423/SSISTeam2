@@ -7,18 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Favourite
+    public partial class Approval_Duties
     {
-        public int favourite_id { get; set; }
         public string username { get; set; }
-        public string item_code { get; set; }
+        public System.DateTime start_date { get; set; }
+        public System.DateTime end_date { get; set; }
+        public string dept_code { get; set; }
+        public int duty_id { get; set; }
+        public System.DateTime created_date { get; set; }
+        public string deleted { get; set; }
     
+        public virtual Department Department { get; set; }
         public virtual Dept_Registry Dept_Registry { get; set; }
-        public virtual Stock_Inventory Stock_Inventory { get; set; }
     }
 }

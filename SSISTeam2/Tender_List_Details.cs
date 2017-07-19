@@ -7,35 +7,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Department
+    public partial class Tender_List_Details
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Department()
+        public Tender_List_Details()
         {
-            this.Approval_Duties = new HashSet<Approval_Duties>();
-            this.Requests = new HashSet<Request>();
+            this.Delivery_Details = new HashSet<Delivery_Details>();
+            this.Purchase_Order_Details = new HashSet<Purchase_Order_Details>();
         }
     
-        public string dept_code { get; set; }
-        public string name { get; set; }
-        public string rep_user { get; set; }
-        public string contact_user { get; set; }
-        public string contact_num { get; set; }
-        public string fax_num { get; set; }
-        public string head_user { get; set; }
-        public int collection_point { get; set; }
-        public string logo_path { get; set; }
+        public int tender_id { get; set; }
+        public decimal price { get; set; }
+        public int rank { get; set; }
+        public int tender_year_id { get; set; }
+        public string item_code { get; set; }
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Approval_Duties> Approval_Duties { get; set; }
-        public virtual Collection_Point Collection_Point1 { get; set; }
+        public virtual ICollection<Delivery_Details> Delivery_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Request> Requests { get; set; }
+        public virtual ICollection<Purchase_Order_Details> Purchase_Order_Details { get; set; }
+        public virtual Stock_Inventory Stock_Inventory { get; set; }
+        public virtual Tender_List Tender_List { get; set; }
+        public virtual Tender_List Tender_List1 { get; set; }
     }
 }

@@ -7,28 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Tender_List
+    public partial class Request
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tender_List()
+        public Request()
         {
-            this.Tender_List_Details = new HashSet<Tender_List_Details>();
+            this.Request_Details = new HashSet<Request_Details>();
         }
     
-        public int tender_year_id { get; set; }
-        public string supplier_id { get; set; }
-        public System.DateTime tender_date { get; set; }
-        public int tender_id { get; set; }
+        public int request_id { get; set; }
+        public string username { get; set; }
+        public string dept_code { get; set; }
+        public string reason { get; set; }
+        public string current_status { get; set; }
+        public string rejected { get; set; }
+        public string rejected_reason { get; set; }
         public string deleted { get; set; }
     
-        public virtual Supplier Supplier { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Dept_Registry Dept_Registry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tender_List_Details> Tender_List_Details { get; set; }
-        public virtual Tender_List_Details Tender_List_Details1 { get; set; }
+        public virtual ICollection<Request_Details> Request_Details { get; set; }
     }
 }

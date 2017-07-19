@@ -7,24 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Tender_List
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Tender_List()
         {
-            this.Stock_Inventory = new HashSet<Stock_Inventory>();
+            this.Tender_List_Details = new HashSet<Tender_List_Details>();
         }
     
-        public int cat_id { get; set; }
-        public string cat_name { get; set; }
+        public int tender_year_id { get; set; }
+        public string supplier_id { get; set; }
+        public System.DateTime tender_date { get; set; }
+        public int tender_id { get; set; }
         public string deleted { get; set; }
     
+        public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stock_Inventory> Stock_Inventory { get; set; }
+        public virtual ICollection<Tender_List_Details> Tender_List_Details { get; set; }
+        public virtual Tender_List_Details Tender_List_Details1 { get; set; }
     }
 }

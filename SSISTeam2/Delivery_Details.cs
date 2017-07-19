@@ -7,22 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Purchase_Order_Details
+    public partial class Delivery_Details
     {
-        public int order_details_id { get; set; }
-        public int tender_id { get; set; }
+        public int delivery_details_id { get; set; }
         public int quantity { get; set; }
-        public int order_id { get; set; }
-        public string status { get; set; }
-        public string cancelled { get; set; }
+        public int delivery_id { get; set; }
+        public int tender_id { get; set; }
+        public string remarks { get; set; }
         public string deleted { get; set; }
     
-        public virtual Purchase_Order Purchase_Order { get; set; }
+        public virtual Delivery_Orders Delivery_Orders { get; set; }
         public virtual Tender_List_Details Tender_List_Details { get; set; }
     }
 }

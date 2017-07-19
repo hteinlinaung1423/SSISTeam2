@@ -7,27 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Collection_Point
+    public partial class Delivery_Orders
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Collection_Point()
+        public Delivery_Orders()
         {
-            this.Departments = new HashSet<Department>();
+            this.Delivery_Details = new HashSet<Delivery_Details>();
         }
     
-        public int collection_pt_id { get; set; }
-        public string location { get; set; }
-        public System.DateTime date_time { get; set; }
-        public string username { get; set; }
+        public int delivery_id { get; set; }
+        public string clerk_user { get; set; }
+        public System.DateTime receive_date { get; set; }
+        public int order_id { get; set; }
         public string deleted { get; set; }
     
-        public virtual Dept_Registry Dept_Registry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<Delivery_Details> Delivery_Details { get; set; }
+        public virtual Dept_Registry Dept_Registry { get; set; }
+        public virtual Purchase_Order Purchase_Order { get; set; }
     }
 }

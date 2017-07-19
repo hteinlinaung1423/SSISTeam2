@@ -7,19 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.App_Code
+namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Monthly_Check_Records
+    public partial class Adjustment_Details
     {
-        public int check_id { get; set; }
-        public System.DateTime date_checked { get; set; }
-        public string clerk_user { get; set; }
-        public string discrepancy { get; set; }
+        public int voucher_detail_id { get; set; }
+        public string item_code { get; set; }
+        public int quantity_adjusted { get; set; }
+        public string reason { get; set; }
+        public int voucher_id { get; set; }
         public string deleted { get; set; }
     
-        public virtual Dept_Registry Dept_Registry { get; set; }
+        public virtual Inventory_Adjustment Inventory_Adjustment { get; set; }
+        public virtual Stock_Inventory Stock_Inventory { get; set; }
     }
 }

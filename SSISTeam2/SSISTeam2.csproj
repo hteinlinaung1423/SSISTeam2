@@ -104,15 +104,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\SSISModel.Context.tt">
+    <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="App_Code\SSISModel.tt">
+    <Content Include="Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="packages.config" />
@@ -120,12 +120,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MasterPage.Master" />
-    <EntityDeploy Include="App_Code\SSISModel.edmx">
+    <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SSISModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="App_Code\SSISModel.edmx.diagram">
-      <DependentUpon>SSISModel.edmx</DependentUpon>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
     <None Include="Web.Debug.config">
@@ -149,6 +149,84 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adjustment_Details.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Alert.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Approval_Duties.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Collection_Point.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Delivery_Details.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Delivery_Orders.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Department.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dept_Registry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Favourite.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory_Adjustment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Monthly_Check_Records.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Order_Details.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Request.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Request_Details.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Request_Event.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stock_Inventory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tender_List.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tender_List_Details.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -156,84 +234,6 @@
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.designer.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
     </Compile>
-    <Content Include="App_Code\Adjustment_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Alert.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Approval_Duties.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Category.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Collection_Point.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Delivery_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Delivery_Orders.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Department.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Dept_Registry.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Favourite.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Inventory_Adjustment.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Monthly_Check_Records.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Purchase_Order.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Purchase_Order_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Request.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Request_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Request_Event.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\SSISModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SSISModel.Context.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\SSISModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\SSISModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Stock_Inventory.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Supplier.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Tender_List.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Tender_List_Details.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
     <Content Include="App_Code\DAOServices\IAllocatedService.cs" />
     <Content Include="App_Code\DAOServices\IRequestService.cs" />
     <Content Include="App_Code\DAOServices\RequestService.cs" />
