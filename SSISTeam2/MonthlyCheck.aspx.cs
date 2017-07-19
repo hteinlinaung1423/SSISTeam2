@@ -11,7 +11,9 @@ namespace SSISTeam2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SSISEntities s = new SSISEntities();
+            List<Supplier> a = s.Suppliers.ToList();
+            Label1.Text = a.First().name;
         }
     }
 }
