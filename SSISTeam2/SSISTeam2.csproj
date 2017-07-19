@@ -101,6 +101,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MasterPage.Master" />
+    <Content Include="HengTiong.aspx" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -166,6 +167,13 @@
     </Compile>
     <Compile Include="Views\Home\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HengTiong.aspx.cs">
+      <DependentUpon>HengTiong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HengTiong.aspx.designer.cs">
+      <DependentUpon>HengTiong.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
