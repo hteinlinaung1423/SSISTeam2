@@ -5,15 +5,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SSISTeam2.Views.DepartmentHead
+
+namespace SSISTeam2
 {
-    public partial class ApproveRequest : System.Web.UI.Page
+    public partial class MonthlyCheck : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             SSISEntities s = new SSISEntities();
-            
-            
+            List<Category> a = s.Categories.ToList();
+            Label1.Text = a.First().cat_name;
         }
     }
 }

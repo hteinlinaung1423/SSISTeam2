@@ -5,15 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SSISTeam2.Views.DepartmentHead
+namespace SSISTeam2
 {
-    public partial class ApproveRequest : System.Web.UI.Page
+    public partial class ViewStoreCatalogue : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            SSISEntities s = new SSISEntities();
-            
-            
+
         }
     }
 }
