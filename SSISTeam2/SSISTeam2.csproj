@@ -104,29 +104,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\SSISModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_Code\SSISModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.cs</LastGenOutput>
-    </Content>
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MasterPage.Master" />
-    <EntityDeploy Include="App_Code\SSISModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SSISModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="App_Code\SSISModel.edmx.diagram">
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -149,21 +132,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\SSISModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SSISModel.Context.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\SSISModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\SSISModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-    </Content>
     <Compile Include="MonthlyCheck.aspx.cs">
       <DependentUpon>MonthlyCheck.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
