@@ -96,6 +96,7 @@
   <ItemGroup>
     <Content Include="leonard.aspx" />
     <Content Include="MonthlyCheck.aspx" />
+    <Content Include="May.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -144,13 +145,6 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="MonthlyCheck.aspx.cs">
-      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MonthlyCheck.aspx.designer.cs">
-      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Default.aspx.cs">
