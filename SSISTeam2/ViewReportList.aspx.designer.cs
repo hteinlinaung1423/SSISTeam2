@@ -11,7 +11,7 @@ namespace SSISTeam2
 {
 
 
-    public partial class MonthlyCheck
+    public partial class ViewReportList
     {
     }
 }
