@@ -56,6 +56,7 @@
           <Property Name="date_time" Type="datetime" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="day_of_week" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Delivery_Details">
           <Key>
@@ -224,7 +225,6 @@
           <Property Name="tender_year_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="supplier_id" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="tender_date" Type="datetime" Nullable="false" />
-          <Property Name="tender_id" Type="int" Nullable="false" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Tender_List_Details">
@@ -586,18 +586,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tender_List_Tender_List_Details">
-          <End Role="Tender_List_Details" Type="Self.Tender_List_Details" Multiplicity="1" />
-          <End Role="Tender_List" Type="Self.Tender_List" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Tender_List_Details">
-              <PropertyRef Name="tender_id" />
-            </Principal>
-            <Dependent Role="Tender_List">
-              <PropertyRef Name="tender_year_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SSISModelStoreContainer">
           <EntitySet Name="Adjustment_Details" EntityType="Self.Adjustment_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
@@ -736,10 +724,6 @@
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="Tender_List" EntitySet="Tender_List" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tender_List_Tender_List_Details" Association="Self.FK_Tender_List_Tender_List_Details">
-            <End Role="Tender_List_Details" EntitySet="Tender_List_Details" />
-            <End Role="Tender_List" EntitySet="Tender_List" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -803,6 +787,7 @@
           <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="day_of_week" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Dept_Registry" Relationship="Self.FK_Collection_Point_Dept_Registry" FromRole="Collection_Point" ToRole="Dept_Registry" />
           <NavigationProperty Name="Departments" Relationship="Self.FK_Department_Collection_Point" FromRole="Collection_Point" ToRole="Department" />
         </EntityType>
@@ -1017,11 +1002,9 @@
           <Property Name="tender_year_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="supplier_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tender_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="tender_id" Type="Int32" Nullable="false" />
           <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_Tender_List_Supplier" FromRole="Tender_List" ToRole="Supplier" />
           <NavigationProperty Name="Tender_List_Details" Relationship="Self.FK_Tender_List_Details_Tender_List" FromRole="Tender_List" ToRole="Tender_List_Details" />
-          <NavigationProperty Name="Tender_List_Details1" Relationship="Self.FK_Tender_List_Tender_List_Details" FromRole="Tender_List" ToRole="Tender_List_Details" />
         </EntityType>
         <EntityType Name="Tender_List_Details">
           <Key>
@@ -1037,7 +1020,6 @@
           <NavigationProperty Name="Purchase_Order_Details" Relationship="Self.FK_Purchase_Order_Details_Tender_List_Details" FromRole="Tender_List_Details" ToRole="Purchase_Order_Details" />
           <NavigationProperty Name="Stock_Inventory" Relationship="Self.FK_Tender_List_Details_Stock_Inventory" FromRole="Tender_List_Details" ToRole="Stock_Inventory" />
           <NavigationProperty Name="Tender_List" Relationship="Self.FK_Tender_List_Details_Tender_List" FromRole="Tender_List_Details" ToRole="Tender_List" />
-          <NavigationProperty Name="Tender_List1" Relationship="Self.FK_Tender_List_Tender_List_Details" FromRole="Tender_List_Details" ToRole="Tender_List" />
         </EntityType>
         <Association Name="FK_Adjustment_Details_Inventory_Adjustment">
           <End Role="Inventory_Adjustment" Type="Self.Inventory_Adjustment" Multiplicity="1" />
@@ -1387,18 +1369,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tender_List_Tender_List_Details">
-          <End Role="Tender_List_Details" Type="Self.Tender_List_Details" Multiplicity="1" />
-          <End Role="Tender_List" Type="Self.Tender_List" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Tender_List_Details">
-              <PropertyRef Name="tender_id" />
-            </Principal>
-            <Dependent Role="Tender_List">
-              <PropertyRef Name="tender_year_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SSISEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Adjustment_Details" EntityType="Self.Adjustment_Details" />
           <EntitySet Name="Alerts" EntityType="Self.Alert" />
@@ -1537,10 +1507,6 @@
             <End Role="Tender_List" EntitySet="Tender_List" />
             <End Role="Tender_List_Details" EntitySet="Tender_List_Details" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tender_List_Tender_List_Details" Association="Self.FK_Tender_List_Tender_List_Details">
-            <End Role="Tender_List_Details" EntitySet="Tender_List_Details" />
-            <End Role="Tender_List" EntitySet="Tender_List" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1602,6 +1568,7 @@
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="day_of_week" ColumnName="day_of_week" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1785,7 +1752,6 @@
                 <ScalarProperty Name="tender_year_id" ColumnName="tender_year_id" />
                 <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
                 <ScalarProperty Name="tender_date" ColumnName="tender_date" />
-                <ScalarProperty Name="tender_id" ColumnName="tender_id" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
               </MappingFragment>
             </EntityTypeMapping>
