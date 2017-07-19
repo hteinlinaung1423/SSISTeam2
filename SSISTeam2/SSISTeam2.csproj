@@ -94,12 +94,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="leonard.aspx" />
+    <Content Include="MonthlyCheck.aspx" />
     <Content Include="May.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MasterPage.Master" />
+    <Content Include="HengTiong.aspx" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -116,6 +119,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="leonard.aspx.cs">
+      <DependentUpon>leonard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="leonard.aspx.designer.cs">
+      <DependentUpon>leonard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -129,13 +139,6 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="May.aspx.cs">
-      <DependentUpon>May.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="May.aspx.designer.cs">
-      <DependentUpon>May.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Default.aspx.cs">
@@ -158,6 +161,13 @@
     </Compile>
     <Compile Include="Views\Home\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HengTiong.aspx.cs">
+      <DependentUpon>HengTiong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HengTiong.aspx.designer.cs">
+      <DependentUpon>HengTiong.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
