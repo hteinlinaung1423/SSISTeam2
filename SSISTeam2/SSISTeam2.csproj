@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,6 +87,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -111,6 +113,7 @@
     </Content>
     <Content Include="MasterPage.Master" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
+    <Content Include="Service1.svc" />
     <EntityDeploy Include="SSISModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SSISModel.Designer.cs</LastGenOutput>
@@ -185,6 +188,7 @@
     <Compile Include="Inventory_Adjustment.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService1.cs" />
     <Compile Include="MonthlyCheck.aspx.cs">
       <DependentUpon>MonthlyCheck.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -209,6 +213,9 @@
     </Compile>
     <Compile Include="Request_Event.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service1.svc.cs">
+      <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
     <Compile Include="SSISModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -327,10 +334,9 @@
     <Compile Include="Views\Home\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Work.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Code\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

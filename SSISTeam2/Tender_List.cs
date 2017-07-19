@@ -23,12 +23,10 @@ namespace SSISTeam2
         public int tender_year_id { get; set; }
         public string supplier_id { get; set; }
         public System.DateTime tender_date { get; set; }
-        public int tender_id { get; set; }
         public string deleted { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tender_List_Details> Tender_List_Details { get; set; }
-        public virtual Tender_List_Details Tender_List_Details1 { get; set; }
     }
 }

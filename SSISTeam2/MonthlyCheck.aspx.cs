@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace SSISTeam2
 {
     public partial class MonthlyCheck : System.Web.UI.Page
@@ -12,8 +13,8 @@ namespace SSISTeam2
         protected void Page_Load(object sender, EventArgs e)
         {
             SSISEntities s = new SSISEntities();
-            List<Supplier> a = s.Suppliers.ToList();
-            Label1.Text = a.First().name;
+            List<Category> a = s.Categories.ToList();
+            Label1.Text = a.First().cat_name;
         }
     }
 }
