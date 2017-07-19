@@ -17,7 +17,8 @@ namespace SSISTeam2
             {
                 Response.Redirect("~/Default.aspx");
             }
-            
+
+            SSISEntities content = new SSISEntities();
         }
     }
 }

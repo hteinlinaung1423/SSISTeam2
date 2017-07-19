@@ -17,6 +17,8 @@ namespace SSISTeam2.App_Code.DTOModels
         private bool wasDisbursed;
         private bool wasAllocated;
 
+       
+
         // Methods
         public List<RetrievalDTO> getRetrievals(Ctx context)
         {
