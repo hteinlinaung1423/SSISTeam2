@@ -11,7 +11,8 @@ namespace SSISTeam2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            SSISEntities s = new SSISEntities();
+            s.
         }
     }
 }
