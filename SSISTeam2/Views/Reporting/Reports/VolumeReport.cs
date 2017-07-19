@@ -16,14 +16,14 @@ namespace SSISTeam2.Views.Reporting.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CrystalReport1 : ReportClass {
+    public class VolumeReport : ReportClass {
         
-        public CrystalReport1() {
+        public VolumeReport() {
         }
         
         public override string ResourceName {
             get {
-                return "CrystalReport1.rpt";
+                return "VolumeReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         
         public override string FullResourceName {
             get {
-                return "SSISTeam2.Views.Reporting.Reports.CrystalReport1.rpt";
+                return "SSISTeam2.Views.Reporting.Reports.VolumeReport.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace SSISTeam2.Views.Reporting.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCrystalReport1 : Component, ICachedReport {
+    public class CachedVolumeReport : Component, ICachedReport {
         
-        public CachedCrystalReport1() {
+        public CachedVolumeReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CrystalReport1 rpt = new CrystalReport1();
+            VolumeReport rpt = new VolumeReport();
             rpt.Site = this.Site;
             return rpt;
         }

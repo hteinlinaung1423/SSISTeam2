@@ -7,63 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2 {
+namespace SSISTeam2.Views.Reporting {
     
     
-    public partial class MonthlyCheck {
+    public partial class RequestVolumeRpt {
         
         /// <summary>
-        /// SortDDL control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SortDDL;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// DateTB control.
+        /// Year control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DateTB;
+        protected global::System.Web.UI.WebControls.DropDownList Year;
         
         /// <summary>
-        /// MonthlyCheckGV control.
+        /// Month control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MonthlyCheckGV;
+        protected global::System.Web.UI.WebControls.DropDownList Month;
         
         /// <summary>
-        /// Table1 control.
+        /// sdsDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
+        protected global::System.Web.UI.WebControls.SqlDataSource sdsDepartment;
         
         /// <summary>
-        /// AddBtn control.
+        /// sdsCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddBtn;
+        protected global::System.Web.UI.WebControls.SqlDataSource sdsCategory;
         
         /// <summary>
-        /// Label1 control.
+        /// Generate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Button Generate;
     }
 }
