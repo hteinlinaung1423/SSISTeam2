@@ -25,6 +25,10 @@ namespace SSISTeam2.Classes.Models
             this.email = Membership.GetUser(username).Email;
             this.department = dept;
             this.role = Roles.GetRolesForUser(username).First().ToString();
+            if (role == null)
+            {
+                this.role = "Employee";
+            }
         }
 
         //public UserModel
