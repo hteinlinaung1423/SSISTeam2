@@ -171,7 +171,9 @@
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
+    <!--    
+<Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
+-->
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
@@ -218,11 +220,16 @@
     </Compile>
     <Compile Include="Classes\EFFacades\FacadeFactory.cs" />
     <Compile Include="Classes\EFFServices\AllocatedService.cs" />
+    <Compile Include="Classes\EFFServices\DisbursementService.cs" />
     <Compile Include="Classes\EFFServices\IAllocatedService.cs" />
+    <Compile Include="Classes\EFFServices\IDisbursementService.cs" />
+    <Compile Include="Classes\EFFServices\IRequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\IRequestService.cs" />
     <Compile Include="Classes\EFFServices\IRetrievalService.cs" />
     <Compile Include="Classes\EFFServices\ItemGetter.cs" />
+    <Compile Include="Classes\EFFServices\RequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
+    <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
     <Compile Include="Classes\EFFServices\RetrievalService.cs" />
     <Compile Include="Classes\Exceptions\DateNotFoundException.cs" />
@@ -484,12 +491,14 @@
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
+    <!-- 
     <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
+-->
     <Compile Include="Views\Employee\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -543,7 +552,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>65454</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
