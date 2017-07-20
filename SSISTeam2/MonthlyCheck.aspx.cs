@@ -35,9 +35,10 @@ namespace SSISTeam2
                     initialQuantity.Add(int.Parse(row.Cells[1].Text));
                 }
                 Session["Quantity"] = initialQuantity;
+                testLabel.Text = (initialQuantity[0] + initialQuantity[1]).ToString();
+
             }
 
-            testLabel.Text = (initialQuantity[0] + initialQuantity[1]).ToString();
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)

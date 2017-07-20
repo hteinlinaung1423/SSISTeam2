@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SSISTeam2
 {
-    public partial class MontlyCheckConfirmation : System.Web.UI.Page
+    public partial class MonthlyCheckConfirmation2 : System.Web.UI.Page
     {
         List<Adjustment_Details> adjDetails;
 
@@ -16,8 +16,6 @@ namespace SSISTeam2
             adjDetails = (List<Adjustment_Details>)Session["Adjustment"];
             confirmationGV.DataSource = adjDetails;
             confirmationGV.DataBind();
-
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)

@@ -127,7 +127,6 @@
   <ItemGroup>
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
-    <Content Include="FileDiscrepency.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
     <Content Include="notifysuccess.aspx" />
@@ -168,11 +167,9 @@
     </Content>
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
@@ -267,13 +264,6 @@
     <Compile Include="Favourite.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FileDiscrepency.aspx.cs">
-      <DependentUpon>FileDiscrepency.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FileDiscrepency.aspx.designer.cs">
-      <DependentUpon>FileDiscrepency.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Inventory_Adjustment.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
@@ -284,15 +274,15 @@
     <Compile Include="MonthlyCheck.aspx.designer.cs">
       <DependentUpon>MonthlyCheck.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Monthly_Check_Records.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="MonthlyCheckConfirmation.aspx.cs">
       <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MonthlyCheckConfirmation.aspx.designer.cs">
       <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Monthly_Check_Records.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="notifysuccess.aspx.cs">
       <DependentUpon>notifysuccess.aspx</DependentUpon>
@@ -349,13 +339,6 @@
     </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.designer.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.cs">
       <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
@@ -503,12 +486,6 @@
     </Compile>
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
