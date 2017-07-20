@@ -172,8 +172,9 @@
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
-    <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
     <Content Include="Views\Reporting\Report Generation.aspx" />
+    <Content Include="Views\StoreClerk\EditDepartment.aspx" />
+    <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\StoreClerk\EditTender.aspx" />
     <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\Reports Main.aspx" />
@@ -325,6 +326,13 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reporting\Reports Main.aspx.cs">
       <DependentUpon>Reports Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -353,6 +361,20 @@
     </Compile>
     <Compile Include="Views\Reporting\TrendAnalysis.aspx.designer.cs">
       <DependentUpon>TrendAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditDepartment.aspx.cs">
+      <DependentUpon>EditDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditDepartment.aspx.designer.cs">
+      <DependentUpon>EditDepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditSupplier.aspx.cs">
+      <DependentUpon>EditSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditSupplier.aspx.designer.cs">
+      <DependentUpon>EditSupplier.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\lowstock.aspx.cs">
       <DependentUpon>lowstock.aspx</DependentUpon>
