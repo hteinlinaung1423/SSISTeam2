@@ -12,8 +12,8 @@ namespace SSISTeam2.Views.StoreClerk
         protected void Page_Load(object sender, EventArgs e)
         {
             SSISEntities s = new SSISEntities();
-            GridView1.DataSource = s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
-            GridView1.DataBind();
+           // GridView1.DataSource = s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
+           // GridView1.DataBind();
         }
 
         protected void MakeOrder(object sender, EventArgs e)

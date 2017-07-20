@@ -55,7 +55,6 @@ namespace SSISTeam2.Views.StoreClerk
                     {
                         curRow.Cells[1].RowSpan = preRow.Cells[1].RowSpan + 1;
                         preRow.Cells[1].Visible = false;
-
                         totalQty = totalQty + Convert.ToInt32(curRow.Cells[2].Text);
                         curRow.Cells[2].Text = totalQty.ToString();
                         curRow.Cells[2].RowSpan = preRow.Cells[2].RowSpan + 1;
