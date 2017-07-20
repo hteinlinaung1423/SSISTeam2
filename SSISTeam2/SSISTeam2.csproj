@@ -215,8 +215,11 @@
     <Compile Include="Classes\EFFServices\AllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IAllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IRequestService.cs" />
+    <Compile Include="Classes\EFFServices\IRetrievalService.cs" />
     <Compile Include="Classes\EFFServices\ItemGetter.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
+    <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
+    <Compile Include="Classes\EFFServices\RetrievalService.cs" />
     <Compile Include="Classes\Exceptions\DateNotFoundException.cs" />
     <Compile Include="Classes\Exceptions\IdentifierAlreadySet.cs" />
     <Compile Include="Classes\Exceptions\ItemNotFoundException.cs" />

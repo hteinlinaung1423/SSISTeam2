@@ -14,24 +14,91 @@ namespace SSISTeam2.Classes.EFFServices
         {
             this.context = context;
         }
-        public AllocatedModelCollection findAllocatedByRequestId(int requestId)
+
+        public AllocatedModelCollection getAllAllocated()
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
-            List<Request> efRequests = context.Requests.Where(x => x.current_status == RequestStatus.APPROVED).ToList();
+            List<Request> efRequests = context.Requests
+                .Where(x => x.current_status == RequestStatus.APPROVED
+                            || x.current_status == RequestStatus.PART_DISBURSED
+                ).ToList();
 
             if (efRequests.Count == 0)
             {
-                throw new ItemNotFoundException();
+                //throw new ItemNotFoundException("No records exist");
+                return null;
             }
 
             List<AllocatedModel> results = new List<AllocatedModel>();
             foreach (var efRequest in efRequests)
             {
-                AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
+                //AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
+                AllocatedModel alloc = findLatestAllocatedByRequestId(efRequest.request_id);
+                if (alloc == null) continue; // SKIP
                 results.Add(alloc);
             }
-            
+
             return new AllocatedModelCollection(results);
+        }
+
+        public AllocatedModel findLatestAllocatedByRequestId(int requestId)
+        {
+            // Get all allocated: depending on:
+            // Determine there's any latest allocation
+            // Find the difference with the previous allocation, to see how much to fulfill
+
+            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+            Request efRequest = context.Requests
+                .Where(x => x.request_id == requestId
+                            && (x.current_status == RequestStatus.APPROVED
+                            || x.current_status == RequestStatus.PART_DISBURSED)
+                ).First();
+
+            if (efRequest == null)
+            {
+                throw new ItemNotFoundException("No records exist");
+            }
+
+            IEnumerable<IGrouping<string, Request_Event>> events = efRequest.Request_Details.SelectMany(x => x.Request_Event).GroupBy(g => g.Request_Details.item_code).ToList();
+
+            Dictionary<ItemModel, int> itemsToFulfill = new Dictionary<ItemModel, int>();
+
+            foreach (IGrouping<string, Request_Event> eventItem in events)
+            {
+                // Grouping:
+                // A101
+                // - Approved, 10
+                // - Allocated, 9
+                // A102
+                // - Approved, 10
+                List<Request_Event> latestAlloc = eventItem.Where(x => x.status == RequestServiceStatus.ALLOCATED).OrderBy(o => o.date_time).ToList();
+                if (latestAlloc.Count == 0) continue;
+
+                int quantityToFulfil = 0;
+
+                if (latestAlloc.Count > 1)
+                {
+                    Request_Event last = latestAlloc.Last();
+                    Request_Event secondLast = latestAlloc[latestAlloc.Count - 2];
+
+                    quantityToFulfil = last.quantity - secondLast.quantity;
+                } else
+                {
+                    quantityToFulfil = latestAlloc.Last().quantity;
+                }
+
+                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
+                itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
+            }
+
+            if (itemsToFulfill.Count == 0)
+            {
+                return null;
+            }
+
+            AllocatedModel alloc = new AllocatedModel(efRequest, itemsToFulfill);
+            
+            return alloc;
         }
 
         public AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId)
@@ -39,19 +106,22 @@ namespace SSISTeam2.Classes.EFFServices
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests
                 .Where(x =>
-                    x.current_status == RequestStatus.APPROVED
+                    (x.current_status == RequestStatus.APPROVED
+                    || x.current_status == RequestStatus.PART_DISBURSED)
                     && x.Department.collection_point == collectionPointId
                 ).ToList();
 
             if (efRequests.Count == 0)
             {
-                throw new ItemNotFoundException();
+                //throw new ItemNotFoundException("No records exist");
+                return null;
             }
 
             List<AllocatedModel> results = new List<AllocatedModel>();
             foreach (var efRequest in efRequests)
             {
-                AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
+                AllocatedModel alloc = findLatestAllocatedByRequestId(efRequest.request_id);
+                if (alloc == null) continue; // SKIP
                 results.Add(alloc);
             }
 
@@ -63,26 +133,29 @@ namespace SSISTeam2.Classes.EFFServices
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests
                 .Where(x =>
-                    x.current_status == RequestStatus.APPROVED
+                    (x.current_status == RequestStatus.APPROVED
+                    || x.current_status == RequestStatus.PART_DISBURSED)
                     && x.dept_code == deptCode
                 ).ToList();
 
             if (efRequests.Count == 0)
             {
-                throw new ItemNotFoundException();
+                //throw new ItemNotFoundException();
+                return null;
             }
 
             List<AllocatedModel> results = new List<AllocatedModel>();
             foreach (var efRequest in efRequests)
             {
-                AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
+                AllocatedModel alloc = findLatestAllocatedByRequestId(efRequest.request_id);
+                if (alloc == null) continue; // SKIP
                 results.Add(alloc);
             }
 
             return new AllocatedModelCollection(results);
         }
 
-        public int allocatedRequest(RequestModel toAllocate, string currentUser)
+        public int allocateRequest(RequestModel toAllocate, string currentUser)
         {
             List<ItemModel> itemsAllocateable = new List<ItemModel>();
             // First, make sure each item can be allocated in its entirety. If it can, allocate it.
