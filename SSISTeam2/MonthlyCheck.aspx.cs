@@ -17,7 +17,7 @@ namespace SSISTeam2
         protected void Page_Load(object sender, EventArgs e)
         {
             context = new SSISEntities();
-            UserModel um = new UserModel(HttpContext.Current.User.Identity.Name, context);
+            UserModel um = new UserModel(HttpContext.Current.User.Identity.Name);
             today = DateTime.Today;
 
             Monthly_Check_Records checkRecord = new Monthly_Check_Records();
