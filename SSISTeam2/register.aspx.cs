@@ -17,9 +17,12 @@ namespace SSISTeam2
 
         protected void CreateUserWizard1_CreatedUser(object sender, EventArgs e)
         {
-            
+            string UN = CreateUserWizard1.UserName.ToString();
 
-            Response.Redirect("notifysuccess.aspx?");
+            Response.Redirect("CreateContactInfo.aspx?key=" + UN);
+
+           
+
         }
 
     }
