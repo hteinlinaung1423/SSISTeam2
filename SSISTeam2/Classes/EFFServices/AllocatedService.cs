@@ -16,6 +16,7 @@ namespace SSISTeam2.Classes.EFFServices
         }
         public AllocatedModelCollection findAllocatedByRequestId(int requestId)
         {
+            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests.Where(x => x.current_status == RequestStatus.APPROVED).ToList();
 
             if (efRequests.Count == 0)
@@ -23,29 +24,135 @@ namespace SSISTeam2.Classes.EFFServices
                 throw new ItemNotFoundException();
             }
 
+            List<AllocatedModel> results = new List<AllocatedModel>();
             foreach (var efRequest in efRequests)
             {
-                AllocatedModel alloc = new AllocatedModel();
-                RequestModel request = new RequestModel(efRequest, ItemGetter._getPendingOrUpdatedItemsForRequest(efRequest));
+                AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
+                results.Add(alloc);
             }
-
             
-            return request;
+            return new AllocatedModelCollection(results);
         }
 
         public AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId)
         {
-            throw new NotImplementedException();
+            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+            List<Request> efRequests = context.Requests
+                .Where(x =>
+                    x.current_status == RequestStatus.APPROVED
+                    && x.Department.collection_point == collectionPointId
+                ).ToList();
+
+            if (efRequests.Count == 0)
+            {
+                throw new ItemNotFoundException();
+            }
+
+            List<AllocatedModel> results = new List<AllocatedModel>();
+            foreach (var efRequest in efRequests)
+            {
+                AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
+                results.Add(alloc);
+            }
+
+            return new AllocatedModelCollection(results);
         }
 
-        public AllocatedModelCollection getAllAllocatedFromDepartment(int departmentId)
+        public AllocatedModelCollection getAllAllocatedFromDepartment(string deptCode)
         {
-            throw new NotImplementedException();
+            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+            List<Request> efRequests = context.Requests
+                .Where(x =>
+                    x.current_status == RequestStatus.APPROVED
+                    && x.dept_code == deptCode
+                ).ToList();
+
+            if (efRequests.Count == 0)
+            {
+                throw new ItemNotFoundException();
+            }
+
+            List<AllocatedModel> results = new List<AllocatedModel>();
+            foreach (var efRequest in efRequests)
+            {
+                AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
+                results.Add(alloc);
+            }
+
+            return new AllocatedModelCollection(results);
         }
 
-        public bool saveNewAllocation(AllocatedModel allocation)
+        public int allocatedRequest(RequestModel toAllocate, string currentUser)
+        {
+            List<ItemModel> itemsAllocateable = new List<ItemModel>();
+            // First, make sure each item can be allocated in its entirety. If it can, allocate it.
+            foreach (var item in toAllocate.Items)
+            {
+                if (item.Key.AvailableQuantity >= item.Value)
+                {
+                    // Can be completely allocated
+                    itemsAllocateable.Add(item.Key);
+                }
+            }
+
+            int added = 0;
+            DateTime timestamp = DateTime.Now;
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    Request efRequest = context.Requests.Find(toAllocate.RequestId);
+                    if (efRequest == null) throw new ItemNotFoundException("Could not find Request object");
+
+                    foreach (var item in itemsAllocateable)
+                    {
+                        // get associated request_detail
+                        Request_Details targetDetail = efRequest.Request_Details.Where(r => r.item_code == item.ItemCode).First();
+                        if (targetDetail == null) throw new ItemNotFoundException("Could not find Request_Details object");
+
+                        // For each item, add a new event that is allocated
+                        Request_Event newEvent = new Request_Event();
+                        newEvent.request_detail_id = targetDetail.request_detail_id;
+
+                        // get the quantity from the provided item quantity in the method arguments
+                        newEvent.quantity = toAllocate.Items.Where(i => i.Key.ItemCode == item.ItemCode).First().Value;
+                        newEvent.status = RequestServiceStatus.ALLOCATED;
+                        newEvent.username = currentUser;
+                        newEvent.date_time = timestamp;
+                        newEvent.deleted = "N";
+
+                        context.Request_Event.Add(newEvent);
+                        added++;
+                    }
+
+                }
+                catch (Exception exec)
+                {
+                    transaction.Rollback();
+                    throw exec;
+                }
+
+                transaction.Commit();
+            }
+            return added;
+        }
+
+        public int reAllocateRequest(RequestModel toAllocate, string currentUser)
         {
             throw new NotImplementedException();
+            //List<ItemModel> notYetAllocated = new List<ItemModel>();
+
+            // Get items that have only been approved
+            //Request efR = context.Requests.Find(toAllocate.RequestId);
+            //List<Request_Event> evs = efR.Request_Details.Select(x => x.Request_Event.OrderBy(o => o.date_time).Last()).ToList();
+
+            //foreach (var item in evs)
+            //{
+            //    if (item.status == RequestServiceStatus.APPROVED)
+            //    {
+
+            //    }
+            //}
         }
     }
 }
