@@ -183,6 +183,7 @@
     <Content Include="Views\Reporting\Reports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
+    <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
@@ -422,6 +423,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\EditSupplier.aspx.designer.cs">
       <DependentUpon>EditSupplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\GenerateDisbursementForm.aspx.cs">
+      <DependentUpon>GenerateDisbursementForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\GenerateDisbursementForm.aspx.designer.cs">
+      <DependentUpon>GenerateDisbursementForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\lowstock.aspx.cs">
       <DependentUpon>lowstock.aspx</DependentUpon>
