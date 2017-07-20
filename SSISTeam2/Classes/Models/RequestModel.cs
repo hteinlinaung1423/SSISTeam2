@@ -9,7 +9,7 @@ namespace SSISTeam2.Classes.Models
 {
     public class RequestModel : AllocatedModel
     {
-        private Department department;
+        
         private string reason;
         private string rejectedReason;
         private bool rejected;
@@ -190,19 +190,6 @@ namespace SSISTeam2.Classes.Models
             set
             {
                 status = value;
-            }
-        }
-
-        public Department Department
-        {
-            get
-            {
-                return department;
-            }
-
-            set
-            {
-                department = value;
             }
         }
     }

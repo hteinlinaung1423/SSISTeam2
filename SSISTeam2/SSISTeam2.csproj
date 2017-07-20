@@ -203,8 +203,10 @@
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\EFFacades\RequestFactory.cs" />
+    <Compile Include="Classes\EFFServices\AllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IAllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IRequestService.cs" />
+    <Compile Include="Classes\EFFServices\ItemGetter.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\Exceptions\DateNotFoundException.cs" />
     <Compile Include="Classes\Exceptions\IdentifierAlreadySet.cs" />
@@ -212,9 +214,10 @@
     <Compile Include="Classes\Exceptions\RequestAlreadyApprovedException.cs" />
     <Compile Include="Classes\Models\AllocatedModel.cs" />
     <Compile Include="Classes\Models\DisbursementModel.cs" />
+    <Compile Include="Classes\Models\IRecordModelCollection.cs" />
     <Compile Include="Classes\Models\ItemModel.cs" />
     <Compile Include="Classes\Models\RecordModel.cs" />
-    <Compile Include="Classes\Models\RecordModelCollection.cs" />
+    <Compile Include="Classes\Models\AllocatedModelCollection.cs" />
     <Compile Include="Classes\Models\RequestModel.cs" />
     <Compile Include="Classes\Models\RequestModelCollection.cs" />
     <Compile Include="Classes\Models\RetrievalModel.cs" />

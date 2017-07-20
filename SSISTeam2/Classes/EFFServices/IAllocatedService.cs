@@ -9,9 +9,9 @@ namespace SSISTeam2.Classes.EFFServices
 {
     interface IAllocatedService
     {
-        RecordModelCollection<AllocatedModel> getAllAllocatedForCollectionPoint(int collectionPointId);
-        RecordModelCollection<AllocatedModel> getAllAllocatedFromDepartment(int departmentId);
-        RecordModelCollection<AllocatedModel> findAllocatedByRequestId(int requestId);
+        AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
+        AllocatedModelCollection getAllAllocatedFromDepartment(int departmentId);
+        AllocatedModelCollection findAllocatedByRequestId(int requestId);
         //RequestDTOCollection getAllAllocatedRequests();
         //RequestDTOCollection getAllPartiallyAllocatedRequests();
         //RequestDTOCollection getAllRequestsDisbursing();
