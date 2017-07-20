@@ -170,6 +170,12 @@
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\Employee\Home.aspx" />
+    <Content Include="Views\Employee\ViewCatalogue.aspx" />
+    <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
+    <Content Include="Views\Reporting\Report Generation.aspx" />
+    <Content Include="Views\StoreClerk\EditTender.aspx" />
+    <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\Reports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
@@ -178,6 +184,9 @@
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
+    <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
+    <Content Include="Views\StoreClerk\ViewTenderList.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -318,6 +327,13 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
+      <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\EmpRequestHistory.aspx.designer.cs">
+      <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reporting\Reports Main.aspx.cs">
       <DependentUpon>Reports Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -367,6 +383,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.designer.cs">
       <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditTender.aspx.cs">
+      <DependentUpon>EditTender.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditTender.aspx.designer.cs">
+      <DependentUpon>EditTender.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
@@ -439,12 +462,33 @@
     <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\Home.aspx.cs">
+    <Compile Include="Views\Employee\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Home\Home.aspx.designer.cs">
+    <Compile Include="Views\Employee\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.cs">
+      <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.designer.cs">
+      <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewSupplierList.aspx.cs">
+      <DependentUpon>ViewSupplierList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewSupplierList.aspx.designer.cs">
+      <DependentUpon>ViewSupplierList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewTenderList.aspx.cs">
+      <DependentUpon>ViewTenderList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewTenderList.aspx.designer.cs">
+      <DependentUpon>ViewTenderList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
