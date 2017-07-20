@@ -55,6 +55,7 @@
         <AssociationConnector Association="SSISModel.FK_Tender_List_Details_Stock_Inventory" ManuallyRouted="false" />
         <AssociationConnector Association="SSISModel.FK_Tender_List_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="SSISModel.FK_Tender_List_Details_Tender_List" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SSISModel.Volume_Request" Width="1.5" PointX="9.375" PointY="2.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
