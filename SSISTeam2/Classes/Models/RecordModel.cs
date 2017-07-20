@@ -9,10 +9,16 @@ namespace SSISTeam2.Classes.Models
 {
     public class RecordModel
     {
-        private int requestId = -1;
-        private UserModel user;
+        private int requestId;
+        private UserModel userModel;
         private DateTime date;
         private Dictionary<ItemModel, int> items;
+        private Department department;
+
+        public RecordModel()
+        {
+
+        }
 
         public virtual int RequestId
         {
@@ -23,7 +29,7 @@ namespace SSISTeam2.Classes.Models
 
             set
             {
-                if (requestId == -1) // Hasn't been assigned
+                if (true)//requestId == -1) // Hasn't been assigned
                 {
                     requestId = value;
                 }
@@ -60,17 +66,44 @@ namespace SSISTeam2.Classes.Models
             }
         }
 
-        internal UserModel User
+        internal UserModel UserModel
         {
             get
             {
-                return user;
+                return userModel;
             }
 
             set
             {
-                user = value;
+                userModel = value;
             }
+        }
+
+        public Department Department
+        {
+            get
+            {
+                return department;
+            }
+
+            set
+            {
+                department = value;
+            }
+        }
+
+        public DateTime getDate()
+        {
+            return Date;
+        }
+
+        public Department getDepartment()
+        {
+            return Department;
+        }
+        public UserModel getUserModel()
+        {
+            return UserModel;
         }
     }
 }
