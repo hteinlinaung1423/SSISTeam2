@@ -27,12 +27,19 @@ namespace SSISTeam2
         {
             System.Web.Security.FormsAuthentication.SignOut();
             
-            Response.Redirect("Login.aspx");
+            Response.Redirect("~/Login.aspx");
         }
 
         protected void Default(object sender, EventArgs e)
         {
             Response.Redirect("~/Default.aspx");
+        }
+
+        protected void LowStock(object sender, EventArgs e)
+        {
+            
+
+            Response.Redirect("~/Views/StoreClerk/lowstock.aspx");
         }
     }
 }
