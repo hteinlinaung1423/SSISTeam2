@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DelegateAuthority.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.DelegateAuthority" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrendAnalysis.aspx.cs" Inherits="SSISTeam2.Views.Reporting.TrendAnalysis" %>
 
 <!DOCTYPE html>
 
@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-            <h1>DepartmentHead</h1>
+    
     </div>
     </form>
 </body>
