@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.DepartmentHead
+namespace SSISTeam2.Views.StoreClerk
 {
 
 
-    public partial class ChangeCollection_Rep
+    public partial class EditDepartment
     {
 
         /// <summary>

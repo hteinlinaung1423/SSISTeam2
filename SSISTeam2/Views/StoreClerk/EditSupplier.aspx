@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeCollection&Rep.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ChangeCollection_Rep" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditSupplier.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.EditSupplier" %>
 
 <!DOCTYPE html>
 

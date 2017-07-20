@@ -10,7 +10,7 @@
 namespace SSISTeam2.Views.DepartmentHead {
     
     
-    public partial class DepartmentInfo {
+    public partial class ChangeCollection_Rep {
         
         /// <summary>
         /// form1 control.
@@ -67,30 +67,57 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Label LabelHeadName;
         
         /// <summary>
-        /// LabelCollectP control.
+        /// lbCurrentCollectP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCollectP;
+        protected global::System.Web.UI.WebControls.Label lbCurrentCollectP;
         
         /// <summary>
-        /// LabelRepName control.
+        /// ddlCollectPoint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelRepName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCollectPoint;
         
         /// <summary>
-        /// BtnChangeCpRn control.
+        /// lbRepName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnChangeCpRn;
+        protected global::System.Web.UI.WebControls.Label lbRepName;
+        
+        /// <summary>
+        /// ddlRepName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRepName;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }

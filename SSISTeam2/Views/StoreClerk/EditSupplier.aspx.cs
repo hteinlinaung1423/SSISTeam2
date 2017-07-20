@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SSISTeam2.Views.DepartmentHead
+namespace SSISTeam2.Views.StoreClerk
 {
-    public partial class ChangeCollection_Rep : System.Web.UI.Page
+    public partial class EditSupplier : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

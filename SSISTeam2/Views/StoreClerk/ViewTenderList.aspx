@@ -19,11 +19,6 @@
 
         </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                <asp:HyperLink ID="HyperLink1" runat="server">Add New Tender</asp:HyperLink>
-            </div>
-        </div>
 
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="tender_id,tender_year_id">
             <Columns>
@@ -35,15 +30,6 @@
                 <asp:BoundField DataField="tender_id" HeaderText="tender_id" InsertVisible="False" ReadOnly="True" SortExpression="tender_id" />
                 <asp:BoundField DataField="item_code" HeaderText="item_code" SortExpression="item_code" />
                 <asp:BoundField DataField="tender_year_id" HeaderText="tender_year_id" InsertVisible="False" ReadOnly="True" SortExpression="tender_year_id" />
-
-                <%--<asp:HyperLinkField HeaderText="Edit" DataTextField="HyperLink2" />
-                <asp:HyperLinkField HeaderText="Delete" DataTextField="HyperLink3" />--%>
-
-                <%--  <asp:TemplateField HeaderText="Edit">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="edit" runat="server" >Edit</asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>--%>
 
                 <asp:TemplateField>
                     <HeaderTemplate>

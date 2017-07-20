@@ -11,12 +11,13 @@ namespace SSISTeam2.Classes.EFFServices
     {
         AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
         AllocatedModelCollection getAllAllocatedFromDepartment(string deptCode);
-        AllocatedModelCollection findAllocatedByRequestId(int requestId);
+        AllocatedModelCollection getAllAllocated();
+        AllocatedModel findLatestAllocatedByRequestId(int requestId);
         //RequestDTOCollection getAllAllocatedRequests();
         //RequestDTOCollection getAllPartiallyAllocatedRequests();
         //RequestDTOCollection getAllRequestsDisbursing();
         //RequestDTOCollection getAllDisbursedRequests();
-        int allocatedRequest(RequestModel toAllocate, string currentUser);
+        int allocateRequest(RequestModel toAllocate, string currentUser);
         int reAllocateRequest(RequestModel toAllocate, string currentUser);
     }
 }
