@@ -42,6 +42,7 @@ namespace SSISTeam2.Classes.Models
         public static string UPDATED = "Updated";
 
         public static string ALLOCATED = "Allocated";
+        public static string RETRIEVED = "Retrieved";
         public static string DISBURSING = "Disbursing";
 
     }
