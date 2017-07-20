@@ -20,10 +20,11 @@ namespace SSISTeam2
         {
             context = new SSISEntities();
             UserModel um = new UserModel(HttpContext.Current.User.Identity.Name);
+            UserModel deptHead = um.FindDeptHead();
             today = DateTime.Today;
 
             DateTB.Text = today.Date.ToString("dd/MM/yyyy");
-            testLabel.Text = um.ContactNumber + um.Email + um.Username + um.Role;
+            testLabel.Text = deptHead.ContactNumber + deptHead.Email + deptHead.Username + deptHead.Role + deptHead.Department.dept_code;
             
             if (!IsPostBack)
             {
@@ -35,7 +36,7 @@ namespace SSISTeam2
                     initialQuantity.Add(int.Parse(row.Cells[1].Text));
                 }
                 Session["Quantity"] = initialQuantity;
-                testLabel.Text = (initialQuantity[0] + initialQuantity[1]).ToString();
+                //testLabel.Text = (initialQuantity[0] + initialQuantity[1]).ToString();
 
             }
 
