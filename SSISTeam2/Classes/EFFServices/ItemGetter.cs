@@ -53,21 +53,12 @@ namespace SSISTeam2.Classes.EFFServices
 
                 details.ForEach(x =>
                 {
-                    List<Request_Event> events = x.Request_Event.Where(e => e.status == status).ToList();
-                    int count = events.Count();
-                    int qty = 0;
+                    Request_Event eventItem = x.Request_Event.Where(e => e.status == status).OrderBy(o => o.date_time).Last();
 
-                    if (count == 1)
-                    { // There is one event for this item's status (e.g. no allocated)
-                        qty = events.First().quantity;
-                    }
-                    else if (count > 1)
-                    { // Multiple events for this status (e.g. allocated twice)
-                        qty = events.Select(e => e.quantity).Sum();
-                    }
-                    else if (count == 0)
+                    int qty = 0;
+                    if (eventItem != null)
                     {
-                        throw new ItemNotFoundException("Item not found");
+                        qty = eventItem.quantity;
                     }
 
                     itemsAndQuantities.Add(new ItemModel(x.Stock_Inventory), qty);

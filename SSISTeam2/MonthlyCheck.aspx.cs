@@ -15,7 +15,7 @@ namespace SSISTeam2
         protected void Page_Load(object sender, EventArgs e)
         {
             SSISEntities context = new SSISEntities();
-            UserModel um = new UserModel(HttpContext.Current.User.Identity.Name, context);
+            UserModel um = new UserModel(HttpContext.Current.User.Identity.Name);
             today = DateTime.Today;
             DateTB.Text = today.Date.ToString("dd/MM/yyyy");
             Label1.Text = um.ContactNumber + um.Email + um.Username + um.Role;
