@@ -159,6 +159,7 @@
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\Reports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
@@ -274,6 +275,13 @@
     </Compile>
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
+      <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\EmpRequestHistory.aspx.designer.cs">
+      <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reporting\Reports Main.aspx.cs">
       <DependentUpon>Reports Main.aspx</DependentUpon>
