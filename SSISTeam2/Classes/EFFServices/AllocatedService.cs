@@ -30,7 +30,7 @@ namespace SSISTeam2.Classes.EFFServices
             }
 
             
-            return request;
+            return null;
         }
 
         public AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId)
