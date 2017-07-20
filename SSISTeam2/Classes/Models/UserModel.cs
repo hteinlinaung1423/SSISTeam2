@@ -24,7 +24,7 @@ namespace SSISTeam2.Classes.Models
             this.username = user.username;
             this.email = Membership.GetUser(username).Email;
             this.department = dept;
-            this.role = "worker";
+            this.role = Roles.GetRolesForUser(username).ToString();
 
         }
         public string Username

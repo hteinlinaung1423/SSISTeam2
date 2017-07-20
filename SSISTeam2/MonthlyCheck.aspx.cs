@@ -19,11 +19,14 @@ namespace SSISTeam2
             today = DateTime.Today;
             DateTB.Text = today.Date.ToString("dd/MM/yyyy");
             Label1.Text = um.ContactNumber + um.Email + um.Username;
+            TableRow tr = new TableRow();
+            Table1.Rows.Add(tr);
         }
 
         protected void AddBtn_Click(object sender, EventArgs e)
         {
-            
+            TableRow tr = new TableRow();
+            Table1.Rows.Add(tr);
         }
     }
 }
