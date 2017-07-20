@@ -127,6 +127,7 @@
     <Content Include="CreateChartReport.aspx" />
     <Content Include="FileDiscrepency.aspx" />
     <Content Include="MonthlyCheck.aspx" />
+    <Content Include="MonthlyCheckConfirmation.aspx" />
     <Content Include="notifysuccess.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -276,6 +277,13 @@
     </Compile>
     <Compile Include="Monthly_Check_Records.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonthlyCheckConfirmation.aspx.cs">
+      <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MonthlyCheckConfirmation.aspx.designer.cs">
+      <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
     </Compile>
     <Compile Include="notifysuccess.aspx.cs">
       <DependentUpon>notifysuccess.aspx</DependentUpon>
