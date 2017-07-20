@@ -159,6 +159,7 @@
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
     <Content Include="Views\Reporting\Report Generation.aspx" />
+    <Content Include="Views\StoreClerk\EditTender.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
@@ -273,6 +274,13 @@
     </Compile>
     <Compile Include="Views\Reporting\Report Generation.aspx.designer.cs">
       <DependentUpon>Report Generation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditTender.aspx.cs">
+      <DependentUpon>EditTender.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\EditTender.aspx.designer.cs">
+      <DependentUpon>EditTender.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>

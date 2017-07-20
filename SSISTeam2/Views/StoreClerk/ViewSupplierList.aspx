@@ -16,6 +16,9 @@
                 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox></div>
                 
          </div>   
+
+         <asp:HyperLink ID="HyperLink1" runat="server">Add New Supplier</asp:HyperLink> 
+
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="supplier_id">
                 <Columns>
                     <asp:BoundField DataField="name" HeaderText="Supplier Name" SortExpression="name" />
@@ -27,6 +30,26 @@
                     <asp:BoundField DataField="gst_reg_num" HeaderText="GST Registration Number" SortExpression="gst_reg_num" />
                     <asp:BoundField DataField="supplier_id" HeaderText="Supplier ID" ReadOnly="True" SortExpression="supplier_id" />
                     <asp:BoundField DataField="deleted" HeaderText="Deleted" SortExpression="deleted" />
+
+                    <asp:TemplateField>
+                    <HeaderTemplate>
+                        Edit
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                       <asp:HyperLink ID="edit" runat="server" Text="Edit" ></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+
+                 <asp:TemplateField>
+                    <HeaderTemplate>
+                        Delete
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                       <asp:HyperLink ID="delete" runat="server" Text="Delete" ></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
                 </Columns>
                
             </asp:GridView>
