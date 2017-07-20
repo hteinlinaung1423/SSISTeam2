@@ -100,7 +100,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <asp:Button ID="logout" runat="server" CausesValidation="false" Text="Logout" class="btn btn-block btn-primary" OnClick="Logout" /></li>
-
+                             
 
                             <li>
                                 <asp:Button ID="Dashboard" runat="server" CausesValidation="false" Text="Dashboard" class="btn btn-block btn-primary" OnClick="Default"/></li>
@@ -113,6 +113,9 @@
                             <% }
                                 if (Page.User.IsInRole("Clerk"))
                                 { %>
+                             <li>
+                                <asp:Button ID="message" runat="server" CausesValidation="false" Text="Message" class="btn btn-block btn-primary" OnClick="LowStock"/></li>
+
                             <li>
                                 <asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" class="btn btn-block btn-primary" /></li>
                             <li>
@@ -128,8 +131,7 @@
                             <% }
                                 if (Page.User.IsInRole("Manager"))
                                 { %>
-                            <li>
-                                <asp:Button ID="message" runat="server" CausesValidation="false" Text="Message" class="btn btn-block btn-primary" /></li>
+                          
                             <% } %>
                         </ul>
                     </li>

@@ -12,9 +12,9 @@ namespace SSISTeam2.Classes.Models
         private Department department;
         private string role;
 
-        public UserModel(string username, SSISEntities context)
+        public UserModel(string username)
         {
-            context = new SSISEntities();
+            SSISEntities context = new SSISEntities();
             Dept_Registry user = context.Dept_Registry.Where(x => x.username == username).ToList().First();
             Department dept = context.Departments.Where(x => x.dept_code == user.dept_code).ToList().First();
             
@@ -24,9 +24,14 @@ namespace SSISTeam2.Classes.Models
             this.username = user.username;
             this.email = Membership.GetUser(username).Email;
             this.department = dept;
-            this.role = "worker";
-
+            this.role = Roles.GetRolesForUser(username).First().ToString();
+            if (role == null)
+            {
+                this.role = "Employee";
+            }
         }
+
+        //public UserModel
         public string Username
         {
             get
