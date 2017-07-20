@@ -155,7 +155,9 @@
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
-    <Content Include="Views\Home\Home.aspx" />
+    <Content Include="Views\Employee\Home.aspx" />
+    <Content Include="Views\Employee\ViewCatalogue.aspx" />
+    <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
     <Content Include="Views\Reporting\Report Generation.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Web.config">
@@ -248,6 +250,20 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\ViewDetailsOfRequests.aspx.cs">
+      <DependentUpon>ViewDetailsOfRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\ViewDetailsOfRequests.aspx.designer.cs">
+      <DependentUpon>ViewDetailsOfRequests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reporting\Report Generation.aspx.cs">
       <DependentUpon>Report Generation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -326,11 +342,11 @@
     <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\Home.aspx.cs">
+    <Compile Include="Views\Employee\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Home\Home.aspx.designer.cs">
+    <Compile Include="Views\Employee\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
