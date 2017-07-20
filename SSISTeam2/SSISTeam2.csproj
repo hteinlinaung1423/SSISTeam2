@@ -157,11 +157,11 @@
     </Content>
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
-    <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
-    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
-    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
-    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\Home\DepartmentHead\ApproveRequest.aspx" />
+    <Content Include="Views\Home\DepartmentHead\ChangeCollectionnRep.aspx" />
+    <Content Include="Views\Home\DepartmentHead\DelegateAuthority.aspx" />
+    <Content Include="Views\Home\DepartmentHead\DepartmentInfo.aspx" />
+    <Content Include="Views\Home\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\Reports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
@@ -201,6 +201,7 @@
     <Compile Include="Classes\Exceptions\IdentifierAlreadySet.cs" />
     <Compile Include="Classes\Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Classes\Models\AllocatedModel.cs" />
+    <Compile Include="Classes\Models\NotUsedDepartment.cs" />
     <Compile Include="Classes\Models\DisbursementModel.cs" />
     <Compile Include="Classes\Models\ItemModel.cs" />
     <Compile Include="Classes\Models\RecordModel.cs" />
@@ -369,39 +370,39 @@
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
+    <Compile Include="Views\Home\DepartmentHead\ApproveRequest.aspx.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
+    <Compile Include="Views\Home\DepartmentHead\ApproveRequest.aspx.designer.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.cs">
+    <Compile Include="Views\Home\DepartmentHead\ChangeCollectionnRep.aspx.cs">
       <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.designer.cs">
+    <Compile Include="Views\Home\DepartmentHead\ChangeCollectionnRep.aspx.designer.cs">
       <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.cs">
+    <Compile Include="Views\Home\DepartmentHead\DelegateAuthority.aspx.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
+    <Compile Include="Views\Home\DepartmentHead\DelegateAuthority.aspx.designer.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.cs">
+    <Compile Include="Views\Home\DepartmentHead\DepartmentInfo.aspx.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.designer.cs">
+    <Compile Include="Views\Home\DepartmentHead\DepartmentInfo.aspx.designer.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
+    <Compile Include="Views\Home\DepartmentHead\ViewAllPending.aspx.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
+    <Compile Include="Views\Home\DepartmentHead\ViewAllPending.aspx.designer.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\Home.aspx.cs">
