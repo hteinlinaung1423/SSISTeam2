@@ -40,7 +40,7 @@ namespace SSISTeam2.Classes.Models
         }
         public RequestModel(Request efRequest, Department efDepartment, Dictionary<ItemModel, int> items) : this(efRequest, efDepartment, items, DateTime.Now)
         {
-            Date = _getLatestDateTime();
+            Date = _getLatestDateTime(Status);
         }
         public RequestModel(Request efRequest, Department efDepartment, Dictionary<ItemModel, int> items, DateTime date)
         {
@@ -100,30 +100,6 @@ namespace SSISTeam2.Classes.Models
         public Dictionary<ItemModel, int> getShortfall(RetrievalModel retrieved)
         {
             throw new NotImplementedException();
-        }
-
-        // Private Methods
-        private DateTime _getLatestDateTime()
-        {
-            using (SSISEntities context = new SSISEntities())
-            {
-                Request thing = context.Requests.Find(RequestId);
-                if (thing != null)
-                { // Found one
-                    List<Request_Details> deets = thing.Request_Details.ToList();
-                    if (deets.Count > 0)
-                    {
-                        List<Request_Event> events = deets.First().Request_Event.Where(x => x.status == Status).ToList();
-                        if (events.Count > 0)
-                        {
-                            return events.First().date_time;
-                        }
-                    }
-                }
-
-                throw new DateNotFoundException();
-                //return DateTime.Now;
-            }
         }
 
         // Properties
