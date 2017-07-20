@@ -27,7 +27,7 @@ namespace SSISTeam2.Classes.Models
             this.role = Roles.GetRolesForUser(username).First().ToString();
         }
 
-        public UserModel
+        //public UserModel
         public string Username
         {
             get
