@@ -168,13 +168,14 @@
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
-    <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
-    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
-    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
-    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
+    <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
+    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
+    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
+    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\Report Generation.aspx" />
     <Content Include="Views\StoreClerk\EditTender.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
@@ -336,6 +337,41 @@
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.designer.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
+      <DependentUpon>ApproveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
+      <DependentUpon>ApproveRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.cs">
+      <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.designer.cs">
+      <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.cs">
+      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
+      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.cs">
+      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.designer.cs">
+      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
+      <DependentUpon>ViewAllPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
+      <DependentUpon>ViewAllPending.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reporting\Reports Main.aspx.cs">
       <DependentUpon>Reports Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -435,30 +471,6 @@
     <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.cs">
-      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.designer.cs">
-      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.cs">
-      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
-      <DependentUpon>DelegateAuthority.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.cs">
-      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.designer.cs">
-      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
-      <DependentUpon>ViewAllPending.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
-      <DependentUpon>ViewAllPending.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Employee\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -488,7 +500,9 @@
       <DependentUpon>ViewTenderList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Home\DepartmentHead\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
