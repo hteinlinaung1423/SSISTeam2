@@ -9,8 +9,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:Label ID="Label1" runat="server" Text="Label"> Department</asp:Label>
-      
+       
+        Date: <asp:Label ID="lbCurrentDate" runat="server" Text="Label"></asp:Label>
+        <br />
 
         Delegate Employee:<asp:DropDownList ID="ddlEmployee" runat="server"></asp:DropDownList>
         <br />
@@ -23,8 +24,11 @@
         End Date:<asp:TextBox ID="tbEndDate" runat="server" TextMode="Date"></asp:TextBox>
         <br />
 
-        <asp:Button ID="btnSave" runat="server" Text="Save" />
+        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+
+         <br />
+        <asp:Label ID="lbDateError" runat="server" ForeColor="#FF3300"></asp:Label>
 
     </div>
     </form>

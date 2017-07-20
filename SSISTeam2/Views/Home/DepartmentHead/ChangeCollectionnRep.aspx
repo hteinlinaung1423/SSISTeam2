@@ -30,11 +30,19 @@
     <asp:Label ID="LabelHeadName" runat="server" Text="Label"></asp:Label>
     <br />
 
-    Collection Point: 
+    Current Collection Point:
+    <asp:Label ID="lbCurrentCollectP" runat="server" Text="Label"></asp:Label>
+    <br />
+
+    New Collection Point: 
     <asp:DropDownList ID="ddlCollectPoint" runat="server"></asp:DropDownList>
     <br />
  
-    Representative Name: 
+    Current Representative Name:
+    <asp:Label ID="lbRepName" runat="server" Text="Label"></asp:Label>
+    <br />
+
+    New Representative Name: 
     <asp:DropDownList ID="ddlRepName" runat="server"></asp:DropDownList>
     <br />  
 

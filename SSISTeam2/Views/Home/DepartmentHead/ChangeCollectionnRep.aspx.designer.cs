@@ -67,6 +67,15 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Label LabelHeadName;
         
         /// <summary>
+        /// lbCurrentCollectP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCurrentCollectP;
+        
+        /// <summary>
         /// ddlCollectPoint control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace SSISTeam2.Views.DepartmentHead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCollectPoint;
+        
+        /// <summary>
+        /// lbRepName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbRepName;
         
         /// <summary>
         /// ddlRepName control.

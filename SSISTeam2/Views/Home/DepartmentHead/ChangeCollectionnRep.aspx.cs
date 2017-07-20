@@ -11,6 +11,8 @@ namespace SSISTeam2.Views.DepartmentHead
     public partial class ChangeCollection_Rep : System.Web.UI.Page
     {
         SSISEntities ent = new SSISEntities();
+        int currentCollectId = 0;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -21,6 +23,11 @@ namespace SSISTeam2.Views.DepartmentHead
                 LabelPhNo.Text = sdept.contact_num.ToString();
                 LabelFaxNo.Text = sdept.fax_num.ToString();
                 LabelHeadName.Text = sdept.head_user.ToString();
+
+                currentCollectId = sdept.collection_point;
+                string currentCollectP = ent.Collection_Point.Where(x => x.collection_pt_id == currentCollectId).Select(y => y.location).First();
+                lbCurrentCollectP.Text = currentCollectP;
+                lbRepName.Text = sdept.rep_user.ToString();
 
                 //get all collection point
                 ddlCollectPoint.DataSource = ent.Collection_Point.ToList<Collection_Point>();
