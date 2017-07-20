@@ -23,10 +23,5 @@ namespace SSISTeam2.Classes.Models
                 return base.RequestId;
             }
         }
-
-        public RequestModel getRequest(SSISEntities context)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

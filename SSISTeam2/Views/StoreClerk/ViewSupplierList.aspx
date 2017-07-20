@@ -5,62 +5,109 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
     
-    
+<div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h3>Supplier List</h3></div>
+        <div class="panel-body">
+            <p>
+                <asp:Button ID="add" runat="server" Text="Add New Supplier"
+                    CssClass="btn btn-primary" />
+            </p>
+        </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4"><h2>
-                <asp:Label ID="Label2" runat="server" Text="Supplier List"></asp:Label></h2></div>
-            
-            <div class="col-md-4 col-md-offset-4"><asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox></div>
-                
-         </div>   
+        <!-- Table -->
 
-         <asp:HyperLink ID="HyperLink1" runat="server">Add New Supplier</asp:HyperLink> 
+        <div class="table-responsive">
 
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="supplier_id">
+            <asp:GridView ID="GridView1" runat="server"
+                AutoGenerateColumns="false"
+                AllowPaging="true"
+                PageSize="10"
+                HeaderStyle-CssClass="text-center-impt"
+                CssClass="table table-responsive table-striped"
+                GridLines="None"
+                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
+
+                <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
+                <PagerTemplate>
+                    <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
+                    <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
+                    <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
+                    <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
+                </PagerTemplate>
+
                 <Columns>
-                    <asp:BoundField DataField="name" HeaderText="Supplier Name" SortExpression="name" />
-                    <asp:BoundField DataField="contact_name" HeaderText="Contact Name" SortExpression="contact_name" />
-                    <asp:BoundField DataField="contact_num" HeaderText="Contact Number" SortExpression="contact_num" />
-                    <asp:BoundField DataField="fax_num" HeaderText="Fax Number" SortExpression="fax_num" />
-                    <asp:BoundField DataField="address" HeaderText="Address" SortExpression="address" />
-                    
-                    <asp:BoundField DataField="gst_reg_num" HeaderText="GST Registration Number" SortExpression="gst_reg_num" />
-                    <asp:BoundField DataField="supplier_id" HeaderText="Supplier ID" ReadOnly="True" SortExpression="supplier_id" />
-                    <asp:BoundField DataField="deleted" HeaderText="Deleted" SortExpression="deleted" />
 
-                    <asp:TemplateField>
-                    <HeaderTemplate>
-                        Edit
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                       <asp:HyperLink ID="edit" runat="server" Text="Edit" ></asp:HyperLink>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier ID"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_SupplierId" runat="server" Text='<%# Eval("supplier_id") %>' CssClass="text-bold"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier Name"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_SupplierName" runat="server" Text='<%# Eval("name") %>' ></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Contact Name"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_ContactName" runat="server" Text='<%# Eval("contact_name") %>' CssClass="text-bold"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Contact Number"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_ContactNum" runat="server" Text='<%# Eval("contact_num") %>' CssClass="text-bold"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Fax Number"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_FaxNum" runat="server" Text='<%# Eval("fax_num") %>' CssClass="text-bold"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Address"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_Address" runat="server" Text='<%# Eval("address") %>' CssClass="text-bold"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="GST Registration Number"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_GstRegNum" runat="server" Text='<%# Eval("gst_reg_num") %>' CssClass="text-bold"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" ><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Button ID="edit" runat="server" Text="Edit"
+                                CssClass="btn btn-primary" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
 
-                 <asp:TemplateField>
-                    <HeaderTemplate>
-                        Delete
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                       <asp:HyperLink ID="delete" runat="server" Text="Delete" ></asp:HyperLink>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                    <asp:TemplateField ItemStyle-Width="10%" ><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
+                        <ItemTemplate>
+                            <asp:Button ID="delete" runat="server" Text="Delete"
+                                CssClass="btn btn-primary" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
-               
             </asp:GridView>
-           
 
-     
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=(local);Initial Catalog=SSIS;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT [name], [contact_name], [contact_num], [fax_num], [address], [logo_path], [gst_reg_num], [supplier_id], [deleted] FROM [Supplier]"></asp:SqlDataSource>
-           
+        </div>
 
-     
     </div>
-         
 
 </asp:Content>
