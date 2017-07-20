@@ -175,6 +175,7 @@
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
+    <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Web.config">
@@ -351,6 +352,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\lowstock.aspx.designer.cs">
       <DependentUpon>lowstock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\PurchaseOrder.aspx.cs">
+      <DependentUpon>PurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\PurchaseOrder.aspx.designer.cs">
+      <DependentUpon>PurchaseOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.cs">
       <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
