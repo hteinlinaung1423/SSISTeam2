@@ -9,18 +9,13 @@ namespace SSISTeam2.Classes.EFFServices
 {
     interface IAllocatedService
     {
-        RequestModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
-        //RequestDTOCollection getAllAllocatedFromDepartment(int departmentId);
-        RequestModelCollection findAllocatedByRequestId(int requestId);
-        RequestModelCollection getAllRequestsByUser(string username);
-        RequestModelCollection getAllApprovedRequests();
+        AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
+        AllocatedModelCollection getAllAllocatedFromDepartment(int departmentId);
+        AllocatedModelCollection findAllocatedByRequestId(int requestId);
         //RequestDTOCollection getAllAllocatedRequests();
         //RequestDTOCollection getAllPartiallyAllocatedRequests();
         //RequestDTOCollection getAllRequestsDisbursing();
         //RequestDTOCollection getAllDisbursedRequests();
-        bool saveNewRequest(RequestModel request);
-        bool updateRequestChanges(RequestModel request);
-        bool approveRequests(List<RequestModel> requests);
-        bool rejectRequests(List<RequestModel> requests);
+        bool saveNewAllocation(AllocatedModel allocation);
     }
 }

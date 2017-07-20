@@ -15,6 +15,21 @@ namespace SSISTeam2.Classes.Models
         public static string PART_DISBURSED = "PartDisbursed";
         public static string CANCELLED = "Cancelled";
         public static string UPDATED = "Updated";
+
+        private static List<string> statuses = new List<string>(new string[]{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+
+        public static bool requestHasHadStatus(RequestModel request, string status)
+        {
+            int index = statuses.IndexOf(status);
+            foreach (string statusCompare in statuses.Skip(index))
+            {
+                if (request.Status == statusCompare)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public class RequestServiceStatus

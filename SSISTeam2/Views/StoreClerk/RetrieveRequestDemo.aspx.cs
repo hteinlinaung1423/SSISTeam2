@@ -1,4 +1,5 @@
 ﻿using SSISTeam2.Classes.EFFacades;
+using SSISTeam2.Classes.EFFServices;
 using SSISTeam2.Classes.Models;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace SSISTeam2.Views.StoreClerk
             }
 
             Label1.Text = r.Items.Keys.First().ItemCode;
+
         }
     }
 }

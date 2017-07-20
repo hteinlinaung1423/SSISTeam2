@@ -9,7 +9,7 @@ namespace SSISTeam2.Classes.Models
 {
     public class RequestModel : AllocatedModel
     {
-        private Department department;
+        
         private string reason;
         private string rejectedReason;
         private bool rejected;
@@ -24,9 +24,9 @@ namespace SSISTeam2.Classes.Models
             RequestId = 0;
             //UserModel = 
             Date = DateTime.Now;
-            status = "";
+            Status = "";
             Items = null;
-            department = null;
+            Department = null;
             reason = "";
             rejectedReason = "";
             rejected = false;
@@ -47,28 +47,28 @@ namespace SSISTeam2.Classes.Models
             RequestId = efRequest.request_id;
             //UserModel = 
             Date = date;
-            status = efRequest.current_status;
+            Status = efRequest.current_status;
             Items = items;
-            department = efDepartment;
+            Department = efDepartment;
             reason = efRequest.reason;
             rejectedReason = efRequest.rejected_reason;
             rejected = efRequest.rejected.ToUpper() == "Y" ? true : false;
-            wasRetrieved = _findIfRetrieved();
-            wasDisbursed = _findIfDisbursed();
-            wasAllocated = _findIfAllocated();
+            //wasRetrieved = _findIfWasRetrieved();
+            //wasDisbursed = _findIfWasDisbursed();
+            //wasAllocated = _findIfWasAllocated();
         }
 
-        private bool _findIfAllocated()
+        private bool _findIfWasAllocated()
         {
             throw new NotImplementedException();
         }
 
-        private bool _findIfDisbursed()
+        private bool _findIfWasDisbursed()
         {
             throw new NotImplementedException();
         }
 
-        private bool _findIfRetrieved()
+        private bool _findIfWasRetrieved()
         {
             throw new NotImplementedException();
         }
@@ -113,7 +113,7 @@ namespace SSISTeam2.Classes.Models
                     List<Request_Details> deets = thing.Request_Details.ToList();
                     if (deets.Count > 0)
                     {
-                        List<Request_Event> events = deets.First().Request_Event.Where(x => x.status == status).ToList();
+                        List<Request_Event> events = deets.First().Request_Event.Where(x => x.status == Status).ToList();
                         if (events.Count > 0)
                         {
                             return events.First().date_time;
@@ -178,6 +178,19 @@ namespace SSISTeam2.Classes.Models
                 return wasAllocated;
             }
 
+        }
+
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+
+            set
+            {
+                status = value;
+            }
         }
     }
 }

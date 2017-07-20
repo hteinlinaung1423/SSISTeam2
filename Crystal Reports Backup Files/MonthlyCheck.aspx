@@ -13,7 +13,25 @@
         Date:
         <asp:TextBox ID="DateTB" runat="server"></asp:TextBox>
         <br />
-
+    <asp:GridView ID="MonthlyCheckGV" runat="server" ShowHeaderWhenEmpty="True">       
+    <Columns>
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Pay Scale">
+            <ItemTemplate>
+                <asp:TextBox ID="txtPayScale" runat="server" Text='<%# Eval("PayScale") %>'></asp:TextBox>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Increment Amount">
+            <ItemTemplate>
+                <asp:TextBox ID="txtIncrementAmount" runat="server" Text='<%# Eval("IncrementAmount") %>'></asp:TextBox>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Period">
+            <ItemTemplate>
+                <asp:TextBox ID="txtPeriod" runat="server" Text='<%# Eval("Period") %>'></asp:TextBox>
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
 
     <asp:Table ID="Table1" runat="server">
         <asp:TableRow>

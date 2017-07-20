@@ -44,15 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.Shared">
-      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
-    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -127,11 +121,9 @@
     <Content Include="CreateChartReport.aspx" />
     <Content Include="FileDiscrepency.aspx" />
     <Content Include="MonthlyCheck.aspx" />
-    <Content Include="notifysuccess.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="MasterPage.Master" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
@@ -165,16 +157,16 @@
     </Content>
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
-    <Content Include="Views\Home\DepartmentHead\ApproveRequest.aspx" />
-    <Content Include="Views\Home\DepartmentHead\ChangeCollectionnRep.aspx" />
-    <Content Include="Views\Home\DepartmentHead\DelegateAuthority.aspx" />
-    <Content Include="Views\Home\DepartmentHead\DepartmentInfo.aspx" />
-    <Content Include="Views\Home\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
+    <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
+    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
+    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
+    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\Reports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
-    <Content Include="Views\StoreClerk\lowstock.aspx" />
+    <Content Include="Views\Reporting\Report Generation.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Web.config">
@@ -202,22 +194,17 @@
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\EFFacades\RequestFactory.cs" />
-    <Compile Include="Classes\EFFServices\AllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IAllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IRequestService.cs" />
-    <Compile Include="Classes\EFFServices\ItemGetter.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\Exceptions\DateNotFoundException.cs" />
     <Compile Include="Classes\Exceptions\IdentifierAlreadySet.cs" />
     <Compile Include="Classes\Exceptions\ItemNotFoundException.cs" />
-    <Compile Include="Classes\Exceptions\RequestAlreadyApprovedException.cs" />
     <Compile Include="Classes\Models\AllocatedModel.cs" />
-    <Compile Include="Classes\Models\NotUsedDepartment.cs" />
     <Compile Include="Classes\Models\DisbursementModel.cs" />
-    <Compile Include="Classes\Models\IRecordModelCollection.cs" />
     <Compile Include="Classes\Models\ItemModel.cs" />
     <Compile Include="Classes\Models\RecordModel.cs" />
-    <Compile Include="Classes\Models\AllocatedModelCollection.cs" />
+    <Compile Include="Classes\Models\RecordModelCollection.cs" />
     <Compile Include="Classes\Models\RequestModel.cs" />
     <Compile Include="Classes\Models\RequestModelCollection.cs" />
     <Compile Include="Classes\Models\RetrievalModel.cs" />
@@ -267,13 +254,6 @@
     </Compile>
     <Compile Include="Monthly_Check_Records.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="notifysuccess.aspx.cs">
-      <DependentUpon>notifysuccess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="notifysuccess.aspx.designer.cs">
-      <DependentUpon>notifysuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Purchase_Order.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -346,13 +326,6 @@
     <Compile Include="Views\Reporting\TrendAnalysis.aspx.designer.cs">
       <DependentUpon>TrendAnalysis.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\lowstock.aspx.cs">
-      <DependentUpon>lowstock.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\StoreClerk\lowstock.aspx.designer.cs">
-      <DependentUpon>lowstock.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.cs">
       <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -396,39 +369,39 @@
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\ApproveRequest.aspx.cs">
+    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\ApproveRequest.aspx.designer.cs">
+    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\ChangeCollectionnRep.aspx.cs">
-      <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
+    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.cs">
+      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\ChangeCollectionnRep.aspx.designer.cs">
-      <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
+    <Compile Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx.designer.cs">
+      <DependentUpon>ChangeCollection&amp;Rep.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\DelegateAuthority.aspx.cs">
+    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\DelegateAuthority.aspx.designer.cs">
+    <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\DepartmentInfo.aspx.cs">
+    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\DepartmentInfo.aspx.designer.cs">
+    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.designer.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\ViewAllPending.aspx.cs">
+    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Home\DepartmentHead\ViewAllPending.aspx.designer.cs">
+    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\Home.aspx.cs">
@@ -439,7 +412,9 @@
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Reporting\Reports\VolumeReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

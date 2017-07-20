@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StationaryRetrievalForm.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.StationaryRetrievalForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApproveRequest.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ApproveRequest" %>
 
 <!DOCTYPE html>
 
@@ -9,8 +9,13 @@
 <body>
     <form id="form1" runat="server">
     <div>
-            <h1>Store Clerk</h1>
+
+        <p>Approve Request</p>
+
+
+    
     </div>
     </form>
+
 </body>
 </html>
