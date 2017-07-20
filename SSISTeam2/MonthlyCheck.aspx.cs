@@ -13,6 +13,8 @@ namespace SSISTeam2
         DateTime today;
         SSISEntities context;
         List<Adjustment_Details> adjDetails = new List<Adjustment_Details>();
+        Inventory_Adjustment inventoryAdj = new Inventory_Adjustment();
+        List<int> initialQuantity = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,19 +22,22 @@ namespace SSISTeam2
             UserModel um = new UserModel(HttpContext.Current.User.Identity.Name);
             today = DateTime.Today;
 
-            Monthly_Check_Records checkRecord = new Monthly_Check_Records();
-            checkRecord.date_checked = today;
-            checkRecord.clerk_user = HttpContext.Current.User.Identity.Name;
-            checkRecord.deleted = "N";
-            checkRecord.discrepancy = "N";
             DateTB.Text = today.Date.ToString("dd/MM/yyyy");
-            Label1.Text = um.ContactNumber + um.Email + um.Username + um.Role;
+            testLabel.Text = um.ContactNumber + um.Email + um.Username + um.Role;
+            
+            if (!IsPostBack)
+            {
+                Session["Adjustment"] = adjDetails;
 
-        }
+                //Trying to figure out how to control quantity change
+                foreach (GridViewRow row in GridView1.Rows)
+                {
+                    initialQuantity.Add(int.Parse(row.Cells[1].Text));
+                }
+                Session["Quantity"] = initialQuantity;
+            }
 
-        protected void AddBtn_Click(object sender, EventArgs e)
-        {
-
+            testLabel.Text = (initialQuantity[0] + initialQuantity[1]).ToString();
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -40,7 +45,7 @@ namespace SSISTeam2
             //Retaining initial quantity values
             int initial = int.Parse(GridView1.Rows[e.NewEditIndex].Cells[1].Text);
             Session["discrepency"] = initial;
-            Label1.Text = Session["discrepency"].ToString();
+            testLabel.Text = Session["discrepency"].ToString();
         }
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -51,12 +56,45 @@ namespace SSISTeam2
             int initial = (int) Session["discrepency"];
             if (updated != initial)
             {
-                Label1.Text = (initial - updated).ToString();
                 Adjustment_Details details = new Adjustment_Details();
+                details.item_code = GridView1.Rows[e.RowIndex].Cells[6].Text.ToString();
                 details.quantity_adjusted = initial - updated;
                 details.reason = "Monthly Check";
-              
+                adjDetails = (List<Adjustment_Details>)Session["Adjustment"];
+                if (!CheckRepeatAdjustment(details, adjDetails))
+                {
+                    adjDetails.Add(details);
+                    Session["Adjustment"] = adjDetails;
+
+                }
+                testLabel.Text = details.item_code;
             }
+        }
+
+        protected void nextBtn_Click(object sender, EventArgs e)
+        {
+            adjDetails = (List<Adjustment_Details>)Session["Adjustment"];
+            for (int i = 0; i < adjDetails.Count; i++)
+            {
+                if (adjDetails[i].quantity_adjusted == 0)
+                    adjDetails.RemoveAt(i);
+            }
+            Session["Adjustment"] = adjDetails;
+            Response.Redirect("MonthlyCheckConfirmation.aspx");
+        }
+
+        public bool CheckRepeatAdjustment(Adjustment_Details detail, List<Adjustment_Details> adjDetails)
+        {
+            List<Adjustment_Details> adjDetail = (List<Adjustment_Details>)Session["Adjustment"];
+            foreach (Adjustment_Details i in adjDetails)
+            {
+                if (i.item_code == detail.item_code)
+                {
+                    i.quantity_adjusted += detail.quantity_adjusted;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
