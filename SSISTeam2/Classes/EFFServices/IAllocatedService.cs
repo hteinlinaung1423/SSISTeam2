@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SSISTeam2.Classes.EFFServices
 {
-    interface IAllocatedService
+    public interface IAllocatedService
     {
         AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
         AllocatedModelCollection getAllAllocatedFromDepartment(string deptCode);

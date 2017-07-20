@@ -202,7 +202,7 @@
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Classes\EFFacades\RequestFactory.cs" />
+    <Compile Include="Classes\EFFacades\FacadeFactory.cs" />
     <Compile Include="Classes\EFFServices\AllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IAllocatedService.cs" />
     <Compile Include="Classes\EFFServices\IRequestService.cs" />
