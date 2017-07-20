@@ -6,11 +6,15 @@ using System.Web;
 
 namespace SSISTeam2.Classes.EFFacades
 {
-    public class RequestFactory
+    public class FacadeFactory
     {
         public static IRequestService getRequestService(SSISEntities context)
         {
             return new RequestService(context);
+        }
+        public static IAllocatedService getAllocatedService(SSISEntities context)
+        {
+            return new AllocatedService(context);
         }
     }
 }

@@ -25,80 +25,8 @@ namespace SSISTeam2.Classes.EFFServices
                 throw new ItemNotFoundException();
             }
 
-            RequestModel request = new RequestModel(efRequest, efRequest.Department, _getPendingOrUpdatedItemsForRequest(efRequest));
+            RequestModel request = new RequestModel(efRequest, efRequest.Department, ItemGetter._getPendingOrUpdatedItemsForRequest(efRequest));
             return request;
-        }
-
-        private Dictionary<ItemModel, int> _getPendingOrUpdatedItemsForRequest(Request efRequest)
-        {
-            try
-            {
-                List<Request_Details> details = efRequest.Request_Details.Where(x => x.deleted != "Y").ToList();
-
-                Dictionary<ItemModel, int> itemsAndQuantities = new Dictionary<ItemModel, int>();
-
-                //string status = RequestStatus.PENDING;
-
-                //bool wasUpdated = false;
-
-                details.ForEach(x =>
-                {
-                    // Get the latest event that is either pending or updated
-                    Request_Event eventItem = x.Request_Event
-                        .Where(e => e.deleted != "Y"
-                        && (e.status == RequestStatus.PENDING || e.status == RequestStatus.UPDATED)
-                        )
-                        .OrderBy(o => o.date_time)
-                        .Last();
-
-                    itemsAndQuantities.Add(new ItemModel(x.Stock_Inventory), eventItem.quantity);
-                });
-
-                return itemsAndQuantities;
-
-            }
-            catch (NullReferenceException nullExec)
-            {
-                throw new ItemNotFoundException("Item not found", nullExec);
-            }
-        }
-
-        private Dictionary<ItemModel, int> _getItemsForRequest(Request efRequest, string status)
-        {
-            try
-            {
-                List<Request_Details> details = efRequest.Request_Details.Where(x => x.deleted != "Y").ToList();
-
-                Dictionary<ItemModel, int> itemsAndQuantities = new Dictionary<ItemModel, int>();
-
-                details.ForEach(x =>
-                {
-                    List<Request_Event> events = x.Request_Event.Where(e => e.status == status).ToList();
-                    int count = events.Count();
-                    int qty = 0;
-
-                    if (count == 1)
-                    { // There is one event for this item's status (e.g. no allocated)
-                        qty = events.First().quantity;
-                    }
-                    else if (count > 1)
-                    { // Multiple events for this status (e.g. allocated twice)
-                        qty = events.Select(e => e.quantity).Sum();
-                    } else if (count == 0)
-                    {
-                        throw new ItemNotFoundException("Item not found");
-                    }
-
-                    itemsAndQuantities.Add(new ItemModel(x.Stock_Inventory), qty);
-                });
-
-                return itemsAndQuantities;
-
-            }
-            catch (NullReferenceException nullExec)
-            {
-                throw new ItemNotFoundException("NULLEXEC: Item not found", nullExec);
-            }
         }
 
         public RequestModelCollection getAllApprovedRequests()
@@ -111,7 +39,7 @@ namespace SSISTeam2.Classes.EFFServices
                 throw new ItemNotFoundException();
             } else
             {
-                List<RequestModel> records = approved.Select(x => new RequestModel(x, x.Department, _getItemsForRequest(x, RequestStatus.APPROVED))).ToList();
+                List<RequestModel> records = approved.Select(x => new RequestModel(x, x.Department, ItemGetter._getItemsForRequest(x, RequestStatus.APPROVED))).ToList();
 
                 return new RequestModelCollection(records);
             }
@@ -130,7 +58,7 @@ namespace SSISTeam2.Classes.EFFServices
             }
             else
             {
-                List<RequestModel> records = pending.Select(x => new RequestModel(x, _getPendingOrUpdatedItemsForRequest(x))).ToList();
+                List<RequestModel> records = pending.Select(x => new RequestModel(x, ItemGetter._getPendingOrUpdatedItemsForRequest(x))).ToList();
 
                 return new RequestModelCollection(records);
             }
@@ -151,7 +79,7 @@ namespace SSISTeam2.Classes.EFFServices
                 List<RequestModel> records = all.Select(x =>
                 {
                     string status = x.current_status;
-                    return new RequestModel(x, x.Department, _getItemsForRequest(x, status));
+                    return new RequestModel(x, x.Department, ItemGetter._getItemsForRequest(x, status));
                 }).ToList();
 
                 return new RequestModelCollection(records);
@@ -170,7 +98,7 @@ namespace SSISTeam2.Classes.EFFServices
             }
             else
             {
-                List<RequestModel> records = all.Select(x => new RequestModel(x, x.Department, _getPendingOrUpdatedItemsForRequest(x))).ToList();
+                List<RequestModel> records = all.Select(x => new RequestModel(x, x.Department, ItemGetter._getPendingOrUpdatedItemsForRequest(x))).ToList();
 
                 return new RequestModelCollection(records);
             }
@@ -247,7 +175,7 @@ namespace SSISTeam2.Classes.EFFServices
                     newRequest.dept_code = request.Department.dept_code;
                     newRequest.reason = request.Reason;
                     newRequest.rejected_reason = "";
-                    newRequest.username = request.User.Username;
+                    newRequest.username = request.UserModel.Username;
 
                     List<Request_Details> newDetails = new List<Request_Details>();
                     foreach (KeyValuePair<ItemModel, int> itemAndQty in request.Items)
@@ -261,7 +189,7 @@ namespace SSISTeam2.Classes.EFFServices
                         newEvent.date_time = timestamp;
                         newEvent.quantity = itemAndQty.Value;
                         newEvent.status = RequestStatus.PENDING;
-                        newEvent.username = request.User.Username;
+                        newEvent.username = request.UserModel.Username;
 
                         // Establish relationships
                         newDetail.Request_Event.Add(newEvent);
@@ -301,7 +229,7 @@ namespace SSISTeam2.Classes.EFFServices
                         newEvent.date_time = timestamp;
                         newEvent.quantity = itemAndQty.Value;
                         newEvent.status = RequestStatus.UPDATED;
-                        newEvent.username = request.User.Username;
+                        newEvent.username = request.UserModel.Username;
 
                         // Establish relationships
                         Request_Details targetDetail = targetDetails.Where(x => x.item_code == itemAndQty.Key.ItemCode).First();

@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace SSISTeam2.Classes.EFFServices
 {
-    interface IAllocatedService
+    public interface IAllocatedService
     {
-        RecordModelCollection<AllocatedModel> getAllAllocatedForCollectionPoint(int collectionPointId);
-        RecordModelCollection<AllocatedModel> getAllAllocatedFromDepartment(int departmentId);
-        RecordModelCollection<AllocatedModel> findAllocatedByRequestId(int requestId);
+        AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
+        AllocatedModelCollection getAllAllocatedFromDepartment(string deptCode);
+        AllocatedModelCollection findAllocatedByRequestId(int requestId);
         //RequestDTOCollection getAllAllocatedRequests();
         //RequestDTOCollection getAllPartiallyAllocatedRequests();
         //RequestDTOCollection getAllRequestsDisbursing();
         //RequestDTOCollection getAllDisbursedRequests();
-        bool saveNewAllocation(AllocatedModel allocation);
+        int allocatedRequest(RequestModel toAllocate, string currentUser);
+        int reAllocateRequest(RequestModel toAllocate, string currentUser);
     }
 }
