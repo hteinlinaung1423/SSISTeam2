@@ -160,6 +160,9 @@
     <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
     <Content Include="Views\Reporting\Report Generation.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
+    <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
+    <Content Include="Views\StoreClerk\ViewTenderList.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -348,6 +351,27 @@
     </Compile>
     <Compile Include="Views\Employee\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.cs">
+      <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.designer.cs">
+      <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewSupplierList.aspx.cs">
+      <DependentUpon>ViewSupplierList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewSupplierList.aspx.designer.cs">
+      <DependentUpon>ViewSupplierList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewTenderList.aspx.cs">
+      <DependentUpon>ViewTenderList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewTenderList.aspx.designer.cs">
+      <DependentUpon>ViewTenderList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

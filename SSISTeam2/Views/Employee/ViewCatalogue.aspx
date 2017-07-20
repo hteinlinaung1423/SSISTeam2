@@ -16,8 +16,8 @@
          </div>   
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
                 <Columns>
-                    <asp:BoundField DataField="cat_name" HeaderText="cat_name" SortExpression="cat_name" />
-                    <asp:BoundField DataField="item_description" HeaderText="item_description" SortExpression="item_description" />
+                    <asp:BoundField DataField="cat_name" HeaderText="Category" SortExpression="cat_name" />
+                    <asp:BoundField DataField="item_description" HeaderText="Description" SortExpression="item_description" />
                 </Columns>
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=(local);Initial Catalog=SSIS;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Category.cat_name, Stock_Inventory.item_description FROM Category INNER JOIN Stock_Inventory ON Category.cat_id = Stock_Inventory.cat_id"></asp:SqlDataSource>

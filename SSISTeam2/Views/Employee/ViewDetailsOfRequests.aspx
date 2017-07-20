@@ -17,13 +17,13 @@
 
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
             <Columns>
-                <asp:BoundField DataField="username" HeaderText="username" SortExpression="username" />
-                <asp:BoundField DataField="reason" HeaderText="reason" SortExpression="reason" />
-                <asp:BoundField DataField="current_status" HeaderText="current_status" SortExpression="current_status" />
-                <asp:BoundField DataField="quantity" HeaderText="quantity" SortExpression="quantity" />
-                <asp:BoundField DataField="date_time" HeaderText="date_time" SortExpression="date_time" />
-                <asp:BoundField DataField="item_description" HeaderText="item_description" SortExpression="item_description" />
-                <asp:BoundField DataField="unit_of_measure" HeaderText="unit_of_measure" SortExpression="unit_of_measure" />
+                <asp:BoundField DataField="username" HeaderText="Employee Name" SortExpression="username" />
+                <asp:BoundField DataField="reason" HeaderText="Reason" SortExpression="reason" />
+                <asp:BoundField DataField="current_status" HeaderText="Status" SortExpression="current_status" />
+                <asp:BoundField DataField="quantity" HeaderText="Quantity" SortExpression="quantity" />
+                <asp:BoundField DataField="date_time" HeaderText="Request date_time" SortExpression="date_time" />
+                <asp:BoundField DataField="item_description" HeaderText="Description" SortExpression="item_description" />
+                <asp:BoundField DataField="unit_of_measure" HeaderText="Unit_of_measure" SortExpression="unit_of_measure" />
             </Columns>
                 
             </asp:GridView>
