@@ -15,7 +15,7 @@ namespace SSISTeam2
         DateTime today;
         SSISEntities context;
         List<Adjustment_Details> adjDetails = new List<Adjustment_Details>();
-        List<ItemModel> itemList = new List<ItemModel>();
+        List<MonthlyCheckModel> itemList = new List<MonthlyCheckModel>();
         Inventory_Adjustment inventoryAdj = new Inventory_Adjustment();
         List<Stock_Inventory> stockList;
         List<int> initialQuantity = new List<int>();
@@ -27,14 +27,14 @@ namespace SSISTeam2
             stockList = context.Stock_Inventory.Where(x => x.deleted == "N").ToList();
             foreach (Stock_Inventory i in stockList)
             {
-                ItemModel item = new ItemModel(i);
+                MonthlyCheckModel item = new MonthlyCheckModel(i);
                 itemList.Add(item);
             }
             today = DateTime.Today;
             DateTB.Text = today.Date.ToString("dd/MM/yyyy");
             testLabel.Text = itemList.Count.ToString();
-            GridView1.DataSource = itemList;
-            GridView1.DataBind();
+            MonthlyCheckGV.DataSource = itemList;
+            MonthlyCheckGV.DataBind();
 
             //testLabel.Text = um.Role;
             
@@ -57,7 +57,7 @@ namespace SSISTeam2
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
             //Retaining initial quantity values
-            int initial = int.Parse(GridView1.Rows[e.NewEditIndex].Cells[1].Text);
+            int initial = int.Parse(MonthlyCheckGV.Rows[e.NewEditIndex].Cells[1].Text);
             Session["discrepency"] = initial;
             testLabel.Text = Session["discrepency"].ToString();
         }
@@ -65,13 +65,13 @@ namespace SSISTeam2
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             //Finding new quantity and comparision
-            string updatedString = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[1].Controls[0])).Text;
+            string updatedString = ((TextBox)(MonthlyCheckGV.Rows[e.RowIndex].Cells[1].Controls[0])).Text;
             int updated = int.Parse(updatedString);
             int initial = (int) Session["discrepency"];
             if (updated != initial)
             {
                 Adjustment_Details details = new Adjustment_Details();
-                details.item_code = GridView1.Rows[e.RowIndex].Cells[6].Text.ToString();
+                details.item_code = MonthlyCheckGV.Rows[e.RowIndex].Cells[6].Text.ToString();
                 details.quantity_adjusted = initial - updated;
                 details.reason = "Monthly Check";
                 adjDetails = (List<Adjustment_Details>)Session["Adjustment"];
@@ -118,10 +118,17 @@ namespace SSISTeam2
             DateTime recordDate = recordList.Max(x => x.date_checked);
             if (recordDate.Month == today.Month)
             {
-                GridView1.Enabled = false;
+                MonthlyCheckGV.Enabled = false;
                 nextBtn.Enabled = false;
                 testLabel.Text = "Monthly check has already been done this month";
             }
+        }
+
+        protected void MonthlyCheckGV_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            MonthlyCheckGV.PageIndex = e.NewPageIndex;
+            MonthlyCheckGV.DataSource = itemList;
+            MonthlyCheckGV.DataBind();
         }
     }
 }
