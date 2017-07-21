@@ -41,12 +41,26 @@ namespace SSISTeam2.Classes.Models
             List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == dept.dept_code).ToList();
             foreach (Dept_Registry i in allDeptEmp)
             {
-                if (Roles.GetRolesForUser(i.username).ToString() == "DeptHead") ;
-                username = i.username;
+                if (Roles.GetRolesForUser(i.username).ToString() == "DeptHead")
+                    username = i.username;
             }
 
             UserModel deptHead = new UserModel(username);
             return deptHead;
+        }
+
+        public List<UserModel> FindAllDeptUser()
+        {
+            SSISEntities context = new SSISEntities();
+            string dept = this.department.dept_code;
+            List<Dept_Registry> regList = context.Dept_Registry.Where(x => x.dept_code == dept).ToList();
+            List<UserModel> deptList = new List<UserModel>();
+            foreach (Dept_Registry i in regList)
+            {
+                UserModel user = new UserModel(i.username);
+                deptList.Add(user);
+            }
+            return deptList;
         }
 
         //public UserModel
