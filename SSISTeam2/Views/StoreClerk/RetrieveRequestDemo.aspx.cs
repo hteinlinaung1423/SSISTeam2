@@ -15,7 +15,7 @@ namespace SSISTeam2.Views.StoreClerk
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Text = "Hello, World";
-            RequestModel r;
+            RequestModel r = new RequestModel();
             using (SSISEntities context = new SSISEntities())
             {
                 r = FacadeFactory.getRequestService(context).findRequestById(2);

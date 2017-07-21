@@ -1,18 +1,14 @@
 ﻿using SSISTeam2.Classes.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SSISTeam2.Classes.EFFServices
 {
     public interface IDisbursementService
     {
-        DisbursementModelCollection getAllDisbursementsForCollectionPoint(int collectionPointId);
-        DisbursementModelCollection getAllDisbursementsFromDepartment(string deptCode);
-        DisbursementModelCollection getAllDisbursements();
-        DisbursementModel findLatestDisbursementByRequestId(int requestId);
-        int markRequestAsDisbursed(RequestModel toAllocate, string currentUser);
+        DisbursementModel findLatestPossibleDisbursingByRequestId(int requestId);
+        DisbursementModel findLatestSignOffsByRequestId(int requestId, string currentUser);
+        DisbursementModelCollection getAllPossibleDisbursementsForCollectionPoint(int collectionPointId);
+        DisbursementModelCollection getAllSignOffsForCollectionPoint(int collectionPointId, string currentUser);
+        DisbursementModelCollection getAllThatCanBeSignedOff(string currentUser);
+        DisbursementModelCollection getAllThatWereDisbursed();
     }
 }
