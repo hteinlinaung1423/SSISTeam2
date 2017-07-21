@@ -234,6 +234,7 @@
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
+    <Compile Include="Classes\Models\MonthlyCheckModel.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
     <Compile Include="Classes\EFFServices\RetrievalService.cs" />
     <Compile Include="Classes\Exceptions\DateNotFoundException.cs" />
