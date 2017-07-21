@@ -13,5 +13,10 @@ namespace SSISTeam2.Views.Reporting
         {
 
         }
+
+        protected void GRVReportBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("RequestVolumeRpt.aspx");
+        }
     }
 }

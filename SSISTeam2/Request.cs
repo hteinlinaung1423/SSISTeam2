@@ -28,6 +28,7 @@ namespace SSISTeam2
         public string rejected { get; set; }
         public string rejected_reason { get; set; }
         public string deleted { get; set; }
+        public Nullable<System.DateTime> date_time { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual Dept_Registry Dept_Registry { get; set; }
