@@ -23,7 +23,7 @@ namespace SSISTeam2
             context = new SSISEntities();
             UserModel um = new UserModel(HttpContext.Current.User.Identity.Name);
             List<UserModel> deptAll = um.FindAllDeptUser();
-            UserModel repUser = um.FindDeptRep();
+            UserModel repUser = um.FIndDelegateHead();
             today = DateTime.Today;
 
             DateTB.Text = today.Date.ToString("dd/MM/yyyy");
