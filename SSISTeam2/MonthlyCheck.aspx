@@ -22,7 +22,7 @@
             <asp:BoundField DataField="item_description" HeaderText="item_description" SortExpression="item_description" />
             <asp:BoundField DataField="image_path" HeaderText="image_path" SortExpression="image_path" />
             <asp:BoundField DataField="cat_id" HeaderText="cat_id" SortExpression="cat_id" />
-            <asp:BoundField DataField="item_code" HeaderText="item_code" ReadOnly="True" SortExpression="item_code" Visible="False" />
+            <asp:BoundField DataField="item_code" HeaderText="item_code" ReadOnly="True" SortExpression="item_code" Visible="True" />
         </Columns>
     </asp:GridView>
 
@@ -47,5 +47,6 @@
             <asp:Parameter Name="item_code" Type="String" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="testLabel" runat="server" Text="Label"></asp:Label>
+    <asp:Button ID="nextBtn" runat="server" Text="Button" OnClick="nextBtn_Click" />
 </asp:Content>

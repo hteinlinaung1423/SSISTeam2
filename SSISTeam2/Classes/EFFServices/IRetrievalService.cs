@@ -13,6 +13,6 @@ namespace SSISTeam2.Classes.EFFServices
         RetrievalModelCollection getAllRetrievedFromDepartment(string deptCode);
         RetrievalModelCollection getAllRetrieved();
         RetrievalModel findLatestRetrievalByRequestId(int requestId);
-        int markRequestAsRetrieved(RequestModel toAllocate, string currentUser);
+        //int markRequestAsRetrieved(RequestModel toAllocate, string currentUser);
     }
 }

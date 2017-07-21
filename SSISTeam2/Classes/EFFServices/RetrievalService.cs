@@ -44,7 +44,7 @@ namespace SSISTeam2.Classes.EFFServices
                 // - Allocated, 9
                 // A102
                 // - Approved, 10
-                List<Request_Event> latestRetrieval = eventItem.Where(x => x.status == RequestServiceStatus.RETRIEVED).OrderBy(o => o.date_time).ToList();
+                List<Request_Event> latestRetrieval = eventItem.Where(x => x.status == EventStatus.RETRIEVED).OrderBy(o => o.date_time).ToList();
                 if (latestRetrieval.Count == 0) continue;
 
                 int quantityToFulfil = 0;
@@ -146,9 +146,9 @@ namespace SSISTeam2.Classes.EFFServices
             List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
-                RetrievalModel alloc = findLatestRetrievalByRequestId(efRequest.request_id);
-                if (alloc == null) continue; // SKIP
-                results.Add(alloc);
+                RetrievalModel retrieval = findLatestRetrievalByRequestId(efRequest.request_id);
+                if (retrieval == null) continue; // SKIP
+                results.Add(retrieval);
             }
 
             return new RetrievalModelCollection(results);
@@ -183,7 +183,7 @@ namespace SSISTeam2.Classes.EFFServices
                         newEvent.deleted = "N";
                         newEvent.date_time = timestamp;
                         newEvent.quantity = itemAndQty.Value;
-                        newEvent.status = RequestServiceStatus.RETRIEVED;
+                        newEvent.status = EventStatus.RETRIEVED;
                         newEvent.username = toAllocate.UserModel.Username;
 
                         // Establish relationships

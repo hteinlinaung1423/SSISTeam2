@@ -12,15 +12,12 @@ namespace SSISTeam2
     using System;
     using System.Collections.Generic;
     
-    public partial class Volume_Request
+    public partial class sysdiagram
     {
-        public string cat_name { get; set; }
         public string name { get; set; }
-        public int quantity { get; set; }
-        public string current_status { get; set; }
-        public System.DateTime date_time { get; set; }
-        public string item_description { get; set; }
-        public string username { get; set; }
-        public string dept_code { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -10,60 +10,42 @@
 namespace SSISTeam2 {
     
     
-    public partial class MonthlyCheck {
+    public partial class MonthlyCheckConfirmation2 {
         
         /// <summary>
-        /// SortDDL control.
+        /// confirmationGV control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SortDDL;
+        protected global::System.Web.UI.WebControls.GridView confirmationGV;
         
         /// <summary>
-        /// DateTB control.
+        /// confirmBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DateTB;
+        protected global::System.Web.UI.WebControls.Button confirmBtn;
         
         /// <summary>
-        /// GridView1 control.
+        /// backBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Button backBtn;
         
         /// <summary>
-        /// SqlDataSource1 control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-        
-        /// <summary>
-        /// testLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testLabel;
-        
-        /// <summary>
-        /// nextBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button nextBtn;
+        protected global::System.Web.UI.WebControls.Label Label1;
     }
 }

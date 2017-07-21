@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Security;
+using System.Collections.Generic;
 
 
 namespace SSISTeam2.Classes.Models
@@ -29,6 +30,23 @@ namespace SSISTeam2.Classes.Models
             {
                 this.role = "Employee";
             }
+        }
+
+        public UserModel FindDeptHead()
+        {
+            SSISEntities context = new SSISEntities();
+
+            string username = "";
+            Department dept = this.department;
+            List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == dept.dept_code).ToList();
+            foreach (Dept_Registry i in allDeptEmp)
+            {
+                if (Roles.GetRolesForUser(i.username).ToString() == "DeptHead") ;
+                username = i.username;
+            }
+
+            UserModel deptHead = new UserModel(username);
+            return deptHead;
         }
 
         //public UserModel
