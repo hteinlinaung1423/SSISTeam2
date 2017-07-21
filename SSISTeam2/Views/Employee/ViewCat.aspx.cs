@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SSISTeam2.Views.Employee
 {
-    public partial class ViewDetailsOfRequests : System.Web.UI.Page
+    public partial class ViewCat : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

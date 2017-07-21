@@ -15,5 +15,16 @@ namespace SSISTeam2.Views.StoreClerk
             GridView1.DataSource = s.Suppliers.ToList<Supplier>();
             GridView1.DataBind();
         }
+
+
+        protected void Add_New_Supplier_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/AddNewSupplier.aspx");
+        }
+
+        protected void Edit_Supplier(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/EditSupplier.aspx?");
+        }
     }
 }
