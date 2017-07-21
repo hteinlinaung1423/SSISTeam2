@@ -11,7 +11,9 @@ namespace SSISTeam2.Views.StoreClerk
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SSISEntities s = new SSISEntities();
+            GridView1.DataSource = s.Suppliers.ToList<Supplier>();
+            GridView1.DataBind();
         }
     }
 }

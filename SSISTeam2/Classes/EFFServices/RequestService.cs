@@ -104,6 +104,14 @@ namespace SSISTeam2.Classes.EFFServices
             }
         }
 
+        private bool _setStatusOfRequest(RequestModel request, string currentUser, string status)
+        {
+            List<RequestModel> requests = new List<RequestModel>();
+            requests.Add(request);
+            int qty = _setStatusOfRequests(requests, currentUser, status);
+            return qty == 0 ? false : true;
+        }
+
         private int _setStatusOfRequests(List<RequestModel> requests, string currentUser, string status)
         {
             int added = 0;
@@ -152,14 +160,14 @@ namespace SSISTeam2.Classes.EFFServices
             return added;
         }
 
-        public int approveRequests(List<RequestModel> requests, string currentUser)
+        public bool approveRequest(RequestModel request, string currentUser)
         {
-            return _setStatusOfRequests(requests, currentUser, RequestStatus.APPROVED);
+            return _setStatusOfRequest(request, currentUser, RequestStatus.APPROVED);
         }
 
-        public int rejectRequests(List<RequestModel> requests, string currentUser)
+        public bool rejectRequest(RequestModel request, string currentUser)
         {
-            return _setStatusOfRequests(requests, currentUser, RequestStatus.REJECTED);
+            return _setStatusOfRequest(request, currentUser, RequestStatus.REJECTED);
         }
 
         public bool saveNewRequest(RequestModel request)
