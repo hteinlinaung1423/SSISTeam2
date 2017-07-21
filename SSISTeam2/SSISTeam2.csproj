@@ -239,7 +239,7 @@
     <Compile Include="Classes\Exceptions\RequestDataIntegrityFailureException.cs" />
     <Compile Include="Classes\Models\AllocatedModel.cs" />
     <Compile Include="Classes\Models\DisbursementModel.cs" />
-    <Compile Include="Classes\Models\IRecordModelCollection.cs" />
+    <Compile Include="Classes\EFFServices\IRecordModelCollection.cs" />
     <Compile Include="Classes\Models\ItemModel.cs" />
     <Compile Include="Classes\Models\RecordModel.cs" />
     <Compile Include="Classes\Models\AllocatedModelCollection.cs" />
