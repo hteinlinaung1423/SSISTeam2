@@ -12,7 +12,7 @@ namespace SSISTeam2.Classes.EFFServices
         RetrievalModelCollection getAllRetrievedForCollectionPoint(int collectionPointId);
         RetrievalModelCollection getAllRetrievedFromDepartment(string deptCode);
         RetrievalModelCollection getAllRetrieved();
-        RetrievalModel findLatestRetrievalByRequestId(int requestId);
+        RetrievalModelCollection findLatestRetrievalsByRequestId(int requestId);
         //int markRequestAsRetrieved(RequestModel toAllocate, string currentUser);
     }
 }
