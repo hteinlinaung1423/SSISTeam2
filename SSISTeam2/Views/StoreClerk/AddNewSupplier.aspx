@@ -1,18 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master"  CodeBehind="EditSupplier.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.EditSupplier" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="AddNewSupplier.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.AddNewSupplier" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
-    <%--<div class="panel panel-default">
+<%--    <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            <h3>Edit Supplier Information</h3>
+            <h3>Add New Supplier</h3>
         </div>
 
-    </div>
+    </div>--%>
 
-    <form class="form-horizontal">
+<%--    <form class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-sm-2" for="label_supplierId">Supplier ID:</label>
             <div class="col-sm-10">
@@ -59,25 +58,25 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                <asp:Button ID="delete" runat="server" Text="Submit"
-                                CssClass="btn btn-primary" />
+                                CssClass="btn btn-primary" OnClick="save_Click"/>
             </div>
         </div>
     </form>--%>
 
-     <div class="panel panel-default">
+    <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Edit Supplier Information</h3>
+                <h3 class="panel-title">Add New Supplier</h3>
             </div>
             <div class="panel-body">
                 <div class="form-group">
                     <label for="label_supplierId">Supplier ID: </label>
-                    <asp:TextBox ID="tb_supplierId"  class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    <asp:TextBox ID="tb_supplierId" class="form-control" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="vldTitle" runat="server" ErrorMessage="Supplier ID Is Required" ControlToValidate="tb_supplierId" ForeColor="Red"></asp:RequiredFieldValidator>
 
                 </div>
                 <div class="form-group">
                     <label for="label_supplierName">Supplier Name: </label><br />
-                   <asp:TextBox ID="tb_supplierName" class="form-control" runat="server" ></asp:TextBox>
+                   <asp:TextBox ID="tb_supplierName" class="form-control" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Supplier name Is Required" ControlToValidate="tb_supplierName" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
@@ -112,4 +111,3 @@
 
 
 </asp:Content>
-

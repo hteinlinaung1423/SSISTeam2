@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SSISTeam2.Views.Reporting
+namespace SSISTeam2.Views.Employee
 {
-    public partial class TrendAnalysis : System.Web.UI.Page
+    public partial class ViewCat : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

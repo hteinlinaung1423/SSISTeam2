@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewSupplierList.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.ViewSupplierList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewSupplierList.aspx.cs" enableEventValidation="false" Inherits="SSISTeam2.Views.StoreClerk.ViewSupplierList" %>
 
 
 
@@ -11,7 +11,15 @@
         <div class="panel-body">
             <p>
                 <asp:Button ID="add" runat="server" Text="Add New Supplier"
-                    CssClass="btn btn-primary" />
+                    CssClass="btn btn-primary" OnClick="Add_New_Supplier_Click" />
+
+                <form class="form-inline">
+                    <div class="form-group">
+                      
+                         <label for="search">Search</label>
+                         <input type="search" class="form-control" id="txt_search">
+                    </div>
+               </form>
             </p>
         </div>
 
@@ -26,7 +34,7 @@
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
-                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
+                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" >
 
                 <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
                 <PagerTemplate>
@@ -91,7 +99,7 @@
 
                         <ItemTemplate>
                             <asp:Button ID="edit" runat="server" Text="Edit"
-                                CssClass="btn btn-primary" />
+                                CssClass="btn btn-primary" OnClick="Edit_Supplier"/>
                         </ItemTemplate>
                     </asp:TemplateField>
 
@@ -100,7 +108,7 @@
 
                         <ItemTemplate>
                             <asp:Button ID="delete" runat="server" Text="Delete"
-                                CssClass="btn btn-primary" />
+                                CssClass="btn btn-primary" OnClick="delete_Supplier"  />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
