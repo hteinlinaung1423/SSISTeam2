@@ -7,14 +7,14 @@ using SSISTeam2.Classes.Exceptions;
 
 namespace SSISTeam2.Classes.EFFServices
 {
-    public class RetrievalService : IRetrievalService
+    public class RetrievalServiceOld //: IRetrievalService
     {
         private SSISEntities context;
-        public RetrievalService(SSISEntities context)
+        public RetrievalServiceOld(SSISEntities context)
         {
             this.context = context;
         }
-        public RetrievalModelCollection findLatestRetrievalsByRequestId(int requestId)
+        public RetrievalModel findLatestRetrievalsByRequestId(int requestId)
         {
             // Get all allocated: depending on:
             // Determine there's any latest retrieval
@@ -25,14 +25,54 @@ namespace SSISTeam2.Classes.EFFServices
                 .Where(x => x.request_id == requestId
                             && (x.current_status == RequestStatus.APPROVED
                             || x.current_status == RequestStatus.PART_DISBURSED)
-                            && x.deleted != "Y"
                 ).First();
 
             if (efRequest == null)
             {
                 throw new ItemNotFoundException("No records exist");
             }
-            return null;
+
+            IEnumerable<IGrouping<string, Request_Event>> events = efRequest.Request_Details.SelectMany(x => x.Request_Event).GroupBy(g => g.Request_Details.item_code).ToList();
+
+            Dictionary<ItemModel, int> itemsToFulfill = new Dictionary<ItemModel, int>();
+
+            foreach (IGrouping<string, Request_Event> eventItem in events)
+            {
+                // Grouping:
+                // A101
+                // - Approved, 10
+                // - Allocated, 9
+                // A102
+                // - Approved, 10
+                List<Request_Event> latestRetrieval = eventItem.Where(x => x.status == EventStatus.RETRIEVED).OrderBy(o => o.date_time).ToList();
+                if (latestRetrieval.Count == 0) continue;
+
+                int quantityToFulfil = 0;
+
+                if (latestRetrieval.Count > 1)
+                {
+                    Request_Event last = latestRetrieval.Last();
+                    Request_Event secondLast = latestRetrieval[latestRetrieval.Count - 2];
+
+                    quantityToFulfil = last.quantity - secondLast.quantity;
+                }
+                else
+                {
+                    quantityToFulfil = latestRetrieval.Last().quantity;
+                }
+
+                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
+                itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
+            }
+
+            if (itemsToFulfill.Count == 0)
+            {
+                return null;
+            }
+
+            RetrievalModel retrieval = new RetrievalModel(efRequest, itemsToFulfill);
+
+            return retrieval;
         }
 
         public RetrievalModelCollection getAllRetrieved()
@@ -52,7 +92,7 @@ namespace SSISTeam2.Classes.EFFServices
             List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
-                RetrievalModel retrieval = null;//findLatestRetrievalsByRequestId(efRequest.request_id);
+                RetrievalModel retrieval = findLatestRetrievalsByRequestId(efRequest.request_id);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);
             }
@@ -79,7 +119,7 @@ namespace SSISTeam2.Classes.EFFServices
             List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
-                RetrievalModel retrieval = null;//findLatestRetrievalsByRequestId(efRequest.request_id);
+                RetrievalModel retrieval = findLatestRetrievalsByRequestId(efRequest.request_id);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);
             }
@@ -106,7 +146,7 @@ namespace SSISTeam2.Classes.EFFServices
             List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
-                RetrievalModel retrieval = null;//findLatestRetrievalsByRequestId(efRequest.request_id);
+                RetrievalModel retrieval = findLatestRetrievalsByRequestId(efRequest.request_id);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);
             }
