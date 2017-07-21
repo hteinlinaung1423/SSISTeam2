@@ -15,25 +15,27 @@ namespace SSISTeam2
         DateTime today;
         SSISEntities context;
         List<Adjustment_Details> adjDetails = new List<Adjustment_Details>();
+        List<ItemModel> itemList = new List<ItemModel>();
         Inventory_Adjustment inventoryAdj = new Inventory_Adjustment();
+        List<Stock_Inventory> stockList;
         List<int> initialQuantity = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             context = new SSISEntities();
-            UserModel um = new UserModel(HttpContext.Current.User.Identity.Name);
-            List<UserModel> deptAll = um.FindAllDeptUser();
-            UserModel repUser = um.FIndDelegateHead();
-            today = DateTime.Today;
 
-            DateTB.Text = today.Date.ToString("dd/MM/yyyy");
-            string test = "";
-
-            foreach (UserModel i in deptAll)
+            stockList = context.Stock_Inventory.Where(x => x.deleted == "N").ToList();
+            foreach (Stock_Inventory i in stockList)
             {
-                test += i.Username + " ";
+                ItemModel item = new ItemModel(i);
+                itemList.Add(item);
             }
-            testLabel.Text = um.Department.name;
+            today = DateTime.Today;
+            DateTB.Text = today.Date.ToString("dd/MM/yyyy");
+            testLabel.Text = itemList.Count.ToString();
+            GridView1.DataSource = itemList;
+            GridView1.DataBind();
+
             //testLabel.Text = um.Role;
             
             if (!IsPostBack)
@@ -41,15 +43,15 @@ namespace SSISTeam2
                 Session["Adjustment"] = adjDetails;
 
                 //Trying to figure out how to control quantity change
-                foreach (GridViewRow row in GridView1.Rows)
-                {
-                    initialQuantity.Add(int.Parse(row.Cells[1].Text));
-                }
-                Session["Quantity"] = initialQuantity;
+                //foreach (GridViewRow row in GridView1.Rows)
+                //{
+                //    initialQuantity.Add(int.Parse(row.Cells[1].Text));
+                //}
+                //Session["Quantity"] = initialQuantity;
                 //testLabel.Text = (initialQuantity[0] + initialQuantity[1]).ToString();
 
             }
-
+            //CheckIfMonthlyDone();
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -107,6 +109,19 @@ namespace SSISTeam2
                 }
             }
             return false;
+        }
+
+        public void CheckIfMonthlyDone()
+        {
+            List<Monthly_Check_Records> recordList = context.Monthly_Check_Records.Where(x => x.deleted == "N").ToList();
+
+            DateTime recordDate = recordList.Max(x => x.date_checked);
+            if (recordDate.Month == today.Month)
+            {
+                GridView1.Enabled = false;
+                nextBtn.Enabled = false;
+                testLabel.Text = "Monthly check has already been done this month";
+            }
         }
     }
 }
