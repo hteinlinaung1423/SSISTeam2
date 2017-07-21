@@ -30,7 +30,7 @@ namespace SSISTeam2.Views.StoreClerk
                     Session[SESSION_CATEGORIES] = cats;
                     List<Stock_Inventory> stocks = context.Stock_Inventory.Where(w => w.deleted != "Y").ToList();
                     Session[SESSION_STOCKS] = stocks;
-                    RequestModelCollection requests = null;
+                    RequestModelCollection requests;
                     try
                     {
                         requests = FacadeFactory.getRequestService(context).getAllApprovedRequests()
@@ -38,6 +38,7 @@ namespace SSISTeam2.Views.StoreClerk
                     }
                     catch (ItemNotFoundException exec)
                     {
+                        requests = null;
                     }
 
                     Session[APPROVED_REQS] = requests;
@@ -260,14 +261,15 @@ namespace SSISTeam2.Views.StoreClerk
                     ItemModel im = new ItemModel(stock);
                     itemModels.Add(im, item.Value);
                 }
-                
+
                 // HARDCODED
+                UserModel user = new UserModel(User.Identity.Name);
                 RequestModel newReq = new RequestModel();
                 newReq.Items = itemModels;
                 newReq.Reason = "for fun";
-                newReq.Department = context.Departments.First();
+                newReq.Department = user.Department;
                 newReq.Status = RequestStatus.PENDING;
-                newReq.UserModel = new UserModel(context.Dept_Registry.First().username);
+                newReq.UserModel = user;
 
                 FacadeFactory.getRequestService(context).saveNewRequest(newReq);
 
