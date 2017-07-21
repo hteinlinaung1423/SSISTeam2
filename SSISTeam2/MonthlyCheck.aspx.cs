@@ -33,7 +33,7 @@ namespace SSISTeam2
             {
                 test += i.Username + " ";
             }
-            testLabel.Text = repUser.Username;
+            testLabel.Text = um.Department.name;
             //testLabel.Text = um.Role;
             
             if (!IsPostBack)

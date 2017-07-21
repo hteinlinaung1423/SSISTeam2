@@ -67,7 +67,7 @@ namespace SSISTeam2.Classes.Models
             return deptList;
         }
 
-        public UserModel FindDeptRep()
+        public UserModel FIndDelegateHead()
         {
             DateTime today = DateTime.Today;
             SSISEntities context = new SSISEntities();
