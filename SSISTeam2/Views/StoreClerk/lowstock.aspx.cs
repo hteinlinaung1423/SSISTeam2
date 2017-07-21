@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,11 +21,63 @@ namespace SSISTeam2.Views.StoreClerk
         {
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            bool duplicate = false;
 
-          
+
             string itemcode = ((Label)gvr.FindControl("Label_ItemCode")).Text;
+            
+            SSISEntities ctx = new SSISEntities();
+            Stock_Inventory item = ctx.Stock_Inventory.Where(x => x.item_code == itemcode).First();
 
-            Response.Redirect("~/Default.aspx?itemcode="+itemcode);
+            HashSet<Stock_Inventory> itemList = (HashSet<Stock_Inventory>)Session["item"];
+
+            if (itemList == null)
+            {
+                itemList = new HashSet<Stock_Inventory>();
+                itemList.Add(item);
+                lblResult.Visible = true;
+                lblduplicate.Visible = false;
+                lblResult.Text = "Added Item Code (" + itemcode + ") Successfully";
+                Session["item"] = itemList;
+            }
+
+            else {
+
+                
+
+                foreach (Stock_Inventory s in itemList)
+                {
+
+                    if (s.item_code == item.item_code)
+                    {
+                        duplicate = true;
+                        break;
+                    }
+
+                }
+
+                if (!duplicate)
+                {
+
+                    itemList.Add(item);
+                    lblResult.Visible = true;
+                    lblduplicate.Visible = false;
+                    lblResult.Text = "Added Item Code (" + itemcode + ") Successfully";
+                    Session["item"] = itemList;
+                }
+                else {
+                    lblduplicate.Visible = true;
+                    lblResult.Visible = false;
+                    lblduplicate.Text = "Duplicate item!";
+                        Session["item"] = itemList;
+                }
+               
+            }
+
+            
+
+
+
         }
     }
 }

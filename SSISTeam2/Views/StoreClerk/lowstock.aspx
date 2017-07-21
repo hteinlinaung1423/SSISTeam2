@@ -2,11 +2,14 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <!-- Default panel contents -->
         <div class="panel-heading">Reorder Report List</div>
         <div class="panel-body">
-            <p>The following items have fallen below re-order level</p>
+            
+            <asp:Label ID="lblResult" runat="server" class="btn btn-block alert-success" Visible="false"></asp:Label>
+            <asp:Label ID="lblduplicate" runat="server" class="btn btn-block alert-danger" Visible="false"></asp:Label>             
+        
         </div>
 
         <!-- Table -->
@@ -77,7 +80,7 @@
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Order"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Button ID="Order" runat="server" Text="Order"
+                            <asp:Button ID="Order" runat="server" Text="Add To Cart"
                                 OnClick="MakeOrder"
                                 CssClass="btn btn-primary" />
                         </ItemTemplate>
