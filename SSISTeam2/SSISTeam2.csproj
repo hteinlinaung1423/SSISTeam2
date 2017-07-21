@@ -177,10 +177,15 @@
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\Reporting\ReportsMain.aspx" />
+    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
+    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <Content Include="Views\Reporting\TrendAnalysisRpt.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
+    <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\OLDReports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
@@ -407,11 +412,18 @@
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Reports\Crystal Testing\TEST Volume_Report.cs">
-      <DependentUpon>TEST Volume_Report.rpt</DependentUpon>
+    <Compile Include="Views\Reporting\Reports\Crystal Testing\TEST Trend_Analysis.cs">
+      <DependentUpon>TEST Trend_Analysis.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Reporting\TrendAnalysisStaging.aspx.cs">
+      <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\TrendAnalysisStaging.aspx.designer.cs">
+      <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reporting\Reports\Trend_Analysis.cs">
       <AutoGen>True</AutoGen>
@@ -429,12 +441,15 @@
       <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Reporting\TrendAnalysis.aspx.cs">
-      <DependentUpon>TrendAnalysis.aspx</DependentUpon>
+    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
+      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.cs">
+      <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Reporting\TrendAnalysis.aspx.designer.cs">
-      <DependentUpon>TrendAnalysis.aspx</DependentUpon>
+    <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.designer.cs">
+      <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
@@ -550,9 +565,9 @@
     <Folder Include="Views\Home\DepartmentHead\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Reporting\Reports\Crystal Testing\TEST Volume_Report.rpt">
+    <EmbeddedResource Include="Views\Reporting\Reports\Crystal Testing\TEST Trend_Analysis.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TEST Volume_Report.cs</LastGenOutput>
+      <LastGenOutput>TEST Trend_Analysis.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Reporting\Reports\Trend_Analysis.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
