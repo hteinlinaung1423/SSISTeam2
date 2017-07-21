@@ -167,6 +167,12 @@
     </Content>
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
+    <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
+    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
+    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
+    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCat.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
@@ -179,10 +185,11 @@
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <Content Include="Views\Home\Home.aspx" />
-    <Content Include="Views\Reporting\Reports Main.aspx" />
+    <Content Include="Views\Reporting\OLDReports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
+    <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
@@ -224,6 +231,7 @@
     <Compile Include="Classes\EFFServices\ItemGetter.cs" />
     <Compile Include="Classes\EFFServices\RequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
+    <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
     <Compile Include="Classes\EFFServices\RetrievalService.cs" />
@@ -234,7 +242,7 @@
     <Compile Include="Classes\Exceptions\RequestDataIntegrityFailureException.cs" />
     <Compile Include="Classes\Models\AllocatedModel.cs" />
     <Compile Include="Classes\Models\DisbursementModel.cs" />
-    <Compile Include="Classes\Models\IRecordModelCollection.cs" />
+    <Compile Include="Classes\EFFServices\IRecordModelCollection.cs" />
     <Compile Include="Classes\Models\ItemModel.cs" />
     <Compile Include="Classes\Models\RecordModel.cs" />
     <Compile Include="Classes\Models\AllocatedModelCollection.cs" />
@@ -344,6 +352,13 @@
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.designer.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employee\Form1.aspx.cs">
+      <DependentUpon>Form1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\Form1.aspx.designer.cs">
+      <DependentUpon>Form1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.cs">
       <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -390,8 +405,15 @@
       <DependentUpon>Reports Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Reporting\Reports Main.aspx.designer.cs">
-      <DependentUpon>Reports Main.aspx</DependentUpon>
+    <Compile Include="Views\Reporting\OLDReports Main.aspx.designer.cs">
+      <DependentUpon>OLDReports Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\ReportsMain.aspx.cs">
+      <DependentUpon>ReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
+      <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reporting\Reports\Crystal Testing\TEST Volume_Report.cs">
       <DependentUpon>TEST Volume_Report.rpt</DependentUpon>
@@ -414,11 +436,6 @@
     <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
       <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
-      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Reporting\TrendAnalysis.aspx.cs">
       <DependentUpon>TrendAnalysis.aspx</DependentUpon>
@@ -447,6 +464,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\GenerateDisbursementForm.aspx.designer.cs">
       <DependentUpon>GenerateDisbursementForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\Cart.aspx.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\Cart.aspx.designer.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\lowstock.aspx.cs">
       <DependentUpon>lowstock.aspx</DependentUpon>

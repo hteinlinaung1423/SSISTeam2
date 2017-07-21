@@ -7,16 +7,15 @@ using SSISTeam2.Classes.Exceptions;
 
 namespace SSISTeam2.Classes.EFFServices
 {
-    public class RetrievalService : IRetrievalService
+    public class RetrievalServiceOld //: IRetrievalService
     {
         private SSISEntities context;
-        public RetrievalService(SSISEntities context)
+        public RetrievalServiceOld(SSISEntities context)
         {
             this.context = context;
         }
-        public RetrievalModel findLatestRetrievingByRequestId(int requestId, string currentUser)
-        { // For at the warehouse
-
+        public RetrievalModel findLatestRetrievalsByRequestId(int requestId)
+        {
             // Get all allocated: depending on:
             // Determine there's any latest retrieval
             // Find the difference with the previous retrieval, to see how much to fulfill
@@ -26,7 +25,6 @@ namespace SSISTeam2.Classes.EFFServices
                 .Where(x => x.request_id == requestId
                             && (x.current_status == RequestStatus.APPROVED
                             || x.current_status == RequestStatus.PART_DISBURSED)
-                            && x.deleted != "Y"
                 ).First();
 
             if (efRequest == null)
@@ -34,41 +32,42 @@ namespace SSISTeam2.Classes.EFFServices
                 throw new ItemNotFoundException("No records exist");
             }
 
+            IEnumerable<IGrouping<string, Request_Event>> events = efRequest.Request_Details.SelectMany(x => x.Request_Event).GroupBy(g => g.Request_Details.item_code).ToList();
+
             Dictionary<ItemModel, int> itemsToFulfill = new Dictionary<ItemModel, int>();
 
-            List<Request_Details> details = efRequest.Request_Details.ToList();
-            foreach (var detail in details)
+            foreach (IGrouping<string, Request_Event> eventItem in events)
             {
-                int itemQty = 0;
-                if (detail.deleted == "Y")
-                {
-                    continue;
-                }
-                List<Request_Event> events = detail.Request_Event.OrderByDescending(o => o.date_time).ToList();
+                // Grouping:
+                // A101
+                // - Approved, 10
+                // - Allocated, 9
+                // A102
+                // - Approved, 10
+                List<Request_Event> latestRetrieval = eventItem.Where(x => x.status == EventStatus.RETRIEVED).OrderBy(o => o.date_time).ToList();
+                if (latestRetrieval.Count == 0) continue;
 
-                foreach (var ev in events)
+                int quantityToFulfil = 0;
+
+                if (latestRetrieval.Count > 1)
                 {
-                    if (ev.status == EventStatus.APPROVED
-                        || ev.status == EventStatus.ALLOCATED
-                        || ev.deleted == "Y"
-                        || ev.username != currentUser)
-                    {
-                        continue;
-                    }
-                    if (ev.status == EventStatus.RETRIEVED)
-                    {
-                        break;
-                    } else if (ev.status == EventStatus.RETRIEVING)
-                    {
-                        itemQty += ev.quantity;
-                    }
+                    Request_Event last = latestRetrieval.Last();
+                    Request_Event secondLast = latestRetrieval[latestRetrieval.Count - 2];
+
+                    quantityToFulfil = last.quantity - secondLast.quantity;
+                }
+                else
+                {
+                    quantityToFulfil = latestRetrieval.Last().quantity;
                 }
 
-                if (itemQty > 0)
-                {
-                    Stock_Inventory s = detail.Stock_Inventory;
-                    itemsToFulfill.Add(new ItemModel(s), itemQty);
-                }
+                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
+                itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
+            }
+
+            if (itemsToFulfill.Count == 0)
+            {
+                return null;
             }
 
             RetrievalModel retrieval = new RetrievalModel(efRequest, itemsToFulfill);
@@ -76,28 +75,6 @@ namespace SSISTeam2.Classes.EFFServices
             return retrieval;
         }
 
-        public RetrievalModelCollection getAllRetrievingByClerk(string currentUser)
-        {
-            List<Request> efRequests = context.Requests
-                .Where(x => x.current_status == RequestStatus.APPROVED
-                            || x.current_status == RequestStatus.PART_DISBURSED
-                ).ToList();
-
-            if (efRequests.Count == 0)
-            {
-                //throw new ItemNotFoundException("No records exist");
-                return null;
-            }
-            List<RetrievalModel> results = new List<RetrievalModel>();
-            foreach (var efRequest in efRequests)
-            {
-                RetrievalModel retrieval = findLatestRetrievingByRequestId(efRequest.request_id, currentUser);
-                if (retrieval == null) continue; // SKIP
-                results.Add(retrieval);
-            }
-
-            return new RetrievalModelCollection(results);
-        }
         public RetrievalModelCollection getAllRetrieved()
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
@@ -115,7 +92,7 @@ namespace SSISTeam2.Classes.EFFServices
             List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
-                RetrievalModel retrieval = null;//findLatestRetrievalsByRequestId(efRequest.request_id);
+                RetrievalModel retrieval = findLatestRetrievalsByRequestId(efRequest.request_id);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);
             }
@@ -142,7 +119,7 @@ namespace SSISTeam2.Classes.EFFServices
             List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
-                RetrievalModel retrieval = null;//findLatestRetrievalsByRequestId(efRequest.request_id);
+                RetrievalModel retrieval = findLatestRetrievalsByRequestId(efRequest.request_id);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);
             }
@@ -169,14 +146,14 @@ namespace SSISTeam2.Classes.EFFServices
             List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
-                RetrievalModel retrieval = null;//findLatestRetrievalsByRequestId(efRequest.request_id);
+                RetrievalModel retrieval = findLatestRetrievalsByRequestId(efRequest.request_id);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);
             }
 
             return new RetrievalModelCollection(results);
         }
-        /*
+
         public int markRequestAsRetrieved(RequestModel toAllocate, string currentUser)
         {
             int added = 0;
@@ -225,6 +202,5 @@ namespace SSISTeam2.Classes.EFFServices
             }
             return added;
         }
-        */
     }
 }
