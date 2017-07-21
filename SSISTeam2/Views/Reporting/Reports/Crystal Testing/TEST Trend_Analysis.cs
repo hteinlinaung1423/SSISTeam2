@@ -16,14 +16,14 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class TEST_Volume_Report : ReportClass {
+    public class TEST_Trend_Analysis : ReportClass {
         
-        public TEST_Volume_Report() {
+        public TEST_Trend_Analysis() {
         }
         
         public override string ResourceName {
             get {
-                return "TEST Volume_Report.rpt";
+                return "TEST Trend_Analysis.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         
         public override string FullResourceName {
             get {
-                return "SSISTeam2.Views.Reporting.Reports.Crystal Testing.TEST Volume_Report.rpt";
+                return "SSISTeam2.Views.Reporting.Reports.Crystal Testing.TEST Trend_Analysis.rpt";
             }
             set {
                 // Do nothing
@@ -82,7 +82,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection4 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,7 +90,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection4 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection3 {
             get {
                 return this.ReportDefinition.Sections[5];
             }
@@ -106,7 +106,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection4 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection3 {
             get {
                 return this.ReportDefinition.Sections[7];
             }
@@ -114,7 +114,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection4 {
             get {
                 return this.ReportDefinition.Sections[8];
             }
@@ -151,12 +151,20 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
                 return this.ReportDefinition.Sections[12];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Select_Date___date_time {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedTEST_Volume_Report : Component, ICachedReport {
+    public class CachedTEST_Trend_Analysis : Component, ICachedReport {
         
-        public CachedTEST_Volume_Report() {
+        public CachedTEST_Trend_Analysis() {
         }
         
         [Browsable(false)]
@@ -193,7 +201,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            TEST_Volume_Report rpt = new TEST_Volume_Report();
+            TEST_Trend_Analysis rpt = new TEST_Trend_Analysis();
             rpt.Site = this.Site;
             return rpt;
         }
