@@ -174,13 +174,13 @@
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
-    <Content Include="Views\Reporting\Report Generation.aspx" />
+    <Content Include="Views\Reporting\ReportsMain.aspx" />
     <Content Include="Views\StoreClerk\EditDepartment.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\StoreClerk\EditTender.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <Content Include="Views\Home\Home.aspx" />
-    <Content Include="Views\Reporting\Reports Main.aspx" />
+    <Content Include="Views\Reporting\OLDReports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
@@ -374,12 +374,19 @@
     <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Reports Main.aspx.cs">
-      <DependentUpon>Reports Main.aspx</DependentUpon>
+    <Compile Include="Views\Reporting\OLDReports Main.aspx.cs">
+      <DependentUpon>OLDReports Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Reporting\Reports Main.aspx.designer.cs">
-      <DependentUpon>Reports Main.aspx</DependentUpon>
+    <Compile Include="Views\Reporting\OLDReports Main.aspx.designer.cs">
+      <DependentUpon>OLDReports Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\ReportsMain.aspx.cs">
+      <DependentUpon>ReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
+      <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reporting\Reports\Crystal Testing\TEST Volume_Report.cs">
       <DependentUpon>TEST Volume_Report.rpt</DependentUpon>
@@ -403,11 +410,6 @@
       <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
-      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Views\Reporting\TrendAnalysis.aspx.cs">
       <DependentUpon>TrendAnalysis.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -417,7 +419,6 @@
     </Compile>
     <Compile Include="Views\StoreClerk\EditDepartment.aspx.cs">
       <DependentUpon>EditDepartment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\EditDepartment.aspx.designer.cs">
       <DependentUpon>EditDepartment.aspx</DependentUpon>
@@ -459,7 +460,6 @@
     </Compile>
     <Compile Include="Views\StoreClerk\EditTender.aspx.cs">
       <DependentUpon>EditTender.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\EditTender.aspx.designer.cs">
       <DependentUpon>EditTender.aspx</DependentUpon>
@@ -523,7 +523,6 @@
     </Compile>
     <Compile Include="Views\StoreClerk\ViewTenderList.aspx.cs">
       <DependentUpon>ViewTenderList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\ViewTenderList.aspx.designer.cs">
       <DependentUpon>ViewTenderList.aspx</DependentUpon>

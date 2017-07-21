@@ -10,33 +10,24 @@
 namespace SSISTeam2.Views.Reporting {
     
     
-    public partial class RequestVolumeRpt {
+    public partial class ReportsMain {
         
         /// <summary>
-        /// form1 control.
+        /// GRVReportBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Button GRVReportBtn;
         
         /// <summary>
-        /// CrystalReportViewer1 control.
+        /// GTAReportBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
-        
-        /// <summary>
-        /// VolReq control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportSource VolReq;
+        protected global::System.Web.UI.WebControls.Button GTAReportBtn;
     }
 }
