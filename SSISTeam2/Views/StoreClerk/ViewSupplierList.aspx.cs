@@ -24,7 +24,17 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void Edit_Supplier(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/StoreClerk/EditSupplier.aspx?");
+            Button btn = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+
+            string supplierid = ((Label)gvr.FindControl("Label_SupplierId")).Text;
+
+            Response.Redirect("~/Views/StoreClerk/EditSupplier.aspx?supplier="+supplierid);
+        }
+
+        protected void delete_Supplier(object sender, EventArgs e)
+        {
+
         }
     }
 }

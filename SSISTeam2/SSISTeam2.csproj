@@ -167,8 +167,6 @@
     </Content>
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
-    <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
@@ -180,11 +178,9 @@
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
-    <Content Include="Views\Reporting\Report Generation.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
-    <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\OLDReports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
@@ -400,10 +396,6 @@
     </Compile>
     <Compile Include="Views\Employee\ViewRequestsDetails.aspx.designer.cs">
       <DependentUpon>ViewRequestsDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reporting\Reports Main.aspx.cs">
-      <DependentUpon>Reports Main.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Reporting\OLDReports Main.aspx.designer.cs">
       <DependentUpon>OLDReports Main.aspx</DependentUpon>

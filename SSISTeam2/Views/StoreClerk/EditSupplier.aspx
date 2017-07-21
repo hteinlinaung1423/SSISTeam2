@@ -71,13 +71,13 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label for="label_supplierId">Supplier ID: </label>
-                    <asp:TextBox ID="tb_supplierId" class="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tb_supplierId"  class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="vldTitle" runat="server" ErrorMessage="Supplier ID Is Required" ControlToValidate="tb_supplierId" ForeColor="Red"></asp:RequiredFieldValidator>
 
                 </div>
                 <div class="form-group">
                     <label for="label_supplierName">Supplier Name: </label><br />
-                   <asp:TextBox ID="tb_supplierName" class="form-control" runat="server"></asp:TextBox>
+                   <asp:TextBox ID="tb_supplierName" class="form-control" runat="server" ></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Supplier name Is Required" ControlToValidate="tb_supplierName" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
