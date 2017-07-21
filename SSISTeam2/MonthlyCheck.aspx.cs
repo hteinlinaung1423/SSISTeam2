@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
+
 using SSISTeam2.Classes.Models;
 
 namespace SSISTeam2
@@ -20,11 +22,19 @@ namespace SSISTeam2
         {
             context = new SSISEntities();
             UserModel um = new UserModel(HttpContext.Current.User.Identity.Name);
-            UserModel deptHead = um.FindDeptHead();
+            List<UserModel> deptAll = um.FindAllDeptUser();
+            UserModel repUser = um.FIndDelegateHead();
             today = DateTime.Today;
 
             DateTB.Text = today.Date.ToString("dd/MM/yyyy");
-            testLabel.Text = deptHead.ContactNumber + deptHead.Email + deptHead.Username + deptHead.Role + deptHead.Department.dept_code;
+            string test = "";
+
+            foreach (UserModel i in deptAll)
+            {
+                test += i.Username + " ";
+            }
+            testLabel.Text = um.Department.name;
+            //testLabel.Text = um.Role;
             
             if (!IsPostBack)
             {
