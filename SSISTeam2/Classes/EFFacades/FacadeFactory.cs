@@ -16,5 +16,17 @@ namespace SSISTeam2.Classes.EFFacades
         {
             return new AllocatedService(context);
         }
+        public static IRetrievalService getRetrievalService(SSISEntities context)
+        {
+            return new RetrievalService(context);
+        }
+        public static IDisbursementService getDisbursementService(SSISEntities context)
+        {
+            return new DisbursementService(context);
+        }
+        public static IRequestMovementService getRequestMovementService(SSISEntities context)
+        {
+            return new RequestMovementService(context);
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace SSISTeam2
         public int duty_id { get; set; }
         public System.DateTime created_date { get; set; }
         public string deleted { get; set; }
+        public string reason { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual Dept_Registry Dept_Registry { get; set; }

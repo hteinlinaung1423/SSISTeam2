@@ -26,11 +26,11 @@ namespace SSISTeam2.Classes.EFFServices
         bool updateRequestChanges(RequestModel request);
         // Save a new request. This will update based on the request argument's RequestId.
         // And use your own ctx.SaveChanges()
-        int approveRequests(List<RequestModel> requests, string currentUser);
+        bool approveRequest(RequestModel request, string currentUser);
         // Add approve records for a list of requests, and changes current_status.
         // Will use the quantities supplied in the requests arguments.
         // And use your own ctx.SaveChanges()
-        int rejectRequests(List<RequestModel> requests, string currentUser);
+        bool rejectRequest(RequestModel request, string currentUser);
         // Same as approve requests, but for rejection.
 
 
