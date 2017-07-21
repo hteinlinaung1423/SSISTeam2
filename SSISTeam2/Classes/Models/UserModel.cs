@@ -82,10 +82,19 @@ namespace SSISTeam2.Classes.Models
                 }
             }
 
-            DateTime currentApproved = validList.Max(x => x.start_date);
-            Approval_Duties currentRep = context.Approval_Duties.Where(x => x.start_date == currentApproved).ToList().First();
+            DateTime currentApproved = validList.Max(x => x.created_date);
+            Approval_Duties currentRep = context.Approval_Duties.Where(x => x.created_date == currentApproved).ToList().First();
             UserModel repUser = new UserModel(currentRep.username);
             return repUser;
+        }
+
+        public UserModel FindDeptRep()
+        {
+            SSISEntities context = new SSISEntities();
+            Department dept = context.Departments.Where(x => x.dept_code == this.department.dept_code).ToList().First();
+            string repUser = dept.rep_user;
+            UserModel repUserModel = new UserModel(repUser);
+            return repUserModel;
         }
 
         //public UserModel
