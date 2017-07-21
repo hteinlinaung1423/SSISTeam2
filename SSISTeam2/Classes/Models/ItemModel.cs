@@ -62,7 +62,13 @@ namespace SSISTeam2.Classes.Models
             using (SSISEntities context = new SSISEntities())
             {
                 // Get all RequestDetails for an item code
-                List<Request_Details> details = context.Request_Details.Where(w => w.item_code == itemCode && w.deleted != "Y").ToList();
+                List<Request_Details> details = context.Request_Details
+                    .Where(w => 
+                    w.item_code == itemCode 
+                    && w.deleted != "Y"
+                    && (w.Request.current_status == RequestStatus.APPROVED
+                    || w.Request.current_status == RequestStatus.PART_DISBURSED)
+                    ).ToList();
 
                 // For each of this item's details, get the stock it's occupying
                 foreach (var detail in details)

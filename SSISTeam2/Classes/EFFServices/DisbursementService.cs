@@ -14,16 +14,23 @@ namespace SSISTeam2.Classes.EFFServices
         {
             this.context = context;
         }
-        public DisbursementModel findLatestDisbursementByRequestId(int requestId)
-        {
-            // Get all allocated: depending on:
-            // Determine there's any latest retrieval
-            // Find the difference with the previous retrieval, to see how much to fulfill
+        public DisbursementModel findLatestPossibleDisbursingByRequestId(int requestId)
+        { // For generating disbursement forms (all those as retrieved)
 
-            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+            return _findLatestBetweenStatuses(requestId, EventStatus.RETRIEVED, EventStatus.DISBURSING, null);
+        }
+
+        public DisbursementModel findLatestSignOffsByRequestId(int requestId, string currentUser)
+        { // For signing off forms (all disbursing ones)
+
+            return _findLatestBetweenStatuses(requestId, EventStatus.DISBURSING, EventStatus.DISBURSED, currentUser);
+        }
+
+        private DisbursementModel _findLatestBetweenStatuses(int requestId, string fromStatus, string toStatus, string currentUser)
+        { // For signing off forms (all disbursing ones)
             Request efRequest = context.Requests
                 .Where(x => x.request_id == requestId
-                            && (x.current_status == RequestStatus.DISBURSED
+                            && (x.current_status == RequestStatus.APPROVED
                             || x.current_status == RequestStatus.PART_DISBURSED)
                 ).First();
 
@@ -32,54 +39,53 @@ namespace SSISTeam2.Classes.EFFServices
                 throw new ItemNotFoundException("No records exist");
             }
 
-            IEnumerable<IGrouping<string, Request_Event>> events = efRequest.Request_Details.SelectMany(x => x.Request_Event).GroupBy(g => g.Request_Details.item_code).ToList();
-
             Dictionary<ItemModel, int> itemsToFulfill = new Dictionary<ItemModel, int>();
 
-            foreach (IGrouping<string, Request_Event> eventItem in events)
+            List<Request_Details> details = efRequest.Request_Details.ToList();
+            foreach (var detail in details)
             {
-                // Grouping:
-                // A101
-                // - Approved, 10
-                // - Allocated, 9
-                // A102
-                // - Approved, 10
-                List<Request_Event> latestDisbursement = eventItem.Where(x => x.status == EventStatus.RETRIEVED).OrderBy(o => o.date_time).ToList();
-                if (latestDisbursement.Count == 0) continue;
-
-                int quantityToFulfil = 0;
-
-                if (latestDisbursement.Count > 1)
+                int itemQty = 0;
+                if (detail.deleted == "Y")
                 {
-                    Request_Event last = latestDisbursement.Last();
-                    Request_Event secondLast = latestDisbursement[latestDisbursement.Count - 2];
-
-                    quantityToFulfil = last.quantity - secondLast.quantity;
+                    continue;
                 }
-                else
+                List<Request_Event> events = detail.Request_Event.OrderByDescending(o => o.date_time).ToList();
+
+                foreach (var ev in events)
                 {
-                    quantityToFulfil = latestDisbursement.Last().quantity;
+                    if (ev.status == EventStatus.APPROVED
+                        || ev.status == EventStatus.ALLOCATED
+                        || ev.deleted == "Y")
+                    {
+                        continue;
+                    }
+                    if (ev.status == toStatus)
+                    {
+                        break;
+                    }
+                    else if (ev.status == fromStatus && (currentUser == null) ? true : (ev.username == currentUser))
+                    {
+                        itemQty += ev.quantity;
+                    }
                 }
 
-                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
-                itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
+                if (itemQty > 0)
+                {
+                    Stock_Inventory s = detail.Stock_Inventory;
+                    itemsToFulfill.Add(new ItemModel(s), itemQty);
+                }
             }
 
-            if (itemsToFulfill.Count == 0)
-            {
-                return null;
-            }
+            DisbursementModel retrieved = new DisbursementModel(efRequest, itemsToFulfill);
 
-            DisbursementModel disbursement = new DisbursementModel(efRequest, itemsToFulfill);
-
-            return disbursement;
+            return retrieved;
         }
 
-        public DisbursementModelCollection getAllDisbursements()
+        public DisbursementModelCollection getAllThatCanBeSignedOff(string currentUser)
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests
-                .Where(x => x.current_status == RequestStatus.DISBURSED
+                .Where(x => x.current_status == RequestStatus.APPROVED
                             || x.current_status == RequestStatus.PART_DISBURSED
                 ).ToList();
 
@@ -92,7 +98,7 @@ namespace SSISTeam2.Classes.EFFServices
             List<DisbursementModel> results = new List<DisbursementModel>();
             foreach (var efRequest in efRequests)
             {
-                DisbursementModel retrieval = findLatestDisbursementByRequestId(efRequest.request_id);
+                DisbursementModel retrieval = findLatestSignOffsByRequestId(efRequest.request_id, currentUser);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);
             }
@@ -100,7 +106,41 @@ namespace SSISTeam2.Classes.EFFServices
             return new DisbursementModelCollection(results);
         }
 
-        public DisbursementModelCollection getAllDisbursementsForCollectionPoint(int collectionPointId)
+        public DisbursementModelCollection getAllThatWereDisbursed()
+        {
+            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+            List<Request> efRequests = context.Requests
+                .Where(x => x.current_status == RequestStatus.DISBURSED && x.deleted != "Y"
+                ).ToList();
+
+            if (efRequests.Count == 0)
+            {
+                //throw new ItemNotFoundException("No records exist");
+                return null;
+            }
+
+            List<DisbursementModel> results = new List<DisbursementModel>();
+            foreach (var efRequest in efRequests)
+            {
+                Dictionary<ItemModel, int> items = new Dictionary<ItemModel, int>();
+
+                foreach (var item in efRequest.Request_Details
+                    .Select(s => s.Request_Event.OrderByDescending(o => o.date_time)
+                    .Where(w => w.status == EventStatus.DISBURSED)
+                    .First())) {
+
+                    items.Add(new ItemModel(item.Request_Details.Stock_Inventory), item.quantity);
+                }
+
+                DisbursementModel disbursed = new DisbursementModel(efRequest, items);
+                if (disbursed == null) continue; // SKIP
+                results.Add(disbursed);
+            }
+
+            return new DisbursementModelCollection(results);
+        }
+
+        public DisbursementModelCollection getAllSignOffsForCollectionPoint(int collectionPointId, string currentUser)
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests
@@ -119,7 +159,7 @@ namespace SSISTeam2.Classes.EFFServices
             List<DisbursementModel> results = new List<DisbursementModel>();
             foreach (var efRequest in efRequests)
             {
-                DisbursementModel disbursement = findLatestDisbursementByRequestId(efRequest.request_id);
+                DisbursementModel disbursement = findLatestSignOffsByRequestId(efRequest.request_id, currentUser);
                 if (disbursement == null) continue; // SKIP
                 results.Add(disbursement);
             }
@@ -127,6 +167,33 @@ namespace SSISTeam2.Classes.EFFServices
             return new DisbursementModelCollection(results);
         }
 
+        public DisbursementModelCollection getAllPossibleDisbursementsForCollectionPoint(int collectionPointId)
+        {
+            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+            List<Request> efRequests = context.Requests
+                .Where(x =>
+                    (x.current_status == RequestStatus.DISBURSED
+                    || x.current_status == RequestStatus.PART_DISBURSED)
+                    && x.Department.collection_point == collectionPointId
+                ).ToList();
+
+            if (efRequests.Count == 0)
+            {
+                //throw new ItemNotFoundException("No records exist");
+                return null;
+            }
+
+            List<DisbursementModel> results = new List<DisbursementModel>();
+            foreach (var efRequest in efRequests)
+            {
+                DisbursementModel disbursement = findLatestPossibleDisbursingByRequestId(efRequest.request_id);
+                if (disbursement == null) continue; // SKIP
+                results.Add(disbursement);
+            }
+
+            return new DisbursementModelCollection(results);
+        }
+        /*
         public DisbursementModelCollection getAllDisbursementsFromDepartment(string deptCode)
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
@@ -153,10 +220,6 @@ namespace SSISTeam2.Classes.EFFServices
 
             return new DisbursementModelCollection(results);
         }
-
-        public int markRequestAsDisbursed(RequestModel toAllocate, string currentUser)
-        {
-            throw new NotImplementedException();
-        }
+        */
     }
 }
