@@ -60,13 +60,29 @@
         </asp:TableHeaderRow>
         <asp:TableRow>
             <asp:TableCell>
-                <asp:DropDownList runat="server" CssClass="dropdown" ID="Month"></asp:DropDownList>
+                <asp:DropDownList runat="server" CssClass="dropdown" ID="Month1"></asp:DropDownList>
             </asp:TableCell>
             <asp:TableCell>
-                <asp:DropDownList runat="server" CssClass="dropdown" ID="Year"></asp:DropDownList>
+                <asp:DropDownList runat="server" CssClass="dropdown" ID="Year1"></asp:DropDownList>
             </asp:TableCell>
         </asp:TableRow>
-        <asp:TableFooterRow><asp:TableCell><asp:Button runat="server" ID="AddMonthYear" Text="Add" OnClick="AddMonthYear_Click" /></asp:TableCell></asp:TableFooterRow>
+        <asp:TableRow>
+            <asp:TableCell>
+                <asp:DropDownList runat="server" CssClass="dropdown" ID="Month2"></asp:DropDownList>
+            </asp:TableCell>
+            <asp:TableCell>
+                <asp:DropDownList runat="server" CssClass="dropdown" ID="Year2"></asp:DropDownList>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
+                <asp:DropDownList runat="server" CssClass="dropdown" ID="Month3"></asp:DropDownList>
+            </asp:TableCell>
+            <asp:TableCell>
+                <asp:DropDownList runat="server" CssClass="dropdown" ID="Year3"></asp:DropDownList>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableFooterRow><asp:TableCell><asp:Button runat="server" ID="AddMonthYear" Text="Add" /></asp:TableCell></asp:TableFooterRow>
     </asp:Table>
 
 
