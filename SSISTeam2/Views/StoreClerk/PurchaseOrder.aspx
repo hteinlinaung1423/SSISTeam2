@@ -7,18 +7,18 @@
         <!-- Default panel contents -->
         <div class="panel-heading">Create New Purchase Order</div>
         <div class="panel-body">
-            <p>Step 1 of 3: Add Items</p>
-            <br />
+            <p>Step 2 of 3: Add Items</p>
+            <p>
+                <asp:Label ID="LabelOrderSummary" runat="server" Text=""></asp:Label>
+            </p>
 
             <div class="row">
+
                 <div class="col-md-4">
-                    Select Category :<asp:DropDownList ID="DropDownList1" class="form-control" runat="server" DataSourceID="SqlDataSource1" DataTextField="cat_name" DataValueField="cat_name" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList>
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=.;Initial Catalog=SSIS;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT [cat_name] FROM [Category]"></asp:SqlDataSource>
+                    <asp:Label ID="Label1" runat="server" Text="Deliver Date:"></asp:Label><asp:TextBox ID="deliverydate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                     <asp:RequiredFieldValidator ID="vldDate" runat="server" ErrorMessage="Date Is Required" ControlToValidate="deliverydate" ForeColor="Red">* Date is Required.</asp:RequiredFieldValidator>
                 </div>
-                <div class="col-md-4">
-                    Select Supplier :<asp:DropDownList ID="DropDownList2" class="form-control" runat="server" DataSourceID="SqlDataSource2" DataTextField="name" DataValueField="name"></asp:DropDownList>                    
-                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="Data Source=.;Initial Catalog=SSIS;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT distinct Supplier.name FROM Tender_List INNER JOIN Supplier ON Tender_List.supplier_id = Supplier.supplier_id INNER JOIN Tender_List_Details ON Tender_List.tender_year_id = Tender_List_Details.tender_year_id"></asp:SqlDataSource>
-                </div>
+
             </div>
 
 
@@ -31,53 +31,79 @@
 
             <asp:GridView ID="GridView1" runat="server"
                 AutoGenerateColumns="false"
-                AllowPaging="true"
                 PageSize="10"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
                 PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
 
-                 
+
 
                 <Columns>
-
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Item Code"><%-- HeaderStyle-CssClass="text-center-impt">--%>
-
-                        <ItemTemplate>
-                            <asp:Label ID="Label_ItemCode" runat="server" Text='<%# Eval("item_code") %>' CssClass="text-bold"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
 
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Item Description"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Label ID="Label_ItemDesc" runat="server" Text='<%# Eval("item_description") %>' CssClass="text-bold"></asp:Label>
+                            <asp:Label ID="Label_ItemDesc" runat="server" Text='<%# Eval("ItemDesc") %>' CssClass="text-bold"></asp:Label>
                         </ItemTemplate>
+
+                        <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier ID">
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier Name"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Label ID="Label_Supplier" runat="server" Text='<%# Eval("name") %>' CssClass="text-bold"></asp:Label>
+                            <asp:Label ID="Label_supplier" runat="server" Text='<%# Eval("SupplierName") %>' CssClass="text-bold"></asp:Label>
                         </ItemTemplate>
+
+                        <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
 
-
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Add to Cart"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Price">
 
                         <ItemTemplate>
-                            <asp:Button ID="add" runat="server" Text="Add"
-                                CssClass="btn btn-primary" />
+                            <asp:Label ID="Label_price" runat="server" Text='<%# Eval("Price") %>' CssClass="text-bold"></asp:Label>
                         </ItemTemplate>
+
+                        <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Quantity">
+
+                        <ItemTemplate>
+                            <asp:TextBox ID="quantity" Text='<%# Eval("Quantity") %>' CssClass="form-control" runat="server" OnTextChanged="quantity_TextChanged" AutoPostBack="True"></asp:TextBox>
+                        </ItemTemplate>
+
+                        <ItemStyle Width="10%"></ItemStyle>
+                    </asp:TemplateField>
+
+
+
 
 
 
                 </Columns>
+
+                <HeaderStyle CssClass="text-center-impt"></HeaderStyle>
+
+                <PagerSettings Position="TopAndBottom"></PagerSettings>
+
+                <PagerStyle HorizontalAlign="Center"></PagerStyle>
             </asp:GridView>
 
-        </div>
-    </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4"><b>Order Total :</b> $<asp:Label ID="Lbl_total" runat="server"></asp:Label></div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <asp:Button ID="order" runat="server" Text="Order Now"
+                            OnClick="MakeOrder" Visible="false"
+                            CssClass="btn btn-primary" />
+                    </div>
 
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </asp:Content>

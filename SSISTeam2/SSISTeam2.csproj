@@ -167,8 +167,6 @@
     </Content>
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
-    <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
@@ -182,7 +180,6 @@
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
-    <Content Include="Views\Home\Home.aspx" />
     <Content Include="Views\Reporting\OLDReports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysis.aspx" />
