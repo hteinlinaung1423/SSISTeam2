@@ -118,7 +118,6 @@ namespace SSISTeam2.Views.Reporting.Reports
           
         }
 
-
         protected void AddAllCat_Click(object sender, EventArgs e)
         {
             MoveAllItems(true);
@@ -134,7 +133,15 @@ namespace SSISTeam2.Views.Reporting.Reports
             MoveItems(false);
         }
 
-      
-     
+        protected void SetMonthYear_OnClick(object sender, EventArgs e)
+        {
+            
+        }
+        protected void cValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = SelectorList.Items.Count > 0;
+        }
+
+
     }
 }

@@ -82,8 +82,18 @@
                 <asp:DropDownList runat="server" CssClass="dropdown" ID="Year3"></asp:DropDownList>
             </asp:TableCell>
         </asp:TableRow>
-        <asp:TableFooterRow><asp:TableCell><asp:Button runat="server" ID="AddMonthYear" Text="Add" /></asp:TableCell></asp:TableFooterRow>
+        <asp:TableFooterRow>
+            <asp:TableCell><asp:Button CausesValidation="true" runat="server" ID="SetMonthYear" Text="Generate Report" OnClick="SetMonthYear_OnClick"/></asp:TableCell>
+        </asp:TableFooterRow>
     </asp:Table>
+    <asp:CustomValidator ID="cValidator" ErrorMessage="The list box is empty" OnServerValidate="cValidator_ServerValidate" Display="Dynamic"  ForeColor="Red" SetFocusOnError="True" ControlToValidate="SelectorList" ValidateEmptyText="true" runat="server" ClientValidationFunction="ListBoxValid"></asp:CustomValidator>
+   <%-- <asp:RequiredFieldValidator ValidationGroup="lstCheck" runat="server" id="reqSelectorList" controltovalidate="SelectorList" ForeColor="Red" SetFocusOnError="true" CssClass="has-error" errormessage="Please indicate at least ONE category" />--%>
+    <%--
+        Don't forget to add validation! Fields to validate: 
+        Category Selection - SelectorList MUST have at least 1 category 
+        Use custom validator
+        
+        --%>
 
 
 
