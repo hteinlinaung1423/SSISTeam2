@@ -18,11 +18,21 @@ namespace SSISTeam2.Views.StoreClerk
             RequestModel r = new RequestModel();
             using (SSISEntities context = new SSISEntities())
             {
-                r = FacadeFactory.getRequestService(context).findRequestById(2);
+                r = FacadeFactory.getRequestService(context).findRequestById(1);
             }
 
             Label1.Text = r.Items.Keys.First().ItemCode;
 
+            ItemModel a = new ItemModel();
+            ItemModel b = new ItemModel();
+
+            Dictionary<ItemModel, int> cc = new Dictionary<ItemModel, int>();
+            a.ItemCode = "happy";
+            b.ItemCode = "happy";
+
+            cc.Add(a, 0);
+
+            Label2.Text = cc.ContainsKey(b).ToString();
         }
     }
 }

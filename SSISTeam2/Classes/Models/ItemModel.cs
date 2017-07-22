@@ -7,7 +7,7 @@ using SSISTeam2;
 
 namespace SSISTeam2.Classes.Models
 {
-    public class ItemModel
+    public class ItemModel : IEquatable<ItemModel>
     {
         private string itemCode;
         private Category category;
@@ -49,8 +49,11 @@ namespace SSISTeam2.Classes.Models
                         int reorderQuantity,
                         int reorderLevel)
         {
-            this.category = category;
-            this.catName = category.cat_name;
+            if (category != null)
+            {
+                this.category = category;
+                this.catName = category.cat_name;
+            }
             this.description = description;
             this.unitOfMeasure = unitOfMeasure;
             this.imagePath = imagePath;
@@ -126,6 +129,16 @@ namespace SSISTeam2.Classes.Models
             }
 
             return cumulativeAvailable;
+        }
+
+        public bool Equals(ItemModel other)
+        {
+            return other != null && other.itemCode == itemCode;
+        }
+        public override int GetHashCode()
+        {
+            if (itemCode == null) return 0;
+            return itemCode.GetHashCode();
         }
 
         public Dictionary<Supplier, double> Prices

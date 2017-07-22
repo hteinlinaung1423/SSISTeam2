@@ -14,15 +14,25 @@ namespace SSISTeam2.Views.StoreClerk
     {
         const string SESSION_CATEGORIES = "newRequest_Categories";
         const string SESSION_STOCKS = "newRequest_Stocks";
-        const string APPROVED_REQS = "newRequest_ApprovedRequests";
+        const string SESSION_APPROVED_REQS = "newRequest_ApprovedRequests";
         const string SESSION_MODELS = "newRequest_SessionModels";
+        const string SESSION_USER_MODEL = "newRequest_CurrentUser";
+        const string SESSION_REQ_EDIT_ID = "newRequest_RequestEditId";
 
         const string TEMP_DEPT_CODE = "REGR";
+
+        bool isEditing = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            { // New entry into page
+
+                int requestId = 0;
+                // Get any request string
+                string requestToEdit = Request.QueryString["edit"];
+                int.TryParse(requestToEdit, out requestId); // 0 if fails
+
                 List<MakeNewRequestModel> models = new List<MakeNewRequestModel>();
                 using (SSISEntities context = new SSISEntities())
                 {
@@ -31,62 +41,93 @@ namespace SSISTeam2.Views.StoreClerk
                     List<Stock_Inventory> stocks = context.Stock_Inventory.Where(w => w.deleted != "Y").ToList();
                     Session[SESSION_STOCKS] = stocks;
                     RequestModelCollection requests;
+
+                    if (!User.Identity.IsAuthenticated)
+                    {
+                        Response.Redirect("/login.aspx");
+                    }
+
+                    UserModel currentUser = new UserModel(User.Identity.Name);
                     try
                     {
+                        string deptCode = currentUser.Department.dept_code;
                         requests = FacadeFactory.getRequestService(context).getAllApprovedRequests()
-                        .fromDepartment(TEMP_DEPT_CODE);
+                        .fromDepartment(deptCode);
                     }
                     catch (ItemNotFoundException exec)
                     {
                         requests = null;
                     }
 
-                    Session[APPROVED_REQS] = requests;
+                    Session[SESSION_USER_MODEL] = currentUser;
+                    Session[SESSION_APPROVED_REQS] = requests;
 
-                    MakeNewRequestModel model = new MakeNewRequestModel();
-                    model.Num = 1;
-                    model.Categories = cats.Select(s => s.cat_name).ToList();
-                    model.DictCats = cats.ToDictionary(k => k.cat_id.ToString(), v => v.cat_name);
+                    if (requestId == 0)
+                    { // Making a new request
+                        MakeNewRequestModel model = _makeNewModel(0);
+                        models.Add(model);
 
-                    model.CurrentCategory = cats.First().cat_id;
-                    model.CurrentCatName = cats.First().cat_name;
-
-                    model.Descriptions = stocks.Where(w => w.cat_id == model.CurrentCategory).Select(s => s.item_description).ToList();
-                    model.DictDescriptions = stocks.Where(w => w.cat_id == model.CurrentCategory).ToDictionary(k => k.item_code, v => v.item_description);
-
-                    Stock_Inventory st = stocks.Where(w => w.cat_id == model.CurrentCategory).First();
-                    model.CurrentItem = st.item_code;
-                    model.CurrentDescription = st.item_description;
-                    model.UnitOfMeasure = stocks.Where(w => w.item_code == model.CurrentItem).First().unit_of_measure;
-                    model.Quantity = 0;
-
-                    if (requests == null)
-                    {
-                        model.Approved = new List<string>();
+                        panelCannotChange.Visible = false;
+                        panelNormalBtns.Visible = true;
+                        btnCancelRequest.Visible = false;
                     }
                     else
                     {
-                        model.Approved = requests
-                            .fromDepartment(TEMP_DEPT_CODE)
-                            .SelectMany(s =>
+                        Request found = context.Requests.Find(requestId);
+                        // Set to cannot update first
+                        panelCannotChange.Visible = true;
+                        panelNormalBtns.Visible = false;
+                        string reason = "";
+                        if (found == null)
+                        {
+                            reason = "That request could not be found.";
+                        } else if (found.username != currentUser.Username)
+                        {
+                            reason = "You did not make this request.";
+                        } else if (found.current_status != RequestStatus.PENDING && found.current_status != RequestStatus.UPDATED)
+                        {
+                            // status is neither pending nor updated
+                            switch (found.current_status)
                             {
-                                string date = s.Date.ToShortDateString();
-                                IEnumerable<string> its = s.Items
-                                .Where(w => w.Key.ItemCode == model.CurrentItem)
-                                .Select(ss =>
-                                {
-                                    string res = "";
-                                    res += ss.Key.Category.cat_name;
-                                    res += " " + ss.Key.Description;
-                                    res += " (" + date + ")";
-                                    return res;
-                                });
-
-                                return its;
+                                case RequestStatus.CANCELLED:
+                                    reason = "The request was cancelled.";
+                                    break;
+                                case RequestStatus.REJECTED:
+                                    reason = "The request was already rejected.";
+                                    break;
+                                default: // Approved or others
+                                    reason = "The request was already approved.";
+                                    break;
                             }
-                            ).ToList();
+                        } else
+                        {
+                            // Request can be updated
+                            panelCannotChange.Visible = false;
+                            panelNormalBtns.Visible = true;
+                            btnCancelRequest.Visible = true;
+
+                            RequestModel rModel = FacadeFactory.getRequestService(context).findRequestById(requestId);
+
+                            tbReason.Text = rModel.Reason;
+
+                            int numIter = 0;
+                            foreach (var item in rModel.Items)
+                            {
+                                if (item.Value == 0)
+                                    continue;
+                                MakeNewRequestModel model = _makeNewModel(numIter, item.Key.Category.cat_id, item.Key.ItemCode, item.Value);
+                                models.Add(model);
+                                numIter++;
+                            }
+
+                            isEditing = true;
+                            Session[SESSION_REQ_EDIT_ID] = requestId;
+                            btnSubmit.Text = "Update request";
+                        }
+
+                        lblCannotChangeInfo.Text = reason;
                     }
-                    models.Add(model);
+                    
                 }
 
                 Session[SESSION_MODELS] = models;
@@ -130,14 +171,11 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void ddlCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Label1.Text = "hi";
             DropDownList ddl = sender as DropDownList;
             GridViewRow gvr = ddl.Parent.Parent as GridViewRow;
             Label num = gvr.FindControl("NumLabel") as Label;
 
             string selected = ddl.SelectedValue;
-
-            Label1.Text = "" + num.Text;
 
             int numInt = Convert.ToInt32(num.Text);
             List<MakeNewRequestModel> models = _getModelsFromSession();
@@ -145,7 +183,7 @@ namespace SSISTeam2.Views.StoreClerk
 
             model.CurrentCategory = Convert.ToInt32(selected);
 
-            model = _updateViewModelCategory(model);
+            model = _updateViewModelCategory(model, null);
 
             Session[SESSION_MODELS] = models;
 
@@ -204,6 +242,11 @@ namespace SSISTeam2.Views.StoreClerk
             MakeNewRequestModel newModel = _makeNewModel(models.Count);
             models.Add(newModel);
 
+            if (models.Count == 10)
+            {
+                btnNewRow.Enabled = false;
+            }
+
             Session[SESSION_MODELS] = models;
 
             _refreshGrid(models);
@@ -218,6 +261,11 @@ namespace SSISTeam2.Views.StoreClerk
             int numInt = Convert.ToInt32(num.Text);
             List<MakeNewRequestModel> models = _getModelsFromSession();
             //MakeNewRequestModel model = models[numInt - 1];
+
+            if (models.Count == 10)
+            {
+                btnNewRow.Enabled = true;
+            }
 
             models.RemoveAt(numInt - 1);
 
@@ -262,25 +310,42 @@ namespace SSISTeam2.Views.StoreClerk
                     itemModels.Add(im, item.Value);
                 }
 
-                // HARDCODED
-                UserModel user = new UserModel(User.Identity.Name);
+                UserModel user = (UserModel) Session[SESSION_USER_MODEL];
                 RequestModel newReq = new RequestModel();
                 newReq.Items = itemModels;
-                newReq.Reason = "for fun";
+                newReq.Reason = tbReason.Text;
                 newReq.Department = user.Department;
                 newReq.Status = RequestStatus.PENDING;
                 newReq.UserModel = user;
 
-                FacadeFactory.getRequestService(context).saveNewRequest(newReq);
+                if (isEditing)
+                {
+                    FacadeFactory.getRequestService(context).saveNewRequest(newReq);
+                } else
+                {
+                    newReq.RequestId = (int) Session[SESSION_REQ_EDIT_ID];
+                    FacadeFactory.getRequestService(context).updateRequestChanges(newReq);
+                }
 
                 context.SaveChanges();
             }
         }
 
+        protected void btnCancelRequest_Click(object sender, EventArgs e)
+        {
+            int requestId = (int) Session[SESSION_REQ_EDIT_ID];
+            string username = User.Identity.Name;
+            using (SSISEntities context = new SSISEntities())
+            {
+                FacadeFactory.getRequestService(context).setRequestToCancelled(requestId, username);
+                context.SaveChanges();
+            } 
+        }
+
         private MakeNewRequestModel _updateViewModelItem(MakeNewRequestModel model)
         {
             List<Stock_Inventory> stocks = Session[SESSION_STOCKS] as List<Stock_Inventory>;
-            RequestModelCollection requests = Session[APPROVED_REQS] == null ? null : Session[APPROVED_REQS] as RequestModelCollection;
+            RequestModelCollection requests = Session[SESSION_APPROVED_REQS] == null ? null : Session[SESSION_APPROVED_REQS] as RequestModelCollection;
 
             model.UnitOfMeasure = stocks.Where(w => w.item_code == model.CurrentItem).First().unit_of_measure;
 
@@ -291,7 +356,6 @@ namespace SSISTeam2.Views.StoreClerk
             else
             {
                 model.Approved = requests
-                    .fromDepartment(TEMP_DEPT_CODE)
                     .SelectMany(s =>
                     {
                         string date = s.Date.ToShortDateString();
@@ -313,18 +377,20 @@ namespace SSISTeam2.Views.StoreClerk
             return model;
         }
 
-        private MakeNewRequestModel _updateViewModelCategory(MakeNewRequestModel model)
+        private MakeNewRequestModel _updateViewModelCategory(MakeNewRequestModel model, string itemCode)
         {
-            List<Category> cats = Session[SESSION_CATEGORIES] as List<Category>;
             List<Stock_Inventory> stocks = Session[SESSION_STOCKS] as List<Stock_Inventory>;
-            RequestModelCollection requests = Session[APPROVED_REQS] == null ? null : Session[APPROVED_REQS] as RequestModelCollection;
 
-            model.Descriptions = stocks.Where(w => w.cat_id == model.CurrentCategory).Select(s => s.item_description).ToList();
             model.DictDescriptions = stocks.Where(w => w.cat_id == model.CurrentCategory).ToDictionary(k => k.item_code, v => v.item_description);
 
-            Stock_Inventory st = stocks.Where(w => w.cat_id == model.CurrentCategory).First();
-            model.CurrentItem = st.item_code;
-            model.CurrentDescription = st.item_description;
+            if (itemCode == null)
+            {
+                Stock_Inventory st = stocks.Where(w => w.cat_id == model.CurrentCategory).First();
+                model.CurrentItem = st.item_code;
+            } else
+            {
+                model.CurrentItem = itemCode;
+            }
 
             return _updateViewModelItem(model);
         }
@@ -354,29 +420,40 @@ namespace SSISTeam2.Views.StoreClerk
 
         private MakeNewRequestModel _makeNewModel(int count)
         {
+            return _makeNewModel(count, 0, null, 0);
+        }
+
+        private MakeNewRequestModel _makeNewModel(int count, int catId, string itemCode, int qty)
+        {
             List<Category> cats = Session[SESSION_CATEGORIES] as List<Category>;
             List<Stock_Inventory> stocks = Session[SESSION_STOCKS] as List<Stock_Inventory>;
-            RequestModelCollection requests = Session[APPROVED_REQS] == null ? null : Session[APPROVED_REQS] as RequestModelCollection;
+            RequestModelCollection requests = Session[SESSION_APPROVED_REQS] == null ? null : Session[SESSION_APPROVED_REQS] as RequestModelCollection;
 
             MakeNewRequestModel model = new MakeNewRequestModel();
             model.Num = count + 1;
-            model.Categories = cats.Select(s => s.cat_name).ToList();
+            model.Quantity = qty;
             model.DictCats = cats.ToDictionary(k => k.cat_id.ToString(), v => v.cat_name);
 
-            model.CurrentCategory = cats.First().cat_id;
-            model.CurrentCatName = cats.First().cat_name;
+            if (catId == 0)
+            {
+                model.CurrentCategory = cats.First().cat_id;
+            } else
+            {
+                model.CurrentCategory = catId;
+            }
 
-            return _updateViewModelCategory(model);
+            return _updateViewModelCategory(model, itemCode);
         }
+
     }
 
     class MakeNewRequestModel
     {
         private int num, quantity, currentCategory;
-        private List<string> categories, descriptions, approved;
+        private List<string> approved;
         private Dictionary<string, string> dictCats, dictDescriptions;
         private string unitOfMeasure, currentItem;
-        private string currentCatName, currentDescription;
+        //private string currentCatName, currentDescription;
 
         public int Num
         {
@@ -404,31 +481,7 @@ namespace SSISTeam2.Views.StoreClerk
             }
         }
 
-        public List<string> Categories
-        {
-            get
-            {
-                return categories;
-            }
-
-            set
-            {
-                categories = value;
-            }
-        }
-
-        public List<string> Descriptions
-        {
-            get
-            {
-                return descriptions;
-            }
-
-            set
-            {
-                descriptions = value;
-            }
-        }
+        
 
         public List<string> Approved
         {
@@ -479,32 +532,6 @@ namespace SSISTeam2.Views.StoreClerk
             set
             {
                 currentItem = value;
-            }
-        }
-
-        public string CurrentCatName
-        {
-            get
-            {
-                return currentCatName;
-            }
-
-            set
-            {
-                currentCatName = value;
-            }
-        }
-
-        public string CurrentDescription
-        {
-            get
-            {
-                return currentDescription;
-            }
-
-            set
-            {
-                currentDescription = value;
             }
         }
 
