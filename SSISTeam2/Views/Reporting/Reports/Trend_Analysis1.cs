@@ -216,7 +216,11 @@ namespace SSISTeam2.Views.Reporting.Reports {
             }
         }
         
-
+        public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
+            Trend_Analysis rpt = new Trend_Analysis();
+            rpt.Site = this.Site;
+            return rpt;
+        }
         
         public virtual string GetCustomizedCacheKey(RequestContext request) {
             String key = null;

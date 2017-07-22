@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="TrendAnalysisStaging.aspx.cs" Inherits="SSISTeam2.Views.Reporting.Reports.TrendAnalysisStaging" %>
+<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+<%@ Register assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p></p>
     <h2>Trend Analysis Report Generator</h2>
@@ -86,7 +88,7 @@
             <asp:TableCell><asp:Button CausesValidation="true" runat="server" ID="SetMonthYear" Text="Generate Report" OnClick="SetMonthYear_OnClick"/></asp:TableCell>
         </asp:TableFooterRow>
     </asp:Table>
-    <asp:CustomValidator ID="cValidator" ErrorMessage="The list box is empty" OnServerValidate="cValidator_ServerValidate" Display="Dynamic"  ForeColor="Red" SetFocusOnError="True" ControlToValidate="SelectorList" ValidateEmptyText="true" runat="server" ClientValidationFunction="ListBoxValid"></asp:CustomValidator>
+    <asp:CustomValidator ID="cValidator" ErrorMessage="Please select at least ONE category" OnServerValidate="cValidator_ServerValidate" Display="Dynamic"  ForeColor="Red" SetFocusOnError="True" ControlToValidate="SelectorList" ValidateEmptyText="true" runat="server" ClientValidationFunction="ListBoxValid"></asp:CustomValidator>
    <%-- <asp:RequiredFieldValidator ValidationGroup="lstCheck" runat="server" id="reqSelectorList" controltovalidate="SelectorList" ForeColor="Red" SetFocusOnError="true" CssClass="has-error" errormessage="Please indicate at least ONE category" />--%>
     <%--
         Don't forget to add validation! Fields to validate: 
@@ -94,6 +96,17 @@
         Use custom validator
         
         --%>
+
+
+
+    <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="True"  Height="1202px" ReportSourceID="TrendRptSrc" ToolPanelView="None" ToolPanelWidth="200px" Width="1104px" />
+
+
+
+    <CR:CrystalReportSource ID="TrendRptSrc" runat="server">
+        <Report FileName="C:\Users\veryt\Source\Repos\SSISTeam2\SSISTeam2\Views\Reporting\Reports\Trend_Analysis.rpt">
+        </Report>
+    </CR:CrystalReportSource>
 
 
 
