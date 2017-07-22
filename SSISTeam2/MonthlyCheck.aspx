@@ -71,27 +71,6 @@
 
 <PagerStyle HorizontalAlign="Center"></PagerStyle>
     </asp:GridView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT [current_qty], [unit_of_measure], [item_description], [image_path], [cat_id], [item_code] FROM [Stock_Inventory]" DeleteCommand="DELETE FROM [Stock_Inventory] WHERE [item_code] = @item_code" InsertCommand="INSERT INTO [Stock_Inventory] ([current_qty], [unit_of_measure], [item_description], [image_path], [cat_id], [item_code]) VALUES (@current_qty, @unit_of_measure, @item_description, @image_path, @cat_id, @item_code)" UpdateCommand="UPDATE [Stock_Inventory] SET [current_qty] = @current_qty, [unit_of_measure] = @unit_of_measure, [item_description] = @item_description, [image_path] = @image_path, [cat_id] = @cat_id WHERE [item_code] = @item_code">
-        <DeleteParameters>
-            <asp:Parameter Name="item_code" Type="String" />
-        </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="current_qty" Type="Int32" />
-            <asp:Parameter Name="unit_of_measure" Type="String" />
-            <asp:Parameter Name="item_description" Type="String" />
-            <asp:Parameter Name="image_path" Type="String" />
-            <asp:Parameter Name="cat_id" Type="Int32" />
-            <asp:Parameter Name="item_code" Type="String" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="current_qty" Type="Int32" />
-            <asp:Parameter Name="unit_of_measure" Type="String" />
-            <asp:Parameter Name="item_description" Type="String" />
-            <asp:Parameter Name="image_path" Type="String" />
-            <asp:Parameter Name="cat_id" Type="Int32" />
-            <asp:Parameter Name="item_code" Type="String" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
-    <asp:Label ID="testLabel" runat="server" Text="Label"></asp:Label>
-    <asp:Button ID="nextBtn" runat="server" Text="Button" OnClick="nextBtn_Click" />
+    
+    <asp:Button ID="nextBtn" runat="server" Text="Next" OnClick="nextBtn_Click" /><asp:Label ID="testLabel" runat="server" Text="Label"></asp:Label>
 </asp:Content>
