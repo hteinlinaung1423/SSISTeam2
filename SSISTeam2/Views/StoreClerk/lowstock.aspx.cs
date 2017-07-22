@@ -13,8 +13,19 @@ namespace SSISTeam2.Views.StoreClerk
         protected void Page_Load(object sender, EventArgs e)
         {
             SSISEntities s = new SSISEntities();
-           // GridView1.DataSource = s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
-           // GridView1.DataBind();
+            List<Stock_Inventory> stocks = s.Stock_Inventory.ToList();
+            List<Stock_Inventory> lowStocks = new List<Stock_Inventory>();
+            foreach(var stock in stocks)
+            {
+                ItemModel im = new ItemModel(stock);
+                if (im.AvailableQuantity < im.ReorderLevel)
+                {
+                    lowStocks.Add(stock);
+                }
+            }
+
+            GridView1.DataSource = lowStocks; //s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
+           GridView1.DataBind();
         }
 
         protected void MakeOrder(object sender, EventArgs e)

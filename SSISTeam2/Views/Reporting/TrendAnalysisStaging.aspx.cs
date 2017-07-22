@@ -19,23 +19,29 @@ namespace SSISTeam2.Views.Reporting.Reports
         {
             
             //Populate Year DDL
-            for (int i = 1980; i <= 2040; i++)
+            string currentYear = DateTime.Now.Year.ToString();
+            int year=Convert.ToInt32(currentYear);
+            for (int i = year; i >= 1980; i--)
                                 {
-                Year.Items.Add(i.ToString());
-                                }
-            Year.Items.FindByValue(System.DateTime.Now.Year.ToString()).Selected = true;
+                Year1.Items.Add(i.ToString());
+                Year2.Items.Add(i.ToString());
+                Year3.Items.Add(i.ToString());
+            }
+            
             
             //Populate Month DDL
             DateTime month = Convert.ToDateTime("1/1/2000");
-                            for (int i = 1; i <= 12; i++)
+                            for (int i = 0; i <= 11; i++)
                                 {
                 DateTime NextMont = month.AddMonths(i);
                 ListItem list = new ListItem();
                 list.Text = NextMont.ToString("MMMM");
                 list.Value = NextMont.Month.ToString();
-                Month.Items.Add(list);
-                                }
-            Month.Items.FindByValue(System.DateTime.Now.Month.ToString()).Selected = true;
+                Month1.Items.Add(list);
+                Month2.Items.Add(list);
+                Month3.Items.Add(list);
+            }
+            
 
             //Commence SQL Connection
 
@@ -112,7 +118,6 @@ namespace SSISTeam2.Views.Reporting.Reports
           
         }
 
-
         protected void AddAllCat_Click(object sender, EventArgs e)
         {
             MoveAllItems(true);
@@ -125,25 +130,18 @@ namespace SSISTeam2.Views.Reporting.Reports
 
         protected void RemoveAllCat_Click(object sender, EventArgs e)
         {
-            MoveItems(true);
+            MoveItems(false);
         }
 
-        List<TableRow> TableRows;
-        protected void AddMonthYear_Click(object sender, EventArgs e)
+        protected void SetMonthYear_OnClick(object sender, EventArgs e)
         {
-            //Month Year Table ID is MonthYearTable
-            TableRow row = new TableRow();
-            
-            TableCell NewCell1 = new TableCell();
-            DropDownList newDDL = new DropDownList();
-            NewCell1.Controls.Add(newDDL);
-            row.Cells.Add(NewCell1);
-            TableCell NewCell2 = new TableCell();
-            DropDownList newDDL2 = new DropDownList();
-            NewCell2.Controls.Add(newDDL2);
-            row.Cells.Add(NewCell2);
-            MonthYearTable.Rows.Add(row);
             
         }
+        protected void cValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = SelectorList.Items.Count > 0;
+        }
+
+
     }
 }

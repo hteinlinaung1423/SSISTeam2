@@ -130,5 +130,10 @@ namespace SSISTeam2
             MonthlyCheckGV.DataSource = itemList;
             MonthlyCheckGV.DataBind();
         }
+        protected void MonthlyCheckGV_OnTextChange(object sender, EventArgs e)
+        {
+            testLabel.Text = "changed";
+        }
+
     }
 }

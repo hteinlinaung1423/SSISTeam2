@@ -85,30 +85,75 @@ namespace SSISTeam2.Views.Reporting.Reports {
         protected global::System.Web.UI.WebControls.Table MonthYearTable;
         
         /// <summary>
-        /// Month control.
+        /// Month1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Month;
+        protected global::System.Web.UI.WebControls.DropDownList Month1;
         
         /// <summary>
-        /// Year control.
+        /// Year1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Year;
+        protected global::System.Web.UI.WebControls.DropDownList Year1;
         
         /// <summary>
-        /// AddMonthYear control.
+        /// Month2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddMonthYear;
+        protected global::System.Web.UI.WebControls.DropDownList Month2;
+        
+        /// <summary>
+        /// Year2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Year2;
+        
+        /// <summary>
+        /// Month3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Month3;
+        
+        /// <summary>
+        /// Year3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Year3;
+        
+        /// <summary>
+        /// SetMonthYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SetMonthYear;
+        
+        /// <summary>
+        /// cValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cValidator;
     }
 }
