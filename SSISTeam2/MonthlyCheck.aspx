@@ -61,11 +61,15 @@
 
             <asp:TemplateField HeaderText="Actual Quantity">
                 <ItemTemplate>
-                    <asp:TextBox runat="server" Text='<%# Eval("actualQuantity") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" Text='<%# Eval("actualQuantity") %>' OnTextChanged="MonthlyCheckGV_OnTextChange" AutoPostBack="True"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
 
         </Columns>
+
+<PagerSettings Position="TopAndBottom"></PagerSettings>
+
+<PagerStyle HorizontalAlign="Center"></PagerStyle>
     </asp:GridView>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT [current_qty], [unit_of_measure], [item_description], [image_path], [cat_id], [item_code] FROM [Stock_Inventory]" DeleteCommand="DELETE FROM [Stock_Inventory] WHERE [item_code] = @item_code" InsertCommand="INSERT INTO [Stock_Inventory] ([current_qty], [unit_of_measure], [item_description], [image_path], [cat_id], [item_code]) VALUES (@current_qty, @unit_of_measure, @item_description, @image_path, @cat_id, @item_code)" UpdateCommand="UPDATE [Stock_Inventory] SET [current_qty] = @current_qty, [unit_of_measure] = @unit_of_measure, [item_description] = @item_description, [image_path] = @image_path, [cat_id] = @cat_id WHERE [item_code] = @item_code">
         <DeleteParameters>
