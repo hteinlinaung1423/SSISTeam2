@@ -119,7 +119,7 @@
                             <li>
                                 <asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" class="btn btn-block btn-primary" /></li>
                             <li>
-                                <asp:Button ID="GeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" class="btn btn-block btn-primary" /></li>
+                                <asp:Button ID="GeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" class="btn btn-block btn-primary" OnClick="MakeOrder" /></li>
                             <% }
                                 if (Page.User.IsInRole("DeptHead"))
                                 { %>
