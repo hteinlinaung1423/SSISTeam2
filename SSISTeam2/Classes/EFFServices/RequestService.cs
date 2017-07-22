@@ -176,12 +176,13 @@ namespace SSISTeam2.Classes.EFFServices
             using (var transaction = context.Database.BeginTransaction())
             {
                 try
-                {
+            {
                     Request newRequest = new Request();
                     newRequest.current_status = RequestStatus.PENDING;
                     newRequest.deleted = "N";
                     newRequest.dept_code = request.Department.dept_code;
                     newRequest.reason = request.Reason;
+                    newRequest.rejected = "N";
                     newRequest.rejected_reason = "";
                     newRequest.username = request.UserModel.Username;
 
@@ -198,11 +199,14 @@ namespace SSISTeam2.Classes.EFFServices
                         newEvent.quantity = itemAndQty.Value;
                         newEvent.status = RequestStatus.PENDING;
                         newEvent.username = request.UserModel.Username;
-
+                        
                         // Establish relationships
                         newDetail.Request_Event.Add(newEvent);
                         newRequest.Request_Details.Add(newDetail);
                     }
+
+                    // Add to DB
+                    context.Requests.Add(newRequest);
                 }
                 catch (Exception exec)
                 {
@@ -236,13 +240,64 @@ namespace SSISTeam2.Classes.EFFServices
                         newEvent.deleted = "N";
                         newEvent.date_time = timestamp;
                         newEvent.quantity = itemAndQty.Value;
-                        newEvent.status = RequestStatus.UPDATED;
+                        newEvent.status = EventStatus.UPDATED;
                         newEvent.username = request.UserModel.Username;
 
                         // Establish relationships
                         Request_Details targetDetail = targetDetails.Where(x => x.item_code == itemAndQty.Key.ItemCode).First();
-                        targetDetail.Request_Event.Add(newEvent);
+                        newEvent.request_detail_id = targetDetail.request_detail_id;
+
+                        // Add to DB
+                        context.Request_Event.Add(newEvent);
+                        //targetDetail.Request_Event.Add(newEvent);
                     }
+
+                    // Update Status
+                    context.Requests.Find(request.RequestId).current_status = RequestStatus.UPDATED;
+                }
+                catch (Exception exec)
+                {
+                    transaction.Rollback();
+                    throw exec;
+                }
+
+                transaction.Commit();
+            }
+            return true;
+        }
+
+        public bool setRequestToCancelled(string requestId, string username)
+        {
+            Request request = context.Requests.Find(requestId);
+            if (request.current_status != RequestStatus.PENDING && request.current_status != RequestStatus.UPDATED)
+            {
+                throw new RequestAlreadyApprovedException("Already approved or rejected.");
+                //return false;
+            }
+            DateTime timestamp = DateTime.Now;
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    List<Request_Details> targetDetails = request.Request_Details.ToList();
+                    foreach (Request_Details detail in targetDetails)
+                    {
+                        Request_Event newEvent = new Request_Event();
+                        newEvent.deleted = "N";
+                        newEvent.date_time = timestamp;
+                        newEvent.quantity = detail.Request_Event.OrderBy(o => o.date_time).Where(w => (w.status == EventStatus.UPDATED || w.status == EventStatus.PENDING) && w.deleted != "Y").Last().quantity;
+                        newEvent.status = EventStatus.CANCELLED;
+                        newEvent.username = username;
+
+                        // Establish relationships
+                        newEvent.request_detail_id = detail.request_detail_id;
+
+                        // Add to DB
+                        context.Request_Event.Add(newEvent);
+                    }
+
+                    // Update Status
+                    context.Requests.Find(requestId).current_status = RequestStatus.CANCELLED;
                 }
                 catch (Exception exec)
                 {
