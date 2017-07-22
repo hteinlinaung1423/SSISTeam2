@@ -11,6 +11,7 @@ namespace SSISTeam2.Classes.Models
     {
         private string itemCode;
         private Category category;
+        private string catName;
         private string description;
         private string unitOfMeasure;
         private string imagePath;
@@ -29,6 +30,7 @@ namespace SSISTeam2.Classes.Models
             itemCode = stock.item_code;
             description = stock.item_description;
             category = stock.Category;
+            catName = category.cat_name;
             unitOfMeasure = stock.unit_of_measure;
             imagePath = stock.image_path;
             currentQuantity = stock.current_qty;
@@ -48,6 +50,7 @@ namespace SSISTeam2.Classes.Models
                         int reorderLevel)
         {
             this.category = category;
+            this.catName = category.cat_name;
             this.description = description;
             this.unitOfMeasure = unitOfMeasure;
             this.imagePath = imagePath;
@@ -176,6 +179,19 @@ namespace SSISTeam2.Classes.Models
             set
             {
                 category = value;
+            }
+        }
+
+        public string CatName
+        {
+            get
+            {
+                return catName;
+            }
+
+            set
+            {
+                catName = value;
             }
         }
 

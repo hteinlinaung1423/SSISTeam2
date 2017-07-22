@@ -10,7 +10,7 @@
 namespace SSISTeam2.Views.StoreClerk {
     
     
-    public partial class EditSupplier {
+    public partial class AddNewSupplier {
         
         /// <summary>
         /// tb_supplierId control.
