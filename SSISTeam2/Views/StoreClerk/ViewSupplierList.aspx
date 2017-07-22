@@ -108,7 +108,7 @@
 
                         <ItemTemplate>
                             <asp:Button ID="delete" runat="server" Text="Delete"
-                                CssClass="btn btn-primary" />
+                                CssClass="btn btn-primary" OnClick="delete_Supplier"  />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
