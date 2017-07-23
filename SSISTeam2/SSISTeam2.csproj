@@ -131,6 +131,7 @@
   <ItemGroup>
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
+    <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
     <Content Include="notifysuccess.aspx" />
@@ -172,6 +173,7 @@
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
+    <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
@@ -194,7 +196,7 @@
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
-    <Content Include="Views\StoreClerk\MakeRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
@@ -271,6 +273,13 @@
     </Compile>
     <Compile Include="Delivery_Orders.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.designer.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -349,6 +358,13 @@
     </Compile>
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.cs">
+      <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.designer.cs">
+      <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
@@ -494,12 +510,12 @@
     <Compile Include="Views\StoreClerk\lowstock.aspx.designer.cs">
       <DependentUpon>lowstock.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeRetrievalForm.aspx.cs">
-      <DependentUpon>MakeRetrievalForm.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx.cs">
+      <DependentUpon>DEMO_MakeRetrievalForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeRetrievalForm.aspx.designer.cs">
-      <DependentUpon>MakeRetrievalForm.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx.designer.cs">
+      <DependentUpon>DEMO_MakeRetrievalForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>

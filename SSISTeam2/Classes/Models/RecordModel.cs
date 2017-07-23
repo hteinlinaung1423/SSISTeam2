@@ -80,6 +80,16 @@ namespace SSISTeam2.Classes.Models
             }
         }
 
+        // Computed Properties
+        public string Username
+        {
+            get
+            {
+                return UserModel.Username;
+            }
+        }
+
+        // Properties
         public virtual int RequestId
         {
             get
