@@ -78,13 +78,16 @@ namespace SSISTeam2
         //}
         protected void nextBtn_Click(object sender, EventArgs e)
         {
-            List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>) Session["Monthly"];
-            for (int i = 0; i < itemList.Count; i++)
+            List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>)Session["Monthly"];
+            List<MonthlyCheckModel> confirmList = new List<MonthlyCheckModel>();
+            foreach (MonthlyCheckModel i in itemList)
             {
-                if (itemList[i].ActualQuantity == itemList[i].CurrentQuantity)
-                    itemList.RemoveAt(i);
+                if (i.ActualQuantity != i.CurrentQuantity)
+                {
+                    confirmList.Add(i);
+                }
             }
-            Session["Adjustment"] = itemList;
+            Session["Confirmation"] = confirmList;
             Response.Redirect("MonthlyCheckConfirmation.aspx");
         }
         protected void MonthlyCheckGV_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -98,7 +101,8 @@ namespace SSISTeam2
         {
             GridViewRow gridViewRow = (GridViewRow)(sender as Control).Parent.Parent;
             TextBox textbox = (TextBox) sender;
-            int index = gridViewRow.RowIndex;
+            Label rowIndex = (Label)gridViewRow.FindControl("rowIndex");
+            int index = int.Parse(rowIndex.Text) - 1;
             List<MonthlyCheckModel> model = (List<MonthlyCheckModel>) Session["Monthly"];
             model[index].ActualQuantity = int.Parse(textbox.Text);
 
