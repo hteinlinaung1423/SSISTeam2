@@ -19,6 +19,7 @@ namespace SSISTeam2.Classes.Models
         private int reorderLevel;
         private Dictionary<Supplier, double> prices;
         private int actualQuantity;
+        private string reason;
 
 
         public MonthlyCheckModel(Stock_Inventory stock)
@@ -36,6 +37,7 @@ namespace SSISTeam2.Classes.Models
             this.reorderLevel = item.ReorderLevel;
             this.prices = item.Prices;
             this.actualQuantity = item.CurrentQuantity;
+            this.reason = "";
         }
 
         public static List<ItemModel> ConvertToItemModel(List<MonthlyCheckModel> monthlyList)
@@ -195,6 +197,18 @@ namespace SSISTeam2.Classes.Models
             set
             {
                 actualQuantity = value;
+            }
+        }
+        public string Reason
+        {
+            get
+            {
+                return reason;
+            }
+
+            set
+            {
+                reason = value;
             }
         }
     }
