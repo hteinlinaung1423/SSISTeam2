@@ -131,6 +131,7 @@
   <ItemGroup>
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
+    <Content Include="ViewAllAdjustment.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
@@ -241,6 +242,7 @@
     <Compile Include="Classes\EFFServices\RequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
+    <Compile Include="Classes\Models\AdjustmentModel.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
     <Compile Include="Classes\Models\MonthlyCheckModel.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
@@ -276,6 +278,13 @@
     </Compile>
     <Compile Include="Delivery_Orders.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.designer.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
       <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>

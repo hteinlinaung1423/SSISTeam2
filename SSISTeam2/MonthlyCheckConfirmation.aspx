@@ -31,6 +31,12 @@
                     <asp:Label runat="server" Text='<%# Eval("actualQuantity") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+            
+            <asp:TemplateField HeaderText="Price of Discrepency">
+                <ItemTemplate>
+                    <asp:Label runat="server" Text='<%# Eval("averagePrice") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
 
             <asp:TemplateField HeaderText="Reason">
                 <ItemTemplate>
