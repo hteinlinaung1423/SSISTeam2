@@ -15,6 +15,11 @@ namespace SSISTeam2
             IIdentity id = User.Identity;
             if (id.IsAuthenticated)
             {
+                if (Request.QueryString["return"] != null)
+                {
+                    string redirect = Request.QueryString["return"];
+                    Response.Redirect("~/" + redirect);
+                }
                 Response.Redirect("~/Default.aspx");
             }
 

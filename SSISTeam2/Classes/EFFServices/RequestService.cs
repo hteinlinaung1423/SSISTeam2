@@ -1,4 +1,5 @@
-﻿using SSISTeam2.Classes.Exceptions;
+﻿using SSISTeam2.Classes.EFFacades;
+using SSISTeam2.Classes.Exceptions;
 using SSISTeam2.Classes.Models;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace SSISTeam2.Classes.EFFServices
 
             if (efRequest == null)
             {
+                //return null;
                 throw new ItemNotFoundException();
             }
 
@@ -118,8 +120,8 @@ namespace SSISTeam2.Classes.EFFServices
             DateTime timestamp = DateTime.Now;
             using (var transaction = context.Database.BeginTransaction())
             {
-                try
-                {
+                //try
+                //{
                     foreach (RequestModel request in requests)
                     {
                         if (RequestStatus.requestHasHadStatus(request, status))
@@ -149,11 +151,11 @@ namespace SSISTeam2.Classes.EFFServices
                             added++;
                         }
                     }
-                } catch (Exception exec)
-                {
-                    transaction.Rollback();
-                    throw exec;
-                }
+                //} catch (Exception exec)
+                //{
+                //    transaction.Rollback();
+                //    throw exec;
+                //}
 
                 transaction.Commit();
             }
@@ -162,7 +164,9 @@ namespace SSISTeam2.Classes.EFFServices
 
         public bool approveRequest(RequestModel request, string currentUser)
         {
-            return _setStatusOfRequest(request, currentUser, RequestStatus.APPROVED);
+            bool status = _setStatusOfRequest(request, currentUser, RequestStatus.APPROVED);
+            FacadeFactory.getRequestMovementService(context).allocateRequest(request.RequestId, currentUser);
+            return status;
         }
 
         public bool rejectRequest(RequestModel request, string currentUser)

@@ -37,7 +37,7 @@
 
             <asp:TemplateField HeaderText="No.">
                 <ItemTemplate>
-                    <%# Container.DataItemIndex + 1 %>
+                    <asp:Label runat="server" Text='<%# Container.DataItemIndex + 1 %>' ID="rowIndex"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
 

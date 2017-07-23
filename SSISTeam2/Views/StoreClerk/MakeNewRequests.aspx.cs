@@ -44,7 +44,7 @@ namespace SSISTeam2.Views.StoreClerk
 
                     if (!User.Identity.IsAuthenticated)
                     {
-                        Response.Redirect("/login.aspx");
+                        Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequests.aspx");
                     }
 
                     UserModel currentUser = new UserModel(User.Identity.Name);
@@ -54,7 +54,7 @@ namespace SSISTeam2.Views.StoreClerk
                         requests = FacadeFactory.getRequestService(context).getAllApprovedRequests()
                         .fromDepartment(deptCode);
                     }
-                    catch (ItemNotFoundException exec)
+                    catch (ItemNotFoundException)
                     {
                         requests = null;
                     }
@@ -320,11 +320,11 @@ namespace SSISTeam2.Views.StoreClerk
 
                 if (isEditing)
                 {
-                    FacadeFactory.getRequestService(context).saveNewRequest(newReq);
+                    newReq.RequestId = (int)Session[SESSION_REQ_EDIT_ID];
+                    FacadeFactory.getRequestService(context).updateRequestChanges(newReq);
                 } else
                 {
-                    newReq.RequestId = (int) Session[SESSION_REQ_EDIT_ID];
-                    FacadeFactory.getRequestService(context).updateRequestChanges(newReq);
+                    FacadeFactory.getRequestService(context).saveNewRequest(newReq);
                 }
 
                 context.SaveChanges();
