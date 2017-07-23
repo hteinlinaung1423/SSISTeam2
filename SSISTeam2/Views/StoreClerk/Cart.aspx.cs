@@ -230,11 +230,11 @@ namespace SSISTeam2.Views.StoreClerk
                 Stock_Inventory item = context.Stock_Inventory.Where(x => x.item_code == order.item_code).First();//Find(order.ISBN);
 
                 itemDesc = item.item_description;
-                supplierName = context.Suppliers.Where(x => x.supplier_id == item.supplier_id).Select(x => x.name).First();
+                supplierName = context.Suppliers.Where(x => x.supplier_id == order.Tender_List.supplier_id).Select(x => x.name).First();
                 price = order.price;
                 tenderId = order.tender_id;
                 quantity = item.reorder_qty;
-                supplierId = item.supplier_id;
+                supplierId = order.Tender_List.supplier_id;
             }
         }
 

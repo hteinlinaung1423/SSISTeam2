@@ -99,14 +99,7 @@
 
 
 
-    <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="True"  Height="1202px" ReportSourceID="TrendRptSrc" ToolPanelView="None" ToolPanelWidth="200px" Width="1104px" />
-
-
-
-    <CR:CrystalReportSource ID="TrendRptSrc" runat="server">
-        <Report FileName="C:\Users\veryt\Source\Repos\SSISTeam2\SSISTeam2\Views\Reporting\Reports\Trend_Analysis.rpt">
-        </Report>
-    </CR:CrystalReportSource>
+    <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
 
 
 

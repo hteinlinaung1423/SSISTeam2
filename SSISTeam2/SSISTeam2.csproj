@@ -131,6 +131,7 @@
   <ItemGroup>
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
+    <Content Include="ViewAllAdjustment.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
@@ -185,7 +186,10 @@
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
-    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
+    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TrendAnalysisStaging.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Reporting\TrendAnalysisRpt.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
@@ -193,7 +197,7 @@
     <Content Include="Views\StoreClerk\MakeNewRequests.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
-    <Content Include="Views\Home\Home.aspx" />
+    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
@@ -240,6 +244,7 @@
     <Compile Include="Classes\EFFServices\RequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
+    <Compile Include="Classes\Models\AdjustmentModel.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
     <Compile Include="Classes\Models\MonthlyCheckModel.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
@@ -275,6 +280,13 @@
     </Compile>
     <Compile Include="Delivery_Orders.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.designer.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
       <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
@@ -456,6 +468,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Trend_Analysis.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Views\Reporting\Reports\Volume_Report.cs">
       <AutoGen>True</AutoGen>
@@ -469,6 +482,11 @@
     </Compile>
     <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.designer.cs">
       <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\TrendAnalysisStaging.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
@@ -609,10 +627,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TEST Trend_Analysis.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Reporting\Reports\Trend_Analysis.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    <Content Include="Views\Reporting\Reports\Trend_Analysis.rpt">
       <LastGenOutput>Trend_Analysis1.cs</LastGenOutput>
-    </EmbeddedResource>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Volume_Report.cs</LastGenOutput>

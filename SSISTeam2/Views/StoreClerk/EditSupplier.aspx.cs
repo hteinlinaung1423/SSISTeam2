@@ -13,17 +13,21 @@ namespace SSISTeam2.Views.StoreClerk
         string supplier_code;
         protected void Page_Load(object sender, EventArgs e)
         {
-            string supplierId = Request.QueryString["supplier"];
-            Supplier s = ctx.Suppliers.Where(x => x.supplier_id == supplierId).First();
-            supplier_code = s.supplier_id;
-            tb_supplierId.Text = s.supplier_id;
-            tb_contactName.Text = s.contact_name;
-            tb_contactNum.Text = s.contact_num;
-            tb_faxNum.Text = s.fax_num;
-            tb_gst.Text = s.gst_reg_num;
-            tb_supplierName.Text = s.name;
+            if (!IsPostBack)
+            {
+                string supplierId = Request.QueryString["supplier"];
+                Supplier s = ctx.Suppliers.Where(x => x.supplier_id == supplierId).First();
+                supplier_code = s.supplier_id;
+                tb_supplierId.Text = s.supplier_id;
+                tb_contactName.Text = s.contact_name;
+                tb_contactNum.Text = s.contact_num;
+                tb_faxNum.Text = s.fax_num;
+                tb_gst.Text = s.gst_reg_num;
+                tb_supplierName.Text = s.name;
 
-            tb_address.Text = s.address;
+                tb_address.Text = s.address;
+            }
+            
 
         }
 
@@ -36,9 +40,9 @@ namespace SSISTeam2.Views.StoreClerk
             string FaxNum = tb_faxNum.Text;
             string Address = tb_address.Text;
             string Gst = tb_gst.Text;
+            supplier_code=Request.QueryString["supplier"];
 
-          
-                Supplier s = ctx.Suppliers.Where(x=> x.supplier_id ==supplier_code).First();
+            Supplier s = ctx.Suppliers.Where(x=> x.supplier_id ==supplier_code).First();
 
                
                 s.name = SupplierName;
