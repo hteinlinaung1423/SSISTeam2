@@ -27,6 +27,7 @@ namespace SSISTeam2.Classes.Models
         }
         public RecordModel(Request efRequest, Dictionary<ItemModel, int> items)
         {
+            requestId = efRequest.request_id;
             this.userModel = new UserModel(efRequest.username);
             this.date = _getLatestDateTime();
             this.department = efRequest.Department;
