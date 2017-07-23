@@ -18,7 +18,7 @@ namespace SSISTeam2.Views.StoreClerk
             RequestModel r = new RequestModel();
             using (SSISEntities context = new SSISEntities())
             {
-                r = FacadeFactory.getRequestService(context).findRequestById(2);
+                r = FacadeFactory.getRequestService(context).findRequestById(4);
             }
 
             Label1.Text = r.Items.Keys.First().ItemCode;
