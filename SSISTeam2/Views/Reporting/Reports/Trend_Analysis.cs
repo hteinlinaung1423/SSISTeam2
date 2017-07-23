@@ -233,5 +233,10 @@ namespace SSISTeam2.Views.Reporting.Reports {
             //     this.ShareDBLogonInfo );
             return key;
         }
+
+        public ReportDocument CreateReport()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
