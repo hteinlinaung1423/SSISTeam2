@@ -32,8 +32,8 @@ namespace SSISTeam2.Classes.EFFServices
         // And use your own ctx.SaveChanges()
         bool rejectRequest(RequestModel request, string currentUser);
         // Same as approve requests, but for rejection.
-
-
+   
+        bool setRequestToCancelled(int requestId, string username);
         //RequestDTOCollection getAllAllocatedRequests();
         //RequestDTOCollection getAllPartiallyAllocatedRequests();
         //RequestDTOCollection getAllRequestsDisbursing();

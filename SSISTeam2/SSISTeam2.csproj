@@ -100,6 +100,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
       <Private>True</Private>
@@ -178,16 +179,15 @@
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
-    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
     <Content Include="Views\Reporting\TrendAnalysisRpt.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
-    <Content Include="Views\StoreClerk\DEMO_MakeNewRequests.aspx" />
+    <Content Include="Views\StoreClerk\MakeNewRequests.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <Content Include="Views\Home\Home.aspx" />
-    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
@@ -416,6 +416,19 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
+      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
+      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reporting\Reports\Trend_Analysis1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Trend_Analysis.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Views\Reporting\TrendAnalysisStaging.aspx.cs">
       <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -435,13 +448,6 @@
       <DependentUpon>Volume_Report.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
-      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
-      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.cs">
       <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -456,12 +462,12 @@
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.designer.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\DEMO_MakeNewRequests.aspx.cs">
-      <DependentUpon>DEMO_MakeNewRequests.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\MakeNewRequests.aspx.cs">
+      <DependentUpon>MakeNewRequests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\DEMO_MakeNewRequests.aspx.designer.cs">
-      <DependentUpon>DEMO_MakeNewRequests.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\MakeNewRequests.aspx.designer.cs">
+      <DependentUpon>MakeNewRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\EditSupplier.aspx.cs">
       <DependentUpon>EditSupplier.aspx</DependentUpon>
@@ -583,7 +589,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Reporting\Reports\Trend_Analysis.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Trend_Analysis.cs</LastGenOutput>
+      <LastGenOutput>Trend_Analysis1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

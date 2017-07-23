@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="Cart.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.Cart" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="Cart.aspx.cs" enableEventValidation="false" Inherits="SSISTeam2.Views.StoreClerk.Cart" %>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
@@ -164,6 +164,11 @@
 
                         </Columns>
                     </asp:GridView>
+
+                     <div class="panel-footer"><asp:Button ID="next" runat="server" Text="Next Step" Visible="false" OnClick="Purchase"
+                                      
+                                        CssClass="btn btn-primary" /></div>
+                    
 
                 </div>
 
