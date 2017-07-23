@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.Reporting {
+namespace SSISTeam2.Views.Reporting.Reports {
     
     
-    public partial class RequestVolumeRpt1 {
+    public partial class RequestVolumeRpt {
         
         /// <summary>
         /// CrystalReportViewer1 control.
@@ -22,12 +22,12 @@ namespace SSISTeam2.Views.Reporting {
         protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
         
         /// <summary>
-        /// VolumeRptSrc control.
+        /// CrystalReportSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportSource VolumeRptSrc;
+        protected global::CrystalDecisions.Web.CrystalReportSource CrystalReportSource1;
     }
 }

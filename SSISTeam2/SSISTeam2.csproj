@@ -45,16 +45,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Shared">
-      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web">
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms">
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -127,6 +131,7 @@
   <ItemGroup>
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
+    <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
     <Content Include="notifysuccess.aspx" />
@@ -168,6 +173,7 @@
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
+    <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
@@ -178,19 +184,22 @@
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
-    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TrendAnalysisStaging.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Reporting\TrendAnalysisRpt.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
-    <Content Include="Views\StoreClerk\DEMO_MakeNewRequests.aspx" />
+    <Content Include="Views\StoreClerk\MakeNewRequests.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
-    <Content Include="Views\StoreClerk\MakeRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
@@ -267,6 +276,13 @@
     </Compile>
     <Compile Include="Delivery_Orders.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.designer.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -346,6 +362,13 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.cs">
+      <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.designer.cs">
+      <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -415,6 +438,13 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
+      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
+      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reporting\TrendAnalysisStaging.aspx.cs">
       <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -427,19 +457,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Trend_Analysis.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Views\Reporting\Reports\Volume_Report.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Volume_Report.rpt</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
-      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.designer.cs">
-      <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.cs">
       <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
@@ -448,6 +472,11 @@
     <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.designer.cs">
       <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reporting\TrendAnalysisStaging.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -455,12 +484,12 @@
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.designer.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\DEMO_MakeNewRequests.aspx.cs">
-      <DependentUpon>DEMO_MakeNewRequests.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\MakeNewRequests.aspx.cs">
+      <DependentUpon>MakeNewRequests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\DEMO_MakeNewRequests.aspx.designer.cs">
-      <DependentUpon>DEMO_MakeNewRequests.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\MakeNewRequests.aspx.designer.cs">
+      <DependentUpon>MakeNewRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\EditSupplier.aspx.cs">
       <DependentUpon>EditSupplier.aspx</DependentUpon>
@@ -490,12 +519,12 @@
     <Compile Include="Views\StoreClerk\lowstock.aspx.designer.cs">
       <DependentUpon>lowstock.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeRetrievalForm.aspx.cs">
-      <DependentUpon>MakeRetrievalForm.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx.cs">
+      <DependentUpon>DEMO_MakeRetrievalForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeRetrievalForm.aspx.designer.cs">
-      <DependentUpon>MakeRetrievalForm.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx.designer.cs">
+      <DependentUpon>DEMO_MakeRetrievalForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>
@@ -580,10 +609,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TEST Trend_Analysis.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Reporting\Reports\Trend_Analysis.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Trend_Analysis.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Content Include="Views\Reporting\Reports\Trend_Analysis.rpt">
+      <LastGenOutput>Trend_Analysis1.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Volume_Report.cs</LastGenOutput>

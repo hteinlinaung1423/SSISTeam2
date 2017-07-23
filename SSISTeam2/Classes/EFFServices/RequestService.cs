@@ -1,4 +1,5 @@
-﻿using SSISTeam2.Classes.Exceptions;
+﻿using SSISTeam2.Classes.EFFacades;
+using SSISTeam2.Classes.Exceptions;
 using SSISTeam2.Classes.Models;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace SSISTeam2.Classes.EFFServices
 
             if (efRequest == null)
             {
+                //return null;
                 throw new ItemNotFoundException();
             }
 
@@ -118,8 +120,8 @@ namespace SSISTeam2.Classes.EFFServices
             DateTime timestamp = DateTime.Now;
             using (var transaction = context.Database.BeginTransaction())
             {
-                try
-                {
+                //try
+                //{
                     foreach (RequestModel request in requests)
                     {
                         if (RequestStatus.requestHasHadStatus(request, status))
@@ -149,11 +151,11 @@ namespace SSISTeam2.Classes.EFFServices
                             added++;
                         }
                     }
-                } catch (Exception exec)
-                {
-                    transaction.Rollback();
-                    throw exec;
-                }
+                //} catch (Exception exec)
+                //{
+                //    transaction.Rollback();
+                //    throw exec;
+                //}
 
                 transaction.Commit();
             }
@@ -162,7 +164,9 @@ namespace SSISTeam2.Classes.EFFServices
 
         public bool approveRequest(RequestModel request, string currentUser)
         {
-            return _setStatusOfRequest(request, currentUser, RequestStatus.APPROVED);
+            bool status = _setStatusOfRequest(request, currentUser, RequestStatus.APPROVED);
+            FacadeFactory.getRequestMovementService(context).allocateRequest(request.RequestId, currentUser);
+            return status;
         }
 
         public bool rejectRequest(RequestModel request, string currentUser)
@@ -219,9 +223,9 @@ namespace SSISTeam2.Classes.EFFServices
             return true;
         }
 
-        public bool updateRequestChanges(RequestModel request)
+        public bool updateRequestChanges(RequestModel newRequest)
         {
-            if (RequestStatus.requestHasHadStatus(request, RequestStatus.APPROVED))
+            if (RequestStatus.requestHasHadStatus(newRequest, RequestStatus.APPROVED))
             {
                 throw new RequestAlreadyApprovedException("Already approved or rejected.");
                 //return false;
@@ -229,44 +233,71 @@ namespace SSISTeam2.Classes.EFFServices
             DateTime timestamp = DateTime.Now;
             using (var transaction = context.Database.BeginTransaction())
             {
-                try
-                {
-                    Request targetRequest = context.Requests.Find(request.RequestId);
+                //try
+                //{
+                    Request targetRequest = context.Requests.Find(newRequest.RequestId);
 
                     List<Request_Details> targetDetails = targetRequest.Request_Details.ToList();
-                    foreach (KeyValuePair<ItemModel, int> itemAndQty in request.Items)
+
+                    RequestModel targetRequestModel = findRequestById(newRequest.RequestId);
+                    foreach (var item in targetRequestModel.Items)
+                    {
+                    // Some problem here FFFFF
+                        if (!newRequest.Items.ContainsKey(item.Key))
+                        { // New requestModel does not contain old key
+                            // So add it in, but set quantity to 0
+                            newRequest.Items.Add(item.Key, 0);
+                        }
+                    }
+
+                    foreach (KeyValuePair<ItemModel, int> itemAndQty in newRequest.Items)
                     {
                         Request_Event newEvent = new Request_Event();
                         newEvent.deleted = "N";
                         newEvent.date_time = timestamp;
                         newEvent.quantity = itemAndQty.Value;
                         newEvent.status = EventStatus.UPDATED;
-                        newEvent.username = request.UserModel.Username;
+                        newEvent.username = newRequest.UserModel.Username;
 
                         // Establish relationships
-                        Request_Details targetDetail = targetDetails.Where(x => x.item_code == itemAndQty.Key.ItemCode).First();
-                        newEvent.request_detail_id = targetDetail.request_detail_id;
+                        Request_Details targetDetail = targetDetails.Where(x => x.item_code == itemAndQty.Key.ItemCode).DefaultIfEmpty(null).FirstOrDefault();
+                    if (targetDetail == null)
+                    {
+                        // Need to insert new detail
+                        Request_Details newDetail = new Request_Details();
+                        newDetail.deleted = "N";
+                        newDetail.item_code = itemAndQty.Key.ItemCode;
 
+                        newDetail.Request_Event.Add(newEvent);
+                        newDetail.request_id = newRequest.RequestId;
+                        context.Request_Details.Add(newDetail);
+                    } else
+                    {
+                        newEvent.request_detail_id = targetDetail.request_detail_id;
                         // Add to DB
                         context.Request_Event.Add(newEvent);
+                    }
+
+                        
                         //targetDetail.Request_Event.Add(newEvent);
                     }
 
                     // Update Status
-                    context.Requests.Find(request.RequestId).current_status = RequestStatus.UPDATED;
-                }
-                catch (Exception exec)
-                {
-                    transaction.Rollback();
-                    throw exec;
-                }
+                    context.Requests.Find(newRequest.RequestId).current_status = RequestStatus.UPDATED;
+                    context.Requests.Find(newRequest.RequestId).reason = newRequest.Reason;
+                //}
+                //catch (Exception exec)
+                //{
+                    //transaction.Rollback();
+                    //throw exec;
+                //}
 
                 transaction.Commit();
             }
             return true;
         }
 
-        public bool setRequestToCancelled(string requestId, string username)
+        public bool setRequestToCancelled(int requestId, string username)
         {
             Request request = context.Requests.Find(requestId);
             if (request.current_status != RequestStatus.PENDING && request.current_status != RequestStatus.UPDATED)

@@ -24,7 +24,8 @@ namespace SSISTeam2.Classes.Models
             
 
             this.username = user.username;
-            this.email = Membership.GetUser(username).Email;
+            // Cannot enable yet, as members do not exist in asp.net db
+            //this.email = Membership.GetUser(username).Email;
             this.department = dept;
             //this.role = Roles.GetRolesForUser(username).First().ToString();
             if (role == null)

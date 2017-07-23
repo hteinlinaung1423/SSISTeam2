@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Sql;
+using CrystalDecisions.Shared;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace SSISTeam2.Views.Reporting.Reports
 {
@@ -17,7 +19,12 @@ namespace SSISTeam2.Views.Reporting.Reports
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //CrystalReport
+            ReportDocument crTA = new ReportDocument();
+            crTA.Load(Server.MapPath("~/Views/Reporting/Reports/Trend_Analysis.rpt"));
+            CrystalReportViewer1.ReportSource = crTA;
+            CrystalReportViewer1.RefreshReport();
+
             //Populate Year DDL
             string currentYear = DateTime.Now.Year.ToString();
             int year=Convert.ToInt32(currentYear);
@@ -135,8 +142,41 @@ namespace SSISTeam2.Views.Reporting.Reports
 
         protected void SetMonthYear_OnClick(object sender, EventArgs e)
         {
+
+
+            /*
+                        // Create parameter objects
+                        ParameterFields CatParams = new ParameterFields();
+                        ParameterField CatParam = new ParameterField();
+                        ParameterDiscreteValue Catdv = new ParameterDiscreteValue();
+
+                        // Set the ParameterFieldName to the name of the parameter
+                        // created in the Field Explorer
+                        CatParam.ParameterFieldName = "cat_name";
+
+                        // Add cats
+                        for (int i = SelectorList.Items.Count - 1; i >= 0; i--)
+                        {
+                            Catdv.Value = Convert.ToString(CatList.Items[i]);
+                            CatParam.CurrentValues.Add(Catdv);
+
+                            // Clear and reuse cat dv at end of loop
+                            Catdv = new ParameterDiscreteValue();
+                        }
+
+            // Add CatParam object to collection
+            CatParams.Add(CatParam);
+
+                        // Assign to report viewer
+                        //CrystalReportViewer1.ParameterFieldInfo = CatParams;*/
+                   
+
+
+
+
             
         }
+    
         protected void cValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
             args.IsValid = SelectorList.Items.Count > 0;
