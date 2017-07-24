@@ -187,7 +187,6 @@
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCat.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
-    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
