@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SSISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SSISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adjustment_Details">
           <Key>
             <PropertyRef Name="voucher_detail_id" />
@@ -38,6 +38,7 @@
           <Property Name="duty_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="created_date" Type="datetime" Nullable="false" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="reason" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -188,6 +189,7 @@
           <Property Name="rejected" Type="nchar" MaxLength="1" Nullable="false" />
           <Property Name="rejected_reason" Type="nvarchar(max)" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="date_time" Type="datetime" />
         </EntityType>
         <EntityType Name="Stock_Inventory">
           <Key>
@@ -237,6 +239,28 @@
           <Property Name="tender_year_id" Type="int" Nullable="false" />
           <Property Name="item_code" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Volume_Request">
+          <Key>
+            <PropertyRef Name="cat_name" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="quantity" />
+            <PropertyRef Name="current_status" />
+            <PropertyRef Name="date_time" />
+            <PropertyRef Name="item_description" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="dept_code" />
+          </Key>
+          <Property Name="cat_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="current_status" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="date_time" Type="datetime" Nullable="false" />
+          <Property Name="item_description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dept_code" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Adjustment_Details_Inventory_Adjustment">
           <End Role="Inventory_Adjustment" Type="Self.Inventory_Adjustment" Multiplicity="1" />
@@ -608,6 +632,18 @@
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tender_List" EntityType="Self.Tender_List" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tender_List_Details" EntityType="Self.Tender_List_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Volume_Request" EntityType="Self.Volume_Request" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Volume_Request].[cat_name] AS [cat_name], 
+    [Volume_Request].[name] AS [name], 
+    [Volume_Request].[quantity] AS [quantity], 
+    [Volume_Request].[current_status] AS [current_status], 
+    [Volume_Request].[date_time] AS [date_time], 
+    [Volume_Request].[item_description] AS [item_description], 
+    [Volume_Request].[username] AS [username], 
+    [Volume_Request].[dept_code] AS [dept_code]
+    FROM [dbo].[Volume_Request] AS [Volume_Request]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Adjustment_Details_Inventory_Adjustment" Association="Self.FK_Adjustment_Details_Inventory_Adjustment">
             <End Role="Inventory_Adjustment" EntitySet="Inventory_Adjustment" />
             <End Role="Adjustment_Details" EntitySet="Adjustment_Details" />
@@ -725,8 +761,7 @@
             <End Role="Tender_List" EntitySet="Tender_List" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SSISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -768,6 +803,7 @@
           <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Approval_Duties_Department" FromRole="Approval_Duties" ToRole="Department" />
           <NavigationProperty Name="Dept_Registry" Relationship="Self.FK_Approval_Duties_Dept_Registry" FromRole="Approval_Duties" ToRole="Dept_Registry" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -955,6 +991,7 @@
           <NavigationProperty Name="Department" Relationship="Self.FK_Requests_Department" FromRole="Requests" ToRole="Department" />
           <NavigationProperty Name="Dept_Registry" Relationship="Self.FK_Requests_Dept_Registry" FromRole="Requests" ToRole="Dept_Registry" />
           <NavigationProperty Name="Request_Details" Relationship="Self.FK_Request_Details_Requests" FromRole="Requests" ToRole="Request_Details" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Stock_Inventory">
           <Key>
@@ -1507,7 +1544,28 @@
             <End Role="Tender_List" EntitySet="Tender_List" />
             <End Role="Tender_List_Details" EntitySet="Tender_List_Details" />
           </AssociationSet>
+          <EntitySet Name="Volume_Request" EntityType="SSISModel.Volume_Request" />
         </EntityContainer>
+        <EntityType Name="Volume_Request">
+          <Key>
+            <PropertyRef Name="cat_name" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="quantity" />
+            <PropertyRef Name="current_status" />
+            <PropertyRef Name="date_time" />
+            <PropertyRef Name="item_description" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="dept_code" />
+          </Key>
+          <Property Name="cat_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="current_status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="item_description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dept_code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1541,6 +1599,7 @@
           <EntitySetMapping Name="Approval_Duties">
             <EntityTypeMapping TypeName="SSISModel.Approval_Duties">
               <MappingFragment StoreEntitySet="Approval_Duties">
+                <ScalarProperty Name="reason" ColumnName="reason" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
@@ -1704,6 +1763,7 @@
           <EntitySetMapping Name="Requests">
             <EntityTypeMapping TypeName="SSISModel.Request">
               <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
                 <ScalarProperty Name="request_id" ColumnName="request_id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="dept_code" ColumnName="dept_code" />
@@ -1765,6 +1825,20 @@
                 <ScalarProperty Name="tender_year_id" ColumnName="tender_year_id" />
                 <ScalarProperty Name="item_code" ColumnName="item_code" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Volume_Request">
+            <EntityTypeMapping TypeName="SSISModel.Volume_Request">
+              <MappingFragment StoreEntitySet="Volume_Request">
+                <ScalarProperty Name="dept_code" ColumnName="dept_code" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="item_description" ColumnName="item_description" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="current_status" ColumnName="current_status" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cat_name" ColumnName="cat_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
