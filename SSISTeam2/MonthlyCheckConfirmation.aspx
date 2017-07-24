@@ -46,6 +46,6 @@
 
         </Columns>
     </asp:gridview>
-    <asp:Button ID="confirmBtn" runat="server" Text="Button" OnClick="Button1_Click" /><asp:Button ID="backBtn" runat="server" Text="Button" OnClick="backBtn_Click" />
+    <asp:Button ID="confirmBtn" runat="server" Text="Button" OnClick="confirmBtn_Click" /><asp:Button ID="backBtn" runat="server" Text="Button" OnClick="backBtn_Click" />
     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 </asp:Content>

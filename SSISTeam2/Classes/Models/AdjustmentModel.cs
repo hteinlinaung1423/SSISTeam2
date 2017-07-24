@@ -11,8 +11,8 @@ namespace SSISTeam2.Classes.Models
         private ItemModel inventory;
         private int quantity;
         private string quantityAdjusted;
-        private double price;
-        private string priceAdjusted;
+        private double cost;
+        private string costAdjusted;
         private string reason;
         private Inventory_Adjustment inventoryAdjustment;
         private string catName;
@@ -22,10 +22,11 @@ namespace SSISTeam2.Classes.Models
             this.voucherDetailID = detail.voucher_detail_id;
             this.inventory = GetItemModel(detail.item_code);
             this.quantity = detail.quantity_adjusted;
+            this.quantityAdjusted = GetQuantityString();
             this.reason = detail.reason;
             this.inventoryAdjustment = detail.Inventory_Adjustment;
-            this.price = GetPrice();
-            this.priceAdjusted = string.Format("{0:C}", price);
+            this.cost = GetPrice();
+            this.costAdjusted = string.Format("{0:C}", cost);
             this.catName = inventory.CatName;
         }
         public ItemModel GetItemModel(string itemCode)
@@ -37,9 +38,30 @@ namespace SSISTeam2.Classes.Models
         }
         public double GetPrice()
         {
-            double price = this.inventory.AveragePrice * this.quantity;
+            double price = this.inventory.AveragePrice * Math.Abs(this.quantity);
             return price;
-
+        }
+        public string GetQuantityString()
+        {
+            if (this.quantity <= 0)
+            {
+                string qtyAdj = string.Format("Lost {0}", Math.Abs(this.quantity));
+                return qtyAdj;
+            } else if (this.quantity > 0)
+            {
+                string qtyAdj = string.Format("Found {0}", Math.Abs(this.quantity));
+                return qtyAdj;
+            }
+            return null;
+        }
+        public bool Above250()
+        {
+            if (this.cost > 250)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public int VoucherDetailID
         {
@@ -89,22 +111,22 @@ namespace SSISTeam2.Classes.Models
         {
             get
             {
-                return price;
+                return cost;
             }
             set
             {
-                price = value;
+                cost = value;
             }
         }
         public string PriceAdjusted
         {
             get
             {
-                return priceAdjusted;
+                return costAdjusted;
             }
             set
             {
-                priceAdjusted = value;
+                costAdjusted = value;
             }
         }
         public string Reason
@@ -138,6 +160,18 @@ namespace SSISTeam2.Classes.Models
             set
             {
                 catName = value;
+            }
+        }
+
+        public string CostAdjusted
+        {
+            get
+            {
+                return costAdjusted;
+            }
+            set
+            {
+                costAdjusted = value;
             }
         }
     }
