@@ -21,6 +21,8 @@ namespace SSISTeam2
         public System.DateTime date_time { get; set; }
         public string deleted { get; set; }
         public string username { get; set; }
+        public Nullable<int> allocated { get; set; }
+        public Nullable<int> not_allocated { get; set; }
     
         public virtual Dept_Registry Dept_Registry { get; set; }
         public virtual Request_Details Request_Details { get; set; }
