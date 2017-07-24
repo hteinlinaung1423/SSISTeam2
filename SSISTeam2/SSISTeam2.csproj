@@ -134,6 +134,7 @@
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
     <Content Include="ViewAllAdjustment.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveReject.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
@@ -152,6 +153,7 @@
     <Content Include="SSISModel.edmx.diagram">
       <DependentUpon>SSISModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\DepartmentHead\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -180,6 +182,7 @@
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
+    <Content Include="Views\DepartmentHead\Test.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
@@ -400,6 +403,13 @@
     <Compile Include="Views\DepartmentHead\ApproveReject.aspx.designer.cs">
       <DependentUpon>ApproveReject.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.cs">
+      <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.designer.cs">
+      <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\DepartmentHead\Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -598,7 +608,6 @@
     </Compile>
     <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.designer.cs">
       <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
@@ -664,9 +673,6 @@
     </Compile>
     <Compile Include="Views\StoreClerk\ViewSupplierList.aspx.designer.cs">
       <DependentUpon>ViewSupplierList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Volume_Request.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Volume_Request.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
