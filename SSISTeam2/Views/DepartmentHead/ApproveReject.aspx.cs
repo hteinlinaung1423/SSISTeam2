@@ -30,7 +30,7 @@ namespace SSISTeam2.Views.DepartmentHead
                          select new
                          {    
                             st.item_description,
-                            v.quantity,
+                            de.orig_quantity,
                             st.unit_of_measure
                             
                          }).ToList();
@@ -42,7 +42,7 @@ namespace SSISTeam2.Views.DepartmentHead
                 lbRqEmp.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
 
                 //get last approved Request details,but not receive from store
-                int lastApproveReqId= ent.Requests.Where(x => x.current_status == "Disbursed").Max(y => y.request_id);
+                int lastApproveReqId= ent.Requests.Where(x => x.current_status == "Approved").Max(y => y.request_id);
 
                 var w = (from r in ent.Requests
                          join de in ent.Request_Details on r.request_id equals de.request_id
@@ -52,7 +52,7 @@ namespace SSISTeam2.Views.DepartmentHead
                          select new
                          {
                              st.item_description,
-                             v.quantity,
+                             de.orig_quantity,
                              st.unit_of_measure
 
                          }).ToList();
@@ -73,6 +73,7 @@ namespace SSISTeam2.Views.DepartmentHead
             //change status in "Request"
             var req = ent.Requests.SingleOrDefault(x => x.request_id == selectReqId);
             req.current_status = "Approved";
+            req.rejected_reason = tbReason.Text;
 
             //change status in "Request Event"
             var q = from r in ent.Requests

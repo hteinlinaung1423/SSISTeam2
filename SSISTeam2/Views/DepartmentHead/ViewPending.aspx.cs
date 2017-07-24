@@ -1,20 +1,19 @@
-﻿using SSISTeam2.Classes.EFFacades;
-using SSISTeam2.Classes.Models;
+﻿using SSISTeam2.Classes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SSISTeam2
+namespace SSISTeam2.Views.DepartmentHead
 {
-    public partial class ViewAllPending : System.Web.UI.Page
+    public partial class ViewPending : System.Web.UI.Page
     {
         SSISEntities ent = new SSISEntities();
-        string userName=null;
+        string userName = null;
         string currentDeptCode = null;
+        string id = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             //???(actual)
@@ -28,7 +27,7 @@ namespace SSISTeam2
             if (!IsPostBack)
             {
                 var q = (from r in ent.Requests
-                         where r.dept_code== currentDeptCode && r.current_status=="Pending"
+                         where r.dept_code == currentDeptCode && r.current_status == "Pending"
                          select new
                          {
                              r.request_id,
@@ -38,19 +37,28 @@ namespace SSISTeam2
                          }).ToList();
                 GridView1.DataSource = q;
                 GridView1.DataBind();
-            }          
+            }
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void lbReqId_Click(object sender, EventArgs e)
         {
-            //Bound Field
-            //string id = GridView1.SelectedRow.Cells[1].Text;
+            Button btn = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
-            //Template Field
-            string id = (GridView1.SelectedRow.FindControl("lbReqId") as Label).Text;
-            Response.Redirect("ApproveReject.aspx?key="+id);
+            id = ((Label)gvr.FindControl("lbReqId")).Text;
+            Response.Redirect("ApproveReject.aspx?key=" + id);
         }
 
+        //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    //Bound Field
+        //    id = GridView1.SelectedRow.Cells[0].Text;
+
+        //    //Template Field
+        //    //id = (GridView1.SelectedRow.FindControl("lbReqId") as Label).Text;
+        //    Response.Redirect("ApproveReject.aspx?key=" + id);
+        //    //Response.Redirect("WebForm1.aspx");
+        //}
 
     }
 }

@@ -12,7 +12,7 @@ namespace SSISTeam2.Views.StoreClerk
         SSISEntities s = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            
             GridView1.DataSource = s.Suppliers.Where(x=>x.deleted != "Y").ToList<Supplier>();
             GridView1.DataBind();
         }
@@ -48,10 +48,21 @@ namespace SSISTeam2.Views.StoreClerk
 
             Response.Redirect("~/Views/StoreClerk/ViewSupplierList.aspx");
         }
-
-        protected void btn_search_Click(object sender, EventArgs e)
+        protected void Search_Click(object sender, EventArgs e)
         {
+            string searchWord = TextBox1.Text;
+            //Label1.Text = searchWord;
+            var result = from t1 in s.Suppliers
+                         where t1.deleted.Equals("N")
+                         && (t1.name.Contains(searchWord))
+                         orderby t1.name
+                         select new { t1.supplier_id, t1.name, t1.contact_name, t1.fax_num, t1.contact_num, t1.address, t1.gst_reg_num };
+            GridView1.DataSource = result.ToList();
+            GridView1.DataBind();
 
         }
+
+
+
     }
 }

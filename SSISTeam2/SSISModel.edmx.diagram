@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="SSISModel.Request" Width="1.5" PointX="10.5" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Stock_Inventory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Supplier" Width="1.5" PointX="5.75" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Tender_List" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Tender_List_Details" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Volume_Request" Width="1.5" PointX="8.75" PointY="2.625" IsExpanded="true" />

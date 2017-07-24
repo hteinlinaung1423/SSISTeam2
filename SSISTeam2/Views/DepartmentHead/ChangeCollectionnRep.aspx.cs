@@ -67,7 +67,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("DepartmentInfo.aspx");
+            Response.Redirect("DeptInfo.aspx");
         }
     }
 }
