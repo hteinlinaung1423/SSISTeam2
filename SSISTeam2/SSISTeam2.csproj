@@ -174,7 +174,6 @@
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
     <Content Include="ViewReportList.aspx" />
-    <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="ViewAndEditCatalogue.aspx" />
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
@@ -183,7 +182,7 @@
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
-    <Content Include="Views\Employee\ViewCat.aspx" />
+    <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
@@ -440,12 +439,12 @@
     <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Employee\ViewCat.aspx.cs">
-      <DependentUpon>ViewCat.aspx</DependentUpon>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Employee\ViewCat.aspx.designer.cs">
-      <DependentUpon>ViewCat.aspx</DependentUpon>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\ViewRequestsDetails.aspx.cs">
       <DependentUpon>ViewRequestsDetails.aspx</DependentUpon>

@@ -1,13 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewSupplierList.aspx.cs" enableEventValidation="false" Inherits="SSISTeam2.Views.StoreClerk.ViewSupplierList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewSupplierList.aspx.cs" EnableEventValidation="false" Inherits="SSISTeam2.Views.StoreClerk.ViewSupplierList" %>
 
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
-    
-<div class="panel panel-default">
+
+    <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><h3>Supplier List</h3></div>
+        <div class="panel-heading">
+            <h3>Supplier List</h3>
+        </div>
         <div class="panel-body">
             <p>
                 <asp:Button ID="add" runat="server" Text="Add New Supplier"
@@ -15,26 +17,30 @@
 
                 <form class="form-inline">
                     <div class="form-group">
-                      
-                         <label for="search">Search</label>
-                         <input type="search" class="form-control" id="txt_search">
+
+                        <label for="search">Search</label>
+                        <input type="search" class="form-control" id="txt_search" />
                     </div>
-               </form>
+                    <asp:Button ID="btn_search" runat="server" Text="Search"
+                        CssClass="btn btn-primary" onClick="btn_search_Click"/>
+
+                </form>
             </p>
         </div>
+
+
 
         <!-- Table -->
 
         <div class="table-responsive">
 
             <asp:GridView ID="GridView1" runat="server"
-                AutoGenerateColumns="false"
-                AllowPaging="true"
-                PageSize="10"
+                AutoGenerateColumns="False"
+                AllowPaging="True"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
-                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" >
+                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
 
                 <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
                 <PagerTemplate>
@@ -56,7 +62,7 @@
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier Name"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Label ID="Label_SupplierName" runat="server" Text='<%# Eval("name") %>' ></asp:Label>
+                            <asp:Label ID="Label_SupplierName" runat="server" Text='<%# Eval("name") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
 
@@ -95,24 +101,26 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="10%" ><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
                             <asp:Button ID="edit" runat="server" Text="Edit"
-                                CssClass="btn btn-primary" OnClick="Edit_Supplier"/>
+                                CssClass="btn btn-primary" OnClick="Edit_Supplier" />
                         </ItemTemplate>
                     </asp:TemplateField>
 
 
-                    <asp:TemplateField ItemStyle-Width="10%" ><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
                             <asp:Button ID="delete" runat="server" Text="Delete"
-                                CssClass="btn btn-danger" OnClick="delete_Supplier"  />
+                                CssClass="btn btn-danger" OnClick="delete_Supplier" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT [supplier_id], [name], [contact_name], [fax_num], [contact_num], [address] FROM [Supplier]"></asp:SqlDataSource>
 
         </div>
 
