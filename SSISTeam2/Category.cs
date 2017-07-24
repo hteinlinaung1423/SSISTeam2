@@ -11,7 +11,7 @@ namespace SSISTeam2
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +19,11 @@ namespace SSISTeam2
         {
             this.Stock_Inventory = new HashSet<Stock_Inventory>();
         }
-
+    
         public int cat_id { get; set; }
         public string cat_name { get; set; }
         public string deleted { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock_Inventory> Stock_Inventory { get; set; }
     }
