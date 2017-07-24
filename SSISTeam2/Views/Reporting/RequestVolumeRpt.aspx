@@ -2,10 +2,18 @@
 <%@ Register assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p></p>
-    <CR:crystalreportviewer id="CrystalReportViewer1" runat="server" autodatabind="true" ReportSourceID="CrystalReportSource1" />
+    <asp:table runat="server" CssClass="table">
+        <asp:TableRow>
+            <asp:TableCell>
+    <CR:crystalreportviewer id="CrystalReportViewer1" runat="server" autodatabind="true" HasToggleGroupTreeButton="False" ToolPanelView="None" />
+            </asp:TableCell>
+            <asp:TableCell>
+                <asp:Button runat="server" CssClass="btn btn-default btn-sm" ID="genNewRep" Text="Generate New Report" OnClick="genNewRep_OnClick" />
+                <asp:Button runat="server" CssClass="btn btn-default btn-sm" ID="backBtn" Text="Back" OnClick="backBtn_OnClick" />
+
+            </asp:TableCell>
+            </asp:TableRow>
+    </asp:table>
+   
     
-    <CR:CrystalReportSource ID="CrystalReportSource1" runat="server">
-        <Report FileName="C:\Users\veryt\Source\Repos\SSISTeam2\SSISTeam2\Views\Reporting\Reports\Volume_Report.rpt">
-        </Report>
-    </CR:CrystalReportSource>
 </asp:Content>

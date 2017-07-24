@@ -1,4 +1,5 @@
-﻿using SSISTeam2.Classes.Models;
+﻿
+using SSISTeam2.Classes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,10 @@ namespace SSISTeam2.Views.DepartmentHead
 
                 currentCollectId = sdept.collection_point;
                 string currentCollectP = ent.Collection_Point.Where(x => x.collection_pt_id == currentCollectId).Select(y => y.location).First();
-                lbCurrentCollectP.Text = currentCollectP;
-                lbRepName.Text = sdept.rep_user.ToString();
+                //lbCurrentCollectP.Text = currentCollectP;
+                //lbRepName.Text = sdept.rep_user.ToString();
+                tbCollectP.Text = currentCollectP;
+                tbRepName.Text = sdept.rep_user.ToString();
 
                 //get all collection point
                 ddlCollectPoint.DataSource = ent.Collection_Point.ToList<Collection_Point>();
@@ -35,10 +38,15 @@ namespace SSISTeam2.Views.DepartmentHead
                 ddlCollectPoint.DataValueField = "collection_pt_id";
                 ddlCollectPoint.DataBind();
 
-                //get all employee = * department
+                //get all employee depend on * department
                 ddlRepName.DataSource = ent.Dept_Registry.Where(a=>a.dept_code == sdept.dept_code).ToList<Dept_Registry>();
                 ddlCollectPoint.DataTextField = "username";
                 ddlRepName.DataValueField = "username";
+                //???(actual)
+                //if(User.IsInRole("DeptHead"))
+                //{
+                //    ddlRepName.DataBind();
+                //}
                 ddlRepName.DataBind();
               
             }
