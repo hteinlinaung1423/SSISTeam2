@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="MakeNewRequests.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.DEMO_MakeNewRequests" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="MakeNewRequest.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.MakeNewRequest" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
@@ -34,7 +34,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Unit of Measure">
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# Eval("UnitOfMeasure") %>'></asp:Label>
+                                    <asp:Label runat="server" Text='<%# Eval("UnitOfMeasure") %>' EnableViewState="false"></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Quantity">
@@ -45,7 +45,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Previously Approved">
                                 <ItemTemplate>
-                                    <asp:ListBox ID="lbPrevApproved" runat="server" Enabled="False" CssClass="form-control"></asp:ListBox>
+                                    <asp:ListBox ID="lbPrevApproved" runat="server" Enabled="False" CssClass="form-control" EnableViewState="false"></asp:ListBox>
                                     <%--<asp:Label runat="server" Text='<%# "hi" %>'></asp:Label>--%>
                                 </ItemTemplate>
                             </asp:TemplateField>

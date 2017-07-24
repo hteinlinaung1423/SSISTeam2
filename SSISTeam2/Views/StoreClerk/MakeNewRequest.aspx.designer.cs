@@ -10,7 +10,7 @@
 namespace SSISTeam2.Views.StoreClerk {
     
     
-    public partial class DEMO_MakeNewRequests {
+    public partial class MakeNewRequest {
         
         /// <summary>
         /// ScriptManager1 control.
