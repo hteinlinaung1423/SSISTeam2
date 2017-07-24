@@ -209,6 +209,7 @@
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\TenderListForm.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
     <Content Include="Web.config">
@@ -634,6 +635,13 @@
     </Compile>
     <Compile Include="Views\Employee\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\TenderListForm.aspx.cs">
+      <DependentUpon>TenderListForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\TenderListForm.aspx.designer.cs">
+      <DependentUpon>TenderListForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
