@@ -456,6 +456,8 @@
     </Compile>
     <Compile Include="Views\Reporting\ReportsMain.aspx.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewAndEditCatalogue.aspx.cs">
       <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -469,10 +471,6 @@
     </Compile>
     <Compile Include="ViewAndMaintainSupplier.aspx.designer.cs">
       <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reporting\Report Generation.aspx.cs">
-      <DependentUpon>Report Generation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>

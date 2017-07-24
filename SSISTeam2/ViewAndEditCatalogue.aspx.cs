@@ -128,29 +128,29 @@ namespace SSISTeam2.Views.StoreClerk
         {
             throw new NotImplementedException();
         }
-        public List<ViewandEditCatalogueForShow> SearchCatagories(string param)
+        //public List<ViewandEditCatalogueForShow> SearchCatagories(string param)
 
-        {
-            //List<ViewandEditCatalogueForShow> lllist = new List<ViewandEditCatalogueForShow>();
-            int RL = 0;
-            int CQ = 0;
-            int RQ = 0;
-            int CategoryId = 0;
-            try
-            {
-                RL = int.Parse(param);
-                CQ = int.Parse(param);
-                RQ = int.Parse(param);
-                CategoryId = int.Parse(param);
-                entities.Categories.Where(x => x.itemNumber.Contains(param) || x.categoryName.Contains(param) || x.Description.Contains(param) || x.RL == RL || x.CQ == CQ || x.UoM.Contains(param) || x.CategoryId == CategoryId).ToList();
-            }
-            catch (FormatException e)
-            {
+        //{
+        //    //List<ViewandEditCatalogueForShow> lllist = new List<ViewandEditCatalogueForShow>();
+        //    int RL = 0;
+        //    int CQ = 0;
+        //    int RQ = 0;
+        //    int CategoryId = 0;
+        //    try
+        //    {
+        //        RL = int.Parse(param);
+        //        CQ = int.Parse(param);
+        //        RQ = int.Parse(param);
+        //        CategoryId = int.Parse(param);
+        //        entities.Categories.Where(x => x.itemNumber.Contains(param) || x.categoryName.Contains(param) || x.Description.Contains(param) || x.RL == RL || x.CQ == CQ || x.UoM.Contains(param) || x.CategoryId == CategoryId).ToList();
+        //    }
+        //    catch (FormatException e)
+        //    {
 
-            }
-            return
-            //return new List<ViewandEditCatalogueForShow>();
-        }
+        //    }
+        //    return
+        //    //return new List<ViewandEditCatalogueForShow>();
+        //}
     }
 
     class ViewandEditCatalogueForShow
