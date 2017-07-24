@@ -1014,6 +1014,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Request" Relationship="Self.FK_Request_Details_Requests" FromRole="Request_Details" ToRole="Requests" />
           <NavigationProperty Name="Stock_Inventory" Relationship="Self.FK_Request_Details_Stock_Inventory" FromRole="Request_Details" ToRole="Stock_Inventory" />
           <NavigationProperty Name="Request_Event" Relationship="Self.FK_Request_Event_Request_Details" FromRole="Request_Details" ToRole="Request_Event" />
+          <Property Name="orig_quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="Request_Event">
           <Key>
@@ -1030,6 +1031,8 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="not_allocated" Type="Int32" />
           <NavigationProperty Name="Dept_Registry" Relationship="Self.FK_Request_Event_Dept_Registry" FromRole="Request_Event" ToRole="Dept_Registry" />
           <NavigationProperty Name="Request_Details" Relationship="Self.FK_Request_Event_Request_Details" FromRole="Request_Event" ToRole="Request_Details" />
+          <Property Name="allocated" Type="Int32" />
+          <Property Name="not_allocated" Type="Int32" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -1810,6 +1813,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Request_Details">
             <EntityTypeMapping TypeName="SSISModel.Request_Details">
               <MappingFragment StoreEntitySet="Request_Details">
+                <ScalarProperty Name="orig_quantity" ColumnName="orig_quantity" />
                 <ScalarProperty Name="request_detail_id" ColumnName="request_detail_id" />
                 <ScalarProperty Name="request_id" ColumnName="request_id" />
                 <ScalarProperty Name="item_code" ColumnName="item_code" />
@@ -1821,6 +1825,8 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Request_Event">
             <EntityTypeMapping TypeName="SSISModel.Request_Event">
               <MappingFragment StoreEntitySet="Request_Event">
+                <ScalarProperty Name="not_allocated" ColumnName="not_allocated" />
+                <ScalarProperty Name="allocated" ColumnName="allocated" />
                 <ScalarProperty Name="request_event_id" ColumnName="request_event_id" />
                 <ScalarProperty Name="request_detail_id" ColumnName="request_detail_id" />
                 <ScalarProperty Name="status" ColumnName="status" />

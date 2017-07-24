@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SSISTeam2.Classes.EFFServices
+namespace SSISTeam2.Classes.EFFServices.OldServices
 {
-    public class RequestMovementService : IRequestMovementService
+    public class RequestMovementServiceOLD
     {
         private SSISEntities context;
-        public RequestMovementService(SSISEntities context)
+        public RequestMovementServiceOLD(SSISEntities context)
         {
             this.context = context;
         }
@@ -48,7 +48,7 @@ namespace SSISTeam2.Classes.EFFServices
             {
                 if (detail.deleted == "Y") continue;
 
-                Request_Event approvedEvent = detail.Request_Event.Where(w => w.status == EventStatus.APPROVED).DefaultIfEmpty(null).FirstOrDefault();
+                Request_Event approvedEvent = detail.Request_Event.OrderByDescending(o => o.date_time).Where(w => w.status == EventStatus.APPROVED).DefaultIfEmpty(null).FirstOrDefault();
 
                 if (approvedEvent == null) continue;
 
@@ -77,8 +77,6 @@ namespace SSISTeam2.Classes.EFFServices
                     continue;
                 }
 
-                // Update event
-                //approvedEvent //-----
                 // Save new events
                 Request_Event allocEv = _newRequestEvent(now, newAllocQty, detail.request_detail_id, currentUser, EventStatus.ALLOCATED);
                 Request_Event approvedEv = _newRequestEvent(now, newApprovedQty, detail.request_detail_id, currentUser, EventStatus.APPROVED);
