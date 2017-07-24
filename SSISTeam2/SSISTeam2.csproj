@@ -167,11 +167,11 @@
     </Content>
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveReject.aspx" />
+    <Content Include="Views\DepartmentHead\Test.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\Employee\ViewDetailsOfRequests.aspx" />
-    <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
@@ -335,19 +335,26 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveReject.aspx.cs">
+      <DependentUpon>ApproveReject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveReject.aspx.designer.cs">
+      <DependentUpon>ApproveReject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.designer.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.cs">
       <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
@@ -484,12 +491,6 @@
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ApproveRequest.aspx.designer.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Employee\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -517,6 +518,9 @@
     </Compile>
     <Compile Include="Views\StoreClerk\ViewTenderList.aspx.designer.cs">
       <DependentUpon>ViewTenderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Volume_Request.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -19,9 +19,9 @@
         <EntityTypeShape EntityType="SSISModel.Monthly_Check_Records" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Purchase_Order" Width="1.5" PointX="8" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Purchase_Order_Details" Width="1.5" PointX="10.25" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Request_Details" Width="1.5" PointX="12.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Request_Event" Width="1.5" PointX="15" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Request" Width="1.5" PointX="10.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Request_Details" Width="1.5" PointX="15.125" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Request_Event" Width="1.5" PointX="16.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Request" Width="1.5" PointX="12.625" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Stock_Inventory" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Supplier" Width="1.5" PointX="5.75" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Tender_List" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />

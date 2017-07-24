@@ -20,5 +20,7 @@ namespace SSISTeam2
         public string current_status { get; set; }
         public System.DateTime date_time { get; set; }
         public string item_description { get; set; }
+        public string username { get; set; }
+        public string dept_code { get; set; }
     }
 }
