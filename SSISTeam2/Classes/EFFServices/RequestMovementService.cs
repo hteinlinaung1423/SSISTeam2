@@ -79,7 +79,7 @@ namespace SSISTeam2.Classes.EFFServices
 
                 // Save new events
                 Request_Event allocEv = _newRequestEvent(now, newAllocQty, detail.request_detail_id, currentUser, EventStatus.ALLOCATED);
-                Request_Event approvedEv = _newRequestEvent(now, newAllocQty, detail.request_detail_id, currentUser, EventStatus.APPROVED);
+                Request_Event approvedEv = _newRequestEvent(now, newApprovedQty, detail.request_detail_id, currentUser, EventStatus.APPROVED);
 
                 context.Request_Event.Add(allocEv);
                 context.Request_Event.Add(approvedEv);
@@ -147,7 +147,7 @@ namespace SSISTeam2.Classes.EFFServices
             newEv.quantity = quantity;
             newEv.request_detail_id = detailId;
             newEv.username = username;
-            newEv.status = EventStatus.RETRIEVING;
+            newEv.status = status;
 
             return newEv;
         }

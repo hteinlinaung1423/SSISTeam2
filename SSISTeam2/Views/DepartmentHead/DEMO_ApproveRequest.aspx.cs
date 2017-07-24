@@ -71,6 +71,8 @@ namespace SSISTeam2
 
                 context.SaveChanges();
             }
+
+            Response.Redirect("DEMO_ApproveRequest.aspx?id=" + (int)Session[SESSION_REQUEST_ID]);
         }
 
         protected void btnReject_Click(object sender, EventArgs e)
@@ -82,6 +84,8 @@ namespace SSISTeam2
 
                 context.SaveChanges();
             }
+
+            Response.Redirect("DEMO_ApproveRequest.aspx?id=" + (int)Session[SESSION_REQUEST_ID]);
         }
     }
 }

@@ -89,9 +89,11 @@ namespace SSISTeam2.Classes.EFFServices
                 //{
                 //    quantityToFulfil = latestAlloc.Last().quantity;
                 //}
-
-                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
-                itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
+                if (quantityToFulfil > 0)
+                {
+                    Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
+                    itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
+                }
             }
 
             if (itemsToFulfill.Count == 0)
