@@ -11,36 +11,42 @@
             <h3>Supplier List</h3>
         </div>
         <div class="panel-body">
-            <p>
-                <asp:Button ID="add" runat="server" Text="Add New Supplier"
+            
+                <asp:Button ID="Button2" runat="server" Text="Add New Supplier"
                     CssClass="btn btn-primary" OnClick="Add_New_Supplier_Click" />
+            <br /><br />
 
-                <form class="form-inline">
-                    <div class="form-group">
-
-                        <label for="search">Search</label>
-                        <input type="search" class="form-control" id="txt_search" />
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <asp:TextBox ID="TextBox1" class="form-control" runat="server"></asp:TextBox>
+                        <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                        </span>
                     </div>
-                    <asp:Button ID="btn_search" runat="server" Text="Search"
-                        CssClass="btn btn-primary" onClick="btn_search_Click"/>
-
-                </form>
-            </p>
-        </div>
-
-
+                </td>
+                <td>
+                    <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
+                </td>
+              
+            </tr>
+        </table>  
+    </div>
 
         <!-- Table -->
 
         <div class="table-responsive">
 
             <asp:GridView ID="GridView1" runat="server"
-                AutoGenerateColumns="False"
-                AllowPaging="True"
+                AutoGenerateColumns="false"
+                AllowPaging="true"
+                PageSize="10"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
-                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
+                 PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" EmptyDataText="No records Found">
+                 
 
                 <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
                 <PagerTemplate>
@@ -119,8 +125,6 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT [supplier_id], [name], [contact_name], [fax_num], [contact_num], [address] FROM [Supplier]"></asp:SqlDataSource>
 
         </div>
 
