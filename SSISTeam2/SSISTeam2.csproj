@@ -131,7 +131,7 @@
   <ItemGroup>
     <Content Include="ChangeCategoryName1.aspx" />
     <Content Include="CreateNewCategory.aspx" />
-    <Content Include="ApproveStockAdjustment.aspx" />
+    <Content Include="AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
     <Content Include="ViewAllAdjustment.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
@@ -225,12 +225,12 @@
     <Compile Include="Approval_Duties.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ApproveStockAdjustment.aspx.cs">
-      <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
+    <Compile Include="AdjustmentDetail.aspx.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ApproveStockAdjustment.aspx.designer.cs">
-      <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
+    <Compile Include="AdjustmentDetail.aspx.designer.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -250,6 +250,7 @@
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
     <Compile Include="Classes\Models\AdjustmentModel.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
+    <Compile Include="Classes\Models\InventoryAdjustmentModel.cs" />
     <Compile Include="Classes\Models\MonthlyCheckModel.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
     <Compile Include="Classes\EFFServices\RetrievalService.cs" />
