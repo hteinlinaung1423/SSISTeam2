@@ -31,21 +31,76 @@ namespace SSISTeam2.Classes.EFFServices
             }
             return outstandingItems;
         }
-        public void moveFromAllocatedToRetrieving(int requestId, string currentUser)
+        public void allocateRequest(int requestId, string currentUser)
         {
-            _moveToTransient(requestId, currentUser, EventStatus.ALLOCATED, EventStatus.RETRIEVING, resetAllocQty: true);
-        }
-        public void moveToRetrievedToDisbursing(int requestId, string currentUser)
-        {
-            _moveToTransient(requestId, currentUser, EventStatus.RETRIEVED, EventStatus.DISBURSING, resetAllocQty: true);
+            DateTime now = DateTime.Now;
+            // Get request
+            Request targetRequest = context.Requests.Find(requestId);
+            if (targetRequest.current_status != RequestStatus.APPROVED
+                && targetRequest.current_status != RequestStatus.PART_DISBURSED)
+            {
+                return;
+            }
+            // Get items
+            List<Request_Details> targetDetails = targetRequest.Request_Details.ToList();
+            // Get approved quantities
+            foreach (var detail in targetDetails)
+            {
+                if (detail.deleted == "Y") continue;
+
+                Request_Event approvedEvent = detail.Request_Event.OrderByDescending(o => o.date_time).Where(w => w.status == EventStatus.APPROVED).DefaultIfEmpty(null).FirstOrDefault();
+
+                if (approvedEvent == null) continue;
+
+                ItemModel item = new ItemModel(context.Stock_Inventory.Find(approvedEvent.Request_Details.item_code));
+
+                int approvedQty = approvedEvent.quantity;
+                int availableQty = item.AvailableQuantity;
+                int newApprovedQty = 0;
+                int newAllocQty = 0;
+
+                // See if there's available
+                // Allocate whatever you can
+                if (availableQty >= approvedQty)
+                {
+                    // Can allocate all
+                    newAllocQty = approvedQty;
+                    newApprovedQty = 0;
+                } else if (availableQty > 0)
+                {
+                    // Can allocate some
+                    newAllocQty = availableQty;
+                    newApprovedQty = approvedQty - newAllocQty;
+                } else
+                {
+                    // Cannot allocate at all, skip this item
+                    continue;
+                }
+
+                // Save new events
+                Request_Event allocEv = _newRequestEvent(now, newAllocQty, detail.request_detail_id, currentUser, EventStatus.ALLOCATED);
+                Request_Event approvedEv = _newRequestEvent(now, newApprovedQty, detail.request_detail_id, currentUser, EventStatus.APPROVED);
+
+                context.Request_Event.Add(allocEv);
+                context.Request_Event.Add(approvedEv);
+            }
         }
 
-        public void moveToRetrievingToRetrieved(RequestModel requestModel, string currentUser)
+        public void moveFromAllocatedToRetrieving(int requestId, List<string> itemCodes, string currentUser)
+        {
+            _moveToTransient(requestId, itemCodes, currentUser, EventStatus.ALLOCATED, EventStatus.RETRIEVING, resetAllocQty: true);
+        }
+        public void moveFromRetrievedToDisbursing(int requestId, List<string> itemCodes, string currentUser)
+        {
+            _moveToTransient(requestId, itemCodes, currentUser, EventStatus.RETRIEVED, EventStatus.DISBURSING, resetAllocQty: true);
+        }
+
+        public void moveFromRetrievingToRetrieved(RequestModel requestModel, string currentUser)
         {
             Request request = context.Requests.Find(requestModel.RequestId);
             _moveFromTransient(request, requestModel.Items, currentUser, EventStatus.RETRIEVING, EventStatus.RETRIEVED);
         }
-        public void moveToDisbursingToDisbursed(RequestModel requestModel, string currentUser)
+        public void moveFromDisbursingToDisbursed(RequestModel requestModel, string currentUser)
         {
             Request request = context.Requests.Find(requestModel.RequestId);
             _moveFromTransient(request, requestModel.Items, currentUser, EventStatus.DISBURSING, EventStatus.DISBURSED);
@@ -92,12 +147,12 @@ namespace SSISTeam2.Classes.EFFServices
             newEv.quantity = quantity;
             newEv.request_detail_id = detailId;
             newEv.username = username;
-            newEv.status = EventStatus.RETRIEVING;
+            newEv.status = status;
 
             return newEv;
         }
 
-        private void _moveToTransient(int requestId, string currentUser, string fromStatus, string toStatus, bool resetAllocQty)
+        private void _moveToTransient(int requestId, List<string> itemCodes, string currentUser, string fromStatus, string toStatus, bool resetAllocQty)
         {
             DateTime now = DateTime.Now;
             Request request = context.Requests.Find(requestId);
@@ -107,6 +162,9 @@ namespace SSISTeam2.Classes.EFFServices
             foreach (var detail in details)
             {
                 if (detail.deleted == "Y") continue;
+
+                if (!itemCodes.Contains(detail.item_code)) continue;
+
                 // Get the latest allocated & approved
                 Request_Event alloc = detail.Request_Event.Where(w => w.status == EventStatus.ALLOCATED && w.deleted != "Y").OrderBy(o => o.date_time).Last();
                 Request_Event approv = detail.Request_Event.Where(w => w.status == EventStatus.APPROVED && w.deleted != "Y").OrderBy(o => o.date_time).Last();

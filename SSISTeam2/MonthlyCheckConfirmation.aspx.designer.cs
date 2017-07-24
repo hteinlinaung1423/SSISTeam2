@@ -10,7 +10,7 @@
 namespace SSISTeam2 {
     
     
-    public partial class MonthlyCheckConfirmation2 {
+    public partial class MonthlyCheckConfirmation {
         
         /// <summary>
         /// confirmationGV control.

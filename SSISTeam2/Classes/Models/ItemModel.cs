@@ -7,10 +7,11 @@ using SSISTeam2;
 
 namespace SSISTeam2.Classes.Models
 {
-    public class ItemModel
+    public class ItemModel : IEquatable<ItemModel>
     {
         private string itemCode;
         private Category category;
+        private string catName;
         private string description;
         private string unitOfMeasure;
         private string imagePath;
@@ -29,6 +30,7 @@ namespace SSISTeam2.Classes.Models
             itemCode = stock.item_code;
             description = stock.item_description;
             category = stock.Category;
+            catName = category.cat_name;
             unitOfMeasure = stock.unit_of_measure;
             imagePath = stock.image_path;
             currentQuantity = stock.current_qty;
@@ -47,7 +49,11 @@ namespace SSISTeam2.Classes.Models
                         int reorderQuantity,
                         int reorderLevel)
         {
-            this.category = category;
+            if (category != null)
+            {
+                this.category = category;
+                this.catName = category.cat_name;
+            }
             this.description = description;
             this.unitOfMeasure = unitOfMeasure;
             this.imagePath = imagePath;
@@ -125,6 +131,16 @@ namespace SSISTeam2.Classes.Models
             return cumulativeAvailable;
         }
 
+        public bool Equals(ItemModel other)
+        {
+            return other != null && other.itemCode == itemCode;
+        }
+        public override int GetHashCode()
+        {
+            if (itemCode == null) return 0;
+            return itemCode.GetHashCode();
+        }
+
         public Dictionary<Supplier, double> Prices
         {
             get
@@ -176,6 +192,19 @@ namespace SSISTeam2.Classes.Models
             set
             {
                 category = value;
+            }
+        }
+
+        public string CatName
+        {
+            get
+            {
+                return catName;
+            }
+
+            set
+            {
+                catName = value;
             }
         }
 

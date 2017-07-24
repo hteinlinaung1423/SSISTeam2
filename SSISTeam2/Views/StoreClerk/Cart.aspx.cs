@@ -19,6 +19,8 @@ namespace SSISTeam2.Views.StoreClerk
             {
                 List<string> itemnameList = new List<string>();
                 HashSet<Stock_Inventory> itemList = (HashSet<Stock_Inventory>)Session["item"];
+
+
                 if (itemList == null)
                 {
                     LabelOrderSummary.Text = "Your cart is empty.";
@@ -40,8 +42,20 @@ namespace SSISTeam2.Views.StoreClerk
                     string itemname = itemnameList[0];
                     GridView1.DataSource = ctx.Tender_List_Details.Where(x => x.Stock_Inventory.item_description == itemname).Select(x => new { x.tender_id, x.item_code, x.Stock_Inventory.item_description, x.Tender_List.Supplier.name, x.rank, x.price }).ToList();
                     GridView1.DataBind();
+
+
+
                 }
+
+
             }
+
+
+            HashSet<OrderDetailsView> orderList = (HashSet<OrderDetailsView>)Session["tender"];
+            GridView2.DataSource = orderList;
+            GridView2.DataBind();
+
+
 
 
         }
@@ -77,7 +91,7 @@ namespace SSISTeam2.Views.StoreClerk
             HashSet<OrderDetailsView> itemList = (HashSet<OrderDetailsView>)Session["tender"];
 
 
-
+            next.Visible = true;
 
 
 
@@ -143,21 +157,32 @@ namespace SSISTeam2.Views.StoreClerk
 
             string itemdesc = ((Label)gvr.FindControl("Label_ItemDesc")).Text;
 
-            HashSet<OrderDetailsView> itemList = (HashSet<OrderDetailsView>)Session["tender"] ;
+            HashSet<OrderDetailsView> itemList = (HashSet<OrderDetailsView>)Session["tender"];
             foreach (OrderDetailsView od in itemList)
             {
                 if (od.ItemDesc == itemdesc)
                 {
                     itemList.Remove(od);
-                    
+
                     break;
                 }
+            }
+
+            if (itemList.Count == 0)
+            {
+                next.Visible = false;
             }
             Session["cart"] = itemList;
             lblResult.Visible = false;
             lblduplicate.Visible = false;
             GridView2.DataSource = itemList;
             GridView2.DataBind();
+        }
+
+
+        protected void Purchase(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/purchaseorder.aspx");
         }
     }
 
@@ -168,6 +193,8 @@ namespace SSISTeam2.Views.StoreClerk
         string supplierName;
         decimal price;
         int tenderId;
+        int quantity;
+        string supplierId;
 
         public int TenderId { get { return tenderId; } }
 
@@ -175,7 +202,16 @@ namespace SSISTeam2.Views.StoreClerk
 
         public string SupplierName { get { return supplierName; } }
 
+        public string SupplierId { get { return supplierId; } }
+
         public decimal Price { get { return price; } }
+
+        public int  Quantity { get { return quantity; }
+            set
+            {
+                quantity = value;
+            }
+        }
 
 
         public OrderDetailsView()
@@ -194,9 +230,11 @@ namespace SSISTeam2.Views.StoreClerk
                 Stock_Inventory item = context.Stock_Inventory.Where(x => x.item_code == order.item_code).First();//Find(order.ISBN);
 
                 itemDesc = item.item_description;
-                supplierName = context.Suppliers.Where(x => x.supplier_id == item.supplier_id).Select(x => x.name).First();
+                supplierName = context.Suppliers.Where(x => x.supplier_id == order.Tender_List.supplier_id).Select(x => x.name).First();
                 price = order.price;
                 tenderId = order.tender_id;
+                quantity = item.reorder_qty;
+                supplierId = order.Tender_List.supplier_id;
             }
         }
 

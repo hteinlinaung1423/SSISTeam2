@@ -26,7 +26,8 @@ namespace SSISTeam2
         protected void Logout(object sender, EventArgs e)
         {
             System.Web.Security.FormsAuthentication.SignOut();
-            
+            Session["tender"] = null;
+            Session["item"] = null;
             Response.Redirect("~/Login.aspx");
         }
 
@@ -40,6 +41,13 @@ namespace SSISTeam2
             
 
             Response.Redirect("~/Views/StoreClerk/lowstock.aspx");
+        }
+
+        protected void MakeOrder(object sender, EventArgs e)
+        {
+
+
+            Response.Redirect("~/Views/StoreClerk/Cart.aspx");
         }
     }
 }

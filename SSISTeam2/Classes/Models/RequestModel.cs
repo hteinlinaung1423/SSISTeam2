@@ -44,8 +44,8 @@ namespace SSISTeam2.Classes.Models
         }
         public RequestModel(Request efRequest, Department efDepartment, Dictionary<ItemModel, int> items, DateTime date)
         {
+            UserModel = new UserModel(efRequest.username);
             RequestId = efRequest.request_id;
-            //UserModel = 
             Date = date;
             Status = efRequest.current_status;
             Items = items;
