@@ -239,7 +239,9 @@
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\EFFServices\OldServices\AllocatedServiceOld.cs" />
     <Compile Include="Classes\EFFServices\OldServices\RequestMovementServiceOLD.cs" />
+    <Compile Include="Classes\EFFServices\OldServices\RequestServiceOld.cs" />
     <Compile Include="Classes\Emailer.cs" />
     <Compile Include="Classes\EFFacades\FacadeFactory.cs" />
     <Compile Include="Classes\EFFServices\AllocatedService.cs" />
