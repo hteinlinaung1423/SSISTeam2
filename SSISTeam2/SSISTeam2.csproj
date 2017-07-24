@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -114,6 +117,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ChangeCategoryName1.aspx" />
+    <Content Include="CreateNewCategory.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -150,7 +155,8 @@
       <DependentUpon>SSISModel.edmx</DependentUpon>
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
-    <Content Include="ViewStoreCatalogue.aspx" />
+    <Content Include="ViewAndEditCatalogue.aspx" />
+    <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\ApproveRequest.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollection&amp;Rep.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
@@ -176,8 +182,22 @@
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChangeCategoryName1.aspx.cs">
+      <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangeCategoryName1.aspx.designer.cs">
+      <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Collection_Point.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreateNewCategory.aspx.cs">
+      <DependentUpon>CreateNewCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateNewCategory.aspx.designer.cs">
+      <DependentUpon>CreateNewCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Delivery_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -253,6 +273,20 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewAndEditCatalogue.aspx.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAndEditCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAndMaintainSupplier.aspx.cs">
+      <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAndMaintainSupplier.aspx.designer.cs">
+      <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reporting\Report Generation.aspx.cs">
       <DependentUpon>Report Generation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -264,13 +298,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewStoreCatalogue.aspx.cs">
-      <DependentUpon>ViewStoreCatalogue.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewStoreCatalogue.aspx.designer.cs">
-      <DependentUpon>ViewStoreCatalogue.aspx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
