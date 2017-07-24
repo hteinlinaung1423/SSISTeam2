@@ -71,24 +71,29 @@ namespace SSISTeam2.Classes.EFFServices
                 // - Allocated, 9
                 // A102
                 // - Approved, 10
-                List<Request_Event> latestAlloc = eventItem.Where(x => x.status == RequestServiceStatus.ALLOCATED).OrderBy(o => o.date_time).ToList();
+                List<Request_Event> latestAlloc = eventItem.Where(x => x.status == EventStatus.ALLOCATED).OrderBy(o => o.date_time).ToList();
                 if (latestAlloc.Count == 0) continue;
 
-                int quantityToFulfil = 0;
+                // Get the latest allocated status's quantity
+                int quantityToFulfil = latestAlloc.Last().quantity;
 
-                if (latestAlloc.Count > 1)
-                {
-                    Request_Event last = latestAlloc.Last();
-                    Request_Event secondLast = latestAlloc[latestAlloc.Count - 2];
+                //int quantityToFulfil = 0;
 
-                    quantityToFulfil = last.quantity - secondLast.quantity;
-                } else
+                //if (latestAlloc.Count > 1)
+                //{
+                //    Request_Event last = latestAlloc.Last();
+                //    Request_Event secondLast = latestAlloc[latestAlloc.Count - 2];
+
+                //    quantityToFulfil = last.quantity - secondLast.quantity;
+                //} else
+                //{
+                //    quantityToFulfil = latestAlloc.Last().quantity;
+                //}
+                if (quantityToFulfil > 0)
                 {
-                    quantityToFulfil = latestAlloc.Last().quantity;
+                    Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
+                    itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
                 }
-
-                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
-                itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
             }
 
             if (itemsToFulfill.Count == 0)
@@ -189,7 +194,7 @@ namespace SSISTeam2.Classes.EFFServices
 
                         // get the quantity from the provided item quantity in the method arguments
                         newEvent.quantity = toAllocate.Items.Where(i => i.Key.ItemCode == item.ItemCode).First().Value;
-                        newEvent.status = RequestServiceStatus.ALLOCATED;
+                        newEvent.status = EventStatus.ALLOCATED;
                         newEvent.username = currentUser;
                         newEvent.date_time = timestamp;
                         newEvent.deleted = "N";
@@ -234,7 +239,7 @@ namespace SSISTeam2.Classes.EFFServices
                         Request_Event latest = detail.Request_Event.OrderBy(o => o.date_time).Last();
                         if (latest == null) throw new ItemNotFoundException("event item could not be found");
 
-                        Request_Event approved = detail.Request_Event.Where(e => e.status == RequestServiceStatus.APPROVED).OrderBy(o => o.date_time).Last();
+                        Request_Event approved = detail.Request_Event.Where(e => e.status == EventStatus.APPROVED).OrderBy(o => o.date_time).Last();
                         if (approved == null) throw new ItemNotFoundException("event item could not be found");
 
                         // Get the difference in quantity
@@ -265,7 +270,7 @@ namespace SSISTeam2.Classes.EFFServices
 
                                 // get the quantity from the provided item quantity in the method arguments
                                 newEvent.quantity = toAllocate.Items.Where(i => i.Key.ItemCode == item.ItemCode).First().Value;
-                                newEvent.status = RequestServiceStatus.ALLOCATED;
+                                newEvent.status = EventStatus.ALLOCATED;
                                 newEvent.username = currentUser;
                                 newEvent.date_time = timestamp;
                                 newEvent.deleted = "N";

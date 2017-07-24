@@ -27,6 +27,12 @@ namespace SSISTeam2
     
         public virtual DbSet<Adjustment_Details> Adjustment_Details { get; set; }
         public virtual DbSet<Alert> Alerts { get; set; }
+
+        internal object SearchCatagories(string text)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual DbSet<Approval_Duties> Approval_Duties { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Collection_Point> Collection_Point { get; set; }
@@ -47,5 +53,12 @@ namespace SSISTeam2
         public virtual DbSet<Tender_List> Tender_List { get; set; }
         public virtual DbSet<Tender_List_Details> Tender_List_Details { get; set; }
         public virtual DbSet<Volume_Request> Volume_Request { get; set; }
+        public object Supplier_List { get; internal set; }
+        //public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+
+        internal static object SearchCatagories(object text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
