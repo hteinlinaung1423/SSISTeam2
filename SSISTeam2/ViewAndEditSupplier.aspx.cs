@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SSISTeam2
 {
-    public partial class ViewStoreCatalogue : System.Web.UI.Page
+    public partial class ViewAndEditSupplier : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
