@@ -156,7 +156,6 @@
     </Content>
     <Content Include="MasterPage.Master" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
-    <Content Include="Views\DepartmentHead\web.config" />
     <EntityDeploy Include="SSISModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SSISModel.Designer.cs</LastGenOutput>
@@ -180,14 +179,12 @@
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
-    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\Test.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCat.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
-    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysisStaging.aspx">
@@ -454,13 +451,6 @@
     </Compile>
     <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.cs">
-      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.designer.cs">
-      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
       <DependentUpon>ViewAllPending.aspx</DependentUpon>
