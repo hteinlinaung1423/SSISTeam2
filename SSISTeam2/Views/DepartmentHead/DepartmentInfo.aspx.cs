@@ -18,10 +18,10 @@ namespace SSISTeam2.Views.DepartmentHead
         protected void Page_Load(object sender, EventArgs e)
         {
             //???(actual)
-            //loginUsername = User.Identity.Name.ToString();
+            loginUsername = User.Identity.Name.ToString();
 
             //(testing exmaple)
-            loginUsername = "Jerry";
+           // loginUsername = "Jerry";
 
             string logindepCode = ent.Dept_Registry.Where(b => b.username == loginUsername).Select(c => c.dept_code).First().ToString();
 

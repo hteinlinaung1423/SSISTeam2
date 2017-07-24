@@ -176,7 +176,6 @@
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
     <Content Include="ViewReportList.aspx" />
-    <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="ViewAndEditCatalogue.aspx" />
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
@@ -188,8 +187,6 @@
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCat.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
-    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
-    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
