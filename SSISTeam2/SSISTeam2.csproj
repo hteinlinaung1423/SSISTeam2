@@ -179,8 +179,8 @@
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
-    <Content Include="Views\DepartmentHead\Test.aspx" />
-    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\DepartmentHead\DeptInfo.aspx" />
+    <Content Include="Views\DepartmentHead\ViewPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
@@ -332,12 +332,6 @@
     <Compile Include="Request_Event.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="SSISModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -417,12 +411,19 @@
     <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.designer.cs">
       <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
+    <Compile Include="Views\DepartmentHead\DeptInfo.aspx.cs">
+      <DependentUpon>DeptInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
+    <Compile Include="Views\DepartmentHead\DeptInfo.aspx.designer.cs">
+      <DependentUpon>DeptInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewPending.aspx.cs">
+      <DependentUpon>ViewPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewPending.aspx.designer.cs">
+      <DependentUpon>ViewPending.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
@@ -451,13 +452,6 @@
     </Compile>
     <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
-      <DependentUpon>ViewAllPending.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
-      <DependentUpon>ViewAllPending.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\ViewCatalogue.aspx.cs">
       <DependentUpon>ViewCatalogue.aspx</DependentUpon>
