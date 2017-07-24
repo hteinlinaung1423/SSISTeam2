@@ -48,5 +48,10 @@ namespace SSISTeam2.Views.StoreClerk
 
             Response.Redirect("~/Views/StoreClerk/ViewSupplierList.aspx");
         }
+
+        protected void btn_search_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

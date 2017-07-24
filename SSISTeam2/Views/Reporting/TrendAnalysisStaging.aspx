@@ -3,9 +3,18 @@
 <%@ Register assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p></p>
-    <h2>Trend Analysis Report Generator</h2>
-     <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" DisplayToolbar="False" ToolPanelView="None" HasToggleGroupTreeButton="False" />
-     
+     <asp:table runat="server" CssClass="table">
+        <asp:TableRow>
+            <asp:TableCell>
+    <CR:crystalreportviewer id="CrystalReportViewer1" runat="server" autodatabind="true" HasRefreshButton="True" HasToggleGroupTreeButton="False" ToolPanelView="None" />
+            </asp:TableCell>
+            <asp:TableCell>
+                <asp:Button runat="server" CssClass="btn btn-default btn-sm" ID="genNewRep" Text="Generate New Report" OnClick="genNewRep_OnClick" />
+                <asp:Button runat="server" CssClass="btn btn-danger btn-sm" ID="backBtn" Text="Back" OnClick="backBtn_OnClick" />
+
+            </asp:TableCell>
+            </asp:TableRow>
+    </asp:table>
     <%--Department Selector--%>
 <%--    <h4>Please Select Department</h4>
     <asp:SqlDataSource 
