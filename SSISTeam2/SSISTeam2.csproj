@@ -176,7 +176,6 @@
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
     <Content Include="ViewReportList.aspx" />
-    <Content Include="ViewStoreCatalogue.aspx" />
     <Content Include="ViewAndEditCatalogue.aspx" />
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
@@ -204,7 +203,7 @@
     <Content Include="Views\StoreClerk\MakeNewRequests.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
-    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <!--<Content Include="Views\Reporting\RequestVolumeRpt.aspx" />-->
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
