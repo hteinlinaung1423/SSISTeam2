@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewCat.aspx.cs" Inherits="SSISTeam2.Views.Employee.ViewCat" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewCatalogue.aspx.cs" Inherits="SSISTeam2.Views.Employee.ViewCat" %>
 
 <asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1"
     runat="server">

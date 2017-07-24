@@ -19,7 +19,7 @@
            
             <asp:TableRow>
             <asp:TableCell>Generate Trend Analysis Report </asp:TableCell>
-            <asp:TableCell><asp:Button ID="GTAReportBtn" Text="Select" width="142px" runat="server" CssClass="btn btn-default btn-sm"/></asp:TableCell>
+            <asp:TableCell><asp:Button ID="GTAReportBtn" Text="Select" width="142px" runat="server"  OnClick="GTAReportBtn_Click"  CssClass="btn btn-default btn-sm"/></asp:TableCell>
             
             </asp:TableRow>
         </asp:table>        

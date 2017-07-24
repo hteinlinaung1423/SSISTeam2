@@ -95,15 +95,17 @@
                     <li>
                         <p class="navbar-text">Signed in as <%= Page.User.Identity.Name %></p>
                     </li>
+                    <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages <span class="badge btn-default">4</span></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+
+                        <ul class="dropdown-menu list-group">
                             <li>
                                 <asp:Button ID="logout" runat="server" CausesValidation="false" Text="Logout" class="btn btn-block btn-primary" OnClick="Logout" /></li>
                              
 
                             <li>
-                                <asp:Button ID="Dashboard" runat="server" CausesValidation="false" Text="Dashboard" class="btn btn-block btn-primary" OnClick="Default"/></li>
+                                <asp:Button ID="Dashboard" runat="server" CausesValidation="false" Text="Dashboard" class="btn btn-block btn-primary dropdown-toggle" OnClick="Default"/></li>
                             <% if (Page.User.IsInRole("Employee"))
                                 { %>
                             <li>
@@ -113,8 +115,7 @@
                             <% }
                                 if (Page.User.IsInRole("Clerk"))
                                 { %>
-                             <li>
-                                <asp:Button ID="message" runat="server" CausesValidation="false" Text="Message" class="btn btn-block btn-primary" OnClick="LowStock"/></li>
+                            
 
                             <li>
                                 <asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" class="btn btn-block btn-primary" /></li>
