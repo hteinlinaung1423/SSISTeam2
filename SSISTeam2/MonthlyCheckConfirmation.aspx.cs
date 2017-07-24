@@ -117,17 +117,21 @@ namespace SSISTeam2
                 checkRecord.deleted = "N";
                 checkRecord.discrepancy = "Y";
 
+                context.Monthly_Check_Records.Add(checkRecord);
+                context.SaveChanges();
+
                 if (invAdjustmentSup.Adjustment_Details.Count != 0)
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentSup);
+                    context.SaveChanges();
                 }
                 if (invAdjustmentMan.Adjustment_Details.Count != 0)
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentMan);
+                    context.SaveChanges();
                 }
 
-                context.Monthly_Check_Records.Add(checkRecord);
-                context.SaveChanges();
+
             }
 
         }
