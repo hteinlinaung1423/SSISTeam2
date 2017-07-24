@@ -48,7 +48,7 @@ namespace SSISTeam2.Classes.EFFServices
             {
                 if (detail.deleted == "Y") continue;
 
-                Request_Event approvedEvent = detail.Request_Event.OrderByDescending(o => o.date_time).Where(w => w.status == EventStatus.APPROVED).DefaultIfEmpty(null).FirstOrDefault();
+                Request_Event approvedEvent = detail.Request_Event.Where(w => w.status == EventStatus.APPROVED).DefaultIfEmpty(null).FirstOrDefault();
 
                 if (approvedEvent == null) continue;
 
@@ -77,9 +77,11 @@ namespace SSISTeam2.Classes.EFFServices
                     continue;
                 }
 
+                // Update event
+                //approvedEvent //-----
                 // Save new events
                 Request_Event allocEv = _newRequestEvent(now, newAllocQty, detail.request_detail_id, currentUser, EventStatus.ALLOCATED);
-                Request_Event approvedEv = _newRequestEvent(now, newAllocQty, detail.request_detail_id, currentUser, EventStatus.APPROVED);
+                Request_Event approvedEv = _newRequestEvent(now, newApprovedQty, detail.request_detail_id, currentUser, EventStatus.APPROVED);
 
                 context.Request_Event.Add(allocEv);
                 context.Request_Event.Add(approvedEv);
@@ -147,7 +149,7 @@ namespace SSISTeam2.Classes.EFFServices
             newEv.quantity = quantity;
             newEv.request_detail_id = detailId;
             newEv.username = username;
-            newEv.status = EventStatus.RETRIEVING;
+            newEv.status = status;
 
             return newEv;
         }

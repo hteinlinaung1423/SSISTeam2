@@ -13,15 +13,6 @@ namespace SSISTeam2.Views.DepartmentHead {
     public partial class DepartmentInfo {
         
         /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
         /// LabelDeptName control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace SSISTeam2.Views.DepartmentHead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelDeptName;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// LabelContactName control.
@@ -67,22 +67,22 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Label LabelHeadName;
         
         /// <summary>
-        /// LabelCollectP control.
+        /// tbCollectP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCollectP;
+        protected global::System.Web.UI.WebControls.TextBox tbCollectP;
         
         /// <summary>
-        /// LabelRepName control.
+        /// tbRepName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelRepName;
+        protected global::System.Web.UI.WebControls.TextBox tbRepName;
         
         /// <summary>
         /// BtnChangeCpRn control.

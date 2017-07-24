@@ -20,6 +20,7 @@ namespace SSISTeam2.Classes.Models
         private Dictionary<Supplier, double> prices;
         private int actualQuantity;
         private string reason;
+        private double averagePrice;
 
 
         public MonthlyCheckModel(Stock_Inventory stock)
@@ -38,6 +39,7 @@ namespace SSISTeam2.Classes.Models
             this.prices = item.Prices;
             this.actualQuantity = item.CurrentQuantity;
             this.reason = "";
+            this.averagePrice = AveragePrice;
         }
 
         public static List<ItemModel> ConvertToItemModel(List<MonthlyCheckModel> monthlyList)

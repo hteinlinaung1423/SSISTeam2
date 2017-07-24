@@ -1014,6 +1014,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Request" Relationship="Self.FK_Request_Details_Requests" FromRole="Request_Details" ToRole="Requests" />
           <NavigationProperty Name="Stock_Inventory" Relationship="Self.FK_Request_Details_Stock_Inventory" FromRole="Request_Details" ToRole="Stock_Inventory" />
           <NavigationProperty Name="Request_Event" Relationship="Self.FK_Request_Event_Request_Details" FromRole="Request_Details" ToRole="Request_Event" />
+          <Property Name="orig_quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="Request_Event">
           <Key>
@@ -1030,6 +1031,8 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="not_allocated" Type="Int32" />
           <NavigationProperty Name="Dept_Registry" Relationship="Self.FK_Request_Event_Dept_Registry" FromRole="Request_Event" ToRole="Dept_Registry" />
           <NavigationProperty Name="Request_Details" Relationship="Self.FK_Request_Event_Request_Details" FromRole="Request_Event" ToRole="Request_Details" />
+          <Property Name="allocated" Type="Int32" />
+          <Property Name="not_allocated" Type="Int32" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -1666,17 +1669,30 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
+        <EntityType Name="Volume_Request">
+          <Key>
+            <PropertyRef Name="cat_name" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="quantity" />
+            <PropertyRef Name="current_status" />
+            <PropertyRef Name="date_time" />
+            <PropertyRef Name="item_description" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="dept_code" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="item_code" />
+          </Key>
+          <Property Name="cat_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="current_status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="item_description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dept_code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="item_code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1851,6 +1867,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Request_Details">
             <EntityTypeMapping TypeName="SSISModel.Request_Details">
               <MappingFragment StoreEntitySet="Request_Details">
+                <ScalarProperty Name="orig_quantity" ColumnName="orig_quantity" />
                 <ScalarProperty Name="request_detail_id" ColumnName="request_detail_id" />
                 <ScalarProperty Name="request_id" ColumnName="request_id" />
                 <ScalarProperty Name="item_code" ColumnName="item_code" />
@@ -1862,6 +1879,8 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Request_Event">
             <EntityTypeMapping TypeName="SSISModel.Request_Event">
               <MappingFragment StoreEntitySet="Request_Event">
+                <ScalarProperty Name="not_allocated" ColumnName="not_allocated" />
+                <ScalarProperty Name="allocated" ColumnName="allocated" />
                 <ScalarProperty Name="request_event_id" ColumnName="request_event_id" />
                 <ScalarProperty Name="request_detail_id" ColumnName="request_detail_id" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -1956,12 +1975,8 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Volume_Request">
             <EntityTypeMapping TypeName="SSISModel.Volume_Request">
               <MappingFragment StoreEntitySet="Volume_Request">
-                <ScalarProperty Name="cat_name" ColumnName="cat_name" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="date_time" ColumnName="date_time" />
-                <ScalarProperty Name="item_description" ColumnName="item_description" />
-                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="item_code" ColumnName="item_code" />
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="dept_code" ColumnName="dept_code" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="current_status" ColumnName="current_status" />

@@ -129,18 +129,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ChangeCategoryName1.aspx" />
+    <Content Include="CreateNewCategory.aspx" />
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
-    <Content Include="SSISModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SSISModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.cs</LastGenOutput>
-    </Content>
+    <Content Include="ViewAllAdjustment.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveReject.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
@@ -159,6 +153,7 @@
     <Content Include="SSISModel.edmx.diagram">
       <DependentUpon>SSISModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\DepartmentHead\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -172,9 +167,12 @@
     <Content Include="register.aspx" />
     <Content Include="ViewReportList.aspx" />
     <Content Include="ViewStoreCatalogue.aspx" />
+    <Content Include="ViewAndEditCatalogue.aspx" />
+    <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
+    <Content Include="Views\DepartmentHead\Test.aspx" />
     <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
@@ -192,6 +190,7 @@
     <Content Include="Views\Reporting\TrendAnalysisRpt.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
+    <Content Include="Views\StoreClerk\DEMO_EmailTest.aspx" />
     <Content Include="Views\StoreClerk\EditOrder.aspx" />
     <Content Include="Views\StoreClerk\MakeNewRequests.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
@@ -206,6 +205,7 @@
     <Content Include="Views\StoreClerk\ReceiveOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\TenderListForm.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
     <Content Include="Views\StoreClerk\ViewPendingOrder.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
@@ -233,6 +233,8 @@
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\EFFServices\OldServices\RequestMovementServiceOLD.cs" />
+    <Compile Include="Classes\Emailer.cs" />
     <Compile Include="Classes\EFFacades\FacadeFactory.cs" />
     <Compile Include="Classes\EFFServices\AllocatedService.cs" />
     <Compile Include="Classes\EFFServices\DisbursementService.cs" />
@@ -245,6 +247,7 @@
     <Compile Include="Classes\EFFServices\RequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
+    <Compile Include="Classes\Models\AdjustmentModel.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
     <Compile Include="Classes\Models\MonthlyCheckModel.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
@@ -265,8 +268,22 @@
     <Compile Include="Classes\Models\RetrievalModel.cs" />
     <Compile Include="Classes\Models\StatusEnums.cs" />
     <Compile Include="Classes\Models\UserModel.cs" />
+    <Compile Include="ChangeCategoryName1.aspx.cs">
+      <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangeCategoryName1.aspx.designer.cs">
+      <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Collection_Point.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreateNewCategory.aspx.cs">
+      <DependentUpon>CreateNewCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateNewCategory.aspx.designer.cs">
+      <DependentUpon>CreateNewCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="CreateChartReport.aspx.cs">
       <DependentUpon>CreateChartReport.aspx</DependentUpon>
@@ -280,6 +297,20 @@
     </Compile>
     <Compile Include="Delivery_Orders.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.designer.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.designer.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -375,12 +406,26 @@
     <Compile Include="notifysuccess.aspx.designer.cs">
       <DependentUpon>notifysuccess.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveReject.aspx.cs">
+      <DependentUpon>ApproveReject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveReject.aspx.designer.cs">
+      <DependentUpon>ApproveReject.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.cs">
       <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.designer.cs">
       <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
@@ -442,6 +487,20 @@
       <DependentUpon>ReportsMain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ViewAndEditCatalogue.aspx.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAndEditCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAndMaintainSupplier.aspx.cs">
+      <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAndMaintainSupplier.aspx.designer.cs">
+      <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
@@ -496,6 +555,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.designer.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\DEMO_EmailTest.aspx.cs">
+      <DependentUpon>DEMO_EmailTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\DEMO_EmailTest.aspx.designer.cs">
+      <DependentUpon>DEMO_EmailTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\EditOrder.aspx.cs">
       <DependentUpon>EditOrder.aspx</DependentUpon>
@@ -573,6 +639,7 @@
     </Compile>
     <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.designer.cs">
       <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
       <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
@@ -616,6 +683,13 @@
     </Compile>
     <Compile Include="Views\Employee\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\TenderListForm.aspx.cs">
+      <DependentUpon>TenderListForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\TenderListForm.aspx.designer.cs">
+      <DependentUpon>TenderListForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>

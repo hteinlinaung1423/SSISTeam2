@@ -329,6 +329,8 @@ namespace SSISTeam2.Views.StoreClerk
 
                 context.SaveChanges();
             }
+
+            Response.Redirect(Request.Url.ToString(), false);
         }
 
         protected void btnCancelRequest_Click(object sender, EventArgs e)
@@ -339,7 +341,9 @@ namespace SSISTeam2.Views.StoreClerk
             {
                 FacadeFactory.getRequestService(context).setRequestToCancelled(requestId, username);
                 context.SaveChanges();
-            } 
+            }
+
+            Response.Redirect(Request.Url.ToString(), false);
         }
 
         private MakeNewRequestModel _updateViewModelItem(MakeNewRequestModel model)
