@@ -18,12 +18,12 @@ namespace SSISTeam2
         protected void Page_Load(object sender, EventArgs e)
         {
             //???(actual)
-            userName = User.Identity.Name.ToString();
-            UserModel user = new UserModel(userName);
-            currentDeptCode = user.Department.dept_code.ToString();
+            //userName = User.Identity.Name.ToString();
+            //UserModel user = new UserModel(userName);
+            //currentDeptCode = user.Department.dept_code.ToString();
 
             //(testing example)
-            //currentDeptCode = "REGR";
+            currentDeptCode = "REGR";
 
             if (!IsPostBack)
             {
