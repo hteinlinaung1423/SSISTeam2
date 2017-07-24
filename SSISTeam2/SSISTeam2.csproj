@@ -185,10 +185,7 @@
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
-    <Content Include="Views\Home\Home.aspx" />
-    <Content Include="Views\Reporting\OLDReports Main.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
-    <Content Include="Views\Reporting\TrendAnalysis.aspx" />
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
@@ -401,9 +398,6 @@
     </Compile>
     <Compile Include="Views\Employee\ViewRequestsDetails.aspx.designer.cs">
       <DependentUpon>ViewRequestsDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reporting\OLDReports Main.aspx.designer.cs">
-      <DependentUpon>OLDReports Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reporting\ReportsMain.aspx.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
