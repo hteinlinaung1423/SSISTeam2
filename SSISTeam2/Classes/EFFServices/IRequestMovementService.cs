@@ -5,7 +5,7 @@ namespace SSISTeam2.Classes.EFFServices
 {
     public interface IRequestMovementService
     {
-        List<string> getRequestNonAllocatedItemCodes(int requestId);
+        //List<string> getRequestNonAllocatedItemCodes(int requestId);
         void allocateRequest(int requestId, string currentUser);
         void moveFromAllocatedToRetrieving(int requestId, List<string> itemCodes, string currentUser);
         void moveFromRetrievingToRetrieved(RequestModel requestModel, string currentUser);
