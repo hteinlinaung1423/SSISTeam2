@@ -10,12 +10,24 @@ namespace SSISTeam2.Views.Reporting.Reports
 {
     public partial class RequestVolumeRpt : System.Web.UI.Page
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                ReportDocument crVOL = new ReportDocument();
+                crVOL.Load(Server.MapPath("~/Views/Reporting/Reports/Volume_Report.rpt"));
+                CrystalReportViewer1.ReportSource = crVOL;
+                Session["ReportDocument"] = crVOL;
+            }
+            else
+            {
+                ReportDocument doc = (ReportDocument)Session["ReportDocument"];
+                CrystalReportViewer1.ReportSource = doc;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ReportDocument crTA = new ReportDocument();
-            crTA.Load(Server.MapPath("~/Views/Reporting/Reports/Volume_Report.rpt"));
-            CrystalReportViewer1.ReportSource = crTA;
-            CrystalReportViewer1.RefreshReport();
+           
         }
 
         protected void genNewRep_OnClick(object Sender, EventArgs e)

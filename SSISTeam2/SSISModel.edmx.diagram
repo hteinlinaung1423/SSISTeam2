@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="93b7653a65ba4b419d31236b463bbc2a" Name="Diagram1">
+      <Diagram DiagramId="baf53f64d33c418a9028df440f12ac13" Name="Diagram1">
         <EntityTypeShape EntityType="SSISModel.Adjustment_Details" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Alert" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Approval_Duties" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="SSISModel.Request" Width="1.5" PointX="10.5" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Stock_Inventory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Supplier" Width="1.5" PointX="5.75" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Tender_List" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Tender_List_Details" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Volume_Request" Width="1.5" PointX="8.75" PointY="2.625" IsExpanded="true" />
