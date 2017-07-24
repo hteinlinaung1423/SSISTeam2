@@ -133,15 +133,15 @@
     <Content Include="CreateNewCategory.aspx" />
     <Content Include="ApproveStockAdjustment.aspx" />
     <Content Include="CreateChartReport.aspx" />
-    <Content Include="SSISEntities.Context.tt">
+    <Content Include="SSISModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISEntities.edmx</DependentUpon>
-      <LastGenOutput>SSISEntities.Context.cs</LastGenOutput>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+      <LastGenOutput>SSISModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="SSISEntities.tt">
+    <Content Include="SSISModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISEntities.edmx</DependentUpon>
-      <LastGenOutput>SSISEntities.cs</LastGenOutput>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+      <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
     <Content Include="ViewAllAdjustment.aspx" />
     <Content Include="Views\DepartmentHead\ApproveReject.aspx" />
@@ -156,12 +156,12 @@
     </Content>
     <Content Include="MasterPage.Master" />
     <None Include="Properties\PublishProfiles\SSISTeam2.pubxml" />
-    <EntityDeploy Include="SSISEntities.edmx">
+    <EntityDeploy Include="SSISModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SSISEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>SSISModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="SSISEntities.edmx.diagram">
-      <DependentUpon>SSISEntities.edmx</DependentUpon>
+    <Content Include="SSISModel.edmx.diagram">
+      <DependentUpon>SSISModel.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -219,13 +219,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adjustment_Details.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Alert.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Approval_Duties.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ApproveStockAdjustment.aspx.cs">
       <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
@@ -235,7 +235,7 @@
       <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\EFFServices\OldServices\RequestMovementServiceOLD.cs" />
     <Compile Include="Classes\Emailer.cs" />
@@ -280,7 +280,7 @@
       <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Collection_Point.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CreateNewCategory.aspx.cs">
       <DependentUpon>CreateNewCategory.aspx</DependentUpon>
@@ -297,67 +297,67 @@
       <DependentUpon>CreateChartReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Delivery_Details.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Delivery_Orders.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Department.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dept_Registry.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Favourite.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Inventory_Adjustment.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Monthly_Check_Records.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Purchase_Order.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Purchase_Order_Details.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Request.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Request_Details.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Request_Event.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SSISEntities.Context.cs">
+    <Compile Include="SSISModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SSISEntities.Context.tt</DependentUpon>
+      <DependentUpon>SSISModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SSISEntities.cs">
+    <Compile Include="SSISModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SSISEntities.Designer.cs">
+    <Compile Include="SSISModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SSISEntities.edmx</DependentUpon>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Stock_Inventory.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Supplier.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tender_List.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tender_List_Details.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewAllAdjustment.aspx.cs">
       <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
@@ -694,7 +694,7 @@
       <DependentUpon>ViewSupplierList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Volume_Request.cs">
-      <DependentUpon>SSISEntities.tt</DependentUpon>
+      <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
