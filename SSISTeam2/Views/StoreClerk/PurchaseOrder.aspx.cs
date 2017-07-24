@@ -11,6 +11,7 @@ namespace SSISTeam2.Views.StoreClerk
     {
         SSISEntities s = new SSISEntities();
         decimal total = Convert.ToDecimal(0.0);
+ 
         protected void Page_Load(object sender, EventArgs e)
         {
            
@@ -94,47 +95,59 @@ namespace SSISTeam2.Views.StoreClerk
 
             HashSet<OrderDetailsView> orderList = (HashSet<OrderDetailsView>)Session["tender"];
 
+            IEnumerable<IGrouping<string, OrderDetailsView>> groups= orderList.GroupBy(k => k.SupplierId);
             // Create new Order
-            OrderDetailsView order = new OrderDetailsView();
-            Purchase_Order po = new Purchase_Order();
-            foreach (OrderDetailsView o in orderList)
+          
+           
+            foreach (var o in groups)
             {
-                po.supplier_id = o.SupplierId;
-                break;
-            }
-
-
-            po.clerk_user = User.Identity.Name;
-            po.delivery_by = DateTime.Parse(deliverydate.Text);
-            po.order_date = DateTime.Today;
-            po.deliver_address = "1 University Road, #01-00 Store Warehouse, Singapore 786541";
-            po.deleted = "N";
-
-
-            s.Purchase_Order.Add(po);
-            s.SaveChanges();
-
-            // Get OrderID
-
-            Purchase_Order createdorder = s.Purchase_Order.Where(x => x.clerk_user == User.Identity.Name).OrderBy(o => o.order_id).ToList().Last();
-
-            foreach (OrderDetailsView o in orderList)
-            {
-                Purchase_Order_Details orderDetail = new Purchase_Order_Details();
-                orderDetail.order_id = createdorder.order_id;
-                orderDetail.tender_id = o.TenderId;
-                orderDetail.quantity = o.Quantity;
-                orderDetail.status = "Pending";
-                orderDetail.cancelled = "N";
-                orderDetail.deleted = "N";
-                s.Purchase_Order_Details.Add(orderDetail);
+                Purchase_Order po = new Purchase_Order();
+                po.supplier_id = o.Key;
+                po.clerk_user = User.Identity.Name;
+                po.delivery_by = DateTime.Parse(deliverydate.Text);
+                po.order_date = DateTime.Today;
+                po.deliver_address = "1 University Road, #01-00 Store Warehouse, Singapore 786541";
+                po.deleted = "N";
+                s.Purchase_Order.Add(po);
                 s.SaveChanges();
+
+
+                // Get OrderID
+                Purchase_Order createdorder = s.Purchase_Order.Where(x => x.clerk_user == User.Identity.Name).OrderBy(x => x.order_id).ToList().Last();
+
+                
+
+                foreach (var item in o)
+                {
+                    Purchase_Order_Details orderDetail = new Purchase_Order_Details();
+                    orderDetail.order_id = createdorder.order_id;
+                    orderDetail.tender_id = item.TenderId;
+                    orderDetail.quantity = item.Quantity;
+                    orderDetail.status = "Pending";
+                    orderDetail.cancelled = "N";
+                    orderDetail.deleted = "N";
+                    s.Purchase_Order_Details.Add(orderDetail);
+                    s.SaveChanges();
+                }
+                
             }
+
+
+
 
             Session["tender"] = null;
             Session["item"] = null;
 
-            Response.Redirect("~/default.aspx");
+            Response.Redirect("~/Views/StoreClerk/PurchaseOrderSuccess.aspx");
+
+
+            
+
+
+
+
+
+
 
 
 
