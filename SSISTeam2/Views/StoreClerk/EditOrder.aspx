@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditOrder.aspx.cs" MasterPageFile="~/MasterPage.master" Inherits="SSISTeam2.Views.StoreClerk.EditOrder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditOrder.aspx.cs" MasterPageFile="~/MasterPage.master" enableEventValidation="false" Inherits="SSISTeam2.Views.StoreClerk.EditOrder" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
@@ -10,7 +10,8 @@
         </div>
         <div class="panel-body">
             <p>
-                Your Ref: PO Number <%= Request.QueryString["order"] %>               
+             <asp:HyperLink runat="server" NavigateUrl="~/views/storeclerk/viewpendingorder.aspx"><span class="glyphicon glyphicon-circle-arrow-left" style="color: black;"></span></asp:HyperLink> Your Ref: PO Number <%= Session["order"] %>               
+             <asp:Label ID="lblResult" runat="server" class="btn btn-block alert-danger" Visible="false"></asp:Label>               
             </p>
         </div>
 
@@ -56,12 +57,6 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Actual Quantity"><%-- HeaderStyle-CssClass="text-center-impt">--%>
-
-                        <ItemTemplate>
-                            <asp:Label ID="Label_quantity" runat="server" Text='<%# Eval("quantity") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
 
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Status"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
@@ -70,6 +65,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
+                   
 
                     <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
@@ -84,6 +80,8 @@
         </div>
 
         <div class="panel-footer">
+
+            
             <asp:Button ID="finish" runat="server" Text="Receive Delivery Orders" 
                 CssClass="btn btn-primary" OnClick="ReceiveOrder" />
         </div>
