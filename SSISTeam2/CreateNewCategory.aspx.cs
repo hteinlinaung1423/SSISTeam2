@@ -19,7 +19,7 @@ namespace SSISTeam2
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string cat_name = TextBox1.Text;
+            string cat_name = TextBox2.Text;
             //try
             //{
                 using (SSISEntities entities = new SSISEntities())
@@ -30,9 +30,10 @@ namespace SSISTeam2
                     c.deleted = "N";
                     entities.Categories.Add(c);
 
-                entities.SaveChanges();
+                    entities.SaveChanges();
                 }
-           
+            Response.Redirect("~/Views/StoreClerk/ChangeCategoryName1.aspx");
+
 
 
 
@@ -48,9 +49,9 @@ namespace SSISTeam2
 
 
 
-        protected void Button2_Click1(object sender, EventArgs e)
-        {
-            Response.Redirect("ChangeCategoryName1.aspx");
-        }
+        //protected void Button2_Click1(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("ChangeCategoryName1.aspx");
+        //}
     }
 }

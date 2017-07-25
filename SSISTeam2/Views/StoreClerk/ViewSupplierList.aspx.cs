@@ -50,19 +50,19 @@ namespace SSISTeam2.Views.StoreClerk
         }
         protected void Search_Click(object sender, EventArgs e)
         {
-            string searchWord = TextBox1.Text;
-            //Label1.Text = searchWord;
-            var result = from t1 in s.Suppliers
-                         where t1.deleted.Equals("N")
-                         && (t1.name.Contains(searchWord))
-                         orderby t1.name
-                         select new { t1.supplier_id, t1.name, t1.contact_name, t1.fax_num, t1.contact_num, t1.address, t1.gst_reg_num };
-            GridView1.DataSource = result.ToList();
-            GridView1.DataBind();
+            if (TextBox2.Text != null)
+            {
 
+
+                GridView1.DataSource = SearchCatagories(TextBox2.Text);
+                GridView1.DataBind();
+            }
         }
+        public List<Supplier> SearchCatagories(string param)
+        {
+            // return s.Suppliers.Where(x => x.supplier_id == id).ToList();
 
-
-
+            return s.Suppliers.Where(x => x.name.Contains(param) || x.contact_name.Contains(param) || x.contact_num.Contains(param) || x.fax_num.Contains(param) || x.address.Contains(param) || x.gst_reg_num.Contains(param)).ToList();
+        }
     }
 }

@@ -37,7 +37,6 @@ namespace SSISTeam2.Classes.Models
             reorderLevel = stock.reorder_level;
             reorderQuantity = stock.reorder_qty;
             prices = stock.Tender_List_Details.ToDictionary(x => x.Tender_List.Supplier, x => Convert.ToDouble(x.price));
-
         }
 
         public ItemModel(Category category,

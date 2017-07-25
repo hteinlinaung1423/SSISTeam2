@@ -176,13 +176,11 @@
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
     <Content Include="ViewReportList.aspx" />
-    <Content Include="ViewAndEditCatalogue.aspx" />
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DeptInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewPending.aspx" />
-    <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
@@ -209,6 +207,7 @@
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
     <Content Include="Views\StoreClerk\TenderListForm.aspx" />
+    <Content Include="Views\StoreClerk\ViewAndEditCatalogue.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
     <Content Include="Views\StoreClerk\ViewPendingOrder.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
@@ -341,6 +340,12 @@
     <Compile Include="Request_Event.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SSISModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -438,13 +443,6 @@
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.designer.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Employee\Form1.aspx.cs">
-      <DependentUpon>Form1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Employee\Form1.aspx.designer.cs">
-      <DependentUpon>Form1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\DepartmentHead\ChangeCollectionnRep.aspx.cs">
       <DependentUpon>ChangeCollectionnRep.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -477,13 +475,6 @@
       <DependentUpon>ReportsMain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ViewAndEditCatalogue.aspx.cs">
-      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewAndEditCatalogue.aspx.designer.cs">
-      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ViewAndMaintainSupplier.aspx.cs">
       <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -494,8 +485,8 @@
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Reports\Crystal_Testing\TESTTrend_Analysis.cs">
-      <DependentUpon>TESTTrend_Analysis.rpt</DependentUpon>
+    <Compile Include="Views\Reporting\Reports\Trend_Analysis.cs">
+      <DependentUpon>Trend_Analysis.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -514,12 +505,6 @@
     </Compile>
     <Compile Include="Views\Reporting\TrendAnalysisStaging.aspx.designer.cs">
       <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reporting\Reports\Trend_Analysis.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Trend_Analysis.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Reporting\Reports\Volume_Report.cs">
       <AutoGen>True</AutoGen>
@@ -684,6 +669,13 @@
     <Compile Include="Views\StoreClerk\TenderListForm.aspx.designer.cs">
       <DependentUpon>TenderListForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\StoreClerk\ViewAndEditCatalogue.aspx.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewAndEditCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -711,13 +703,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Home\DepartmentHead\" />
+    <Folder Include="Views\Reporting\Reports\Crystal_Testing\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Reporting\Reports\Crystal_Testing\TESTTrend_Analysis.rpt">
-      <LastGenOutput>TESTTrend_Analysis.cs</LastGenOutput>
+    <Content Include="Views\Reporting\Reports\Trend_Analysis.rpt">
+      <LastGenOutput>Trend_Analysis.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Views\Reporting\Reports\Trend_Analysis.rpt" />
     <Content Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Volume_Report.cs</LastGenOutput>
