@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="ViewCatalogueForm.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.ViewCatalogueForm" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="ViewAndEditCatalogue.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.ViewAndEditCatalogue" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
@@ -21,7 +21,7 @@
                         </div>  
                     </td>
                     <td>
-                        <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Button1_Click"/>
+                        <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
                     </td>
                     
 

@@ -10,7 +10,7 @@
 namespace SSISTeam2.Views.StoreClerk {
     
     
-    public partial class ViewCatalogueForm {
+    public partial class ViewAndEditCatalogue {
         
         /// <summary>
         /// TextBox1 control.

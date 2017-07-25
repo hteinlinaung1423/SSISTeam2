@@ -1,25 +1,25 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateNewCategory.aspx.cs" Inherits="SSISTeam2.CreateNewCategory" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="CreateNewCategory.aspx.cs" Inherits="SSISTeam2.CreateNewCategory" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+    runat="server">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h3>Create New Category</h3></div>
+        <div class="panel-body">
+          
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
-        <asp:Label ID="Label1" runat="server" Text="Add New Category"></asp:Label>
-        <p>
-            <asp:Label ID="Label2" runat="server" Text="New Category Name222:"></asp:Label>
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+           <asp:Label ID="Label3" runat="server" Text="Add New Category"></asp:Label>
+       <p>
+            <asp:Label ID="Label4" runat="server" Text="New Category Name222:"></asp:Label>
+            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
         </p>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Confirm" />
+        <asp:Button ID="Button3" runat="server" OnClick="Button1_Click" Text="Submit" CssClass="btn btn-primary" />
+        <asp:RequiredFieldValidator ID="vldPrice" runat="server" ErrorMessage="Category Name Is Required" ControlToValidate="cat_name" ForeColor="Red"></asp:RequiredFieldValidator>
+
        
-        <asp:Button ID="Button2" runat="server"  Text="Cancel" OnClick="Button2_Click1" />
+    </div>
+         
        
-    </form>
-</body>
-</html>
+   </asp:Content>
+
+

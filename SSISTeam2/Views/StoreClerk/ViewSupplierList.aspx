@@ -16,8 +16,9 @@
                 <form class="form-inline">
                     <div class="form-group">
                       
-                         <label for="search">Search</label>
-                         <input type="search" class="form-control" id="txt_search">
+                         &nbsp;
+                         <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Search" />
+                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                     </div>
                </form>
             </p>

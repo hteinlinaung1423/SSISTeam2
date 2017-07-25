@@ -174,8 +174,6 @@
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
     <Content Include="ViewReportList.aspx" />
-    <Content Include="ViewStoreCatalogue.aspx" />
-    <Content Include="ViewAndEditCatalogue.aspx" />
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
@@ -209,6 +207,7 @@
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\ViewAndEditCatalogue.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
     <Content Include="Web.config">
@@ -456,12 +455,7 @@
     </Compile>
     <Compile Include="Views\Reporting\ReportsMain.aspx.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
-    <Compile Include="ViewAndEditCatalogue.aspx.cs">
-      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewAndEditCatalogue.aspx.designer.cs">
-      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewAndMaintainSupplier.aspx.cs">
       <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
@@ -469,10 +463,6 @@
     </Compile>
     <Compile Include="ViewAndMaintainSupplier.aspx.designer.cs">
       <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reporting\Report Generation.aspx.cs">
-      <DependentUpon>Report Generation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
@@ -636,6 +626,13 @@
     </Compile>
     <Compile Include="Views\Employee\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewAndEditCatalogue.aspx.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewAndEditCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>

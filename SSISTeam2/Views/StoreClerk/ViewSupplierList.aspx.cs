@@ -48,5 +48,21 @@ namespace SSISTeam2.Views.StoreClerk
 
             Response.Redirect("~/Views/StoreClerk/ViewSupplierList.aspx");
         }
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            if (TextBox1.Text != null)
+            {
+
+
+                GridView1.DataSource = SearchCatagories(TextBox1.Text);
+                GridView1.DataBind();
+            }
+        }
+        public List<Supplier> SearchCatagories(string param)
+        {
+            // return s.Suppliers.Where(x => x.supplier_id == id).ToList();
+
+            return s.Suppliers.Where(x => x.name.Contains(param) || x.contact_name.Contains(param) || x.contact_num.Contains(param) || x.fax_num.Contains(param) || x.address.Contains(param) || x.gst_reg_num.Contains(param)).ToList();
+        }
     }
 }
