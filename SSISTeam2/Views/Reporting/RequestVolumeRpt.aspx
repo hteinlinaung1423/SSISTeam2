@@ -5,7 +5,7 @@
     <asp:table runat="server" CssClass="table">
         <asp:TableRow>
             <asp:TableCell>
-    <CR:crystalreportviewer id="CrystalReportViewer1" runat="server" autodatabind="true" HasToggleGroupTreeButton="False" HasRefreshButton="True" ToolPanelView="None" />
+                <CR:crystalreportviewer id="CrystalReportViewer1" runat="server" autodatabind="true" HasToggleGroupTreeButton="False" HasRefreshButton="True" ToolPanelView="None" HasCrystalLogo="False" HasToggleParameterPanelButton="False" />
             </asp:TableCell>
             <asp:TableCell>
                 <asp:Button runat="server" CssClass="btn btn-default btn-sm" ID="genNewRep" Text="Generate New Report" OnClick="genNewRep_OnClick" />
@@ -14,6 +14,7 @@
             </asp:TableCell>
             </asp:TableRow>
     </asp:table>
-   
+       
+
     
 </asp:Content>

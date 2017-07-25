@@ -1,12 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="TrendAnalysisStaging.aspx.cs" Inherits="SSISTeam2.Views.Reporting.Reports.TrendAnalysisStaging" %>
-<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <%@ Register assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p></p>
      <asp:table runat="server" CssClass="table">
         <asp:TableRow>
             <asp:TableCell>
-    <CR:crystalreportviewer id="CrystalReportViewer1" runat="server" autodatabind="true" HasRefreshButton="True" HasToggleGroupTreeButton="False" ToolPanelView="None" />
+    <CR:crystalreportviewer id="CrystalReportViewer1" runat="server" autodatabind="true" HasToggleGroupTreeButton="False" HasRefreshButton="True" ToolPanelView="None" HasCrystalLogo="False" HasToggleParameterPanelButton="False"/>
             </asp:TableCell>
             <asp:TableCell>
                 <asp:Button runat="server" CssClass="btn btn-default btn-sm" ID="genNewRep" Text="Generate New Report" OnClick="genNewRep_OnClick" />
@@ -15,6 +14,7 @@
             </asp:TableCell>
             </asp:TableRow>
     </asp:table>
+    
     <%--Department Selector--%>
 <%--    <h4>Please Select Department</h4>
     <asp:SqlDataSource 
