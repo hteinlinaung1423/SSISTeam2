@@ -298,6 +298,9 @@ namespace SSISTeam2.Views.StoreClerk
                 Dictionary<string, int> items = new Dictionary<string, int>();
                 foreach (var model in models)
                 {
+                    // If the user didn't add a quantity, just SKIP
+                    if (model.Quantity == 0) continue;
+
                     if (items.ContainsKey(model.CurrentItem))
                     {
                         int qty = items[model.CurrentItem];
@@ -375,11 +378,18 @@ namespace SSISTeam2.Views.StoreClerk
                         .Where(w => w.Key.ItemCode == model.CurrentItem)
                         .Select(ss =>
                         {
-                            string res = "";
-                            res += ss.Key.Category.cat_name;
-                            res += " " + ss.Key.Description;
-                            res += " (" + date + ")";
-                            return res;
+                            string result = string
+                                .Format("({0}) {1} - {2} ({3})",
+                                    ss.Key.Category.cat_name,
+                                    ss.Key.Description,
+                                    ss.Value,
+                                    date
+                                    );
+                            //string res = "";
+                            //res += ss.Key.Category.cat_name;
+                            //res += " " + ss.Key.Description;
+                            //res += " (" + date + ")";
+                            return result;
                         });
 
                         return its;

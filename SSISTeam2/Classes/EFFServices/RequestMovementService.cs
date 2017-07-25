@@ -100,17 +100,17 @@ namespace SSISTeam2.Classes.EFFServices
             _moveToTransient(requestId, itemCodes, currentUser, EventStatus.RETRIEVED, EventStatus.DISBURSING, resetAllocQty: true);
         }
 
-        public void moveFromRetrievingToRetrieved(RequestModel requestModel, string currentUser)
+        public void moveFromRetrievingToRetrieved(int requestId, Dictionary<string, int> items, string currentUser)
         {
-            Request request = context.Requests.Find(requestModel.RequestId);
-            _moveFromTransient(request, requestModel.Items, currentUser, EventStatus.RETRIEVING, EventStatus.RETRIEVED);
+            Request request = context.Requests.Find(requestId);
+            _moveFromTransient(request, items, currentUser, EventStatus.RETRIEVING, EventStatus.RETRIEVED);
         }
-        public void moveFromDisbursingToDisbursed(RequestModel requestModel, string currentUser)
+        public void moveFromDisbursingToDisbursed(int requestId, Dictionary<string, int> items, string currentUser)
         {
-            Request request = context.Requests.Find(requestModel.RequestId);
+            Request request = context.Requests.Find(requestId);
 
             // Check if all were disbursed
-            bool fullyDisbursed = _moveFromTransient(request, requestModel.Items, currentUser, EventStatus.DISBURSING, EventStatus.DISBURSED);
+            bool fullyDisbursed = _moveFromTransient(request, items, currentUser, EventStatus.DISBURSING, EventStatus.DISBURSED);
 
             if (fullyDisbursed)
             {
@@ -173,7 +173,7 @@ namespace SSISTeam2.Classes.EFFServices
             }
         }
 
-        private bool _moveFromTransient(Request request, Dictionary<ItemModel, int> items, string currentUser, string fromStatus, string toStatus)
+        private bool _moveFromTransient(Request request, Dictionary<string, int> items, string currentUser, string fromStatus, string toStatus)
         {
             bool wasFullyAllocated = true;
 
@@ -186,7 +186,14 @@ namespace SSISTeam2.Classes.EFFServices
                 if (detail.deleted == "Y") continue;
                 var itemCode = detail.item_code;
                 // Match item codes
-                var item = items.Where(w => w.Key.ItemCode == itemCode).First();
+                var itemMatches = items.Where(w => w.Key == itemCode);
+
+                KeyValuePair<string, int> item;
+
+                // If there are no matches, skip this detail
+                if (itemMatches.Count() == 0) continue;
+
+                item = itemMatches.First();
                 // Quantity to move to nonTransient
                 var quantity = item.Value;
 

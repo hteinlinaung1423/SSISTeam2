@@ -53,7 +53,7 @@ namespace SSISTeam2.Classes.EFFServices
 
                 details.ForEach(x =>
                 {
-                    Request_Event eventItem = x.Request_Event.Where(e => e.status == status).OrderBy(o => o.date_time).Last();
+                    Request_Event eventItem = x.Request_Event.Where(e => e.deleted != "Y").OrderBy(o => o.date_time).Last();
 
                     int qty = 0;
                     if (eventItem != null)

@@ -68,7 +68,7 @@ namespace SSISTeam2.Classes.Models
                     List<Request_Details> deets = thing.Request_Details.ToList();
                     if (deets.Count > 0)
                     {
-                        List<Request_Event> events = deets.First().Request_Event.Where(x => x.status == status).OrderBy(o => o.date_time).ToList();
+                        List<Request_Event> events = deets.First().Request_Event.Where(x => x.deleted != "Y").OrderBy(o => o.date_time).ToList();
                         if (events.Count > 0)
                         {
                             return events.Last().date_time;
