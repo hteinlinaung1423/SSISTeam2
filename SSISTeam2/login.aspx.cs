@@ -22,8 +22,10 @@ namespace SSISTeam2
                 {
                     string redirect = Request.QueryString["return"];
                     Response.Redirect("~/" + redirect);
+                } else
+                {
+                    Response.Redirect("~/Default.aspx");
                 }
-                Response.Redirect("~/Default.aspx");
             }
 
         }

@@ -71,7 +71,19 @@ namespace SSISTeam2.Classes.EFFServices
                 if (item == null) continue;
 
                 // If neither approved nor disbursed, skip it.
-                if (item.status != EventStatus.APPROVED && item.status != EventStatus.DISBURSED) continue;
+                if (item.status != EventStatus.APPROVED
+                    && item.status != EventStatus.DISBURSED
+                    && item.status != EventStatus.ALLOCATED) continue;
+
+                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
+                ItemModel itemModel = new ItemModel(inv);
+
+                // Already allocated, just add it
+                if (item.status == EventStatus.ALLOCATED && item.allocated.HasValue)
+                {
+                    itemsToFulfill.Add(itemModel, item.allocated.Value);
+                    continue;
+                }
 
                 // Fully allocated, can skip
                 if (item.status == EventStatus.DISBURSED && item.not_allocated == 0) continue;
@@ -91,9 +103,7 @@ namespace SSISTeam2.Classes.EFFServices
                 // if for some reason it's still zero, just skip.
                 if (qtyToAllocate == 0) continue;
 
-                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
-                ItemModel itemModel = new ItemModel(inv);
-
+                
                 int canAllocateQty = 0;
                 int availableQty = itemModel.AvailableQuantity;
 

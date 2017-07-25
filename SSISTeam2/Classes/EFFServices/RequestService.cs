@@ -189,6 +189,7 @@ namespace SSISTeam2.Classes.EFFServices
                     newRequest.rejected = "N";
                     newRequest.rejected_reason = "";
                     newRequest.username = request.UserModel.Username;
+                    newRequest.date_time = timestamp;
 
                     List<Request_Details> newDetails = new List<Request_Details>();
                     foreach (KeyValuePair<ItemModel, int> itemAndQty in request.Items)

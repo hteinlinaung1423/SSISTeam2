@@ -15,6 +15,12 @@ namespace SSISTeam2.Views.DepartmentHead
         int selectReqId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["key"] == null)
+            {
+                lblInfo.Text = "No request to show.";
+                return;
+            }
+
             selectReqId = Int16.Parse(Request.QueryString["key"]);
             Label1.Text = selectReqId.ToString();
 
@@ -42,7 +48,10 @@ namespace SSISTeam2.Views.DepartmentHead
                 lbRqEmp.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
 
                 //get last approved Request details,but not receive from store
-                int lastApproveReqId= ent.Requests.Where(x => x.current_status == "Approved").Max(y => y.request_id);
+                var lastApproveReq = ent.Requests.Where(x => x.current_status == "Approved").ToList();
+                if (lastApproveReq.Count == 0) return;
+
+                int lastApproveReqId = lastApproveReq.Max(y => y.request_id);
 
                 var w = (from r in ent.Requests
                          join de in ent.Request_Details on r.request_id equals de.request_id
