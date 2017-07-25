@@ -21,14 +21,14 @@ namespace SSISTeam2.Views.Reporting.Reports
             if (!IsPostBack)
             {
                 ReportDocument crTA = new ReportDocument();
-                crTA.Load(Server.MapPath("~/Views/Reporting/Reports/Trend_Analysis.rpt"));
-                CrystalReportViewer1.ReportSource = crTA;
+                crTA.Load(Server.MapPath("~/Views/Reporting/Reports/Crystal_Testing/TESTTrend_Analysis.rpt"));
+                TACrystal.ReportSource = crTA;
                 Session["ReportDocument"] = crTA;
             }
             else
             {
                 ReportDocument doc = (ReportDocument)Session["ReportDocument"];
-                CrystalReportViewer1.ReportSource = doc;
+                TACrystal.ReportSource = doc;
             }
         }
 

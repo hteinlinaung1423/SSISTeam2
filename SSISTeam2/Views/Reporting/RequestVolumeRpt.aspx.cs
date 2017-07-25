@@ -16,13 +16,13 @@ namespace SSISTeam2.Views.Reporting.Reports
             {
                 ReportDocument crVOL = new ReportDocument();
                 crVOL.Load(Server.MapPath("~/Views/Reporting/Reports/Volume_Report.rpt"));
-                CrystalReportViewer1.ReportSource = crVOL;
+                VOLCrystal.ReportSource = crVOL;
                 Session["ReportDocument"] = crVOL;
             }
             else
             {
                 ReportDocument doc = (ReportDocument)Session["ReportDocument"];
-                CrystalReportViewer1.ReportSource = doc;
+                VOLCrystal.ReportSource = doc;
             }
         }
         protected void Page_Load(object sender, EventArgs e)

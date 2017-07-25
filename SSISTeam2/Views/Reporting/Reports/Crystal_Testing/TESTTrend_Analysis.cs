@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
+namespace SSISTeam2.Views.Reporting.Reports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class TEST_Trend_Analysis : ReportClass {
+    public class TESTTrend_Analysis : ReportClass {
         
-        public TEST_Trend_Analysis() {
+        public TESTTrend_Analysis() {
         }
         
         public override string ResourceName {
             get {
-                return "TEST Trend_Analysis.rpt";
+                return "TESTTrend_Analysis.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         
         public override string FullResourceName {
             get {
-                return "SSISTeam2.Views.Reporting.Reports.Crystal Testing.TEST Trend_Analysis.rpt";
+                return "SSISTeam2.Views.Reporting.Reports.Crystal_Testing.TESTTrend_Analysis.rpt";
             }
             set {
                 // Do nothing
@@ -154,17 +154,33 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Select_Date___date_time {
+        public CrystalDecisions.Shared.IParameterField Parameter_Date_Selector {
             get {
                 return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Department_Selector {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Category_Selector {
+            get {
+                return this.DataDefinition.ParameterFields[2];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedTEST_Trend_Analysis : Component, ICachedReport {
+    public class CachedTESTTrend_Analysis : Component, ICachedReport {
         
-        public CachedTEST_Trend_Analysis() {
+        public CachedTESTTrend_Analysis() {
         }
         
         [Browsable(false)]
@@ -200,11 +216,7 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
             }
         }
         
-        public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            TEST_Trend_Analysis rpt = new TEST_Trend_Analysis();
-            rpt.Site = this.Site;
-            return rpt;
-        }
+
         
         public virtual string GetCustomizedCacheKey(RequestContext request) {
             String key = null;
@@ -220,6 +232,11 @@ namespace SSISTeam2.Views.Reporting.Reports.Crystal_Testing {
             //     this.GetType(),
             //     this.ShareDBLogonInfo );
             return key;
+        }
+
+        public ReportDocument CreateReport()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,13 +13,13 @@ namespace SSISTeam2.Views.Reporting.Reports {
     public partial class RequestVolumeRpt {
         
         /// <summary>
-        /// CrystalReportViewer1 control.
+        /// VOLCrystal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
+        protected global::CrystalDecisions.Web.CrystalReportViewer VOLCrystal;
         
         /// <summary>
         /// genNewRep control.
