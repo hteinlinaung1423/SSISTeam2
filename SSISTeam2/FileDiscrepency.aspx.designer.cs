@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.Employee {
+namespace SSISTeam2 {
     
     
-    public partial class ViewCat {
+    public partial class FileDiscrepency {
         
         /// <summary>
-        /// GridView1 control.
+        /// FileDiscrepencyGV control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView FileDiscrepencyGV;
         
         /// <summary>
-        /// SqlDataSource1 control.
+        /// ConfirmBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Button ConfirmBtn;
     }
 }

@@ -1,14 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MonthlyCheckConfirmation.aspx.cs" Inherits="SSISTeam2.MonthlyCheckConfirmation" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FileDiscrepency.aspx.cs" Inherits="SSISTeam2.FileDiscrepency" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:gridview runat="server" ID="confirmationGV" AutoGenerateColumns="False">
+    <asp:GridView ID="FileDiscrepencyGV" runat="server" AutoGenerateColumns="False">
         <Columns>
             <asp:TemplateField HeaderText="No.">
                 <ItemTemplate>
-                    <asp:Label ID="rowIndex" runat="server" Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>                    
+                    <asp:Label ID="rowIndex" runat="server" Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-
-            <asp:TemplateField HeaderText="Item Description">
+            <asp:TemplateField HeaderText="Item Name">
                 <ItemTemplate>
                     <asp:Label runat="server" Text='<%# Eval("description") %>'></asp:Label>
                 </ItemTemplate>
@@ -26,13 +25,13 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Recorded Quantity">
+            <asp:TemplateField HeaderText="Actual Quantity">
                 <ItemTemplate>
                     <asp:Label runat="server" Text='<%# Eval("actualQuantity") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            
-            <asp:TemplateField HeaderText="Price of Discrepency">
+
+            <asp:TemplateField HeaderText="Average Price">
                 <ItemTemplate>
                     <asp:Label runat="server" Text='<%# Eval("averagePrice") %>'></asp:Label>
                 </ItemTemplate>
@@ -40,12 +39,10 @@
 
             <asp:TemplateField HeaderText="Reason">
                 <ItemTemplate>
-                    <asp:TextBox ID="reasonTB" runat="server" Text='<%# Eval("reason") %>' AutoPostBack="True" OnTextChanged="reasonTB_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="reasonTB" runat="server" OnTextChanged="reasonTB_TextChanged" AutoPostBack="false"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-
         </Columns>
-    </asp:gridview>
-    <asp:Button ID="confirmBtn" runat="server" Text="Button" OnClick="confirmBtn_Click" /><asp:Button ID="backBtn" runat="server" Text="Button" OnClick="backBtn_Click" />
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    </asp:GridView>
+    <asp:Button ID="ConfirmBtn" runat="server" Text="Confirm" OnClick="ConfirmBtn_Click" />
 </asp:Content>

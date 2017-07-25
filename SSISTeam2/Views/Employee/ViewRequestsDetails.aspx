@@ -11,7 +11,7 @@
                 <form class="form-inline">
                     <div class="form-group">
                          <label for="search">Search</label>
-                         <input type="search" class="form-control" id="txt_search">
+                         <input type="search" class="form-control" id="txt_search"/>
                     </div>
                </form>
             </p>
@@ -27,7 +27,7 @@
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
-                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" DataSourceID="SqlDataSource1">
+                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
 
 <HeaderStyle CssClass="text-center-impt"></HeaderStyle>
 

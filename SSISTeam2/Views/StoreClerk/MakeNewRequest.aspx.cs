@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace SSISTeam2.Views.StoreClerk
 {
-    public partial class DEMO_MakeNewRequests : System.Web.UI.Page
+    public partial class MakeNewRequest : System.Web.UI.Page
     {
         const string SESSION_CATEGORIES = "newRequest_Categories";
         const string SESSION_STOCKS = "newRequest_Stocks";
@@ -22,6 +22,14 @@ namespace SSISTeam2.Views.StoreClerk
         const string TEMP_DEPT_CODE = "REGR";
 
         bool isEditing = false;
+
+        protected override PageStatePersister PageStatePersister
+        {
+            get
+            {
+                return new SessionPageStatePersister(Page);
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,7 +52,7 @@ namespace SSISTeam2.Views.StoreClerk
 
                     if (!User.Identity.IsAuthenticated)
                     {
-                        Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequests.aspx");
+                        Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
                     }
 
                     UserModel currentUser = new UserModel(User.Identity.Name);
@@ -450,7 +458,7 @@ namespace SSISTeam2.Views.StoreClerk
         }
 
     }
-
+    [Serializable]
     class MakeNewRequestModel
     {
         private int num, quantity, currentCategory;

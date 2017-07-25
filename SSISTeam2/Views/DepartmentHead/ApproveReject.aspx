@@ -32,7 +32,7 @@
 
                  <asp:TemplateField HeaderText="Requested Quantity">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("quantity") %>' ID="lbQty1"></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("orig_quantity") %>' ID="lbQty1"></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                   
@@ -48,6 +48,8 @@
          </div> 
          
     <div>
+        <asp:TextBox ID="tbReason" runat="server"></asp:TextBox>
+        <br />
         <asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" />
         &nbsp;&nbsp;
         <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" />
@@ -87,7 +89,7 @@
 
                  <asp:TemplateField HeaderText="Requested Quantity">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("quantity") %>' ID="lbQty1"></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("orig_quantity") %>' ID="lbQty1"></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                   
