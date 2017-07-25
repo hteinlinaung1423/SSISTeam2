@@ -492,8 +492,8 @@
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Reports\Crystal_Testing\TESTTrend_Analysis.cs">
-      <DependentUpon>TESTTrend_Analysis.rpt</DependentUpon>
+    <Compile Include="Views\Reporting\Reports\Trend_Analysis.cs">
+      <DependentUpon>Trend_Analysis.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -512,12 +512,6 @@
     </Compile>
     <Compile Include="Views\Reporting\TrendAnalysisStaging.aspx.designer.cs">
       <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reporting\Reports\Trend_Analysis.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Trend_Analysis.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Reporting\Reports\Volume_Report.cs">
       <AutoGen>True</AutoGen>
@@ -695,13 +689,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Home\DepartmentHead\" />
+    <Folder Include="Views\Reporting\Reports\Crystal_Testing\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Reporting\Reports\Crystal_Testing\TESTTrend_Analysis.rpt">
-      <LastGenOutput>TESTTrend_Analysis.cs</LastGenOutput>
+    <Content Include="Views\Reporting\Reports\Trend_Analysis.rpt">
+      <LastGenOutput>Trend_Analysis.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Views\Reporting\Reports\Trend_Analysis.rpt" />
     <Content Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Volume_Report.cs</LastGenOutput>
