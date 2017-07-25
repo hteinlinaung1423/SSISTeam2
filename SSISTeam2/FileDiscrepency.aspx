@@ -39,7 +39,7 @@
 
             <asp:TemplateField HeaderText="Reason">
                 <ItemTemplate>
-                    <asp:TextBox ID="reasonTB" runat="server" OnTextChanged="reasonTB_TextChanged" AutoPostBack="false"></asp:TextBox>
+                    <asp:TextBox ID="reasonTB" runat="server" Text='<%# Eval("reason") %>' OnTextChanged="reasonTB_TextChanged" AutoPostBack="true"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
