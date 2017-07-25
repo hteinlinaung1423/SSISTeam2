@@ -492,13 +492,6 @@
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Reports\Crystal_Testing\TESTTrend_Analysis.cs">
-      <DependentUpon>TESTTrend_Analysis.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
       <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -695,12 +688,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Home\DepartmentHead\" />
+    <Folder Include="Views\Reporting\Reports\Crystal_Testing\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Reporting\Reports\Crystal_Testing\TESTTrend_Analysis.rpt">
-      <LastGenOutput>TESTTrend_Analysis.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="Views\Reporting\Reports\Trend_Analysis.rpt" />
     <Content Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
