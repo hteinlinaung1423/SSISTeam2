@@ -27,7 +27,9 @@ namespace SSISTeam2.Views.StoreClerk
 
             string orderId = ((Label)gvr.FindControl("Label_OrderId")).Text;
 
-            Response.Redirect("~/Views/StoreClerk/EditOrder.aspx?order=" + orderId);
+            Session["order"] = orderId;
+
+            Response.Redirect("~/Views/StoreClerk/EditOrder.aspx");
         }
 
         protected void Delete_Order(object sender, EventArgs e)
