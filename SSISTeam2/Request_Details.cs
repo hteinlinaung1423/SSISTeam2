@@ -24,6 +24,7 @@ namespace SSISTeam2
         public int request_id { get; set; }
         public string item_code { get; set; }
         public string deleted { get; set; }
+        public Nullable<int> orig_quantity { get; set; }
     
         public virtual Request Request { get; set; }
         public virtual Stock_Inventory Stock_Inventory { get; set; }

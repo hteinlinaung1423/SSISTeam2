@@ -1,28 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="ReportsMain.aspx.cs" Inherits="SSISTeam2.Views.Reporting.ReportsMain" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p>
-    Reports Management
-    </p>
+ 
+    <h2>Reports Management</h2>
+   
 
     <div>
         <h3>Please indicate the type of report to generate</h3>
-        <table>
-            <tr>
-                <th>Report Type</th>
-                <th></th>
-            </tr>
+        <asp:table runat="server" CssClass="table table-responsive table-striped">
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell>Report Type</asp:TableHeaderCell>
+                <asp:TableHeaderCell>Action</asp:TableHeaderCell>
+            </asp:TableHeaderRow>
             
-            <tr>
-            <td>Generate Request Volume Reports</td>
-            <td><asp:Button ID="GRVReportBtn" Text="Select" width="142px" runat="server" OnClick="GRVReportBtn_Click"/></td>
-            </tr>
+            <asp:TableRow>
+            <asp:TableCell>Generate Request Volume Reports</asp:TableCell>
+            <asp:TableCell><asp:Button ID="GRVReportBtn" Text="Select" width="142px" runat="server" OnClick="GRVReportBtn_Click" CssClass="btn btn-default btn-sm"/></asp:TableCell>
+            </asp:TableRow>
            
-            <tr>
-            <td>Generate Trend Analysis Report </td>
-            <td><asp:Button ID="GTAReportBtn" Text="Select" width="142px" runat="server" OnClick="GTAReportBtn_Click" /></td>
+            <asp:TableRow>
+            <asp:TableCell>Generate Trend Analysis Report </asp:TableCell>
+            <asp:TableCell><asp:Button ID="GTAReportBtn" Text="Select" width="142px" runat="server"  OnClick="GTAReportBtn_Click"  CssClass="btn btn-default btn-sm"/></asp:TableCell>
             
-            </tr>
-        </table>        
+            </asp:TableRow>
+        </asp:table>        
     
     </div>
 </asp:Content>

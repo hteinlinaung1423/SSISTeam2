@@ -16,6 +16,7 @@ namespace SSISTeam2.Classes.EFFServices
         }
 
         public AllocatedModelCollection getAllAllocated()
+        // Now Allocation logic runs here
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests
@@ -32,7 +33,6 @@ namespace SSISTeam2.Classes.EFFServices
             List<AllocatedModel> results = new List<AllocatedModel>();
             foreach (var efRequest in efRequests)
             {
-                //AllocatedModel alloc = new AllocatedModel(efRequest, ItemGetter._getItemsForRequest(efRequest, RequestServiceStatus.ALLOCATED));
                 AllocatedModel alloc = findLatestAllocatedByRequestId(efRequest.request_id);
                 if (alloc == null) continue; // SKIP
                 results.Add(alloc);
@@ -43,6 +43,7 @@ namespace SSISTeam2.Classes.EFFServices
 
         public AllocatedModel findLatestAllocatedByRequestId(int requestId)
         {
+            // This NOW ALLOCATES UPON FINDING
             // Get all allocated: depending on:
             // Determine there's any latest allocation
             // Find the difference with the previous allocation, to see how much to fulfill
@@ -65,42 +66,84 @@ namespace SSISTeam2.Classes.EFFServices
 
             foreach (IGrouping<string, Request_Event> eventItem in events)
             {
-                // Grouping:
-                // A101
-                // - Approved, 10
-                // - Allocated, 9
-                // A102
-                // - Approved, 10
-                List<Request_Event> latestAlloc = eventItem.Where(x => x.status == EventStatus.ALLOCATED).OrderBy(o => o.date_time).ToList();
-                if (latestAlloc.Count == 0) continue;
+                Request_Event item = eventItem.Where(w => w.deleted != "Y").DefaultIfEmpty(null).FirstOrDefault();
 
-                // Get the latest allocated status's quantity
-                int quantityToFulfil = latestAlloc.Last().quantity;
+                if (item == null) continue;
 
-                //int quantityToFulfil = 0;
+                // If neither approved nor disbursed, skip it.
+                if (item.status != EventStatus.APPROVED && item.status != EventStatus.DISBURSED) continue;
 
-                //if (latestAlloc.Count > 1)
-                //{
-                //    Request_Event last = latestAlloc.Last();
-                //    Request_Event secondLast = latestAlloc[latestAlloc.Count - 2];
+                // Fully allocated, can skip
+                if (item.status == EventStatus.DISBURSED && item.not_allocated == 0) continue;
 
-                //    quantityToFulfil = last.quantity - secondLast.quantity;
-                //} else
-                //{
-                //    quantityToFulfil = latestAlloc.Last().quantity;
-                //}
+                int qtyToAllocate;
+
+                if (item.status == EventStatus.APPROVED)
+                {
+                    // Take the whole quantity
+                    qtyToAllocate = item.quantity;
+                } else
+                {
+                    // Disbursed. Take just the not-allocated
+                    qtyToAllocate = item.not_allocated.HasValue ? item.not_allocated.Value : 0;
+                }
+
+                // if for some reason it's still zero, just skip.
+                if (qtyToAllocate == 0) continue;
 
                 Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
-                itemsToFulfill.Add(new ItemModel(inv), quantityToFulfil);
+                ItemModel itemModel = new ItemModel(inv);
+
+                int canAllocateQty = 0;
+                int availableQty = itemModel.AvailableQuantity;
+
+                if (availableQty > 0)
+                {
+                    // There is available stock
+                    if (availableQty >= qtyToAllocate)
+                    {
+                        // Lots of stock
+                        canAllocateQty = qtyToAllocate;
+                    } else
+                    {
+                        // Only some stock
+                        canAllocateQty = availableQty;
+                    }
+                } else
+                {
+                    // Cannot allocate at all, cannot retrieve, SKIP
+                    continue;
+                }
+
+                // At this point, there is some qtyToAllocate
+                context.Request_Event.Find(item.request_event_id).allocated = qtyToAllocate;
+
+                if (item.status == EventStatus.DISBURSED)
+                {
+                    context.Request_Event.Find(item.request_event_id).quantity = qtyToAllocate;
+                    context.Request_Event.Find(item.request_event_id).not_allocated -= qtyToAllocate;
+                } else
+                {
+                    // Approved only
+                    // it.quantity doesn't change
+                    //context.Request_Event.Find(item.request_event_id).quantity = //doesn't change;
+                    context.Request_Event.Find(item.request_event_id).not_allocated = item.quantity - qtyToAllocate;
+                }
+                context.Request_Event.Find(item.request_event_id).status = EventStatus.ALLOCATED;
+
+                itemsToFulfill.Add(itemModel, canAllocateQty);
             }
 
             if (itemsToFulfill.Count == 0)
             {
+                // Nothing to allocate, or cannot allocate anything at all.
                 return null;
             }
 
             AllocatedModel alloc = new AllocatedModel(efRequest, itemsToFulfill);
-            
+
+            // Save changes to update Available Qty
+            context.SaveChanges();
             return alloc;
         }
 
@@ -278,7 +321,8 @@ namespace SSISTeam2.Classes.EFFServices
                             }
                         }
                     }
-                } catch (Exception exec)
+                }
+                catch (Exception exec)
                 {
                     transaction.Rollback();
                     throw exec;

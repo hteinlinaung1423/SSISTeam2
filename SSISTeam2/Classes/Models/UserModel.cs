@@ -19,14 +19,15 @@ namespace SSISTeam2.Classes.Models
             SSISEntities context = new SSISEntities();
             Dept_Registry user = context.Dept_Registry.Where(x => x.username == username).ToList().First();
             Department dept = context.Departments.Where(x => x.dept_code == user.dept_code).ToList().First();
-            
-                //Membership.FindUsersByName(username);
-            
+
+            //Membership.FindUsersByName(username);
+
 
             this.username = user.username;
-            this.email = Membership.GetUser(username).Email;
+            // Cannot enable yet, as members do not exist in asp.net db
+            //this.email = Membership.GetUser(username).Email;
             this.department = dept;
-            this.role = Roles.GetRolesForUser(username).First().ToString();
+            //this.role = Roles.GetRolesForUser(username).First().ToString();
             if (role == null)
             {
                 this.role = "Employee";
@@ -82,10 +83,19 @@ namespace SSISTeam2.Classes.Models
                 }
             }
 
-            DateTime currentApproved = validList.Max(x => x.start_date);
-            Approval_Duties currentRep = context.Approval_Duties.Where(x => x.start_date == currentApproved).ToList().First();
+            DateTime currentApproved = validList.Max(x => x.created_date);
+            Approval_Duties currentRep = context.Approval_Duties.Where(x => x.created_date == currentApproved).ToList().First();
             UserModel repUser = new UserModel(currentRep.username);
             return repUser;
+        }
+
+        public UserModel FindDeptRep()
+        {
+            SSISEntities context = new SSISEntities();
+            Department dept = context.Departments.Where(x => x.dept_code == this.department.dept_code).ToList().First();
+            string repUser = dept.rep_user;
+            UserModel repUserModel = new UserModel(repUser);
+            return repUserModel;
         }
 
         //public UserModel

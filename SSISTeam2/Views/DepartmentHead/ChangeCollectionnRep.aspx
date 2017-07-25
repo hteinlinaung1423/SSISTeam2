@@ -1,56 +1,53 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeCollectionnRep.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ChangeCollection_Rep" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeCollectionnRep.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ChangeCollection_Rep"
+          MasterPageFile="~/MasterPage.Master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
- 
-    Department Name: 
-    <asp:Label ID="LabelDeptName" runat="server" Text="Label"></asp:Label>
-    <br />
-
-    Contact Name: 
-    <asp:Label ID="LabelContactName" runat="server" Text="Label"></asp:Label>
-    <br />
-
-    Telephone No:
-    <asp:Label ID="LabelPhNo" runat="server" Text="Label"></asp:Label>
-    <br />
-
-     Fax Number: 
-    <asp:Label ID="LabelFaxNo" runat="server" Text="Label"></asp:Label>
-    <br />
-
-    Department Head Name: 
-    <asp:Label ID="LabelHeadName" runat="server" Text="Label"></asp:Label>
-    <br />
-
-    Current Collection Point:
-    <asp:Label ID="lbCurrentCollectP" runat="server" Text="Label"></asp:Label>
-    <br />
-
-    New Collection Point: 
-    <asp:DropDownList ID="ddlCollectPoint" runat="server"></asp:DropDownList>
-    <br />
- 
-    Current Representative Name:
-    <asp:Label ID="lbRepName" runat="server" Text="Label"></asp:Label>
-    <br />
-
-    New Representative Name: 
-    <asp:DropDownList ID="ddlRepName" runat="server"></asp:DropDownList>
-    <br />  
-
-        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />       
-        &nbsp;
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
-
+    <div class="panel-heading" style="font-size: xx-large">
+        <asp:Label ID="LabelDeptName" runat="server" Text="Label"></asp:Label> Department
     </div>
-    </form>
-</body>
-</html>
+
+    <div>
+        <table class="active" style="table-layout: auto; font-size: large;">
+            <tr>
+                <td>Contact Name</td>
+                <td>: <asp:Label ID="LabelContactName" runat="server" Text="Label"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Telephone No</td>
+                <td>: <asp:Label ID="LabelPhNo" runat="server" Text="Label"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Fax Number</td>
+                <td>: <asp:Label ID="LabelFaxNo" runat="server" Text="Label"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Department Head Name<br />
+                </td>
+                <td>: <asp:Label ID="LabelHeadName" runat="server" Text="Label"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Current Collection Point</td>
+               <%-- <td>: <asp:Label ID="lbCurrentCollectP" runat="server" Text="Label"></asp:Label> </td>--%>
+               <td>: <asp:TextBox ID="tbCollectP" runat="server" ReadOnly="True" BorderStyle="Outset" Width="350"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td>New Collection Point</td>
+                <td>: <asp:DropDownList ID="ddlCollectPoint" runat="server" AutoPostBack="True"></asp:DropDownList></td>
+            </tr>
+            <tr>
+                <td>Current Representative Name</td>
+                <%--<td>: <asp:Label ID="lbRepName" runat="server" Text="Label"></asp:Label></td>--%>
+                 <td>: <asp:TextBox ID="tbRepName" runat="server" ReadOnly="True" BorderStyle="Outset" Width="350"></asp:TextBox></td>
+            </tr>
+
+            <tr>
+                <td>New Representative Name</td>
+                <td>: <asp:DropDownList ID="ddlRepName" runat="server" AutoPostBack="True"></asp:DropDownList></td>
+            </tr>
+            <tr>
+                <td>        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn-primary" /></td>
+                <td>        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn-primary"/></td>
+            </tr>
+        </table>
+    </div>
+ </asp:Content>

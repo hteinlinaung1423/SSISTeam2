@@ -8,14 +8,14 @@ namespace SSISTeam2.Classes.Models
 {
     public class RequestStatus
     {
-        public static string PENDING = "Pending";
-        public static string CANCELLED = "Cancelled";
-        public static string UPDATED = "Updated";
-        public static string REJECTED = "Rejected";
+        public const string PENDING = "Pending";
+        public const string CANCELLED = "Cancelled";
+        public const string UPDATED = "Updated";
+        public const string REJECTED = "Rejected";
 
-        public static string APPROVED = "Approved";
-        public static string PART_DISBURSED = "PartDisbursed";
-        public static string DISBURSED = "Disbursed";
+        public const string APPROVED = "Approved";
+        public const string PART_DISBURSED = "PartDisbursed";
+        public const string DISBURSED = "Disbursed";
 
 
         private static List<string> statuses = new List<string>(new string[]{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
@@ -36,17 +36,17 @@ namespace SSISTeam2.Classes.Models
 
     public class EventStatus
     {
-        public static string PENDING = "Pending";
-        public static string CANCELLED = "Cancelled";
-        public static string UPDATED = "Updated";
-        public static string REJECTED = "Rejected";
+        public const string PENDING = "Pending";
+        public const string CANCELLED = "Cancelled";
+        public const string UPDATED = "Updated";
+        public const string REJECTED = "Rejected";
 
-        public static string APPROVED = "Approved";
-        public static string ALLOCATED = "Allocated";
-        public static string RETRIEVING = "Retrieving";
-        public static string RETRIEVED = "Retrieved";
-        public static string DISBURSING = "Disbursing";
-        public static string DISBURSED = "Disbursed";
+        public const string APPROVED = "Approved";
+        public const string ALLOCATED = "Allocated";
+        public const string RETRIEVING = "Retrieving";
+        public const string RETRIEVED = "Retrieved";
+        public const string DISBURSING = "Disbursing";
+        public const string DISBURSED = "Disbursed";
 
     }
 

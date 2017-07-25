@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.EFFacades;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,7 +87,12 @@ namespace SSISTeam2.Views.StoreClerk
                          orderby t5.item_description
                          select new { t5.item_description, t1.dept_code, t4.quantity };
 
-           
+            using (SSISEntities context = new SSISEntities())
+            {
+                //var result2 = FacadeFactory.getAllocatedService(context).getAllAllocated()
+            }
+
+
             GridView1.DataSource = result.ToList();
             GridView1.DataBind();
             MergeCells();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,19 +13,82 @@ namespace SSISTeam2.Views.StoreClerk
         protected void Page_Load(object sender, EventArgs e)
         {
             SSISEntities s = new SSISEntities();
-           // GridView1.DataSource = s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
-           // GridView1.DataBind();
+            List<Stock_Inventory> stocks = s.Stock_Inventory.ToList();
+            List<Stock_Inventory> lowStocks = new List<Stock_Inventory>();
+            foreach(var stock in stocks)
+            {
+                ItemModel im = new ItemModel(stock);
+                if (im.AvailableQuantity < im.ReorderLevel)
+                {
+                    lowStocks.Add(stock);
+                }
+            }
+
+            GridView1.DataSource = lowStocks; //s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
+           GridView1.DataBind();
         }
 
         protected void MakeOrder(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            bool duplicate = false;
 
-          
+
             string itemcode = ((Label)gvr.FindControl("Label_ItemCode")).Text;
+            
+            SSISEntities ctx = new SSISEntities();
+            Stock_Inventory item = ctx.Stock_Inventory.Where(x => x.item_code == itemcode).First();
 
-            Response.Redirect("~/Default.aspx?itemcode="+itemcode);
+            HashSet<Stock_Inventory> itemList = (HashSet<Stock_Inventory>)Session["item"];
+
+            if (itemList == null)
+            {
+                itemList = new HashSet<Stock_Inventory>();
+                itemList.Add(item);
+                lblResult.Visible = true;
+                lblduplicate.Visible = false;
+                lblResult.Text = "Added Item Code (" + itemcode + ") Successfully";
+                Session["item"] = itemList;
+            }
+
+            else {
+
+                
+
+                foreach (Stock_Inventory s in itemList)
+                {
+
+                    if (s.item_code == item.item_code)
+                    {
+                        duplicate = true;
+                        break;
+                    }
+
+                }
+
+                if (!duplicate)
+                {
+
+                    itemList.Add(item);
+                    lblResult.Visible = true;
+                    lblduplicate.Visible = false;
+                    lblResult.Text = "Added Item Code (" + itemcode + ") Successfully";
+                    Session["item"] = itemList;
+                }
+                else {
+                    lblduplicate.Visible = true;
+                    lblResult.Visible = false;
+                    lblduplicate.Text = "Duplicate item!";
+                        Session["item"] = itemList;
+                }
+               
+            }
+
+            
+
+
+
         }
     }
 }

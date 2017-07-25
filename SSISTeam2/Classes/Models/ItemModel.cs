@@ -7,10 +7,11 @@ using SSISTeam2;
 
 namespace SSISTeam2.Classes.Models
 {
-    public class ItemModel
+    public class ItemModel : IEquatable<ItemModel>
     {
         private string itemCode;
         private Category category;
+        private string catName;
         private string description;
         private string unitOfMeasure;
         private string imagePath;
@@ -29,6 +30,7 @@ namespace SSISTeam2.Classes.Models
             itemCode = stock.item_code;
             description = stock.item_description;
             category = stock.Category;
+            catName = category.cat_name;
             unitOfMeasure = stock.unit_of_measure;
             imagePath = stock.image_path;
             currentQuantity = stock.current_qty;
@@ -47,7 +49,11 @@ namespace SSISTeam2.Classes.Models
                         int reorderQuantity,
                         int reorderLevel)
         {
-            this.category = category;
+            if (category != null)
+            {
+                this.category = category;
+                this.catName = category.cat_name;
+            }
             this.description = description;
             this.unitOfMeasure = unitOfMeasure;
             this.imagePath = imagePath;
@@ -56,13 +62,57 @@ namespace SSISTeam2.Classes.Models
             this.reorderLevel = reorderLevel;
         }
 
-        private int _getAvailableQuantity()
+        private static int _getAvailableQuantity(string itemCode, int currentQuantity)
         {
             int cumulativeAvailable = currentQuantity;
             using (SSISEntities context = new SSISEntities())
             {
                 // Get all RequestDetails for an item code
-                List<Request_Details> details = context.Request_Details.Where(w => w.item_code == itemCode && w.deleted != "Y").ToList();
+                List<Request_Details> details = context.Request_Details
+                    .Where(w =>
+                    w.item_code == itemCode
+                    && w.deleted != "Y"
+                    && (w.Request.current_status == RequestStatus.APPROVED
+                    || w.Request.current_status == RequestStatus.PART_DISBURSED)
+                    ).ToList();
+
+                // For each of this item's details, get the stock it's occupying
+                foreach (var detail in details)
+                {
+                    Request_Event eventItem = detail.Request_Event.Where(w => w.deleted != "Y" && w.status != EventStatus.DISBURSED).First();
+
+                    // Just check allocated amount
+                    int allocatedAty = eventItem.allocated.HasValue ? eventItem.allocated.Value : 0;
+
+                    List<Request_Event> events = detail.Request_Event.OrderByDescending(o => o.date_time).ToList();
+                    int numAllocated = events.Where(w => w.status == EventStatus.ALLOCATED && w.deleted != "Y").Count();
+
+                    // For each detail, subtract its minusQty from the cumulative total
+                    cumulativeAvailable -= numAllocated;
+                }
+            }
+
+            return cumulativeAvailable;
+        }
+
+        public static int GetAvailableQtyFor(string itemCode, int currentQuantity)
+        {
+            return _getAvailableQuantity(itemCode, currentQuantity);
+        }
+
+        private int _getAvailableQuantityOld()
+        {
+            int cumulativeAvailable = currentQuantity;
+            using (SSISEntities context = new SSISEntities())
+            {
+                // Get all RequestDetails for an item code
+                List<Request_Details> details = context.Request_Details
+                    .Where(w => 
+                    w.item_code == itemCode 
+                    && w.deleted != "Y"
+                    && (w.Request.current_status == RequestStatus.APPROVED
+                    || w.Request.current_status == RequestStatus.PART_DISBURSED)
+                    ).ToList();
 
                 // For each of this item's details, get the stock it's occupying
                 foreach (var detail in details)
@@ -119,6 +169,16 @@ namespace SSISTeam2.Classes.Models
             return cumulativeAvailable;
         }
 
+        public bool Equals(ItemModel other)
+        {
+            return other != null && other.itemCode == itemCode;
+        }
+        public override int GetHashCode()
+        {
+            if (itemCode == null) return 0;
+            return itemCode.GetHashCode();
+        }
+
         public Dictionary<Supplier, double> Prices
         {
             get
@@ -173,6 +233,19 @@ namespace SSISTeam2.Classes.Models
             }
         }
 
+        public string CatName
+        {
+            get
+            {
+                return catName;
+            }
+
+            set
+            {
+                catName = value;
+            }
+        }
+
         public string Description
         {
             get
@@ -216,7 +289,7 @@ namespace SSISTeam2.Classes.Models
         {
             get
             {
-                return _getAvailableQuantity();
+                return _getAvailableQuantity(itemCode, currentQuantity);
             }
         }
 

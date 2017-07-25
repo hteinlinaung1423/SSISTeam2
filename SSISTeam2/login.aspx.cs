@@ -12,13 +12,20 @@ namespace SSISTeam2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            System.Web.Security.FormsAuthentication.SignOut();
+            Session["tender"] = null;
+            Session["item"] = null;
             IIdentity id = User.Identity;
             if (id.IsAuthenticated)
             {
+                if (Request.QueryString["return"] != null)
+                {
+                    string redirect = Request.QueryString["return"];
+                    Response.Redirect("~/" + redirect);
+                }
                 Response.Redirect("~/Default.aspx");
             }
 
-            SSISEntities content = new SSISEntities();
         }
     }
 }
