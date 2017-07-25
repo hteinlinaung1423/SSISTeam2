@@ -12,7 +12,7 @@ namespace SSISTeam2.Views.StoreClerk
         SSISEntities s = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            
             GridView1.DataSource = s.Suppliers.Where(x=>x.deleted != "Y").ToList<Supplier>();
             GridView1.DataBind();
         }
@@ -48,7 +48,7 @@ namespace SSISTeam2.Views.StoreClerk
 
             Response.Redirect("~/Views/StoreClerk/ViewSupplierList.aspx");
         }
-        protected void Button3_Click(object sender, EventArgs e)
+        protected void Search_Click(object sender, EventArgs e)
         {
             if (TextBox1.Text != null)
             {

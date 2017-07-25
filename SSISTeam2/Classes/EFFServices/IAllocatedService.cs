@@ -9,11 +9,11 @@ namespace SSISTeam2.Classes.EFFServices
 {
     public interface IAllocatedService
     {
-        AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
-        AllocatedModelCollection getAllAllocatedFromDepartment(string deptCode);
+        //AllocatedModelCollection getAllAllocatedForCollectionPoint(int collectionPointId);
+        //AllocatedModelCollection getAllAllocatedFromDepartment(string deptCode);
         AllocatedModelCollection getAllAllocated();
         AllocatedModel findLatestAllocatedByRequestId(int requestId);
-        int allocateRequest(RequestModel toAllocate, string currentUser);
-        int reAllocateRequest(RequestModel toAllocate, string currentUser);
+        //int allocateRequest(RequestModel toAllocate, string currentUser);
+        //int reAllocateRequest(RequestModel toAllocate, string currentUser);
     }
 }

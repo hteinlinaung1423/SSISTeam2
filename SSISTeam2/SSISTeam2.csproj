@@ -131,9 +131,21 @@
   <ItemGroup>
     <Content Include="ChangeCategoryName1.aspx" />
     <Content Include="CreateNewCategory.aspx" />
-    <Content Include="ApproveStockAdjustment.aspx" />
+    <Content Include="AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
+    <Content Include="FileDiscrepency.aspx" />
+    <Content Include="SSISModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+      <LastGenOutput>SSISModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SSISModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SSISModel.edmx</DependentUpon>
+      <LastGenOutput>SSISModel.cs</LastGenOutput>
+    </Content>
     <Content Include="ViewAllAdjustment.aspx" />
+    <Content Include="Views\DepartmentHead\ApproveReject.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="MonthlyCheck.aspx" />
     <Content Include="MonthlyCheckConfirmation.aspx" />
@@ -163,52 +175,40 @@
     <Content Include="Default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
-    <Content Include="SSISModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SSISModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SSISModel.edmx</DependentUpon>
-      <LastGenOutput>SSISModel.cs</LastGenOutput>
-    </Content>
     <Content Include="ViewReportList.aspx" />
+    <Content Include="ViewAndEditCatalogue.aspx" />
     <Content Include="ViewAndMaintainSupplier.aspx" />
     <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
-    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
-    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
+    <Content Include="Views\DepartmentHead\DeptInfo.aspx" />
+    <Content Include="Views\DepartmentHead\ViewPending.aspx" />
     <Content Include="Views\Employee\Form1.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
-    <Content Include="Views\Employee\ViewCat.aspx" />
+    <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
-    <Content Include="Views\DepartmentHead\DelegateAuthority.aspx" />
-    <Content Include="Views\DepartmentHead\DepartmentInfo.aspx" />
-    <Content Include="Views\DepartmentHead\ViewAllPending.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
     <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
-    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TrendAnalysisStaging.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Reporting\TrendAnalysisRpt.aspx" />
+    <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
     <Content Include="Views\StoreClerk\DEMO_EmailTest.aspx" />
-    <Content Include="Views\StoreClerk\MakeNewRequests.aspx" />
+    <Content Include="Views\StoreClerk\EditOrder.aspx" />
+    <Content Include="Views\StoreClerk\MakeNewRequest.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
-    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <!--<Content Include="Views\Reporting\RequestVolumeRpt.aspx" />-->
     <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
     <Content Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
+    <Content Include="Views\StoreClerk\PurchaseOrderSuccess.aspx" />
+    <Content Include="Views\StoreClerk\ReceiveOrder.aspx" />
     <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
     <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
-    <Content Include="Views\StoreClerk\ViewAndEditCatalogue.aspx" />
+    <Content Include="Views\StoreClerk\TenderListForm.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
+    <Content Include="Views\StoreClerk\ViewPendingOrder.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -224,16 +224,19 @@
     <Compile Include="Approval_Duties.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ApproveStockAdjustment.aspx.cs">
-      <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
+    <Compile Include="AdjustmentDetail.aspx.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ApproveStockAdjustment.aspx.designer.cs">
-      <DependentUpon>ApproveStockAdjustment.aspx</DependentUpon>
+    <Compile Include="AdjustmentDetail.aspx.designer.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\EFFServices\OldServices\AllocatedServiceOld.cs" />
+    <Compile Include="Classes\EFFServices\OldServices\RequestMovementServiceOLD.cs" />
+    <Compile Include="Classes\EFFServices\OldServices\RequestServiceOld.cs" />
     <Compile Include="Classes\Emailer.cs" />
     <Compile Include="Classes\EFFacades\FacadeFactory.cs" />
     <Compile Include="Classes\EFFServices\AllocatedService.cs" />
@@ -249,6 +252,7 @@
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
     <Compile Include="Classes\Models\AdjustmentModel.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
+    <Compile Include="Classes\Models\InventoryAdjustmentModel.cs" />
     <Compile Include="Classes\Models\MonthlyCheckModel.cs" />
     <Compile Include="Classes\Models\RetrievalModelCollection.cs" />
     <Compile Include="Classes\EFFServices\RetrievalService.cs" />
@@ -298,20 +302,6 @@
     <Compile Include="Delivery_Orders.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewAllAdjustment.aspx.cs">
-      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewAllAdjustment.aspx.designer.cs">
-      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
-      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.designer.cs">
-      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
@@ -321,32 +311,18 @@
     <Compile Include="Favourite.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FileDiscrepency.aspx.cs">
+      <DependentUpon>FileDiscrepency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FileDiscrepency.aspx.designer.cs">
+      <DependentUpon>FileDiscrepency.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inventory_Adjustment.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MonthlyCheck.aspx.cs">
-      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MonthlyCheck.aspx.designer.cs">
-      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MonthlyCheckConfirmation.aspx.cs">
-      <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MonthlyCheckConfirmation.aspx.designer.cs">
-      <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Monthly_Check_Records.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="notifysuccess.aspx.cs">
-      <DependentUpon>notifysuccess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="notifysuccess.aspx.designer.cs">
-      <DependentUpon>notifysuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Purchase_Order.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -361,6 +337,12 @@
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Request_Event.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SSISModel.Context.cs">
@@ -390,12 +372,68 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAllAdjustment.aspx.designer.cs">
+      <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.designer.cs">
+      <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MonthlyCheck.aspx.cs">
+      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MonthlyCheck.aspx.designer.cs">
+      <DependentUpon>MonthlyCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MonthlyCheckConfirmation.aspx.cs">
+      <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MonthlyCheckConfirmation.aspx.designer.cs">
+      <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="notifysuccess.aspx.cs">
+      <DependentUpon>notifysuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="notifysuccess.aspx.designer.cs">
+      <DependentUpon>notifysuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveReject.aspx.cs">
+      <DependentUpon>ApproveReject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ApproveReject.aspx.designer.cs">
+      <DependentUpon>ApproveReject.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.cs">
       <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx.designer.cs">
       <DependentUpon>DEMO_ViewAllPending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DeptInfo.aspx.cs">
+      <DependentUpon>DeptInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\DeptInfo.aspx.designer.cs">
+      <DependentUpon>DeptInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewPending.aspx.cs">
+      <DependentUpon>ViewPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\ViewPending.aspx.designer.cs">
+      <DependentUpon>ViewPending.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
@@ -425,26 +463,12 @@
     <Compile Include="Views\DepartmentHead\DelegateAuthority.aspx.designer.cs">
       <DependentUpon>DelegateAuthority.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.cs">
-      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\DepartmentHead\DepartmentInfo.aspx.designer.cs">
-      <DependentUpon>DepartmentInfo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.cs">
-      <DependentUpon>ViewAllPending.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\DepartmentHead\ViewAllPending.aspx.designer.cs">
-      <DependentUpon>ViewAllPending.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Employee\ViewCat.aspx.cs">
-      <DependentUpon>ViewCat.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Employee\ViewCat.aspx.designer.cs">
-      <DependentUpon>ViewCat.aspx</DependentUpon>
+    <Compile Include="Views\Employee\ViewCatalogue.aspx.designer.cs">
+      <DependentUpon>ViewCatalogue.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\ViewRequestsDetails.aspx.cs">
       <DependentUpon>ViewRequestsDetails.aspx</DependentUpon>
@@ -457,6 +481,10 @@
       <DependentUpon>ReportsMain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ViewAndEditCatalogue.aspx.cs">
+      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewAndMaintainSupplier.aspx.cs">
       <DependentUpon>ViewAndMaintainSupplier.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -467,11 +495,12 @@
     <Compile Include="Views\Reporting\ReportsMain.aspx.designer.cs">
       <DependentUpon>ReportsMain.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Reports\Crystal Testing\TEST Trend_Analysis.cs">
-      <DependentUpon>TEST Trend_Analysis.rpt</DependentUpon>
+    <Compile Include="Views\Reporting\Reports\Trend_Analysis.cs">
+      <DependentUpon>Trend_Analysis.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Views\Reporting\RequestVolumeRpt.aspx.cs">
       <DependentUpon>RequestVolumeRpt.aspx</DependentUpon>
@@ -487,30 +516,12 @@
     <Compile Include="Views\Reporting\TrendAnalysisStaging.aspx.designer.cs">
       <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reporting\Reports\Trend_Analysis.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Trend_Analysis.rpt</DependentUpon>
-      <SubType>Component</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Views\Reporting\Reports\Volume_Report.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Volume_Report.rpt</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.cs">
-      <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Reporting\TrendAnalysisRpt.aspx.designer.cs">
-      <DependentUpon>TrendAnalysisRpt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reporting\TrendAnalysisStaging.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrendAnalysisStaging.aspx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
@@ -526,12 +537,19 @@
     <Compile Include="Views\StoreClerk\DEMO_EmailTest.aspx.designer.cs">
       <DependentUpon>DEMO_EmailTest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeNewRequests.aspx.cs">
-      <DependentUpon>MakeNewRequests.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\EditOrder.aspx.cs">
+      <DependentUpon>EditOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeNewRequests.aspx.designer.cs">
-      <DependentUpon>MakeNewRequests.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\EditOrder.aspx.designer.cs">
+      <DependentUpon>EditOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\MakeNewRequest.aspx.cs">
+      <DependentUpon>MakeNewRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\MakeNewRequest.aspx.designer.cs">
+      <DependentUpon>MakeNewRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\EditSupplier.aspx.cs">
       <DependentUpon>EditSupplier.aspx</DependentUpon>
@@ -575,13 +593,26 @@
     <Compile Include="Views\StoreClerk\PurchaseOrder.aspx.designer.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\StoreClerk\PurchaseOrderSuccess.aspx.cs">
+      <DependentUpon>PurchaseOrderSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\PurchaseOrderSuccess.aspx.designer.cs">
+      <DependentUpon>PurchaseOrderSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ReceiveOrder.aspx.cs">
+      <DependentUpon>ReceiveOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ReceiveOrder.aspx.designer.cs">
+      <DependentUpon>ReceiveOrder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.cs">
       <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.designer.cs">
       <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
@@ -627,12 +658,12 @@
     <Compile Include="Views\Employee\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\ViewAndEditCatalogue.aspx.cs">
-      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\TenderListForm.aspx.cs">
+      <DependentUpon>TenderListForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\ViewAndEditCatalogue.aspx.designer.cs">
-      <DependentUpon>ViewAndEditCatalogue.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\TenderListForm.aspx.designer.cs">
+      <DependentUpon>TenderListForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
@@ -640,6 +671,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.designer.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewPendingOrder.aspx.cs">
+      <DependentUpon>ViewPendingOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewPendingOrder.aspx.designer.cs">
+      <DependentUpon>ViewPendingOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\ViewSupplierList.aspx.cs">
       <DependentUpon>ViewSupplierList.aspx</DependentUpon>
@@ -654,20 +692,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Home\DepartmentHead\" />
+    <Folder Include="Views\Reporting\Reports\Crystal_Testing\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Reporting\Reports\Crystal Testing\TEST Trend_Analysis.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TEST Trend_Analysis.cs</LastGenOutput>
-    </EmbeddedResource>
     <Content Include="Views\Reporting\Reports\Trend_Analysis.rpt">
-      <LastGenOutput>Trend_Analysis1.cs</LastGenOutput>
+      <LastGenOutput>Trend_Analysis.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Views\Reporting\Reports\Volume_Report.rpt">
+    <Content Include="Views\Reporting\Reports\Volume_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Volume_Report.cs</LastGenOutput>
-    </EmbeddedResource>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

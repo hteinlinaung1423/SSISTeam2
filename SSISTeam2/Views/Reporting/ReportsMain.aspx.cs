@@ -18,5 +18,10 @@ namespace SSISTeam2.Views.Reporting
         {
             Response.Redirect("RequestVolumeRpt.aspx");
         }
+
+        protected void GTAReportBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TrendAnalysisStaging.aspx");
+        }
     }
 }

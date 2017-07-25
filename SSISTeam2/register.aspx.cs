@@ -19,15 +19,28 @@ namespace SSISTeam2
         protected void CreateUserWizard1_CreatedUser(object sender, EventArgs e)
         {
             SSISEntities context = new SSISEntities();
+            string username = CreateUserWizard1.UserName;
+            DropDownList Department = (DropDownList)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Department");
+            DropDownList Role = (DropDownList)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Role");
+            TextBox Fullname = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Fullname");
+
+            string department = Department.SelectedValue;
+            string role = Role.SelectedValue;
+            string fullname = Fullname.Text;
+
+
             Dept_Registry user = new Dept_Registry();
-            user.username = CreateUserWizard1.UserName;
-            user.dept_code = "REGR";
+            user.username = username;
+            //user.fullname = fullname;
+            user.dept_code = department;
             user.deleted = "N";
             context.Dept_Registry.Add(user);
             context.SaveChanges();
 
-            Response.Redirect("notifysuccess.aspx?");
-        }
+            Roles.AddUserToRole(username, role);
+            Label1.Text = role;
 
+            //Response.Redirect("notifysuccess.aspx?");
+        }
     }
 }

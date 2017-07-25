@@ -13,15 +13,6 @@ namespace SSISTeam2.Views.DepartmentHead {
     public partial class ChangeCollection_Rep {
         
         /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
         /// LabelDeptName control.
         /// </summary>
         /// <remarks>
@@ -67,13 +58,13 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Label LabelHeadName;
         
         /// <summary>
-        /// lbCurrentCollectP control.
+        /// tbCollectP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCurrentCollectP;
+        protected global::System.Web.UI.WebControls.TextBox tbCollectP;
         
         /// <summary>
         /// ddlCollectPoint control.
@@ -85,13 +76,13 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCollectPoint;
         
         /// <summary>
-        /// lbRepName control.
+        /// tbRepName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbRepName;
+        protected global::System.Web.UI.WebControls.TextBox tbRepName;
         
         /// <summary>
         /// ddlRepName control.

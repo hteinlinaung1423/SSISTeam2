@@ -71,7 +71,7 @@
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Quantity">
 
                         <ItemTemplate>
-                            <asp:TextBox ID="quantity" Text='<%# Eval("Quantity") %>' CssClass="form-control" runat="server" OnTextChanged="quantity_TextChanged" AutoPostBack="True"></asp:TextBox>
+                            <asp:TextBox ID="quantity" Text='<%# Eval("Quantity") %>' CssClass="form-control"  Width="50%" runat="server" OnTextChanged="quantity_TextChanged" AutoPostBack="True"></asp:TextBox>
                         </ItemTemplate>
 
                         <ItemStyle Width="10%"></ItemStyle>
