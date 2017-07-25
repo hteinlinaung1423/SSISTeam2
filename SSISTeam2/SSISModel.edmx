@@ -189,6 +189,7 @@
           <Property Name="rejected" Type="nchar" MaxLength="1" Nullable="false" />
           <Property Name="rejected_reason" Type="nvarchar(max)" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="date_time" Type="datetime" />
         </EntityType>
         <EntityType Name="Stock_Inventory">
           <Key>
@@ -789,21 +790,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Stock_Inventory" Relationship="Self.FK_Alerts_Stock_Inventory" FromRole="Alerts" ToRole="Stock_Inventory" />
         </EntityType>
-        <EntityType Name="Approval_Duties">
-          <Key>
-            <PropertyRef Name="duty_id" />
-          </Key>
-          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dept_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="duty_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="created_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Department" Relationship="Self.FK_Approval_Duties_Department" FromRole="Approval_Duties" ToRole="Department" />
-          <NavigationProperty Name="Dept_Registry" Relationship="Self.FK_Approval_Duties_Dept_Registry" FromRole="Approval_Duties" ToRole="Dept_Registry" />
-          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="cat_id" />
@@ -866,9 +852,9 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="collection_point" Type="Int32" Nullable="false" />
           <Property Name="logo_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Approval_Duties" Relationship="Self.FK_Approval_Duties_Department" FromRole="Department" ToRole="Approval_Duties" />
           <NavigationProperty Name="Collection_Point1" Relationship="Self.FK_Department_Collection_Point" FromRole="Department" ToRole="Collection_Point" />
           <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Department" FromRole="Department" ToRole="Requests" />
+          <NavigationProperty Name="Approval_Duties" Relationship="SSISModel.FK_Approval_Duties_Department" FromRole="Department" ToRole="Approval_Duties" />
         </EntityType>
         <EntityType Name="Dept_Registry">
           <Key>
@@ -877,7 +863,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="dept_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Approval_Duties" Relationship="Self.FK_Approval_Duties_Dept_Registry" FromRole="Dept_Registry" ToRole="Approval_Duties" />
           <NavigationProperty Name="Collection_Point" Relationship="Self.FK_Collection_Point_Dept_Registry" FromRole="Dept_Registry" ToRole="Collection_Point" />
           <NavigationProperty Name="Delivery_Orders" Relationship="Self.FK_Delivery_Orders_Dept_Registry" FromRole="Dept_Registry" ToRole="Delivery_Orders" />
           <NavigationProperty Name="Favourites" Relationship="Self.FK_Favourites_Dept_Registry" FromRole="Dept_Registry" ToRole="Favourites" />
@@ -885,6 +870,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Purchase_Order" Relationship="Self.FK_Purchase_Order_Dept_Registry" FromRole="Dept_Registry" ToRole="Purchase_Order" />
           <NavigationProperty Name="Request_Event" Relationship="Self.FK_Request_Event_Dept_Registry" FromRole="Dept_Registry" ToRole="Request_Event" />
           <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Dept_Registry" FromRole="Dept_Registry" ToRole="Requests" />
+          <NavigationProperty Name="Approval_Duties" Relationship="SSISModel.FK_Approval_Duties_Dept_Registry" FromRole="Dept_Registry" ToRole="Approval_Duties" />
         </EntityType>
         <EntityType Name="Favourite">
           <Key>
@@ -990,6 +976,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Department" Relationship="Self.FK_Requests_Department" FromRole="Requests" ToRole="Department" />
           <NavigationProperty Name="Dept_Registry" Relationship="Self.FK_Requests_Dept_Registry" FromRole="Requests" ToRole="Dept_Registry" />
           <NavigationProperty Name="Request_Details" Relationship="Self.FK_Request_Details_Requests" FromRole="Requests" ToRole="Request_Details" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Stock_Inventory">
           <Key>
@@ -1089,30 +1076,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
             </Principal>
             <Dependent Role="Alerts">
               <PropertyRef Name="item_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Approval_Duties_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1" />
-          <End Role="Approval_Duties" Type="Self.Approval_Duties" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="dept_code" />
-            </Principal>
-            <Dependent Role="Approval_Duties">
-              <PropertyRef Name="dept_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Approval_Duties_Dept_Registry">
-          <End Role="Dept_Registry" Type="Self.Dept_Registry" Multiplicity="1" />
-          <End Role="Approval_Duties" Type="Self.Approval_Duties" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dept_Registry">
-              <PropertyRef Name="username" />
-            </Principal>
-            <Dependent Role="Approval_Duties">
-              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1407,7 +1370,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
         <EntityContainer Name="SSISEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Adjustment_Details" EntityType="Self.Adjustment_Details" />
           <EntitySet Name="Alerts" EntityType="Self.Alert" />
-          <EntitySet Name="Approval_Duties" EntityType="Self.Approval_Duties" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Collection_Point" EntityType="Self.Collection_Point" />
           <EntitySet Name="Delivery_Details" EntityType="Self.Delivery_Details" />
@@ -1437,14 +1399,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <AssociationSet Name="FK_Alerts_Stock_Inventory" Association="Self.FK_Alerts_Stock_Inventory">
             <End Role="Stock_Inventory" EntitySet="Stock_Inventory" />
             <End Role="Alerts" EntitySet="Alerts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Approval_Duties_Department" Association="Self.FK_Approval_Duties_Department">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Approval_Duties" EntitySet="Approval_Duties" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Approval_Duties_Dept_Registry" Association="Self.FK_Approval_Duties_Dept_Registry">
-            <End Role="Dept_Registry" EntitySet="Dept_Registry" />
-            <End Role="Approval_Duties" EntitySet="Approval_Duties" />
           </AssociationSet>
           <AssociationSet Name="FK_Stock_Inventory_Category" Association="Self.FK_Stock_Inventory_Category">
             <End Role="Category" EntitySet="Categories" />
@@ -1542,8 +1496,56 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
             <End Role="Tender_List" EntitySet="Tender_List" />
             <End Role="Tender_List_Details" EntitySet="Tender_List_Details" />
           </AssociationSet>
+          <EntitySet Name="Approval_Duties" EntityType="SSISModel.Approval_Duties" />
+          <AssociationSet Name="FK_Approval_Duties_Department" Association="SSISModel.FK_Approval_Duties_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Approval_Duties" EntitySet="Approval_Duties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Approval_Duties_Dept_Registry" Association="SSISModel.FK_Approval_Duties_Dept_Registry">
+            <End Role="Dept_Registry" EntitySet="Dept_Registry" />
+            <End Role="Approval_Duties" EntitySet="Approval_Duties" />
+          </AssociationSet>
           <EntitySet Name="Volume_Request" EntityType="SSISModel.Volume_Request" />
         </EntityContainer>
+        <EntityType Name="Approval_Duties">
+          <Key>
+            <PropertyRef Name="duty_id" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dept_code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="duty_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="deleted" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="SSISModel.FK_Approval_Duties_Department" FromRole="Approval_Duties" ToRole="Department" />
+          <NavigationProperty Name="Dept_Registry" Relationship="SSISModel.FK_Approval_Duties_Dept_Registry" FromRole="Approval_Duties" ToRole="Dept_Registry" />
+        </EntityType>
+        <Association Name="FK_Approval_Duties_Department">
+          <End Type="SSISModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="SSISModel.Approval_Duties" Role="Approval_Duties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="dept_code" />
+            </Principal>
+            <Dependent Role="Approval_Duties">
+              <PropertyRef Name="dept_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Approval_Duties_Dept_Registry">
+          <End Type="SSISModel.Dept_Registry" Role="Dept_Registry" Multiplicity="1" />
+          <End Type="SSISModel.Approval_Duties" Role="Approval_Duties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dept_Registry">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Approval_Duties">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Volume_Request">
           <Key>
             <PropertyRef Name="cat_name" />
@@ -1590,20 +1592,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
                 <ScalarProperty Name="reason" ColumnName="reason" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="handled" ColumnName="handled" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Approval_Duties">
-            <EntityTypeMapping TypeName="SSISModel.Approval_Duties">
-              <MappingFragment StoreEntitySet="Approval_Duties">
-                <ScalarProperty Name="reason" ColumnName="reason" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="dept_code" ColumnName="dept_code" />
-                <ScalarProperty Name="duty_id" ColumnName="duty_id" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1761,6 +1749,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Requests">
             <EntityTypeMapping TypeName="SSISModel.Request">
               <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
                 <ScalarProperty Name="request_id" ColumnName="request_id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="dept_code" ColumnName="dept_code" />
@@ -1822,6 +1811,20 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
                 <ScalarProperty Name="tender_year_id" ColumnName="tender_year_id" />
                 <ScalarProperty Name="item_code" ColumnName="item_code" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Approval_Duties">
+            <EntityTypeMapping TypeName="SSISModel.Approval_Duties">
+              <MappingFragment StoreEntitySet="Approval_Duties">
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="duty_id" ColumnName="duty_id" />
+                <ScalarProperty Name="dept_code" ColumnName="dept_code" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="username" ColumnName="username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

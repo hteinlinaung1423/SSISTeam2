@@ -7,11 +7,19 @@ using System.Web.UI.WebControls;
 
 namespace SSISTeam2.Views.Employee
 {
-    public partial class Form1 : System.Web.UI.Page
+    public partial class CreateNewReq : System.Web.UI.Page
     {
+
+        SSISEntities ent = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+               
+            }
         }
+
+        
+
     }
 }
