@@ -50,11 +50,11 @@ namespace SSISTeam2.Views.StoreClerk
         }
         protected void Search_Click(object sender, EventArgs e)
         {
-            if (TextBox1.Text != null)
+            if (TextBox2.Text != null)
             {
 
 
-                GridView1.DataSource = SearchCatagories(TextBox1.Text);
+                GridView1.DataSource = SearchCatagories(TextBox2.Text);
                 GridView1.DataBind();
             }
         }
