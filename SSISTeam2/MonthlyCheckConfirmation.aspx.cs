@@ -47,7 +47,7 @@ namespace SSISTeam2
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void confirmBtn_Click(object sender, EventArgs e)
         {
             //Inventory_Adjustment inventoryAdj = new Inventory_Adjustment();
             //foreach (Adjustment_Details i in adjDetails)
@@ -71,27 +71,45 @@ namespace SSISTeam2
             }
             else
             {
-                Inventory_Adjustment invAdjustment = new Inventory_Adjustment();
-                invAdjustment.date = DateTime.Today;
-                invAdjustment.clerk_user = HttpContext.Current.User.Identity.Name;
-                invAdjustment.status = "Pending";
-                invAdjustment.status_date = DateTime.Today;
-                invAdjustment.deleted = "N";
+                Inventory_Adjustment invAdjustmentSup = new Inventory_Adjustment();
+                invAdjustmentSup.date = DateTime.Today;
+                invAdjustmentSup.clerk_user = HttpContext.Current.User.Identity.Name;
+                invAdjustmentSup.status = "Pending";
+                invAdjustmentSup.status_date = DateTime.Today;
+                invAdjustmentSup.deleted = "N";
+
+                Inventory_Adjustment invAdjustmentMan = new Inventory_Adjustment();
+                invAdjustmentMan.date = DateTime.Today;
+                invAdjustmentMan.clerk_user = HttpContext.Current.User.Identity.Name;
+                invAdjustmentMan.status = "Pending";
+                invAdjustmentMan.status_date = DateTime.Today;
+                invAdjustmentMan.deleted = "N";
 
 
                 foreach (MonthlyCheckModel i in itemList)
                 {
+                    //get price of adjustment for MonthlyCheckModel
+                    double priceAdj = i.AveragePrice * Math.Abs(i.ActualQuantity - i.CurrentQuantity);
+
+
                     Adjustment_Details adjDetails = new Adjustment_Details();
                     adjDetails.deleted = "N";
                     adjDetails.item_code = i.ItemCode;
                     adjDetails.quantity_adjusted = i.ActualQuantity - i.CurrentQuantity;
                     adjDetails.reason = i.Reason;
 
+                    if (priceAdj < 250)
+                    {
+                        invAdjustmentSup.Adjustment_Details.Add(adjDetails);
+                    } else if (priceAdj >= 250)
+                    {
+                        invAdjustmentMan.Adjustment_Details.Add(adjDetails);
+                    }
+
                     context.Adjustment_Details.Add(adjDetails);
-
-                    invAdjustment.Adjustment_Details.Add(adjDetails);
-
                 }
+
+
 
                 Monthly_Check_Records checkRecord = new Monthly_Check_Records();
                 checkRecord.date_checked = DateTime.Today;
@@ -99,9 +117,21 @@ namespace SSISTeam2
                 checkRecord.deleted = "N";
                 checkRecord.discrepancy = "Y";
 
-                context.Inventory_Adjustment.Add(invAdjustment);
                 context.Monthly_Check_Records.Add(checkRecord);
                 context.SaveChanges();
+
+                if (invAdjustmentSup.Adjustment_Details.Count != 0)
+                {
+                    context.Inventory_Adjustment.Add(invAdjustmentSup);
+                    context.SaveChanges();
+                }
+                if (invAdjustmentMan.Adjustment_Details.Count != 0)
+                {
+                    context.Inventory_Adjustment.Add(invAdjustmentMan);
+                    context.SaveChanges();
+                }
+
+
             }
 
         }

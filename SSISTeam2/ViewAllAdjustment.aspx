@@ -8,21 +8,27 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Item Description">
+            <asp:TemplateField HeaderText="Clerk">
                 <ItemTemplate>
-                    <asp:Label runat="server" Text='<%# Eval("catName") %>'></asp:Label>
+                    <asp:Label runat="server" Text='<%# Eval("clerk") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Quantity Adjusted">
+            <asp:TemplateField HeaderText="Status">
                 <ItemTemplate>
-                    <asp:Label runat="server" Text='<%# Eval("quantity") %>'></asp:Label>
+                    <asp:Label runat="server" Text='<%# Eval("status") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Price of Adjustment">
+            <asp:TemplateField HeaderText="Date">
                 <ItemTemplate>
-                    <asp:Label runat="server" Text='<%# Eval("priceAdjusted") %>'></asp:Label>
+                    <asp:Label runat="server" Text='<%# Eval("date") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            
+            <asp:TemplateField HeaderText="Highest Single Cost of Adjustment">
+                <ItemTemplate>
+                    <asp:Label runat="server" Text='<%# Eval("highestCost") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
 

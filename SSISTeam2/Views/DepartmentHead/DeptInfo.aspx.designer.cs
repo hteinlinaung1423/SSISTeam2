@@ -7,99 +7,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.StoreClerk {
+namespace SSISTeam2.Views.DepartmentHead {
     
     
-    public partial class DEMO_MakeNewRequests {
+    public partial class DeptInfo {
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// LabelDeptName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.Label LabelDeptName;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// Table1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Table Table1;
         
         /// <summary>
-        /// GridView1 control.
+        /// LabelContactName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Label LabelContactName;
         
         /// <summary>
-        /// panelCannotChange control.
+        /// LabelPhNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelCannotChange;
+        protected global::System.Web.UI.WebControls.Label LabelPhNo;
         
         /// <summary>
-        /// lblCannotChangeInfo control.
+        /// LabelFaxNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCannotChangeInfo;
+        protected global::System.Web.UI.WebControls.Label LabelFaxNo;
         
         /// <summary>
-        /// panelNormalBtns control.
+        /// LabelHeadName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelNormalBtns;
+        protected global::System.Web.UI.WebControls.Label LabelHeadName;
         
         /// <summary>
-        /// btnNewRow control.
+        /// tbCollectP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewRow;
+        protected global::System.Web.UI.WebControls.TextBox tbCollectP;
         
         /// <summary>
-        /// tbReason control.
+        /// tbRepName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbReason;
+        protected global::System.Web.UI.WebControls.TextBox tbRepName;
         
         /// <summary>
-        /// btnSubmit control.
+        /// BtnChangeCpRn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
-        /// <summary>
-        /// btnCancelRequest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelRequest;
+        protected global::System.Web.UI.WebControls.Button BtnChangeCpRn;
     }
 }

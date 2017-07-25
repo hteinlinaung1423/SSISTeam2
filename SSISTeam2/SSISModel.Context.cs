@@ -44,7 +44,6 @@ namespace SSISTeam2
         public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Stock_Inventory> Stock_Inventory { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tender_List> Tender_List { get; set; }
         public virtual DbSet<Tender_List_Details> Tender_List_Details { get; set; }
         public virtual DbSet<Volume_Request> Volume_Request { get; set; }

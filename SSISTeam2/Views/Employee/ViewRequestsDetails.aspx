@@ -11,7 +11,7 @@
                 <form class="form-inline">
                     <div class="form-group">
                          <label for="search">Search</label>
-                         <input type="search" class="form-control" id="txt_search">
+                         <input type="search" class="form-control" id="txt_search"/>
                     </div>
                </form>
             </p>

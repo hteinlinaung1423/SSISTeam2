@@ -5,7 +5,7 @@
     <div class="col-md-6 col-md-offset-4">
         <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" OnCreatedUser="CreateUserWizard1_CreatedUser">
             <WizardSteps>
-                <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server">
+                <asp:CreateUserWizardStep runat="server">
                     <ContentTemplate>
                         <div class="panel panel-primary">
                             <div class="panel-heading" ">
@@ -62,6 +62,29 @@
                                 <div style="color: red">
                                     <asp:Literal ID="ErrorMessage" runat="server" EnableViewState="False"></asp:Literal>
                                 </div>
+                                <div class="form-group">
+                                    <asp:Label ID="FullnameLabel" runat="server" AssociatedControlID="Fullname">                       Full Name:</asp:Label>
+                                    <asp:TextBox ID="Fullname" runat="server" class="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Fullname"
+                                        ErrorMessage="Full Name is required." ToolTip="Full Name is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Full Name is required.</asp:RequiredFieldValidator>
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label ID="DepartmentLabel" runat="server" AssociatedControlID="Department">                       Department:</asp:Label>
+                                    <asp:DropDownList ID="Department" runat="server" class="form-control" DataSourceID="SqlDataSource1" DataTextField="name" DataValueField="dept_code"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Department"
+                                        ErrorMessage="Department is required." ToolTip="Department is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Department is required.</asp:RequiredFieldValidator>
+                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT [dept_code], [name] FROM [Department]"></asp:SqlDataSource>
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label ID="RoleLabel" runat="server" AssociatedControlID="Role">                       Role:</asp:Label>
+                                    <asp:DropDownList ID="Role" runat="server" class="form-control">
+                                        <asp:ListItem>employee</asp:ListItem>
+                                        <asp:ListItem Value="Clerk">Store Clerk</asp:ListItem>
+                                        <asp:ListItem Value="DeptHead">Department Head</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Role"
+                                        ErrorMessage="Role is required." ToolTip="Role is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Role is required.</asp:RequiredFieldValidator>
+                                </div>
                     </ContentTemplate>
                     <CustomNavigationTemplate>
 
@@ -70,7 +93,10 @@
                     </CustomNavigationTemplate>
                 </asp:CreateUserWizardStep>
 
+<asp:CompleteWizardStep runat="server"></asp:CompleteWizardStep>
+
             </WizardSteps>
         </asp:CreateUserWizard>
+        <asp:Label ID="Label1" runat="server"></asp:Label>
     </div>
 </asp:Content>

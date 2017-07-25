@@ -10,24 +10,24 @@
 namespace SSISTeam2 {
     
     
-    public partial class register {
+    public partial class FileDiscrepency {
         
         /// <summary>
-        /// CreateUserWizard1 control.
+        /// FileDiscrepencyGV control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CreateUserWizard CreateUserWizard1;
+        protected global::System.Web.UI.WebControls.GridView FileDiscrepencyGV;
         
         /// <summary>
-        /// Label1 control.
+        /// ConfirmBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Button ConfirmBtn;
     }
 }
