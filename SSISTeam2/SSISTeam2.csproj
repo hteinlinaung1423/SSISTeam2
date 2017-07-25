@@ -339,6 +339,12 @@
     <Compile Include="Request_Event.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SSISModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
