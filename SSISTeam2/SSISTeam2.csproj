@@ -187,7 +187,7 @@
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
-    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <EmbeddedResource Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
