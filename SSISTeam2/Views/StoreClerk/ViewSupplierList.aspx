@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <div class="input-group">
-                        <asp:TextBox ID="TextBox1" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBox2" class="form-control" runat="server"></asp:TextBox>
                         <span class="input-group-addon">
                             <i class="fa fa-search"></i>
                         </span>

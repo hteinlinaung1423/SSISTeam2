@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MonthlyCheckConfirmation.aspx.cs" Inherits="SSISTeam2.MonthlyCheckConfirmation" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" 
+    HeaderStyle-CssClass="text-center-impt"
+    CssClass="table table-responsive table-striped"
+    GridLines="None"
+    PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
     <asp:gridview runat="server" ID="confirmationGV" AutoGenerateColumns="False">
         <Columns>
             <asp:TemplateField HeaderText="No.">

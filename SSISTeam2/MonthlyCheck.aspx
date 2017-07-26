@@ -17,8 +17,10 @@
         AutoGenerateColumns="false" 
         AllowPaging="True" 
         PageSize="2" 
-        PagerStyle-HorizontalAlign="Center" 
-        PagerSettings-Position="TopAndBottom" 
+        HeaderStyle-CssClass="text-center-impt"
+        CssClass="table table-responsive table-striped"
+        GridLines="None"
+        PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" 
         OnPageIndexChanging="MonthlyCheckGV_PageIndexChanging">
         
 <%--        <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />

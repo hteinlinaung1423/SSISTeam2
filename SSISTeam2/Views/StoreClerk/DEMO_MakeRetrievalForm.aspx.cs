@@ -14,10 +14,10 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                Response.Redirect("/login.aspx?return=/Views/StoreClerk/DEMO_MakeRetrievalForm.aspx");
-            }
+            //if (!User.Identity.IsAuthenticated)
+            //{
+            //    Response.Redirect("/login.aspx?return=/Views/StoreClerk/DEMO_MakeRetrievalForm.aspx");
+            //}
 
             if (IsPostBack)
             {

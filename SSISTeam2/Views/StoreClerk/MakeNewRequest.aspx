@@ -39,7 +39,12 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Quantity">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbQuantity" runat="server" Text='<%# Eval("Quantity") %>' AutoPostBack="True" OnTextChanged="tbQuantity_TextChanged" CssClass="form-control" />
+                                    <asp:TextBox ID="tbQuantity" runat="server" Text='<%# Eval("Quantity") %>'
+                                        max='<%# Eval("Quantity") %>'
+                                        OnTextChanged="tbQuantity_TextChanged"
+                                        AutoPostBack="True" 
+                                        CssClass="form-control" />
+                                        <%--onchange="checkQty(event)"--%>
                                     <%--<asp:Label runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -51,7 +56,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Actions">
                                 <ItemTemplate>
-                                    <asp:Button runat="server" Text="Remove" ID="btnRemoveRow" OnClick="btnRemoveRow_Click" CssClass="btn btn-danger" />
+                                    <asp:Button runat="server" AutoPostBack="True" Text="Remove" ID="btnRemoveRow" OnClick="btnRemoveRow_Click" CssClass="btn btn-danger" />
                                 </ItemTemplate>
                             </asp:TemplateField>
 
@@ -93,6 +98,16 @@
                 </div>                
             </ContentTemplate>
         </asp:UpdatePanel>
+        <script>
+            function checkQty(event) {
+                console.log(event)
+                var tb = event.target;
+                var isNum = /^\d+$/.test(tb.value);
+                if (!isNum) {
+                    tb.value = tb.max;
+                }
+            }
+        </script>
     </div>
     <%--</form>--%>
 </asp:Content>
