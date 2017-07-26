@@ -83,7 +83,23 @@ namespace SSISTeam2.Classes.WebServices
             else { return user = new WCF_User(null, "failed", null); }
 
 
-            return req_detail_list;
+
+        }
+
+        public List<WCF_RequestDetail> GetRequestDetail(string id)
+        {
+            List<WCF_RequestDetail> rd = new List<WCF_RequestDetail>();
+
+            List<Request_Details> rd_List = new Work().GetRequestDetail(id);
+            foreach (Request_Details r in rd_List)
+            {
+                int quantity = Convert.ToInt32(r.orig_quantity);
+                WCF_RequestDetail req = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
+
+                rd.Add(req);
+            }
+
+            return rd;
         }
     }
 }
