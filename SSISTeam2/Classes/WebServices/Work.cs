@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -43,6 +44,17 @@ namespace SSISTeam2.Classes.WebServices
         {
             Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
             return dr;
+        }
+        public List<String> ListEmployeeName(string deptcode)
+        {
+            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)).Select(c => c.username).ToList<String>(); 
+            return list;
+        }
+
+        public void CreateAppDuties(Approval_Duties ap)
+        {
+                ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
+                ctx.SaveChanges();   
         }
     }
 }
