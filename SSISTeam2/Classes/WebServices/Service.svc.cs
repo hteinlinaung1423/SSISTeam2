@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,6 +13,8 @@ namespace SSISTeam2.Classes.WebServices
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service : IService
     {
+        Work work = new Work();
+
         List<string> IService.GetCatName()
         {
             return new Work().GetCatName();
@@ -79,20 +82,6 @@ namespace SSISTeam2.Classes.WebServices
             }
             else { return user = new WCF_User(null, "failed", null); }
 
-
-        }
-
-        public List<WCF_RequestDetail> GetRequestDetail(string id)
-        {
-            List<WCF_RequestDetail> req_detail_list = new List<WCF_RequestDetail>();
-            List<Request_Details> rdList = new Work().GetRequestDetail(id);
-
-            foreach (Request_Details r in rdList)
-            {
-                int quantity = Convert.ToInt32(r.orig_quantity);
-                WCF_RequestDetail req_detail = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
-                req_detail_list.Add(req_detail);
-            }
 
             return req_detail_list;
         }
