@@ -78,13 +78,22 @@ namespace SSISTeam2.Classes.Models
                 // For each of this item's details, get the stock it's occupying
                 foreach (var detail in details)
                 {
-                    Request_Event eventItem = detail.Request_Event.Where(w => w.deleted != "Y" && w.status != EventStatus.DISBURSED).First();
+                    var eventItems = detail.Request_Event.Where(w => w.deleted != "Y" && w.status != EventStatus.DISBURSED);
+
+                    // No matching
+                    if (eventItems.Count() == 0)
+                    {
+                        continue;
+                    }
+
+                    Request_Event eventItem = eventItems.First();
 
                     // Just check allocated amount
-                    int allocatedAty = eventItem.allocated.HasValue ? eventItem.allocated.Value : 0;
+                    int allocatedQty = eventItem.allocated.HasValue ? eventItem.allocated.Value : 0;
 
                     List<Request_Event> events = detail.Request_Event.OrderByDescending(o => o.date_time).ToList();
-                    int numAllocated = events.Where(w => w.status == EventStatus.ALLOCATED && w.deleted != "Y").Count();
+                    //int numAllocated = events.Where(w => w.status == EventStatus.ALLOCATED && w.deleted != "Y").Count();
+                    int numAllocated = allocatedQty;
 
                     // For each detail, subtract its minusQty from the cumulative total
                     cumulativeAvailable -= numAllocated;
