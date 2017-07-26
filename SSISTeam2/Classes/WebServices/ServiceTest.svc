@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="SSISTeam2.Classes.WebServices.ServiceTest" CodeBehind="ServiceTest.svc.cs" %>
