@@ -213,24 +213,13 @@ namespace SSISTeam2.Classes.WebServices
             set { startDate = value; }
         }
 
-
-
-    }
-
-    [DataContract]
-    public class WCF_RequestDetail
-    {
-        [DataMember]
-        string itemdesc;
-        [DataMember]
-        int quantity;
-
         [DataMember]
         public DateTime EndDate
         {
             get { return endDate; }
             set { endDate = value; }
         }
+
 
         [DataMember]
         public String DeptCode
@@ -246,12 +235,6 @@ namespace SSISTeam2.Classes.WebServices
             get { return createdDate; }
             set { createdDate = value; }
         }
-        public WCF_RequestDetail(string itemdesc, int quantity)
-        {
-            this.itemdesc = itemdesc;
-            this.quantity = quantity;
-        }
-
         [DataMember]
         public String Deleted
         {
@@ -264,6 +247,28 @@ namespace SSISTeam2.Classes.WebServices
             get { return reason; }
             set { reason = value; }
         }
+
+
+    }
+
+    [DataContract]
+    public class WCF_RequestDetail
+    {
+        [DataMember]
+        string itemdesc;
+        [DataMember]
+        int quantity;
+
+        
+        
+
+        public WCF_RequestDetail(string itemdesc, int quantity)
+        {
+            this.itemdesc = itemdesc;
+            this.quantity = quantity;
+        }
+
+       
 
     }
 }

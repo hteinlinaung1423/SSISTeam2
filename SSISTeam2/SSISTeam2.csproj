@@ -220,6 +220,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdjustmentDetail.aspx.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdjustmentDetail.aspx.designer.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Adjustment_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
@@ -228,13 +235,6 @@
     </Compile>
     <Compile Include="Approval_Duties.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AdjustmentDetail.aspx.cs">
-      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdjustmentDetail.aspx.designer.cs">
-      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -347,12 +347,6 @@
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Request_Event.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SSISModel.Context.cs">
