@@ -21,12 +21,12 @@ namespace SSISTeam2.Classes.EFFServices
                             || x.current_status == RequestStatus.PART_DISBURSED
                 ).ToList();
 
+            List<RetrievalModel> results = new List<RetrievalModel>();
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new RetrievalModelCollection(results);
             }
-            List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
                 RetrievalModel retrieval = findLatestRetrievingByRequestId(efRequest.request_id, currentUser);
@@ -83,35 +83,11 @@ namespace SSISTeam2.Classes.EFFServices
                     Stock_Inventory s = detail.Stock_Inventory;
                     itemsToFulfill.Add(new ItemModel(s), eventItem.allocated.Value);
                 }
+            }
 
-                if (itemsToFulfill.Count == 0)
-                {
-                    return null;
-                }
-
-                //foreach (var ev in events)
-                //{
-                //    if (ev.status == EventStatus.APPROVED
-                //        || ev.status == EventStatus.ALLOCATED
-                //        || ev.deleted == "Y"
-                //        || ev.username != currentUser)
-                //    {
-                //        continue;
-                //    }
-                //    if (ev.status == EventStatus.RETRIEVED)
-                //    {
-                //        break;
-                //    } else if (ev.status == EventStatus.RETRIEVING)
-                //    {
-                //        itemQty += ev.quantity;
-                //    }
-                //}
-
-                //if (itemQty > 0)
-                //{
-                //    Stock_Inventory s = detail.Stock_Inventory;
-                //    itemsToFulfill.Add(new ItemModel(s), itemQty);
-                //}
+            if (itemsToFulfill.Count == 0)
+            {
+                return null;
             }
 
             RetrievalModel retrieval = new RetrievalModel(efRequest, itemsToFulfill);
@@ -127,13 +103,13 @@ namespace SSISTeam2.Classes.EFFServices
                             || x.current_status == RequestStatus.PART_DISBURSED
                 ).ToList();
 
+            List<RetrievalModel> results = new List<RetrievalModel>();
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new RetrievalModelCollection(results);
             }
 
-            List<RetrievalModel> results = new List<RetrievalModel>();
             foreach (var efRequest in efRequests)
             {
                 RetrievalModel retrieval = null;//findLatestRetrievalsByRequestId(efRequest.request_id);

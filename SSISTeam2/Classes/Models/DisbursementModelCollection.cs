@@ -49,5 +49,11 @@ namespace SSISTeam2.Classes.Models
             List<DisbursementModel> result = Items.Where(x => x.getUserModel().Username == username).ToList();
             return new DisbursementModelCollection(result);
         }
+
+        public DisbursementModelCollection forCollectionPoint(int collectionPtId)
+        {
+            List<DisbursementModel> result = Items.Where(x => x.CollectionPtId == collectionPtId).ToList();
+            return new DisbursementModelCollection(result);
+        }
     }
 }

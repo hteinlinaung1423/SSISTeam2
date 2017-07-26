@@ -7,6 +7,8 @@ using System.ServiceModel;
 using System.Text;
 using System.Web.Security;
 
+using SSISTeam2.Classes.Models;
+
 namespace SSISTeam2.Classes.WebServices
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
@@ -81,7 +83,62 @@ namespace SSISTeam2.Classes.WebServices
                 return user;
             }
             else { return user = new WCF_User(null, "failed", null); }
+        }
 
+        public List<WCF_MonthlyCheck> GetIMonthlyCheckModel()
+        {
+            List<MonthlyCheckModel> modelList = new Work().GetAllMonthlyCheck();
+
+            List<WCF_MonthlyCheck> WCFList = new List<WCF_MonthlyCheck>();
+
+            foreach (MonthlyCheckModel i in modelList)
+            {
+
+                string currentQuantity = i.CurrentQuantity.ToString();
+                string actualQuantity = i.ActualQuantity.ToString();
+                WCF_MonthlyCheck wcf = new WCF_MonthlyCheck(i.ItemCode, i.Description, i.CatName, currentQuantity, actualQuantity, i.Reason);
+
+                WCFList.Add(wcf);
+            }
+
+            return WCFList;
+        }
+
+        public List<string> GetMonthlyCheckName()
+        {
+            List<MonthlyCheckModel> modelList = new Work().GetAllMonthlyCheck();
+            List<string> strings = new List<string>();
+
+            foreach (MonthlyCheckModel i in modelList)
+            {
+
+                string names = i.Description;
+                strings.Add(names);
+            }
+
+            return strings;
+        }
+        public string[] GetDelgateEmployeeName(string deptcode)
+        {
+            
+            return work.ListEmployeeName(deptcode).ToArray<String>();
+        }
+
+        public void Create(WCF_AppDuties dr)
+        {
+            Approval_Duties appduties = new Approval_Duties
+            {
+                username = dr.UserName,
+                start_date = Convert.ToDateTime(dr.StartDate),
+                end_date = Convert.ToDateTime(dr.EndDate),
+                dept_code = dr.DeptCode,
+                created_date = Convert.ToDateTime(dr.CreatedDate),
+                deleted = dr.Deleted,
+                reason = dr.Reason
+              
+            };
+
+            work.CreateAppDuties(appduties);
 
 
         }

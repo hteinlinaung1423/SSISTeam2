@@ -22,6 +22,7 @@ namespace SSISTeam2.Views.StoreClerk
 
             panelNoItems.Visible = false;
             panelNormal.Visible = false;
+
             using (SSISEntities context = new SSISEntities())
             {
                 var allocated = FacadeFactory.getRetrievalService(context).getAllRetrievingByClerk(User.Identity.Name);
@@ -173,10 +174,10 @@ namespace SSISTeam2.Views.StoreClerk
                                 request.Request_Details
                                 .Where(w => w.deleted != "Y" 
                                             && idAndItemCode.Contains(w.item_code)
-                                            && w.orig_quantity.HasValue)
+                                        )
                                 .ToDictionary(
                                     k => k.item_code,
-                                    v => v.orig_quantity.Value
+                                    v => v.Request_Event.First().allocated.Value
                                 );
 
                             FacadeFactory.getRequestMovementService(context).moveFromRetrievingToRetrieved(idAndItemCode.Key, itemCodeAndQty, User.Identity.Name);
@@ -202,9 +203,9 @@ namespace SSISTeam2.Views.StoreClerk
                     foreach (var request in requestsByDateDesc)
                     {
                         Request_Details detail = request.Request_Details.Where(w => w.deleted != "Y" && w.item_code == item.Key.ItemCode).DefaultIfEmpty(null).FirstOrDefault();
-                        if (detail == null || ! detail.orig_quantity.HasValue) continue;
+                        if (detail == null) continue;
 
-                        int origQty = detail.orig_quantity.Value;
+                        int origQty = detail.Request_Event.First().allocated.Value;
                         int retrievedQty = origQty;
 
                         if (shortfall > 0)
@@ -220,7 +221,7 @@ namespace SSISTeam2.Views.StoreClerk
                             } else
                             {
                                 // shortfall < origQty
-                                retrievedQty = shortfall;
+                                retrievedQty = origQty - shortfall;
                                 shortfall = 0;
                             }
                         }
@@ -230,8 +231,8 @@ namespace SSISTeam2.Views.StoreClerk
 
                     itemCodeAndIdAndQty.Add(item.Key.ItemCode, idAndQty);
 
-                    // Minus the expected quantity for each request's item orig_qty, while expected quantity is > 0,
-                    // and don't minus if orig_qty is > expectedQty
+                    // Minus the expected quantity for each request's item origQty, while expected quantity is > 0,
+                    // and don't minus if origQty is > expectedQty
                     // Once you've hit zero or cannot minus, assign the leftover into the next request
                     // Then the rest of the requests are gonna be zero
                     // Then save all these requests using the MovementService
@@ -369,10 +370,22 @@ namespace SSISTeam2.Views.StoreClerk
 
     class ConfirmRetrievalViewModel
     {
-        string itemCode, itemDescription;//, deptCode, deptName;
+        string itemCode, itemDescription;
         int quantityExpected, quantityActual;
         List<int> requestIds;
-        //bool include;
+
+        public List<int> RequestIds
+        {
+            get
+            {
+                return requestIds;
+            }
+
+            set
+            {
+                requestIds = value;
+            }
+        }
 
         public string ItemCode
         {
@@ -400,32 +413,6 @@ namespace SSISTeam2.Views.StoreClerk
             }
         }
 
-        //public string DeptCode
-        //{
-        //    get
-        //    {
-        //        return deptCode;
-        //    }
-
-        //    set
-        //    {
-        //        deptCode = value;
-        //    }
-        //}
-
-        //public string DeptName
-        //{
-        //    get
-        //    {
-        //        return deptName;
-        //    }
-
-        //    set
-        //    {
-        //        deptName = value;
-        //    }
-        //}
-
         public int QuantityExpected
         {
             get
@@ -452,31 +439,6 @@ namespace SSISTeam2.Views.StoreClerk
             }
         }
 
-        public List<int> RequestIds
-        {
-            get
-            {
-                return requestIds;
-            }
-
-            set
-            {
-                requestIds = value;
-            }
-        }
-
-        //public bool Include
-        //{
-        //    get
-        //    {
-        //        return include;
-        //    }
-
-        //    set
-        //    {
-        //        include = value;
-        //    }
-        //}
     }
 
 }

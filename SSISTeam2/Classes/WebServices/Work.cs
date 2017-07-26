@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
+using SSISTeam2.Classes.Models;
 
 namespace SSISTeam2.Classes.WebServices
 {
@@ -43,6 +46,31 @@ namespace SSISTeam2.Classes.WebServices
         {
             Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
             return dr;
+        }
+        public List<String> ListEmployeeName(string deptcode)
+        {
+            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)).Select(c => c.username).ToList<String>(); 
+            return list;
+        }
+
+        public void CreateAppDuties(Approval_Duties ap)
+        {
+                ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
+                ctx.SaveChanges();   
+        }
+
+        public List<MonthlyCheckModel> GetAllMonthlyCheck()
+        {
+            List<MonthlyCheckModel> modelList = new List<MonthlyCheckModel>();
+            List<Stock_Inventory> inventoryList = ctx.Stock_Inventory.Where(x => x.deleted == "N").ToList();
+
+            foreach (Stock_Inventory i in inventoryList)
+            {
+                MonthlyCheckModel model = new MonthlyCheckModel(i);
+                modelList.Add(model);
+            }
+
+            return modelList;
         }
 
         public List<Request_Details> GetRequestDetail(string id)
