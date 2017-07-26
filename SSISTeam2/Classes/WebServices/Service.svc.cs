@@ -54,7 +54,8 @@ namespace SSISTeam2.Classes.WebServices
 
             foreach (Request r in req)
             {
-                WCF_Request request = new WCF_Request(r.username, r.request_id, r.date_time, r.reason);
+                string date = string.Format("{0:dd/MM/yyy}", r.date_time);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason);
                 reqList.Add(request);
             }
 
@@ -79,6 +80,21 @@ namespace SSISTeam2.Classes.WebServices
             else { return user = new WCF_User(null, "failed", null); }
 
 
+        }
+
+        public List<WCF_RequestDetail> GetRequestDetail(string id)
+        {
+            List<WCF_RequestDetail> req_detail_list = new List<WCF_RequestDetail>();
+            List<Request_Details> rdList = new Work().GetRequestDetail(id);
+
+            foreach (Request_Details r in rdList)
+            {
+                int quantity = Convert.ToInt32(r.orig_quantity);
+                WCF_RequestDetail req_detail = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
+                req_detail_list.Add(req_detail);
+            }
+
+            return req_detail_list;
         }
     }
 }

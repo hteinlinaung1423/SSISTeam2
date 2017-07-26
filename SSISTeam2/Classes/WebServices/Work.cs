@@ -44,5 +44,13 @@ namespace SSISTeam2.Classes.WebServices
             Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
             return dr;
         }
+
+        public List<Request_Details> GetRequestDetail(string id)
+        {
+            int req_id = Convert.ToInt32(id);
+            List<Request_Details> rd = ctx.Request_Details.Where(x => x.request_id == req_id).ToList<Request_Details>();
+
+            return rd;
+        }
     }
 }

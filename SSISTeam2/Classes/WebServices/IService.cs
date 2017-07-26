@@ -12,6 +12,9 @@ namespace SSISTeam2.Classes.WebServices
     [ServiceContract]
     public interface IService
     {
+
+        //Operations by Htein Lin Aung 
+
         [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder", ResponseFormat = WebMessageFormat.Json)]
         List<int> GetDeliveryOrderId();
@@ -23,6 +26,10 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/PendingRequest/{dept}", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_Request> GetAllRequest(string dept);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/RequestDetail/{id}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_RequestDetail> GetRequestDetail(string id);
 
 
 
@@ -77,11 +84,11 @@ namespace SSISTeam2.Classes.WebServices
         [DataMember]
         int req_id;
         [DataMember]
-        DateTime? requestdate;
+        string requestdate;
         //[DataMember]
         string reason;
 
-        public WCF_Request(string user, int req_id, DateTime? requestdate, string reason)
+        public WCF_Request(string user, int req_id, string requestdate, string reason)
         {
             this.user = user;
             this.req_id = req_id;
@@ -111,6 +118,23 @@ namespace SSISTeam2.Classes.WebServices
         }
 
 
+
+
+    }
+
+    [DataContract]
+    public class WCF_RequestDetail
+    {
+        [DataMember]
+        string itemdesc;
+        [DataMember]
+        int quantity;
+
+        public WCF_RequestDetail(string itemdesc, int quantity)
+        {
+            this.itemdesc = itemdesc;
+            this.quantity = quantity;
+        }
 
 
     }
