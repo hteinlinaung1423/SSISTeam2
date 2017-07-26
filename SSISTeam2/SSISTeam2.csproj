@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChangeCategoryName1.aspx" />
-    <Content Include="Classes\WebServices\ServiceTest.svc" />
+    <Content Include="Classes\WebServices\Service.svc" />
     <Content Include="CreateNewCategory.aspx" />
     <Content Include="AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
@@ -253,7 +253,7 @@
     <Compile Include="Classes\EFFServices\RequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
-    <Compile Include="Classes\WebServices\IServiceTest.cs" />
+    <Compile Include="Classes\WebServices\IService.cs" />
     <Compile Include="Classes\Models\AdjustmentModel.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
     <Compile Include="Classes\Models\InventoryAdjustmentModel.cs" />
@@ -283,9 +283,10 @@
     <Compile Include="ChangeCategoryName1.aspx.designer.cs">
       <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\WebServices\ServiceTest.svc.cs">
-      <DependentUpon>ServiceTest.svc</DependentUpon>
+    <Compile Include="Classes\WebServices\Service.svc.cs">
+      <DependentUpon>Service.svc</DependentUpon>
     </Compile>
+    <Compile Include="Classes\WebServices\Work.cs" />
     <Compile Include="Collection_Point.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
