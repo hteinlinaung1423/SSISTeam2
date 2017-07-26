@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using SSISTeam2.Classes.Models;
+
 namespace SSISTeam2.Classes.WebServices
 {
     public class Work
@@ -43,6 +45,20 @@ namespace SSISTeam2.Classes.WebServices
         {
             Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
             return dr;
+        }
+
+        public List<MonthlyCheckModel> GetAllMonthlyCheck()
+        {
+            List<MonthlyCheckModel> modelList = new List<MonthlyCheckModel>();
+            List<Stock_Inventory> inventoryList = ctx.Stock_Inventory.Where(x => x.deleted == "N").ToList();
+
+            foreach (Stock_Inventory i in inventoryList)
+            {
+                MonthlyCheckModel model = new MonthlyCheckModel(i);
+                modelList.Add(model);
+            }
+
+            return modelList;
         }
     }
 }

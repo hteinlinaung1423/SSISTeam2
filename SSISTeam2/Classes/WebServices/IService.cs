@@ -6,6 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
+using SSISTeam2.Classes.Models;
+
 namespace SSISTeam2.Classes.WebServices
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
@@ -24,8 +26,6 @@ namespace SSISTeam2.Classes.WebServices
         [WebGet(UriTemplate = "/PendingRequest/{dept}", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_Request> GetAllRequest(string dept);
 
-
-
         [OperationContract]
         [WebGet(UriTemplate = "/Category/", ResponseFormat = WebMessageFormat.Json)]
         List<string> GetCatName();
@@ -37,6 +37,46 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/login/{name}/{pass}", ResponseFormat = WebMessageFormat.Json)]
         WCF_User login(string name, string pass);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/InventoryCheck/", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_MonthlyCheck> GetIMonthlyCheckModel();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/InventoryCheckName", ResponseFormat = WebMessageFormat.Json)]
+        List<string> GetMonthlyCheckName();
+    }
+
+    [DataContract]
+    public class WCF_MonthlyCheck
+    {
+        [DataMember]
+        public string itemCode;
+
+        [DataMember]
+        public string itemDescription;
+
+        [DataMember]
+        public string categoryName;
+
+        [DataMember]
+        public string currentQuantity;
+
+        [DataMember]
+        public string actualQuantity;
+
+        [DataMember]
+        public string reason;
+
+        public WCF_MonthlyCheck(string itemCode, string itemDescription, string categoryName, string currentQuantity, string actualQuantity, string reason)
+        {
+            this.itemCode = itemCode;
+            this.itemDescription = itemDescription;
+            this.categoryName = categoryName;
+            this.currentQuantity = currentQuantity;
+            this.actualQuantity = actualQuantity;
+            this.reason = reason;
+        }
 
     }
 
