@@ -126,18 +126,18 @@ namespace SSISTeam2.Classes.EFFServices
                 }
 
                 // At this point, there is some qtyToAllocate
-                context.Request_Event.Find(item.request_event_id).allocated = qtyToAllocate;
+                context.Request_Event.Find(item.request_event_id).allocated = canAllocateQty;
 
                 if (item.status == EventStatus.DISBURSED)
                 {
                     context.Request_Event.Find(item.request_event_id).quantity = qtyToAllocate;
-                    context.Request_Event.Find(item.request_event_id).not_allocated -= qtyToAllocate;
+                    context.Request_Event.Find(item.request_event_id).not_allocated -= canAllocateQty;
                 } else
                 {
                     // Approved only
                     // it.quantity doesn't change
                     //context.Request_Event.Find(item.request_event_id).quantity = //doesn't change;
-                    context.Request_Event.Find(item.request_event_id).not_allocated = item.quantity - qtyToAllocate;
+                    context.Request_Event.Find(item.request_event_id).not_allocated = item.quantity - canAllocateQty;
                 }
                 context.Request_Event.Find(item.request_event_id).status = EventStatus.ALLOCATED;
 

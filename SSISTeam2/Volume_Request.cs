@@ -24,5 +24,6 @@ namespace SSISTeam2
         public string status { get; set; }
         public string current_status { get; set; }
         public string item_code { get; set; }
+        public Nullable<int> orig_quantity { get; set; }
     }
 }
