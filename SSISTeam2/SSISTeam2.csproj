@@ -187,19 +187,20 @@
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
-    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <EmbeddedResource Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
+    <Content Include="Views\StoreClerk\ConfirmDisbursement.aspx" />
     <Content Include="Views\StoreClerk\ConfirmRetrieval.aspx" />
     <Content Include="Views\StoreClerk\DEMO_EmailTest.aspx" />
     <Content Include="Views\StoreClerk\DEMO_LoginTest.aspx" />
     <Content Include="Views\StoreClerk\EditOrder.aspx" />
+    <Content Include="Views\StoreClerk\GenerateDisbursement.aspx" />
     <Content Include="Views\StoreClerk\MakeNewRequest.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <!--<Content Include="Views\Reporting\RequestVolumeRpt.aspx" />-->
-    <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
     <Content Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx" />
@@ -211,6 +212,7 @@
     <Content Include="Views\StoreClerk\TenderListForm.aspx" />
     <Content Include="Views\StoreClerk\ViewAndEditCatalogue.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
+    <Content Include="Views\StoreClerk\ViewGeneratedDisbursements.aspx" />
     <Content Include="Views\StoreClerk\ViewPendingOrder.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
     <Content Include="Web.config">
@@ -527,6 +529,13 @@
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.designer.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\StoreClerk\ConfirmDisbursement.aspx.cs">
+      <DependentUpon>ConfirmDisbursement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ConfirmDisbursement.aspx.designer.cs">
+      <DependentUpon>ConfirmDisbursement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\ConfirmRetrieval.aspx.cs">
       <DependentUpon>ConfirmRetrieval.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -555,6 +564,13 @@
     <Compile Include="Views\StoreClerk\EditOrder.aspx.designer.cs">
       <DependentUpon>EditOrder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\StoreClerk\GenerateDisbursement.aspx.cs">
+      <DependentUpon>GenerateDisbursement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\GenerateDisbursement.aspx.designer.cs">
+      <DependentUpon>GenerateDisbursement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\MakeNewRequest.aspx.cs">
       <DependentUpon>MakeNewRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -568,13 +584,6 @@
     </Compile>
     <Compile Include="Views\StoreClerk\EditSupplier.aspx.designer.cs">
       <DependentUpon>EditSupplier.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StoreClerk\GenerateDisbursementForm.aspx.cs">
-      <DependentUpon>GenerateDisbursementForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\StoreClerk\GenerateDisbursementForm.aspx.designer.cs">
-      <DependentUpon>GenerateDisbursementForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\Cart.aspx.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
@@ -689,6 +698,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.designer.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewGeneratedDisbursements.aspx.cs">
+      <DependentUpon>ViewGeneratedDisbursements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewGeneratedDisbursements.aspx.designer.cs">
+      <DependentUpon>ViewGeneratedDisbursements.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\ViewPendingOrder.aspx.cs">
       <DependentUpon>ViewPendingOrder.aspx</DependentUpon>

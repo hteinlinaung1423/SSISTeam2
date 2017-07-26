@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,6 +15,8 @@ namespace SSISTeam2.Classes.WebServices
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service : IService
     {
+        Work work = new Work();
+
         List<string> IService.GetCatName()
         {
             return new Work().GetCatName();
@@ -113,6 +116,29 @@ namespace SSISTeam2.Classes.WebServices
             }
 
             return strings;
+        }
+        public string[] GetDelgateEmployeeName(string deptcode)
+        {
+            
+            return work.ListEmployeeName(deptcode).ToArray<String>();
+        }
+
+        public void Create(WCF_AppDuties dr)
+        {
+            Approval_Duties appduties = new Approval_Duties
+            {
+                username = dr.UserName,
+                start_date = Convert.ToDateTime(dr.StartDate),
+                end_date = Convert.ToDateTime(dr.EndDate),
+                dept_code = dr.DeptCode,
+                created_date = Convert.ToDateTime(dr.CreatedDate),
+                deleted = dr.Deleted,
+                reason = dr.Reason
+              
+            };
+
+            work.CreateAppDuties(appduties);
+
         }
     }
 }

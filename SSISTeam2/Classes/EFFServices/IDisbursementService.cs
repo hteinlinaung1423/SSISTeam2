@@ -6,9 +6,10 @@ namespace SSISTeam2.Classes.EFFServices
     {
         DisbursementModel findLatestPossibleDisbursingByRequestId(int requestId);
         DisbursementModel findLatestSignOffsByRequestId(int requestId, string currentUser);
-        //DisbursementModelCollection getAllPossibleDisbursementsForCollectionPoint(int collectionPointId);
-        //DisbursementModelCollection getAllSignOffsForCollectionPoint(int collectionPointId, string currentUser);
-        //DisbursementModelCollection getAllThatCanBeSignedOff(string currentUser);
-        //DisbursementModelCollection getAllThatWereDisbursed();
+        DisbursementModelCollection getAllPossibleDisbursementsForCollectionPoint(int collectionPointId);
+        DisbursementModelCollection getAllSignOffsForCollectionPoint(int collectionPointId, string currentUser);
+        DisbursementModelCollection getAllPossibleDisbursements();
+        DisbursementModelCollection getAllThatCanBeSignedOff(string currentUser);
+        DisbursementModelCollection getAllThatWereDisbursed();
     }
 }

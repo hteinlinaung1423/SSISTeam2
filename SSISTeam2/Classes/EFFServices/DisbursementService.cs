@@ -44,36 +44,43 @@ namespace SSISTeam2.Classes.EFFServices
             List<Request_Details> details = efRequest.Request_Details.ToList();
             foreach (var detail in details)
             {
-                int itemQty = 0;
+                //int itemQty = 0;
                 if (detail.deleted == "Y")
                 {
                     continue;
                 }
-                List<Request_Event> events = detail.Request_Event.OrderByDescending(o => o.date_time).ToList();
 
-                foreach (var ev in events)
+                List<Request_Event> events = detail.Request_Event.Where(w => w.deleted != "Y").ToList();
+
+                // If there are no events for some reason, SKIP
+                if (events.Count == 0) continue;
+
+                Request_Event eventItem = events.First();
+
+                // If the event does not have anything allocated to it, SKIP
+                if (eventItem.allocated.HasValue && eventItem.allocated.Value == 0) continue;
+
+
+
+                // Only add if it's retrieving AND it was by the currentUser
+                if (eventItem.status == fromStatus && eventItem.allocated.HasValue)
                 {
-                    if (ev.status == EventStatus.APPROVED
-                        || ev.status == EventStatus.ALLOCATED
-                        || ev.deleted == "Y")
+                    // currentUser was specified, skip if it's not by them
+                    if (currentUser != null
+                        && eventItem.username != currentUser)
                     {
                         continue;
                     }
-                    if (ev.status == toStatus)
-                    {
-                        break;
-                    }
-                    else if (ev.status == fromStatus && (currentUser == null) ? true : (ev.username == currentUser))
-                    {
-                        itemQty += ev.quantity;
-                    }
+
+                    Stock_Inventory s = detail.Stock_Inventory;
+                    itemsToFulfill.Add(new ItemModel(s), eventItem.allocated.Value);
                 }
 
-                if (itemQty > 0)
-                {
-                    Stock_Inventory s = detail.Stock_Inventory;
-                    itemsToFulfill.Add(new ItemModel(s), itemQty);
-                }
+            }
+
+            if (itemsToFulfill.Count == 0)
+            {
+                return null;
             }
 
             DisbursementModel retrieved = new DisbursementModel(efRequest, itemsToFulfill);
@@ -87,20 +94,22 @@ namespace SSISTeam2.Classes.EFFServices
             List<Request> efRequests = context.Requests
                 .Where(x => x.current_status == RequestStatus.APPROVED
                             || x.current_status == RequestStatus.PART_DISBURSED
+                            && x.deleted != "Y"
                 ).ToList();
+
+            List<DisbursementModel> results = new List<DisbursementModel>();
 
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new DisbursementModelCollection(results);
             }
 
-            List<DisbursementModel> results = new List<DisbursementModel>();
             foreach (var efRequest in efRequests)
             {
-                DisbursementModel retrieval = findLatestSignOffsByRequestId(efRequest.request_id, currentUser);
-                if (retrieval == null) continue; // SKIP
-                results.Add(retrieval);
+                DisbursementModel disbursing = findLatestSignOffsByRequestId(efRequest.request_id, currentUser);
+                if (disbursing == null) continue; // SKIP
+                results.Add(disbursing);
             }
 
             return new DisbursementModelCollection(results);
@@ -110,16 +119,18 @@ namespace SSISTeam2.Classes.EFFServices
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests
-                .Where(x => x.current_status == RequestStatus.DISBURSED && x.deleted != "Y"
+                .Where(x => x.current_status == RequestStatus.DISBURSED
+                        && x.deleted != "Y"
                 ).ToList();
+
+            List<DisbursementModel> results = new List<DisbursementModel>();
 
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new DisbursementModelCollection(results);
             }
 
-            List<DisbursementModel> results = new List<DisbursementModel>();
             foreach (var efRequest in efRequests)
             {
                 Dictionary<ItemModel, int> items = new Dictionary<ItemModel, int>();
@@ -148,20 +159,22 @@ namespace SSISTeam2.Classes.EFFServices
                     (x.current_status == RequestStatus.DISBURSED
                     || x.current_status == RequestStatus.PART_DISBURSED)
                     && x.Department.collection_point == collectionPointId
+                    && x.deleted != "Y"
                 ).ToList();
+
+            List<DisbursementModel> results = new List<DisbursementModel>();
 
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new DisbursementModelCollection(results);
             }
 
-            List<DisbursementModel> results = new List<DisbursementModel>();
             foreach (var efRequest in efRequests)
             {
-                DisbursementModel disbursement = findLatestSignOffsByRequestId(efRequest.request_id, currentUser);
-                if (disbursement == null) continue; // SKIP
-                results.Add(disbursement);
+                DisbursementModel disbursing = findLatestSignOffsByRequestId(efRequest.request_id, currentUser);
+                if (disbursing == null) continue; // SKIP
+                results.Add(disbursing);
             }
 
             return new DisbursementModelCollection(results);
@@ -175,15 +188,45 @@ namespace SSISTeam2.Classes.EFFServices
                     (x.current_status == RequestStatus.DISBURSED
                     || x.current_status == RequestStatus.PART_DISBURSED)
                     && x.Department.collection_point == collectionPointId
+                    && x.deleted != "Y"
                 ).ToList();
+
+            List<DisbursementModel> results = new List<DisbursementModel>();
 
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new DisbursementModelCollection(results);
             }
 
+            foreach (var efRequest in efRequests)
+            {
+                DisbursementModel disbursement = findLatestPossibleDisbursingByRequestId(efRequest.request_id);
+                if (disbursement == null) continue; // SKIP
+                results.Add(disbursement);
+            }
+
+            return new DisbursementModelCollection(results);
+        }
+
+        public DisbursementModelCollection getAllPossibleDisbursements()
+        {
+            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+            List<Request> efRequests = context.Requests
+                .Where(x =>
+                    (x.current_status == RequestStatus.APPROVED
+                    || x.current_status == RequestStatus.PART_DISBURSED)
+                    && x.deleted != "Y"
+                ).ToList();
+
             List<DisbursementModel> results = new List<DisbursementModel>();
+
+            if (efRequests.Count == 0)
+            {
+                //throw new ItemNotFoundException("No records exist");
+                return new DisbursementModelCollection(results);
+            }
+
             foreach (var efRequest in efRequests)
             {
                 DisbursementModel disbursement = findLatestPossibleDisbursingByRequestId(efRequest.request_id);
@@ -196,29 +239,29 @@ namespace SSISTeam2.Classes.EFFServices
         /*
         public DisbursementModelCollection getAllDisbursementsFromDepartment(string deptCode)
         {
-            //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
-            List<Request> efRequests = context.Requests
-                .Where(x =>
-                    (x.current_status == RequestStatus.DISBURSED
-                    || x.current_status == RequestStatus.PART_DISBURSED)
-                    && x.dept_code == deptCode
-                ).ToList();
+           //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
+           List<Request> efRequests = context.Requests
+               .Where(x =>
+                   (x.current_status == RequestStatus.DISBURSED
+                   || x.current_status == RequestStatus.PART_DISBURSED)
+                   && x.dept_code == deptCode
+               ).ToList();
 
-            if (efRequests.Count == 0)
-            {
-                //throw new ItemNotFoundException();
-                return null;
-            }
+           if (efRequests.Count == 0)
+           {
+               //throw new ItemNotFoundException();
+               return null;
+           }
 
-            List<DisbursementModel> results = new List<DisbursementModel>();
-            foreach (var efRequest in efRequests)
-            {
-                DisbursementModel disbursements = findLatestDisbursementByRequestId(efRequest.request_id);
-                if (disbursements == null) continue; // SKIP
-                results.Add(disbursements);
-            }
+           List<DisbursementModel> results = new List<DisbursementModel>();
+           foreach (var efRequest in efRequests)
+           {
+               DisbursementModel disbursements = findLatestDisbursementByRequestId(efRequest.request_id);
+               if (disbursements == null) continue; // SKIP
+               results.Add(disbursements);
+           }
 
-            return new DisbursementModelCollection(results);
+           return new DisbursementModelCollection(results);
         }
         */
     }
