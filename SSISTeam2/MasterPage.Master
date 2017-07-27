@@ -100,33 +100,31 @@
 
                             <ul class="dropdown-menu list-group">
                                 <li>
-                                    <asp:Button ID="logout" runat="server" CausesValidation="false" Text="Logout" class="btn btn-block btn-primary" OnClick="Logout" /></li>
-
-
+                                    <asp:Button ID="logout" runat="server" CausesValidation="false" Text="Logout" class="btn btn-block btn-danger" OnClick="Logout"/></li>
                                 <li>
                                     <asp:Button ID="Dashboard" runat="server" CausesValidation="false" Text="Dashboard" class="btn btn-block btn-primary dropdown-toggle" OnClick="Default" /></li>
                                 <% if (Page.User.IsInRole("Employee"))
                                     { %>
                                 <li>
-                                    <asp:Button ID="MakeRequest" runat="server" CausesValidation="false" Text="Make Request" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="MakeRequest" runat="server" CausesValidation="false" Text="Make Request" class="btn btn-block btn-primary" OnClick="MakeNewRequest" /></li>
                                 <li>
-                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View History" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View History" class="btn btn-block btn-primary" OnClick="ViewRequestHistory"/></li>
                                 <% }
                                     if (Page.User.IsInRole("Clerk"))
                                     { %>
 
 
                                 <li>
-                                    <asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" class="btn btn-block btn-primary" OnClick="ViewPendingReq"/></li>
                                 <li>
                                     <asp:Button ID="GeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" class="btn btn-block btn-primary" OnClick="MakeOrder" /></li>
                                 <% }
                                     if (Page.User.IsInRole("DeptHead"))
                                     { %>
                                 <li>
-                                    <asp:Button ID="PendingApprove" runat="server" CausesValidation="false" Text="Approve Request" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="PendingApprove" runat="server" CausesValidation="false" Text="Approve Request" class="btn btn-block btn-primary" OnClick="ApproveBtn" /></li>
                                 <li>
-                                    <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delagate Authority" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delagate Authority" class="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
 
                                 <% }
                                     if (Page.User.IsInRole("Manager"))
