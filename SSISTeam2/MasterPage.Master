@@ -28,6 +28,15 @@
             background-color: white;
         }
 
+        .footer{
+            position: absolute;
+            bottom:0;
+            padding-left:10px;
+            padding-top: 10px;
+            background-color:lightgray;
+            width: 100%;
+        }
+
         .carousel_height {
             height: 500px;
         }
@@ -35,7 +44,7 @@
         .carousel_color {
             background-color: #caa052;
         }
-
+            
         .right {
             float: right;
         }
@@ -44,7 +53,7 @@
             color: white;
         }
 
-                 .dropdown-menu {
+        .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -182,7 +191,7 @@
 
 
         <hr />
-        <div class="well">
+        <div class="footer">
             <p>
                 &copy; 2017 Logic University Store Project All rights Reserved.
             </p>
