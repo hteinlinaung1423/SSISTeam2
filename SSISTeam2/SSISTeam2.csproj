@@ -286,6 +286,7 @@
     <Compile Include="ChangeCategoryName1.aspx.designer.cs">
       <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\WebServices\MobileConfirmation.cs" />
     <Compile Include="Classes\WebServices\Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
     </Compile>
