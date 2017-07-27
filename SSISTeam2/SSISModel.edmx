@@ -1854,7 +1854,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Volume_Request">
             <EntityTypeMapping TypeName="SSISModel.Volume_Request">
               <MappingFragment StoreEntitySet="Volume_Request">
-                <ScalarProperty Name="orig_quantity" ColumnName="orig_quantity" />
                 <ScalarProperty Name="cat_name" ColumnName="cat_name" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
