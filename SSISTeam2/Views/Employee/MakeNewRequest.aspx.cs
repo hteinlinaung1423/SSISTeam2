@@ -41,6 +41,12 @@ namespace SSISTeam2.Views.StoreClerk
                 string requestToEdit = Request.QueryString["edit"];
                 int.TryParse(requestToEdit, out requestId); // 0 if fails
 
+                if (requestId > 0)
+                {
+                    lblPageTitle.Text = "Update Request (Id " + requestId + ")";
+                    isEditing = true;
+                }
+
                 List<MakeNewRequestModel> models = new List<MakeNewRequestModel>();
                 using (SSISEntities context = new SSISEntities())
                 {
@@ -49,13 +55,14 @@ namespace SSISTeam2.Views.StoreClerk
                     List<Stock_Inventory> stocks = context.Stock_Inventory.Where(w => w.deleted != "Y").ToList();
                     Session[SESSION_STOCKS] = stocks;
                     RequestModelCollection requests;
-
+                    /*
                     if (!User.Identity.IsAuthenticated)
                     {
                         Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
-                    }
+                    }*/
 
-                    UserModel currentUser = new UserModel(User.Identity.Name);
+                    //UserModel currentUser = new UserModel(User.Identity.Name);
+                    UserModel currentUser = new UserModel("Sally");
                     try
                     {
                         string deptCode = currentUser.Department.dept_code;

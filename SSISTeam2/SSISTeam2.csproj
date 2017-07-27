@@ -197,7 +197,7 @@
     <Content Include="Views\StoreClerk\DEMO_LoginTest.aspx" />
     <Content Include="Views\StoreClerk\EditOrder.aspx" />
     <Content Include="Views\StoreClerk\GenerateDisbursement.aspx" />
-    <Content Include="Views\StoreClerk\MakeNewRequest.aspx" />
+    <Content Include="Views\Employee\MakeNewRequest.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <!--<Content Include="Views\Reporting\RequestVolumeRpt.aspx" />-->
@@ -565,11 +565,11 @@
     <Compile Include="Views\StoreClerk\GenerateDisbursement.aspx.designer.cs">
       <DependentUpon>GenerateDisbursement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeNewRequest.aspx.cs">
+    <Compile Include="Views\Employee\MakeNewRequest.aspx.cs">
       <DependentUpon>MakeNewRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\MakeNewRequest.aspx.designer.cs">
+    <Compile Include="Views\Employee\MakeNewRequest.aspx.designer.cs">
       <DependentUpon>MakeNewRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\EditSupplier.aspx.cs">

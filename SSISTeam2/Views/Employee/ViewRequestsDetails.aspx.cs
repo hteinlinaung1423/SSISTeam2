@@ -11,6 +11,7 @@ namespace SSISTeam2.Views.Employee
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int requestID = Convert.ToInt32 (Request.QueryString["requestid"]);
 
         }
 
