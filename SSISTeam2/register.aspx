@@ -7,7 +7,7 @@
             <WizardSteps>
                 <asp:CreateUserWizardStep runat="server">
                     <ContentTemplate>
-                        <div lass="panel panel-primary">
+                        <div class="panel panel-primary">
                             <div class="panel-heading" ">
                                 <h2 class="panel-title" ">Sign Up for Your New Account</h2>
                             </div>
@@ -78,9 +78,10 @@
                                 <div class="form-group">
                                     <asp:Label ID="RoleLabel" runat="server" AssociatedControlID="Role">                       Role:</asp:Label>
                                     <asp:DropDownList ID="Role" runat="server" CssClass="form-control">
-                                        <asp:ListItem>employee</asp:ListItem>
+                                        <asp:ListItem Value="Employee">Employee</asp:ListItem>
                                         <asp:ListItem Value="Clerk">Store Clerk</asp:ListItem>
                                         <asp:ListItem Value="DeptHead">Department Head</asp:ListItem>
+                                        <asp:ListItem Value="Manager">Store Manager</asp:ListItem>
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Role"
                                         ErrorMessage="Role is required." ToolTip="Role is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Role is required.</asp:RequiredFieldValidator>

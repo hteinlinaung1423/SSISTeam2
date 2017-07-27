@@ -27,15 +27,21 @@
         body {
             padding-top: 85px;
             background-color: white;
+        
         }
 
+
+
         .footer{
-            position: absolute;
-            bottom:0;
+            border-top-style:groove;
+            position: fixed;
+            bottom: 0;
             padding-left:10px;
-            padding-top: 10px;
             background-color:lightgray;
             width: 100%;
+            text-align:center;
+            padding-top:2px;
+            height:3%;
         }
 
         .carousel_height {
@@ -100,7 +106,7 @@
                         <span class="glyphicon glyphicon-align-justify"></span>
                        
                     </button>
-                    <a class="navbar-brand" style="color: #ECEFF4">Logic University Store</a>
+                    <a class="navbar-brand" style="color: #ECEFF4; font-size:28px; font-family:Papyrus">Logic University Store</a>
                 </div>
 
 
@@ -211,9 +217,9 @@
 
         <hr />
         <div class="footer">
-            <p>
+          
                 &copy; 2017 Logic University Store Project All rights Reserved.
-            </p>
+           
         </div>
 
     </form>
