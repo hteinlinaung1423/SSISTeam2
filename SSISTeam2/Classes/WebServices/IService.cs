@@ -48,6 +48,8 @@ namespace SSISTeam2.Classes.WebServices
         ResponseFormat = WebMessageFormat.Json)]
         void Create(WCF_AppDuties Approval_Duties);
 
+
+
     }
 
 
@@ -130,14 +132,14 @@ namespace SSISTeam2.Classes.WebServices
     {
 
         public string username;
-        public DateTime startDate;
-        public DateTime endDate;
+        public string startDate;
+        public string endDate;
         public string deptCode;
-        public DateTime createdDate;
+        public string createdDate;
         public string deleted;
         public string reason;
 
-        public static WCF_AppDuties Make(string username, DateTime startDate, DateTime endDate, string deptCode,DateTime createdDate,string deleted,string reason)
+        public static WCF_AppDuties Make(string username, string startDate, string endDate, string deptCode, string createdDate, string deleted, string reason)
         {
             WCF_AppDuties c = new WCF_AppDuties();
             c.username = username;
@@ -158,21 +160,21 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         [DataMember]
-        public DateTime StartDate
+        public string StartDate
         {
             get { return startDate; }
             set { startDate = value; }
         }
 
         [DataMember]
-        public DateTime EndDate
+        public string EndDate
         {
             get { return endDate; }
             set { endDate = value; }
         }
 
         [DataMember]
-        public String DeptCode
+        public string DeptCode
         {
             get { return deptCode; }
             set { deptCode = value; }
@@ -180,20 +182,20 @@ namespace SSISTeam2.Classes.WebServices
 
 
         [DataMember]
-        public DateTime CreatedDate
+        public string CreatedDate
         {
             get { return createdDate; }
             set { createdDate = value; }
         }
 
         [DataMember]
-        public String Deleted
+        public string Deleted
         {
             get { return deleted; }
             set { deleted = value; }
         }
         [DataMember]
-        public String Reason
+        public string Reason
         {
             get { return reason; }
             set { reason = value; }

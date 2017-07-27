@@ -91,6 +91,7 @@ namespace SSISTeam2.Classes.WebServices
 
         public void Create(WCF_AppDuties dr)
         {
+            Work work = new Work();
             Approval_Duties appduties = new Approval_Duties
             {
                 username = dr.UserName,
@@ -100,7 +101,7 @@ namespace SSISTeam2.Classes.WebServices
                 created_date = Convert.ToDateTime(dr.CreatedDate),
                 deleted = dr.Deleted,
                 reason = dr.Reason
-              
+
             };
 
             work.CreateAppDuties(appduties);
