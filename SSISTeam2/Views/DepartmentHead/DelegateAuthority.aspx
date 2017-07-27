@@ -9,7 +9,7 @@
 
        <asp:Label ID="lbCheckDelegate" runat="server" Font-Size="X-Large"></asp:Label>
   
-        <asp:Table ID="CurrentTable" runat="server" class="active" style="table-layout: auto; font-size: large;">
+        <asp:Table ID="CurrentTable" runat="server" class="active" style="table-layout: auto; font-size: large;" CssClass="table table-responsive table-striped">
                
             <asp:TableRow>
                 <asp:TableCell>Created Date </asp:TableCell>
@@ -46,7 +46,7 @@
     <div>
   
              
-        <asp:Table ID="ChooseNewTable" runat="server" class="active" style="table-layout: auto; font-size: large;">
+        <asp:Table ID="ChooseNewTable" runat="server" class="active" style="table-layout: auto; font-size: large;" CssClass="table table-responsive table-striped">
                
             <asp:TableRow>
                 <asp:TableCell>Date </asp:TableCell>
@@ -74,12 +74,12 @@
             </asp:TableRow>
 
             <asp:TableRow>
-                <asp:TableCell> <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" /></asp:TableCell>
-                <asp:TableCell> <asp:Button ID="btnCancel" runat="server" Text="Cancel" /></asp:TableCell>
+                <asp:TableCell> <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-default"/></asp:TableCell>
+                <asp:TableCell> <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-default"/></asp:TableCell>
             </asp:TableRow>
         </asp:Table>
 
         <asp:Label ID="lbDateError" runat="server" ForeColor="#FF3300"></asp:Label>
     </div>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+ 
  </asp:Content>
