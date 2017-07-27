@@ -7,12 +7,14 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
-     <div class="table-responsive ">
-        <div class="panel-heading"><h3>
-            
-            <asp:Label ID="lblPageTitle" Text="Create New Request" runat="server" />
+    <div class="table-responsive ">
+        <div class="panel-heading">
+            <h3>
 
-                                   </h3></div>
+                <asp:Label ID="lblPageTitle" Text="Create New Request" runat="server" />
+
+            </h3>
+        </div>
     </div>
     <div>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -22,10 +24,10 @@
                 <div class="row">
 
                     <asp:GridView ID="GridView1" runat="server"
-                        AutoGenerateColumns="false" 
+                        AutoGenerateColumns="false"
                         OnRowDataBound="GridView1_RowDataBound"
-                        CssClass="table table-responsive table-striped" 
-                        GridLines="None" 
+                        CssClass="table table-responsive table-striped"
+                        GridLines="None"
                         BorderColor="White">
                         <Columns>
                             <asp:TemplateField HeaderText="No.">
@@ -57,9 +59,9 @@
                                     <asp:TextBox ID="tbQuantity" runat="server" Text='<%# Eval("Quantity") %>'
                                         max='<%# Eval("Quantity") %>'
                                         OnTextChanged="tbQuantity_TextChanged"
-                                        AutoPostBack="True" 
+                                        AutoPostBack="True"
                                         CssClass="form-control" />
-                                        <%--onchange="checkQty(event)"--%>
+                                    <%--onchange="checkQty(event)"--%>
                                     <%--<asp:Label runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -110,7 +112,7 @@
                             </div>
                         </div>
                     </asp:Panel>
-                </div>                
+                </div>
             </ContentTemplate>
         </asp:UpdatePanel>
         <script>

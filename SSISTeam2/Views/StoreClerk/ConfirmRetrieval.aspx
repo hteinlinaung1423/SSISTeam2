@@ -29,9 +29,9 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-md-7">
 
-                    <asp:GridView ID="gvToRetrieve" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive table-striped">
+                    <asp:GridView ID="gvToRetrieve" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped">
                         <Columns>
                             <asp:TemplateField HeaderText="No.">
                                 <ItemTemplate>
@@ -43,30 +43,34 @@
                                     <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("ItemDescription") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Total Quantity">
+                            <%--<asp:TemplateField HeaderText="Total Quantity">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTotalQty" runat="server" Text='<%# Eval("QuantityExpected") %>'></asp:Label>
                                 </ItemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="Quantity">
                                 <ItemTemplate>
                                     <asp:Label ID="lblQtyExpected" runat="server" Text='<%# Eval("QuantityExpected") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Actual Quantity">
+                            <asp:TemplateField HeaderText="Actual Quantity" ItemStyle-Width="30%">
                                 <ItemTemplate>
-                                    <asp:TextBox runat="server"
-                                        AutoPostBack="true"
-                                        OnTextChanged="tbQtyActual_TextChanged"
-                                        ID="tbQtyActual"
-                                        Text='<%# Eval("QuantityActual") %>'
-                                        Width="5em"
-                                        TextMode="Number"
-                                        min="0"
-                                        max='<%# Eval("QuantityExpected") %>'
-                                        step="1" />
-                                    <asp:Button ID="btnResetRowQty" Text="Reset" runat="server" OnClick="btnResetRowQty_Click" />
-                                    <%--onchange="checkQty(event)"--%>
+                                    <div class="input-group">
+                                        <asp:TextBox runat="server"
+                                            AutoPostBack="true"
+                                            OnTextChanged="tbQtyActual_TextChanged"
+                                            ID="tbQtyActual"
+                                            Text='<%# Eval("QuantityActual") %>'
+                                            TextMode="Number"
+                                            min="0"
+                                            max='<%# Eval("QuantityExpected") %>'
+                                            step="1"
+                                            CssClass="form-control"
+                                            />
+                                        <span class="input-group-btn">
+                                            <asp:Button ID="btnResetRowQty" Text="Reset" runat="server" OnClick="btnResetRowQty_Click" CssClass="btn btn-default" />
+                                        </span>
+                                    </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -75,21 +79,28 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-md-4">
 
                     <asp:Label ID="lblWarningInfo" runat="server" EnableViewState="false"></asp:Label>
 
                     <asp:Panel ID="panelNoItems" runat="server">
 
                         <div class="alert alert-warning">
-                            <asp:Label runat="server" Text="There are no items to retrieve"></asp:Label>
+                            <asp:Label runat="server" Text="There were no items marked for retrieval by you."></asp:Label>
+                            
+                            <br />
+                            <br />
+
+                            <a href="GenerateRetrieval.aspx">
+                                <span class="btn btn-warning">Go to generate a retrieval</span>
+                            </a>
                         </div>
 
                     </asp:Panel>
 
                     <asp:Panel ID="panelNormal" runat="server">
 
-                        <asp:Button ID="btnSubmit" runat="server" Text="Confirm retrieval quantities" OnClick="btnSubmit_Click" CssClass="btn btn-primary" />
+                        <asp:Button ID="btnSubmit" runat="server" Text="Confirm retrieval quantities" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
                     
                     </asp:Panel>
 

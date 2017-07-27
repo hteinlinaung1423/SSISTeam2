@@ -13,13 +13,13 @@ namespace SSISTeam2.Views.StoreClerk {
     public partial class GenerateRetrieval {
         
         /// <summary>
-        /// form1 control.
+        /// lblDebug control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label lblDebug;
         
         /// <summary>
         /// gvToRetrieve control.

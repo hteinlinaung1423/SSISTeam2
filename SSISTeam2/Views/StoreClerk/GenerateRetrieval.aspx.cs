@@ -28,12 +28,15 @@ namespace SSISTeam2.Views.StoreClerk
             panelNormal.Visible = false;
             using (SSISEntities context = new SSISEntities())
             {
+                lblDebug.Text += User.Identity.Name;
+
                 var allocated = FacadeFactory.getAllocatedService(context).getAllAllocated();
                 if (allocated.Count == 0)
                 {
                     panelNoItems.Visible = true;
                     return;
                 }
+
 
                 panelNormal.Visible = true;
 
