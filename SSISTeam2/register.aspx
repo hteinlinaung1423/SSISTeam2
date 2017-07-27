@@ -15,32 +15,32 @@
 
                                 <div class="form-group">
                                     <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
-                                    <asp:TextBox ID="UserName" runat="server" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="UserName" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="CreateUserWizard1" Style="color: red">* User Name is required.</asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
-                                    <asp:TextBox ID="Password" runat="server" TextMode="Password" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="Password" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Password is required.</asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword">                      Confirm Password:</asp:Label>
 
-                                    <asp:TextBox ID="ConfirmPassword" runat="server" TextMode="Password" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="ConfirmPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ConfirmPasswordRequired" runat="server" ControlToValidate="ConfirmPassword"
                                         ErrorMessage="Confirm Password is required." ToolTip="Confirm Password is required."
                                         ValidationGroup="CreateUserWizard1" Style="color: red">* Confirm Password is required.</asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email">                       E-mail:</asp:Label>
-                                    <asp:TextBox ID="Email" runat="server" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="Email" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email"
                                         ErrorMessage="E-mail is required." ToolTip="E-mail is required." ValidationGroup="CreateUserWizard1" Style="color: red">* E-mail is required.</asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="QuestionLabel" runat="server" AssociatedControlID="Question">
                         Security Question:</asp:Label>
-                                    <asp:TextBox ID="Question" runat="server" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="Question" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="QuestionRequired" runat="server" ControlToValidate="Question"
                                         ErrorMessage="Security question is required." ToolTip="Security question is required."
                                         ValidationGroup="CreateUserWizard1" Style="color: red">* Security question is required.</asp:RequiredFieldValidator>
@@ -49,7 +49,7 @@
                                     <asp:Label ID="AnswerLabel" runat="server" AssociatedControlID="Answer">
                         Security Answer:</asp:Label>
 
-                                    <asp:TextBox ID="Answer" runat="server" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="Answer" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="AnswerRequired" runat="server" ControlToValidate="Answer"
                                         ErrorMessage="Security answer is required." ToolTip="Security answer is required."
                                         ValidationGroup="CreateUserWizard1" Style="color: red">* Security answer is required.</asp:RequiredFieldValidator>
@@ -64,23 +64,24 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="FullnameLabel" runat="server" AssociatedControlID="Fullname">                       Full Name:</asp:Label>
-                                    <asp:TextBox ID="Fullname" runat="server" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="Fullname" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Fullname"
                                         ErrorMessage="Full Name is required." ToolTip="Full Name is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Full Name is required.</asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="DepartmentLabel" runat="server" AssociatedControlID="Department">                       Department:</asp:Label>
-                                    <asp:DropDownList ID="Department" runat="server" class="form-control" DataSourceID="SqlDataSource1" DataTextField="name" DataValueField="dept_code"></asp:DropDownList>
+                                    <asp:DropDownList ID="Department" runat="server" CssClass="form-control" DataSourceID="SqlDataSource1" DataTextField="name" DataValueField="dept_code"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Department"
                                         ErrorMessage="Department is required." ToolTip="Department is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Department is required.</asp:RequiredFieldValidator>
                                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT [dept_code], [name] FROM [Department]"></asp:SqlDataSource>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="RoleLabel" runat="server" AssociatedControlID="Role">                       Role:</asp:Label>
-                                    <asp:DropDownList ID="Role" runat="server" class="form-control">
-                                        <asp:ListItem>employee</asp:ListItem>
+                                    <asp:DropDownList ID="Role" runat="server" CssClass="form-control">
+                                        <asp:ListItem Value="Employee">Employee</asp:ListItem>
                                         <asp:ListItem Value="Clerk">Store Clerk</asp:ListItem>
                                         <asp:ListItem Value="DeptHead">Department Head</asp:ListItem>
+                                        <asp:ListItem Value="Manager">Store Manager</asp:ListItem>
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Role"
                                         ErrorMessage="Role is required." ToolTip="Role is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Role is required.</asp:RequiredFieldValidator>
@@ -88,7 +89,7 @@
                     </ContentTemplate>
                     <CustomNavigationTemplate>
 
-                        <asp:Button ID="StepNextButton" runat="server" CommandName="MoveNext" Text="Create User" ValidationGroup="CreateUserWizard1" class="btn btn-default" />
+                        <asp:Button ID="StepNextButton" runat="server" CommandName="MoveNext" Text="Create User" ValidationGroup="CreateUserWizard1" CssClass="btn btn-default" />
 
                     </CustomNavigationTemplate>
                 </asp:CreateUserWizardStep>
