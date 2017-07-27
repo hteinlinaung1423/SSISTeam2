@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SSISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SSISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adjustment_Details">
           <Key>
             <PropertyRef Name="voucher_detail_id" />
@@ -102,6 +102,7 @@
           <Property Name="dept_code" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Favourites">
           <Key>
@@ -772,8 +773,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
             <End Role="Tender_List" EntitySet="Tender_List" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SSISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -898,6 +898,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Purchase_Order" Relationship="Self.FK_Purchase_Order_Dept_Registry" FromRole="Dept_Registry" ToRole="Purchase_Order" />
           <NavigationProperty Name="Request_Event" Relationship="Self.FK_Request_Event_Dept_Registry" FromRole="Dept_Registry" ToRole="Request_Event" />
           <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Dept_Registry" FromRole="Dept_Registry" ToRole="Requests" />
+          <Property Name="fullname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Favourite">
           <Key>
@@ -1693,6 +1694,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Dept_Registry">
             <EntityTypeMapping TypeName="SSISModel.Dept_Registry">
               <MappingFragment StoreEntitySet="Dept_Registry">
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
                 <ScalarProperty Name="dept_code" ColumnName="dept_code" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />

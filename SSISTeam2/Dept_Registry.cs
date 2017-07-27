@@ -30,6 +30,7 @@ namespace SSISTeam2
         public string dept_code { get; set; }
         public string username { get; set; }
         public string deleted { get; set; }
+        public string fullname { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Approval_Duties> Approval_Duties { get; set; }

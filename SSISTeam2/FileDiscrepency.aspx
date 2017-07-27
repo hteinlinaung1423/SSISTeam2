@@ -1,6 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FileDiscrepency.aspx.cs" Inherits="SSISTeam2.FileDiscrepency" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:GridView ID="FileDiscrepencyGV" runat="server" AutoGenerateColumns="False">
+    <div class="table-responsive ">
+        <div class="panel-heading"><h3>File Discrepency</h3></div>
+    </div>
+    <asp:GridView ID="FileDiscrepencyGV" runat="server" 
+        AutoGenerateColumns="False"
+        GridLines="None"
+        AllowPaging="true"
+        PageSize="10"
+        HeaderStyle-CssClass="text-center-impt"
+        CssClass="table table-responsive table-striped"
+        PagerStyle-HorizontalAlign="Center" 
+        PagerSettings-Position="TopAndBottom"
+        >
         <Columns>
             <asp:TemplateField HeaderText="No.">
                 <ItemTemplate>
@@ -44,5 +56,5 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <asp:Button ID="ConfirmBtn" runat="server" Text="Confirm" OnClick="ConfirmBtn_Click" />
+    <asp:Button ID="ConfirmBtn" runat="server" Text="Confirm" OnClick="ConfirmBtn_Click" CssClass="btn btn-primary"/>
 </asp:Content>
