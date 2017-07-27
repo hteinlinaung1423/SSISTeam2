@@ -72,5 +72,10 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
         }
+
+        protected void genReport(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Reporting/ReportsMain.aspx");
+        }
     }
 }

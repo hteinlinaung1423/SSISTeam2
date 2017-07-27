@@ -94,6 +94,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.Button GeneratePurchaseOrder;
         
         /// <summary>
+        /// genReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button genReports;
+        
+        /// <summary>
         /// PendingApprove control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,51 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Delegate;
+        
+        /// <summary>
+        /// manPendingApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button manPendingApprove;
+        
+        /// <summary>
+        /// manDelegate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button manDelegate;
+        
+        /// <summary>
+        /// manViewPending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button manViewPending;
+        
+        /// <summary>
+        /// manGeneratePurchaseOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button manGeneratePurchaseOrder;
+        
+        /// <summary>
+        /// mangenReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button mangenReports;
         
         /// <summary>
         /// logout control.
