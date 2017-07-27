@@ -50,7 +50,7 @@ namespace SSISTeam2
 
         protected void MakeNewRequest(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/StoreClerk/MakeNewRequest.aspx");
+            Response.Redirect("~/Views/Employee/MakeNewRequest.aspx");
         }
 
         protected void ViewRequestHistory(object sender, EventArgs e)

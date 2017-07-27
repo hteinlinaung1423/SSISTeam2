@@ -18,10 +18,11 @@ namespace SSISTeam2.Views.StoreClerk
         const string SESSION_MODELS = "newRequest_SessionModels";
         const string SESSION_USER_MODEL = "newRequest_CurrentUser";
         const string SESSION_REQ_EDIT_ID = "newRequest_RequestEditId";
+        const string SESSION_IS_EDITING = "newRequest_RequestIsEditing";
 
         const string TEMP_DEPT_CODE = "REGR";
 
-        bool isEditing = false;
+        //bool isEditing = false;
 
         protected override PageStatePersister PageStatePersister
         {
@@ -41,11 +42,13 @@ namespace SSISTeam2.Views.StoreClerk
                 string requestToEdit = Request.QueryString["edit"];
                 int.TryParse(requestToEdit, out requestId); // 0 if fails
 
-                if (requestId > 0)
-                {
-                    lblPageTitle.Text = "Update Request (Id " + requestId + ")";
-                    isEditing = true;
-                }
+                //if (requestId > 0)
+                //{
+                //    lblPageTitle.Text = "Update Request (Id " + requestId + ")";
+                //    isEditing = true;
+                //}
+
+                Session[SESSION_IS_EDITING] = false;
 
                 List<MakeNewRequestModel> models = new List<MakeNewRequestModel>();
                 using (SSISEntities context = new SSISEntities())
@@ -61,8 +64,8 @@ namespace SSISTeam2.Views.StoreClerk
                         Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
                     }*/
 
-                    //UserModel currentUser = new UserModel(User.Identity.Name);
-                    UserModel currentUser = new UserModel("Sally");
+                    UserModel currentUser = new UserModel(User.Identity.Name);
+                    //UserModel currentUser = new UserModel("Sally");
                     try
                     {
                         string deptCode = currentUser.Department.dept_code;
@@ -135,7 +138,10 @@ namespace SSISTeam2.Views.StoreClerk
                                 numIter++;
                             }
 
-                            isEditing = true;
+                            lblPageTitle.Text = "Update Request (Id " + requestId + ")";
+
+                            //isEditing = true;
+                            Session[SESSION_IS_EDITING] = true;
                             Session[SESSION_REQ_EDIT_ID] = requestId;
                             btnSubmit.Text = "Update request";
                         }
@@ -335,6 +341,8 @@ namespace SSISTeam2.Views.StoreClerk
                 newReq.Department = user.Department;
                 newReq.Status = RequestStatus.PENDING;
                 newReq.UserModel = user;
+
+                bool isEditing = (Session[SESSION_IS_EDITING] as bool?).Value;
 
                 if (isEditing)
                 {

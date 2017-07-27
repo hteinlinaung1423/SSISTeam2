@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Confirm Disbursements</title>
+    <title>Confirm Disbursement</title>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
@@ -25,12 +25,12 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <asp:Label Text="Select department:" runat="server" CssClass="h4 grey-text" />
+            <asp:Label Text="First, select a department:" runat="server" CssClass="h4 grey-text" />
         </div>
     </div>
         
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-md-4">
             <asp:DropDownList ID="ddlDepartments" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlDepartments_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
         </div>
     </div>
@@ -47,7 +47,15 @@
     
     <div class="row">
         <div class="col-xs-12">
-            <asp:GridView ID="gvDisbursement" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive table-striped">
+            <asp:Label Text="Then, confirm the quantities" runat="server" CssClass="h4 grey-text" />
+        </div>
+    </div>    
+
+    <div style="margin: 10px"></div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <asp:GridView ID="gvDisbursement" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped">
                 <Columns>
                     <asp:TemplateField HeaderText="No.">
                         <ItemTemplate>
@@ -59,25 +67,30 @@
                             <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("ItemDescription") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Quantity">
+                    <asp:TemplateField HeaderText="Quantity" ItemStyle-Width="15%">
                         <ItemTemplate>
                             <asp:Label ID="lblQtyExpected" runat="server" Text='<%# Eval("QuantityExpected") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Actual Quantity">
+                    <asp:TemplateField HeaderText="Actual Quantity" ItemStyle-Width="20%">
                         <ItemTemplate>
-                            <asp:TextBox runat="server"
-                                AutoPostBack="true"
-                                OnTextChanged="tbQtyActual_TextChanged"
-                                ID="tbQtyActual"
-                                Text='<%# Eval("QuantityActual") %>'
-                                Width="5em"
-                                TextMode="Number"
-                                min="0"
-                                max='<%# Eval("QuantityExpected") %>'
-                                step="1" />
-                            <asp:Button ID="btnResetRowQty" Text="Reset" runat="server" OnClick="btnResetRowQty_Click" />
-                            <%--onchange="checkQty(event)"--%>
+                            <div class="input-group">
+                                <asp:TextBox runat="server"
+                                    AutoPostBack="true"
+                                    OnTextChanged="tbQtyActual_TextChanged"
+                                    ID="tbQtyActual"
+                                    Text='<%# Eval("QuantityActual") %>'
+                                    TextMode="Number"
+                                    min="0"
+                                    max='<%# Eval("QuantityExpected") %>'
+                                    step="1"
+                                    CssClass="form-control"
+                                    />
+                                <span class="input-group-btn">
+                                    <asp:Button ID="btnResetRowQty" Text="Reset" runat="server" OnClick="btnResetRowQty_Click" CssClass="btn btn-default" />
+                                </span>
+
+                            </div>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -85,21 +98,23 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-md-6">
 
             <asp:Label ID="lblWarningInfo" runat="server" EnableViewState="false"></asp:Label>
 
             <asp:Panel ID="panelNoItems" runat="server">
 
                 <div class="alert alert-warning">
-                    <asp:Label runat="server" Text="There are no items that were to be disbursed to this department"></asp:Label>
+                    <asp:Label runat="server" Text="There are no items that were marked to be disbursed to this department by you."></asp:Label>
+                    <br />
+                    <span><a href="GenerateDisbursement.aspx">Generate some disbursement forms here</a>.</span>
                 </div>
 
             </asp:Panel>
 
             <asp:Panel ID="panelNormal" runat="server">
                 
-                <asp:Button ID="btnSubmit" runat="server" Text="Confirm quantities" OnClick="btnSubmit_Click" CssClass="btn btn-primary" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Confirm quantities" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
 
             </asp:Panel>
 

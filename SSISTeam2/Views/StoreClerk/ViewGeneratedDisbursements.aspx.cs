@@ -91,11 +91,30 @@ namespace SSISTeam2.Views.StoreClerk
 
                 //_refreshGrid(list);
 
+                lblNoDepartments.Visible = false;
+
                 _refrehDepartmentsDropDown(departments);
             }
         }
         private void _refreshGrid(List<ConfirmDisbursementViewModel> list)
         {
+            if (list.Count > 0)
+            {
+                panelNoItems.Visible = false;
+                if (ddlDepartments.Items.Count == 0)
+                {
+                  panelNormal.Visible = false;
+                } else
+                {
+                  panelNormal.Visible = true;
+                }
+            }
+            else
+            {
+                panelNoItems.Visible = true;
+                panelNormal.Visible = false;
+            }
+
             gvDisbursement.DataSource = list;
             gvDisbursement.DataBind();
             //MergeCells(gvToRetrieve);
@@ -121,6 +140,17 @@ namespace SSISTeam2.Views.StoreClerk
             // Get the department codes that are related to this value
             List<Department> departments = departmentList.Where(w => w.collection_point == selectedCollectionPtId).ToList();
 
+            if (departments.Count == 0)
+            {
+                lblNoDepartments.Visible = true;
+                ddlDepartments.Enabled = false;
+            }
+            else
+            {
+                lblNoDepartments.Visible = false;
+                ddlDepartments.Enabled = true;
+            }
+
             _refrehDepartmentsDropDown(departments);
         }
 
@@ -137,6 +167,13 @@ namespace SSISTeam2.Views.StoreClerk
             var filtered = list.Where(w => w.DeptCode == selectedDeptCode).ToList();
 
             _refreshGrid(filtered);
+        }
+
+        protected void btnGoToConfirm_Click(object sender, EventArgs e)
+        {
+            string currentDeptCode = ddlDepartments.SelectedValue;
+
+            Response.Redirect("ConfirmDisbursement.aspx?dept=" + currentDeptCode);
         }
     }
     class ConfirmDisbursementViewModel : ConfirmRetrievalViewModel

@@ -25,6 +25,8 @@ namespace SSISTeam2.Views.StoreClerk
             panelNoItems.Visible = false;
             panelNormal.Visible = false;
 
+            string forwardedDeptCode = Request.QueryString["dept"];
+
             using (SSISEntities context = new SSISEntities())
             {
                 //List<Collection_Point> collectionPts = context.Collection_Point.Where(w => w.deleted != "Y").ToList();
@@ -67,6 +69,12 @@ namespace SSISTeam2.Views.StoreClerk
 
                 string currentDepartmentCode = departmentList.First().dept_code;
 
+                if (forwardedDeptCode != null)
+                {
+                    // Forwarded from View Generated forms
+                    currentDepartmentCode = forwardedDeptCode;
+                }
+
                 Session[SESSION_DISBURSING_LIST] = filteredDisbursingList;
                 Session[SESSION_CURRENT_DEPT_CODE] = currentDepartmentCode;
 
@@ -75,6 +83,8 @@ namespace SSISTeam2.Views.StoreClerk
                 _refreshDepartmentsDropDown(departmentList);
 
                 _refreshGrid(filteredDisbursingList);
+
+                ddlDepartments.SelectedValue = currentDepartmentCode;
 
                 if (departmentList.Count == 0 || disbursingList.Count == 0)
                 {
@@ -101,6 +111,17 @@ namespace SSISTeam2.Views.StoreClerk
 
             Department dep = deptList.Find(f => f.dept_code == selectedDeptCode);
             lblRepName.Text = "Representative: " + dep.rep_user; //new UserModel(dep.rep_user).Fullname;
+
+            if (filtered.Count == 0)
+            {
+                panelNoItems.Visible = true;
+                panelNormal.Visible = false;
+            }
+            else
+            {
+                panelNoItems.Visible = false;
+                panelNormal.Visible = true;
+            }
         }
 
         private void _refreshDepartmentsDropDown(List<Department> departments)
@@ -210,11 +231,11 @@ namespace SSISTeam2.Views.StoreClerk
 
             if (noDiscrepancies)
             {
-                btnSubmit.Text = "Confirm disbursed quantities";
+                btnSubmit.Text = "Confirm quantities";
             }
             else
             {
-                btnSubmit.Text = "Confirm quantities, then File Discrepancies";
+                btnSubmit.Text = "Confirm quantities, then file discrepancies";
             }
         }
 

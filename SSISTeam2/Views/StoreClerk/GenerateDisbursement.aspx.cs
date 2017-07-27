@@ -51,14 +51,6 @@ namespace SSISTeam2.Views.StoreClerk
                 //var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursementsForCollectionPoint(collectionPts.First().collection_pt_id);
                 var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursements();
 
-                if (retrieved.Count == 0)
-                {
-                    panelNoItems.Visible = true;
-                    return;
-                }
-
-                panelNormal.Visible = true;
-
                 var itemGroups = retrieved.SelectMany(sm =>
                     sm.Items
                     .Select(s => new { s.Key.ItemCode, s.Key.Description, s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name, sm.CollectionPtId })
@@ -88,13 +80,21 @@ namespace SSISTeam2.Views.StoreClerk
                     }
                 }
 
-                lblDebug.Text = list.Count.ToString();
+                //lblDebug.Text = list.Count.ToString();
 
                 Session[SESSION_COLLECTION_PT_LIST] = list;
                 int currentCollectionPtId = collectionPts.First().collection_pt_id;
                 Session[SESSION_CURRENT_COLLECTION_PT] = currentCollectionPtId;
 
                 _refreshGrid(list);
+
+                if (retrieved.Count == 0)
+                {
+                    panelNoItems.Visible = true;
+                    return;
+                }
+
+                panelNormal.Visible = true;
             }
         }
 

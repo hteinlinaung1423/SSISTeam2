@@ -27,7 +27,7 @@ namespace SSISTeam2.Views.DepartmentHead
             if (!IsPostBack)
             {
                 var q = (from r in ent.Requests
-                         where r.dept_code == currentDeptCode && r.current_status == "Pending"
+                         where r.dept_code == currentDeptCode && (r.current_status == "Pending" || r.current_status == RequestStatus.UPDATED)
                          select new
                          {
                              r.request_id,

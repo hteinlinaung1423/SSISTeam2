@@ -176,6 +176,7 @@ namespace SSISTeam2.Classes.EFFServices
 
                 context.Request_Event.Find(eventId).status = toStatus;
                 context.Request_Event.Find(eventId).date_time = now;
+                context.Request_Event.Find(eventId).username = currentUser;
                 //int allocQty = resetAllocQty ? 0 : alloc.quantity;
 
                 //Request_Event transientEv = _newRequestEvent(now, nonTransient.quantity, detail.request_detail_id, currentUser, toStatus);
@@ -232,6 +233,7 @@ namespace SSISTeam2.Classes.EFFServices
                 context.Request_Event.Find(transient.request_event_id).not_allocated = newNonAllocQty;
                 context.Request_Event.Find(transient.request_event_id).status = toStatus;
                 context.Request_Event.Find(transient.request_event_id).date_time = now;
+                context.Request_Event.Find(transient.request_event_id).username = currentUser;
 
                 if (toStatus == EventStatus.DISBURSED)
                 {

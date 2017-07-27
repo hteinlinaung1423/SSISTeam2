@@ -341,11 +341,11 @@ namespace SSISTeam2.Views.StoreClerk
 
             if (noDiscrepancies)
             {
-                btnSubmit.Text = "Confirm retrieval quantities";
+                btnSubmit.Text = "Confirm quantities";
             }
             else
             {
-                btnSubmit.Text = "Confirm quantities, then File Discrepancies";
+                btnSubmit.Text = "Confirm quantities, then file discrepancies";
             }
         }
     }
