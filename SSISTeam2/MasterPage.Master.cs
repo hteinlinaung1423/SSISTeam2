@@ -45,9 +45,32 @@ namespace SSISTeam2
 
         protected void MakeOrder(object sender, EventArgs e)
         {
-
-
             Response.Redirect("~/Views/StoreClerk/Cart.aspx");
+        }
+
+        protected void MakeNewRequest(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/MakeNewRequest.aspx");
+        }
+
+        protected void ViewRequestHistory(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
+        }
+
+        protected void ViewPendingReq(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
+        }
+
+        protected void ApproveBtn(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/DepartmentHead/ApproveReject.aspx");
+        }
+
+        protected void DelegateAuth(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
         }
     }
 }

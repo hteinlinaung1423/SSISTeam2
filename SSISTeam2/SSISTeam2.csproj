@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChangeCategoryName1.aspx" />
-    <Content Include="Classes\WebServices\ServiceTest.svc" />
+    <Content Include="Classes\WebServices\Service.svc" />
     <Content Include="CreateNewCategory.aspx" />
     <Content Include="AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
@@ -187,19 +187,20 @@
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
     <Content Include="Views\Reporting\ReportsMain.aspx" />
-    <Content Include="Views\Reporting\RequestVolumeRpt.aspx" />
+    <EmbeddedResource Include="Views\Reporting\RequestVolumeRpt.aspx" />
     <Content Include="Views\Reporting\TrendAnalysisStaging.aspx" />
     <Content Include="Views\Employee\ViewRequestsDetails.aspx" />
     <Content Include="Views\StoreClerk\AddNewSupplier.aspx" />
+    <Content Include="Views\StoreClerk\ConfirmDisbursement.aspx" />
     <Content Include="Views\StoreClerk\ConfirmRetrieval.aspx" />
     <Content Include="Views\StoreClerk\DEMO_EmailTest.aspx" />
     <Content Include="Views\StoreClerk\DEMO_LoginTest.aspx" />
     <Content Include="Views\StoreClerk\EditOrder.aspx" />
+    <Content Include="Views\StoreClerk\GenerateDisbursement.aspx" />
     <Content Include="Views\Employee\MakeNewRequest.aspx" />
     <Content Include="Views\StoreClerk\EditSupplier.aspx" />
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <!--<Content Include="Views\Reporting\RequestVolumeRpt.aspx" />-->
-    <Content Include="Views\StoreClerk\GenerateDisbursementForm.aspx" />
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
     <Content Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx" />
@@ -211,6 +212,7 @@
     <Content Include="Views\StoreClerk\TenderListForm.aspx" />
     <Content Include="Views\StoreClerk\ViewAndEditCatalogue.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
+    <Content Include="Views\StoreClerk\ViewGeneratedDisbursements.aspx" />
     <Content Include="Views\StoreClerk\ViewPendingOrder.aspx" />
     <Content Include="Views\StoreClerk\ViewSupplierList.aspx" />
     <Content Include="Web.config">
@@ -218,6 +220,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdjustmentDetail.aspx.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdjustmentDetail.aspx.designer.cs">
+      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Adjustment_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
@@ -226,13 +235,6 @@
     </Compile>
     <Compile Include="Approval_Duties.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AdjustmentDetail.aspx.cs">
-      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdjustmentDetail.aspx.designer.cs">
-      <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -253,7 +255,7 @@
     <Compile Include="Classes\EFFServices\RequestMovementService.cs" />
     <Compile Include="Classes\EFFServices\RequestService.cs" />
     <Compile Include="Classes\EFFServices\RetrievalServiceOld.cs" />
-    <Compile Include="Classes\WebServices\IServiceTest.cs" />
+    <Compile Include="Classes\WebServices\IService.cs" />
     <Compile Include="Classes\Models\AdjustmentModel.cs" />
     <Compile Include="Classes\Models\DisbursementModelCollection.cs" />
     <Compile Include="Classes\Models\InventoryAdjustmentModel.cs" />
@@ -283,9 +285,10 @@
     <Compile Include="ChangeCategoryName1.aspx.designer.cs">
       <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\WebServices\ServiceTest.svc.cs">
-      <DependentUpon>ServiceTest.svc</DependentUpon>
+    <Compile Include="Classes\WebServices\Service.svc.cs">
+      <DependentUpon>Service.svc</DependentUpon>
     </Compile>
+    <Compile Include="Classes\WebServices\Work.cs" />
     <Compile Include="Collection_Point.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
@@ -344,12 +347,6 @@
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Request_Event.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SSISModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SSISModel.Context.cs">
@@ -526,6 +523,13 @@
     <Compile Include="Views\StoreClerk\AddNewSupplier.aspx.designer.cs">
       <DependentUpon>AddNewSupplier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\StoreClerk\ConfirmDisbursement.aspx.cs">
+      <DependentUpon>ConfirmDisbursement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ConfirmDisbursement.aspx.designer.cs">
+      <DependentUpon>ConfirmDisbursement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\ConfirmRetrieval.aspx.cs">
       <DependentUpon>ConfirmRetrieval.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -554,6 +558,13 @@
     <Compile Include="Views\StoreClerk\EditOrder.aspx.designer.cs">
       <DependentUpon>EditOrder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\StoreClerk\GenerateDisbursement.aspx.cs">
+      <DependentUpon>GenerateDisbursement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\GenerateDisbursement.aspx.designer.cs">
+      <DependentUpon>GenerateDisbursement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Employee\MakeNewRequest.aspx.cs">
       <DependentUpon>MakeNewRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -567,13 +578,6 @@
     </Compile>
     <Compile Include="Views\StoreClerk\EditSupplier.aspx.designer.cs">
       <DependentUpon>EditSupplier.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StoreClerk\GenerateDisbursementForm.aspx.cs">
-      <DependentUpon>GenerateDisbursementForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\StoreClerk\GenerateDisbursementForm.aspx.designer.cs">
-      <DependentUpon>GenerateDisbursementForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\Cart.aspx.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
@@ -689,6 +693,13 @@
     <Compile Include="Views\StoreClerk\ViewDepartmentList.aspx.designer.cs">
       <DependentUpon>ViewDepartmentList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\StoreClerk\ViewGeneratedDisbursements.aspx.cs">
+      <DependentUpon>ViewGeneratedDisbursements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\ViewGeneratedDisbursements.aspx.designer.cs">
+      <DependentUpon>ViewGeneratedDisbursements.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreClerk\ViewPendingOrder.aspx.cs">
       <DependentUpon>ViewPendingOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -726,6 +737,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

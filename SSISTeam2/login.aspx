@@ -10,7 +10,10 @@
                     <div class="panel-heading">
                         <h2 class="panel-title" style="color: #ECEFF4">Login</h2>
                     </div>
-                    <div class="panel-body">
+                    <%--Panel to set the default behaviour to trigger LoginButton click event when keyboard Enter is pressed --%>
+                    <asp:Panel ID="panLogin" runat="server" DefaultButton="LoginButton" Width="100%" >
+                   
+                         <div class="panel-body">
                         <div class="form-group">
                             <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
 
@@ -32,7 +35,9 @@
                             <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                         </div>
                         <br />
+                        
                         <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="Login1" class="btn btn-default" />
+                            </asp:Panel>
                     </div>
                 </div>
             </LayoutTemplate>

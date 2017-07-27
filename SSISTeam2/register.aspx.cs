@@ -40,7 +40,7 @@ namespace SSISTeam2
             Roles.AddUserToRole(username, role);
             Label1.Text = role;
 
-            //Response.Redirect("notifysuccess.aspx?");
+            Response.Redirect("notifysuccess.aspx");
         }
     }
 }
