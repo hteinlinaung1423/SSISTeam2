@@ -1,6 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="ViewAllAdjustment.aspx.cs" Inherits="SSISTeam2.ViewAllAdjustment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:GridView ID="ViewAdjustmentGV" runat="server" AutoGenerateColumns="False">
+    <div class="table-responsive ">
+        <div class="panel-heading"><h3>View All Adjustment</h3></div>
+    </div>
+    <asp:GridView ID="ViewAdjustmentGV" runat="server" 
+        AutoGenerateColumns="False"
+        GridLines="None"
+        AllowPaging="true"
+        PageSize="10"
+        HeaderStyle-CssClass="text-center-impt"
+        CssClass="table table-responsive table-striped"
+        PagerStyle-HorizontalAlign="Center" 
+        PagerSettings-Position="TopAndBottom"
+        >
         <Columns>
             <asp:TemplateField HeaderText="No.">
                 <ItemTemplate>
@@ -34,7 +46,7 @@
 
             <asp:TemplateField HeaderText="View Details">
                 <ItemTemplate>
-                    <asp:Button ID="detailBtn" runat="server" Text="Details" OnClick="detailBtn_Click" />
+                    <asp:Button ID="detailBtn" runat="server" Text="Details" OnClick="detailBtn_Click" CssClass="btn btn-primary"/>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

@@ -29,6 +29,15 @@
             background-color: white;
         }
 
+        .footer{
+            position: absolute;
+            bottom:0;
+            padding-left:10px;
+            padding-top: 10px;
+            background-color:lightgray;
+            width: 100%;
+        }
+
         .carousel_height {
             height: 500px;
         }
@@ -36,7 +45,7 @@
         .carousel_color {
             background-color: #caa052;
         }
-
+            
         .right {
             float: right;
         }
@@ -44,6 +53,29 @@
         a {
             color: white;
         }
+
+        .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 0px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                }
         .grey-text
         {
             color: grey !important;
@@ -104,40 +136,41 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
 
                             <ul class="dropdown-menu list-group">
-                                <li>
-                                    <asp:Button ID="logout" runat="server" CausesValidation="false" Text="Logout" class="btn btn-block btn-primary" OnClick="Logout" /></li>
-
-
+                                
                                 <li>
                                     <asp:Button ID="Dashboard" runat="server" CausesValidation="false" Text="Dashboard" class="btn btn-block btn-primary dropdown-toggle" OnClick="Default" /></li>
                                 <% if (Page.User.IsInRole("Employee"))
                                     { %>
                                 <li>
-                                    <asp:Button ID="MakeRequest" runat="server" CausesValidation="false" Text="Make Request" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="MakeRequest" runat="server" CausesValidation="false" Text="Make Request" class="btn btn-block btn-primary" OnClick="MakeNewRequest" /></li>
                                 <li>
-                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View History" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View History" class="btn btn-block btn-primary" OnClick="ViewRequestHistory"/></li>
                                 <% }
                                     if (Page.User.IsInRole("Clerk"))
                                     { %>
 
 
                                 <li>
-                                    <asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" class="btn btn-block btn-primary" OnClick="ViewPendingReq"/></li>
                                 <li>
                                     <asp:Button ID="GeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" class="btn btn-block btn-primary" OnClick="MakeOrder" /></li>
                                 <% }
                                     if (Page.User.IsInRole("DeptHead"))
                                     { %>
                                 <li>
-                                    <asp:Button ID="PendingApprove" runat="server" CausesValidation="false" Text="Approve Request" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="PendingApprove" runat="server" CausesValidation="false" Text="Approve Request" class="btn btn-block btn-primary" OnClick="ApproveBtn" /></li>
                                 <li>
-                                    <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delagate Authority" class="btn btn-block btn-primary" /></li>
+                                    <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delagate Authority" class="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
 
                                 <% }
                                     if (Page.User.IsInRole("Manager"))
                                     { %>
 
                                 <% } %>
+                                
+                                <%--Moved Logout Button to bottom of drop down list--%>
+                                <li>
+                                    <asp:Button ID="logout" runat="server" CausesValidation="false" Text="Logout" class="btn btn-block btn-danger" OnClick="Logout"/></li>
                             </ul>
                         </li>
                     </ul>
@@ -163,7 +196,7 @@
 
 
         <hr />
-        <div class="well">
+        <div class="footer">
             <p>
                 &copy; 2017 Logic University Store Project All rights Reserved.
             </p>

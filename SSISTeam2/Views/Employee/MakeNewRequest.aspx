@@ -7,7 +7,13 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
+     <div class="table-responsive ">
+        <div class="panel-heading"><h3>
+            
+            <asp:Label ID="lblPageTitle" Text="Create New Request" runat="server" />
 
+                                   </h3></div>
+    </div>
     <div>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -16,7 +22,11 @@
                 <div class="row">
 
                     <asp:GridView ID="GridView1" runat="server"
-                        AutoGenerateColumns="false" OnRowDataBound="GridView1_RowDataBound" CssClass="table table-responsive table-striped" GridLines="None" BorderColor="White">
+                        AutoGenerateColumns="false" 
+                        OnRowDataBound="GridView1_RowDataBound"
+                        CssClass="table table-responsive table-striped" 
+                        GridLines="None" 
+                        BorderColor="White">
                         <Columns>
                             <asp:TemplateField HeaderText="No.">
                                 <ItemTemplate>

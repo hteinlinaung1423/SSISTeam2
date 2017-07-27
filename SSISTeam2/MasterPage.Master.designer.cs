@@ -49,15 +49,6 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
-        /// logout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button logout;
-        
-        /// <summary>
         /// Dashboard control.
         /// </summary>
         /// <remarks>
@@ -119,6 +110,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Delegate;
+        
+        /// <summary>
+        /// logout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button logout;
         
         /// <summary>
         /// ContentPlaceHolder1 control.
