@@ -6,12 +6,17 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
+using SSISTeam2.Classes.Models;
+
 namespace SSISTeam2.Classes.WebServices
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface IService
     {
+
+        //Operations by Htein Lin Aung 
+
         [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder", ResponseFormat = WebMessageFormat.Json)]
         List<int> GetDeliveryOrderId();
@@ -23,6 +28,10 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/PendingRequest/{dept}", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_Request> GetAllRequest(string dept);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/RequestDetail/{id}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_RequestDetail> GetRequestDetail(string id);
 
 
 
@@ -48,7 +57,45 @@ namespace SSISTeam2.Classes.WebServices
         ResponseFormat = WebMessageFormat.Json)]
         void Create(WCF_AppDuties Approval_Duties);
 
+        [OperationContract]
+        [WebGet(UriTemplate = "/InventoryCheck/", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_MonthlyCheck> GetIMonthlyCheckModel();
 
+        [OperationContract]
+        [WebGet(UriTemplate = "/InventoryCheckName", ResponseFormat = WebMessageFormat.Json)]
+        List<string> GetMonthlyCheckName();
+    }
+
+    [DataContract]
+    public class WCF_MonthlyCheck
+    {
+        [DataMember]
+        public string itemCode;
+
+        [DataMember]
+        public string itemDescription;
+
+        [DataMember]
+        public string categoryName;
+
+        [DataMember]
+        public string currentQuantity;
+
+        [DataMember]
+        public string actualQuantity;
+
+        [DataMember]
+        public string reason;
+
+        public WCF_MonthlyCheck(string itemCode, string itemDescription, string categoryName, string currentQuantity, string actualQuantity, string reason)
+        {
+            this.itemCode = itemCode;
+            this.itemDescription = itemDescription;
+            this.categoryName = categoryName;
+            this.currentQuantity = currentQuantity;
+            this.actualQuantity = actualQuantity;
+            this.reason = reason;
+        }
 
     }
 
@@ -89,11 +136,11 @@ namespace SSISTeam2.Classes.WebServices
         [DataMember]
         int req_id;
         [DataMember]
-        DateTime? requestdate;
+        string requestdate;
         //[DataMember]
         string reason;
 
-        public WCF_Request(string user, int req_id, DateTime? requestdate, string reason)
+        public WCF_Request(string user, int req_id, string requestdate, string reason)
         {
             this.user = user;
             this.req_id = req_id;
@@ -132,14 +179,14 @@ namespace SSISTeam2.Classes.WebServices
     {
 
         public string username;
-        public string startDate;
-        public string endDate;
+        public DateTime startDate;
+        public DateTime endDate;
         public string deptCode;
-        public string createdDate;
+        public DateTime createdDate;
         public string deleted;
         public string reason;
 
-        public static WCF_AppDuties Make(string username, string startDate, string endDate, string deptCode, string createdDate, string deleted, string reason)
+        public static WCF_AppDuties Make(string username, DateTime startDate, DateTime endDate, string deptCode,DateTime createdDate,string deleted,string reason)
         {
             WCF_AppDuties c = new WCF_AppDuties();
             c.username = username;
@@ -160,21 +207,22 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         [DataMember]
-        public string StartDate
+        public DateTime StartDate
         {
             get { return startDate; }
             set { startDate = value; }
         }
 
         [DataMember]
-        public string EndDate
+        public DateTime EndDate
         {
             get { return endDate; }
             set { endDate = value; }
         }
 
+
         [DataMember]
-        public string DeptCode
+        public String DeptCode
         {
             get { return deptCode; }
             set { deptCode = value; }
@@ -182,24 +230,45 @@ namespace SSISTeam2.Classes.WebServices
 
 
         [DataMember]
-        public string CreatedDate
+        public DateTime CreatedDate
         {
             get { return createdDate; }
             set { createdDate = value; }
         }
-
         [DataMember]
-        public string Deleted
+        public String Deleted
         {
             get { return deleted; }
             set { deleted = value; }
         }
         [DataMember]
-        public string Reason
+        public String Reason
         {
             get { return reason; }
             set { reason = value; }
         }
+
+
+    }
+
+    [DataContract]
+    public class WCF_RequestDetail
+    {
+        [DataMember]
+        string itemdesc;
+        [DataMember]
+        int quantity;
+
+        
+        
+
+        public WCF_RequestDetail(string itemdesc, int quantity)
+        {
+            this.itemdesc = itemdesc;
+            this.quantity = quantity;
+        }
+
+       
 
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using SSISTeam2.Classes.Models;
+
 namespace SSISTeam2.Classes.WebServices
 {
     public class Work
@@ -55,6 +57,28 @@ namespace SSISTeam2.Classes.WebServices
         {
                 ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
                 ctx.SaveChanges();   
+        }
+
+        public List<MonthlyCheckModel> GetAllMonthlyCheck()
+        {
+            List<MonthlyCheckModel> modelList = new List<MonthlyCheckModel>();
+            List<Stock_Inventory> inventoryList = ctx.Stock_Inventory.Where(x => x.deleted == "N").ToList();
+
+            foreach (Stock_Inventory i in inventoryList)
+            {
+                MonthlyCheckModel model = new MonthlyCheckModel(i);
+                modelList.Add(model);
+            }
+
+            return modelList;
+        }
+
+        public List<Request_Details> GetRequestDetail(string id)
+        {
+            int req_id = Convert.ToInt32(id);
+            List<Request_Details> rd = ctx.Request_Details.Where(x => x.request_id == req_id).ToList<Request_Details>();
+
+            return rd;
         }
     }
 }

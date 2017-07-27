@@ -7,6 +7,8 @@ using System.ServiceModel;
 using System.Text;
 using System.Web.Security;
 
+using SSISTeam2.Classes.Models;
+
 namespace SSISTeam2.Classes.WebServices
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
@@ -57,7 +59,8 @@ namespace SSISTeam2.Classes.WebServices
 
             foreach (Request r in req)
             {
-                WCF_Request request = new WCF_Request(r.username, r.request_id, r.date_time, r.reason);
+                string date = string.Format("{0:dd/MM/yyy}", r.date_time);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason);
                 reqList.Add(request);
             }
 
@@ -80,8 +83,40 @@ namespace SSISTeam2.Classes.WebServices
                 return user;
             }
             else { return user = new WCF_User(null, "failed", null); }
+        }
 
+        public List<WCF_MonthlyCheck> GetIMonthlyCheckModel()
+        {
+            List<MonthlyCheckModel> modelList = new Work().GetAllMonthlyCheck();
 
+            List<WCF_MonthlyCheck> WCFList = new List<WCF_MonthlyCheck>();
+
+            foreach (MonthlyCheckModel i in modelList)
+            {
+
+                string currentQuantity = i.CurrentQuantity.ToString();
+                string actualQuantity = i.ActualQuantity.ToString();
+                WCF_MonthlyCheck wcf = new WCF_MonthlyCheck(i.ItemCode, i.Description, i.CatName, currentQuantity, actualQuantity, i.Reason);
+
+                WCFList.Add(wcf);
+            }
+
+            return WCFList;
+        }
+
+        public List<string> GetMonthlyCheckName()
+        {
+            List<MonthlyCheckModel> modelList = new Work().GetAllMonthlyCheck();
+            List<string> strings = new List<string>();
+
+            foreach (MonthlyCheckModel i in modelList)
+            {
+
+                string names = i.Description;
+                strings.Add(names);
+            }
+
+            return strings;
         }
         public string[] GetDelgateEmployeeName(string deptcode)
         {
@@ -106,6 +141,23 @@ namespace SSISTeam2.Classes.WebServices
 
             work.CreateAppDuties(appduties);
 
+
+        }
+
+        public List<WCF_RequestDetail> GetRequestDetail(string id)
+        {
+            List<WCF_RequestDetail> rd = new List<WCF_RequestDetail>();
+
+            List<Request_Details> rd_List = new Work().GetRequestDetail(id);
+            foreach (Request_Details r in rd_List)
+            {
+                int quantity = Convert.ToInt32(r.orig_quantity);
+                WCF_RequestDetail req = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
+
+                rd.Add(req);
+            }
+
+            return rd;
         }
     }
 }
