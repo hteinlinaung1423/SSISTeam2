@@ -189,6 +189,7 @@ namespace SSISTeam2.Classes.EFFServices
                     newRequest.rejected = "N";
                     newRequest.rejected_reason = "";
                     newRequest.username = request.UserModel.Username;
+                    newRequest.date_time = timestamp;
 
                     List<Request_Details> newDetails = new List<Request_Details>();
                     foreach (KeyValuePair<ItemModel, int> itemAndQty in request.Items)
@@ -289,14 +290,14 @@ namespace SSISTeam2.Classes.EFFServices
                         Request_Event existingEvent = targetDetail.Request_Event.Where(w => w.deleted != "Y").First();
                         context.Request_Event.Find(existingEvent.request_event_id).quantity = itemAndQty.Value;
                         context.Request_Event.Find(existingEvent.request_event_id).date_time = timestamp;
-                        context.Request_Event.Find(existingEvent.request_event_id).status = EventStatus.PENDING;
+                        context.Request_Event.Find(existingEvent.request_event_id).status = EventStatus.UPDATED;
                     }
 
                     //targetDetail.Request_Event.Add(newEvent);
                 }
 
                 // Update Status
-                //context.Requests.Find(newRequest.RequestId).current_status = RequestStatus.UPDATED;
+                context.Requests.Find(newRequest.RequestId).current_status = RequestStatus.UPDATED;
                 context.Requests.Find(newRequest.RequestId).reason = newRequest.Reason;
                 //}
                 //catch (Exception exec)

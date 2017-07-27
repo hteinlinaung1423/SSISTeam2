@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="baf53f64d33c418a9028df440f12ac13" Name="Diagram1">
-        <EntityTypeShape EntityType="SSISModel.Adjustment_Details" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Alert" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Approval_Duties" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Category" Width="1.5" PointX="1.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Collection_Point" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Delivery_Details" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Delivery_Orders" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Department" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Dept_Registry" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Favourite" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Inventory_Adjustment" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Monthly_Check_Records" Width="1.5" PointX="3" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Purchase_Order" Width="1.5" PointX="8" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Purchase_Order_Details" Width="1.5" PointX="10.25" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Request_Details" Width="1.5" PointX="12.75" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Request_Event" Width="1.5" PointX="15" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Request" Width="1.5" PointX="10.5" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Stock_Inventory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Supplier" Width="1.5" PointX="5.75" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Tender_List" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Tender_List_Details" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SSISModel.Volume_Request" Width="1.5" PointX="8.75" PointY="2.625" IsExpanded="true" />
+      <Diagram DiagramId="7afb1b34725d48b7af5937cb9b8deda6" Name="Diagram1">
+        <EntityTypeShape EntityType="SSISModel.Adjustment_Details" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Alert" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Approval_Duties" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Category" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Collection_Point" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Delivery_Details" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Delivery_Orders" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Department" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Dept_Registry" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Favourite" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Inventory_Adjustment" Width="1.5" PointX="3.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Monthly_Check_Records" Width="1.5" PointX="3" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Purchase_Order" Width="1.5" PointX="8" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Purchase_Order_Details" Width="1.5" PointX="10.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Request_Details" Width="1.5" PointX="12.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Request_Event" Width="1.5" PointX="15" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Request" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Stock_Inventory" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Supplier" Width="1.5" PointX="5.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Tender_List" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Tender_List_Details" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSISModel.Volume_Request" Width="1.5" PointX="7.75" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="SSISModel.FK_Adjustment_Details_Inventory_Adjustment" ManuallyRouted="false" />
         <AssociationConnector Association="SSISModel.FK_Adjustment_Details_Stock_Inventory" ManuallyRouted="false" />
         <AssociationConnector Association="SSISModel.FK_Alerts_Stock_Inventory" ManuallyRouted="false" />

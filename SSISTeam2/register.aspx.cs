@@ -31,7 +31,7 @@ namespace SSISTeam2
 
             Dept_Registry user = new Dept_Registry();
             user.username = username;
-            //user.fullname = fullname;
+            user.fullname = fullname;
             user.dept_code = department;
             user.deleted = "N";
             context.Dept_Registry.Add(user);
@@ -40,7 +40,7 @@ namespace SSISTeam2
             Roles.AddUserToRole(username, role);
             Label1.Text = role;
 
-            //Response.Redirect("notifysuccess.aspx?");
+            Response.Redirect("notifysuccess.aspx");
         }
     }
 }

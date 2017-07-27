@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MonthlyCheck.aspx.cs" Inherits="SSISTeam2.MonthlyCheck" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p>
-        Monthly Stocktake
-    </p>
+    <div class="table-responsive ">
+        <div class="panel-heading"><h3>Monthly Stocktake</h3></div>
+    </div>
         Sort By:
         <asp:DropDownList ID="SortDDL" runat="server">
             <asp:ListItem>Category</asp:ListItem>
@@ -16,7 +16,10 @@
     <asp:GridView ID="MonthlyCheckGV" runat="server" 
         AutoGenerateColumns="false" 
         AllowPaging="True" 
-        PageSize="2" 
+        PageSize="10" 
+        HeaderStyle-CssClass="text-center-impt"
+        CssClass="table table-responsive table-striped"
+        GridLines="None"
         PagerStyle-HorizontalAlign="Center" 
         PagerSettings-Position="TopAndBottom" 
         OnPageIndexChanging="MonthlyCheckGV_PageIndexChanging">
@@ -72,5 +75,6 @@
 <PagerStyle HorizontalAlign="Center"></PagerStyle>
     </asp:GridView>
     
-    <asp:Button ID="nextBtn" runat="server" Text="Next" OnClick="nextBtn_Click" /><asp:Label ID="testLabel" runat="server" Text="Label"></asp:Label>
+    <asp:Button ID="nextBtn" runat="server" Text="Next" OnClick="nextBtn_Click" CssClass="btn btn-primary"/>
+    <asp:Label ID="testLabel" runat="server" Text="Label"></asp:Label>
 </asp:Content>

@@ -71,7 +71,19 @@ namespace SSISTeam2.Classes.EFFServices
                 if (item == null) continue;
 
                 // If neither approved nor disbursed, skip it.
-                if (item.status != EventStatus.APPROVED && item.status != EventStatus.DISBURSED) continue;
+                if (item.status != EventStatus.APPROVED
+                    && item.status != EventStatus.DISBURSED
+                    && item.status != EventStatus.ALLOCATED) continue;
+
+                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
+                ItemModel itemModel = new ItemModel(inv);
+
+                // Already allocated, just add it
+                if (item.status == EventStatus.ALLOCATED && item.allocated.HasValue)
+                {
+                    itemsToFulfill.Add(itemModel, item.allocated.Value);
+                    continue;
+                }
 
                 // Fully allocated, can skip
                 if (item.status == EventStatus.DISBURSED && item.not_allocated == 0) continue;
@@ -91,9 +103,7 @@ namespace SSISTeam2.Classes.EFFServices
                 // if for some reason it's still zero, just skip.
                 if (qtyToAllocate == 0) continue;
 
-                Stock_Inventory inv = context.Stock_Inventory.Find(eventItem.Key);
-                ItemModel itemModel = new ItemModel(inv);
-
+                
                 int canAllocateQty = 0;
                 int availableQty = itemModel.AvailableQuantity;
 
@@ -116,18 +126,18 @@ namespace SSISTeam2.Classes.EFFServices
                 }
 
                 // At this point, there is some qtyToAllocate
-                context.Request_Event.Find(item.request_event_id).allocated = qtyToAllocate;
+                context.Request_Event.Find(item.request_event_id).allocated = canAllocateQty;
 
                 if (item.status == EventStatus.DISBURSED)
                 {
                     context.Request_Event.Find(item.request_event_id).quantity = qtyToAllocate;
-                    context.Request_Event.Find(item.request_event_id).not_allocated -= qtyToAllocate;
+                    context.Request_Event.Find(item.request_event_id).not_allocated -= canAllocateQty;
                 } else
                 {
                     // Approved only
                     // it.quantity doesn't change
                     //context.Request_Event.Find(item.request_event_id).quantity = //doesn't change;
-                    context.Request_Event.Find(item.request_event_id).not_allocated = item.quantity - qtyToAllocate;
+                    context.Request_Event.Find(item.request_event_id).not_allocated = item.quantity - canAllocateQty;
                 }
                 context.Request_Event.Find(item.request_event_id).status = EventStatus.ALLOCATED;
 

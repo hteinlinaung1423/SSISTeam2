@@ -100,21 +100,36 @@ namespace SSISTeam2.Classes.EFFServices
             _moveToTransient(requestId, itemCodes, currentUser, EventStatus.RETRIEVED, EventStatus.DISBURSING, resetAllocQty: true);
         }
 
-        public void moveFromRetrievingToRetrieved(RequestModel requestModel, string currentUser)
+        public void moveFromRetrievingToRetrieved(int requestId, Dictionary<string, int> items, string currentUser)
         {
-            Request request = context.Requests.Find(requestModel.RequestId);
-            _moveFromTransient(request, requestModel.Items, currentUser, EventStatus.RETRIEVING, EventStatus.RETRIEVED);
+            Request request = context.Requests.Find(requestId);
+            _moveFromTransient(request, items, currentUser, EventStatus.RETRIEVING, EventStatus.RETRIEVED);
         }
-        public void moveFromDisbursingToDisbursed(RequestModel requestModel, string currentUser)
+        public void moveFromDisbursingToDisbursed(int requestId, Dictionary<string, int> items, string currentUser)
         {
-            Request request = context.Requests.Find(requestModel.RequestId);
+            Request request = context.Requests.Find(requestId);
 
             // Check if all were disbursed
-            bool fullyDisbursed = _moveFromTransient(request, requestModel.Items, currentUser, EventStatus.DISBURSING, EventStatus.DISBURSED);
+            bool fullyDisbursed = _moveFromTransient(request, items, currentUser, EventStatus.DISBURSING, EventStatus.DISBURSED);
 
             if (fullyDisbursed)
             {
-                request.current_status = RequestStatus.DISBURSED;
+                // Check if request has any outstanding items
+                Request requestCheck = context.Requests.Find(requestId);
+
+                bool allFulfilled = requestCheck.Request_Details.ToList()
+                            .TrueForAll(detail =>
+                                detail.Request_Event.ToList()
+                                    .TrueForAll(e => e.status == EventStatus.DISBURSED)
+                            );
+
+                if (allFulfilled)
+                {
+                    request.current_status = RequestStatus.DISBURSED;
+                } else
+                {
+                    request.current_status = RequestStatus.PART_DISBURSED;
+                }
             } else
             {
                 request.current_status = RequestStatus.PART_DISBURSED;
@@ -161,6 +176,7 @@ namespace SSISTeam2.Classes.EFFServices
 
                 context.Request_Event.Find(eventId).status = toStatus;
                 context.Request_Event.Find(eventId).date_time = now;
+                context.Request_Event.Find(eventId).username = currentUser;
                 //int allocQty = resetAllocQty ? 0 : alloc.quantity;
 
                 //Request_Event transientEv = _newRequestEvent(now, nonTransient.quantity, detail.request_detail_id, currentUser, toStatus);
@@ -173,7 +189,7 @@ namespace SSISTeam2.Classes.EFFServices
             }
         }
 
-        private bool _moveFromTransient(Request request, Dictionary<ItemModel, int> items, string currentUser, string fromStatus, string toStatus)
+        private bool _moveFromTransient(Request request, Dictionary<string, int> items, string currentUser, string fromStatus, string toStatus)
         {
             bool wasFullyAllocated = true;
 
@@ -186,7 +202,14 @@ namespace SSISTeam2.Classes.EFFServices
                 if (detail.deleted == "Y") continue;
                 var itemCode = detail.item_code;
                 // Match item codes
-                var item = items.Where(w => w.Key.ItemCode == itemCode).First();
+                var itemMatches = items.Where(w => w.Key == itemCode);
+
+                KeyValuePair<string, int> item;
+
+                // If there are no matches, skip this detail
+                if (itemMatches.Count() == 0) continue;
+
+                item = itemMatches.First();
                 // Quantity to move to nonTransient
                 var quantity = item.Value;
 
@@ -210,6 +233,17 @@ namespace SSISTeam2.Classes.EFFServices
                 context.Request_Event.Find(transient.request_event_id).not_allocated = newNonAllocQty;
                 context.Request_Event.Find(transient.request_event_id).status = toStatus;
                 context.Request_Event.Find(transient.request_event_id).date_time = now;
+                context.Request_Event.Find(transient.request_event_id).username = currentUser;
+
+                if (toStatus == EventStatus.DISBURSED)
+                {
+                    // If moving to disbursed, we need to minus the Stock_Inventory current_quantity
+                    // Get the relevant Stock_Inv
+                    //Stock_Inventory stock = context.Stock_Inventory.Find(detail.item_code);
+                    // newAllocQty is what was finally minused off. So:
+
+                    context.Stock_Inventory.Find(detail.item_code).current_qty -= newAllocQty;
+                }
             }
             return wasFullyAllocated;
 

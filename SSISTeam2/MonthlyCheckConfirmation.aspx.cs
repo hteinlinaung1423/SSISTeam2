@@ -56,9 +56,10 @@ namespace SSISTeam2
             //}
             //Label1.Text = inventoryAdj.Adjustment_Details.Count.ToString();
             List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>)Session["Confirmation"];
+            Monthly_Check_Records checkRecord = new Monthly_Check_Records();
+
             if (itemList == null)
             {
-                Monthly_Check_Records checkRecord = new Monthly_Check_Records();
                 checkRecord.date_checked = DateTime.Today;
                 checkRecord.clerk_user = HttpContext.Current.User.Identity.Name;
                 checkRecord.deleted = "N";
@@ -91,6 +92,8 @@ namespace SSISTeam2
                     //get price of adjustment for MonthlyCheckModel
                     double priceAdj = i.AveragePrice * Math.Abs(i.ActualQuantity - i.CurrentQuantity);
 
+                    Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
+                    inventory.current_qty = i.ActualQuantity;
 
                     Adjustment_Details adjDetails = new Adjustment_Details();
                     adjDetails.deleted = "N";
@@ -111,14 +114,10 @@ namespace SSISTeam2
 
 
 
-                Monthly_Check_Records checkRecord = new Monthly_Check_Records();
                 checkRecord.date_checked = DateTime.Today;
                 checkRecord.clerk_user = HttpContext.Current.User.Identity.Name;
                 checkRecord.deleted = "N";
                 checkRecord.discrepancy = "Y";
-
-                context.Monthly_Check_Records.Add(checkRecord);
-                context.SaveChanges();
 
                 if (invAdjustmentSup.Adjustment_Details.Count != 0)
                 {
@@ -133,6 +132,8 @@ namespace SSISTeam2
 
 
             }
+            context.Monthly_Check_Records.Add(checkRecord);
+            context.SaveChanges();
 
         }
 

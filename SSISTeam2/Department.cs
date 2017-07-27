@@ -17,8 +17,8 @@ namespace SSISTeam2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            this.Requests = new HashSet<Request>();
             this.Approval_Duties = new HashSet<Approval_Duties>();
+            this.Requests = new HashSet<Request>();
         }
     
         public string dept_code { get; set; }
@@ -32,10 +32,10 @@ namespace SSISTeam2
         public string logo_path { get; set; }
         public string deleted { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Approval_Duties> Approval_Duties { get; set; }
         public virtual Collection_Point Collection_Point1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Requests { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Approval_Duties> Approval_Duties { get; set; }
     }
 }

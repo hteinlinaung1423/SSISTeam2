@@ -17,17 +17,17 @@ namespace SSISTeam2.Views.DepartmentHead
         protected void Page_Load(object sender, EventArgs e)
         {
             //???(actual)
-            //userName = User.Identity.Name.ToString();
-            //UserModel user = new UserModel(userName);
-            //currentDeptCode = user.Department.dept_code.ToString();
+            userName = User.Identity.Name;
+            UserModel user = new UserModel(userName);
+            currentDeptCode = user.Department.dept_code.ToString();
 
             //(testing example)
-            currentDeptCode = "REGR";
+            //currentDeptCode = "REGR";
 
             if (!IsPostBack)
             {
                 var q = (from r in ent.Requests
-                         where r.dept_code == currentDeptCode && r.current_status == "Pending"
+                         where r.dept_code == currentDeptCode && (r.current_status == "Pending" || r.current_status == RequestStatus.UPDATED)
                          select new
                          {
                              r.request_id,

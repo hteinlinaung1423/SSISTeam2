@@ -18,10 +18,11 @@ namespace SSISTeam2.Views.StoreClerk
         const string SESSION_MODELS = "newRequest_SessionModels";
         const string SESSION_USER_MODEL = "newRequest_CurrentUser";
         const string SESSION_REQ_EDIT_ID = "newRequest_RequestEditId";
+        const string SESSION_IS_EDITING = "newRequest_RequestIsEditing";
 
         const string TEMP_DEPT_CODE = "REGR";
 
-        bool isEditing = false;
+        //bool isEditing = false;
 
         protected override PageStatePersister PageStatePersister
         {
@@ -41,6 +42,14 @@ namespace SSISTeam2.Views.StoreClerk
                 string requestToEdit = Request.QueryString["edit"];
                 int.TryParse(requestToEdit, out requestId); // 0 if fails
 
+                //if (requestId > 0)
+                //{
+                //    lblPageTitle.Text = "Update Request (Id " + requestId + ")";
+                //    isEditing = true;
+                //}
+
+                Session[SESSION_IS_EDITING] = false;
+
                 List<MakeNewRequestModel> models = new List<MakeNewRequestModel>();
                 using (SSISEntities context = new SSISEntities())
                 {
@@ -49,13 +58,14 @@ namespace SSISTeam2.Views.StoreClerk
                     List<Stock_Inventory> stocks = context.Stock_Inventory.Where(w => w.deleted != "Y").ToList();
                     Session[SESSION_STOCKS] = stocks;
                     RequestModelCollection requests;
-
+                    /*
                     if (!User.Identity.IsAuthenticated)
                     {
                         Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
-                    }
+                    }*/
 
                     UserModel currentUser = new UserModel(User.Identity.Name);
+                    //UserModel currentUser = new UserModel("Sally");
                     try
                     {
                         string deptCode = currentUser.Department.dept_code;
@@ -128,7 +138,10 @@ namespace SSISTeam2.Views.StoreClerk
                                 numIter++;
                             }
 
-                            isEditing = true;
+                            lblPageTitle.Text = "Update Request (Id " + requestId + ")";
+
+                            //isEditing = true;
+                            Session[SESSION_IS_EDITING] = true;
                             Session[SESSION_REQ_EDIT_ID] = requestId;
                             btnSubmit.Text = "Update request";
                         }
@@ -298,6 +311,9 @@ namespace SSISTeam2.Views.StoreClerk
                 Dictionary<string, int> items = new Dictionary<string, int>();
                 foreach (var model in models)
                 {
+                    // If the user didn't add a quantity, just SKIP
+                    if (model.Quantity == 0) continue;
+
                     if (items.ContainsKey(model.CurrentItem))
                     {
                         int qty = items[model.CurrentItem];
@@ -325,6 +341,8 @@ namespace SSISTeam2.Views.StoreClerk
                 newReq.Department = user.Department;
                 newReq.Status = RequestStatus.PENDING;
                 newReq.UserModel = user;
+
+                bool isEditing = (Session[SESSION_IS_EDITING] as bool?).Value;
 
                 if (isEditing)
                 {
@@ -375,11 +393,18 @@ namespace SSISTeam2.Views.StoreClerk
                         .Where(w => w.Key.ItemCode == model.CurrentItem)
                         .Select(ss =>
                         {
-                            string res = "";
-                            res += ss.Key.Category.cat_name;
-                            res += " " + ss.Key.Description;
-                            res += " (" + date + ")";
-                            return res;
+                            string result = string
+                                .Format("({0}) {1} - {2} ({3})",
+                                    ss.Key.Category.cat_name,
+                                    ss.Key.Description,
+                                    ss.Value,
+                                    date
+                                    );
+                            //string res = "";
+                            //res += ss.Key.Category.cat_name;
+                            //res += " " + ss.Key.Description;
+                            //res += " (" + date + ")";
+                            return result;
                         });
 
                         return its;

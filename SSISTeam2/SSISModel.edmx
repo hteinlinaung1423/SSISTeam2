@@ -102,6 +102,7 @@
           <Property Name="dept_code" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Favourites">
           <Key>
@@ -268,6 +269,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="status" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="current_status" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="item_code" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="orig_quantity" Type="int" />
         </EntityType>
         <Association Name="FK_Adjustment_Details_Inventory_Adjustment">
           <End Role="Inventory_Adjustment" Type="Self.Inventory_Adjustment" Multiplicity="1" />
@@ -650,7 +652,8 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
     [Volume_Request].[dept_code] AS [dept_code], 
     [Volume_Request].[status] AS [status], 
     [Volume_Request].[current_status] AS [current_status], 
-    [Volume_Request].[item_code] AS [item_code]
+    [Volume_Request].[item_code] AS [item_code], 
+    [Volume_Request].[orig_quantity] AS [orig_quantity]
     FROM [dbo].[Volume_Request] AS [Volume_Request]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Adjustment_Details_Inventory_Adjustment" Association="Self.FK_Adjustment_Details_Inventory_Adjustment">
@@ -895,6 +898,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Purchase_Order" Relationship="Self.FK_Purchase_Order_Dept_Registry" FromRole="Dept_Registry" ToRole="Purchase_Order" />
           <NavigationProperty Name="Request_Event" Relationship="Self.FK_Request_Event_Dept_Registry" FromRole="Dept_Registry" ToRole="Request_Event" />
           <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Dept_Registry" FromRole="Dept_Registry" ToRole="Requests" />
+          <Property Name="fullname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Favourite">
           <Key>
@@ -1093,6 +1097,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="current_status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="item_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="orig_quantity" Type="Int32" />
         </EntityType>
         <Association Name="FK_Adjustment_Details_Inventory_Adjustment">
           <End Role="Inventory_Adjustment" Type="Self.Inventory_Adjustment" Multiplicity="1" />
@@ -1581,48 +1586,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
             <End Role="Tender_List" EntitySet="Tender_List" />
             <End Role="Tender_List_Details" EntitySet="Tender_List_Details" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SSISModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SSISModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1730,6 +1694,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Dept_Registry">
             <EntityTypeMapping TypeName="SSISModel.Dept_Registry">
               <MappingFragment StoreEntitySet="Dept_Registry">
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
                 <ScalarProperty Name="dept_code" ColumnName="dept_code" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
@@ -1901,6 +1866,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="current_status" ColumnName="current_status" />
                 <ScalarProperty Name="item_code" ColumnName="item_code" />
+                <ScalarProperty Name="orig_quantity" ColumnName="orig_quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

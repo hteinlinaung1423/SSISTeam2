@@ -5,6 +5,7 @@
     <div class="panel-heading"><h3>Approve Reject </h3></div>
 
     <div>     
+        <asp:Label ID="lblInfo" runat="server" />
         Requested ID: <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         <br />
         Requested Date: <asp:Label ID="lbRqDate" runat="server" Text="-"></asp:Label>

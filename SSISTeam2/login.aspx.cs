@@ -12,9 +12,12 @@ namespace SSISTeam2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
             System.Web.Security.FormsAuthentication.SignOut();
             Session["tender"] = null;
             Session["item"] = null;
+            Session["fullname"] = null;
             IIdentity id = User.Identity;
             if (id.IsAuthenticated)
             {
@@ -22,8 +25,10 @@ namespace SSISTeam2
                 {
                     string redirect = Request.QueryString["return"];
                     Response.Redirect("~/" + redirect);
+                } else
+                {
+                    Response.Redirect("~/Default.aspx");
                 }
-                Response.Redirect("~/Default.aspx");
             }
 
         }

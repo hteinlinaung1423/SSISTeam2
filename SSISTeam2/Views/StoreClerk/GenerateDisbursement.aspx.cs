@@ -8,16 +8,14 @@ using System.Web.UI.WebControls;
 
 namespace SSISTeam2.Views.StoreClerk
 {
-    public partial class MakeRetrievalForm : System.Web.UI.Page
+    public partial class GenerateDisbursement : System.Web.UI.Page
     {
-        private const string SESSION_ALLOC_LIST = "MakeRetrievalForm_AllocList";
+        private const string SESSION_DISBURSE_LIST = "GenerateDisbursement_DisburseList";
+        private const string SESSION_COLLECTION_PT_LIST = "GenerateDisbursement_CollectionPtList";
+        private const string SESSION_CURRENT_COLLECTION_PT = "GenerateDisbursement_CurrentCollectionPt";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                Response.Redirect("/login.aspx?return=/Views/StoreClerk/DEMO_MakeRetrievalForm.aspx");
-            }
 
             if (IsPostBack)
             {
@@ -28,28 +26,37 @@ namespace SSISTeam2.Views.StoreClerk
             panelNormal.Visible = false;
             using (SSISEntities context = new SSISEntities())
             {
-                var allocated = FacadeFactory.getAllocatedService(context).getAllAllocated();
-                if (allocated.Count == 0)
+                List<Collection_Point> collectionPts = context.Collection_Point.Where(w => w.deleted != "Y").ToList();
+
+                if (collectionPts.Count == 0) return;
+
+                // If the user is tagged to a collection point, add it into the location name
+                string currentUser = User.Identity.Name;
+
+                foreach (var collectionPt in collectionPts)
                 {
-                    panelNoItems.Visible = true;
-                    return;
+                    if (collectionPt.username == currentUser)
+                    {
+                        collectionPt.location += " (Assigned to you)";
+                    }
                 }
 
-                panelNormal.Visible = true;
+                Session[SESSION_COLLECTION_PT_LIST] = collectionPts;
 
-                //var items = allocated.SelectMany(sm =>
-                //    sm.Items.Select(s => new { s.Key.ItemCode, s.Key.Description, s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name })
-                //).OrderBy(o => o.name)
-                //.OrderBy(o => o.ItemCode)
-                //.ToList();//.GroupBy(k => k.ItemCode, v => new { v.dept_code, v.RequestId });
+                ddlCollectionPoint.DataSource = collectionPts;
+                ddlCollectionPoint.DataValueField = "collection_pt_id";
+                ddlCollectionPoint.DataTextField = "location";
+                ddlCollectionPoint.DataBind();
 
-                var itemGroups = allocated.SelectMany(sm =>
+                //var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursementsForCollectionPoint(collectionPts.First().collection_pt_id);
+                var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursements();
+
+                var itemGroups = retrieved.SelectMany(sm =>
                     sm.Items
-                    //.Where(w => w.Value > 0)
-                    .Select(s => new { s.Key.ItemCode, s.Key.Description, s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name })
+                    .Select(s => new { s.Key.ItemCode, s.Key.Description, s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name, sm.CollectionPtId })
                 ).GroupBy(k => k.ItemCode, v => v).ToList();
 
-                List<RetrievalFormViewModel> list = new List<RetrievalFormViewModel>();
+                List<GenerateDisbursementViewModel> list = new List<GenerateDisbursementViewModel>();
 
                 foreach (var itemGroup in itemGroups)
                 {
@@ -59,7 +66,7 @@ namespace SSISTeam2.Views.StoreClerk
                         int deptQty = deptGroup.Select(s => s.Value).Aggregate((a, b) => a + b);
                         List<int> reqIds = deptGroup.Select(s => s.RequestId).ToList();
 
-                        RetrievalFormViewModel model = new RetrievalFormViewModel();
+                        GenerateDisbursementViewModel model = new GenerateDisbursementViewModel();
                         model.ItemCode = itemGroup.Key;
                         model.ItemDescription = itemGroup.First().Description;
                         model.DeptCode = deptGroup.Key;
@@ -67,20 +74,33 @@ namespace SSISTeam2.Views.StoreClerk
                         model.Quantity = deptQty;
                         model.RequestIds = reqIds;
                         model.Include = true;
+                        model.CollectionPtId = deptGroup.First().CollectionPtId;
 
                         list.Add(model);
                     }
                 }
 
-                Session[SESSION_ALLOC_LIST] = list;
+                //lblDebug.Text = list.Count.ToString();
+
+                Session[SESSION_COLLECTION_PT_LIST] = list;
+                int currentCollectionPtId = collectionPts.First().collection_pt_id;
+                Session[SESSION_CURRENT_COLLECTION_PT] = currentCollectionPtId;
 
                 _refreshGrid(list);
+
+                if (retrieved.Count == 0)
+                {
+                    panelNoItems.Visible = true;
+                    return;
+                }
+
+                panelNormal.Visible = true;
             }
         }
 
         protected void chkbxInclude_CheckedChanged(object sender, EventArgs e)
         {
-            List<RetrievalFormViewModel> list = Session[SESSION_ALLOC_LIST] as List<RetrievalFormViewModel>;
+            List<GenerateDisbursementViewModel> list = Session[SESSION_COLLECTION_PT_LIST] as List<GenerateDisbursementViewModel>;
             CheckBox chkBox = sender as CheckBox;
             GridViewRow gvr = chkBox.Parent.Parent as GridViewRow;
 
@@ -89,14 +109,35 @@ namespace SSISTeam2.Views.StoreClerk
             // Flip the include boolean
             list[selectedIndex].Include = !list[selectedIndex].Include;
 
-            Session[SESSION_ALLOC_LIST] = list;
+            Session[SESSION_COLLECTION_PT_LIST] = list;
 
             _refreshGrid(list);
         }
 
-        private void _refreshGrid(List<RetrievalFormViewModel> list)
+        private void _refreshGrid(List<GenerateDisbursementViewModel> list)
         {
-            gvToRetrieve.DataSource = list;
+            int currentCollectionPtId = (int) Session[SESSION_CURRENT_COLLECTION_PT];
+
+            var filtered = list;
+            if (currentCollectionPtId > 0)
+            {
+                filtered = list.Where(w => w.CollectionPtId == currentCollectionPtId).ToList();
+            }
+
+            panelNoItems.Visible = false;
+            panelNormal.Visible = false;
+
+            if (filtered.Count > 0)
+            {
+                // Items to show
+                panelNormal.Visible = true;
+            } else
+            {
+                // Nothing to show
+                panelNoItems.Visible = true;
+            }
+
+            gvToRetrieve.DataSource = filtered;
             gvToRetrieve.DataBind();
             MergeCells(gvToRetrieve);
         }
@@ -148,7 +189,7 @@ namespace SSISTeam2.Views.StoreClerk
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             // Get all the models
-            List<RetrievalFormViewModel> list = Session[SESSION_ALLOC_LIST] as List<RetrievalFormViewModel>;
+            List<GenerateDisbursementViewModel> list = Session[SESSION_COLLECTION_PT_LIST] as List<GenerateDisbursementViewModel>;
             // Convert to ids and items to retrieve
             var listByRequestIds = list
                 .SelectMany(sm => sm.RequestIds
@@ -160,7 +201,7 @@ namespace SSISTeam2.Views.StoreClerk
             {
                 foreach (var request in listByRequestIds)
                 {
-                    FacadeFactory.getRequestMovementService(context).moveFromAllocatedToRetrieving(request.Key, request.ToList(), User.Identity.Name);
+                    FacadeFactory.getRequestMovementService(context).moveFromRetrievedToDisbursing(request.Key, request.ToList(), User.Identity.Name);
                 }
 
                 context.SaveChanges();
@@ -168,113 +209,36 @@ namespace SSISTeam2.Views.StoreClerk
 
             Response.Redirect(Request.Url.ToString(), false);
         }
+
+        protected void ddlCollectionPoint_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<GenerateDisbursementViewModel> list = Session[SESSION_COLLECTION_PT_LIST] as List<GenerateDisbursementViewModel>;
+
+            DropDownList ddl = sender as DropDownList;
+
+            int newCollectionPtId = int.Parse(ddl.SelectedValue);
+
+            Session[SESSION_CURRENT_COLLECTION_PT] = newCollectionPtId;
+
+            _refreshGrid(list);
+        }
     }
 
-    class RetrievalFormViewModel
+    class GenerateDisbursementViewModel : RetrievalFormViewModel
     {
-        string itemCode, itemDescription, deptCode, deptName;
-        int quantity;
-        List<int> requestIds;
-        bool include;
+        private int collectionPtId;
 
-        public string ItemCode
+        public int CollectionPtId
         {
             get
             {
-                return itemCode;
+                return collectionPtId;
             }
 
             set
             {
-                itemCode = value;
-            }
-        }
-
-        public string ItemDescription
-        {
-            get
-            {
-                return itemCode + " - " + itemDescription;
-            }
-
-            set
-            {
-                itemDescription = value;
-            }
-        }
-
-        public string DeptCode
-        {
-            get
-            {
-                return deptCode;
-            }
-
-            set
-            {
-                deptCode = value;
-            }
-        }
-
-        public string DeptName
-        {
-            get
-            {
-                return deptName;
-            }
-
-            set
-            {
-                deptName = value;
-            }
-        }
-
-        public int Quantity
-        {
-            get
-            {
-                return quantity;
-            }
-
-            set
-            {
-                quantity = value;
-            }
-        }
-
-        public List<int> RequestIds
-        {
-            get
-            {
-                return requestIds;
-            }
-
-            set
-            {
-                requestIds = value;
-            }
-        }
-
-        public bool Include
-        {
-            get
-            {
-                return include;
-            }
-
-            set
-            {
-                include = value;
-            }
-        }
-
-        public int IncludedQty
-        {
-            get
-            {
-                return include ? quantity : 0;
+                collectionPtId = value;
             }
         }
     }
-
 }
