@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -13,15 +14,12 @@ namespace SSISTeam2.Views.Employee
     public partial class EmpRequestHistory : System.Web.UI.Page
     {
         SSISEntities ent = new SSISEntities();
-        int selectreqid = 4;//testing
-        string username = "Sally";//testing
-        string currentDept = "REGR";//testing
+        //string username = "yht";//testing
+        //string currentDept = "REGR";//testing
 
-        //string username = User.Identity.Name.ToString();
-        //UserModel user = new UserModel(username);
+        
         //string currentDept = user.Department.dept_code.ToString();*/
-        string statusPending = "Pending";
-        string statusUpdated = "Updated";
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             //selectreqid = Int16.Parse(Request.QueryString["key"]); 
@@ -34,10 +32,23 @@ namespace SSISTeam2.Views.Employee
 
         protected Boolean IsEditable(String name, String status)
         {
-            return name == username && (status == statusPending | status == statusUpdated);
+            string username = "Sally";//testing
+            //return name == (User.Identity.Name.ToString()) && (status == RequestStatus.PENDING  | status == RequestStatus.UPDATED);
+            return name == (username) && (status == RequestStatus.PENDING | status == RequestStatus.UPDATED);
         }
         private void FillPage()
         {
+            /* need to login
+            if (!User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
+            }*/
+
+            //UserModel currentUser = new UserModel(User.Identity.Name);
+            string username = "Sally";//testing
+            //string username = User.Identity.Name.ToString();
+            UserModel user = new UserModel(username);
+            string currentDept = user.Department.dept_code;
             var q = (from x in ent.Requests
                      where x.dept_code == currentDept
                      select new
@@ -54,9 +65,7 @@ namespace SSISTeam2.Views.Employee
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {   
-            //not sure about the aspx name
-            //Response.Redirect("~/ViewRequestDetails?username=" + e.CommandArgument);
-            //Response.Redirect("~/CreateNewReq.aspx");
+            Response.Redirect("MakeNewRequest.aspx");
         }
 
         protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,25 +74,17 @@ namespace SSISTeam2.Views.Employee
             string id = (GridView2.SelectedRow.FindControl("lblreqid") as Label).Text;
             //Response.Redirect("~/ViewDetailsPage.aspx?key="+id);
         }
-
-        protected void details_Click(object sender, EventArgs e)
-        {
-        }
-
-        protected void update_Click(object sender, EventArgs e)
-        {
-        }
-
-        protected void cancel_Click(object sender, EventArgs e)
+        
+        protected void cancel_Click(int requestID)
         {
 
             //change status in request table
-            var req = ent.Requests.SingleOrDefault(x => x.request_id == selectreqid);
-            req.current_status = "Cancelled";
+            var req = ent.Requests.SingleOrDefault(x => x.request_id == requestID);
+            req.current_status = RequestStatus.CANCELLED;
 
             //change status in request event table
             var q = from r in ent.Requests
-                    where r.request_id == selectreqid
+                    where r.request_id == requestID
                     join de in ent.Request_Details on r.request_id equals de.request_id
                     select de.request_detail_id;
             List<int> reqDetails = q.ToList();
@@ -106,15 +107,18 @@ namespace SSISTeam2.Views.Employee
             List<Request_Event> events = p.ToList();
             foreach (Request_Event e in events)
             {
-                e.status = "Cancelled";
+                e.status = RequestStatus.CANCELLED;
             }
             ent.SaveChanges();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            //string username = User.Identity.Name.ToString();
+            string username = "Sally";
+            UserModel user = new UserModel(username);
             var q = (from x in ent.Requests
-                     where x.dept_code == currentDept
+                     where x.dept_code == user.Department.dept_code
                      select new
                      {
                          x.request_id,
@@ -134,9 +138,27 @@ namespace SSISTeam2.Views.Employee
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             //not sure about the aspx name
-            //Response.Redirect("~/ViewRequestDetails?requestid=" + e.CommandArgument);
+            //
+            
+            if (e.CommandName == "view")
+            {
+                Response.Redirect("ViewRequestsDetails.aspx?requestid=" + e.CommandArgument.ToString());
+            }
+            else if(e.CommandName == "update")
+            {
+                Response.Redirect("MakeNewRequest.aspx?edit=" + e.CommandArgument.ToString());
+            }
+            else if(e.CommandName == "cancel")
+            {
+                cancel_Click(Convert.ToInt32(e.CommandArgument.ToString()));
+            }
         }
 
+        protected void GridView2_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView2.EditIndex = -1;
+            FillPage();
+        }
     }
     
 }

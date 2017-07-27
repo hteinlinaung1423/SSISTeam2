@@ -6,7 +6,7 @@
         <div class="panel-heading"><h3>View Request History</h3></div>
     </div>
 
-    <asp:Button ID="btnCreate" runat="server" Text="Create New Request" OnClick="btnCreate_Click" CssClass="btn btn-primary"/>
+    <asp:Button ID="btnCreate" runat="server" Text="Create New Request" OnClick="btnCreate_Click" CssClass="btn btn-success"/>
     <br />
     <br />
     Search by name: <asp:TextBox ID="searchtext" runat="server"></asp:TextBox>
@@ -23,7 +23,7 @@
         HeaderStyle-CssClass="text-center-impt"
         CssClass="table table-responsive table-striped"
         PagerStyle-HorizontalAlign="Center" 
-        PagerSettings-Position="TopAndBottom"
+        PagerSettings-Position="TopAndBottom" OnRowCancelingEdit="GridView2_RowCancelingEdit"
          
         >
 
@@ -69,17 +69,18 @@
                     </asp:TemplateField>
             <asp:TemplateField ItemStyle-Width="10%" >
                         <ItemTemplate>
-                            <asp:Button ID="details" runat="server" Text="Details"
+                            <asp:LinkButton ID="details" runat="server" Text="Details"
                                 CommandName="view" CommandArgument='<%# Bind("request_id") %>'
-                                CssClass="btn btn-primary" OnClick="details_Click"/>
+                                CssClass="btn btn-primary"/>
                         </ItemTemplate>
                         <ItemStyle Width="10%"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField ItemStyle-Width="10%" >
                         <ItemTemplate>
-                            <asp:Button ID="update" runat="server" Text="Update" 
+                            <asp:LinkButton ID="update" runat="server" Text="Update" 
+                                CommandName="update" CommandArgument='<%# Bind("request_id") %>'
                                 Visible='<%# IsEditable((String)Eval("username"),(String)Eval("current_status"))%>'
-                                CssClass="btn btn-primary" OnClick="update_Click"/>
+                                CssClass="btn btn-primary"/>
                             
                         </ItemTemplate>
 <ItemStyle Width="10%"></ItemStyle>
@@ -87,10 +88,11 @@
              <asp:TemplateField ItemStyle-Width="10%" >
 
                         <ItemTemplate>
-                            <asp:Button ID="cancel" runat="server" Text="Cancel"
+                            <asp:LinkButton ID="cancel" runat="server" Text="Cancel"
+                                CommandName="cancel" CommandArgument='<%# Bind("request_id") %>'
                                 Visible='<%# IsEditable((String)Eval("username"),(String)Eval("current_status"))%>'
-                                CssClass="btn btn-primary" OnClick="cancel_Click"
-                                OnClientClick="return confirm('Are you sure you want to cancel this request?');" CommandName="Cancel"/>
+                                CssClass="btn btn-danger"
+                                OnClientClick="return confirm('Are you sure you want to cancel this request?');" />
                         </ItemTemplate>
 
 <ItemStyle Width="10%"></ItemStyle>
