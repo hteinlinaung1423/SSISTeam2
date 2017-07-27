@@ -41,6 +41,11 @@ namespace SSISTeam2.Views.StoreClerk
                 string requestToEdit = Request.QueryString["edit"];
                 int.TryParse(requestToEdit, out requestId); // 0 if fails
 
+                if (requestId > 0)
+                {
+                    isEditing = true;
+                }
+
                 List<MakeNewRequestModel> models = new List<MakeNewRequestModel>();
                 using (SSISEntities context = new SSISEntities())
                 {

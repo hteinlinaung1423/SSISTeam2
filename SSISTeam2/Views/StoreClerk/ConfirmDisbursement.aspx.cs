@@ -30,39 +30,9 @@ namespace SSISTeam2.Views.StoreClerk
                 //List<Collection_Point> collectionPts = context.Collection_Point.Where(w => w.deleted != "Y").ToList();
                 List<Department> departmentList = context.Departments.Where(w => w.deleted != "Y").ToList();
 
-                if (departmentList.Count == 0)
-                {
-                    panelNoItems.Visible = true;
-                    return;
-                }
-
-                panelNormal.Visible = true;
-
                 Session[SESSION_DEPARTMENT_LIST] = departmentList;
 
-                //if (collectionPts.Count == 0) return;
-
-                // If the user is tagged to a collection point, add it into the location name
                 string currentUser = User.Identity.Name;
-
-                //foreach (var collectionPt in collectionPts)
-                //{
-                //    if (collectionPt.username == currentUser)
-                //    {
-                //        collectionPt.location += " (Assigned to you)";
-                //    }
-                //}
-
-                //ddlCollectionPoints.DataSource = collectionPts;
-                //ddlCollectionPoints.DataValueField = "collection_pt_id";
-                //ddlCollectionPoints.DataTextField = "location";
-                //ddlCollectionPoints.DataBind();
-
-
-                //int currentCollectionPtId = collectionPts.First().collection_pt_id;
-                // Get the department codes that are related to this value
-                //List<Department> departments = departmentList.Where(w => w.collection_point == currentCollectionPtId).ToList();
-
 
                 // Get all that can be disbursed given the current user
                 DisbursementModelCollection disbursingList = FacadeFactory.getDisbursementService(context).getAllThatCanBeSignedOff(currentUser);
@@ -105,6 +75,15 @@ namespace SSISTeam2.Views.StoreClerk
                 _refreshDepartmentsDropDown(departmentList);
 
                 _refreshGrid(filteredDisbursingList);
+
+                if (departmentList.Count == 0 || disbursingList.Count == 0)
+                {
+                    panelNoItems.Visible = true;
+                } else
+                {
+                    panelNormal.Visible = true;
+                }
+
             }
         }
         private void _refreshGrid(List<ConfirmDisbursementViewModel> list)
@@ -116,6 +95,12 @@ namespace SSISTeam2.Views.StoreClerk
             gvDisbursement.DataSource = filtered;
             gvDisbursement.DataBind();
             //MergeCells(gvToRetrieve);
+
+            // Update representative name
+            List<Department> deptList = Session[SESSION_DEPARTMENT_LIST] as List<Department>;
+
+            Department dep = deptList.Find(f => f.dept_code == selectedDeptCode);
+            lblRepName.Text = "Representative: " + dep.rep_user; //new UserModel(dep.rep_user).Fullname;
         }
 
         private void _refreshDepartmentsDropDown(List<Department> departments)
@@ -131,6 +116,7 @@ namespace SSISTeam2.Views.StoreClerk
         protected void ddlDepartments_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<ConfirmDisbursementViewModel> list = Session[SESSION_DISBURSING_LIST] as List<ConfirmDisbursementViewModel>;
+
 
             // Reset all quantities
             list.ForEach(l => l.QuantityActual = l.QuantityExpected);
