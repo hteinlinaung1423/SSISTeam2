@@ -10,7 +10,7 @@
 namespace SSISTeam2.Views.StoreClerk {
     
     
-    public partial class MakeRetrievalForm {
+    public partial class GenerateRetrieval {
         
         /// <summary>
         /// form1 control.

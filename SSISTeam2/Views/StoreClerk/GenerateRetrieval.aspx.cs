@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace SSISTeam2.Views.StoreClerk
 {
-    public partial class MakeRetrievalForm : System.Web.UI.Page
+    public partial class GenerateRetrieval : System.Web.UI.Page
     {
         private const string SESSION_ALLOC_LIST = "MakeRetrievalForm_AllocList";
 
