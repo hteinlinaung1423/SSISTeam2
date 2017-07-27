@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace SSISTeam2
 {
@@ -11,6 +13,22 @@ namespace SSISTeam2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
+            if (Request.IsAuthenticated)
+            {
+                string currentUser = Page.User.Identity.Name;
+
+                string fullName = "";
+                using (SSISEntities ctx = new SSISEntities())
+                {
+                    fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                }
+
+                lblFullName.Text = "Welcome, "+fullName;
+               
+            }
+            
 
         }
 
@@ -50,7 +68,7 @@ namespace SSISTeam2
 
         protected void MakeNewRequest(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/StoreClerk/MakeNewRequest.aspx");
+            Response.Redirect("~/Views/Employee/MakeNewRequest.aspx");
         }
 
         protected void ViewRequestHistory(object sender, EventArgs e)

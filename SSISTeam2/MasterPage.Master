@@ -129,7 +129,9 @@
                     <%--<p class="navbar-text navbar-right">Signed in as <%= Page.User.Identity.Name %>  </p>--%>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
+                            <asp:Label Font-Italic="true" runat="server" CssClass="navbar-text" ID="lblFullName"></asp:Label>
                             <div class="navbar-text">Signed in as <%= Page.User.Identity.Name %></div>
+                            
                         </li>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages <span class="badge btn-default">4</span></a></li>
                         <li class="dropdown">
