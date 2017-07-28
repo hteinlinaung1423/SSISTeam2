@@ -30,13 +30,13 @@ namespace SSISTeam2.Views.DepartmentHead
             UserModel user = new UserModel(loginUserName);
             currentDeptCode = user.Department.dept_code.ToString();
             //show Departmnet Name(Actual)
-            lbDeptName.Text = user.Department.name.ToString() + " Department";
+           lbDeptName.Text = user.Department.name.ToString()+ " Department";
 
             //(testing example)
             //loginUserName = "Low Kway Boo";
             //currentDeptCode = ent.Dept_Registry.Where(b => b.username == loginUserName).Select(c => c.dept_code).First().ToString();
-            //show Departmnet Name(testing example)
-            lbDeptName.Text = currentDeptCode + " Department";
+            ////show Departmnet Name(testing example)
+            //lbDeptName.Text = currentDeptCode + " Department";
 
             //get login department all employee
             List<Dept_Registry> currendepReg = ent.Dept_Registry.Where(b => b.dept_code == currentDeptCode).ToList<Dept_Registry>();

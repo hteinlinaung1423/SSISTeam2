@@ -40,6 +40,8 @@
     <div class="row">
         <div class="col-xs-12">
             <asp:Label ID="lblRepName" Text="Representative: " runat="server" CssClass="h5" />
+            <br />
+            <asp:Label ID="lblCollectionPtLocation" Text="Collection point: " runat="server" CssClass="h5" />
         </div>
     </div>
 

@@ -23,12 +23,12 @@
             <ContentTemplate>
                 <div class="row">
 
-                    <asp:GridView ID="GridView1" runat="server"
+                    <asp:GridView ID="GridView1" Width="100%" runat="server"
                         AutoGenerateColumns="false"
                         OnRowDataBound="GridView1_RowDataBound"
                         CssClass="table table-responsive table-striped"
                         GridLines="None"
-                        BorderColor="White">
+                        BorderColor="White" >
                         <Columns>
                             <asp:TemplateField HeaderText="No.">
                                 <ItemTemplate>
@@ -44,7 +44,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Description">
                                 <ItemTemplate>
-                                    <asp:ListBox ID="lbDescriptions" runat="server" AutoPostBack="True" OnSelectedIndexChanged="lbDescriptions_SelectedIndexChanged" CssClass="form-control"></asp:ListBox>
+                                    <asp:ListBox ID="lbDescriptions" runat="server" AutoPostBack="True" Height="150px" OnSelectedIndexChanged="lbDescriptions_SelectedIndexChanged" CssClass="form-control"></asp:ListBox>
                                     <%--<asp:DropDownList ID="ddlDescriptions" runat="server"></asp:DropDownList>--%>
                                     <%--<asp:Label runat="server" Text='<%# Eval("CurrentDescription") %>'></asp:Label>--%>
                                 </ItemTemplate>
@@ -56,7 +56,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Quantity">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbQuantity" runat="server" Text='<%# Eval("Quantity") %>'
+                                    <asp:TextBox ID="tbQuantity" runat="server" width="80px" Text='<%# Eval("Quantity") %>'
                                         max='<%# Eval("Quantity") %>'
                                         OnTextChanged="tbQuantity_TextChanged"
                                         AutoPostBack="True"
@@ -67,11 +67,11 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Previously Approved">
                                 <ItemTemplate>
-                                    <asp:ListBox ID="lbPrevApproved" runat="server" Enabled="False" CssClass="form-control" EnableViewState="false"></asp:ListBox>
+                                    <asp:ListBox ID="lbPrevApproved" runat="server" Enabled="False" CssClass="form-control" height="150px" EnableViewState="false"></asp:ListBox>
                                     <%--<asp:Label runat="server" Text='<%# "hi" %>'></asp:Label>--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Actions">
+                            <asp:TemplateField HeaderText="">
                                 <ItemTemplate>
                                     <asp:Button runat="server" AutoPostBack="True" Text="Remove" ID="btnRemoveRow" OnClick="btnRemoveRow_Click" CssClass="btn btn-danger" />
                                 </ItemTemplate>

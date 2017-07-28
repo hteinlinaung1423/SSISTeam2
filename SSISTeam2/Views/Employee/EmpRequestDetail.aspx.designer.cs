@@ -7,81 +7,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.StoreClerk {
+namespace SSISTeam2.Views.Employee {
     
     
-    public partial class ConfirmDisbursement {
+    public partial class EmpRequestDetail {
         
         /// <summary>
-        /// ddlDepartments control.
+        /// lblreqid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDepartments;
+        protected global::System.Web.UI.WebControls.Label lblreqid;
         
         /// <summary>
-        /// lblRepName control.
+        /// lblDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRepName;
+        protected global::System.Web.UI.WebControls.Label lblDate;
         
         /// <summary>
-        /// lblCollectionPtLocation control.
+        /// lblstatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCollectionPtLocation;
+        protected global::System.Web.UI.WebControls.Label lblstatus;
         
         /// <summary>
-        /// gvDisbursement control.
+        /// lblemployeename control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvDisbursement;
+        protected global::System.Web.UI.WebControls.Label lblemployeename;
         
         /// <summary>
-        /// lblWarningInfo control.
+        /// lblcomment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWarningInfo;
+        protected global::System.Web.UI.WebControls.Label lblcomment;
         
         /// <summary>
-        /// panelNoItems control.
+        /// GridView2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelNoItems;
+        protected global::System.Web.UI.WebControls.GridView GridView2;
         
         /// <summary>
-        /// panelNormal control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelNormal;
-        
-        /// <summary>
-        /// btnSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        protected global::System.Web.UI.WebControls.LinkButton btnBack;
     }
 }
