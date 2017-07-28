@@ -10,7 +10,7 @@
     <br />
     <br />
     Search by name: <asp:TextBox ID="searchtext" runat="server"></asp:TextBox>
-    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />  
+    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-default" />  
     <br />
     <br />
     <asp:GridView ID="GridView2" runat="server" 
@@ -18,12 +18,15 @@
         OnRowCommand="GridView2_RowCommand"
         GridLines="None"
         AutoGenerateColumns="false"
+        AllowSorting="true"
         AllowPaging="true"
         PageSize="10"
         HeaderStyle-CssClass="text-center-impt"
         CssClass="table table-responsive table-striped"
         PagerStyle-HorizontalAlign="Center" 
-        PagerSettings-Position="TopAndBottom" OnRowCancelingEdit="GridView2_RowCancelingEdit"
+        PagerSettings-Position="TopAndBottom" 
+        OnRowCancelingEdit="GridView2_RowCancelingEdit"
+        OnPageIndexChanging="GridView2_PageIndexChanging"
          
         >
 
@@ -47,22 +50,22 @@
                </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Request ID" SortExpression="Request ID">
+            <asp:TemplateField HeaderText="Request ID" SortExpression="request_id">
                         <ItemTemplate>
                             <asp:Label ID="lblreqid" runat="server" Text='<%# Eval("request_id") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-            <asp:TemplateField HeaderText="Request Employee" SortExpression="Request Employee">
+            <asp:TemplateField HeaderText="Request Employee" SortExpression="username">
                         <ItemTemplate>
                             <asp:Label ID="lblempname" runat="server" Text='<%# Eval("username") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-            <asp:TemplateField HeaderText="Date" SortExpression="Date">
+            <asp:TemplateField HeaderText="Date" SortExpression="date_time">
                         <ItemTemplate>
                             <asp:Label ID="lbldate" runat="server" Text='<%# Eval("date_time") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-            <asp:TemplateField HeaderText="Status" SortExpression="Status">
+            <asp:TemplateField HeaderText="Status" SortExpression="current_status">
                         <ItemTemplate>
                             <asp:Label ID="lblstatus" runat="server" Text='<%# Eval("current_status") %>'></asp:Label>
                         </ItemTemplate>
@@ -71,7 +74,7 @@
                         <ItemTemplate>
                             <asp:LinkButton ID="details" runat="server" Text="Details"
                                 CommandName="view" CommandArgument='<%# Bind("request_id") %>'
-                                CssClass="btn btn-primary"/>
+                                CssClass="btn btn-info"/>
                         </ItemTemplate>
                         <ItemStyle Width="10%"></ItemStyle>
             </asp:TemplateField>
@@ -91,7 +94,7 @@
                             <asp:LinkButton ID="cancel" runat="server" Text="Cancel"
                                 CommandName="cancel" CommandArgument='<%# Bind("request_id") %>'
                                 Visible='<%# IsEditable((String)Eval("username"),(String)Eval("current_status"))%>'
-                                CssClass="btn btn-danger"
+                                CssClass="btn btn-warning"
                                 OnClientClick="return confirm('Are you sure you want to cancel this request?');" />
                         </ItemTemplate>
 
