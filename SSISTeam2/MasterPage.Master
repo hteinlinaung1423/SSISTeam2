@@ -29,6 +29,7 @@
     <style type="text/css">
         body {
             padding-top: 85px;
+            /*padding-bottom: 100px;*/
             background-color: white;
         width:100%;
       
@@ -37,16 +38,17 @@
 
 
         .footer{
-            border-top-style:groove;
+            /*border-top-style:groove;*/
             position: fixed;
             bottom: 0;
-            padding-left:10px;
-            background-color:rgb(237, 242, 249);
+            padding-bottom:0;
+            /*padding-left:10px;
+            background-color:rgb(237, 242, 249);*/
             width: 100%;
             text-align:center;
-            padding-top:2px;
-            height:3%;
-        }
+            /*padding-bottom:2px;
+            height:2px;*/
+        } 
 
         .carousel_height {
             height: 500px;
@@ -64,7 +66,9 @@
             /*color: white;*/
         }
         #content
-        {width:100%;}
+        {width:100%;
+         
+        }
 
         /*.dropdown-menu {
     position: absolute;
@@ -112,7 +116,7 @@
                         <span class="glyphicon glyphicon-align-justify"></span>
                        
                     </button>
-                    <a class="navbar-brand" style="color: #ECEFF4; font-size:28px; font-family:Papyrus">Logic University Store</a>
+                    <a class="navbar-brand" style="color: #ECEFF4; font-size:28px; font-family:Papyrus"><b>Logic University Store</b></a>
                 </div>
 
 
@@ -171,7 +175,9 @@
                                 <%--<li>
                                     <asp:Button ID="MakeRequest" runat="server" CausesValidation="false" Text="Make Request" CssClass="btn btn-block btn-primary" OnClick="MakeNewRequest" /></li>--%>
                                 <li>
-                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View History" CssClass="btn btn-block btn-primary" OnClick="ViewRequestHistory"/></li>
+                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View Request History" CssClass="btn btn-block btn-primary" OnClick="ViewRequestHistory"/></li>
+                                <li>
+                                    <asp:Button ID="ViewCatalogue" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
                                 <li>
                                     <asp:Button ID="btnDepRepViewDisbursements" runat="server" CausesValidation="false" Text="View Recent Disbursements" CssClass="btn btn-block btn-primary" OnClick="btnDepRepViewDisbursements_Click"/></li>
                                 <% }
@@ -187,6 +193,8 @@
                                     <asp:Button ID="GeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" CssClass="btn btn-block btn-primary" OnClick="MakeOrder" /></li>
                                 <li>
                                     <asp:Button ID="genReports" runat="server" CausesValidation="false" Text="Generate Reports" CssClass="btn btn-block btn-primary" OnClick="genReport"/></li>
+                                <li>
+                                    <asp:Button ID="ViewCatalogue2" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
                                 <% }
 
                                     if (Page.User.IsInRole("DeptHead"))
@@ -195,7 +203,12 @@
                                     <asp:Button ID="PendingApprove" runat="server" CausesValidation="false" Text="Approve Request" CssClass="btn btn-block btn-primary" OnClick="ApproveBtn" /></li>
                                 <li>
                                     <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delagate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
+                                <li>
+                                    <asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
 
+                                 <li>
+                                 <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>
+                                
                                 <% }
                                     if (Page.User.IsInRole("Manager"))
                                     { %>
@@ -209,6 +222,10 @@
                                     <asp:Button ID="manGeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" CssClass="btn btn-block btn-primary" OnClick="MakeOrder" /></li>
                                 <li>
                                     <asp:Button ID="mangenReports" runat="server" CausesValidation="false" Text="Generate Reports" CssClass="btn btn-block btn-primary" OnClick="genReport"/></li>
+                                <li>
+                                    <asp:Button ID="ViewCatalogue4" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
+                                <li>
+                                 <asp:Button ID="ChangeCPRep2" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>
                                 <% } %>
                                 
                                 <%--Moved Logout Button to bottom of drop down list--%>
@@ -239,12 +256,13 @@
 
 
         <hr />
-        <div class="footer">
-          
-                &copy; 2017 Logic University Store Project All rights Reserved.
+
+        <div class="well">
+            <p>
+                &copy; 2017 Logic University Store Project All Rights Reserved.
            
         </div>
-
+      
     </form>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -22,6 +22,14 @@ namespace SSISTeam2.Classes.WebServices
         List<int> GetDeliveryOrderId();
 
         [OperationContract]
+        [WebGet(UriTemplate = "/Approve/{id}", ResponseFormat = WebMessageFormat.Json)]
+        void Approve(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Reject/{id}", ResponseFormat = WebMessageFormat.Json)]
+        void Reject(string id);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder/{id}", ResponseFormat = WebMessageFormat.Json)]
         List<Delivery_Details> GetDeliveryOrdersDetails(string id);
 
@@ -57,6 +65,8 @@ namespace SSISTeam2.Classes.WebServices
         ResponseFormat = WebMessageFormat.Json)]
         void Create(WCF_AppDuties Approval_Duties);
 
+        //Service Contract by Heng Tiong
+
         [OperationContract]
         [WebGet(UriTemplate = "/InventoryCheck/", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_MonthlyCheck> GetIMonthlyCheckModel();
@@ -64,6 +74,37 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/InventoryCheckName", ResponseFormat = WebMessageFormat.Json)]
         List<string> GetMonthlyCheckName();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/CheckApprovalDuties/{deptcode}", ResponseFormat = WebMessageFormat.Json)]
+        WCF_AppDuties CheckAppDuties(string deptcode);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Update", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        string Update(WCF_AppDuties app);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/InventoryCheck/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList);
+
+        //By Yin
+        [OperationContract]
+        [WebGet(UriTemplate = "/RetriveTQty", ResponseFormat = WebMessageFormat.Json)]
+        WCFItemTotalQty[] GetEachItemQty();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbCollectP", ResponseFormat = WebMessageFormat.Json)]
+        List<String> GetDisbCollectP();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbCollectDept/{cpid}", ResponseFormat = WebMessageFormat.Json)]
+        List<String> GetDisbCollectDept(string cpid);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbDeptDetail/{deptname}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFDeptTQty> GetDeptDetail(string deptname);
     }
 
     [DataContract]
@@ -179,14 +220,14 @@ namespace SSISTeam2.Classes.WebServices
     {
 
         public string username;
-        public DateTime startDate;
-        public DateTime endDate;
+        public string startDate;
+        public string endDate;
         public string deptCode;
-        public DateTime createdDate;
+        public string createdDate;
         public string deleted;
         public string reason;
 
-        public static WCF_AppDuties Make(string username, DateTime startDate, DateTime endDate, string deptCode,DateTime createdDate,string deleted,string reason)
+        public static WCF_AppDuties Make(string username, string startDate, string endDate, string deptCode, string createdDate, string deleted, string reason)
         {
             WCF_AppDuties c = new WCF_AppDuties();
             c.username = username;
@@ -207,14 +248,14 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         [DataMember]
-        public DateTime StartDate
+        public string StartDate
         {
             get { return startDate; }
             set { startDate = value; }
         }
 
         [DataMember]
-        public DateTime EndDate
+        public string EndDate
         {
             get { return endDate; }
             set { endDate = value; }
@@ -222,7 +263,7 @@ namespace SSISTeam2.Classes.WebServices
 
 
         [DataMember]
-        public String DeptCode
+        public string DeptCode
         {
             get { return deptCode; }
             set { deptCode = value; }
@@ -230,19 +271,19 @@ namespace SSISTeam2.Classes.WebServices
 
 
         [DataMember]
-        public DateTime CreatedDate
+        public string CreatedDate
         {
             get { return createdDate; }
             set { createdDate = value; }
         }
         [DataMember]
-        public String Deleted
+        public string Deleted
         {
             get { return deleted; }
             set { deleted = value; }
         }
         [DataMember]
-        public String Reason
+        public string Reason
         {
             get { return reason; }
             set { reason = value; }
@@ -271,4 +312,96 @@ namespace SSISTeam2.Classes.WebServices
        
 
     }
+
+    //By Yin
+    [DataContract]
+    public class WCFItemTotalQty
+    {
+        [DataMember]
+        string itemDes;
+        [DataMember]
+        string totalQty;
+
+        public WCFItemTotalQty() : this("", "")
+        {
+
+        }
+        public WCFItemTotalQty(string itemDes, string totalQty)
+        {
+            this.itemDes = itemDes;
+            this.totalQty = totalQty;
+        }
+
+        public string ItemDes
+        {
+            get
+            {
+                return itemDes;
+            }
+
+            set
+            {
+                itemDes = value;
+            }
+        }
+
+        public string TotalQty
+        {
+            get
+            {
+                return totalQty;
+            }
+
+            set
+            {
+                totalQty = value;
+            }
+        }
+    }
+
+    [DataContract]
+    public class WCFDeptTQty
+    {
+        [DataMember]
+        string itemName;
+        [DataMember]
+        int reqQty;
+
+        public WCFDeptTQty() : this("", 0)
+        {
+
+        }
+        public WCFDeptTQty(string itemDes, int reqQty)
+        {
+            this.ItemDes = itemDes;
+            this.ReqQty = reqQty;
+        }
+
+        public string ItemDes
+        {
+            get
+            {
+                return itemName;
+            }
+
+            set
+            {
+                itemName = value;
+            }
+        }
+
+        public int ReqQty
+        {
+            get
+            {
+                return reqQty;
+            }
+
+            set
+            {
+                reqQty = value;
+            }
+        }
+    }
+
 }

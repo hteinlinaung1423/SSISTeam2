@@ -27,6 +27,7 @@
         PagerSettings-Position="TopAndBottom" 
         OnRowCancelingEdit="GridView2_RowCancelingEdit"
         OnPageIndexChanging="GridView2_PageIndexChanging"
+ 
          
         >
 

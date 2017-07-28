@@ -1,10 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApproveReject.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ApproveReject" 
      MasterPageFile="~/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-   
+   <div class="panel panel-default">
     <div class="panel-heading"><h3>Approve Reject </h3></div>
 
-    <div>     
+    <div class="panel-body">     
         <asp:Label ID="lblInfo" runat="server" />
         Requested ID: <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         <br />
@@ -50,24 +50,32 @@
          
     <div>
         <asp:TextBox ID="tbReason" runat="server"></asp:TextBox>
-        <br />
-        <asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" />
+        <br /><br />
+        <asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" CssClass="btn btn-default"/>
         &nbsp;&nbsp;
-        <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" />
+        <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" CssClass="btn btn-default"/>
+         &nbsp;&nbsp;
+        <asp:Button ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CssClass="btn btn-default" />
         <br />
+
         <asp:Label ID="lbAppRej" runat="server" ForeColor="#FF3300"></asp:Label>
     </div> 
-      
+       </div> 
+  
 
-    <hr /><br />
-         <div>
-         <asp:Label ID="Label3" runat="server" Text=" This is Last Approved Request ,but Not Received From Store" Font-Size="Medium"></asp:Label>
-        <br />
-         Requested ID: <asp:Label ID="lbLastReqID" runat="server" Text="Label"></asp:Label>
-        <br />
-         Requested Date: <asp:Label ID="lbLastReqDate" runat="server" Text="-"></asp:Label>
-         <br />
-         Requested Employee: <asp:Label ID="lbLastReqEmp" runat="server" Text="-"></asp:Label>
+    <hr />
+     <div class="panel panel-default">
+           <div class="panel-heading"><h3> This is Last Approved Request ,but Not Received From Store</h3></div>     
+       <br />
+         <asp:Panel ID="Panel1" runat="server">
+                 Requested ID: <asp:Label ID="lbLastReqID" runat="server" Text="-"></asp:Label>
+                <br />
+                 Requested Date: <asp:Label ID="lbLastReqDate" runat="server" Text="-"></asp:Label>
+                 <br />
+                 Requested Employee: <asp:Label ID="lbLastReqEmp" runat="server" Text="-"></asp:Label>            
+         </asp:Panel>
+    <asp:Label ID="lbLastApp" runat="server" Font-Size="Large" ></asp:Label>
+     <div class="panel-body"> 
           <div class="table-responsive">
             <asp:GridView ID="GridView2" runat="server"
                 HeaderStyle-CssClass="text-center-impt" 
@@ -104,6 +112,6 @@
                 </asp:GridView>
               </div>
              </div>
-        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+    </div>
         
 </asp:Content>

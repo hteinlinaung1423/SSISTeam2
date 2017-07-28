@@ -82,6 +82,25 @@ namespace SSISTeam2 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ViewHistory;
+        
+        /// <summary>
+        /// ViewCatalogue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ViewCatalogue;
+        
+        /// <summary>
+        /// ViewPending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ViewPending;
         protected global::System.Web.UI.WebControls.Button btnGenerateRetrieval;
         
         /// <summary>
@@ -103,6 +122,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.Button genReports;
         
         /// <summary>
+        /// ViewCatalogue2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ViewCatalogue2;
+        
+        /// <summary>
         /// PendingApprove control.
         /// </summary>
         /// <remarks>
@@ -119,6 +147,24 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Delegate;
+        
+        /// <summary>
+        /// ViewCatalogue3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ViewCatalogue3;
+        
+        /// <summary>
+        /// ChangeCPnRep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeCPnRep;
         
         /// <summary>
         /// manPendingApprove control.
@@ -164,6 +210,24 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button mangenReports;
+        
+        /// <summary>
+        /// ViewCatalogue4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ViewCatalogue4;
+        
+        /// <summary>
+        /// ChangeCPRep2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeCPRep2;
         
         /// <summary>
         /// logout control.
