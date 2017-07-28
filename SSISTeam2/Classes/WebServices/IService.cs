@@ -57,6 +57,8 @@ namespace SSISTeam2.Classes.WebServices
         ResponseFormat = WebMessageFormat.Json)]
         void Create(WCF_AppDuties Approval_Duties);
 
+        //Service Contract by Heng Tiong
+
         [OperationContract]
         [WebGet(UriTemplate = "/InventoryCheck/", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_MonthlyCheck> GetIMonthlyCheckModel();
@@ -64,6 +66,10 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/InventoryCheckName", ResponseFormat = WebMessageFormat.Json)]
         List<string> GetMonthlyCheckName();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/InventoryCheck/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList);
     }
 
     [DataContract]

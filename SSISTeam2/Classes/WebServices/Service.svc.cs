@@ -85,6 +85,8 @@ namespace SSISTeam2.Classes.WebServices
             else { return user = new WCF_User(null, "failed", null); }
         }
 
+        // Heng Tiong's MonthlyCheck implementation
+
         public List<WCF_MonthlyCheck> GetIMonthlyCheckModel()
         {
             List<MonthlyCheckModel> modelList = new Work().GetAllMonthlyCheck();
@@ -117,6 +119,16 @@ namespace SSISTeam2.Classes.WebServices
             }
 
             return strings;
+        }
+
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList)
+        {
+            foreach (WCF_MonthlyCheck i in monthlyCheckList)
+            {
+                //MonthlyCheckModel model = new MonthlyCheckModel();
+            }
+
+
         }
         public string[] GetDelgateEmployeeName(string deptcode)
         {
