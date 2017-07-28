@@ -207,6 +207,8 @@
                                     <asp:Button ID="mangenReports" runat="server" CausesValidation="false" Text="Generate Reports" CssClass="btn btn-block btn-primary" OnClick="genReport"/></li>
                                 <li>
                                     <asp:Button ID="ViewCatalogue4" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
+                                <li>
+                                 <asp:Button ID="ChangeCPRep2" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>
                                 <% } %>
                                 
                                 <%--Moved Logout Button to bottom of drop down list--%>
