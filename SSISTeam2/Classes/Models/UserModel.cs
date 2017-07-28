@@ -2,13 +2,13 @@
 using System.Web.Security;
 using System.Collections.Generic;
 using System;
-
+using System.DirectoryServices.AccountManagement;
 
 namespace SSISTeam2.Classes.Models
 {
     public class UserModel
     {
-        private string username;
+        private string username, fullname;
         private string email;
         private string contactNumber;
         private Department department;
@@ -28,6 +28,7 @@ namespace SSISTeam2.Classes.Models
             //this.email = Membership.GetUser(username).Email;
             this.department = dept;
             //this.role = Roles.GetRolesForUser(username).First().ToString();
+            //this.fullname = UserPrincipal.Current.DisplayName;
             if (role == null)
             {
                 this.role = "Employee";
@@ -161,6 +162,19 @@ namespace SSISTeam2.Classes.Models
             set
             {
                 department = value;
+            }
+        }
+
+        public string Fullname
+        {
+            get
+            {
+                return fullname;
+            }
+
+            set
+            {
+                fullname = value;
             }
         }
     }

@@ -128,29 +128,39 @@ namespace SSISTeam2.Views.StoreClerk
         {
             throw new NotImplementedException();
         }
-        //public List<ViewandEditCatalogueForShow> SearchCatagories(string param)
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            string searchWord = TextBox1.Text;
+            Label2.Text = searchWord;
+            list = new List<ViewandEditCatalogueForShow>();
+            var catList = entities.Categories.Where(x => x.deleted == "N" && x.cat_name.Contains(searchWord)).Select(x => x.cat_id).ToList();
+            var result2 = (from t1 in entities.Categories
+                           join t2 in entities.Stock_Inventory
+                           on t1.cat_id equals t2.cat_id
+                           where t1.deleted.Equals("N")
+                           && t2.deleted.Equals("N")
+                           && (catList.Contains(t2.cat_id))
+                           || t2.item_description.Contains(searchWord)
+                           || t2.item_code.Contains(searchWord)
+                           orderby t1.cat_name
+                           select new { t2.item_code, t1.cat_name, t2.item_description, t2.current_qty, t2.reorder_level, t2.reorder_qty, t2.unit_of_measure }).ToList();
 
-        //{
-        //    //List<ViewandEditCatalogueForShow> lllist = new List<ViewandEditCatalogueForShow>();
-        //    int RL = 0;
-        //    int CQ = 0;
-        //    int RQ = 0;
-        //    int CategoryId = 0;
-        //    try
-        //    {
-        //        RL = int.Parse(param);
-        //        CQ = int.Parse(param);
-        //        RQ = int.Parse(param);
-        //        CategoryId = int.Parse(param);
-        //        entities.Categories.Where(x => x.itemNumber.Contains(param) || x.categoryName.Contains(param) || x.Description.Contains(param) || x.RL == RL || x.CQ == CQ || x.UoM.Contains(param) || x.CategoryId == CategoryId).ToList();
-        //    }
-        //    catch (FormatException e)
-        //    {
+            for (int i = 0; i < result2.Count(); i++)
+            {
+                ViewandEditCatalogueForShow vec = new ViewandEditCatalogueForShow();
+                vec.itemNumber = result2[i].item_code;
+                vec.categoryName = result2[i].cat_name;
+                vec.Description = result2[i].item_description;
+                vec.CQ = result2[i].current_qty;
+                vec.RQ = result2[i].reorder_level;
+                vec.RL = result2[i].reorder_level;
+                vec.UoM = result2[i].unit_of_measure;
+                list.Add(vec);
+            }
 
-        //    }
-        //    return
-        //    //return new List<ViewandEditCatalogueForShow>();
-        //}
+            GridView1.DataSource = list;
+            GridView1.DataBind();
+        }
     }
 
     class ViewandEditCatalogueForShow

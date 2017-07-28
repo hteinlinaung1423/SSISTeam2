@@ -108,6 +108,7 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -183,6 +184,7 @@
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DeptInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewPending.aspx" />
+    <Content Include="Views\Employee\EmpRequestDetail.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
     <Content Include="Views\DepartmentHead\ChangeCollectionnRep.aspx" />
@@ -286,6 +288,7 @@
     <Compile Include="ChangeCategoryName1.aspx.designer.cs">
       <DependentUpon>ChangeCategoryName1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\WebServices\MobileConfirmation.cs" />
     <Compile Include="Classes\WebServices\Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
     </Compile>
@@ -439,6 +442,13 @@
     </Compile>
     <Compile Include="Views\DepartmentHead\ViewPending.aspx.designer.cs">
       <DependentUpon>ViewPending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmpRequestDetail.aspx.cs">
+      <DependentUpon>EmpRequestDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\EmpRequestDetail.aspx.designer.cs">
+      <DependentUpon>EmpRequestDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestHistory.aspx.cs">
       <DependentUpon>EmpRequestHistory.aspx</DependentUpon>
@@ -594,12 +604,12 @@
     <Compile Include="Views\StoreClerk\lowstock.aspx.designer.cs">
       <DependentUpon>lowstock.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx.cs">
-      <DependentUpon>DEMO_MakeRetrievalForm.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\GenerateRetrieval.aspx.cs">
+      <DependentUpon>GenerateRetrieval.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx.designer.cs">
-      <DependentUpon>DEMO_MakeRetrievalForm.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\GenerateRetrieval.aspx.designer.cs">
+      <DependentUpon>GenerateRetrieval.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\MakeOrder.aspx.cs">
       <DependentUpon>MakeOrder.aspx</DependentUpon>

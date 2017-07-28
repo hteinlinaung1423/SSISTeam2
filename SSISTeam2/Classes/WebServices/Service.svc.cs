@@ -8,6 +8,7 @@ using System.Text;
 using System.Web.Security;
 
 using SSISTeam2.Classes.Models;
+using System.IO;
 
 namespace SSISTeam2.Classes.WebServices
 {
@@ -126,7 +127,7 @@ namespace SSISTeam2.Classes.WebServices
 
         public void Create(WCF_AppDuties dr)
         {
-            Work work = new Work();
+           
             Approval_Duties appduties = new Approval_Duties
             {
                 username = dr.UserName,
@@ -140,7 +141,6 @@ namespace SSISTeam2.Classes.WebServices
             };
 
             work.CreateAppDuties(appduties);
-
 
         }
 
@@ -158,6 +158,28 @@ namespace SSISTeam2.Classes.WebServices
             }
 
             return rd;
+        }
+
+        public WCF_AppDuties CheckAppDuties(string deptcode)
+        {
+            Approval_Duties c = work.ListAppDuties(deptcode);
+            return WCF_AppDuties.Make(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
+            //return Work.ListAppDuties(deptcode).ToArray<String>();
+        }
+
+        public string Update(WCF_AppDuties c)
+        {
+            System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
+            /*Approval_Duties ap = new Approval_Duties
+            {
+                username = c.UserName,
+                dept_code = c.DeptCode,
+                deleted = "N"
+
+            };*/
+            work.UpdateDuty(c.DeptCode);
+            return c.DeptCode;
+            
         }
 
         public void Approve(string id)

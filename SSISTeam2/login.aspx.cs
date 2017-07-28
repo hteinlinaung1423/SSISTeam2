@@ -17,6 +17,7 @@ namespace SSISTeam2
             System.Web.Security.FormsAuthentication.SignOut();
             Session["tender"] = null;
             Session["item"] = null;
+            Session["fullname"] = null;
             IIdentity id = User.Identity;
             if (id.IsAuthenticated)
             {

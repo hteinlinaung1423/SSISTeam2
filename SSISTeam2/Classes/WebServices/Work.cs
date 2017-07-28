@@ -59,6 +59,8 @@ namespace SSISTeam2.Classes.WebServices
                 ctx.SaveChanges();   
         }
 
+        
+
         public List<MonthlyCheckModel> GetAllMonthlyCheck()
         {
             List<MonthlyCheckModel> modelList = new List<MonthlyCheckModel>();
@@ -79,6 +81,27 @@ namespace SSISTeam2.Classes.WebServices
             List<Request_Details> rd = ctx.Request_Details.Where(x => x.request_id == req_id).ToList<Request_Details>();
 
             return rd;
+        }
+
+        public Approval_Duties ListAppDuties(string deptcode)
+        {
+                var q = ctx.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == ctx.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
+                return q;
+        }
+
+        /* public void UpdateDuty(Approval_Duties c)
+         {
+             ctx.Entry(c).State = System.Data.Entity.EntityState.Modified;
+             ctx.SaveChanges();
+
+         }*/
+
+        public void UpdateDuty(String deptCode)
+        {
+            var q = ctx.Approval_Duties.Where(x => x.dept_code == deptCode && x.deleted == "N").First();
+            q.deleted = "Y";
+            ctx.SaveChanges();
+
         }
 
         public void Approve(String id)

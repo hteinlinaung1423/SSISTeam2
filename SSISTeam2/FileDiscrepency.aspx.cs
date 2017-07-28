@@ -11,6 +11,8 @@ namespace SSISTeam2
 {
     public partial class FileDiscrepency : System.Web.UI.Page
     {
+        public const string PUBLIC_SESSION_DISCREPANCY_DICT = "DiscrepanciesList";
+
         SSISEntities context;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,12 +24,7 @@ namespace SSISTeam2
             if (!IsPostBack)
             {
                 modelList = new List<MonthlyCheckModel>();
-                //Dictionary<string, int> SessionInfo = (Dictionary<string, int>)Session["Discrepency"];
-                SessionInfo = new Dictionary<string, int>()
-            {
-                {"P030", 5 },
-                {"P031", 6 }
-            };
+                SessionInfo = (Dictionary<string, int>)Session[FileDiscrepency.PUBLIC_SESSION_DISCREPANCY_DICT];
 
 
                 foreach (KeyValuePair<string, int> pair in SessionInfo)

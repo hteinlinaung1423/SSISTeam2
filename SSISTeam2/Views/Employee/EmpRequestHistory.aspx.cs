@@ -16,14 +16,12 @@ namespace SSISTeam2.Views.Employee
         SSISEntities ent = new SSISEntities();
         //string username = "yht";//testing
         //string currentDept = "REGR";//testing
-
         
         //string currentDept = user.Department.dept_code.ToString();*/
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            //selectreqid = Int16.Parse(Request.QueryString["key"]); 
-
+           
             if (!IsPostBack)
             {
                 FillPage();
@@ -45,6 +43,7 @@ namespace SSISTeam2.Views.Employee
             }*/
 
             //UserModel currentUser = new UserModel(User.Identity.Name);
+
             string username = "Sally";//testing
             //string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
@@ -58,11 +57,15 @@ namespace SSISTeam2.Views.Employee
                          x.date_time,
                          x.current_status
                      }).ToList();
-
             GridView2.DataSource = q;
             GridView2.DataBind();
         }
-
+        protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            FillPage();
+            GridView2.PageIndex = e.NewPageIndex;
+            GridView2.DataBind();
+        }
         protected void btnCreate_Click(object sender, EventArgs e)
         {   
             Response.Redirect("MakeNewRequest.aspx");
@@ -142,7 +145,7 @@ namespace SSISTeam2.Views.Employee
             
             if (e.CommandName == "view")
             {
-                Response.Redirect("ViewRequestsDetails.aspx?requestid=" + e.CommandArgument.ToString());
+                Response.Redirect("EmpRequestDetail.aspx?requestid=" + e.CommandArgument.ToString());
             }
             else if(e.CommandName == "update")
             {
@@ -159,6 +162,10 @@ namespace SSISTeam2.Views.Employee
             GridView2.EditIndex = -1;
             FillPage();
         }
+
+        
+
+        
     }
     
 }
