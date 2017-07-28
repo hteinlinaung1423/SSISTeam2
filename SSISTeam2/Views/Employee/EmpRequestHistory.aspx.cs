@@ -30,22 +30,22 @@ namespace SSISTeam2.Views.Employee
 
         protected Boolean IsEditable(String name, String status)
         {
-            string username = "Sally";//testing
-            //return name == (User.Identity.Name.ToString()) && (status == RequestStatus.PENDING  | status == RequestStatus.UPDATED);
-            return name == (username) && (status == RequestStatus.PENDING | status == RequestStatus.UPDATED);
+           // string username = "Sally";//testing
+            return name == (User.Identity.Name.ToString()) && (status == RequestStatus.PENDING  | status == RequestStatus.UPDATED);
+            //return name == (username) && (status == RequestStatus.PENDING | status == RequestStatus.UPDATED);
         }
         private void FillPage()
         {
-            /* need to login
+            // need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
-            }*/
+                Response.Redirect("/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
+            }
 
             //UserModel currentUser = new UserModel(User.Identity.Name);
 
-            string username = "Sally";//testing
-            //string username = User.Identity.Name.ToString();
+            //string username = "Sally";//testing
+            string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
             string currentDept = user.Department.dept_code;
             var q = (from x in ent.Requests
@@ -59,6 +59,8 @@ namespace SSISTeam2.Views.Employee
                      }).ToList();
             GridView2.DataSource = q;
             GridView2.DataBind();
+
+
         }
         protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -117,8 +119,8 @@ namespace SSISTeam2.Views.Employee
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //string username = User.Identity.Name.ToString();
-            string username = "Sally";
+            string username = User.Identity.Name.ToString();
+            //string username = "Sally";
             UserModel user = new UserModel(username);
             var q = (from x in ent.Requests
                      where x.dept_code == user.Department.dept_code
@@ -162,8 +164,6 @@ namespace SSISTeam2.Views.Employee
             GridView2.EditIndex = -1;
             FillPage();
         }
-
-        
 
         
     }

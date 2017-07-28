@@ -19,9 +19,14 @@ namespace SSISTeam2.Views.StoreClerk
 
                 int orderID = Convert.ToInt32(Session["order"]);
 
-                
 
-                GridView1.DataSource = ctx.Purchase_Order_Details.Where(x => x.order_id == orderID && x.status == "Pending").Select(x => new { x.order_details_id, x.Tender_List_Details.Stock_Inventory.item_description, x.quantity }).ToList();
+                var list= ctx.Purchase_Order_Details.Where(x => x.order_id == orderID && x.status == "Pending").Select(x => new { x.order_details_id, x.Tender_List_Details.Stock_Inventory.item_description, x.quantity }).ToList();
+                if (list.Count == 0)
+                {
+                    confirm.Visible = false;
+                }
+
+                GridView1.DataSource = list;
                 GridView1.DataBind();
             }
 
@@ -42,22 +47,43 @@ namespace SSISTeam2.Views.StoreClerk
             ctx.Delivery_Orders.Add(d);
             ctx.SaveChanges();
 
+            List<Purchase_Order_Details> podList = ctx.Purchase_Order_Details.Where(x => x.order_id == orderID).ToList<Purchase_Order_Details>();
+
+            foreach (Purchase_Order_Details pod in podList)
+            {
+                pod.status = "Completed";
+                ctx.SaveChanges();
+            }
+
+
             //Get DeliveryOrderID
             Delivery_Orders order = ctx.Delivery_Orders.Where(x => x.clerk_user == User.Identity.Name).OrderBy(x => x.delivery_id).ToList().Last();
+
+        
 
             foreach (GridViewRow rows in GridView1.Rows)
             {
                 TextBox qty = (TextBox)rows.FindControl("quantity");
                 TextBox r = (TextBox)rows.FindControl("remark");
 
-                Label orderdetailid=(Label)rows.FindControl("Label_OrderDetailId");
+                Label exp_quantity = (Label)rows.FindControl("Label_quantity");
+
+                int exp_qty =Convert.ToInt32( exp_quantity.Text);
+
+                Label itemdesc = (Label)rows.FindControl("Label_itemDesc");
+                Label orderdetailid = (Label)rows.FindControl("Label_OrderDetailId");
+
+                string itemName = itemdesc.Text;
+                int quantity = Convert.ToInt32(qty.Text);
 
 
-                int quantity =Convert.ToInt32( qty.Text);
                 string remarks = r.Text;
-                int orderDetail =Convert.ToInt32( orderdetailid.Text);
+                int orderDetail = Convert.ToInt32(orderdetailid.Text);
 
-               
+                Stock_Inventory item = ctx.Stock_Inventory.Where(x => x.item_description == itemName).First();
+                int currentQuantity = item.current_qty;
+                item.current_qty = currentQuantity + quantity;
+                ctx.SaveChanges();
 
                 Purchase_Order_Details pod = ctx.Purchase_Order_Details.Where(x => x.order_details_id == orderDetail).First();
 
@@ -74,11 +100,12 @@ namespace SSISTeam2.Views.StoreClerk
             }
 
 
-            Response.Redirect("~/default.aspx");
+            Response.Redirect("~/views/storeclerk/viewpendingorder.aspx");
+
+
         }
 
+  
 
     }
-
-    
 }

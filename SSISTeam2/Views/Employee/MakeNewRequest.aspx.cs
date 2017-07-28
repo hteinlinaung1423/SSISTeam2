@@ -143,7 +143,7 @@ namespace SSISTeam2.Views.StoreClerk
                             //isEditing = true;
                             Session[SESSION_IS_EDITING] = true;
                             Session[SESSION_REQ_EDIT_ID] = requestId;
-                            btnSubmit.Text = "Update request";
+                            btnSubmit.Text = "Save Changes";
                         }
 
                         lblCannotChangeInfo.Text = reason;
