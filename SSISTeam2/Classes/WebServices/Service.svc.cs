@@ -125,24 +125,29 @@ namespace SSISTeam2.Classes.WebServices
 
         public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username)
         {
-            List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
-            bool discrepencyFound = false;
+            //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
+            //bool discrepencyFound = false;
 
-            foreach (WCF_MonthlyCheck i in monthlyCheckList)
-            {
-                if (i.ActualQuantity != i.CurrentQuantity)
-                {
-                    confirmList.Add(i);
-                    discrepencyFound = true;
-                }
+            //foreach (WCF_MonthlyCheck i in monthlyCheckList)
+            //{
+            //    if (i.ActualQuantity != i.CurrentQuantity)
+            //    {
+            //        confirmList.Add(i);
+            //        discrepencyFound = true;
+            //    }
 
-                work.UpdateMonthlyCheck(confirmList, username);
-                work.UpdateMonthlyCheckRecord(username, discrepencyFound);
-
-            }
-
-
+            //    work.UpdateMonthlyCheck(confirmList, username);
+            //    work.UpdateMonthlyCheckRecord(username, discrepencyFound);
+            //}
+            SSISEntities context = new SSISEntities();
+            Monthly_Check_Records record = new Monthly_Check_Records();
+            record.clerk_user = username;
+            record.date_checked = DateTime.Today;
+            record.deleted = "N";
+            context.Monthly_Check_Records.Add(record);
+            context.SaveChanges();
         }
+
         public string[] GetDelgateEmployeeName(string deptcode)
         {
             

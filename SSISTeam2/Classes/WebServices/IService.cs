@@ -123,12 +123,17 @@ namespace SSISTeam2.Classes.WebServices
     [DataContract]
     public class WCF_MonthlyCheck
     {
-
+        [DataMember]
         public string itemCode;
+        [DataMember]
         public string itemDescription;
+        [DataMember]
         public string categoryName;
+        [DataMember]
         public string currentQuantity;
+        [DataMember]
         public string actualQuantity;
+        [DataMember]
         public string reason;
 
         public WCF_MonthlyCheck(string itemCode, string itemDescription, string categoryName, string currentQuantity, string actualQuantity, string reason)
