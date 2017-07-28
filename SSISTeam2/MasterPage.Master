@@ -185,7 +185,7 @@
                                 <li>
                                     <asp:Button ID="PendingApprove" runat="server" CausesValidation="false" Text="Approve Request" CssClass="btn btn-block btn-primary" OnClick="ApproveBtn" /></li>
                                 <li>
-                                    <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delagate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
+                                    <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delegate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
                                 <li>
                                     <asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
 
