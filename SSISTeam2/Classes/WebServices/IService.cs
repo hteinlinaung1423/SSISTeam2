@@ -462,6 +462,7 @@ namespace SSISTeam2.Classes.WebServices
         }
 
 
+
     }
 
     [DataContract]
@@ -507,6 +508,10 @@ namespace SSISTeam2.Classes.WebServices
                 reqQty = value;
             }
         }
+
+
     }
 
 }
+
+
