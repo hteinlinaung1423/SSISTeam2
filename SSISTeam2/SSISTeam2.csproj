@@ -205,6 +205,7 @@
     <Content Include="Views\Employee\EmpRequestHistory.aspx" />
     <!--<Content Include="Views\Reporting\RequestVolumeRpt.aspx" />-->
     <Content Include="Views\StoreClerk\Cart.aspx" />
+    <Content Include="Views\StoreClerk\GenerateRetrieval.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
     <Content Include="Views\StoreClerk\MakeOrder.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
