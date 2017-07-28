@@ -189,6 +189,9 @@
                                 <li>
                                     <asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
 
+                                 <li>
+                                 <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>
+                                
                                 <% }
                                     if (Page.User.IsInRole("Manager"))
                                     { %>
