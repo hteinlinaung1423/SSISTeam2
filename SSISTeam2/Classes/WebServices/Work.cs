@@ -174,4 +174,16 @@ namespace SSISTeam2.Classes.WebServices
 
 
 
+
+
+        //Apply New Request
+
+        public void ApplyNewRequest(Request r)
+        {
+            ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
+        }
+
+        
+    }
 }
