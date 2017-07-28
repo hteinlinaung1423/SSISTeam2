@@ -22,6 +22,14 @@ namespace SSISTeam2.Classes.WebServices
         List<int> GetDeliveryOrderId();
 
         [OperationContract]
+        [WebGet(UriTemplate = "/Approve/{id}", ResponseFormat = WebMessageFormat.Json)]
+        void Approve(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Reject/{id}", ResponseFormat = WebMessageFormat.Json)]
+        void Reject(string id);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder/{id}", ResponseFormat = WebMessageFormat.Json)]
         List<Delivery_Details> GetDeliveryOrdersDetails(string id);
 

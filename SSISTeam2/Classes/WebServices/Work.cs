@@ -80,5 +80,24 @@ namespace SSISTeam2.Classes.WebServices
 
             return rd;
         }
+
+        public void Approve(String id)
+        {
+            int req_id = Convert.ToInt32(id);
+            Request r = new Request();
+            Request req = ctx.Requests.Where(x => x.request_id == req_id).First();
+            req.current_status = RequestStatus.APPROVED;
+            ctx.SaveChanges();
+        }
+
+        public void Reject(String id)
+        {
+            int req_id = Convert.ToInt32(id);
+            Request r = new Request();
+            Request req = ctx.Requests.Where(x => x.request_id == req_id).First();
+            req.current_status = RequestStatus.REJECTED;
+            req.rejected = "Y";
+            ctx.SaveChanges();
+        }
     }
 }

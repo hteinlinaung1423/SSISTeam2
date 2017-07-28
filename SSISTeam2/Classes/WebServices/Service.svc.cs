@@ -69,7 +69,7 @@ namespace SSISTeam2.Classes.WebServices
 
         }
 
-        public WCF_User login(string name, string pass)
+        WCF_User IService.login(string name, string pass)
         {
             WCF_User user;
             bool validate = Membership.ValidateUser(name, pass);
@@ -158,6 +158,16 @@ namespace SSISTeam2.Classes.WebServices
             }
 
             return rd;
+        }
+
+        public void Approve(string id)
+        {
+            new Work().Approve(id);
+        }
+
+        public void Reject(string id)
+        {
+            new Work().Reject(id);
         }
     }
 }

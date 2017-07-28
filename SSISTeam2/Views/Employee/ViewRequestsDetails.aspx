@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPage.master" CodeBehind="ViewRequestsDetails.aspx.cs" Inherits="SSISTeam2.Views.Employee.ViewRequestsDetails" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPage.master" CodeBehind="ViewRequestsDetails.aspx.cs" enableEventValidation="false" Inherits="SSISTeam2.Views.Employee.ViewRequestsDetails" %>
 
 <asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1"
     runat="server">
