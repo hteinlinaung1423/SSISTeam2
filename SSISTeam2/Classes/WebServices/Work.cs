@@ -124,24 +124,14 @@ namespace SSISTeam2.Classes.WebServices
         }
 
 
-        public void CreateNewRequest(Request r)
+        //Apply New Request
+
+        public void ApplyNewRequest(Request r)
         {
             ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
             ctx.SaveChanges();
         }
 
-        //Htein Lin Aung New Request
-
-        public void NewRequest(string user, string dept_code, string reason, string date)
-        {
-            Request r = new Request();
-            r.current_status = RequestStatus.PENDING;
-            r.username = user;
-            r.dept_code = dept_code;
-            r.reason = reason;
-            r.date_time = Convert.ToDateTime(date);
-            r.deleted = "N";
-            r.rejected = "N";
-        }
+        
     }
 }

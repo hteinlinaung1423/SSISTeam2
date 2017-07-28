@@ -192,7 +192,9 @@ namespace SSISTeam2.Classes.WebServices
             new Work().Reject(id);
         }
 
-        public void CreateNewRequest(WCF_NewReqeust r)
+
+        // Htein Lin Aung Apply new Request
+        public void ApplyNewRequest(WCF_NewReqeust r)
         {
             Request req = new Request();
             req.username = r.Name;
@@ -203,15 +205,10 @@ namespace SSISTeam2.Classes.WebServices
             req.deleted = "N";
             req.rejected = "N";
 
-            new Work().CreateNewRequest(req);
+            new Work().ApplyNewRequest(req);
         }
 
-        // Htein Lin Aun New Request Get Method
-
-        public void NewRequest(string user, string dept_code, string reason, string date)
-        {
-            new Work().NewRequest(user, dept_code, reason, date);
-        }
+       
 
     }
 }

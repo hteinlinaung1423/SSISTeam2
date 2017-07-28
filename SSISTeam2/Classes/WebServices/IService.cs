@@ -26,11 +26,7 @@ namespace SSISTeam2.Classes.WebServices
         void Approve(string id);
 
 
-        // Htein Lin Aung Create New Request
-
-        [OperationContract]
-        [WebGet(UriTemplate = "/NewRequest/{name}/{dept_code}/{reason}/{date}", ResponseFormat = WebMessageFormat.Json)]
-        void NewRequest(string name, string dept_code,string reason,string date);
+        
 
         [OperationContract]
         [WebGet(UriTemplate = "/Reject/{id}", ResponseFormat = WebMessageFormat.Json)]
@@ -90,11 +86,14 @@ namespace SSISTeam2.Classes.WebServices
         ResponseFormat = WebMessageFormat.Json)]
         string Update(WCF_AppDuties app);
 
+
+        //Htein Lin Aung Create New Request
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/CreateNewRequest", Method = "POST",
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
-        void CreateNewRequest(WCF_NewReqeust req);
+        void ApplyNewRequest(WCF_NewReqeust req);
     }
 
     [DataContract]
