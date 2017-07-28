@@ -25,6 +25,13 @@ namespace SSISTeam2.Classes.WebServices
         [WebGet(UriTemplate = "/Approve/{id}", ResponseFormat = WebMessageFormat.Json)]
         void Approve(string id);
 
+
+        // Htein Lin Aung Create New Request
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/NewRequest/{name}/{dept_code}/{reason}/{date}", ResponseFormat = WebMessageFormat.Json)]
+        void NewRequest(string name, string dept_code,string reason,string date);
+
         [OperationContract]
         [WebGet(UriTemplate = "/Reject/{id}", ResponseFormat = WebMessageFormat.Json)]
         void Reject(string id);
@@ -82,6 +89,12 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         string Update(WCF_AppDuties app);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/CreateNewRequest", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void CreateNewRequest(WCF_NewReqeust req);
     }
 
     [DataContract]
@@ -289,4 +302,72 @@ namespace SSISTeam2.Classes.WebServices
        
 
     }
+
+    [DataContract]
+    public class WCF_NewReqeust
+    {
+        [DataMember]
+        string user;
+        [DataMember]
+        string dept_code;
+        [DataMember]
+        string reason;
+        [DataMember]
+        string status;
+        [DataMember]
+        string date_time;
+
+
+
+
+        public WCF_NewReqeust(string user, string dept_code,string reason,string status,string date_time)
+        {
+            this.user = user;
+            this.dept_code = dept_code;
+            this.reason = reason;
+            this.status = status;
+            this.date_time = date_time;
+        }
+
+        [DataMember]
+        public string Name
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+
+        [DataMember]
+        public string DeptCode
+        {
+            get { return dept_code; }
+            set { dept_code = value; }
+        }
+
+        [DataMember]
+        public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+
+        [DataMember]
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
+        [DataMember]
+        public string Date
+        {
+            get { return date_time; }
+            set { date_time = value; }
+        }
+
+
+
+    }
+
+
 }

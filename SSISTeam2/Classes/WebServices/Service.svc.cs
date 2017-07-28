@@ -191,5 +191,27 @@ namespace SSISTeam2.Classes.WebServices
         {
             new Work().Reject(id);
         }
+
+        public void CreateNewRequest(WCF_NewReqeust r)
+        {
+            Request req = new Request();
+            req.username = r.Name;
+            req.dept_code = r.DeptCode;
+            req.reason = r.Reason;
+            req.current_status = r.Status;
+            req.date_time =Convert.ToDateTime(r.Date);
+            req.deleted = "N";
+            req.rejected = "N";
+
+            new Work().CreateNewRequest(req);
+        }
+
+        // Htein Lin Aun New Request Get Method
+
+        public void NewRequest(string user, string dept_code, string reason, string date)
+        {
+            new Work().NewRequest(user, dept_code, reason, date);
+        }
+
     }
 }
