@@ -205,7 +205,8 @@
     <!--<Content Include="Views\Reporting\RequestVolumeRpt.aspx" />-->
     <Content Include="Views\StoreClerk\Cart.aspx" />
     <Content Include="Views\StoreClerk\lowstock.aspx" />
-    <Content Include="Views\StoreClerk\GenerateRetrieval.aspx" />
+    <Content Include="Views\StoreClerk\DEMO_MakeRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\MakeOrder.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrderSuccess.aspx" />
     <Content Include="Views\StoreClerk\ReceiveOrder.aspx" />
@@ -609,6 +610,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\GenerateRetrieval.aspx.designer.cs">
       <DependentUpon>GenerateRetrieval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\MakeOrder.aspx.cs">
+      <DependentUpon>MakeOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\MakeOrder.aspx.designer.cs">
+      <DependentUpon>MakeOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\PurchaseOrder.aspx.cs">
       <DependentUpon>PurchaseOrder.aspx</DependentUpon>

@@ -222,8 +222,8 @@
 
 
         <hr />
-        <div class="footer">
-          
+        <div class="well">
+            <p>
                 &copy; 2017 Logic University Store Project All rights Reserved.
            
         </div>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\heng_\Source\Repos\SSISTeam2\SSISTeam2\SSISModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Htein Lin Aung\Documents\Visual Studio 2015\Projects\SSISTeam2\SSISTeam2\SSISTeam2\SSISModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
