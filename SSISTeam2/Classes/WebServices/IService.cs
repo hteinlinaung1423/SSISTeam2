@@ -76,6 +76,11 @@ namespace SSISTeam2.Classes.WebServices
         List<string> GetMonthlyCheckName();
 
         [OperationContract]
+        [WebInvoke(UriTemplate = "/InventoryCheck/Update/{username}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username);
+
+
+        [OperationContract]
         [WebGet(UriTemplate = "/CheckApprovalDuties/{deptcode}", ResponseFormat = WebMessageFormat.Json)]
         WCF_AppDuties CheckAppDuties(string deptcode);
 
@@ -84,10 +89,6 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         string Update(WCF_AppDuties app);
-
-        [OperationContract]
-        [WebInvoke(UriTemplate = "/InventoryCheck/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList);
 
         //By Yin
         [OperationContract]
