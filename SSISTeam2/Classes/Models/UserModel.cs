@@ -29,6 +29,7 @@ namespace SSISTeam2.Classes.Models
             this.department = dept;
             //this.role = Roles.GetRolesForUser(username).First().ToString();
             //this.fullname = UserPrincipal.Current.DisplayName;
+            this.fullname = user.fullname;
             if (role == null)
             {
                 this.role = "Employee";
@@ -74,7 +75,7 @@ namespace SSISTeam2.Classes.Models
             DateTime today = DateTime.Today;
             SSISEntities context = new SSISEntities();
             string dept = this.department.dept_code;
-            List<Approval_Duties> approvedList= context.Approval_Duties.Where(x => x.dept_code == dept).ToList();
+            List<Approval_Duties> approvedList= context.Approval_Duties.Where(x => x.dept_code == dept && x.deleted == "N").ToList();
             List<Approval_Duties> validList = new List<Approval_Duties>();
             for (int i = 0; i < approvedList.Count; i++)
             {

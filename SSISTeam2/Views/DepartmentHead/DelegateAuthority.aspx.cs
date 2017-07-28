@@ -19,7 +19,8 @@ namespace SSISTeam2.Views.DepartmentHead
         string selectEndDate = null;
         string checkDelegate = null;
         int currentDutyId = 0;
-
+        List<String> allEmp = null;
+        string headName = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             currentDate = DateTime.Now.ToString("yyyy-MM-dd");
@@ -32,20 +33,18 @@ namespace SSISTeam2.Views.DepartmentHead
             //show Departmnet Name(Actual)
            lbDeptName.Text = user.Department.name.ToString()+ " Department";
 
-            //(testing example)
-            //loginUserName = "Low Kway Boo";
-            //currentDeptCode = ent.Dept_Registry.Where(b => b.username == loginUserName).Select(c => c.dept_code).First().ToString();
-            ////show Departmnet Name(testing example)
-            //lbDeptName.Text = currentDeptCode + " Department";
-
-            //get login department all employee
-            List<Dept_Registry> currendepReg = ent.Dept_Registry.Where(b => b.dept_code == currentDeptCode).ToList<Dept_Registry>();
-
             if (!IsPostBack)
             {
-                //get Last delgate id whethere have or not depend on department
-                int lastDutyId = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode).Max(x => x.duty_id);
-                var w = ent.Approval_Duties.Where(x => x.duty_id == lastDutyId).First();
+                try
+                {
+
+                    //get login department all employee , remove Depthead name in Delegate
+                    allEmp = ent.Dept_Registry.Where(b => b.dept_code == currentDeptCode).Select(x => x.fullname).ToList<String>();
+                    headName = user.Department.head_user;
+                    allEmp.Remove(headName);
+                    //get Last delgate id whethere have or not depend on department
+                    int lastDutyId = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode).Max(x => x.duty_id);
+                    var w = ent.Approval_Duties.Where(x => x.duty_id == lastDutyId).First();
 
                 //if current delegate already exist, cannot delegate another
                 if (w.deleted.ToString() == "N" )
@@ -65,46 +64,79 @@ namespace SSISTeam2.Views.DepartmentHead
                 else
                 {
                     CurrentTable.Visible = false;
-                    lbCheckDelegate.Text = "No Current Delegate! ";
+                    lbCheckDelegate.Text = "There is no Current Delegate! ";
                 }
-                //show data for New Choose Delegate Table
-                ddlEmployee.DataSource = currendepReg;
-                ddlEmployee.DataTextField = "username";
-                ddlEmployee.DataValueField = "username";
-                ddlEmployee.DataBind();
-            }       
+
+            }catch
+                {
+                    lbCheckDelegate.Text = "There is no Current Delegate! ";
+                    CurrentTable.Visible = false;
+                }
+                finally
+                {
+                    //show data for New Choose Delegate Table
+                    ddlEmployee.DataSource = allEmp;
+                    ddlEmployee.DataBind();
+
+                }
+            }
+            
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            //Select Dropdown List Validation
+            try
+            {
+                if (ddlEmployee.SelectedIndex == 0)
+                {
+                   
+                }
+
             choosedDelegate = ddlEmployee.SelectedValue.ToString();
             //Date Validation
             selectStartDate = tbStartDate.Text;
             selectEndDate = tbEndDate.Text;
-            if(selectStartDate.CompareTo(currentDate) == -1 || selectEndDate.CompareTo(currentDate)==-1)
+            if(selectStartDate == "" || selectEndDate =="")
             {
-                lbDateError.Text = "cannot choose previous date!";
-            }
-            else if (selectEndDate.CompareTo(selectStartDate) == -1)
-            {
-                lbDateError.Text = "Start Date should before End Date!";
+                lbDateError.Text = "Please choose the Date!";
             }
             else
-            {
-                lbDateError.Text = "";
-                Approval_Duties ad = new Approval_Duties
+            { 
+                if (selectStartDate.CompareTo(currentDate) == -1 || selectEndDate.CompareTo(currentDate)==-1)
                 {
-                    username = choosedDelegate,
-                    start_date = Convert.ToDateTime(tbStartDate.Text),
-                    end_date = Convert.ToDateTime(tbEndDate.Text),
-                    dept_code = currentDeptCode,
-                    created_date = Convert.ToDateTime(currentDate),
-                    deleted = "N",
-                    reason = tbReason.Text
-                };
-                ent.Approval_Duties.Add(ad);
-                ent.SaveChanges();
+                    lbDateError.Text = "cannot choose previous date!";
+                }
+                else if (selectEndDate.CompareTo(selectStartDate) == -1)
+                {
+                    lbDateError.Text = "Start Date should before End Date!";
+                }
+                else
+                {
+
+                    lbDateError.Text = "";
+                    Approval_Duties ad = new Approval_Duties
+                    {
+                        username = choosedDelegate,
+                        start_date = Convert.ToDateTime(tbStartDate.Text),
+                        end_date = Convert.ToDateTime(tbEndDate.Text),
+                        dept_code = currentDeptCode,
+                        created_date = Convert.ToDateTime(currentDate),
+                        deleted = "N",
+                        reason = tbReason.Text
+                    };
+                    ent.Approval_Duties.Add(ad);
+                    ent.SaveChanges();
+                    lbDateError.Text = "Successfully Save!";
+                }
             }
+
+            }
+            catch
+            {
+                Label1.Text = "PLeae choose one Delegate!";
+            }
+
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -117,6 +149,11 @@ namespace SSISTeam2.Views.DepartmentHead
             lbCheckDelegate.Text = "No Current Delegate! ";
             ChooseNewTable.Visible = true;
 
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");           
         }
     }
 }

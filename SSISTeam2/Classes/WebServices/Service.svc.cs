@@ -16,6 +16,7 @@ namespace SSISTeam2.Classes.WebServices
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service : IService
     {
+        SSISEntities context = new SSISEntities();
         Work work = new Work();
 
         List<string> IService.GetCatName()
@@ -86,6 +87,8 @@ namespace SSISTeam2.Classes.WebServices
             else { return user = new WCF_User(null, "failed", null); }
         }
 
+        // Heng Tiong's MonthlyCheck implementation
+
         public List<WCF_MonthlyCheck> GetIMonthlyCheckModel()
         {
             List<MonthlyCheckModel> modelList = new Work().GetAllMonthlyCheck();
@@ -118,6 +121,16 @@ namespace SSISTeam2.Classes.WebServices
             }
 
             return strings;
+        }
+
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList)
+        {
+            foreach (WCF_MonthlyCheck i in monthlyCheckList)
+            {
+                //MonthlyCheckModel model = new MonthlyCheckModel();
+            }
+
+
         }
         public string[] GetDelgateEmployeeName(string deptcode)
         {
@@ -191,6 +204,45 @@ namespace SSISTeam2.Classes.WebServices
         {
             new Work().Reject(id);
         }
+
+        //By Yin
+ 
+
+        public WCFItemTotalQty[] GetEachItemQty()
+        {
+            List<WCFItemTotalQty> list = work.wgetEachItemQty();
+            return list.ToArray<WCFItemTotalQty>();
+
+        }
+
+        public List<String> GetDisbCollectP()
+        {
+            return work.wgetCollectP();
+
+        }
+
+        public List<string> GetDisbCollectDept(string cpid)
+        {
+            return work.wgetCollectDept(cpid);
+        }
+
+        public List<WCFDeptTQty> GetDeptDetail(string deptname)
+        {
+            List<WCFDeptTQty> list = work.wgetDepDetail(deptname);
+
+            List<WCFDeptTQty> disSL = null;
+
+            var q = (from x in list
+                     group x by x.ItemDes into g
+                     select new WCFDeptTQty
+                     {
+                         ItemDes = g.Key,
+                         ReqQty = g.Sum(y => y.ReqQty)
+                     }).ToList();
+
+            return q.ToList<WCFDeptTQty>();
+        }
+
 
 
         // Htein Lin Aung Apply new Request

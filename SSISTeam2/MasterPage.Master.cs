@@ -23,10 +23,22 @@ namespace SSISTeam2
                 using (SSISEntities ctx = new SSISEntities())
                 {
                     fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+
+                    // Check if user is department rep
+                    int count = ctx.Departments.Where(d => d.rep_user == currentUser).Count();
+                    if (count > 0)
+                    {
+                        // is a dept rep
+                        btnDepRepViewDisbursements.Visible = true;
+                    } else
+                    {
+                        btnDepRepViewDisbursements.Visible = false;
+                    }
                 }
 
                 lblFullName.Text = "Welcome, "+fullName;
                
+
             }
             
 
@@ -66,6 +78,11 @@ namespace SSISTeam2
             Response.Redirect("~/Views/StoreClerk/Cart.aspx");
         }
 
+        protected void GenerateRetrieval(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/GenerateRetrieval.aspx");
+        }
+
         protected void MakeNewRequest(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Employee/MakeNewRequest.aspx");
@@ -83,17 +100,36 @@ namespace SSISTeam2
 
         protected void ApproveBtn(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/DepartmentHead/ApproveReject.aspx");
+            Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
         }
 
         protected void DelegateAuth(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
         }
+        protected void ChangeCPRep(object sender, EventArgs e)
+        {
+            //Yin
+            SSISEntities context = new SSISEntities();
+            string loginUser = Page.User.Identity.Name;
+            string logindepCode = context.Dept_Registry.Where(b => b.username == loginUser).Select(c => c.dept_code).First().ToString();
+            Department dept = context.Departments.Where(d => d.dept_code == logindepCode).Single();
+            Session["sDept"] = dept;
+            Response.Redirect("~/Views/DepartmentHead/ChangeCollectionnRep.aspx");
+        }
 
         protected void genReport(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Reporting/ReportsMain.aspx");
+        }
+        protected void ViewCatalogue_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/ViewCatalogue.aspx");
+        }
+
+        protected void btnDepRepViewDisbursements_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/RepViewDisbursements.aspx");
         }
     }
 }

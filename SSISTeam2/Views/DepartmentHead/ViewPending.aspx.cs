@@ -35,8 +35,14 @@ namespace SSISTeam2.Views.DepartmentHead
                              r.current_status,
                              r.date_time
                          }).ToList();
-                GridView1.DataSource = q;
-                GridView1.DataBind();
+                if(q.Count==0)
+                {
+                    Label1.Text = "No Pending request!";
+                }
+                    GridView1.DataSource = q;
+                    GridView1.DataBind();
+
+
             }
         }
 
