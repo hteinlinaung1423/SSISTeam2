@@ -136,7 +136,8 @@
     <Content Include="CreateNewCategory.aspx" />
     <Content Include="AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
-    <Content Include="FileDiscrepency.aspx" />
+    <Content Include="Views\Employee\RepViewDisbursements.aspx" />
+    <Content Include="Views\StoreClerk\FileDiscrepency.aspx" />
     <Content Include="SSISModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SSISModel.edmx</DependentUpon>
@@ -324,11 +325,18 @@
     <Compile Include="Favourite.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FileDiscrepency.aspx.cs">
+    <Compile Include="Views\Employee\RepViewDisbursements.aspx.cs">
+      <DependentUpon>RepViewDisbursements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\RepViewDisbursements.aspx.designer.cs">
+      <DependentUpon>RepViewDisbursements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\FileDiscrepency.aspx.cs">
       <DependentUpon>FileDiscrepency.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FileDiscrepency.aspx.designer.cs">
+    <Compile Include="Views\StoreClerk\FileDiscrepency.aspx.designer.cs">
       <DependentUpon>FileDiscrepency.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inventory_Adjustment.cs">

@@ -108,7 +108,7 @@
                             <div class="row">
                                 <asp:Button ID="btnSubmit" Text="Submit request" runat="server" OnClick="btnSubmit_Click" CssClass="btn btn-primary" />
                                 <br />
-                                <asp:Button ID="btnCancelRequest" Text="Remove this request" runat="server" OnClick="btnCancelRequest_Click" CssClass="btn btn-danger" />
+                                <asp:Button ID="btnCancelRequest" Text="Cancel this request" runat="server" OnClick="btnCancelRequest_Click" CssClass="btn btn-danger" />
                             </div>
                         </div>
                     </asp:Panel>
