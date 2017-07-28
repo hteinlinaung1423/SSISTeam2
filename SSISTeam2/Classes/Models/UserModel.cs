@@ -29,6 +29,7 @@ namespace SSISTeam2.Classes.Models
             this.department = dept;
             //this.role = Roles.GetRolesForUser(username).First().ToString();
             //this.fullname = UserPrincipal.Current.DisplayName;
+            this.fullname = user.fullname;
             if (role == null)
             {
                 this.role = "Employee";

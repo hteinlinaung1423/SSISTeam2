@@ -43,14 +43,19 @@ namespace SSISTeam2.Classes.Models
                 if (thing != null)
                 { // Found one
                     List<Request_Details> deets = thing.Request_Details.ToList();
-                    if (deets.Count > 0)
-                    {
-                        List<Request_Event> events = deets.First().Request_Event.OrderBy(o => o.date_time).ToList();
-                        if (events.Count > 0)
-                        {
-                            return events.Last().date_time;
-                        }
-                    }
+
+                    List<Request_Event> events = deets.SelectMany(d => d.Request_Event.OrderByDescending(o => o.date_time)).ToList();
+
+                    return events.First().date_time;
+
+                    //if (deets.Count > 0)
+                    //{
+                    //    List<Request_Event> events = deets.First().Request_Event.OrderBy(o => o.date_time).ToList();
+                    //    if (events.Count > 0)
+                    //    {
+                    //        return events.Last().date_time;
+                    //    }
+                    //}
                 }
 
                 throw new DateNotFoundException();

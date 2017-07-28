@@ -58,24 +58,6 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.Label lblFullName;
         
         /// <summary>
-        /// Dashboard control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Dashboard;
-        
-        /// <summary>
-        /// MakeRequest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button MakeRequest;
-        
-        /// <summary>
         /// ViewHistory control.
         /// </summary>
         /// <remarks>
@@ -83,6 +65,16 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ViewHistory;
+        
+        /// <summary>
+        /// btnDepRepViewDisbursements control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDepRepViewDisbursements;
+        
         
         /// <summary>
         /// ViewCatalogue control.
@@ -101,6 +93,7 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ViewPending;
+        protected global::System.Web.UI.WebControls.Button btnGenerateRetrieval;
         
         /// <summary>
         /// GeneratePurchaseOrder control.
