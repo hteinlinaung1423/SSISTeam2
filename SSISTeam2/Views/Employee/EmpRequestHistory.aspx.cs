@@ -58,10 +58,6 @@ namespace SSISTeam2.Views.Employee
                          x.current_status
                      }).ToList();
 
-            DataTable dt = new DataTable();
-            d
-            DataRow dr = dt.NewRow();
-
             GridView2.DataSource = q;
             GridView2.DataBind();
 
