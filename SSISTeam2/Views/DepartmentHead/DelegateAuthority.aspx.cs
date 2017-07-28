@@ -26,15 +26,15 @@ namespace SSISTeam2.Views.DepartmentHead
             lbCurrentDate.Text = currentDate;
 
             //???(Actual)
-            //loginUserName = User.Identity.Name.ToString();
-            //UserModel user = new UserModel(loginUserName);
-            //currentDeptCode = user.Department.dept_code.ToString();
+            loginUserName = User.Identity.Name.ToString();
+            UserModel user = new UserModel(loginUserName);
+            currentDeptCode = user.Department.dept_code.ToString();
             //show Departmnet Name(Actual)
-            //lbDeptName.Text = user.Department.name.ToString()+ " Department";
+            lbDeptName.Text = user.Department.name.ToString() + " Department";
 
             //(testing example)
-            loginUserName = "Low Kway Boo";
-            currentDeptCode = ent.Dept_Registry.Where(b => b.username == loginUserName).Select(c => c.dept_code).First().ToString();
+            //loginUserName = "Low Kway Boo";
+            //currentDeptCode = ent.Dept_Registry.Where(b => b.username == loginUserName).Select(c => c.dept_code).First().ToString();
             //show Departmnet Name(testing example)
             lbDeptName.Text = currentDeptCode + " Department";
 
