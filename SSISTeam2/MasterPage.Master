@@ -158,7 +158,7 @@
                                 <li>
                                     <asp:Button ID="MakeRequest" runat="server" CausesValidation="false" Text="Make Request" CssClass="btn btn-block btn-primary" OnClick="MakeNewRequest" /></li>
                                 <li>
-                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View History" CssClass="btn btn-block btn-primary" OnClick="ViewRequestHistory"/></li>
+                                    <asp:Button ID="ViewHistory" runat="server" CausesValidation="false" Text="View Request History" CssClass="btn btn-block btn-primary" OnClick="ViewRequestHistory"/></li>
                                 <% }
                                     if (Page.User.IsInRole("Clerk"))
                                     { %>
