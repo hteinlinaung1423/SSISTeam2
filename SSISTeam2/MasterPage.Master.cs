@@ -83,12 +83,22 @@ namespace SSISTeam2
 
         protected void ApproveBtn(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/DepartmentHead/ApproveReject.aspx");
+            Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
         }
 
         protected void DelegateAuth(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
+        }
+        protected void ChangeCPRep(object sender, EventArgs e)
+        {
+            //Yin
+            SSISEntities context = new SSISEntities();
+            string loginUser = Page.User.Identity.Name;
+            string logindepCode = context.Dept_Registry.Where(b => b.username == loginUser).Select(c => c.dept_code).First().ToString();
+            Department dept = context.Departments.Where(d => d.dept_code == logindepCode).Single();
+            Session["sDept"] = dept;
+            Response.Redirect("~/Views/DepartmentHead/ChangeCollectionnRep.aspx");
         }
 
         protected void genReport(object sender, EventArgs e)

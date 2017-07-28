@@ -178,7 +178,9 @@
                                     <asp:Button ID="PendingApprove" runat="server" CausesValidation="false" Text="Approve Request" CssClass="btn btn-block btn-primary" OnClick="ApproveBtn" /></li>
                                 <li>
                                     <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delagate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
-
+                                 <li>
+                                 <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>
+                                
                                 <% }
                                     if (Page.User.IsInRole("Manager"))
                                     { %>
