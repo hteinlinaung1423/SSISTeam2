@@ -95,5 +95,9 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/Reporting/ReportsMain.aspx");
         }
+        protected void ViewCatalogue_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/ViewCatalogue.aspx");
+        }
     }
 }
