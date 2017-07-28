@@ -47,17 +47,17 @@ namespace SSISTeam2.Classes.WebServices
         }
         public List<String> ListEmployeeName(string deptcode)
         {
-            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)).Select(c => c.username).ToList<String>(); 
+            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)).Select(c => c.username).ToList<String>();
             return list;
         }
 
         public void CreateAppDuties(Approval_Duties ap)
         {
-                ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
-                ctx.SaveChanges();   
+            ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
         }
 
-        
+
 
         public List<MonthlyCheckModel> GetAllMonthlyCheck()
         {
@@ -83,8 +83,8 @@ namespace SSISTeam2.Classes.WebServices
 
         public Approval_Duties ListAppDuties(string deptcode)
         {
-                var q = ctx.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == ctx.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
-                return q;
+            var q = ctx.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == ctx.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
+            return q;
         }
 
         /* public void UpdateDuty(Approval_Duties c)
@@ -169,12 +169,6 @@ namespace SSISTeam2.Classes.WebServices
 
             return q.ToList<WCFDeptTQty>();
         }
-    }
-
-
-
-
-
 
         //Apply New Request
 
@@ -183,7 +177,9 @@ namespace SSISTeam2.Classes.WebServices
             ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
             ctx.SaveChanges();
         }
-
-        
     }
+
+
+
+
 }

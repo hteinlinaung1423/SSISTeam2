@@ -344,6 +344,32 @@ namespace SSISTeam2.Classes.WebServices
             this.totalQty = totalQty;
         }
 
+        public string ItemDes
+        {
+            get
+            {
+                return itemDes;
+            }
+
+            set
+            {
+                itemDes = value;
+            }
+        }
+
+        public string TotalQty
+        {
+            get
+            {
+                return totalQty;
+            }
+
+            set
+            {
+                totalQty = value;
+            }
+        }
+
     }
 
     [DataContract]
@@ -412,34 +438,6 @@ namespace SSISTeam2.Classes.WebServices
 
     }
 
-
-        public string ItemDes
-        {
-            get
-            {
-                return itemDes;
-            }
-
-            set
-            {
-                itemDes = value;
-            }
-        }
-
-        public string TotalQty
-        {
-            get
-            {
-                return totalQty;
-            }
-
-            set
-            {
-                totalQty = value;
-            }
-        }
-    }
-
     [DataContract]
     public class WCFDeptTQty
     {
@@ -483,6 +481,10 @@ namespace SSISTeam2.Classes.WebServices
                 reqQty = value;
             }
         }
+
+
     }
 
 }
+
+
