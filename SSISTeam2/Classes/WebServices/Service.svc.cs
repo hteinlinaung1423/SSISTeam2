@@ -125,9 +125,20 @@ namespace SSISTeam2.Classes.WebServices
 
         public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username)
         {
+            List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
+            bool discrepencyFound = false;
+
             foreach (WCF_MonthlyCheck i in monthlyCheckList)
             {
-                //MonthlyCheckModel model = new MonthlyCheckModel();
+                if (i.ActualQuantity != i.CurrentQuantity)
+                {
+                    confirmList.Add(i);
+                    discrepencyFound = true;
+                }
+
+                work.UpdateMonthlyCheck(confirmList, username);
+                work.UpdateMonthlyCheckRecord(username, discrepencyFound);
+
             }
 
 
@@ -152,6 +163,7 @@ namespace SSISTeam2.Classes.WebServices
                 reason = dr.Reason
 
             };
+
 
             work.CreateAppDuties(appduties);
 
