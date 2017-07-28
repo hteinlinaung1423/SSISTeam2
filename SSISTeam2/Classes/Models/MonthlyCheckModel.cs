@@ -42,6 +42,13 @@ namespace SSISTeam2.Classes.Models
             this.averagePrice = AveragePrice;
         }
 
+        //public MonthlyCheck(string itemCode, string description, string catName, string actualQuantity, string currentQuantity, string reason)
+        //{
+        //    this.itemCode = itemCode;
+        //    this.description = description;
+        //    this.catName = catName;
+        //}
+
         public static List<ItemModel> ConvertToItemModel(List<MonthlyCheckModel> monthlyList)
         {
             return null;

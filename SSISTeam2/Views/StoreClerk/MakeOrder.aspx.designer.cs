@@ -10,34 +10,25 @@
 namespace SSISTeam2.Views.StoreClerk {
     
     
-    public partial class ReceiveOrder {
+    public partial class MakeOrder {
         
         /// <summary>
-        /// Label1 control.
+        /// lblResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblResult;
         
         /// <summary>
-        /// deliverydate control.
+        /// lblduplicate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox deliverydate;
-        
-        /// <summary>
-        /// vldDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldDate;
+        protected global::System.Web.UI.WebControls.Label lblduplicate;
         
         /// <summary>
         /// GridView1 control.
@@ -47,14 +38,5 @@ namespace SSISTeam2.Views.StoreClerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
-        
-        /// <summary>
-        /// confirm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button confirm;
     }
 }

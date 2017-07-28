@@ -1,0 +1,66 @@
+﻿using SSISTeam2.Classes.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace SSISTeam2.Views.Employee
+{
+    public partial class EmpRequestDetail : System.Web.UI.Page
+    {
+        SSISEntities ent = new SSISEntities();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //selectreqid = Int16.Parse(Request.QueryString["key"]); 
+            int requestID = Convert.ToInt32(Request.QueryString["requestid"]);
+            if (!IsPostBack)
+            {
+                FillPage(requestID);
+            }
+        }
+        
+        private void FillPage(int reqid)
+        {
+            /* need to login
+            if (!User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
+            }*/
+
+            //UserModel currentUser = new UserModel(User.Identity.Name);
+
+            //string username = User.Identity.Name.ToString();
+            //UserModel user = new UserModel(username);
+            
+            Request req = ent.Requests.Find(reqid);
+            lblreqid.Text = req.request_id.ToString();
+            lblDate.Text = req.date_time.ToString();
+            lblstatus.Text = req.current_status;
+            lblemployeename.Text = req.username;
+            lblcomment.Text = req.reason;
+            
+            var q = (from x in ent.Requests
+                     where x.request_id  == reqid
+                     join re in ent.Request_Details on x.request_id equals re.request_id
+                     join de in ent.Request_Event on re.request_detail_id equals de.request_detail_id 
+                     join si in ent.Stock_Inventory on re.item_code equals si.item_code 
+                     join cat in ent.Categories on si.cat_id equals cat.cat_id
+                     select new
+                     {
+                         cat.cat_name ,
+                         si.item_description ,
+                         si.unit_of_measure,
+                         re.orig_quantity
+                     }).ToList();
+            GridView2.DataSource = q;
+            GridView2.DataBind();
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EmpRequestHistory.aspx");
+        }
+    }
+}
