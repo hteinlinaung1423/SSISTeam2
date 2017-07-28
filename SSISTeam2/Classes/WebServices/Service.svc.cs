@@ -16,6 +16,7 @@ namespace SSISTeam2.Classes.WebServices
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service : IService
     {
+        SSISEntities context = new SSISEntities();
         Work work = new Work();
 
         List<string> IService.GetCatName()
@@ -203,5 +204,44 @@ namespace SSISTeam2.Classes.WebServices
         {
             new Work().Reject(id);
         }
+
+        //By Yin
+ 
+
+        public WCFItemTotalQty[] GetEachItemQty()
+        {
+            List<WCFItemTotalQty> list = work.wgetEachItemQty();
+            return list.ToArray<WCFItemTotalQty>();
+
+        }
+
+        public List<String> GetDisbCollectP()
+        {
+            return work.wgetCollectP();
+
+        }
+
+        public List<string> GetDisbCollectDept(string cpid)
+        {
+            return work.wgetCollectDept(cpid);
+        }
+
+        public List<WCFDeptTQty> GetDeptDetail(string deptname)
+        {
+            List<WCFDeptTQty> list = work.wgetDepDetail(deptname);
+
+            List<WCFDeptTQty> disSL = null;
+
+            var q = (from x in list
+                     group x by x.ItemDes into g
+                     select new WCFDeptTQty
+                     {
+                         ItemDes = g.Key,
+                         ReqQty = g.Sum(y => y.ReqQty)
+                     }).ToList();
+
+            return q.ToList<WCFDeptTQty>();
+        }
+
     }
 }
