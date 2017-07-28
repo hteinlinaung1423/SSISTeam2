@@ -123,7 +123,7 @@ namespace SSISTeam2.Classes.WebServices
             return strings;
         }
 
-        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList)
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username)
         {
             foreach (WCF_MonthlyCheck i in monthlyCheckList)
             {
