@@ -1,51 +1,31 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="GenerateDisbursement.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.GenerateDisbursement" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="GenerateRetrieval.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.GenerateRetrieval" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Generate Disbursements</title>
+    <title>Generate Retrieval</title>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
     <div class="row">
         <div class="col-xs-12">
-            <asp:Label Text="Generate Disbursement Forms" runat="server" CssClass="h1" />
+            <asp:Label Text="Generate Retrieval Form" runat="server" CssClass="h1" />
         </div>
     </div>
 
     <div style="margin: 10px"></div>
+
+    <asp:Label ID="lblDebug" Text="uName" runat="server" />
+
+     <%= Page.User.Identity.Name %>
 
     <div class="row">
         <div class="col-xs-12">
-            <asp:Label Text="Select the collection point to disburse to" runat="server" CssClass="h5 grey-text" />
+            <asp:Label Text="Select which items to include in the retrieval" runat="server" CssClass="h5 grey-text" />
         </div>
     </div>
 
     <div style="margin: 10px"></div>
-
-    <div class="row">
-        <div class="col-xs-12">
-            <asp:Label Text="Select collection point:" runat="server" CssClass="h4 grey-text" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <asp:DropDownList ID="ddlCollectionPoint" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCollectionPoint_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
-        </div>
-    </div>
-
-    <div style="margin: 10px"></div>
-
-    <div class="row">
-        <div class="col-xs-12">
-            <asp:Label Text="Then choose which items to include in the disbursement" runat="server" CssClass="h5 grey-text" />
-        </div>
-    </div>
-
-    <div style="margin: 10px"></div>
-
-    <%--<asp:Label ID="lblDebug" Text="text" runat="server" />--%>
 
     <div class="row">
         <div class="col-md-10">
@@ -91,32 +71,27 @@
     </div>
 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
+
             <asp:Panel ID="panelNoItems" runat="server">
 
                 <div class="alert alert-warning">
-                    <asp:Label runat="server" Text="There are no items to disburse at this collection point."></asp:Label>
-
-                    <br />
-                    <br />
-
-                    <span>Choose another collection point, or check if there are any <a href="GenerateRetrieval.aspx">items to retrieve</a>.</span>
-
-                    <br />
-                    <br />
-
-                    <span>If you just generated some forms, you can <a href="ViewGeneratedDisbursements.aspx">view them here</a>.
-                    </span>
+                    <asp:Label runat="server" Text="There are no items that need to be retrieved right now."></asp:Label>
+                    <%--<asp:Button ID="btnGoToGenerate" Text="Go to generate a retrieval" runat="server" CssClass="btn btn-warning" />--%>
                 </div>
+                <span>
+                    If you generated a form, you can <a href="ConfirmRetrieval.aspx">confirm the quantities here</a>.
+                </span>
 
             </asp:Panel>
 
             <asp:Panel ID="panelNormal" runat="server">
 
-                <asp:Button ID="btnSubmit" runat="server" Text="Generate disbursment forms" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Make retrieval form" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
 
             </asp:Panel>
-
         </div>
     </div>
+
+
 </asp:Content>

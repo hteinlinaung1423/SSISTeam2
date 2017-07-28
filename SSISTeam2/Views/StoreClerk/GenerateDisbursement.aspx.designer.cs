@@ -13,15 +13,6 @@ namespace SSISTeam2.Views.StoreClerk {
     public partial class GenerateDisbursement {
         
         /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
         /// ddlCollectionPoint control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace SSISTeam2.Views.StoreClerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCollectionPoint;
-        
-        /// <summary>
-        /// lblDebug control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDebug;
         
         /// <summary>
         /// gvToRetrieve control.

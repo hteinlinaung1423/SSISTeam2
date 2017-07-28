@@ -137,7 +137,7 @@ namespace SSISTeam2.Classes.WebServices
         int req_id;
         [DataMember]
         string requestdate;
-        //[DataMember]
+        [DataMember]
         string reason;
 
         public WCF_Request(string user, int req_id, string requestdate, string reason)

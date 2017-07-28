@@ -272,7 +272,7 @@ namespace SSISTeam2.Views.StoreClerk
                 // Enable button to continue to fileDiscrepancies
 
                 // Change to redirect to heng tiong's thing
-                Response.Redirect(Request.Url.ToString(), false);
+                Response.Redirect("FileDiscrepency.aspx", false);
 
             } else
             {
@@ -341,11 +341,11 @@ namespace SSISTeam2.Views.StoreClerk
 
             if (noDiscrepancies)
             {
-                btnSubmit.Text = "Confirm retrieval quantities";
+                btnSubmit.Text = "Confirm quantities";
             }
             else
             {
-                btnSubmit.Text = "Confirm quantities, then File Discrepancies";
+                btnSubmit.Text = "Confirm quantities, then file discrepancies";
             }
         }
     }
