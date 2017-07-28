@@ -36,8 +36,8 @@ namespace SSISTeam2.Views.DepartmentHead
 
                 currentCollectId = sdept.collection_point;
                 string currentCollectP = ent.Collection_Point.Where(x => x.collection_pt_id == currentCollectId).Select(y => y.location).First();
-                tbCollectP.Text = currentCollectP;
-                tbRepName.Text = sdept.rep_user.ToString();
+                lbCollectP.Text = currentCollectP;
+                lbRepName.Text = sdept.rep_user.ToString();
 
 
  

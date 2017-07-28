@@ -14,12 +14,12 @@
             
             <asp:TableRow>
             <asp:TableCell>Generate Request Volume Reports</asp:TableCell>
-            <asp:TableCell><asp:Button ID="GRVReportBtn" Text="Select" width="142px" runat="server" OnClick="GRVReportBtn_Click" CssClass="btn btn-default btn-sm"/></asp:TableCell>
+            <asp:TableCell><asp:Button ID="GRVReportBtn" Text="Select" width="142px" runat="server" OnClick="GRVReportBtn_Click" CssClass="btn btn-default"/></asp:TableCell>
             </asp:TableRow>
            
             <asp:TableRow>
             <asp:TableCell>Generate Trend Analysis Report </asp:TableCell>
-            <asp:TableCell><asp:Button ID="GTAReportBtn" Text="Select" width="142px" runat="server"  OnClick="GTAReportBtn_Click"  CssClass="btn btn-default btn-sm"/></asp:TableCell>
+            <asp:TableCell><asp:Button ID="GTAReportBtn" Text="Select" width="142px" runat="server"  OnClick="GTAReportBtn_Click"  CssClass="btn btn-default"/></asp:TableCell>
             
             </asp:TableRow>
         </asp:table>        

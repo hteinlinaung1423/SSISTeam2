@@ -116,7 +116,7 @@
                         <span class="glyphicon glyphicon-align-justify"></span>
                        
                     </button>
-                    <a class="navbar-brand" style="color: #ECEFF4; font-size:28px; font-family:Papyrus">Logic University Store</a>
+                    <a class="navbar-brand" style="color: #ECEFF4; font-size:28px; font-family:Papyrus"><b>Logic University Store</b></a>
                 </div>
 
 
@@ -242,7 +242,7 @@
 
         <div class="well">
             <p>
-                &copy; 2017 Logic University Store Project All rights Reserved.
+                &copy; 2017 Logic University Store Project All Rights Reserved.
            
         </div>
       

@@ -29,28 +29,29 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>Current Collection Point</asp:TableCell>
-               <asp:TableCell>: <asp:TextBox ID="tbCollectP" runat="server" ReadOnly="True" BorderStyle="Outset" Width="350"></asp:TextBox></asp:TableCell>
+               <asp:TableCell>: <asp:Label ID="lbCollectP" runat="server" ReadOnly="True" Width="350"></asp:Label></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>New Collection Point</asp:TableCell>
-                <asp:TableCell>: <asp:DropDownList ID="ddlCollectPoint" runat="server" AutoPostBack="True" AppendDataBoundItems="true">
+                <asp:TableCell> <asp:DropDownList ID="ddlCollectPoint" runat="server" AutoPostBack="True" AppendDataBoundItems="true" CssClass="form-control" Width="300px">
                     <asp:ListItem Text="Select---" Value="0"></asp:ListItem>
                       </asp:DropDownList></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>Current Representative Name</asp:TableCell>
-                 <asp:TableCell>: <asp:TextBox ID="tbRepName" runat="server" ReadOnly="True" BorderStyle="Outset" Width="350"></asp:TextBox></asp:TableCell>
+                 <asp:TableCell>: <asp:Label ID="lbRepName" runat="server" ReadOnly="True" Width="350"></asp:Label></asp:TableCell>
             </asp:TableRow>
 
             <asp:TableRow>
                 <asp:TableCell>New Representative Name</asp:TableCell>
-                <asp:TableCell>: <asp:DropDownList ID="ddlRepName" runat="server" AutoPostBack="True" AppendDataBoundItems="true">
+                <asp:TableCell> <asp:DropDownList ID="ddlRepName" runat="server" AutoPostBack="True" AppendDataBoundItems="true" CssClass="form-control" Width="300px">
                      <asp:ListItem Text="Select---" Value="0"></asp:ListItem>
                       </asp:DropDownList></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell>        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn-primary" /></asp:TableCell>
-                <asp:TableCell>        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn-primary"/></asp:TableCell>
+                       <asp:TableCell HorizontalAlign="Right">        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn btn-warning" Width="150px"/></asp:TableCell>
+                <asp:TableCell>        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-default" Width="150px"/></asp:TableCell>
+         
             </asp:TableRow>
        </asp:Table>
         <asp:Label ID="lbDDLError" runat="server" ForeColor="#FF3300"></asp:Label>

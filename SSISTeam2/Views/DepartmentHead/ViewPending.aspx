@@ -48,7 +48,7 @@
                
                 <asp:TemplateField >
                     <ItemTemplate>
-                        <asp:Button  runat="server" Text="View" OnClick="lbReqId_Click" CssClass="btn-primary" />
+                        <asp:Button  runat="server" Text="View" OnClick="lbReqId_Click" CssClass="btn btn-default" />
                     </ItemTemplate>
                 </asp:TemplateField>
             

@@ -51,11 +51,11 @@
     <div>
         <asp:TextBox ID="tbReason" runat="server"></asp:TextBox>
         <br /><br />
-        <asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" CssClass="btn-primary"/>
+        <asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" CssClass="btn btn-default"/>
         &nbsp;&nbsp;
-        <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" CssClass="btn-primary"/>
+        <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" CssClass="btn btn-default"/>
          &nbsp;&nbsp;
-        <asp:Button ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CssClass="btn-primary" />
+        <asp:Button ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CssClass="btn btn-default" />
         <br />
 
         <asp:Label ID="lbAppRej" runat="server" ForeColor="#FF3300"></asp:Label>

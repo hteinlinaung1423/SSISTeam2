@@ -4,13 +4,13 @@
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h3> <asp:Label ID="lbDeptName" runat="server"  Font-Size="Large"></asp:Label></h3>
+            <h3> <asp:Label ID="lbDeptName" runat="server"  Font-Size="X-Large"></asp:Label></h3>
        </div>
-
-       <asp:Label ID="lbCheckDelegate" runat="server" Font-Size="X-Large"></asp:Label>
+        <asp:Label ID="lbCheckDelegate" runat="server" Font-Size="Large"></asp:Label>
+       
     <div class="panel-body">
 
-        <asp:Table ID="CurrentTable" runat="server" class="active" style="table-layout: auto; font-size: large;" CssClass="table table-responsive table-striped">
+        <asp:Table ID="CurrentTable" runat="server" class="active" style="table-layout: auto; font-size: large;" CssClass="table-responsive">
                
             <asp:TableRow>
                 <asp:TableCell>Created Date </asp:TableCell>
@@ -56,7 +56,7 @@
 
             <asp:TableRow>
                 <asp:TableCell>Choose Delegate Employee</asp:TableCell>
-                <asp:TableCell>: <asp:DropDownList ID="ddlEmployee" runat="server" AppendDataBoundItems="true" BackColor="#DCE0DC">
+                <asp:TableCell> <asp:DropDownList ID="ddlEmployee" runat="server" AppendDataBoundItems="true" BackColor="#DCE0DC" CssClass="form-control">
                     <asp:ListItem Text="Select---" Value="0"></asp:ListItem>
                                  </asp:DropDownList></asp:TableCell>
             </asp:TableRow>
@@ -80,8 +80,9 @@
             </asp:TableRow>
 
             <asp:TableRow>
-                <asp:TableCell> <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-default"/></asp:TableCell>
-                <asp:TableCell> <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-default" OnClick="btnCancel_Click"/></asp:TableCell>
+                <asp:TableCell HorizontalAlign="Right"> <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-warning" Width="150px" OnClick="btnCancel_Click"/></asp:TableCell>
+                <asp:TableCell> <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" Width="150px" CssClass="btn btn-default"/></asp:TableCell>
+                
             </asp:TableRow>
         </asp:Table>
 
