@@ -88,6 +88,23 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/InventoryCheck/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList);
+
+        //By Yin
+        [OperationContract]
+        [WebGet(UriTemplate = "/RetriveTQty", ResponseFormat = WebMessageFormat.Json)]
+        WCFItemTotalQty[] GetEachItemQty();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbCollectP", ResponseFormat = WebMessageFormat.Json)]
+        List<String> GetDisbCollectP();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbCollectDept/{cpid}", ResponseFormat = WebMessageFormat.Json)]
+        List<String> GetDisbCollectDept(string cpid);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbDeptDetail/{deptname}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFDeptTQty> GetDeptDetail(string deptname);
     }
 
     [DataContract]
@@ -295,4 +312,96 @@ namespace SSISTeam2.Classes.WebServices
        
 
     }
+
+    //By Yin
+    [DataContract]
+    public class WCFItemTotalQty
+    {
+        [DataMember]
+        string itemDes;
+        [DataMember]
+        string totalQty;
+
+        public WCFItemTotalQty() : this("", "")
+        {
+
+        }
+        public WCFItemTotalQty(string itemDes, string totalQty)
+        {
+            this.itemDes = itemDes;
+            this.totalQty = totalQty;
+        }
+
+        public string ItemDes
+        {
+            get
+            {
+                return itemDes;
+            }
+
+            set
+            {
+                itemDes = value;
+            }
+        }
+
+        public string TotalQty
+        {
+            get
+            {
+                return totalQty;
+            }
+
+            set
+            {
+                totalQty = value;
+            }
+        }
+    }
+
+    [DataContract]
+    public class WCFDeptTQty
+    {
+        [DataMember]
+        string itemName;
+        [DataMember]
+        int reqQty;
+
+        public WCFDeptTQty() : this("", 0)
+        {
+
+        }
+        public WCFDeptTQty(string itemDes, int reqQty)
+        {
+            this.ItemDes = itemDes;
+            this.ReqQty = reqQty;
+        }
+
+        public string ItemDes
+        {
+            get
+            {
+                return itemName;
+            }
+
+            set
+            {
+                itemName = value;
+            }
+        }
+
+        public int ReqQty
+        {
+            get
+            {
+                return reqQty;
+            }
+
+            set
+            {
+                reqQty = value;
+            }
+        }
+    }
+
 }

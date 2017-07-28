@@ -1,8 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewPending.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ViewPending"
     MasterPageFile="~/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-   
+   <div class="panel panel-default">
     <div class="panel-heading"><h3> View All Pending </h3></div>
+
+    <asp:Label ID="Label1" runat="server" Font-Size="Large"></asp:Label>
+
+      <div class="panel-body">
 
     <div class="table-responsive">
         <asp:GridView ID="GridView1" runat="server"
@@ -44,7 +48,7 @@
                
                 <asp:TemplateField >
                     <ItemTemplate>
-                        <asp:Button  runat="server" Text="View" OnClick="lbReqId_Click" />
+                        <asp:Button  runat="server" Text="View" OnClick="lbReqId_Click" CssClass="btn-primary" />
                     </ItemTemplate>
                 </asp:TemplateField>
             
@@ -52,4 +56,6 @@
 
         </asp:GridView>    
     </div>
+          </div>
+       </div>
 </asp:Content>

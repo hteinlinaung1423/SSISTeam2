@@ -49,7 +49,10 @@ namespace SSISTeam2.Views.DepartmentHead
 
                 //get last approved Request details,but not receive from store
                 var lastApproveReq = ent.Requests.Where(x => x.current_status == "Approved").ToList();
-                if (lastApproveReq.Count == 0) return;
+                if (lastApproveReq.Count == 0)
+                    Panel1.Visible = false;
+                    lbLastApp.Text = "There is no disbursed request from Store!";
+                    return;
 
                 int lastApproveReqId = lastApproveReq.Max(y => y.request_id);
 
@@ -147,6 +150,11 @@ namespace SSISTeam2.Views.DepartmentHead
                 e.status = "Rejected";
             }
             ent.SaveChanges();
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewPending.aspx");
         }
     }
     }
