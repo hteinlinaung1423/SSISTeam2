@@ -123,15 +123,31 @@ namespace SSISTeam2.Classes.WebServices
             return strings;
         }
 
-        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList)
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username)
         {
-            foreach (WCF_MonthlyCheck i in monthlyCheckList)
-            {
-                //MonthlyCheckModel model = new MonthlyCheckModel();
-            }
+            //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
+            //bool discrepencyFound = false;
 
+            //foreach (WCF_MonthlyCheck i in monthlyCheckList)
+            //{
+            //    if (i.ActualQuantity != i.CurrentQuantity)
+            //    {
+            //        confirmList.Add(i);
+            //        discrepencyFound = true;
+            //    }
 
+            //    work.UpdateMonthlyCheck(confirmList, username);
+            //    work.UpdateMonthlyCheckRecord(username, discrepencyFound);
+            //}
+            SSISEntities context = new SSISEntities();
+            Monthly_Check_Records record = new Monthly_Check_Records();
+            record.clerk_user = username;
+            record.date_checked = DateTime.Today;
+            record.deleted = "N";
+            context.Monthly_Check_Records.Add(record);
+            context.SaveChanges();
         }
+
         public string[] GetDelgateEmployeeName(string deptcode)
         {
             
@@ -152,6 +168,7 @@ namespace SSISTeam2.Classes.WebServices
                 reason = dr.Reason
 
             };
+
 
             work.CreateAppDuties(appduties);
 
@@ -242,6 +259,25 @@ namespace SSISTeam2.Classes.WebServices
 
             return q.ToList<WCFDeptTQty>();
         }
+
+
+
+        // Htein Lin Aung Apply new Request
+        public void ApplyNewRequest(WCF_NewReqeust r)
+        {
+            Request req = new Request();
+            req.username = r.Name;
+            req.dept_code = r.DeptCode;
+            req.reason = r.Reason;
+            req.current_status = r.Status;
+            req.date_time =Convert.ToDateTime(r.Date);
+            req.deleted = "N";
+            req.rejected = "N";
+
+            new Work().ApplyNewRequest(req);
+        }
+
+       
 
     }
 }
