@@ -224,7 +224,7 @@
                                     <a href="/Views/DepartmentHead/ViewPending.aspx">Approve Requests</a>
                                 </li>
                                 <li>
-                                    <asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delegate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
+                                    <%--<asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delegate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>--%>
                                     <a href="/Views/DepartmentHead/DelegateAuthority.aspx">Delegate Authority</a>
                                 </li>
                                 <li>
