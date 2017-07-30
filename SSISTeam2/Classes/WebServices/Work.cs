@@ -147,6 +147,17 @@ namespace SSISTeam2.Classes.WebServices
             ctx.SaveChanges();
         }
 
+        public void CreateMonthlyCheckRecord(string username)
+        {
+            Monthly_Check_Records checkRecords = new Monthly_Check_Records();
+            checkRecords.clerk_user = username;
+            checkRecords.date_checked = DateTime.Today;
+            checkRecords.deleted = "N";
+            checkRecords.discrepancy = "N";
+            ctx.Entry(checkRecords).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
+        }
+
         public List<Request_Details> GetRequestDetail(string id)
         {
             int req_id = Convert.ToInt32(id);

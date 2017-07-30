@@ -123,7 +123,7 @@ namespace SSISTeam2.Classes.WebServices
             return strings;
         }
 
-        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username)
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> listMonthlyCheck, string username)
         {
             //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
             //bool discrepencyFound = false;
@@ -139,13 +139,8 @@ namespace SSISTeam2.Classes.WebServices
             //    work.UpdateMonthlyCheck(confirmList, username);
             //    work.UpdateMonthlyCheckRecord(username, discrepencyFound);
             //}
-            SSISEntities context = new SSISEntities();
-            Monthly_Check_Records record = new Monthly_Check_Records();
-            record.clerk_user = username;
-            record.date_checked = DateTime.Today;
-            record.deleted = "N";
-            context.Monthly_Check_Records.Add(record);
-            context.SaveChanges();
+
+            work.CreateMonthlyCheckRecord(username);
         }
 
         public string[] GetDelgateEmployeeName(string deptcode)
