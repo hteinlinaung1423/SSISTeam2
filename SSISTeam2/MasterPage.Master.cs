@@ -29,10 +29,12 @@ namespace SSISTeam2
                     if (count > 0)
                     {
                         // is a dept rep
-                        btnDepRepViewDisbursements.Visible = true;
+                        linkBtnDepRepView.Visible = true;
+                        //btnDepRepViewDisbursements.Visible = true;
                     } else
                     {
-                        btnDepRepViewDisbursements.Visible = false;
+                        linkBtnDepRepView.Visible = false;
+                        //btnDepRepViewDisbursements.Visible = false;
                     }
                 }
 

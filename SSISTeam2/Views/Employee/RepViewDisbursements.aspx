@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <asp:Label Text="Find out what to distribute" runat="server" CssClass="h5 grey-text" />
+            <asp:Label Text="Find out what to distribute to your department" runat="server" CssClass="h5 grey-text" />
         </div>
     </div>
 
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-sm-3 col-sm-offset-1">
+        <div class="col-sm-4">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     2. Select a name
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="col-sm-4 col-sm-offset-1">
+        <div class="col-sm-4">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     3. View items
