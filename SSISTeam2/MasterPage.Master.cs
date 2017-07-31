@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using SSISTeam2.Classes.Models;
 
 namespace SSISTeam2
 {
@@ -60,6 +61,7 @@ namespace SSISTeam2
             System.Web.Security.FormsAuthentication.SignOut();
             Session["tender"] = null;
             Session["item"] = null;
+            Session.Clear();
             Response.Redirect("~/Login.aspx");
         }
 
@@ -71,7 +73,6 @@ namespace SSISTeam2
         protected void LowStock(object sender, EventArgs e)
         {
             
-
             Response.Redirect("~/Views/StoreClerk/lowstock.aspx");
         }
 
@@ -95,19 +96,51 @@ namespace SSISTeam2
             Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
         }
 
-        protected void ViewPendingReq(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
-        }
+        //protected void ViewPendingReq(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
+        //}
 
         protected void ApproveBtn(object sender, EventArgs e)
-        {
+        {           
+
             Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
+
+            
+            //Delegate  (access department-head'all pages except "DelegateAuthority.aspx")
+            //try
+            //{
+            //    string loginUserame = Page.User.Identity.Name;
+            //    UserModel loginUser = new UserModel(loginUserame);
+            //    UserModel delegat = loginUser.FIndDelegateHead();
+
+            //    if (loginUserame == delegat.Username)
+            //    {
+            //        Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
+            //    }
+
+            //    else
+            //    {
+            //        Response.Redirect("~/Default.aspx");
+            //    }
+
+            //}
+            //catch
+            //{
+            //    Response.Redirect("~/Default.aspx");
+            //}
+
         }
 
         protected void DelegateAuth(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
+            //Yin
+            if(Page.User.IsInRole("DeptHead"))
+            {
+                Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
+            }
+            Response.Redirect("~/Login.aspx");
+
         }
         protected void ChangeCPRep(object sender, EventArgs e)
         {

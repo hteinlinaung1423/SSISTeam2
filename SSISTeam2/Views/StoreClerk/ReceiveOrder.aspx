@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReceiveOrder.aspx.cs" MasterPageFile="~/MasterPage.master" Inherits="SSISTeam2.Views.StoreClerk.ReceiveOrder" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Purchase Order Details</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 

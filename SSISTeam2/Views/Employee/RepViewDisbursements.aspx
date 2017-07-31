@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="RepViewDisbursements.aspx.cs" Inherits="SSISTeam2.Views.Employee.RepViewDisbursements" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
-    <title>View Disbursements</title>
+<%--    <title>View Disbursements</title>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
@@ -56,4 +56,5 @@
         </div>
 
     </div>
+    <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
 </asp:Content>

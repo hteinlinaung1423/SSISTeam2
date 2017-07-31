@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewCatalogue.aspx.cs" Inherits="SSISTeam2.Views.Employee.ViewCat" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>Stationery Catalogue</title>--%>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
@@ -31,7 +34,7 @@
 
         </div>
 
-    <%--</div>--%>
+    </div>  
 
 
     <!-- Table -->
@@ -70,6 +73,6 @@
         <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT Category.cat_name, Stock_Inventory.item_description FROM Category INNER JOIN Stock_Inventory ON Category.cat_id = Stock_Inventory.cat_id"></asp:SqlDataSource>--%>
 
     </div>
-
+        <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
 
 </asp:Content>

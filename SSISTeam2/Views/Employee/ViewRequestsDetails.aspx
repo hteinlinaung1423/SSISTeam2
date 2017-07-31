@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPage.master" CodeBehind="ViewRequestsDetails.aspx.cs" enableEventValidation="false" Inherits="SSISTeam2.Views.Employee.ViewRequestsDetails" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>View Request Details</title>--%>
+</asp:Content>
 <asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1"
     runat="server">
     

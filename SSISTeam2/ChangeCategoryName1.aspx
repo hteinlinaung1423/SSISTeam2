@@ -1,6 +1,10 @@
 ﻿<%@ Page Language="C#"  AutoEventWireup="true" CodeBehind="ChangeCategoryName1.aspx.cs" Inherits="SSISTeam2.ChangeCategoryName1" 
     MasterPageFile="~/MasterPage.master"%>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Edit Category Name</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 

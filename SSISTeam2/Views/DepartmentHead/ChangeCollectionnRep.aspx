@@ -1,10 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeCollectionnRep.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ChangeCollection_Rep"
           MasterPageFile="~/MasterPage.Master" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>Change Collection Point and/or Representative</title>--%>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
-    <div class="panel-heading" style="font-size: xx-large">
-        <asp:Label ID="LabelDeptName" runat="server" Text="Label"></asp:Label> Department
-    </div>
+     <div class="panel-heading"><h2> Collection Point and Representative </h2></div>
+        <%--<asp:Label ID="LabelDeptName" runat="server" Text="Label"></asp:Label> Department--%>
 
         <div class="panel-body">
              

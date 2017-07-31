@@ -1,13 +1,16 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="TenderListForm.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.TenderListForm"%>
 
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Tender List</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><h3>Tender List</h3></div>
         <div class="panel-body">
-           <p></p>
+         <%--  <p></p>
             <table>
                 
                 <tr>
@@ -30,7 +33,31 @@
                     <td><div style="text-align:left;position: absolute; margin: 0 auto; left: 1000px; right: 0; bottom: 362px;"><asp:Button ID="add" runat="server" Text="Add New Tender" CssClass="btn btn-primary" OnClick="AddNewTender_Click" /> </div></td>
                 </tr>
             </table>
-              <p></p> 
+              <p></p> --%>
+            <div class="panel-body">
+            
+                <asp:Button ID="add" runat="server" Text="Add New Tender"
+                    CssClass="btn btn-primary" OnClick="AddNewTender_Click" />
+            <br /><br />
+
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <asp:TextBox ID="TextBox1" class="form-control" runat="server"></asp:TextBox>
+                        <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    
+                    <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
+                </td>
+              
+            </tr>
+        </table>  
+    </div>
              <div class="table-responsive">
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="3"
                 HeaderStyle-CssClass="text-center-impt"
@@ -138,7 +165,7 @@
                      <asp:TemplateField ItemStyle-Width="20%">  
                     <ItemTemplate >  
                         <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-primary"/>
-                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-primary"/>    
+                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-danger"/>    
                     </ItemTemplate>  
                     <EditItemTemplate>  
                         <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary"/>  
@@ -148,9 +175,7 @@
                 </Columns>
                 
             </asp:GridView>
-                 <asp:GridView ID="GridView2" runat="server"></asp:GridView>
-                 <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
-                 <asp:Label ID="Label10" runat="server" Text="Label"></asp:Label>
+                
             </div>
 
         </div>

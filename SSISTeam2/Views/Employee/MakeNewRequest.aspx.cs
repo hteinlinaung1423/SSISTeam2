@@ -1,4 +1,5 @@
-﻿using SSISTeam2.Classes.EFFacades;
+﻿using SSISTeam2.Classes;
+using SSISTeam2.Classes.EFFacades;
 using SSISTeam2.Classes.Exceptions;
 using SSISTeam2.Classes.Models;
 using System;
@@ -305,9 +306,13 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            UserModel currentUserModel;
+
             List<MakeNewRequestModel> models = _getModelsFromSession();
             using (SSISEntities context = new SSISEntities())
             {
+                currentUserModel = new UserModel(User.Identity.Name);
+
                 Dictionary<string, int> items = new Dictionary<string, int>();
                 foreach (var model in models)
                 {
@@ -355,6 +360,17 @@ namespace SSISTeam2.Views.StoreClerk
 
                 context.SaveChanges();
             }
+
+            string fromEmail = currentUserModel.Email;
+            string fromName = currentUserModel.Fullname;
+            UserModel deptHead = currentUserModel.FindDeptHead();
+            string toEmail = deptHead.Email;
+            string toName = deptHead.Fullname;
+
+            string subject = string.Format("");
+            string body = string.Format("");
+
+            new Emailer(fromEmail, fromName).SendEmail(toEmail, toName, subject, body);
 
             //Response.Redirect(Request.Url.ToString(), false);
             Response.Redirect("EmpRequestHistory.aspx", false);

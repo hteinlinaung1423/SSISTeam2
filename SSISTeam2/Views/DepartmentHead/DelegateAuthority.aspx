@@ -1,14 +1,16 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DelegateAuthority.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.DelegateAuthority" 
-         MasterPageFile="~/MasterPage.Master" %>
+         MasterPageFile="~/MasterPage.Master" Debug="true" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>Delegation of Authority</title>--%>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
 
-        <div class="panel-heading">
-            <h3> <asp:Label ID="lbDeptName" runat="server"  Font-Size="X-Large"></asp:Label></h3>
-       </div>
-        <asp:Label ID="lbCheckDelegate" runat="server" Font-Size="Large"></asp:Label>
-       
+        <div class="panel-heading"><h2> Delegate Authority </h2></div>
+                 
     <div class="panel-body">
+         <asp:Label ID="lbCheckDelegate" runat="server" Font-Size="Medium" CssClass="alert-info" Font-Italic="True" ></asp:Label>
 
         <asp:Table ID="CurrentTable" runat="server" class="active" style="table-layout: auto; font-size: large;" CssClass="table-responsive">
                
@@ -38,7 +40,7 @@
             </asp:TableRow>
 
             <asp:TableRow>
-                <asp:TableCell><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click"/></asp:TableCell>
+                <asp:TableCell><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click" CssClass="btn btn-default"/></asp:TableCell>
             </asp:TableRow>
 
         </asp:Table>
@@ -91,4 +93,6 @@
          </div> 
     
     <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label>
+     <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
+  
  </asp:Content>

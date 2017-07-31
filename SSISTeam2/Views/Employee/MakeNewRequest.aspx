@@ -1,8 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="MakeNewRequest.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.MakeNewRequest" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Make New Request</title>
+<%--    <title>Make New Request</title>--%>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
