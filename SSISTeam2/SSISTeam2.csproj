@@ -184,6 +184,7 @@
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DeptInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewPending.aspx" />
+    <Content Include="Views\Employee\EmpDashboard.aspx" />
     <Content Include="Views\Employee\EmpRequestDetail.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
@@ -442,6 +443,13 @@
     </Compile>
     <Compile Include="Views\DepartmentHead\ViewPending.aspx.designer.cs">
       <DependentUpon>ViewPending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmpDashboard.aspx.cs">
+      <DependentUpon>EmpDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\EmpDashboard.aspx.designer.cs">
+      <DependentUpon>EmpDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestDetail.aspx.cs">
       <DependentUpon>EmpRequestDetail.aspx</DependentUpon>
