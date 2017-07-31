@@ -49,7 +49,7 @@ namespace SSISTeam2.Classes.WebServices
         {
             var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
             String headuserName = q.First();
-            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)&&c.fullname!=headuserName).Select(c => c.fullname).ToList<String>(); 
+            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode) && c.fullname != headuserName).Select(c => c.fullname).ToList<String>();
             return list;
         }
 
@@ -110,7 +110,8 @@ namespace SSISTeam2.Classes.WebServices
                     adjustmentDetail.reason = i.reason;
                     adjustmentDetail.deleted = "N";
                     inventoryAdjMan.Adjustment_Details.Add(adjustmentDetail);
-                } else if (cost < 250)
+                }
+                else if (cost < 250)
                 {
                     adjustmentDetail.item_code = i.ItemCode;
                     adjustmentDetail.quantity_adjusted = adjusted;
@@ -126,7 +127,8 @@ namespace SSISTeam2.Classes.WebServices
             {
                 ctx.Inventory_Adjustment.Add(inventoryAdjMan);
                 ctx.SaveChanges();
-            } else if (inventoryAdjSup.Adjustment_Details.Count > 0)
+            }
+            else if (inventoryAdjSup.Adjustment_Details.Count > 0)
             {
                 ctx.Inventory_Adjustment.Add(inventoryAdjSup);
                 ctx.SaveChanges();
@@ -170,7 +172,7 @@ namespace SSISTeam2.Classes.WebServices
 
         public Approval_Duties ListAppDuties(string deptcode)
         {
-            
+
             try
             {
                 var q = ctx.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == ctx.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
@@ -182,9 +184,9 @@ namespace SSISTeam2.Classes.WebServices
             }
 
 
-            
-          
-           
+
+
+
         }
 
         /* public void UpdateDuty(Approval_Duties c)
@@ -292,6 +294,7 @@ namespace SSISTeam2.Classes.WebServices
             ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
             ctx.SaveChanges();
         }
+
 
         public void updateAdjustment(String voucherId)
         {
