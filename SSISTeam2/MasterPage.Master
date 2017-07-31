@@ -238,33 +238,62 @@
 
                                  <%--<li>
                                  <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>--%>
-                                    <asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
-                                 <li>
-                                 <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>
+                                                                <li>
+                                    <a href="/Views/Employee/ViewCatalogue.aspx">View Stationery Catalogue</a>
+                                </li>
+   
+<%--                                 <asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>--%>
+                                <li>
+                                    <a href="/Views/DepartmentHead/ChangeCollectionnRep.aspx">Change Collection Point & Representative</a>
+                                </li>
+
+<%--                                 <li>
+                                 <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>--%>
                                 
                                 <% }
 
                                     if (Page.User.IsInRole("Manager"))
                                     { %>
+
+                          <li>
+                                    <a href="/Views/DepartmentHead/ViewPending.aspx">Approve Requests</a>
+                                </li>
+                               <%-- <li>
+                                    <asp:Button ID="manPendingApprove" runat="server" CausesValidation="false" Text="Approve Request" CssClass="btn btn-block btn-primary" OnClick="ApproveBtn" /></li>--%>
+                        <li>
+                                    <a href="/Views/DepartmentHead/DelegateAuthority.aspx">Delegate Authority</a>
+                                </li>        
+<%--                        <li>
+                                    <asp:Button ID="manDelegate" runat="server" CausesValidation="false" Text="Delagate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>--%>
                                 <li>
-                                    <asp:Button ID="manPendingApprove" runat="server" CausesValidation="false" Text="Approve Request" CssClass="btn btn-block btn-primary" OnClick="ApproveBtn" /></li>
+                                    <a href="/Views/StoreClerk/Cart.aspx">Make Purchase Order</a>
+                                </li>
+
+<%--                                <li>
+                                    <asp:Button ID="manGeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" CssClass="btn btn-block btn-primary" OnClick="MakeOrder" /></li>--%>
                                 <li>
-                                    <asp:Button ID="manDelegate" runat="server" CausesValidation="false" Text="Delagate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>
-                                 <li>
-                                    <asp:Button ID="manViewPending" runat="server" CausesValidation="false" Text="View Pending Request" CssClass="btn btn-block btn-primary" OnClick="ViewPendingReq"/></li>
+                                    <a href="/Views/Reporting/ReportsMain.aspx">Generate Reports</a>
+                                </li>
+
+<%--                                <li>
+                                    <asp:Button ID="mangenReports" runat="server" CausesValidation="false" Text="Generate Reports" CssClass="btn btn-block btn-primary" OnClick="genReport"/></li>--%>
                                 <li>
-                                    <asp:Button ID="manGeneratePurchaseOrder" runat="server" CausesValidation="false" Text="Make Order" CssClass="btn btn-block btn-primary" OnClick="MakeOrder" /></li>
+                                    <a href="/Views/Employee/ViewCatalogue.aspx">View Stationery Catalogue</a>
+                                </li>
+
+<%--                                <li>
+                                    <asp:Button ID="ViewCatalogue4" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>--%>
                                 <li>
-                                    <asp:Button ID="mangenReports" runat="server" CausesValidation="false" Text="Generate Reports" CssClass="btn btn-block btn-primary" OnClick="genReport"/></li>
-                                <li>
-                                    <asp:Button ID="ViewCatalogue4" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>
-                                <li>
-                                 <asp:Button ID="ChangeCPRep2" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>
+                                    <a href="/Views/DepartmentHead/ChangeCollectionnRep.aspx">Change Collection Point & Representative</a>
+                                </li>
+
+<%--                                <li>
+                                 <asp:Button ID="ChangeCPRep2" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>--%>
                                 <% } %>
                                 
                                 <%--Moved Logout Button to bottom of drop down list--%>
                                 <li>
-                                    <asp:Button ID="logout" runat="server" CausesValidation="false" Text="Logout" CssClass="btn btn-danger" OnClick="Logout"/></li>
+                                    <asp:Button ID="logout" runat="server" CausesValidation="false" style="font-weight:bold; color:black;" Text="Logout" CssClass="btn-link" OnClick="Logout" BackColor="LightGray" Width="100%"/></li>
                             </ul>
                         </li>
                     </ul>
