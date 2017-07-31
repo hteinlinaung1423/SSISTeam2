@@ -27,8 +27,10 @@ namespace SSISTeam2.Classes.EFFServices
                 //throw new ItemNotFoundException("No records exist");
                 return new RetrievalModelCollection(results);
             }
+            int count = 0;
             foreach (var efRequest in efRequests)
             {
+                count++;
                 RetrievalModel retrieval = findLatestRetrievingByRequestId(efRequest.request_id, currentUser);
                 if (retrieval == null) continue; // SKIP
                 results.Add(retrieval);

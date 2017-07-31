@@ -240,8 +240,8 @@ namespace SSISTeam2.Classes.WebServices
             return work.wgetEachItemQty();
         }
         //Update Retrieve Form
-        //public void UpdateRetrieveQty(string loginUserName, List<WCFRetieve> retrieveList)
-        //{ 
+        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList)
+        //{
         //    int ii = 0;
         //    string[] keys = new string[retrieveList.Count];
         //    int[] values = new int[retrieveList.Count];
@@ -249,13 +249,13 @@ namespace SSISTeam2.Classes.WebServices
         //    foreach (WCFRetieve eachObj in retrieveList)
         //    {
         //        //Item
-        //        string itemDescription =  eachObj.ItemDes;
+        //        string itemDescription = eachObj.ItemDes;
         //        //change item description to item code
         //        string itemCode = context.Stock_Inventory.Where(x => x.item_description == itemDescription).Select(x => x.item_code).ToString();
-        //        keys[ii] = itemCode ;
+        //        keys[ii] = itemCode;
 
         //        //Quantity
-        //        values[ii] = eachObj.RetrieveQty;    
+        //        values[ii] = Int16.Parse(eachObj.RetrieveQty);
 
         //        //Add to dictionary
         //        dicList.Add(keys[ii], values[ii]);
@@ -264,43 +264,31 @@ namespace SSISTeam2.Classes.WebServices
         //    }
 
         //    //Pass data to Mobile confirmation
-        //   string name = loginUserName;
-        //   MobileConfirmation.ConfirmRetrievalFromWarehouse( name, dicList);
+        //    //string name = loginUserName;
+
+        //    Dictionary<string, int> someItems = new Dictionary<string, int>();
+
+        //    someItems.Add("P043", 7);
+
+        //    MobileConfirmation.ConfirmRetrievalFromWarehouse("empy", someItems);
         //}
+
         //Testing
-        public void UpdateRetrieveQty(string loginUserName, List<WCFRetieve> retrieveList)
+        public void UpdateRetrieveQty(List<WCFRetieve> retrieveList)
         {
-            int ii = 0;
-            string[] keys = new string[retrieveList.Count];
-            int[] values = new int[retrieveList.Count];
-            Dictionary<string, int> dicList = new Dictionary<string, int>();
-            foreach (WCFRetieve eachObj in retrieveList)
+           
+            Request rr = new Request
             {
-                //Item
-                string itemDescription = eachObj.ItemDes;
-                //change item description to item code
-                string itemCode = context.Stock_Inventory.Where(x => x.item_description == itemDescription).Select(x => x.item_code).ToString();
-                keys[ii] = itemCode;
-
-                //Quantity
-                values[ii] = eachObj.RetrieveQty;
-
-                ii++;
-            }
-
-            Request_Event rqEvent = new Request_Event
-            {
-                request_detail_id = 33,
-                status = keys[1],
-                quantity = values[1],
+                dept_code = "REGRR",
+                current_status = "aaa",
+                reason = "55",
                 date_time = DateTime.Now,
                 deleted = "Z",
-                username = loginUserName,
-                allocated = 0,
-                not_allocated = 0
+                username = "yyyyyyy",
+                rejected="G"
             };
 
-            context.Request_Event.Add(rqEvent);
+            context.Requests.Add(rr);
             context.SaveChanges();
         }
 

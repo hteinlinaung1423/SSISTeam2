@@ -98,9 +98,9 @@ namespace SSISTeam2.Classes.WebServices
         [WebGet(UriTemplate = "/RetriveTQty", ResponseFormat = WebMessageFormat.Json)]
         List<WCFRetieve> GetEachItemQty();
 
-        //[OperationContract]
-        //[WebInvoke(UriTemplate = "/RetriveTQty/Update/{loginUserName}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        //void UpdateRetrieveQty(string loginUserName,List<WCFRetieve> retrieveList);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/RetriveTQty/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateRetrieveQty(List<WCFRetieve> retrievedList);
 
 
         [OperationContract]
@@ -396,13 +396,13 @@ namespace SSISTeam2.Classes.WebServices
         [DataMember]
         string totalQty;
         [DataMember]
-        int retrieveQty;
+        string retrieveQty;
 
-        public WCFRetieve() : this("", "",0)
+        public WCFRetieve() : this("", "","")
         {
 
         }
-        public WCFRetieve(string itemDes, string totalQty, int retrieveQty)
+        public WCFRetieve(string itemDes, string totalQty, string retrieveQty)
         {
             this.itemDes = itemDes;
             this.totalQty = totalQty;
@@ -434,7 +434,7 @@ namespace SSISTeam2.Classes.WebServices
                 totalQty = value;
             }
         }
-        public int RetrieveQty
+        public string RetrieveQty
         {
             get
             {
