@@ -105,7 +105,7 @@ namespace SSISTeam2.Views.DepartmentHead
             { 
                 if (selectStartDate.CompareTo(currentDate) == -1 || selectEndDate.CompareTo(currentDate)==-1)
                 {
-                    lbDateError.Text = "cannot choose previous date!";
+                    lbDateError.Text = "Cannot choose previous date!";
                 }
                 else if (selectEndDate.CompareTo(selectStartDate) == -1)
                 {
@@ -134,7 +134,7 @@ namespace SSISTeam2.Views.DepartmentHead
             }
             catch
             {
-                Label1.Text = "PLeae choose one Delegate!";
+                Label1.Text = "Please choose one Delegate!";
             }
 
         }
