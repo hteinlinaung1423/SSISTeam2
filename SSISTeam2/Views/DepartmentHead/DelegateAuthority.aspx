@@ -36,7 +36,7 @@
             </asp:TableRow>
 
             <asp:TableRow>
-                <asp:TableCell><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click"/></asp:TableCell>
+                <asp:TableCell><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click" CssClass="btn btn-default"/></asp:TableCell>
             </asp:TableRow>
 
         </asp:Table>

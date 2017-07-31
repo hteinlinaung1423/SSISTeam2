@@ -111,11 +111,11 @@ namespace SSISTeam2.Views.DepartmentHead
 
                         //show data for Current Delegate Table
 
-                        lbCurDate.Text = q.created_date.ToString("yyyy-MM-dd");
+                        lbCurDate.Text = q.created_date.ToString("dd-MM-yyyy");
                         lbCurDelegate.Text = q.username.ToString();
                         lbCurReason.Text = q.reason.ToString();
-                        lbCurStart.Text = q.start_date.ToString("yyyy-MM-dd");
-                        lbCurEnd.Text = q.end_date.ToString("yyyy-MM-dd");
+                        lbCurStart.Text = q.start_date.ToString("dd-MM-yyyy");
+                        lbCurEnd.Text = q.end_date.ToString("dd-MM-yyyy");
 
                     }
                     else
@@ -160,7 +160,7 @@ namespace SSISTeam2.Views.DepartmentHead
             {
                 if (delegateFullName.Equals("Select---"))
                 {
-                    Label1.Text = "PLeae choose one Delegate!";
+                    Label1.Text = "Please Choose One Delegate!";
                 }
 
                 //Date Validation
@@ -203,7 +203,7 @@ namespace SSISTeam2.Views.DepartmentHead
                         ent.Approval_Duties.Add(ad);
                         ent.SaveChanges();
 
-                        lbDateError.Text = "Successfully Save!";
+                        lbDateError.Text = "Successfully Saved!";
 
                     }
 
