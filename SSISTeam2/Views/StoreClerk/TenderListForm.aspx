@@ -204,11 +204,3 @@
 
    
 </asp:Content>
-<asp:Content ID="Content3" runat="server" contentplaceholderid="ContentPlaceHolderHead">
-    <style type="text/css">
-        .auto-style1 {
-            margin-bottom: 0;
-        }
-    </style>
-</asp:Content>
-

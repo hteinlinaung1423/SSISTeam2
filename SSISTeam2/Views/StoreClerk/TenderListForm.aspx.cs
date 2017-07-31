@@ -83,7 +83,7 @@ namespace SSISTeam2.Views.StoreClerk
             string supplierId = (row.FindControl("Label9") as Label).Text;
             //string supplierName = dropDowns[0].SelectedValue.
             string supplierName= (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
-            Label9.Text = supplierId;
+            //Label9.Text = supplierId;
             //Label1.Text = supplierName;
             //string supplierName= (row.FindControl("TextBox1") as TextBox).Text;
             string itemCode = (row.FindControl("Label8") as Label).Text;
