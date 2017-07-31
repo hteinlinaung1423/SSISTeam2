@@ -292,7 +292,6 @@ namespace SSISTeam2.Classes.WebServices
             ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
             ctx.SaveChanges();
         }
-    }
 
         public void updateAdjustment(String voucherId)
         {
@@ -313,8 +312,10 @@ namespace SSISTeam2.Classes.WebServices
         }
         public string GetUserName(String fullName)
         {
-            var q = ctx.Dept_Registry.Where(x => x.fullname.Equals(fullName)).Select(x=>x.username);
+            var q = ctx.Dept_Registry.Where(x => x.fullname.Equals(fullName)).Select(x => x.username);
             return q.First();
         }
     }
-}
+
+        
+    }

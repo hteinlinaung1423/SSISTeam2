@@ -518,62 +518,68 @@ namespace SSISTeam2.Classes.WebServices
 
     }
 
-    [DataContract]
-    public class WCFDisburse
+[DataContract]
+public class WCFDisburse
+{
+    [DataMember]
+    string itemName;
+    [DataMember]
+    int retrievedQty;
+    [DataMember]
+    int disbursedQty;
+
+
+    public WCFDisburse() : this("", 0, 0)
     {
-        [DataMember]
-        string itemName;
-        [DataMember]
-        int retrievedQty;
-        [DataMember]
-        int disbursedQty;
+
+    }
+    public WCFDisburse(string itemName, int retrievedQty, int disbursedQty)
+    {
+        this.itemName = itemName;
+        this.retrievedQty = retrievedQty;
+        this.disbursedQty = disbursedQty;
+    }
 
 
-        public WCFDisburse() : this("", 0,0)
+    public string ItemName
+    {
+        get
         {
-
-        }
-        public WCFDisburse(string itemName, int retrievedQty, int disbursedQty)
-        {
-            this.itemName = itemName;
-            this.retrievedQty = retrievedQty;
-            this.disbursedQty = disbursedQty;
+            return itemName;
         }
 
-
-        public string ItemName
+        set
         {
-            get
-            {
-                return itemName;
-            }
-
-            set
-            {
-                itemName = value;
-            }
-        }
-
-        public int RetrievedQty
-        {
-            get
-            {
-                return retrievedQty;
-            }
-
-            set
-            {
-                retrievedQty = value;
-            }
+            itemName = value;
         }
     }
 
-        public int DisbursedQty
+    public int RetrievedQty
+    {
+        get
         {
-            get
-            {
-                return disbursedQty;
-            }
+            return retrievedQty;
+        }
+
+        set
+        {
+            retrievedQty = value;
+        }
+    }
+
+
+    public int DisbursedQty
+    {
+        get
+        {
+            return disbursedQty;
+        }
+        set
+        {
+            disbursedQty = value;
+        }
+    }
+}
     [DataContract]
     public class WCFInventoryAdjustmentModel
     {
@@ -674,11 +680,5 @@ namespace SSISTeam2.Classes.WebServices
         }
         
     }
-}
-
-
-    }
-
-}
 
 
