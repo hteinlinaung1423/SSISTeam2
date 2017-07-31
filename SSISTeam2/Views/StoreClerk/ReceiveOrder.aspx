@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReceiveOrder.aspx.cs" MasterPageFile="~/MasterPage.master" Inherits="SSISTeam2.Views.StoreClerk.ReceiveOrder" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Purchase Order Details</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
@@ -44,7 +47,6 @@
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
-               
                 PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
 
                 <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
@@ -115,12 +117,11 @@
 
         <div class="panel-footer">
 
-
+            <!-- Button trigger modal -->
             <asp:Button ID="confirm" runat="server" Text="Confirm"
                 CssClass="btn btn-primary" OnClick="Confirm" />
-            <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-        </div>
 
+        </div>
 
     </div>
 

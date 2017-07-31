@@ -16,14 +16,12 @@ namespace SSISTeam2.Views.Employee
         SSISEntities ent = new SSISEntities();
         //string username = "yht";//testing
         //string currentDept = "REGR";//testing
-
         
         //string currentDept = user.Department.dept_code.ToString();*/
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            //selectreqid = Int16.Parse(Request.QueryString["key"]); 
-
+           
             if (!IsPostBack)
             {
                 FillPage();
@@ -32,21 +30,22 @@ namespace SSISTeam2.Views.Employee
 
         protected Boolean IsEditable(String name, String status)
         {
-            string username = "Sally";//testing
-            //return name == (User.Identity.Name.ToString()) && (status == RequestStatus.PENDING  | status == RequestStatus.UPDATED);
-            return name == (username) && (status == RequestStatus.PENDING | status == RequestStatus.UPDATED);
+           // string username = "Sally";//testing
+            return name == (User.Identity.Name.ToString()) && (status == RequestStatus.PENDING  | status == RequestStatus.UPDATED);
+            //return name == (username) && (status == RequestStatus.PENDING | status == RequestStatus.UPDATED);
         }
         private void FillPage()
         {
-            /* need to login
+            // need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
-            }*/
+                Response.Redirect("/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
+            }
 
             //UserModel currentUser = new UserModel(User.Identity.Name);
-            string username = "Sally";//testing
-            //string username = User.Identity.Name.ToString();
+
+            //string username = "Sally";//testing
+            string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
             string currentDept = user.Department.dept_code;
             var q = (from x in ent.Requests
@@ -61,8 +60,15 @@ namespace SSISTeam2.Views.Employee
 
             GridView2.DataSource = q;
             GridView2.DataBind();
-        }
 
+
+        }
+        protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            FillPage();
+            GridView2.PageIndex = e.NewPageIndex;
+            GridView2.DataBind();
+        }
         protected void btnCreate_Click(object sender, EventArgs e)
         {   
             Response.Redirect("MakeNewRequest.aspx");
@@ -114,8 +120,8 @@ namespace SSISTeam2.Views.Employee
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //string username = User.Identity.Name.ToString();
-            string username = "Sally";
+            string username = User.Identity.Name.ToString();
+            //string username = "Sally";
             UserModel user = new UserModel(username);
             var q = (from x in ent.Requests
                      where x.dept_code == user.Department.dept_code
@@ -142,7 +148,7 @@ namespace SSISTeam2.Views.Employee
             
             if (e.CommandName == "view")
             {
-                Response.Redirect("ViewRequestsDetails.aspx?requestid=" + e.CommandArgument.ToString());
+                Response.Redirect("EmpRequestDetail.aspx?requestid=" + e.CommandArgument.ToString());
             }
             else if(e.CommandName == "update")
             {
@@ -159,7 +165,15 @@ namespace SSISTeam2.Views.Employee
             GridView2.EditIndex = -1;
             FillPage();
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Default.aspx");
+        }
+
+
+
     }
-    
+
 }
     

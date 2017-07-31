@@ -1,4 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="AdjustmentDetail.aspx.cs" Inherits="SSISTeam2.ApproveStockAdjustment" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Adjustment Details</title>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
         <div class="panel-heading"><h3>Adjustment Details</h3></div>
@@ -46,6 +50,7 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView><asp:Label ID="testLbl" runat="server"></asp:Label>
+    <asp:GridView ID="GridView2" runat="server"></asp:GridView>
     <asp:Button ID="Approve" runat="server" Text="approveBtn" OnClick="Approve_Click" CssClass="btn btn-primary"/>
     <asp:Button ID="Reject" runat="server" Text="RejectBtn" OnClick="Reject_Click" CssClass="btn btn-primary"/>
 </asp:Content>

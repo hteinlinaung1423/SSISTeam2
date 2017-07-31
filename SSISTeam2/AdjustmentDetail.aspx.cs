@@ -16,7 +16,13 @@ namespace SSISTeam2
         {
             context = new SSISEntities();
             InventoryAdjustmentModel invModel = (InventoryAdjustmentModel)Session["ConfirmAdj"];
+            //List<InventoryAdjustmentModel> invModelList = new List<InventoryAdjustmentModel>();
+            //invModelList.Add(invModel);
+            //GridView2.DataSource = invModelList;
+            //GridView2.DataBind();
+
             List<AdjustmentModel> adjList = invModel.AdjModel;
+          
 
             testLbl.Text = adjList.Count.ToString();
             GridView1.DataSource = adjList;

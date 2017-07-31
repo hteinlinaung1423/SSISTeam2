@@ -1,4 +1,5 @@
-﻿using SSISTeam2.Classes.EFFacades;
+﻿using SSISTeam2.Classes;
+using SSISTeam2.Classes.EFFacades;
 using SSISTeam2.Classes.Exceptions;
 using SSISTeam2.Classes.Models;
 using System;
@@ -143,7 +144,7 @@ namespace SSISTeam2.Views.StoreClerk
                             //isEditing = true;
                             Session[SESSION_IS_EDITING] = true;
                             Session[SESSION_REQ_EDIT_ID] = requestId;
-                            btnSubmit.Text = "Update request";
+                            btnSubmit.Text = "Save Changes";
                         }
 
                         lblCannotChangeInfo.Text = reason;
@@ -305,9 +306,13 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            UserModel currentUserModel;
+
             List<MakeNewRequestModel> models = _getModelsFromSession();
             using (SSISEntities context = new SSISEntities())
             {
+                currentUserModel = new UserModel(User.Identity.Name);
+
                 Dictionary<string, int> items = new Dictionary<string, int>();
                 foreach (var model in models)
                 {
@@ -356,7 +361,19 @@ namespace SSISTeam2.Views.StoreClerk
                 context.SaveChanges();
             }
 
-            Response.Redirect(Request.Url.ToString(), false);
+            string fromEmail = currentUserModel.Email;
+            string fromName = currentUserModel.Fullname;
+            UserModel deptHead = currentUserModel.FindDeptHead();
+            string toEmail = deptHead.Email;
+            string toName = deptHead.Fullname;
+
+            string subject = string.Format("");
+            string body = string.Format("");
+
+            new Emailer(fromEmail, fromName).SendEmail(toEmail, toName, subject, body);
+
+            //Response.Redirect(Request.Url.ToString(), false);
+            Response.Redirect("EmpRequestHistory.aspx", false);
         }
 
         protected void btnCancelRequest_Click(object sender, EventArgs e)
@@ -369,13 +386,21 @@ namespace SSISTeam2.Views.StoreClerk
                 context.SaveChanges();
             }
 
-            Response.Redirect(Request.Url.ToString(), false);
+            Response.Redirect("EmpRequestHistory.aspx", false);
         }
 
         private MakeNewRequestModel _updateViewModelItem(MakeNewRequestModel model)
         {
             List<Stock_Inventory> stocks = Session[SESSION_STOCKS] as List<Stock_Inventory>;
             RequestModelCollection requests = Session[SESSION_APPROVED_REQS] == null ? null : Session[SESSION_APPROVED_REQS] as RequestModelCollection;
+
+            if (model.CurrentItem == null)
+            {
+                model.UnitOfMeasure = "";
+                model.Approved = new List<string>();
+
+                return model; // EARLY RETURN
+            }
 
             model.UnitOfMeasure = stocks.Where(w => w.item_code == model.CurrentItem).First().unit_of_measure;
 
@@ -411,6 +436,7 @@ namespace SSISTeam2.Views.StoreClerk
                     }
                     ).ToList();
             }
+
             return model;
         }
 
@@ -422,8 +448,15 @@ namespace SSISTeam2.Views.StoreClerk
 
             if (itemCode == null)
             {
-                Stock_Inventory st = stocks.Where(w => w.cat_id == model.CurrentCategory).First();
-                model.CurrentItem = st.item_code;
+                var stList = stocks.Where(w => w.cat_id == model.CurrentCategory);
+                if (stList.Count() > 0)
+                {
+                    Stock_Inventory st = stocks.Where(w => w.cat_id == model.CurrentCategory).First();
+                    model.CurrentItem = st.item_code;
+                } else
+                {
+                    model.CurrentItem = null;
+                }
             } else
             {
                 model.CurrentItem = itemCode;

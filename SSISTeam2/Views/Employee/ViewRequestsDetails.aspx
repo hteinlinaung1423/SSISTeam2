@@ -1,5 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPage.master" CodeBehind="ViewRequestsDetails.aspx.cs" Inherits="SSISTeam2.Views.Employee.ViewRequestsDetails" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPage.master" CodeBehind="ViewRequestsDetails.aspx.cs" enableEventValidation="false" Inherits="SSISTeam2.Views.Employee.ViewRequestsDetails" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>View Request Details</title>--%>
+</asp:Content>
 <asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1"
     runat="server">
     
@@ -59,7 +62,16 @@
             </asp:GridView>
 
           
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT Requests.username, Requests.reason, Request_Event.quantity, Requests.current_status, Request_Event.date_time, Stock_Inventory.unit_of_measure, Stock_Inventory.item_description FROM Request_Details INNER JOIN Request_Event ON Request_Details.request_detail_id = Request_Event.request_detail_id INNER JOIN Requests ON Request_Details.request_id = Requests.request_id INNER JOIN Stock_Inventory ON Request_Details.item_code = Stock_Inventory.item_code"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" 
+                SelectCommand="SELECT Requests.username, Requests.reason, Request_Event.quantity,
+                 Requests.current_status, Request_Event.date_time, Stock_Inventory.unit_of_measure, 
+                Stock_Inventory.item_description 
+                FROM Request_Details 
+                INNER JOIN Request_Event ON Request_Details.request_detail_id = Request_Event.request_detail_id 
+                INNER JOIN Requests ON Request_Details.request_id = Requests.request_id 
+                INNER JOIN Stock_Inventory ON Request_Details.item_code = Stock_Inventory.item_code">
+
+            </asp:SqlDataSource>
 
           
         </div>

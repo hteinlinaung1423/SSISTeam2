@@ -11,6 +11,8 @@ namespace SSISTeam2
 {
     public partial class FileDiscrepency : System.Web.UI.Page
     {
+        public const string PUBLIC_SESSION_DISCREPANCY_DICT = Views.StoreClerk.ConfirmRetrieval.PUBLIC_SESSION_DISCREPANCY_DICT;
+
         SSISEntities context;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,13 +24,17 @@ namespace SSISTeam2
             if (!IsPostBack)
             {
                 modelList = new List<MonthlyCheckModel>();
-                //Dictionary<string, int> SessionInfo = (Dictionary<string, int>)Session["Discrepency"];
-                SessionInfo = new Dictionary<string, int>()
-            {
-                {"P030", 5 },
-                {"P031", 6 }
-            };
+                SessionInfo = (Dictionary<string, int>)Session[PUBLIC_SESSION_DISCREPANCY_DICT];
 
+                // Early quit if no session
+                if (SessionInfo == null)
+                {
+                    lblWarning.Text = "No discrepancies to be filed.";
+                    ConfirmBtn.Visible = false;
+                    return;
+                }
+
+                lblWarning.Visible = false;
 
                 foreach (KeyValuePair<string, int> pair in SessionInfo)
                 {
@@ -130,6 +136,12 @@ namespace SSISTeam2
                     context.SaveChanges();
                 }
             }
+
+            // Clear the session once done
+            Session["DisDetail"] = null;
+            Session[PUBLIC_SESSION_DISCREPANCY_DICT] = null;
+
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

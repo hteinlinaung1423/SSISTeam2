@@ -119,7 +119,8 @@ namespace SSISTeam2.Classes.EFFServices
         {
             //{ PENDING, APPROVED, REJECTED, DISBURSED, PART_DISBURSED, CANCELLED, UPDATED });
             List<Request> efRequests = context.Requests
-                .Where(x => x.current_status == RequestStatus.DISBURSED
+                .Where(x => (x.current_status == RequestStatus.DISBURSED
+                        || x.current_status == RequestStatus.PART_DISBURSED)
                         && x.deleted != "Y"
                 ).ToList();
 
@@ -135,10 +136,19 @@ namespace SSISTeam2.Classes.EFFServices
             {
                 Dictionary<ItemModel, int> items = new Dictionary<ItemModel, int>();
 
-                foreach (var item in efRequest.Request_Details
-                    .Select(s => s.Request_Event.OrderByDescending(o => o.date_time)
-                    .Where(w => w.status == EventStatus.DISBURSED)
-                    .First())) {
+                var details = efRequest.Request_Details.Where(x => x.deleted != "Y");
+
+                var events = details.Select(s => s.Request_Event.OrderByDescending(o => o.date_time)
+                    .Where(w => w.status == EventStatus.DISBURSED).DefaultIfEmpty(null).FirstOrDefault());
+
+                //var list = efRequest.Request_Details
+                //    .Select(s => s.Request_Event.OrderByDescending(o => o.date_time)
+                //    .Where(w => w.status == EventStatus.DISBURSED)
+                //    .First());
+
+                foreach (var item in events) {
+
+                    if (item == null) continue;
 
                     items.Add(new ItemModel(item.Request_Details.Stock_Inventory), item.quantity);
                 }

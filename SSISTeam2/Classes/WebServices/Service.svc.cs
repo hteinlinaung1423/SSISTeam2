@@ -8,6 +8,9 @@ using System.Text;
 using System.Web.Security;
 
 using SSISTeam2.Classes.Models;
+using System.IO;
+using static SSISTeam2.Classes.WebServices.Work;
+
 
 namespace SSISTeam2.Classes.WebServices
 {
@@ -15,7 +18,10 @@ namespace SSISTeam2.Classes.WebServices
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service : IService
     {
+        SSISEntities context = new SSISEntities();
+
         Work work = new Work();
+
 
         List<string> IService.GetCatName()
         {
@@ -69,7 +75,7 @@ namespace SSISTeam2.Classes.WebServices
 
         }
 
-        public WCF_User login(string name, string pass)
+        WCF_User IService.login(string name, string pass)
         {
             WCF_User user;
             bool validate = Membership.ValidateUser(name, pass);
@@ -84,6 +90,8 @@ namespace SSISTeam2.Classes.WebServices
             }
             else { return user = new WCF_User(null, "failed", null); }
         }
+
+        // Heng Tiong's MonthlyCheck implementation
 
         public List<WCF_MonthlyCheck> GetIMonthlyCheckModel()
         {
@@ -118,18 +126,41 @@ namespace SSISTeam2.Classes.WebServices
 
             return strings;
         }
+
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> listMonthlyCheck, string username)
+        {
+            //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
+            //bool discrepencyFound = false;
+
+            //foreach (WCF_MonthlyCheck i in monthlyCheckList)
+            //{
+            //    if (i.ActualQuantity != i.CurrentQuantity)
+            //    {
+            //        confirmList.Add(i);
+            //        discrepencyFound = true;
+            //    }
+
+            //    work.UpdateMonthlyCheck(confirmList, username);
+            //    work.UpdateMonthlyCheckRecord(username, discrepencyFound);
+            //}
+
+            work.CreateMonthlyCheckRecord(username);
+        }
+
         public string[] GetDelgateEmployeeName(string deptcode)
         {
-            
+
             return work.ListEmployeeName(deptcode).ToArray<String>();
         }
 
         public void Create(WCF_AppDuties dr)
         {
-            Work work = new Work();
+
+            string fullName = dr.username;
+            string usrName = work.GetUserName(fullName);
             Approval_Duties appduties = new Approval_Duties
             {
-                username = dr.UserName,
+                username = usrName,
                 start_date = Convert.ToDateTime(dr.StartDate),
                 end_date = Convert.ToDateTime(dr.EndDate),
                 dept_code = dr.DeptCode,
@@ -139,8 +170,8 @@ namespace SSISTeam2.Classes.WebServices
 
             };
 
-            work.CreateAppDuties(appduties);
 
+            work.CreateAppDuties(appduties);
 
         }
 
@@ -159,5 +190,275 @@ namespace SSISTeam2.Classes.WebServices
 
             return rd;
         }
+
+        public WCF_AppDuties CheckAppDuties(string deptcode)
+        {
+            try
+            {
+                Approval_Duties c = work.ListAppDuties(deptcode);
+                return WCF_AppDuties.Make(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
+            }
+            catch
+            {
+                return null;
+            }
+            
+            
+            
+            //return Work.ListAppDuties(deptcode).ToArray<String>();
+        }
+
+        public string Update(WCF_AppDuties c)
+        {
+            System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
+            /*Approval_Duties ap = new Approval_Duties
+            {
+                username = c.UserName,
+                dept_code = c.DeptCode,
+                deleted = "N"
+
+            };*/
+            work.UpdateDuty(c.DeptCode);
+            return c.DeptCode;
+
+        }
+
+        public void Approve(string id)
+        {
+            new Work().Approve(id);
+        }
+
+        public void Reject(string id)
+        {
+            new Work().Reject(id);
+        }
+
+        //By Yin
+ 
+        public List<WCFRetieve> GetEachItemQty(string user)
+        {
+            return work.wgetEachItemQty(user);
+        }
+        //Update Retrieve Form
+        public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
+        {
+            int ii = 0;
+            string itemCode = null;
+            string[] itemCodeAry = new string[retrieveList.Count];
+            int[] qtyAry = new int[retrieveList.Count];
+            Dictionary<string, int> dicList = new Dictionary<string, int>();
+
+            foreach (WCFRetieve eachObj in retrieveList)
+            {
+
+                string itemName = eachObj.ItemDes;
+                itemCode = changeItemNametoCode(itemName);
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.RetrieveQty);
+                qtyAry[ii] = quantity;
+
+                //Add to dictionary
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
+
+                ii++;
+            }
+
+            //Pass data to Mobile confirmation
+
+            MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
+        }
+
+        //chnage into Item Name to item COode
+        public string changeItemNametoCode(string itemName)
+        {
+
+            Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
+            string itemCode = st.item_code;
+            return itemCode;
+
+        }
+
+        //Testing
+        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
+        //{
+        //    int ii = 0;
+        //    Stock_Inventory st = null;
+        //    string itemCode = null;
+        //    string[] itemCodeAry = new string[retrieveList.Count];
+        //    //    //change item into item code
+        //    foreach (WCFRetieve eachObj in retrieveList)
+        //    {
+        //        //Item
+        //        string itemDescription = eachObj.ItemDes;
+        //        st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //        itemCode = st.item_code;
+        //        itemCodeAry[ii] = itemCode;
+        //        ii++;
+        //    }
+
+        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "test");
+        //    rq.rejected_reason = itemCode;
+        //    rq.deleted = "H";
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
+        //}
+
+        public List<String> GetDisbCollectP()
+        {
+            return work.wgetCollectP();
+
+        }
+
+        public List<string> GetDisbCollectDept(string cpid)
+        {
+            return work.wgetCollectDept(cpid);
+        }
+
+        public List<WCFDisburse> GetDeptDetail(string user, string deptname)
+        {
+            //List<WCFDisburse> list = work.wgetDepDetail(deptname);
+
+            //List<WCFDisburse> disSL = null;
+
+            //var q = (from x in list
+            //         group x by x.ItemName into g
+            //         select new WCFDisburse
+            //         {
+            //             ItemName = g.Key,
+            //             RetrievedQty = g.Sum(y => y.RetrievedQty)
+            //         }).ToList();
+
+            //return q.ToList<WCFDisburse>();
+
+            return MobileConfirmation.getAllPossibleSignOffsForUserForDept(user, deptname);
+        }
+
+        //Update Disburse Form
+        public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
+        {
+            int ii = 0;
+            string[] keys = new string[disburseList.Count];
+            int[] values = new int[disburseList.Count];
+            Dictionary<string, int> dicList = new Dictionary<string, int>();
+            foreach (WCFDisburse eachObj in disburseList)
+            {
+                //Item
+                string itemDescription = eachObj.ItemName;
+                //change item description to item code
+                string itemCode = context.Stock_Inventory.Where(x => x.item_description == itemDescription).Select(x => x.item_code).ToString();
+                keys[ii] = itemCode;
+
+                //Quantity
+                values[ii] = eachObj.DisbursedQty;
+
+                //Add to dictionary
+                dicList.Add(keys[ii], values[ii]);
+
+                ii++;
+            }
+
+            //Pass data to Mobile confirmation
+            MobileConfirmation.SignOffDisbursement(loginUserName, deptcode, dicList);
+        }
+
+
+
+        // Htein Lin Aung Apply new Request
+        public void ApplyNewRequest(WCF_NewReqeust r)
+        {
+            Request req = new Request();
+            req.username = r.Name;
+            req.dept_code = r.DeptCode;
+            req.reason = r.Reason;
+            req.current_status = r.Status;
+            req.date_time =Convert.ToDateTime(r.Date);
+            req.deleted = "N";
+            req.rejected = "N";
+
+            new Work().ApplyNewRequest(req);
+        }
+
+        public List<WCFInventoryAdjustmentModel> GetAllAdjustmentList(string role)
+        {
+
+            List<WCFInventoryAdjustmentModel> rd = new List<WCFInventoryAdjustmentModel>();
+            List<InventoryAdjustmentModel> invModelList = new List<InventoryAdjustmentModel>();
+
+            List<Inventory_Adjustment> invAdjList = work.GetAdjustmentList();
+            foreach (Inventory_Adjustment i in invAdjList)
+            {
+                InventoryAdjustmentModel s = new InventoryAdjustmentModel(i);
+                if (role.Equals("DeptHead"))
+                {
+                    foreach (AdjustmentModel j in s.AdjModel)
+                    {
+                        if (j.Above250())
+                        {
+                            invModelList.Add(s);
+                            break;
+                        }
+                    }
+                }
+                else if (role.Equals("Supervisor"))
+                {
+                    foreach (AdjustmentModel j in s.AdjModel)
+                    {
+                        if (!j.Above250())
+                        {
+                            invModelList.Add(s);
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            foreach (InventoryAdjustmentModel s in invModelList)
+            {
+                WCFInventoryAdjustmentModel item = new WCFInventoryAdjustmentModel(s.VoucherID.ToString(), s.Clerk, s.Status, s.Date.ToString(), s.HighestCost.ToString());
+                rd.Add(item);
+            }
+
+            return rd;
+
+        }
+
+        public List<WCFInventoryAdjustmentDetailModel> AdjustmentDetailList(string id)
+        {
+            List<WCFInventoryAdjustmentDetailModel> rd = new List<WCFInventoryAdjustmentDetailModel>();
+            List<Adjustment_Details> adjList = work.GetViewAdjustmentDetailList(id);
+
+            List<AdjustmentModel> modelList = new List<AdjustmentModel>();
+            foreach (Adjustment_Details i in adjList)
+            {
+                AdjustmentModel model = new AdjustmentModel(i);
+                modelList.Add(model);
+            }
+            foreach (AdjustmentModel s in modelList)
+            {
+                WCFInventoryAdjustmentDetailModel item = new WCFInventoryAdjustmentDetailModel(s.CatName, s.QuantityAdjusted.ToString(), s.CostAdjusted.ToString(), s.Reason);
+                rd.Add(item);
+            }
+            return rd;
+        }
+
+        public void UpdateInventoryAdj(String voucherId)
+        {
+            System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
+            work.updateAdjustment(voucherId);
+           
+
+        }
+
+        public void DeleteInventoryAdj(String voucherId)
+        {
+            System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
+            work.deleteAdjustment(voucherId);
+
+
+        }
+       
+
     }
 }

@@ -22,6 +22,14 @@ namespace SSISTeam2.Classes.WebServices
         List<int> GetDeliveryOrderId();
 
         [OperationContract]
+        [WebGet(UriTemplate = "/Approve/{id}", ResponseFormat = WebMessageFormat.Json)]
+        void Approve(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Reject/{id}", ResponseFormat = WebMessageFormat.Json)]
+        void Reject(string id);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder/{id}", ResponseFormat = WebMessageFormat.Json)]
         List<Delivery_Details> GetDeliveryOrdersDetails(string id);
 
@@ -57,6 +65,8 @@ namespace SSISTeam2.Classes.WebServices
         ResponseFormat = WebMessageFormat.Json)]
         void Create(WCF_AppDuties Approval_Duties);
 
+        //Service Contract by Heng Tiong
+
         [OperationContract]
         [WebGet(UriTemplate = "/InventoryCheck/", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_MonthlyCheck> GetIMonthlyCheckModel();
@@ -64,6 +74,80 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/InventoryCheckName", ResponseFormat = WebMessageFormat.Json)]
         List<string> GetMonthlyCheckName();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/InventoryCheck/Update/{username}", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        //void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username);
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheck, string username);
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/CheckApprovalDuties/{deptcode}", ResponseFormat = WebMessageFormat.Json)]
+        WCF_AppDuties CheckAppDuties(string deptcode);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Update", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        string Update(WCF_AppDuties app);
+
+        //By Yin
+        [OperationContract]
+        [WebGet(UriTemplate = "/RetriveTQty/{user}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFRetieve> GetEachItemQty(string user);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/RetriveTQty/Update/{loginUserName}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateRetrieveQty(List<WCFRetieve> retrievedList,string loginUserName);
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbCollectP", ResponseFormat = WebMessageFormat.Json)]
+        List<String> GetDisbCollectP();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbCollectDept/{cpid}", ResponseFormat = WebMessageFormat.Json)]
+        List<String> GetDisbCollectDept(string cpid);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbDeptDetail/{user}/{deptname}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFDisburse> GetDeptDetail(string user, string deptname);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/ViewAllAdjustment/{role}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFInventoryAdjustmentModel> GetAllAdjustmentList(string role);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/ViewAllAdjustmentDetail/{id}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFInventoryAdjustmentDetailModel> AdjustmentDetailList(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateInventoryAdjustment", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void UpdateInventoryAdj(String voucherId);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/DeleteInventoryAdjustment", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void DeleteInventoryAdj(String voucherId);
+
+
+        //Htein Lin Aung Create New Request
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/CreateNewRequest", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void ApplyNewRequest(WCF_NewReqeust req);
+ 
     }
 
     [DataContract]
@@ -71,19 +155,14 @@ namespace SSISTeam2.Classes.WebServices
     {
         [DataMember]
         public string itemCode;
-
         [DataMember]
         public string itemDescription;
-
         [DataMember]
         public string categoryName;
-
         [DataMember]
         public string currentQuantity;
-
         [DataMember]
         public string actualQuantity;
-
         [DataMember]
         public string reason;
 
@@ -97,6 +176,42 @@ namespace SSISTeam2.Classes.WebServices
             this.reason = reason;
         }
 
+        [DataMember]
+        public string ItemCode
+        {
+            get { return itemCode; }
+            set { itemCode = value; }
+        }
+        [DataMember]
+        public string ItemDescription
+        {
+            get { return itemDescription; }
+            set { itemDescription = value; }
+        }
+        [DataMember]
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set { categoryName = value; }
+        }
+        [DataMember]
+        public string CurrentQuantity
+        {
+            get { return currentQuantity; }
+            set { currentQuantity = value; }
+        }
+        [DataMember]
+        public string ActualQuantity
+        {
+            get { return actualQuantity; }
+            set { actualQuantity = value; }
+        }
+        [DataMember]
+        public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
     }
 
 
@@ -179,14 +294,14 @@ namespace SSISTeam2.Classes.WebServices
     {
 
         public string username;
-        public DateTime startDate;
-        public DateTime endDate;
+        public string startDate;
+        public string endDate;
         public string deptCode;
-        public DateTime createdDate;
+        public string createdDate;
         public string deleted;
         public string reason;
 
-        public static WCF_AppDuties Make(string username, DateTime startDate, DateTime endDate, string deptCode,DateTime createdDate,string deleted,string reason)
+        public static WCF_AppDuties Make(string username, string startDate, string endDate, string deptCode, string createdDate, string deleted, string reason)
         {
             WCF_AppDuties c = new WCF_AppDuties();
             c.username = username;
@@ -207,14 +322,14 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         [DataMember]
-        public DateTime StartDate
+        public string StartDate
         {
             get { return startDate; }
             set { startDate = value; }
         }
 
         [DataMember]
-        public DateTime EndDate
+        public string EndDate
         {
             get { return endDate; }
             set { endDate = value; }
@@ -222,7 +337,7 @@ namespace SSISTeam2.Classes.WebServices
 
 
         [DataMember]
-        public String DeptCode
+        public string DeptCode
         {
             get { return deptCode; }
             set { deptCode = value; }
@@ -230,19 +345,19 @@ namespace SSISTeam2.Classes.WebServices
 
 
         [DataMember]
-        public DateTime CreatedDate
+        public string CreatedDate
         {
             get { return createdDate; }
             set { createdDate = value; }
         }
         [DataMember]
-        public String Deleted
+        public string Deleted
         {
             get { return deleted; }
             set { deleted = value; }
         }
         [DataMember]
-        public String Reason
+        public string Reason
         {
             get { return reason; }
             set { reason = value; }
@@ -271,4 +386,299 @@ namespace SSISTeam2.Classes.WebServices
        
 
     }
+
+    //By Yin
+    [DataContract]
+    public class WCFRetieve
+    {
+        [DataMember]
+        string itemDes;
+        [DataMember]
+        string totalQty;
+        [DataMember]
+        string retrieveQty;
+
+        public WCFRetieve() : this("", "","")
+        {
+
+        }
+        public WCFRetieve(string itemDes, string totalQty, string retrieveQty)
+        {
+            this.itemDes = itemDes;
+            this.totalQty = totalQty;
+            this.retrieveQty = retrieveQty;
+        }
+
+        public string ItemDes
+        {
+            get
+            {
+                return itemDes;
+            }
+
+            set
+            {
+                itemDes = value;
+            }
+        }
+
+        public string TotalQty
+        {
+            get
+            {
+                return totalQty;
+            }
+
+            set
+            {
+                totalQty = value;
+            }
+        }
+        public string RetrieveQty
+        {
+            get
+            {
+                return retrieveQty;
+            }
+
+            set
+            {
+                retrieveQty = value;
+            }
+        }
+
+    }
+
+    [DataContract]
+    public class WCF_NewReqeust
+    {
+        [DataMember]
+        string user;
+        [DataMember]
+        string dept_code;
+        [DataMember]
+        string reason;
+        [DataMember]
+        string status;
+        [DataMember]
+        string date_time;
+
+
+
+
+        public WCF_NewReqeust(string user, string dept_code, string reason, string status, string date_time)
+        {
+            this.user = user;
+            this.dept_code = dept_code;
+            this.reason = reason;
+            this.status = status;
+            this.date_time = date_time;
+        }
+
+        [DataMember]
+        public string Name
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+
+        [DataMember]
+        public string DeptCode
+        {
+            get { return dept_code; }
+            set { dept_code = value; }
+        }
+
+        [DataMember]
+        public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+
+        [DataMember]
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
+        [DataMember]
+        public string Date
+        {
+            get { return date_time; }
+            set { date_time = value; }
+        }
+
+        
+    }
+
+
+
+    }
+
+[DataContract]
+public class WCFDisburse
+{
+    [DataMember]
+    string itemName;
+    [DataMember]
+    int retrievedQty;
+    [DataMember]
+    int disbursedQty;
+
+
+    public WCFDisburse() : this("", 0, 0)
+    {
+
+    }
+    public WCFDisburse(string itemName, int retrievedQty, int disbursedQty)
+    {
+        this.itemName = itemName;
+        this.retrievedQty = retrievedQty;
+        this.disbursedQty = disbursedQty;
+    }
+
+
+    public string ItemName
+    {
+        get
+        {
+            return itemName;
+        }
+
+        set
+        {
+            itemName = value;
+        }
+    }
+
+    public int RetrievedQty
+    {
+        get
+        {
+            return retrievedQty;
+        }
+
+        set
+        {
+            retrievedQty = value;
+        }
+    }
+
+
+    public int DisbursedQty
+    {
+        get
+        {
+            return disbursedQty;
+        }
+        set
+        {
+            disbursedQty = value;
+        }
+    }
 }
+    [DataContract]
+    public class WCFInventoryAdjustmentModel
+    {
+
+        public string voucherID;
+        public string clerk;
+        public string date;
+        public string status;
+        public string highestCost;
+
+
+        public WCFInventoryAdjustmentModel(string voucherID, string clerk, string date, string status, string highestCost)
+        {
+            
+            this.voucherID = voucherID;
+            this.clerk = clerk;
+            this.date = date;
+            this.status = status;
+            this.highestCost = highestCost;
+            
+
+        }
+        [DataMember]
+        public string VoucherID
+        {
+            get { return voucherID; }
+            set { voucherID = value; }
+        }
+        [DataMember]
+        public string Clerk
+        {
+            get { return clerk; }
+            set { clerk = value; }
+        }
+        [DataMember]
+        public string Date
+        {
+            get { return date; }
+            set { date = value; }
+        }
+        [DataMember]
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+        [DataMember]
+        public string HighestCost
+        {
+            get { return highestCost; }
+            set { highestCost = value; }
+        }      
+    }
+
+    [DataContract]
+    public class WCFInventoryAdjustmentDetailModel
+    {
+
+        public string itemdesc;
+        public string qtyadjust;
+        public string priceadjust;
+        public string reason;
+
+
+        public WCFInventoryAdjustmentDetailModel(string itemdesc, string qtyadjust, string priceadjust, string reason)
+        {
+
+            this.itemdesc = itemdesc;
+            this.qtyadjust = qtyadjust;
+            this.priceadjust = priceadjust;
+            this.reason = reason;
+
+
+        }
+        [DataMember]
+        public string ItemDesc
+        {
+            get { return itemdesc; }
+            set { itemdesc = value; }
+        }
+        [DataMember]
+        public string QtyAdjust
+        {
+            get { return qtyadjust; }
+            set { qtyadjust = value; }
+        }
+        [DataMember]
+        public string PriceAdjust
+        {
+            get { return priceadjust; }
+            set { priceadjust = value; }
+        }
+        [DataMember]
+        public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+        
+    }
+
+

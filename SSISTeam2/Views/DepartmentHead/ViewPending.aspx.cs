@@ -35,8 +35,14 @@ namespace SSISTeam2.Views.DepartmentHead
                              r.current_status,
                              r.date_time
                          }).ToList();
-                GridView1.DataSource = q;
-                GridView1.DataBind();
+                if(q.Count==0)
+                {
+                    Label1.Text = "No Pending request!";
+                }
+                    GridView1.DataSource = q;
+                    GridView1.DataBind();
+
+
             }
         }
 
@@ -45,9 +51,18 @@ namespace SSISTeam2.Views.DepartmentHead
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
+            Session["deptcode"] = currentDeptCode;
+
             id = ((Label)gvr.FindControl("lbReqId")).Text;
             Response.Redirect("ApproveReject.aspx?key=" + id);
+            
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Default.aspx");
+        }
+
 
         //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         //{

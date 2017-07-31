@@ -12,6 +12,8 @@ namespace SSISTeam2.Views.StoreClerk
     public partial class ConfirmDisbursement : System.Web.UI.Page
     {
         private const string SESSION_DEPARTMENT_LIST = "ConfirmDisbursement_DepartmentList";
+        private const string SESSION_COLLECTION_PT_LIST = "ConfirmDisbursement_CollectionPtList";
+        private const string SESSION_USER_LIST = "ConfirmDisbursement_UserList";
         private const string SESSION_DISBURSING_LIST = "ConfirmDisbursement_DisbursingList";
         private const string SESSION_CURRENT_DEPT_CODE = "ConfirmDisbursement_CurrentDeptCode";
 
@@ -31,8 +33,12 @@ namespace SSISTeam2.Views.StoreClerk
             {
                 //List<Collection_Point> collectionPts = context.Collection_Point.Where(w => w.deleted != "Y").ToList();
                 List<Department> departmentList = context.Departments.Where(w => w.deleted != "Y").ToList();
+                List<Collection_Point> collectionPtList = context.Collection_Point.Where(w => w.deleted != "Y").ToList();
+                List<Dept_Registry> usersList = context.Dept_Registry.Where(w => w.deleted != "Y").ToList();
 
                 Session[SESSION_DEPARTMENT_LIST] = departmentList;
+                Session[SESSION_COLLECTION_PT_LIST] = collectionPtList;
+                Session[SESSION_USER_LIST] = usersList;
 
                 string currentUser = User.Identity.Name;
 
@@ -75,6 +81,19 @@ namespace SSISTeam2.Views.StoreClerk
                     currentDepartmentCode = forwardedDeptCode;
                 }
 
+                // Mark empty departments
+                List<string> deptCodes = filteredDisbursingList.Select(s => s.DeptCode).ToList();
+
+                foreach (var dept in departmentList)
+                {
+                    // If the dept does not have disbursements:
+                    if (! deptCodes.Contains(dept.dept_code))
+                    {
+                        dept.name += " (empty)";
+                    }
+                }
+
+
                 Session[SESSION_DISBURSING_LIST] = filteredDisbursingList;
                 Session[SESSION_CURRENT_DEPT_CODE] = currentDepartmentCode;
 
@@ -106,11 +125,14 @@ namespace SSISTeam2.Views.StoreClerk
             gvDisbursement.DataBind();
             //MergeCells(gvToRetrieve);
 
-            // Update representative name
+            // Update representative name and collection point location
             List<Department> deptList = Session[SESSION_DEPARTMENT_LIST] as List<Department>;
+            List<Collection_Point> collectionPtList = Session[SESSION_COLLECTION_PT_LIST] as List<Collection_Point>;
+            List<Dept_Registry> usersList = Session[SESSION_USER_LIST] as List<Dept_Registry>;
 
             Department dep = deptList.Find(f => f.dept_code == selectedDeptCode);
-            lblRepName.Text = "Representative: " + dep.rep_user; //new UserModel(dep.rep_user).Fullname;
+            lblRepName.Text = "Representative: " + dep.rep_user; //lblRepName.Text = "Representative: " + usersList.Find(f => f.username == dep.rep_user).fullname;
+            lblCollectionPtLocation.Text = "Collection point: " + collectionPtList.Find(f => f.collection_pt_id == dep.collection_point).location;
 
             if (filtered.Count == 0)
             {
@@ -399,7 +421,7 @@ namespace SSISTeam2.Views.StoreClerk
                 // Enable button to continue to fileDiscrepancies
 
                 // Change to redirect to heng tiong's thing
-                Response.Redirect(Request.Url.ToString(), false);
+                Response.Redirect("FileDiscrepency.aspx", false);
 
             }
             else

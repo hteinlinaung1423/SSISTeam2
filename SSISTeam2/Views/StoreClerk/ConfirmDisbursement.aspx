@@ -40,6 +40,8 @@
     <div class="row">
         <div class="col-xs-12">
             <asp:Label ID="lblRepName" Text="Representative: " runat="server" CssClass="h5" />
+            <br />
+            <asp:Label ID="lblCollectionPtLocation" Text="Collection point: " runat="server" CssClass="h5" />
         </div>
     </div>
 
@@ -54,8 +56,8 @@
     <div style="margin: 10px"></div>
 
     <div class="row">
-        <div class="col-md-8">
-            <asp:GridView ID="gvDisbursement" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped">
+        <div class="col-12 col-lg-12 col-md-12">
+            <asp:GridView ID="gvDisbursement" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-striped" style="width:700px; overflow-x:auto">
                 <Columns>
                     <asp:TemplateField HeaderText="No.">
                         <ItemTemplate>
