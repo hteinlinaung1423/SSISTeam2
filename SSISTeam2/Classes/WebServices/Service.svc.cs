@@ -9,6 +9,7 @@ using System.Web.Security;
 
 using SSISTeam2.Classes.Models;
 using System.IO;
+using static SSISTeam2.Classes.WebServices.Work;
 
 namespace SSISTeam2.Classes.WebServices
 {
@@ -17,6 +18,7 @@ namespace SSISTeam2.Classes.WebServices
     public class Service : IService
     {
         SSISEntities context = new SSISEntities();
+
         Work work = new Work();
 
         List<string> IService.GetCatName()
@@ -134,16 +136,18 @@ namespace SSISTeam2.Classes.WebServices
         }
         public string[] GetDelgateEmployeeName(string deptcode)
         {
-            
+
             return work.ListEmployeeName(deptcode).ToArray<String>();
         }
 
         public void Create(WCF_AppDuties dr)
         {
-           
+
+            string fullName = dr.username;
+            string usrName = work.GetUserName(fullName);
             Approval_Duties appduties = new Approval_Duties
             {
-                username = dr.UserName,
+                username = usrName,
                 start_date = Convert.ToDateTime(dr.StartDate),
                 end_date = Convert.ToDateTime(dr.EndDate),
                 dept_code = dr.DeptCode,
@@ -175,8 +179,18 @@ namespace SSISTeam2.Classes.WebServices
 
         public WCF_AppDuties CheckAppDuties(string deptcode)
         {
-            Approval_Duties c = work.ListAppDuties(deptcode);
-            return WCF_AppDuties.Make(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
+            try
+            {
+                Approval_Duties c = work.ListAppDuties(deptcode);
+                return WCF_AppDuties.Make(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
+            }
+            catch
+            {
+                return null;
+            }
+            
+            
+            
             //return Work.ListAppDuties(deptcode).ToArray<String>();
         }
 
@@ -192,7 +206,7 @@ namespace SSISTeam2.Classes.WebServices
             };*/
             work.UpdateDuty(c.DeptCode);
             return c.DeptCode;
-            
+
         }
 
         public void Approve(string id)
@@ -206,7 +220,7 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         //By Yin
- 
+
 
         public WCFItemTotalQty[] GetEachItemQty()
         {
@@ -243,5 +257,84 @@ namespace SSISTeam2.Classes.WebServices
             return q.ToList<WCFDeptTQty>();
         }
 
+        public List<WCFInventoryAdjustmentModel> GetAllAdjustmentList(string role)
+        {
+
+            List<WCFInventoryAdjustmentModel> rd = new List<WCFInventoryAdjustmentModel>();
+            List<InventoryAdjustmentModel> invModelList = new List<InventoryAdjustmentModel>();
+
+            List<Inventory_Adjustment> invAdjList = work.GetAdjustmentList();
+            foreach (Inventory_Adjustment i in invAdjList)
+            {
+                InventoryAdjustmentModel s = new InventoryAdjustmentModel(i);
+                if (role.Equals("DeptHead"))
+                {
+                    foreach (AdjustmentModel j in s.AdjModel)
+                    {
+                        if (j.Above250())
+                        {
+                            invModelList.Add(s);
+                            break;
+                        }
+                    }
+                }
+                else if (role.Equals("Supervisor"))
+                {
+                    foreach (AdjustmentModel j in s.AdjModel)
+                    {
+                        if (!j.Above250())
+                        {
+                            invModelList.Add(s);
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            foreach (InventoryAdjustmentModel s in invModelList)
+            {
+                WCFInventoryAdjustmentModel item = new WCFInventoryAdjustmentModel(s.VoucherID.ToString(), s.Clerk, s.Status, s.Date.ToString(), s.HighestCost.ToString());
+                rd.Add(item);
+            }
+
+            return rd;
+
+        }
+
+        public List<WCFInventoryAdjustmentDetailModel> AdjustmentDetailList(string id)
+        {
+            List<WCFInventoryAdjustmentDetailModel> rd = new List<WCFInventoryAdjustmentDetailModel>();
+            List<Adjustment_Details> adjList = work.GetViewAdjustmentDetailList(id);
+
+            List<AdjustmentModel> modelList = new List<AdjustmentModel>();
+            foreach (Adjustment_Details i in adjList)
+            {
+                AdjustmentModel model = new AdjustmentModel(i);
+                modelList.Add(model);
+            }
+            foreach (AdjustmentModel s in modelList)
+            {
+                WCFInventoryAdjustmentDetailModel item = new WCFInventoryAdjustmentDetailModel(s.CatName, s.QuantityAdjusted.ToString(), s.CostAdjusted.ToString(), s.Reason);
+                rd.Add(item);
+            }
+            return rd;
+        }
+
+        public void UpdateInventoryAdj(String voucherId)
+        {
+            System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
+            work.updateAdjustment(voucherId);
+           
+
+        }
+
+        public void DeleteInventoryAdj(String voucherId)
+        {
+            System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
+            work.deleteAdjustment(voucherId);
+
+
+        }
     }
 }

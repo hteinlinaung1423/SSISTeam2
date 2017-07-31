@@ -47,7 +47,9 @@ namespace SSISTeam2.Classes.WebServices
         }
         public List<String> ListEmployeeName(string deptcode)
         {
-            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)).Select(c => c.username).ToList<String>(); 
+            var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
+            String headuserName = q.First();
+            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)&&c.fullname!=headuserName).Select(c => c.fullname).ToList<String>(); 
             return list;
         }
 
@@ -83,8 +85,21 @@ namespace SSISTeam2.Classes.WebServices
 
         public Approval_Duties ListAppDuties(string deptcode)
         {
+            
+            try
+            {
                 var q = ctx.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == ctx.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
                 return q;
+            }
+            catch
+            {
+                return null;
+            }
+
+
+            
+          
+           
         }
 
         /* public void UpdateDuty(Approval_Duties c)
@@ -169,9 +184,42 @@ namespace SSISTeam2.Classes.WebServices
 
             return q.ToList<WCFDeptTQty>();
         }
+
+        public List<Inventory_Adjustment> GetAdjustmentList()
+        {
+            var invAdjList = ctx.Inventory_Adjustment.Where(x => x.deleted == "N" & x.status == "Pending").ToList();
+            return invAdjList;
+        }
+
+        public List<Adjustment_Details> GetViewAdjustmentDetailList(string id)
+        {
+            int voucherId = Convert.ToInt32(id);
+            var invAdjList = ctx.Adjustment_Details.Where(x => x.voucher_id.Equals(voucherId)).ToList();
+            return invAdjList;
+
+        }
+
+        public void updateAdjustment(String voucherId)
+        {
+            int vId = Convert.ToInt32(voucherId);
+            var q = ctx.Inventory_Adjustment.Where(x => x.voucher_id == vId).First();
+            q.status = "Approved";
+            ctx.SaveChanges();
+
+        }
+
+        public void deleteAdjustment(String voucherId)
+        {
+            int vId = Convert.ToInt32(voucherId);
+            var q = ctx.Inventory_Adjustment.Where(x => x.voucher_id == vId).First();
+            q.status = "Rejected";
+            ctx.SaveChanges();
+
+        }
+        public string GetUserName(String fullName)
+        {
+            var q = ctx.Dept_Registry.Where(x => x.fullname.Equals(fullName)).Select(x=>x.username);
+            return q.First();
+        }
     }
-
-
-
-
 }

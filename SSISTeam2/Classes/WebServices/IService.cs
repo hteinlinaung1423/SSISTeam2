@@ -105,6 +105,26 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/DisbDeptDetail/{deptname}", ResponseFormat = WebMessageFormat.Json)]
         List<WCFDeptTQty> GetDeptDetail(string deptname);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/ViewAllAdjustment/{role}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFInventoryAdjustmentModel> GetAllAdjustmentList(string role);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/ViewAllAdjustmentDetail/{id}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFInventoryAdjustmentDetailModel> AdjustmentDetailList(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateInventoryAdjustment", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void UpdateInventoryAdj(String voucherId);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/DeleteInventoryAdjustment", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void DeleteInventoryAdj(String voucherId);
     }
 
     [DataContract]
@@ -404,4 +424,104 @@ namespace SSISTeam2.Classes.WebServices
         }
     }
 
+    [DataContract]
+    public class WCFInventoryAdjustmentModel
+    {
+
+        public string voucherID;
+        public string clerk;
+        public string date;
+        public string status;
+        public string highestCost;
+
+
+        public WCFInventoryAdjustmentModel(string voucherID, string clerk, string date, string status, string highestCost)
+        {
+            
+            this.voucherID = voucherID;
+            this.clerk = clerk;
+            this.date = date;
+            this.status = status;
+            this.highestCost = highestCost;
+            
+
+        }
+        [DataMember]
+        public string VoucherID
+        {
+            get { return voucherID; }
+            set { voucherID = value; }
+        }
+        [DataMember]
+        public string Clerk
+        {
+            get { return clerk; }
+            set { clerk = value; }
+        }
+        [DataMember]
+        public string Date
+        {
+            get { return date; }
+            set { date = value; }
+        }
+        [DataMember]
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+        [DataMember]
+        public string HighestCost
+        {
+            get { return highestCost; }
+            set { highestCost = value; }
+        }      
+    }
+
+    [DataContract]
+    public class WCFInventoryAdjustmentDetailModel
+    {
+
+        public string itemdesc;
+        public string qtyadjust;
+        public string priceadjust;
+        public string reason;
+
+
+        public WCFInventoryAdjustmentDetailModel(string itemdesc, string qtyadjust, string priceadjust, string reason)
+        {
+
+            this.itemdesc = itemdesc;
+            this.qtyadjust = qtyadjust;
+            this.priceadjust = priceadjust;
+            this.reason = reason;
+
+
+        }
+        [DataMember]
+        public string ItemDesc
+        {
+            get { return itemdesc; }
+            set { itemdesc = value; }
+        }
+        [DataMember]
+        public string QtyAdjust
+        {
+            get { return qtyadjust; }
+            set { qtyadjust = value; }
+        }
+        [DataMember]
+        public string PriceAdjust
+        {
+            get { return priceadjust; }
+            set { priceadjust = value; }
+        }
+        [DataMember]
+        public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+        
+    }
 }

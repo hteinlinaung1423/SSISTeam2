@@ -90,5 +90,5 @@
     </div> 
          </div> 
     
-    <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label>
+    <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label><asp:GridView ID="GridView1" runat="server"></asp:GridView>
  </asp:Content>

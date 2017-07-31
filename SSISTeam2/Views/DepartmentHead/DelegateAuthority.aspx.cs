@@ -1,4 +1,5 @@
 ﻿using SSISTeam2.Classes.Models;
+using SSISTeam2.Classes.WebServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,13 +32,12 @@ namespace SSISTeam2.Views.DepartmentHead
             UserModel user = new UserModel(loginUserName);
             currentDeptCode = user.Department.dept_code.ToString();
             //show Departmnet Name(Actual)
-           lbDeptName.Text = user.Department.name.ToString()+ " Department";
+            lbDeptName.Text = user.Department.name.ToString() + " Department";
 
             if (!IsPostBack)
             {
                 try
                 {
-
                     //get login department all employee , remove Depthead name in Delegate
                     allEmp = ent.Dept_Registry.Where(b => b.dept_code == currentDeptCode).Select(x => x.fullname).ToList<String>();
                     headName = user.Department.head_user;
@@ -46,28 +46,29 @@ namespace SSISTeam2.Views.DepartmentHead
                     int lastDutyId = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode).Max(x => x.duty_id);
                     var w = ent.Approval_Duties.Where(x => x.duty_id == lastDutyId).First();
 
-                //if current delegate already exist, cannot delegate another
-                if (w.deleted.ToString() == "N" )
-                {
-                    ChooseNewTable.Visible = false;
-                    //get data for Current Delegate Table
-                    var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode&&x.deleted=="N").First();
-                    checkDelegate = q.deleted.ToString();
-                    currentDutyId = q.duty_id;
-                    //show data for Current Delegate Table
-                    lbCurDate.Text = q.created_date.ToString("yyyy-MM-dd");
-                    lbCurDelegate.Text = q.username.ToString();
-                    lbCurReason.Text = q.reason.ToString();
-                    lbCurStart.Text = q.start_date.ToString("yyyy-MM-dd");
-                    lbCurEnd.Text = q.end_date.ToString("yyyy-MM-dd");
-                }
-                else
-                {
-                    CurrentTable.Visible = false;
-                    lbCheckDelegate.Text = "There is no Current Delegate! ";
-                }
+                    //if current delegate already exist, cannot delegate another
+                    if (w.deleted.ToString() == "N")
+                    {
+                        ChooseNewTable.Visible = false;
+                        //get data for Current Delegate Table
+                        var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
+                        checkDelegate = q.deleted.ToString();
+                        currentDutyId = q.duty_id;
+                        //show data for Current Delegate Table
+                        lbCurDate.Text = q.created_date.ToString("yyyy-MM-dd");
+                        lbCurDelegate.Text = q.username.ToString();
+                        lbCurReason.Text = q.reason.ToString();
+                        lbCurStart.Text = q.start_date.ToString("yyyy-MM-dd");
+                        lbCurEnd.Text = q.end_date.ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        CurrentTable.Visible = false;
+                        lbCheckDelegate.Text = "There is no Current Delegate! ";
+                    }
 
-            }catch
+                }
+                catch
                 {
                     lbCheckDelegate.Text = "There is no Current Delegate! ";
                     CurrentTable.Visible = false;
@@ -80,7 +81,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
                 }
             }
-            
+           
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
