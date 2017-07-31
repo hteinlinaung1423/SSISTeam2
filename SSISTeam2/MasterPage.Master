@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title> Stationary Store Inventory System</title>
+    <title></title>
     <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
     </asp:ContentPlaceHolder>
 
@@ -154,16 +154,16 @@
 
                             <ul class="dropdown-menu">
                                 
-                                <li>
-                                    <a href="/Default.aspx">Dashboard</a>
-                                </li>
+
                                 
 
                                 <%--<li>
                                     <asp:Button ID="Dashboard" runat="server" CausesValidation="false" Text="Dashboard" CssClass="btn btn-block btn-primary dropdown-toggle" OnClick="Default" /></li>--%>
                                 <% if (Page.User.IsInRole("Employee"))
                                     { %>
-
+                                 <li>
+                                    <a href="/Views/Employee/EmpDashBoard.aspx">Your Dashboard</a>
+                                </li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Employee actions</li>
 
@@ -235,6 +235,9 @@
                                 <li>
                                     <a href="/Views/Employee/ViewCatalogue.aspx">View Stationery Catalogue</a>
                                 </li>
+                                 <li>
+                                    <asp:LinkButton ID="LinkButtonn" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
+                                </li>
 <%--                                <li>
                                     <a href="/Views/DepartmentHead/ChangeCollectionnRep.aspx">Change Collection Point & Representative</a>
                                 </li>--%>
@@ -245,7 +248,6 @@
                                <%--<li><asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>--%>
                                <%--<li><asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>--%>
                                <%--<asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>--%>
-                               <li><asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-default" OnClick="ChangeCPRep" /></li>
                                 <% }
 
                                     if (Page.User.IsInRole("Manager"))
@@ -271,7 +273,13 @@
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Store actions</li>
                                 <li>
-                                    <a href="/Views/StoreClerk/Cart.aspx">Make Purchase Order</a>
+                                    <a href="/Views/StoreClerk/lowstock.aspx">Low Stock Orders</a>
+                                </li>
+                                <li>
+                                    <a href="/Views/StoreClerk/MakeOrder.aspx">Make Purchase Order</a>
+                                </li>
+                                <li>
+                                    <a href="/Views/StoreClerk/Cart.aspx">View Cart</a>
                                 </li>
                                 <li>
                                     <a href="/Views/Reporting/ReportsMain.aspx">Generate Reports</a>
@@ -297,8 +305,8 @@
                                     <a href="/Views/DepartmentHead/ChangeCollectionnRep.aspx">Change Collection Point & Representative</a>
                                 </li>--%>
 
-                                <li>
-                                 <asp:Button ID="ChangeCPRep2" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-default" OnClick="ChangeCPRep" /></li>
+<%--                                <li>
+                                 <asp:Button ID="ChangeCPRep2" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-default" OnClick="ChangeCPRep" /></li>--%>
                                 <% } %>
                                 
                                 <%--Moved Logout Button to bottom of drop down list--%>

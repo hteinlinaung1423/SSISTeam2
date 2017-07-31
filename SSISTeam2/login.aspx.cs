@@ -19,18 +19,22 @@ namespace SSISTeam2
             Session["item"] = null;
             Session["fullname"] = null;
             IIdentity id = User.Identity;
-            if (id.IsAuthenticated)
-            {
-                if (Request.QueryString["return"] != null)
-                {
-                    string redirect = Request.QueryString["return"];
-                    Response.Redirect("~/" + redirect);
-                } else
-                {
-                    Response.Redirect("~/Default.aspx");
-                }
-            }
+            //if (id.IsAuthenticated)
+            //{
+                
+            //    //else if (Request.QueryString["return"] != null)
+            //    //{
+            //    //    string redirect = Request.QueryString["return"];
+            //    //    Response.Redirect("~/" + redirect);
+            //    //}
+            //    else
+            //    {
+            //        Response.Redirect("~/Default.aspx");
+            //    }
+            //}
 
         }
+
+
     }
 }
