@@ -67,13 +67,22 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton linkBtnDepRepView;
         
         /// <summary>
-        /// linkBtnChangeCollectPt control.
+        /// ChangeCPnRep control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkBtnChangeCollectPt;
+        protected global::System.Web.UI.WebControls.Button ChangeCPnRep;
+        
+        /// <summary>
+        /// ChangeCPRep2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeCPRep2;
         
         /// <summary>
         /// logout control.

@@ -31,7 +31,7 @@
 
         </div>
 
-    <%--</div>--%>
+    </div>  
 
 
     <!-- Table -->
@@ -70,6 +70,6 @@
         <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" SelectCommand="SELECT Category.cat_name, Stock_Inventory.item_description FROM Category INNER JOIN Stock_Inventory ON Category.cat_id = Stock_Inventory.cat_id"></asp:SqlDataSource>--%>
 
     </div>
-
+        <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
 
 </asp:Content>

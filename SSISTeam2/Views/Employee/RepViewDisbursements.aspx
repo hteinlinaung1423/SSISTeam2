@@ -56,4 +56,5 @@
         </div>
 
     </div>
+    <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
 </asp:Content>
