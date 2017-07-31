@@ -127,24 +127,51 @@ namespace SSISTeam2.Classes.WebServices
             return strings;
         }
 
-        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> listMonthlyCheck, string username)
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username)
         {
-            //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
-            //bool discrepencyFound = false;
+            List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
+            bool discrepencyFound = false;
+
+            //WCF_MonthlyCheck model = monthlyCheckList[0];
+
+            //Adjustment_Details detail = new Adjustment_Details();
+            //detail.item_code = model.ItemCode;
+            //int adjusted = int.Parse(model.ActualQuantity) - int.Parse(model.CurrentQuantity);
+            //detail.quantity_adjusted = adjusted;
+            //detail.reason = model.Reason;
+            //detail.deleted = "N";
+
+            //Inventory_Adjustment inventory = new Inventory_Adjustment();
+            //inventory.deleted = "N";
+            //inventory.clerk_user = username;
+            //inventory.status = "Pending";
+            //inventory.date = DateTime.Today;
+            //inventory.status_date = DateTime.Today;
+
+            //inventory.Adjustment_Details.Add(detail);
+
+            //SSISEntities context = new SSISEntities();
+            //context.Adjustment_Details.Add(detail);
+            //context.Inventory_Adjustment.Add(inventory);
+            //context.SaveChanges();
+
 
             //foreach (WCF_MonthlyCheck i in monthlyCheckList)
             //{
-            //    if (i.ActualQuantity != i.CurrentQuantity)
+            //    int actualQty = int.Parse(i.actualQuantity);
+            //    int currentQty = int.Parse(i.currentQuantity);
+            //    if (actualQty != currentQty)
             //    {
             //        confirmList.Add(i);
             //        discrepencyFound = true;
             //    }
 
-            //    work.UpdateMonthlyCheck(confirmList, username);
-            //    work.UpdateMonthlyCheckRecord(username, discrepencyFound);
-            //}
 
-            work.CreateMonthlyCheckRecord(username);
+            //}
+            //this is the problem
+            work.UpdateMonthlyCheck(monthlyCheckList, username);
+            //this is the problem
+            work.UpdateMonthlyCheckRecord(username, discrepencyFound);
         }
 
         public string[] GetDelgateEmployeeName(string deptcode)
