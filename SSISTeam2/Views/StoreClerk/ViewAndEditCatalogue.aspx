@@ -31,7 +31,7 @@
             </table>
               <p></p> 
              <div class="table-responsive">
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="3"
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
@@ -68,11 +68,15 @@
                     </asp:TemplateField>
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="CategoryName"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                        <EditItemTemplate>
+                            <asp:DropDownList ID="DropDownList1" Visible="false" runat="server">
+                            </asp:DropDownList>
                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("categoryName") %>' BackColor="Transparent" Height="30px" Width="100px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Category Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Eval("categoryName") %>' CssClass="text-bold" Height="20px" Width="100px"></asp:Label>
+                            <asp:DropDownList ID="DropDownList2" runat="server">
+                            </asp:DropDownList>
                         </ItemTemplate>
 
 <ItemStyle Width="10%"></ItemStyle>
@@ -85,7 +89,7 @@
                             <asp:TextBox ID="TextBox2" runat="server" Text='<%# Eval("Description") %>' BackColor="Transparent" Height="30px" Width="200px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Description is required" ControlToValidate="TextBox2" ForeColor="Red"></asp:RequiredFieldValidator>
                         </EditItemTemplate>
-                        <ItemTemplate>
+                        <ItemTemplate>                     
                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("Description") %>' CssClass="text-bold" Width="250px"></asp:Label>
                         </ItemTemplate>
 
@@ -116,7 +120,7 @@
 
 <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-Width="80%" HeaderText="RQ"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="80%" HeaderText="Reorder Quantity"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox4" runat="server" Text='<%# Eval("RQ") %>' BackColor="Transparent" Height="30px" Width="50px"></asp:TextBox>
@@ -125,10 +129,10 @@
                         <ItemTemplate>
                             <asp:Label ID="Label5" runat="server" Text='<%# Eval("RQ")%>' CssClass="text-bold"></asp:Label>
                         </ItemTemplate>
-
+                        
 <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
-                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="UOM"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Unit of Measure"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox5" runat="server" Text='<%# Eval("UoM") %>' BackColor="Transparent" Height="30px" Width="70px"></asp:TextBox>
@@ -144,12 +148,14 @@
                      <asp:TemplateField ItemStyle-Width="50%">  
                     <ItemTemplate >  
                         <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-primary"/>
-                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-primary"/>    
+                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-danger"/>    
                     </ItemTemplate>  
                     <EditItemTemplate>  
                         <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary"/>  
                         <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-primary"/>  
                     </EditItemTemplate>  
+
+<ItemStyle Width="50%"></ItemStyle>
                 </asp:TemplateField>      
                 </Columns>
                 

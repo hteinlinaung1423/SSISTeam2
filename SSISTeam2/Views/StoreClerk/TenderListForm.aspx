@@ -30,9 +30,10 @@
                     <td><div style="text-align:left;position: absolute; margin: 0 auto; left: 1000px; right: 0; bottom: 362px;"><asp:Button ID="add" runat="server" Text="Add New Tender" CssClass="btn btn-primary" OnClick="AddNewTender_Click" /> </div></td>
                 </tr>
             </table>
-              <p></p> 
+              <p></p>
+            <p></p> 
              <div class="table-responsive">
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="3"
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
@@ -90,6 +91,8 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Supplier Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
                         </EditItemTemplate>
                         <ItemTemplate>
+                            <asp:DropDownList ID="DropDownList1" Visible="false" runat="server" CssClass="auto-style1">
+                            </asp:DropDownList>
                             <asp:Label ID="Label1" runat="server" Text='<%# Eval("name") %>' CssClass="text-bold" Width="250px"></asp:Label>
                         </ItemTemplate>
 
@@ -123,10 +126,10 @@
                     </asp:TemplateField>
 
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Tender Date"><%-- HeaderStyle-CssClass="text-center-impt">--%>
-                        <EditItemTemplate>
+                        <%--<EditItemTemplate>
                             <asp:TextBox ID="TextBox6" runat="server" Text='<%# Eval("tender_date") %>' BackColor="Transparent" Height="30px" Width="150px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Tender Date is required" ControlToValidate="TextBox6" ForeColor="Red"></asp:RequiredFieldValidator>
-                        </EditItemTemplate>
+                        </EditItemTemplate>--%>
                         <ItemTemplate>
                             <asp:Label ID="Label6" runat="server" Text='<%# Eval("tender_date", "{0:dd/MM/yyyy}") %>' CssClass="text-bold"></asp:Label>
                         </ItemTemplate>
@@ -138,13 +141,28 @@
                      <asp:TemplateField ItemStyle-Width="20%">  
                     <ItemTemplate >  
                         <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-primary"/>
-                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-primary"/>    
+                       <%-- <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-primary"/>    --%>
                     </ItemTemplate>  
                     <EditItemTemplate>  
                         <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary"/>  
                         <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-primary"/>  
                     </EditItemTemplate>  
+
+<ItemStyle Width="20%"></ItemStyle>
                 </asp:TemplateField>      
+                       
+                      <asp:TemplateField ItemStyle-Width="10%" >
+
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btn_Delete" runat="server" Text="Delete"
+                                CommandName="Delete" CommandArgument='<%# Bind("request_id") %>'
+                                
+                                CssClass="btn btn-danger"
+                                OnClientClick="return confirm('Are you sure you want to delete this record?');" />
+                        </ItemTemplate>
+
+<ItemStyle Width="10%"></ItemStyle>
+                          </asp:TemplateField> 
                 </Columns>
                 
             </asp:GridView>
@@ -162,3 +180,11 @@
 
    
 </asp:Content>
+<asp:Content ID="Content3" runat="server" contentplaceholderid="ContentPlaceHolderHead">
+    <style type="text/css">
+        .auto-style1 {
+            margin-bottom: 0;
+        }
+    </style>
+</asp:Content>
+
