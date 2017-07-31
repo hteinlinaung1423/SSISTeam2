@@ -121,9 +121,7 @@
 
 
 
-
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
 
 
                     <% if (!Page.User.Identity.IsAuthenticated)
@@ -263,8 +261,20 @@
 
                                  <%--<li>
                                  <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>--%>
+                                                                <li>
+                                    <a href="/Views/Employee/ViewCatalogue.aspx">View Stationery Catalogue</a>
+                                </li>
+   
+<%--                                 <asp:Button ID="ViewCatalogue3" runat="server" CausesValidation="false" Text="View Stationery Catalogue" CssClass="btn btn-block btn-primary" OnClick="ViewCatalogue_Click" /></li>--%>
+                                <li>
+                                    <a href="/Views/DepartmentHead/ChangeCollectionnRep.aspx">Change Collection Point & Representative</a>
+                                </li>
+
+<%--                                 <li>
+                                 <asp:Button ID="ChangeCPnRep" runat="server" CausesValidation="false" Text="Change CollectPoint & Representative" CssClass="btn btn-block btn-primary" OnClick="ChangeCPRep" /></li>--%>
                                 
                                 <% }
+
                                     if (Page.User.IsInRole("Manager"))
                                     { %>
                                 <li class="divider"></li>

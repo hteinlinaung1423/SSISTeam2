@@ -13,15 +13,6 @@ namespace SSISTeam2.Views.DepartmentHead {
     public partial class ChangeCollection_Rep {
         
         /// <summary>
-        /// LabelDeptName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDeptName;
-        
-        /// <summary>
         /// Table control.
         /// </summary>
         /// <remarks>
