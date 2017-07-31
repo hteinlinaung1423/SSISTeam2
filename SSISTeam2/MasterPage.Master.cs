@@ -24,10 +24,24 @@ namespace SSISTeam2
                 using (SSISEntities ctx = new SSISEntities())
                 {
                     fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+
+                    // Check if user is department rep
+                    int count = ctx.Departments.Where(d => d.rep_user == currentUser).Count();
+                    if (count > 0)
+                    {
+                        // is a dept rep
+                        linkBtnDepRepView.Visible = true;
+                        //btnDepRepViewDisbursements.Visible = true;
+                    } else
+                    {
+                        linkBtnDepRepView.Visible = false;
+                        //btnDepRepViewDisbursements.Visible = false;
+                    }
                 }
 
                 lblFullName.Text = "Welcome, "+fullName;
                
+
             }
             
 
@@ -64,6 +78,11 @@ namespace SSISTeam2
         protected void MakeOrder(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/StoreClerk/Cart.aspx");
+        }
+
+        protected void GenerateRetrieval(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/GenerateRetrieval.aspx");
         }
 
         protected void MakeNewRequest(object sender, EventArgs e)
@@ -139,6 +158,11 @@ namespace SSISTeam2
         protected void ViewCatalogue_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Employee/ViewCatalogue.aspx");
+        }
+
+        protected void btnDepRepViewDisbursements_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/RepViewDisbursements.aspx");
         }
     }
 }

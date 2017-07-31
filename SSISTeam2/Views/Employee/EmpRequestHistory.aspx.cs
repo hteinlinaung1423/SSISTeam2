@@ -57,6 +57,7 @@ namespace SSISTeam2.Views.Employee
                          x.date_time,
                          x.current_status
                      }).ToList();
+
             GridView2.DataSource = q;
             GridView2.DataBind();
 
@@ -165,35 +166,7 @@ namespace SSISTeam2.Views.Employee
             FillPage();
         }
 
-        private string GetSortDirection(string column)
-        {
-
-            // By default, set the sort direction to ascending.
-            string sortDirection = "ASC";
-
-            // Retrieve the last column that was sorted.
-            string sortExpression = ViewState["SortExpression"] as string;
-
-            if (sortExpression != null)
-            {
-                // Check if the same column is being sorted.
-                // Otherwise, the default value can be returned.
-                if (sortExpression == column)
-                {
-                    string lastDirection = ViewState["SortDirection"] as string;
-                    if ((lastDirection != null) && (lastDirection == "ASC"))
-                    {
-                        sortDirection = "DESC";
-                    }
-                }
-            }
-
-            // Save new values in ViewState.
-            ViewState["SortDirection"] = sortDirection;
-            ViewState["SortExpression"] = column;
-
-            return sortDirection;
-        }
+        
 
        
 

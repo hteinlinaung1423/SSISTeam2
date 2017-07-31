@@ -25,6 +25,9 @@ namespace SSISTeam2.Classes.WebServices
         [WebGet(UriTemplate = "/Approve/{id}", ResponseFormat = WebMessageFormat.Json)]
         void Approve(string id);
 
+
+        
+
         [OperationContract]
         [WebGet(UriTemplate = "/Reject/{id}", ResponseFormat = WebMessageFormat.Json)]
         void Reject(string id);
@@ -76,6 +79,14 @@ namespace SSISTeam2.Classes.WebServices
         List<string> GetMonthlyCheckName();
 
         [OperationContract]
+        [WebInvoke(UriTemplate = "/InventoryCheck/Update/{username}", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        //void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username);
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheck, string username);
+
+
+        [OperationContract]
         [WebGet(UriTemplate = "/CheckApprovalDuties/{deptcode}", ResponseFormat = WebMessageFormat.Json)]
         WCF_AppDuties CheckAppDuties(string deptcode);
 
@@ -84,10 +95,6 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         string Update(WCF_AppDuties app);
-
-        [OperationContract]
-        [WebInvoke(UriTemplate = "/InventoryCheck/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList);
 
         //By Yin
         [OperationContract]
@@ -109,6 +116,16 @@ namespace SSISTeam2.Classes.WebServices
 
         [OperationContract]
         [WebGet(UriTemplate = "/DisbDeptDetail/{deptname}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFDeptTQty> GetDeptDetail(string deptname);
+
+
+        //Htein Lin Aung Create New Request
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/CreateNewRequest", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void ApplyNewRequest(WCF_NewReqeust req);
         List<WCFDisburse> GetDeptDetail(string deptname);
 
         [OperationContract]
@@ -121,19 +138,14 @@ namespace SSISTeam2.Classes.WebServices
     {
         [DataMember]
         public string itemCode;
-
         [DataMember]
         public string itemDescription;
-
         [DataMember]
         public string categoryName;
-
         [DataMember]
         public string currentQuantity;
-
         [DataMember]
         public string actualQuantity;
-
         [DataMember]
         public string reason;
 
@@ -147,6 +159,42 @@ namespace SSISTeam2.Classes.WebServices
             this.reason = reason;
         }
 
+        [DataMember]
+        public string ItemCode
+        {
+            get { return itemCode; }
+            set { itemCode = value; }
+        }
+        [DataMember]
+        public string ItemDescription
+        {
+            get { return itemDescription; }
+            set { itemDescription = value; }
+        }
+        [DataMember]
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set { categoryName = value; }
+        }
+        [DataMember]
+        public string CurrentQuantity
+        {
+            get { return currentQuantity; }
+            set { currentQuantity = value; }
+        }
+        [DataMember]
+        public string ActualQuantity
+        {
+            get { return actualQuantity; }
+            set { actualQuantity = value; }
+        }
+        [DataMember]
+        public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
     }
 
 
@@ -370,6 +418,70 @@ namespace SSISTeam2.Classes.WebServices
             }
         }
 
+    }
+
+    [DataContract]
+    public class WCF_NewReqeust
+    {
+        [DataMember]
+        string user;
+        [DataMember]
+        string dept_code;
+        [DataMember]
+        string reason;
+        [DataMember]
+        string status;
+        [DataMember]
+        string date_time;
+
+
+
+
+        public WCF_NewReqeust(string user, string dept_code, string reason, string status, string date_time)
+        {
+            this.user = user;
+            this.dept_code = dept_code;
+            this.reason = reason;
+            this.status = status;
+            this.date_time = date_time;
+        }
+
+        [DataMember]
+        public string Name
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+
+        [DataMember]
+        public string DeptCode
+        {
+            get { return dept_code; }
+            set { dept_code = value; }
+        }
+
+        [DataMember]
+        public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+
+        [DataMember]
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
+        [DataMember]
+        public string Date
+        {
+            get { return date_time; }
+            set { date_time = value; }
+        }
+
         public int RetrieveQty
         {
             get
@@ -382,6 +494,10 @@ namespace SSISTeam2.Classes.WebServices
                 retrieveQty = value;
             }
         }
+    }
+
+
+
     }
 
     [DataContract]
@@ -445,6 +561,10 @@ namespace SSISTeam2.Classes.WebServices
                 disbursedQty = value;
             }
         }
+
+
     }
 
 }
+
+

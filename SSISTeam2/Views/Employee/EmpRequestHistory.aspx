@@ -18,7 +18,7 @@
         OnRowCommand="GridView2_RowCommand"
         GridLines="None"
         AutoGenerateColumns="false"
-        AllowSorting="true"
+       AllowSorting="true"
         AllowPaging="true"
         PageSize="10"
         HeaderStyle-CssClass="text-center-impt"

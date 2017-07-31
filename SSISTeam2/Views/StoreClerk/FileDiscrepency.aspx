@@ -56,5 +56,6 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <asp:Label ID="lblWarning" Text="" runat="server" />
     <asp:Button ID="ConfirmBtn" runat="server" Text="Confirm" OnClick="ConfirmBtn_Click" CssClass="btn btn-primary"/>
 </asp:Content>
