@@ -51,7 +51,7 @@ namespace SSISTeam2.Views.StoreClerk
         }
         protected void AddNewTender_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CreateNewTender.aspx");
+            Response.Redirect("AddNewTender.aspx");
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
