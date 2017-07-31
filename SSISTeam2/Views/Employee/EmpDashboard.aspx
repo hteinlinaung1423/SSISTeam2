@@ -6,6 +6,19 @@
 </asp:Content>
 <asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1"
     runat="server">
+
+      <div class="col-md-12">
+ <div class="panel panel-default">
+     <div class="panel-heading">
+        <h3 class="panel-title">
+
+                <asp:Label runat="server" Font-Size="XX-Large" ID="lblFullName" CssClass="modal-header"></asp:Label></h3>
+                <h4>Welcome to the SSIS</h4>
+            </div>
+
+        </div>
+          </div>
+
     
     <div class="col-md-6">
 

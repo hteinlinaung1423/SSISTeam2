@@ -17,6 +17,7 @@ namespace SSISTeam2.Views
             {
                 FillPage();
             }
+
         }
         private void FillPage()
         {
@@ -37,7 +38,15 @@ namespace SSISTeam2.Views
             string pendingnum = GridView1.Rows.Count.ToString();
             lblPendingNum.Text = "YOU HAVE "+ pendingnum + " REQUEST(S) TO VIEW";
 
-            Department dept = ent.Departments.Where(x => currentDept == x.dept_code).First();
+            string currentUser = Page.User.Identity.Name;
+            string fullName = "";
+            using (SSISEntities ctx = new SSISEntities())
+            {
+                fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+            }
+            lblFullName.Text = "Welcome, " + fullName;
+
+                Department dept = ent.Departments.Where(x => currentDept == x.dept_code).First();
             Collection_Point colpoint = ent.Collection_Point.Where(y => y.collection_pt_id == dept.collection_point).First();
             lblrep.Text = dept.rep_user;
             lblcolpoint.Text = colpoint.location + " (" + colpoint.day_of_week +")";
@@ -66,11 +75,18 @@ namespace SSISTeam2.Views
             Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
         }
 
+    
+
         protected void btnchangecoll_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ChangeCollectionnRep.aspx");
+            //Yin
+            SSISEntities context = new SSISEntities();
+            string loginUser = Page.User.Identity.Name;
+            string logindepCode = context.Dept_Registry.Where(b => b.username == loginUser).Select(c => c.dept_code).First().ToString();
+            Department dept = context.Departments.Where(d => d.dept_code == logindepCode).Single();
+            Session["sDept"] = dept;
+            Response.Redirect("~/Views/DepartmentHead/ChangeCollectionnRep.aspx");
         }
-
         protected void btnShowHistory_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");

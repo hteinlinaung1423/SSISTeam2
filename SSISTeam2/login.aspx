@@ -14,7 +14,7 @@
                         <h2 class="panel-title" style="color: #ECEFF4">Login</h2>
                     </div>
                     <%--Panel to set the default behaviour to trigger LoginButton click event when keyboard Enter is pressed --%>
-                    <asp:Panel ID="panLogin" runat="server" DefaultButton="LoginButton" Width="100%" >
+                    <asp:Panel ID="panLogin" runat="server" DefaultButton="LoginButton" Width="100%">
                    
                          <div class="panel-body">
                         <div class="form-group">
