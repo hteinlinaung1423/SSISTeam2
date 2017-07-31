@@ -34,12 +34,14 @@ namespace SSISTeam2.Classes.WebServices
                     int itemQty = itemGroup.Select(s => s.Quantity).Aggregate((a, b) => a + b);
                     List<int> reqIds = itemGroup.Select(s => s.RequestId).ToList();
 
+                    int actualQty = itemCodeAndQuantities[itemGroup.Key.ItemCode];
+
                     ConfirmDisbursementViewModel model = new ConfirmDisbursementViewModel();
                     model.ItemCode = itemGroup.Key.ItemCode;
                     model.ItemDescription = itemGroup.Key.Description;
                     model.DeptCode = itemGroup.Key.DeptCode;
                     model.QuantityExpected = itemQty;
-                    model.QuantityActual = itemQty;
+                    model.QuantityActual = actualQty;
                     model.RequestIds = reqIds;
 
                     modelDisbursingList.Add(model);
@@ -204,11 +206,13 @@ namespace SSISTeam2.Classes.WebServices
                     int itemQty = itemGroup.Select(s => s.Quantity).Aggregate((a, b) => a + b);
                     List<int> reqIds = itemGroup.Select(s => s.RequestId).ToList();
 
+                    int actualQty = itemCodeAndQuantities[itemGroup.Key];
+
                     ConfirmRetrievalViewModel model = new ConfirmRetrievalViewModel();
                     model.ItemCode = itemGroup.Key;
                     model.ItemDescription = itemGroup.First().Description;
                     model.QuantityExpected = itemQty;
-                    model.QuantityActual = itemQty;
+                    model.QuantityActual = actualQty;
                     model.RequestIds = reqIds;
 
                     list.Add(model);

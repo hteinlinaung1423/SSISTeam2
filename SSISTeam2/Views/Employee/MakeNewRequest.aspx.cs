@@ -356,6 +356,8 @@ namespace SSISTeam2.Views.StoreClerk
                 context.SaveChanges();
             }
 
+            //Emailer
+
             //Response.Redirect(Request.Url.ToString(), false);
             Response.Redirect("EmpRequestHistory.aspx", false);
         }
