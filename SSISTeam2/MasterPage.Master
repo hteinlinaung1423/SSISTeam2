@@ -229,7 +229,9 @@
 
                                     if (Page.User.IsInRole("DeptHead"))
                                     { %>
-
+                                <li>
+                                    <a href="/Views/DepartmentHead/HeadDashboard.aspx">Your Dashboard</a>
+                                </li>
                                 <li>
                                     <a href="/Views/DepartmentHead/ViewPending.aspx">Approve Requests</a>
                                 </li>
