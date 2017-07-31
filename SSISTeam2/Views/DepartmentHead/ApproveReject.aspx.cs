@@ -123,6 +123,7 @@ namespace SSISTeam2.Views.DepartmentHead
             var req = ent.Requests.SingleOrDefault(x => x.request_id == selectReqId);
             req.current_status = "Rejected";
             req.rejected = "Y";
+            req.rejected_reason = tbReason.Text;
 
             //change status in "Request Event"
             var q = from r in ent.Requests

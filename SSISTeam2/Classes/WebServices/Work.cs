@@ -55,11 +55,11 @@ namespace SSISTeam2.Classes.WebServices
 
         public void CreateAppDuties(Approval_Duties ap)
         {
-                ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
-                ctx.SaveChanges();   
+            ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
         }
 
-        
+
 
         public List<MonthlyCheckModel> GetAllMonthlyCheck()
         {
@@ -73,6 +73,91 @@ namespace SSISTeam2.Classes.WebServices
             }
 
             return modelList;
+        }
+
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> list, string username)
+        {
+            Inventory_Adjustment inventoryAdjMan = new Inventory_Adjustment();
+            inventoryAdjMan.clerk_user = username;
+            inventoryAdjMan.deleted = "N";
+            inventoryAdjMan.status = "Pending";
+            inventoryAdjMan.date = DateTime.Today;
+            inventoryAdjMan.status_date = DateTime.Today;
+
+            Inventory_Adjustment inventoryAdjSup = new Inventory_Adjustment();
+            inventoryAdjMan.clerk_user = username;
+            inventoryAdjMan.deleted = "N";
+            inventoryAdjMan.status = "Pending";
+            inventoryAdjMan.date = DateTime.Today;
+            inventoryAdjMan.status_date = DateTime.Today;
+
+            foreach (WCF_MonthlyCheck i in list)
+            {
+                int actual = int.Parse(i.actualQuantity);
+                int current = int.Parse(i.CurrentQuantity);
+                int adjusted = current - actual;
+
+                Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
+                ItemModel itemModel = new ItemModel(inventory);
+                double cost = Math.Abs(adjusted) * itemModel.AveragePrice;
+                Adjustment_Details adjustmentDetail = new Adjustment_Details();
+
+
+                if (cost >= 250)
+                {
+                    adjustmentDetail.item_code = i.ItemCode;
+                    adjustmentDetail.quantity_adjusted = adjusted;
+                    adjustmentDetail.reason = i.reason;
+                    adjustmentDetail.deleted = "N";
+                    inventoryAdjMan.Adjustment_Details.Add(adjustmentDetail);
+                } else if (cost < 250)
+                {
+                    adjustmentDetail.item_code = i.ItemCode;
+                    adjustmentDetail.quantity_adjusted = adjusted;
+                    adjustmentDetail.reason = i.reason;
+                    adjustmentDetail.deleted = "N";
+                    inventoryAdjSup.Adjustment_Details.Add(adjustmentDetail);
+                }
+                ctx.Adjustment_Details.Add(adjustmentDetail);
+                ctx.SaveChanges();
+            }
+
+            if (inventoryAdjMan.Adjustment_Details.Count > 0)
+            {
+                ctx.Inventory_Adjustment.Add(inventoryAdjMan);
+                ctx.SaveChanges();
+            } else if (inventoryAdjSup.Adjustment_Details.Count > 0)
+            {
+                ctx.Inventory_Adjustment.Add(inventoryAdjSup);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void UpdateMonthlyCheckRecord(string username, bool discrepencyFound)
+        {
+            Monthly_Check_Records checkRecords = new Monthly_Check_Records();
+            checkRecords.clerk_user = username;
+            checkRecords.date_checked = DateTime.Today;
+            checkRecords.deleted = "N";
+            string yesOrNo = "";
+            if (discrepencyFound)
+                yesOrNo = "Y";
+            else
+                yesOrNo = "N";
+            checkRecords.discrepancy = yesOrNo;
+            ctx.Monthly_Check_Records.Add(checkRecords);
+            ctx.SaveChanges();
+        }
+
+        public void CreateMonthlyCheckRecord(string username)
+        {
+            Monthly_Check_Records checkRecords = new Monthly_Check_Records();
+            checkRecords.clerk_user = username;
+            checkRecords.date_checked = DateTime.Today;
+            checkRecords.deleted = "N";
+            checkRecords.discrepancy = "N";
+            ctx.Entry(checkRecords).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
         }
 
         public List<Request_Details> GetRequestDetail(string id)
@@ -198,6 +283,15 @@ namespace SSISTeam2.Classes.WebServices
             return invAdjList;
 
         }
+
+        //Apply New Request
+
+        public void ApplyNewRequest(Request r)
+        {
+            ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
+        }
+    }
 
         public void updateAdjustment(String voucherId)
         {
