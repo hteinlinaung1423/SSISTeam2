@@ -7,7 +7,7 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Your Latest 3 Requests</h3>
+            <h3 class="panel-title">YOUR LATEST 3 REQUEST(S)</h3>
           </div>
           <div class="panel-body">
               <asp:GridView ID="GridView1" runat="server" GridLines="None"
@@ -42,6 +42,7 @@
                     </Columns>
               </asp:GridView>
           </div>
+
            <div class="panel-footer">
                <asp:Button ID="btnMakeNewReq" runat="server" Text="Make New Request" CssClass="btn btn-primary" OnClick="btnMakeNewReq_Click"/></div>
         </div>
@@ -50,7 +51,7 @@
     <div class="col-md-6">
         <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Department Latest 3 Requests</h3>
+        <h3 class="panel-title">DEPARTMENT LATEST 3 REQUEST(S)</h3>
       </div>
       <div class="panel-body">
          <asp:GridView ID="GridView2" runat="server" GridLines="None"
@@ -92,13 +93,4 @@
        <div class="panel-footer">
            <asp:Button ID="btnShowHistory" runat="server" Text="Show Request History" CssClass="btn btn-primary" OnClick="btnShowHistory_Click"/></div></div>
     </div>
-
-
-
-
-
-
-
-
-
     </asp:content>
