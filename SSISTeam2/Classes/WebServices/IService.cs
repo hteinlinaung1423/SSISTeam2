@@ -99,8 +99,8 @@ namespace SSISTeam2.Classes.WebServices
         List<WCFRetieve> GetEachItemQty(string user);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/RetriveTQty/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void UpdateRetrieveQty(List<WCFRetieve> retrievedList);
+        [WebInvoke(UriTemplate = "/RetriveTQty/Update/{loginUserName}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateRetrieveQty(List<WCFRetieve> retrievedList,string loginUserName);
 
 
         [OperationContract]
@@ -114,6 +114,10 @@ namespace SSISTeam2.Classes.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/DisbDeptDetail/{user}/{deptname}", ResponseFormat = WebMessageFormat.Json)]
         List<WCFDisburse> GetDeptDetail(string user, string deptname);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
 
         [OperationContract]
         [WebGet(UriTemplate = "/ViewAllAdjustment/{role}", ResponseFormat = WebMessageFormat.Json)]
@@ -143,11 +147,7 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         void ApplyNewRequest(WCF_NewReqeust req);
-        
-
-        [OperationContract]
-        [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
+ 
     }
 
     [DataContract]

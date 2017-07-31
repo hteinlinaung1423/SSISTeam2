@@ -240,57 +240,69 @@ namespace SSISTeam2.Classes.WebServices
             return work.wgetEachItemQty(user);
         }
         //Update Retrieve Form
-        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList)
+        public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
+        {
+            int ii = 0;
+            string itemCode = null;
+            string[] itemCodeAry = new string[retrieveList.Count];
+            int[] qtyAry = new int[retrieveList.Count];
+            Dictionary<string, int> dicList = new Dictionary<string, int>();
+
+            foreach (WCFRetieve eachObj in retrieveList)
+            {
+
+                string itemName = eachObj.ItemDes;
+                itemCode = changeItemNametoCode(itemName);
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.RetrieveQty);
+                qtyAry[ii] = quantity;
+
+                //Add to dictionary
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
+
+                ii++;
+            }
+
+            //Pass data to Mobile confirmation
+
+            MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
+        }
+
+        //chnage into Item Name to item COode
+        public string changeItemNametoCode(string itemName)
+        {
+
+            Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
+            string itemCode = st.item_code;
+            return itemCode;
+
+        }
+
+        //Testing
+        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
         //{
         //    int ii = 0;
-        //    string[] keys = new string[retrieveList.Count];
-        //    int[] values = new int[retrieveList.Count];
-        //    Dictionary<string, int> dicList = new Dictionary<string, int>();
+        //    Stock_Inventory st = null;
+        //    string itemCode = null;
+        //    string[] itemCodeAry = new string[retrieveList.Count];
+        //    //    //change item into item code
         //    foreach (WCFRetieve eachObj in retrieveList)
         //    {
         //        //Item
         //        string itemDescription = eachObj.ItemDes;
-        //        //change item description to item code
-        //        string itemCode = context.Stock_Inventory.Where(x => x.item_description == itemDescription).Select(x => x.item_code).ToString();
-        //        keys[ii] = itemCode;
-
-        //        //Quantity
-        //        values[ii] = Int16.Parse(eachObj.RetrieveQty);
-
-        //        //Add to dictionary
-        //        dicList.Add(keys[ii], values[ii]);
-
+        //        st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //        itemCode = st.item_code;
+        //        itemCodeAry[ii] = itemCode;
         //        ii++;
         //    }
 
-        //    //Pass data to Mobile confirmation
-        //    //string name = loginUserName;
-
-        //    Dictionary<string, int> someItems = new Dictionary<string, int>();
-
-        //    someItems.Add("P043", 7);
-
-        //    MobileConfirmation.ConfirmRetrievalFromWarehouse("empy", someItems);
+        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "test");
+        //    rq.rejected_reason = itemCode;
+        //    rq.deleted = "H";
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
         //}
-
-        //Testing
-        public void UpdateRetrieveQty(List<WCFRetieve> retrieveList)
-        {
-           
-            Request rr = new Request
-            {
-                dept_code = "REGRR",
-                current_status = "aaa",
-                reason = "55",
-                date_time = DateTime.Now,
-                deleted = "Z",
-                username = "yyyyyyy",
-                rejected="G"
-            };
-
-            context.Requests.Add(rr);
-            context.SaveChanges();
-        }
 
         public List<String> GetDisbCollectP()
         {
