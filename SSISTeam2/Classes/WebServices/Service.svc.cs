@@ -140,20 +140,17 @@ namespace SSISTeam2.Classes.WebServices
 
         public void Create(WCF_AppDuties dr)
         {
-           
-            Approval_Duties appduties = new Approval_Duties
-            {
-                username = dr.UserName,
-                start_date = Convert.ToDateTime(dr.StartDate),
-                end_date = Convert.ToDateTime(dr.EndDate),
-                dept_code = dr.DeptCode,
-                created_date = Convert.ToDateTime(dr.CreatedDate),
-                deleted = dr.Deleted,
-                reason = dr.Reason
 
-            };
+            Approval_Duties duti = new Approval_Duties();
+            duti.username = dr.UserName;
+            duti.dept_code = dr.DeptCode;
+            duti.start_date = Convert.ToDateTime( dr.StartDate);
+            duti.end_date =Convert.ToDateTime( dr.EndDate);
+            duti.reason = dr.Reason;
+            duti.created_date =Convert.ToDateTime( dr.CreatedDate);
+            duti.deleted = "N";
 
-            work.CreateAppDuties(appduties);
+            work.CreateAppDuties(duti);
 
         }
 
@@ -176,7 +173,7 @@ namespace SSISTeam2.Classes.WebServices
         public WCF_AppDuties CheckAppDuties(string deptcode)
         {
             Approval_Duties c = work.ListAppDuties(deptcode);
-            return WCF_AppDuties.Make(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
+            return new WCF_AppDuties(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(),c.deleted, c.reason);
             //return Work.ListAppDuties(deptcode).ToArray<String>();
         }
 
@@ -260,7 +257,32 @@ namespace SSISTeam2.Classes.WebServices
             new Work().ApplyNewRequest(req);
         }
 
-       
+        public void CreateRequestDetail(WCFItemTotalQty req)
+        {
+            Request r = new Work().GetRequest();
 
+         
+                Request_Details rdetail = new Request_Details();
+                rdetail.deleted = "N";
+                rdetail.request_id = r.request_id;
+                Stock_Inventory item = new Work().GetStockInventory(req.ItemDes);
+                rdetail.item_code = item.item_code;
+                rdetail.orig_quantity =Convert.ToInt32( req.TotalQty);
+
+                new Work().CreateRequestDetail(rdetail);
+
+            Request_Details newreq = new Work().GetLastRequestDetail();
+            Request_Event revent = new Request_Event();
+            revent.request_detail_id = newreq.request_detail_id;
+            revent.status = RequestStatus.PENDING;
+            revent.quantity = Convert.ToInt32(newreq.orig_quantity);
+            revent.date_time = Convert.ToDateTime(r.date_time);
+            revent.deleted = "N";
+            revent.username = r.username;
+
+            new Work().CreateRequestEvent(revent);
+
+
+        }
     }
 }
