@@ -51,8 +51,11 @@ namespace SSISTeam2.Views.DepartmentHead
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
+            Session["deptcode"] = currentDeptCode;
+
             id = ((Label)gvr.FindControl("lbReqId")).Text;
             Response.Redirect("ApproveReject.aspx?key=" + id);
+            
         }
 
         //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

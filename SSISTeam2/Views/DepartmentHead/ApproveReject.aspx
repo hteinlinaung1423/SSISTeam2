@@ -1,11 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApproveReject.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ApproveReject" 
      MasterPageFile="~/MasterPage.Master" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <div class="panel panel-default">
     <div class="panel-heading"><h3>Approve Reject </h3></div>
 
     <div class="panel-body">     
-        <asp:Label ID="lblInfo" runat="server" />
+        <asp:Label ID="lblInfo" runat="server" Font-Size="Medium" />
+        <br />
         Requested ID: <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         <br />
         Requested Date: <asp:Label ID="lbRqDate" runat="server" Text="-"></asp:Label>
@@ -49,32 +52,50 @@
          </div> 
          
     <div>
-        <asp:TextBox ID="tbReason" runat="server"></asp:TextBox>
-        <br /><br />
-        <asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" CssClass="btn btn-default"/>
-        &nbsp;&nbsp;
-        <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" CssClass="btn btn-default"/>
-         &nbsp;&nbsp;
-        <asp:Button ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CssClass="btn btn-default" />
+
+      <div class="panel-heading" style="width:700px" >
+           <asp:Label Text="Reason for Approve/Reject" runat="server" Width="700px"/>
+     </div>
+    <div class="">
+        <asp:TextBox ID="tbReason" runat="server" TextMode="MultiLine" MaxLength="1000" Height="70px" CssClass="form-control" Width="705px"></asp:TextBox>
+     </div>
         <br />
+     <asp:Table ID="Table1" runat="server">
+             <asp:TableRow>
+                <asp:TableCell HorizontalAlign="Left"><asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" CssClass="btn btn-default" /></asp:TableCell>
+                <asp:TableCell HorizontalAlign="Center"> <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" CssClass="btn btn-default"/></asp:TableCell>
+ 		        <asp:TableCell HorizontalAlign="Right"><asp:Button ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CssClass="btn btn-default" /></asp:TableCell>
+             </asp:TableRow>
+         </asp:Table>
 
         <asp:Label ID="lbAppRej" runat="server" ForeColor="#FF3300"></asp:Label>
     </div> 
        </div> 
   
-
     <hr />
+
      <div class="panel panel-default">
-           <div class="panel-heading"><h3> This is Last Approved Request ,but Not Received From Store</h3></div>     
+           <div class="panel-heading"><h3> This is Last Approved Request ,but Not Received From Store</h3></div> 
+         <asp:Label ID="lbLastApp" runat="server" Font-Size="Medium" ></asp:Label>
+             
        <br />
-         <asp:Panel ID="Panel1" runat="server">
-                 Requested ID: <asp:Label ID="lbLastReqID" runat="server" Text="-"></asp:Label>
+         <asp:Table ID="Table2" runat="server">
+             <asp:TableRow>
+                 <asp:TableCell>Requested ID</asp:TableCell>
+                <asp:TableCell>   :<asp:Label ID="lbLastReqID" runat="server" Text="-"></asp:Label></asp:TableCell>
+             </asp:TableRow>
+               <asp:TableRow>
+                <asp:TableCell>Requested Date</asp:TableCell>
+                <asp:TableCell>   :<asp:Label ID="lbLastReqDate" runat="server" Text="-"></asp:Label></asp:TableCell>
+             </asp:TableRow>
+                <asp:TableRow>
+                <asp:TableCell>Requested Employee</asp:TableCell>
+                 <asp:TableCell>   :<asp:Label ID="lbLastReqEmp" runat="server" Text="-"></asp:Label></asp:TableCell>   
+             </asp:TableRow>
+         </asp:Table>
+                 
                 <br />
-                 Requested Date: <asp:Label ID="lbLastReqDate" runat="server" Text="-"></asp:Label>
-                 <br />
-                 Requested Employee: <asp:Label ID="lbLastReqEmp" runat="server" Text="-"></asp:Label>            
-         </asp:Panel>
-    <asp:Label ID="lbLastApp" runat="server" Font-Size="Large" ></asp:Label>
+
      <div class="panel-body"> 
           <div class="table-responsive">
             <asp:GridView ID="GridView2" runat="server"

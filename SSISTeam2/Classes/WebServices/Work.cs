@@ -224,7 +224,7 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         //By Yin
-        public List<WCFItemTotalQty> wgetEachItemQty()
+        public List<WCFRetieve> wgetEachItemQty()
         {
             var q = (from r in ctx.Requests
                      join x in ctx.Request_Details on r.request_id equals x.request_id
@@ -232,13 +232,13 @@ namespace SSISTeam2.Classes.WebServices
                      join ee in ctx.Request_Event on x.request_detail_id equals ee.request_detail_id
                      where r.current_status == "Approved" && ee.status == "Retrieving"
                      group x by y.item_description into g
-                     select new WCFItemTotalQty
+                     select new WCFRetieve
                      {
                          ItemDes = g.Key,
                          TotalQty = g.Sum(d => d.orig_quantity).ToString(),
-                     }).ToList<WCFItemTotalQty>();
+                     }).ToList<WCFRetieve>();
 
-            return q.ToList<WCFItemTotalQty>();
+            return q.ToList<WCFRetieve>();
         }
 
         public List<String> wgetCollectP()
@@ -255,21 +255,22 @@ namespace SSISTeam2.Classes.WebServices
             return q.ToList<String>();
         }
 
-        public List<WCFDeptTQty> wgetDepDetail(string deptname)
+        public List<WCFDisburse> wgetDepDetail(string deptname)
         {
             var q = (from de in ctx.Departments
                      join rq in ctx.Requests on de.dept_code equals rq.dept_code
                      join rqd in ctx.Request_Details on rq.request_id equals rqd.request_id
                      join rqe in ctx.Request_Event on rqd.request_detail_id equals rqe.request_detail_id
                      join st in ctx.Stock_Inventory on rqd.item_code equals st.item_code
-                     where de.name == deptname && rq.current_status == "Approved" || rq.current_status == "Part_Disbursed" && rqe.status == "Disbursing"
-                     select new WCFDeptTQty
+                     where de.name == deptname && rqe.status == "Disbursing" 
+                     where rq.current_status == "Approved" ||  rq.current_status== "PartDisbursed"
+                     select new WCFDisburse
                      {
-                         ItemDes = st.item_description,
-                         ReqQty = rqe.quantity
+                         ItemName = st.item_description,
+                         RetrievedQty = rqe.quantity
                      }).ToList();
 
-            return q.ToList<WCFDeptTQty>();
+            return q.ToList<WCFDisburse>();
         }
 
         public List<Inventory_Adjustment> GetAdjustmentList()
@@ -318,4 +319,6 @@ namespace SSISTeam2.Classes.WebServices
             return q.First();
         }
     }
-}
+
+        
+    }
