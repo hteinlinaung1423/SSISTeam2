@@ -60,6 +60,7 @@ namespace SSISTeam2
             System.Web.Security.FormsAuthentication.SignOut();
             Session["tender"] = null;
             Session["item"] = null;
+            Session.Clear();
             Response.Redirect("~/Login.aspx");
         }
 
@@ -95,20 +96,20 @@ namespace SSISTeam2
             Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
         }
 
-        protected void ViewPendingReq(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
-        }
+        //protected void ViewPendingReq(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
+        //}
 
-        protected void ApproveBtn(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
-        }
+        //protected void ApproveBtn(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
+        //}
 
-        protected void DelegateAuth(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
-        }
+        //protected void DelegateAuth(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
+        //}
         protected void ChangeCPRep(object sender, EventArgs e)
         {
             //Yin

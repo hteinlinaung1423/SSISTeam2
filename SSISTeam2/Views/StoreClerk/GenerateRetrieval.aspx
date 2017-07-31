@@ -15,9 +15,9 @@
 
     <div style="margin: 10px"></div>
 
-    <asp:Label ID="lblDebug" Text="uName" runat="server" />
+    <asp:Label ID="lblDebug" Text="" runat="server" />
 
-     <%= Page.User.Identity.Name %>
+     <%--<%= Page.User.Identity.Name %>--%>
 
     <div class="row">
         <div class="col-xs-12">
