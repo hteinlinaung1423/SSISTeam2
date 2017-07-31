@@ -76,6 +76,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
         
         /// <summary>
+        /// LinkButtonDelegateAuth1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonDelegateAuth1;
+        
+        /// <summary>
         /// linkBtnChangeCollectPt control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkBtnChangeCollectPt;
+        
+        /// <summary>
+        /// LinkButtonDelegateAuth2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonDelegateAuth2;
         
         /// <summary>
         /// linkBtnChangeCollectPt2 control.

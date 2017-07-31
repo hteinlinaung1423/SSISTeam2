@@ -246,7 +246,8 @@
                                 </li>
                                 <li>
                                     <%--<asp:Button ID="Delegate" runat="server" CausesValidation="false" Text="Delegate Authority" CssClass="btn btn-block btn-primary" OnClick="DelegateAuth"/></li>--%>
-                                    <a href="/Views/DepartmentHead/DelegateAuthority.aspx">Delegate Authority</a>
+                                    <%--<a href="/Views/DepartmentHead/DelegateAuthority.aspx">Delegate Authority</a>--%>
+                                    <asp:LinkButton ID="LinkButtonDelegateAuth1" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="linkBtnChangeCollectPt" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
@@ -284,7 +285,8 @@
                                     <a href="/Views/DepartmentHead/ViewPending.aspx">Approve Request</a>
                                 </li>
                                 <li>
-                                    <a href="/Views/DepartmentHead/DelegateAuthority.aspx">Delegate Authority</a>
+                                    <%--<a href="/Views/DepartmentHead/DelegateAuthority.aspx">Delegate Authority</a>--%>
+                                    <asp:LinkButton ID="LinkButtonDelegateAuth2" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
                                 <li>
                                     <a href="/Views/Employee/EmpRequestHistory.aspx">View Pending Requests</a>
