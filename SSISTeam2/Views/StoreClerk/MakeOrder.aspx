@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MakeOrder.aspx.cs" EnableEventValidation="false" MasterPageFile="~/MasterPage.master" Inherits="SSISTeam2.Views.StoreClerk.MakeOrder" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>New Purchase Order</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
     <div class="panel panel-primary">

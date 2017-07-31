@@ -85,7 +85,7 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonDelegateAuth1;
         
         /// <summary>
-        /// linkBtnChangeCollectPt control.
+        /// LinkButtonn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
