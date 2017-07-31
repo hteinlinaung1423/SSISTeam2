@@ -7,54 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2 {
+namespace SSISTeam2.Views.Employee {
     
     
-    public partial class ApproveStockAdjustment {
+    public partial class RepViewDisbursements {
         
         /// <summary>
-        /// GridView1 control.
+        /// lblDebug control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Label lblDebug;
         
         /// <summary>
-        /// testLbl control.
+        /// lboxRecents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testLbl;
+        protected global::System.Web.UI.WebControls.ListBox lboxRecents;
         
         /// <summary>
-        /// GridView2 control.
+        /// lboxRequests control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.ListBox lboxRequests;
         
         /// <summary>
-        /// Approve control.
+        /// lboxItems control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Approve;
-        
-        /// <summary>
-        /// Reject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Reject;
+        protected global::System.Web.UI.WebControls.ListBox lboxItems;
     }
 }

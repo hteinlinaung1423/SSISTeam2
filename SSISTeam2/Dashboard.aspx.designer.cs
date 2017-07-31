@@ -7,171 +7,207 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.DepartmentHead {
+namespace SSISTeam2 {
     
     
-    public partial class DelegateAuthority {
+    public partial class Dashboard {
         
         /// <summary>
-        /// lbCheckDelegate control.
+        /// panelLowStocks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCheckDelegate;
+        protected global::System.Web.UI.WebControls.Panel panelLowStocks;
         
         /// <summary>
-        /// CurrentTable control.
+        /// panelLowStocksEmpty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table CurrentTable;
+        protected global::System.Web.UI.WebControls.Panel panelLowStocksEmpty;
         
         /// <summary>
-        /// lbCurDate control.
+        /// panelLowStocksNormal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCurDate;
+        protected global::System.Web.UI.WebControls.Panel panelLowStocksNormal;
         
         /// <summary>
-        /// lbCurDelegate control.
+        /// gridViewLowStocks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCurDelegate;
+        protected global::System.Web.UI.WebControls.GridView gridViewLowStocks;
         
         /// <summary>
-        /// lbCurReason control.
+        /// panelLowStocksBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCurReason;
+        protected global::System.Web.UI.WebControls.Panel panelLowStocksBtn;
         
         /// <summary>
-        /// lbCurStart control.
+        /// lblNumLowStock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCurStart;
+        protected global::System.Web.UI.WebControls.Label lblNumLowStock;
         
         /// <summary>
-        /// lbCurEnd control.
+        /// panelToRetrieve control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCurEnd;
+        protected global::System.Web.UI.WebControls.Panel panelToRetrieve;
         
         /// <summary>
-        /// btnDelete control.
+        /// panelToRetrieve_Empty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDelete;
+        protected global::System.Web.UI.WebControls.Panel panelToRetrieve_Empty;
         
         /// <summary>
-        /// ChooseNewTable control.
+        /// panelToRetrieve_FromWarehouse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table ChooseNewTable;
+        protected global::System.Web.UI.WebControls.Panel panelToRetrieve_FromWarehouse;
         
         /// <summary>
-        /// lbCurrentDate control.
+        /// gridViewToRetrieve_FromWarehouse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCurrentDate;
+        protected global::System.Web.UI.WebControls.GridView gridViewToRetrieve_FromWarehouse;
         
         /// <summary>
-        /// ddlEmployee control.
+        /// lblNumToRetrieve control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmployee;
+        protected global::System.Web.UI.WebControls.Label lblNumToRetrieve;
         
         /// <summary>
-        /// tbReason control.
+        /// panelToRetrieve_ToConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbReason;
+        protected global::System.Web.UI.WebControls.Panel panelToRetrieve_ToConfirm;
         
         /// <summary>
-        /// tbStartDate control.
+        /// gridViewToRetrieve_ToConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbStartDate;
+        protected global::System.Web.UI.WebControls.GridView gridViewToRetrieve_ToConfirm;
         
         /// <summary>
-        /// tbEndDate control.
+        /// lblNumToConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbEndDate;
+        protected global::System.Web.UI.WebControls.Label lblNumToConfirm;
         
         /// <summary>
-        /// btnCancel control.
+        /// panelToDisburse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Panel panelToDisburse;
         
         /// <summary>
-        /// btnSave control.
+        /// panelToDisburse_Empty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.Panel panelToDisburse_Empty;
         
         /// <summary>
-        /// lbDateError control.
+        /// panelToDisburse_ToCollectionPt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDateError;
+        protected global::System.Web.UI.WebControls.Panel panelToDisburse_ToCollectionPt;
         
         /// <summary>
-        /// Label1 control.
+        /// gridViewToDisburse_ToCollectionPt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.GridView gridViewToDisburse_ToCollectionPt;
+        
+        /// <summary>
+        /// lblNumToDisburse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumToDisburse;
+        
+        /// <summary>
+        /// panelToDisburse_ToConfirm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelToDisburse_ToConfirm;
+        
+        /// <summary>
+        /// gridViewToDisburse_ToConfirm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridViewToDisburse_ToConfirm;
+        
+        /// <summary>
+        /// lblNumToSignOff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumToSignOff;
     }
 }

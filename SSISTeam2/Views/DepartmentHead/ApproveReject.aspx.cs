@@ -24,6 +24,7 @@ namespace SSISTeam2.Views.DepartmentHead
             selectReqId = Int16.Parse(Request.QueryString["key"]);
             Label1.Text = selectReqId.ToString();
 
+            string currentDeptcode = Session["deptcode"].ToString();
 
             if (!IsPostBack)
             {
@@ -48,31 +49,40 @@ namespace SSISTeam2.Views.DepartmentHead
                 lbRqEmp.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
 
                 //get last approved Request details,but not receive from store
-                var lastApproveReq = ent.Requests.Where(x => x.current_status == "Approved").ToList();
-                if (lastApproveReq.Count == 0) return;
+                var lastApproveReq = ent.Requests.Where(x => x.current_status == "Approved" && x.dept_code == currentDeptcode).ToList();
+                if (lastApproveReq.Count == 0)
+                {
+                    Table2.Visible = false;
+                    lbLastApp.Text = "There is no requested form to the Store!";
+                    return;
+                }
+                else
+                {
+                    int lastApproveReqId = lastApproveReq.Max(y => y.request_id);
 
-                int lastApproveReqId = lastApproveReq.Max(y => y.request_id);
+                    var w = (from r in ent.Requests
+                             join de in ent.Request_Details on r.request_id equals de.request_id
+                             join st in ent.Stock_Inventory on de.item_code equals st.item_code
+                             join v in ent.Request_Event on de.request_detail_id equals v.request_detail_id
+                             where de.request_id == lastApproveReqId
+                             select new
+                             {
+                                 st.item_description,
+                                 de.orig_quantity,
+                                 st.unit_of_measure
 
-                var w = (from r in ent.Requests
-                         join de in ent.Request_Details on r.request_id equals de.request_id
-                         join st in ent.Stock_Inventory on de.item_code equals st.item_code
-                         join v in ent.Request_Event on de.request_detail_id equals v.request_detail_id
-                         where de.request_id == lastApproveReqId
-                         select new
-                         {
-                             st.item_description,
-                             de.orig_quantity,
-                             st.unit_of_measure
+                             }).ToList();
 
-                         }).ToList();
+                    lbLastReqID.Text = lastApproveReqId.ToString();
+                    var req = ent.Requests.Where(x => x.request_id == lastApproveReqId);
+                    lbLastReqDate.Text = req.First().date_time.ToString();
+                    lbLastReqEmp.Text = req.First().username;
 
-                lbLastReqID.Text = lastApproveReqId.ToString();
-                var req = ent.Requests.Where(x => x.request_id == lastApproveReqId);
-                lbLastReqDate.Text = req.First().date_time.ToString();
-                lbLastReqEmp.Text = req.First().username;
-                
-                GridView2.DataSource = w;
-                GridView2.DataBind();
+                    GridView2.DataSource = w;
+                    GridView2.DataBind();
+                }
+
+
             }
         }
 
@@ -120,6 +130,7 @@ namespace SSISTeam2.Views.DepartmentHead
             var req = ent.Requests.SingleOrDefault(x => x.request_id == selectReqId);
             req.current_status = "Rejected";
             req.rejected = "Y";
+            req.rejected_reason = tbReason.Text;
 
             //change status in "Request Event"
             var q = from r in ent.Requests
@@ -147,6 +158,11 @@ namespace SSISTeam2.Views.DepartmentHead
                 e.status = "Rejected";
             }
             ent.SaveChanges();
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewPending.aspx");
         }
     }
     }

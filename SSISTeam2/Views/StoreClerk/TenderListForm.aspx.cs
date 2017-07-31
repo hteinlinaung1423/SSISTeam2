@@ -69,8 +69,6 @@ namespace SSISTeam2.Views.StoreClerk
             GridViewRow row = GridView1.Rows[e.RowIndex];
             string supplierId = (row.FindControl("Label9") as Label).Text;
             string supplierName = (row.FindControl("TextBox1") as TextBox).Text;
-            Label9.Text = supplierId;
-            Label10.Text = supplierName;
             string itemCode = (row.FindControl("Label8") as Label).Text;
             string itemDescription = (row.FindControl("TextBox3") as TextBox).Text;
             int tenderId = Convert.ToInt32((row.FindControl("Label10") as Label).Text);

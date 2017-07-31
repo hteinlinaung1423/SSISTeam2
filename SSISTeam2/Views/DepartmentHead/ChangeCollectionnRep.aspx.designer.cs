@@ -13,13 +13,13 @@ namespace SSISTeam2.Views.DepartmentHead {
     public partial class ChangeCollection_Rep {
         
         /// <summary>
-        /// LabelDeptName control.
+        /// Table control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDeptName;
+        protected global::System.Web.UI.WebControls.Table Table;
         
         /// <summary>
         /// LabelContactName control.
@@ -58,13 +58,13 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Label LabelHeadName;
         
         /// <summary>
-        /// tbCollectP control.
+        /// lbCollectP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbCollectP;
+        protected global::System.Web.UI.WebControls.Label lbCollectP;
         
         /// <summary>
         /// ddlCollectPoint control.
@@ -76,13 +76,13 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCollectPoint;
         
         /// <summary>
-        /// tbRepName control.
+        /// lbRepName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbRepName;
+        protected global::System.Web.UI.WebControls.Label lbRepName;
         
         /// <summary>
         /// ddlRepName control.
@@ -94,6 +94,15 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.DropDownList ddlRepName;
         
         /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -103,12 +112,12 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// btnCancel control.
+        /// lbDDLError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Label lbDDLError;
     }
 }

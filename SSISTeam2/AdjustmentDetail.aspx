@@ -46,6 +46,7 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView><asp:Label ID="testLbl" runat="server"></asp:Label>
+    <asp:GridView ID="GridView2" runat="server"></asp:GridView>
     <asp:Button ID="Approve" runat="server" Text="approveBtn" OnClick="Approve_Click" CssClass="btn btn-primary"/>
     <asp:Button ID="Reject" runat="server" Text="RejectBtn" OnClick="Reject_Click" CssClass="btn btn-primary"/>
 </asp:Content>

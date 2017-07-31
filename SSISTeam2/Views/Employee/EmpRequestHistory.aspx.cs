@@ -57,6 +57,7 @@ namespace SSISTeam2.Views.Employee
                          x.date_time,
                          x.current_status
                      }).ToList();
+
             GridView2.DataSource = q;
             GridView2.DataBind();
 
@@ -166,7 +167,10 @@ namespace SSISTeam2.Views.Employee
         }
 
         
+
+       
+
     }
-    
+
 }
     
