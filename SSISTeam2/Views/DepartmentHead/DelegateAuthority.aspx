@@ -36,7 +36,7 @@
             </asp:TableRow>
 
             <asp:TableRow>
-                <asp:TableCell><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click"/></asp:TableCell>
+                <asp:TableCell><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click" CssClass="btn btn-default"/></asp:TableCell>
             </asp:TableRow>
 
         </asp:Table>
@@ -89,5 +89,6 @@
          </div> 
     
     <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label>
+     <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
   
  </asp:Content>

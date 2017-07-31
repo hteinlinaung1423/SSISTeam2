@@ -140,6 +140,7 @@
     <Content Include="CreateNewCategory.aspx" />
     <Content Include="AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="Views\Employee\RepViewDisbursements.aspx" />
     <Content Include="Views\StoreClerk\AddNewTender.aspx" />
     <Content Include="Views\StoreClerk\FileDiscrepency.aspx" />
@@ -190,6 +191,7 @@
     <Content Include="Views\DepartmentHead\DEMO_ViewAllPending.aspx" />
     <Content Include="Views\DepartmentHead\DeptInfo.aspx" />
     <Content Include="Views\DepartmentHead\ViewPending.aspx" />
+    <Content Include="Views\Employee\EmpDashboard.aspx" />
     <Content Include="Views\Employee\EmpRequestDetail.aspx" />
     <Content Include="Views\Employee\Home.aspx" />
     <Content Include="Views\Employee\ViewCatalogue.aspx" />
@@ -315,6 +317,13 @@
     </Compile>
     <Compile Include="CreateChartReport.aspx.designer.cs">
       <DependentUpon>CreateChartReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Delivery_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
@@ -462,6 +471,13 @@
     </Compile>
     <Compile Include="Views\DepartmentHead\ViewPending.aspx.designer.cs">
       <DependentUpon>ViewPending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmpDashboard.aspx.cs">
+      <DependentUpon>EmpDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\EmpDashboard.aspx.designer.cs">
+      <DependentUpon>EmpDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmpRequestDetail.aspx.cs">
       <DependentUpon>EmpRequestDetail.aspx</DependentUpon>

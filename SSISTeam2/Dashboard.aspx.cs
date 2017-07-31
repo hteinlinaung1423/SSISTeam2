@@ -1,0 +1,191 @@
+﻿using SSISTeam2.Classes.EFFacades;
+using SSISTeam2.Classes.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace SSISTeam2
+{
+    public partial class Dashboard : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                return;
+            }
+
+            string currentUser = User.Identity.Name;
+
+            SSISEntities context = new SSISEntities();
+
+            /* Low Stocks */
+            #region Low Stocks
+            List<Stock_Inventory> stocks = context.Stock_Inventory.ToList();
+            List<ItemModel> lowStocks = new List<ItemModel>();
+
+            foreach (var stock in stocks)
+            {
+                ItemModel im = new ItemModel(stock);
+                if (im.AvailableQuantity < im.ReorderLevel)
+                {
+                    lowStocks.Add(im);
+                }
+            }
+
+            gridViewLowStocks.DataSource = lowStocks.OrderBy(o => o.AvailableQuantity).Take(5);
+            gridViewLowStocks.DataBind();
+
+            if (lowStocks.Count > 0)
+            {
+                panelLowStocksEmpty.Visible = false;
+                panelLowStocksNormal.Visible = true;
+                panelLowStocksBtn.Visible = true;
+                panelLowStocks.CssClass = "panel panel-warning";
+                gridViewLowStocks.HeaderRow.CssClass = "warning";
+                lblNumLowStock.Text = string.Format("({0} in total)", lowStocks.Count);
+            } else
+            {
+                panelLowStocksEmpty.Visible = true;
+                panelLowStocksNormal.Visible = false;
+                panelLowStocksBtn.Visible = false;
+            }
+            #endregion
+
+            /* Items to retrieve */
+            #region Items to retrieve
+            /* Items for retrieving */
+            var allocated = FacadeFactory.getAllocatedService(context).getAllAllocated();
+
+            bool anyAllocated = allocated.Count > 0 ? true : false;
+
+            var allocatedItems = allocated.SelectMany(sm =>
+                    sm.Items
+                    .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value
+                    //, sm.Department.dept_code, sm.RequestId, sm.Department.name
+                    })
+                )
+                .GroupBy(k => k.ItemCode, v => v)
+                .Select(s => s.Aggregate((a, b) => {
+                    int Quantity = a.Quantity + b.Quantity;
+                    return new { a.ItemCode, a.Description, Quantity };
+                })
+                )
+                .ToList();
+
+            gridViewToRetrieve_FromWarehouse.DataSource = allocatedItems.Take(3);
+            gridViewToRetrieve_FromWarehouse.DataBind();
+
+            /* Items to confirm */
+            var toConfirm = FacadeFactory.getRetrievalService(context).getAllRetrievingByClerk(currentUser);
+
+            bool anyRetrievingToConfirm = toConfirm.Count > 0;
+
+            var toConfirmItems = toConfirm.SelectMany(sm =>
+                    sm.Items
+                    .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value })
+                )
+                .GroupBy(k => k.ItemCode, v => v)
+                .Select(s => s.Aggregate((a, b) => {
+                    int Quantity = a.Quantity + b.Quantity;
+                    return new { a.ItemCode, a.Description, Quantity };
+                })
+                )
+                .ToList();
+
+            gridViewToRetrieve_ToConfirm.DataSource = toConfirmItems.Take(3);
+            gridViewToRetrieve_ToConfirm.DataBind();
+
+            /* Display toggling */
+            panelToRetrieve_Empty.Visible = true;
+            panelToRetrieve_FromWarehouse.Visible = true;
+            panelToRetrieve_ToConfirm.Visible = true;
+
+            if (anyAllocated)
+            {
+                panelToRetrieve.CssClass = "panel panel-info";
+                panelToRetrieve_Empty.Visible = false;
+                lblNumToRetrieve.Text = string.Format("({0} in total)", allocated.Count);
+            } else
+            {
+                panelToRetrieve_FromWarehouse.Visible = false;
+            }
+
+            if (anyRetrievingToConfirm)
+            {
+                panelToRetrieve.CssClass = "panel panel-info";
+                panelToRetrieve_Empty.Visible = false;
+                lblNumToConfirm.Text = string.Format("({0} in total)", toConfirmItems.Count);
+            } else
+            {
+                panelToRetrieve_ToConfirm.Visible = false;
+            }
+            #endregion
+
+            /* Disbursements */
+            #region Disbursements
+            /* To disburse to collection points */
+            var toBeDisbursed = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursements();
+
+            bool anyToBeDisbursed = toBeDisbursed.Count > 0;
+
+            var collectionPtIds = toBeDisbursed.SelectMany(sm =>
+                sm.Items
+                .Select(s => new { s.Key.ItemCode, s.Key.Description, s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name, sm.CollectionPtId })
+            )
+            .GroupBy(k => k.CollectionPtId)
+            .Select(s => s.Key)
+            .ToList();
+
+            List<Collection_Point> collectionPts = context.Collection_Point.Where(w => w.deleted != "Y" && collectionPtIds.Contains(w.collection_pt_id)).ToList();
+
+            gridViewToDisburse_ToCollectionPt.DataSource = collectionPts.Take(3);
+            gridViewToDisburse_ToCollectionPt.DataBind();
+
+            /* To sign-off */
+            DisbursementModelCollection disbursingList = FacadeFactory.getDisbursementService(context).getAllThatCanBeSignedOff(currentUser);
+
+            bool anyToBeSignedOff = disbursingList.Count > 0;
+
+            var toBeSignedOff = disbursingList
+                .Select(sm => sm.Department.name )
+                .Distinct()
+                .Select(s => new { DepartmentName = s })
+                .ToList();
+
+            gridViewToDisburse_ToConfirm.DataSource = toBeSignedOff.Take(3);
+            gridViewToDisburse_ToConfirm.DataBind();
+
+            /* Display toggling */
+            panelToDisburse_Empty.Visible = true;
+            panelToDisburse_ToCollectionPt.Visible = true;
+            panelToDisburse_ToConfirm.Visible = true;
+
+            if (anyToBeDisbursed)
+            {
+                panelToDisburse.CssClass = "panel panel-success";
+                panelToDisburse_Empty.Visible = false;
+                lblNumToDisburse.Text = string.Format("({0} in total)", collectionPts.Count);
+            }
+            else
+            {
+                panelToDisburse_ToCollectionPt.Visible = false;
+            }
+
+            if (anyToBeSignedOff)
+            {
+                panelToDisburse.CssClass = "panel panel-success";
+                panelToDisburse_Empty.Visible = false;
+                lblNumToSignOff.Text = string.Format("({0} in total)", disbursingList.Count);
+            }
+            else
+            {
+                panelToDisburse_ToConfirm.Visible = false;
+            }
+            #endregion
+        }
+    }
+}
