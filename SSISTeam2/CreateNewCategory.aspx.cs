@@ -32,7 +32,7 @@ namespace SSISTeam2
 
                     entities.SaveChanges();
                 }
-            Response.Redirect("~/Views/StoreClerk/ChangeCategoryName1.aspx");
+            Response.Redirect("~/ChangeCategoryName1.aspx");
 
 
 

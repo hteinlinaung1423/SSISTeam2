@@ -89,5 +89,6 @@
          </div> 
     
     <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label>
+     <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
   
  </asp:Content>

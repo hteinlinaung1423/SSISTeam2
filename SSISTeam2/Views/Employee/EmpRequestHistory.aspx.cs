@@ -166,9 +166,12 @@ namespace SSISTeam2.Views.Employee
             FillPage();
         }
 
-        
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Default.aspx");
+        }
 
-       
+
 
     }
 
