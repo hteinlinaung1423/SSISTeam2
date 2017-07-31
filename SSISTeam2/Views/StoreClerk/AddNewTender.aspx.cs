@@ -41,7 +41,7 @@ namespace SSISTeam2.Views.StoreClerk
             bool isInt = int.TryParse(TextBox3.Text, out rank);
             selectStartDate = TextBox1.Text;
             String currentDate = DateTime.Now.ToString("yyyy-MM-dd");
-
+            //For dropdown list checking
             if (supplierName.Equals("Select---"))
             {
                 lblerror2.Text = "PLeae choose one supplier name!";
