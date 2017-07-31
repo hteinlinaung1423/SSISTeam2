@@ -183,6 +183,8 @@ namespace SSISTeam2.Classes.WebServices
             return true;
         }
 
+
+
         public static bool ConfirmRetrievalFromWarehouse(string currentUser, Dictionary<string, int> itemCodeAndQuantities)
         {
             using (SSISEntities context = new SSISEntities())
@@ -350,5 +352,6 @@ namespace SSISTeam2.Classes.WebServices
             } // Disposal of context
             return true;
         }
+
     }
 }

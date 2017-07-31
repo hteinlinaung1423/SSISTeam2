@@ -28,7 +28,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
                 //
                 Department sdept = (Department) Session["sDept"];
-                LabelDeptName.Text = sdept.name.ToString();
+                //LabelDeptName.Text = sdept.name.ToString();
                 LabelContactName.Text = sdept.contact_user.ToString();
                 LabelPhNo.Text = sdept.contact_num.ToString();
                 LabelFaxNo.Text = sdept.fax_num.ToString();
@@ -61,31 +61,39 @@ namespace SSISTeam2.Views.DepartmentHead
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
+            //save/update changed collection point & representative in database
+            string selectColPoint = ddlCollectPoint.SelectedValue.ToString();           
+            string repFullName = ddlRepName.SelectedItem.ToString();
+
+
             try
             {
                 //Collection Point
-                if (ddlCollectPoint.SelectedIndex == 0 || ddlRepName.SelectedIndex == 0)
+                if (selectColPoint.Equals("0") || repFullName.Equals("0"))
                 {
-
+                    lbDDLError.Text = "Please select the required field!";
                 }
 
-                //save/update changed collection point & representative in database
-                string selectColPoint = ddlCollectPoint.SelectedValue.ToString();
-                string selectRepName = ddlRepName.SelectedValue.ToString();
+                //show Full Name- save username
+                Dept_Registry depReg = ent.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
+                string repUserName = depReg.username;
 
                 Department sdept = (Department)Session["sDept"];
                 var result = ent.Departments.SingleOrDefault(c => c.name == sdept.name);
-                result.rep_user = selectRepName;
+                result.rep_user = repUserName;
                 result.collection_point = Int16.Parse(selectColPoint);
                 ent.SaveChanges();
                 lbDDLError.Text = "Sucessfully Save!";
-
             }
             catch
             {
-                lbDDLError.Text = "Please select the required field!";
+               
 
             }
+
+ 
+
+
 
       
 

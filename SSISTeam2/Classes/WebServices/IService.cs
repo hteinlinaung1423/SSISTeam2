@@ -92,7 +92,12 @@ namespace SSISTeam2.Classes.WebServices
         //By Yin
         [OperationContract]
         [WebGet(UriTemplate = "/RetriveTQty", ResponseFormat = WebMessageFormat.Json)]
-        WCFItemTotalQty[] GetEachItemQty();
+        List<WCFRetieve> GetEachItemQty();
+
+        //[OperationContract]
+        //[WebInvoke(UriTemplate = "/RetriveTQty/Update/{loginUserName}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        //void UpdateRetrieveQty(string loginUserName,List<WCFRetieve> retrieveList);
+
 
         [OperationContract]
         [WebGet(UriTemplate = "/DisbCollectP", ResponseFormat = WebMessageFormat.Json)]
@@ -104,7 +109,11 @@ namespace SSISTeam2.Classes.WebServices
 
         [OperationContract]
         [WebGet(UriTemplate = "/DisbDeptDetail/{deptname}", ResponseFormat = WebMessageFormat.Json)]
-        List<WCFDeptTQty> GetDeptDetail(string deptname);
+        List<WCFDisburse> GetDeptDetail(string deptname);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
     }
 
     [DataContract]
@@ -315,21 +324,24 @@ namespace SSISTeam2.Classes.WebServices
 
     //By Yin
     [DataContract]
-    public class WCFItemTotalQty
+    public class WCFRetieve
     {
         [DataMember]
         string itemDes;
         [DataMember]
         string totalQty;
+        [DataMember]
+        int retrieveQty;
 
-        public WCFItemTotalQty() : this("", "")
+        public WCFRetieve() : this("", "",0)
         {
 
         }
-        public WCFItemTotalQty(string itemDes, string totalQty)
+        public WCFRetieve(string itemDes, string totalQty, int retrieveQty)
         {
             this.itemDes = itemDes;
             this.totalQty = totalQty;
+            this.retrieveQty = retrieveQty;
         }
 
         public string ItemDes
@@ -357,27 +369,45 @@ namespace SSISTeam2.Classes.WebServices
                 totalQty = value;
             }
         }
+
+        public int RetrieveQty
+        {
+            get
+            {
+                return retrieveQty;
+            }
+
+            set
+            {
+                retrieveQty = value;
+            }
+        }
     }
 
     [DataContract]
-    public class WCFDeptTQty
+    public class WCFDisburse
     {
         [DataMember]
         string itemName;
         [DataMember]
-        int reqQty;
+        int retrievedQty;
+        [DataMember]
+        int disbursedQty;
 
-        public WCFDeptTQty() : this("", 0)
+
+        public WCFDisburse() : this("", 0,0)
         {
 
         }
-        public WCFDeptTQty(string itemDes, int reqQty)
+        public WCFDisburse(string itemName, int retrievedQty, int disbursedQty)
         {
-            this.ItemDes = itemDes;
-            this.ReqQty = reqQty;
+            this.itemName = itemName;
+            this.retrievedQty = retrievedQty;
+            this.disbursedQty = disbursedQty;
         }
 
-        public string ItemDes
+
+        public string ItemName
         {
             get
             {
@@ -390,16 +420,29 @@ namespace SSISTeam2.Classes.WebServices
             }
         }
 
-        public int ReqQty
+        public int RetrievedQty
         {
             get
             {
-                return reqQty;
+                return retrievedQty;
             }
 
             set
             {
-                reqQty = value;
+                retrievedQty = value;
+            }
+        }
+
+        public int DisbursedQty
+        {
+            get
+            {
+                return disbursedQty;
+            }
+
+            set
+            {
+                disbursedQty = value;
             }
         }
     }
