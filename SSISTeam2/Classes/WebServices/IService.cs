@@ -116,7 +116,7 @@ namespace SSISTeam2.Classes.WebServices
 
         [OperationContract]
         [WebGet(UriTemplate = "/DisbDeptDetail/{deptname}", ResponseFormat = WebMessageFormat.Json)]
-        List<WCFDeptTQty> GetDeptDetail(string deptname);
+        List<WCFDisburse> GetDeptDetail(string deptname);
 
 
         //Htein Lin Aung Create New Request
@@ -126,7 +126,7 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         void ApplyNewRequest(WCF_NewReqeust req);
-        List<WCFDisburse> GetDeptDetail(string deptname);
+        
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -417,6 +417,18 @@ namespace SSISTeam2.Classes.WebServices
                 totalQty = value;
             }
         }
+        public int RetrieveQty
+        {
+            get
+            {
+                return retrieveQty;
+            }
+
+            set
+            {
+                retrieveQty = value;
+            }
+        }
 
     }
 
@@ -482,18 +494,7 @@ namespace SSISTeam2.Classes.WebServices
             set { date_time = value; }
         }
 
-        public int RetrieveQty
-        {
-            get
-            {
-                return retrieveQty;
-            }
-
-            set
-            {
-                retrieveQty = value;
-            }
-        }
+        
     }
 
 
@@ -565,6 +566,5 @@ namespace SSISTeam2.Classes.WebServices
 
     }
 
-}
 
 
