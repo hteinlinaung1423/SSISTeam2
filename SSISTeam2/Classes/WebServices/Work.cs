@@ -49,7 +49,7 @@ namespace SSISTeam2.Classes.WebServices
         {
             var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
             String headuserName = q.First();
-            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode)&&c.fullname!=headuserName).Select(c => c.fullname).ToList<String>(); 
+            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode) && c.fullname != headuserName).Select(c => c.fullname).ToList<String>();
             return list;
         }
 
@@ -110,7 +110,8 @@ namespace SSISTeam2.Classes.WebServices
                     adjustmentDetail.reason = i.reason;
                     adjustmentDetail.deleted = "N";
                     inventoryAdjMan.Adjustment_Details.Add(adjustmentDetail);
-                } else if (cost < 250)
+                }
+                else if (cost < 250)
                 {
                     adjustmentDetail.item_code = i.ItemCode;
                     adjustmentDetail.quantity_adjusted = adjusted;
@@ -126,7 +127,8 @@ namespace SSISTeam2.Classes.WebServices
             {
                 ctx.Inventory_Adjustment.Add(inventoryAdjMan);
                 ctx.SaveChanges();
-            } else if (inventoryAdjSup.Adjustment_Details.Count > 0)
+            }
+            else if (inventoryAdjSup.Adjustment_Details.Count > 0)
             {
                 ctx.Inventory_Adjustment.Add(inventoryAdjSup);
                 ctx.SaveChanges();
@@ -170,7 +172,7 @@ namespace SSISTeam2.Classes.WebServices
 
         public Approval_Duties ListAppDuties(string deptcode)
         {
-            
+
             try
             {
                 var q = ctx.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == ctx.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
@@ -182,9 +184,9 @@ namespace SSISTeam2.Classes.WebServices
             }
 
 
-            
-          
-           
+
+
+
         }
 
         /* public void UpdateDuty(Approval_Duties c)
@@ -222,21 +224,23 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         //By Yin
-        public List<WCFRetieve> wgetEachItemQty()
+        public List<WCFRetieve> wgetEachItemQty(string currentUser)
         {
-            var q = (from r in ctx.Requests
-                     join x in ctx.Request_Details on r.request_id equals x.request_id
-                     join y in ctx.Stock_Inventory on x.item_code equals y.item_code
-                     join ee in ctx.Request_Event on x.request_detail_id equals ee.request_detail_id
-                     where r.current_status == "Approved" && ee.status == "Retrieving"
-                     group x by y.item_description into g
-                     select new WCFRetieve
-                     {
-                         ItemDes = g.Key,
-                         TotalQty = g.Sum(d => d.orig_quantity).ToString(),
-                     }).ToList<WCFRetieve>();
+            //var q = (from r in ctx.Requests
+            //         join x in ctx.Request_Details on r.request_id equals x.request_id
+            //         join y in ctx.Stock_Inventory on x.item_code equals y.item_code
+            //         join ee in ctx.Request_Event on x.request_detail_id equals ee.request_detail_id
+            //         where r.current_status == "Approved" && ee.status == "Retrieving"
+            //         group x by y.item_description into g
+            //         select new WCFRetieve
+            //         {
+            //             ItemDes = g.Key,
+            //             TotalQty = g.Sum(d => d.orig_quantity).ToString(),
+            //         }).ToList<WCFRetieve>();
 
-            return q.ToList<WCFRetieve>();
+            //return q.ToList<WCFRetieve>();
+
+            return MobileConfirmation.GetAllPossibleRetrievalsForUser(currentUser);
         }
 
         public List<String> wgetCollectP()
@@ -292,6 +296,7 @@ namespace SSISTeam2.Classes.WebServices
             ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
             ctx.SaveChanges();
         }
+
 
         public void updateAdjustment(String voucherId)
         {

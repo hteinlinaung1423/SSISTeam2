@@ -11,6 +11,15 @@ namespace SSISTeam2.Views.Home
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (User.IsInRole("Employee"))
+            {
+                Response.Redirect("/Views/Employee/EmpDashboard.aspx");
+            }
+            else if (User.IsInRole("Clerk"))
+            {
+                Response.Redirect("Dashboard.aspx");
+            }
+
             SSISEntities context = new SSISEntities();
             Category cat = context.Categories.Where(x => x.cat_id == 1).ToList().First();
             Label1.Text = cat.cat_name;

@@ -58,6 +58,12 @@ namespace SSISTeam2.Views.DepartmentHead
             
         }
 
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Default.aspx");
+        }
+
+
         //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    //Bound Field

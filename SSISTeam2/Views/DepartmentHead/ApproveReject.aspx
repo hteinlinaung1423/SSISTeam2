@@ -1,7 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApproveReject.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ApproveReject" 
      MasterPageFile="~/MasterPage.Master" %>
 
-
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+   <%-- <title>Approve/Reject Request</title>--%>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <div class="panel panel-default">
     <div class="panel-heading"><h3>Approve Reject </h3></div>
@@ -134,5 +137,6 @@
               </div>
              </div>
     </div>
+
         
 </asp:Content>

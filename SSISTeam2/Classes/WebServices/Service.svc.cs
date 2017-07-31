@@ -235,9 +235,9 @@ namespace SSISTeam2.Classes.WebServices
 
         //By Yin
  
-        public List<WCFRetieve> GetEachItemQty()
+        public List<WCFRetieve> GetEachItemQty(string user)
         {
-            return work.wgetEachItemQty();
+            return work.wgetEachItemQty(user);
         }
         //Update Retrieve Form
         //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList)
@@ -303,21 +303,23 @@ namespace SSISTeam2.Classes.WebServices
             return work.wgetCollectDept(cpid);
         }
 
-        public List<WCFDisburse> GetDeptDetail(string deptname)
+        public List<WCFDisburse> GetDeptDetail(string user, string deptname)
         {
-            List<WCFDisburse> list = work.wgetDepDetail(deptname);
+            //List<WCFDisburse> list = work.wgetDepDetail(deptname);
 
-            List<WCFDisburse> disSL = null;
+            //List<WCFDisburse> disSL = null;
 
-            var q = (from x in list
-                     group x by x.ItemName into g
-                     select new WCFDisburse
-                     {
-                         ItemName = g.Key,
-                         RetrievedQty = g.Sum(y => y.RetrievedQty)
-                     }).ToList();
+            //var q = (from x in list
+            //         group x by x.ItemName into g
+            //         select new WCFDisburse
+            //         {
+            //             ItemName = g.Key,
+            //             RetrievedQty = g.Sum(y => y.RetrievedQty)
+            //         }).ToList();
 
-            return q.ToList<WCFDisburse>();
+            //return q.ToList<WCFDisburse>();
+
+            return MobileConfirmation.getAllPossibleSignOffsForUserForDept(user, deptname);
         }
 
         //Update Disburse Form
