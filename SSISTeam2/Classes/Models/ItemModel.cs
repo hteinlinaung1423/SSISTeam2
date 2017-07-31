@@ -36,6 +36,7 @@ namespace SSISTeam2.Classes.Models
             currentQuantity = stock.current_qty;
             reorderLevel = stock.reorder_level;
             reorderQuantity = stock.reorder_qty;
+            //Changes for dashboard
             prices = stock.Tender_List_Details.Where(w => w.deleted != "Y" && w.Tender_List.deleted != "Y" && w.Tender_List.tender_date.Year == DateTime.Now.Year).ToDictionary(x => x.Tender_List.Supplier, x => Convert.ToDouble(x.price));
         }
 
