@@ -38,6 +38,17 @@ namespace SSISTeam2.Classes
                 Body = body
             })
             {
+                message.IsBodyHtml = true;
+                string nonHtmlBody = message.Body;
+                string newBody = "";
+                newBody += "<html>";
+                newBody += "<head></head>";
+                newBody += "<body>";
+                newBody += nonHtmlBody;
+                newBody += "</body>";
+
+                message.Body = newBody;
+
                 smtp.Send(message);
             }
 

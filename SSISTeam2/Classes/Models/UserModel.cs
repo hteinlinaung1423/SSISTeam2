@@ -37,20 +37,57 @@ namespace SSISTeam2.Classes.Models
             }
         }
 
+        public UserModel FindStoreSupervisor()
+        {
+            SSISEntities context = new SSISEntities();
+            string username = "";
+            if (this.role != "Clerk")
+            {
+                return null;
+            }
+            List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == department.dept_code).ToList();
+
+            foreach (Dept_Registry i in allDeptEmp)
+            {
+                var roles = Roles.GetRolesForUser(i.username);
+                if (roles.Length == 0) continue;
+
+                if (roles.First().ToString() == "Supervisor")
+                {
+                    username = i.username;
+                    break;
+                }
+            }
+
+            return new UserModel(username);
+        }
+
         public UserModel FindDeptHead()
         {
             SSISEntities context = new SSISEntities();
+
+            // Check delegate table if there is a delegate entry for this time period
+            // If yes, return that person
 
             string username = "";
             Department dept = this.department;
             List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == dept.dept_code).ToList();
             foreach (Dept_Registry i in allDeptEmp)
             {
-                if (Roles.GetRolesForUser(i.username).First().ToString() == "DeptHead")
+                var roles = Roles.GetRolesForUser(i.username);
+                if (roles.Length == 0) continue;
+
+                if (roles.First().ToString() == "DeptHead")
                 {
                     username = i.username;
                     break;
                 }
+            }
+
+            // Backup search
+            if (username == "")
+            {
+                username = dept.head_user;
             }
 
             UserModel deptHead = new UserModel(username);
