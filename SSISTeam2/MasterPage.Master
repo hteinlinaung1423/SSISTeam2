@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>SSIS</title>
     <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
     </asp:ContentPlaceHolder>
 
@@ -35,7 +35,11 @@
       
         }
 
-
+        .well
+        {
+            position:fixed;
+            bottom: 0;
+        }
 
         .footer{
             /*border-top-style:groove;*/
@@ -225,7 +229,9 @@
 
                                     if (Page.User.IsInRole("DeptHead"))
                                     { %>
-
+                                <li>
+                                    <a href="/Views/DepartmentHead/HeadDashboard.aspx">Your Dashboard</a>
+                                </li>
                                 <li>
                                     <a href="/Views/DepartmentHead/ViewPending.aspx">Approve Requests</a>
                                 </li>
@@ -346,7 +352,7 @@
         <hr />
 
         <div class="well">
-            <p>
+            
                 &copy; 2017 Logic University Store Project All Rights Reserved.
            
         </div>

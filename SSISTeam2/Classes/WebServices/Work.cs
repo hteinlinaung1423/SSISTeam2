@@ -77,19 +77,19 @@ namespace SSISTeam2.Classes.WebServices
 
         public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> list, string username)
         {
-            Inventory_Adjustment inventoryAdjMan = new Inventory_Adjustment();
-            inventoryAdjMan.clerk_user = username;
-            inventoryAdjMan.deleted = "N";
-            inventoryAdjMan.status = "Pending";
-            inventoryAdjMan.date = DateTime.Today;
-            inventoryAdjMan.status_date = DateTime.Today;
+            Inventory_Adjustment invAdjustmentSup = new Inventory_Adjustment();
+            invAdjustmentSup.deleted = "N";
+            invAdjustmentSup.clerk_user = username;
+            invAdjustmentSup.status = "Pending";
+            invAdjustmentSup.date = DateTime.Today;
+            invAdjustmentSup.status_date = DateTime.Today;
 
-            Inventory_Adjustment inventoryAdjSup = new Inventory_Adjustment();
-            inventoryAdjMan.clerk_user = username;
-            inventoryAdjMan.deleted = "N";
-            inventoryAdjMan.status = "Pending";
-            inventoryAdjMan.date = DateTime.Today;
-            inventoryAdjMan.status_date = DateTime.Today;
+            Inventory_Adjustment invAdjustmentMan = new Inventory_Adjustment();
+            invAdjustmentMan.deleted = "N";
+            invAdjustmentMan.clerk_user = username;
+            invAdjustmentMan.status = "Pending";
+            invAdjustmentMan.date = DateTime.Today;
+            invAdjustmentMan.status_date = DateTime.Today;
 
             foreach (WCF_MonthlyCheck i in list)
             {
@@ -97,40 +97,40 @@ namespace SSISTeam2.Classes.WebServices
                 int current = int.Parse(i.CurrentQuantity);
                 int adjusted = current - actual;
 
+                if (adjusted == 0)
+                    continue;
+
                 Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
-                ItemModel itemModel = new ItemModel(inventory);
+                inventory.current_qty = actual;
+
+                MonthlyCheckModel itemModel = new MonthlyCheckModel(inventory);
                 double cost = Math.Abs(adjusted) * itemModel.AveragePrice;
-                Adjustment_Details adjustmentDetail = new Adjustment_Details();
 
+                Adjustment_Details adjDetails = new Adjustment_Details();
+                adjDetails.deleted = "N";
+                adjDetails.item_code = i.ItemCode;
+                adjDetails.quantity_adjusted = adjusted;
+                adjDetails.reason = i.Reason;
 
+                if (cost < 250)
+                {
+                    invAdjustmentSup.Adjustment_Details.Add(adjDetails);
+                }
                 if (cost >= 250)
                 {
-                    adjustmentDetail.item_code = i.ItemCode;
-                    adjustmentDetail.quantity_adjusted = adjusted;
-                    adjustmentDetail.reason = i.reason;
-                    adjustmentDetail.deleted = "N";
-                    inventoryAdjMan.Adjustment_Details.Add(adjustmentDetail);
+                    invAdjustmentMan.Adjustment_Details.Add(adjDetails);
                 }
-                else if (cost < 250)
-                {
-                    adjustmentDetail.item_code = i.ItemCode;
-                    adjustmentDetail.quantity_adjusted = adjusted;
-                    adjustmentDetail.reason = i.reason;
-                    adjustmentDetail.deleted = "N";
-                    inventoryAdjSup.Adjustment_Details.Add(adjustmentDetail);
-                }
-                ctx.Adjustment_Details.Add(adjustmentDetail);
-                ctx.SaveChanges();
+                ctx.Adjustment_Details.Add(adjDetails);
             }
 
-            if (inventoryAdjMan.Adjustment_Details.Count > 0)
+            if (invAdjustmentSup.Adjustment_Details.Count != 0)
             {
-                ctx.Inventory_Adjustment.Add(inventoryAdjMan);
+                ctx.Inventory_Adjustment.Add(invAdjustmentSup);
                 ctx.SaveChanges();
             }
-            else if (inventoryAdjSup.Adjustment_Details.Count > 0)
+            if (invAdjustmentMan.Adjustment_Details.Count != 0)
             {
-                ctx.Inventory_Adjustment.Add(inventoryAdjSup);
+                ctx.Inventory_Adjustment.Add(invAdjustmentMan);
                 ctx.SaveChanges();
             }
         }
@@ -148,17 +148,6 @@ namespace SSISTeam2.Classes.WebServices
                 yesOrNo = "N";
             checkRecords.discrepancy = yesOrNo;
             ctx.Monthly_Check_Records.Add(checkRecords);
-            ctx.SaveChanges();
-        }
-
-        public void CreateMonthlyCheckRecord(string username)
-        {
-            Monthly_Check_Records checkRecords = new Monthly_Check_Records();
-            checkRecords.clerk_user = username;
-            checkRecords.date_checked = DateTime.Today;
-            checkRecords.deleted = "N";
-            checkRecords.discrepancy = "N";
-            ctx.Entry(checkRecords).State = System.Data.Entity.EntityState.Added;
             ctx.SaveChanges();
         }
 

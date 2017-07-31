@@ -74,6 +74,7 @@ namespace SSISTeam2
             }
             else
             {
+                //UpdateMonthlyCheck(itemList, HttpContext.Current.User.Identity.Name);
                 Inventory_Adjustment invAdjustmentSup = new Inventory_Adjustment();
                 invAdjustmentSup.date = DateTime.Today;
                 invAdjustmentSup.clerk_user = HttpContext.Current.User.Identity.Name;
@@ -92,6 +93,7 @@ namespace SSISTeam2
                 foreach (MonthlyCheckModel i in itemList)
                 {
                     //get price of adjustment for MonthlyCheckModel
+    
                     double priceAdj = i.AveragePrice * Math.Abs(i.ActualQuantity - i.CurrentQuantity);
 
                     Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
@@ -106,7 +108,8 @@ namespace SSISTeam2
                     if (priceAdj < 250)
                     {
                         invAdjustmentSup.Adjustment_Details.Add(adjDetails);
-                    } else if (priceAdj >= 250)
+                    }
+                    else if (priceAdj >= 250)
                     {
                         invAdjustmentMan.Adjustment_Details.Add(adjDetails);
                     }
@@ -196,6 +199,60 @@ namespace SSISTeam2
 
             new Emailer(fromEmail, fromName).SendEmail(toEmail, toName, subject, body);
             /* End of email logic */
+        }
+
+        public void UpdateMonthlyCheck(List<MonthlyCheckModel> list, string username)
+        {
+            Inventory_Adjustment inventoryAdjMan = new Inventory_Adjustment();
+            inventoryAdjMan.clerk_user = username;
+            inventoryAdjMan.deleted = "N";
+            inventoryAdjMan.status = "Pending";
+            inventoryAdjMan.date = DateTime.Today;
+            inventoryAdjMan.status_date = DateTime.Today;
+
+            Inventory_Adjustment inventoryAdjSup = new Inventory_Adjustment();
+            inventoryAdjMan.clerk_user = username;
+            inventoryAdjMan.deleted = "N";
+            inventoryAdjMan.status = "Pending";
+            inventoryAdjMan.date = DateTime.Today;
+            inventoryAdjMan.status_date = DateTime.Today;
+
+            foreach (MonthlyCheckModel i in list)
+            {
+                int adjusted = i.CurrentQuantity - i.ActualQuantity;
+
+                Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
+                MonthlyCheckModel itemModel = new MonthlyCheckModel(inventory);
+                double cost = Math.Abs(adjusted) * itemModel.AveragePrice;
+
+                Adjustment_Details adjustmentDetail = new Adjustment_Details();
+                adjustmentDetail.item_code = i.ItemCode;
+                adjustmentDetail.quantity_adjusted = adjusted;
+                adjustmentDetail.reason = i.Reason;
+                adjustmentDetail.deleted = "N";
+
+
+                if (cost >= 250)
+                {
+                    inventoryAdjMan.Adjustment_Details.Add(adjustmentDetail);
+                }
+                else if (cost < 250)
+                {
+                    inventoryAdjSup.Adjustment_Details.Add(adjustmentDetail);
+                }
+                context.Adjustment_Details.Add(adjustmentDetail);
+            }
+
+            if (inventoryAdjMan.Adjustment_Details.Count != 0)
+            {
+                context.Inventory_Adjustment.Add(inventoryAdjMan);
+                context.SaveChanges();
+            }
+            if (inventoryAdjSup.Adjustment_Details.Count != 0)
+            {
+                context.Inventory_Adjustment.Add(inventoryAdjSup);
+                context.SaveChanges();
+            }
         }
     }
 }

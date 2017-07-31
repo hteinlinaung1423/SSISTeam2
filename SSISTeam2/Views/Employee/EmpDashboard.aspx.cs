@@ -27,6 +27,14 @@ namespace SSISTeam2.Views.Employee
                 Response.Redirect("/login.aspx?return=Views/Employee/EmpDashboard.aspx");
             }
 
+            string currentUser = Page.User.Identity.Name;
+            string fullName = "";
+            using (SSISEntities ctx = new SSISEntities())
+            {
+                fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+            }
+            lblFullName.Text = "Welcome, " + fullName;
+
             string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
             string currentDept = user.Department.dept_code;

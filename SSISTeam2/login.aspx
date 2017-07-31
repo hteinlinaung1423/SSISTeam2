@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="login.aspx.cs" Inherits="SSISTeam2.login" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+ 
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
@@ -11,7 +14,7 @@
                         <h2 class="panel-title" style="color: #ECEFF4">Login</h2>
                     </div>
                     <%--Panel to set the default behaviour to trigger LoginButton click event when keyboard Enter is pressed --%>
-                    <asp:Panel ID="panLogin" runat="server" DefaultButton="LoginButton" Width="100%" >
+                    <asp:Panel ID="panLogin" runat="server" DefaultButton="LoginButton" Width="100%">
                    
                          <div class="panel-body">
                         <div class="form-group">

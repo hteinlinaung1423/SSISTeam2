@@ -7,135 +7,99 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.StoreClerk {
+namespace SSISTeam2.Views {
     
     
-    public partial class EditSupplier {
+    public partial class HeadDashboard {
         
         /// <summary>
-        /// tb_supplierId control.
+        /// lblFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_supplierId;
+        protected global::System.Web.UI.WebControls.Label lblFullName;
         
         /// <summary>
-        /// vldTitle control.
+        /// lblPendingNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldTitle;
+        protected global::System.Web.UI.WebControls.Label lblPendingNum;
         
         /// <summary>
-        /// tb_supplierName control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_supplierName;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// btnViewAllPending control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.Button btnViewAllPending;
         
         /// <summary>
-        /// tb_contactName control.
+        /// btnViewAllReq control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_contactName;
+        protected global::System.Web.UI.WebControls.Button btnViewAllReq;
         
         /// <summary>
-        /// vldISBN control.
+        /// lblrep control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldISBN;
+        protected global::System.Web.UI.WebControls.Label lblrep;
         
         /// <summary>
-        /// tb_contactNum control.
+        /// lblcolpoint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_contactNum;
+        protected global::System.Web.UI.WebControls.Label lblcolpoint;
         
         /// <summary>
-        /// vldPrice control.
+        /// btnchangecoll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPrice;
+        protected global::System.Web.UI.WebControls.Button btnchangecoll;
         
         /// <summary>
-        /// tb_faxNum control.
+        /// lbldelegation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_faxNum;
+        protected global::System.Web.UI.WebControls.Label lbldelegation;
         
         /// <summary>
-        /// tb_address control.
+        /// btndelegate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_address;
-        
-        /// <summary>
-        /// tb_gst control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_gst;
-        
-        /// <summary>
-        /// SubmitButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SubmitButton;
-        
-        /// <summary>
-        /// CancelButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelButton;
-        
-        /// <summary>
-        /// ValidationSummary1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.Button btndelegate;
     }
 }

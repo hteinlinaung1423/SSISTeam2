@@ -142,6 +142,7 @@
     <Content Include="AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="Views\DepartmentHead\HeadDashboard.aspx" />
     <Content Include="Views\Employee\RepViewDisbursements.aspx" />
     <Content Include="Views\StoreClerk\AddNewTender.aspx" />
     <Content Include="Views\StoreClerk\FileDiscrepency.aspx" />
@@ -347,6 +348,13 @@
     </Compile>
     <Compile Include="Favourite.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\HeadDashboard.aspx.cs">
+      <DependentUpon>HeadDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\DepartmentHead\HeadDashboard.aspx.designer.cs">
+      <DependentUpon>HeadDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\RepViewDisbursements.aspx.cs">
       <DependentUpon>RepViewDisbursements.aspx</DependentUpon>

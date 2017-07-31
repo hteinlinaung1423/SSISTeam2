@@ -19,6 +19,10 @@ namespace SSISTeam2.Views.Home
             {
                 Response.Redirect("Dashboard.aspx");
             }
+            else if (User.IsInRole("DeptHead"))
+            {
+                Response.Redirect("/Views/DepartmentHead/HeadDashboard.aspx");
+            }
 
             SSISEntities context = new SSISEntities();
             Category cat = context.Categories.Where(x => x.cat_id == 1).ToList().First();
