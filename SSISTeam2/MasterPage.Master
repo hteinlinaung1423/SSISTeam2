@@ -229,6 +229,8 @@
 
                                     if (Page.User.IsInRole("DeptHead"))
                                     { %>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Department Head actions</li>
                                 <li>
                                     <a href="/Views/DepartmentHead/HeadDashboard.aspx">Your Dashboard</a>
                                 </li>
