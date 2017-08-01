@@ -66,6 +66,13 @@
                             <asp:Label ID="Label_SupplierId" runat="server" Text='<%# Eval("supplier_id") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Status"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label_Status" runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 
 
                     <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
@@ -80,8 +87,8 @@
                     <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Button ID="delete" runat="server" Text="Delete"
-                                CssClass="btn btn-danger" OnClick="Delete_Order" />
+                            <asp:Button ID="delete" runat="server" Text="Cancel"
+                                CssClass="btn btn-danger" OnClick="Delete_Order" OnClientClick="return confirm('Are you sure you want to cancel this order?');" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

@@ -78,7 +78,7 @@
     <hr />
 
      <div class="panel panel-default">
-           <div class="panel-heading"><h3> This is Last Approved Request ,but Not Received From Store</h3></div> 
+           <div class="panel-heading"><h3> Last Approved Request, Pending Retrieval From Store</h3></div> 
          <asp:Label ID="lbLastApp" runat="server" Font-Size="Medium" ></asp:Label>
              
        <br />
