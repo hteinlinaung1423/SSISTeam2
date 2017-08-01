@@ -2,7 +2,7 @@
           MasterPageFile="~/MasterPage.Master" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-<%--    <title>Change Collection Point and/or Representative</title>--%>
+    <title>Change Collection Point and/or Representative</title>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
