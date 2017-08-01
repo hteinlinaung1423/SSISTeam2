@@ -39,27 +39,15 @@ namespace SSISTeam2.Classes.Models
         {
             using (SSISEntities context = new SSISEntities())
             {
-                Request thing = context.Requests.Find(RequestId);
-                if (thing != null)
-                { // Found one
-                    List<Request_Details> deets = thing.Request_Details.ToList();
+                Request request = context.Requests.Find(RequestId);
 
-                    List<Request_Event> events = deets.SelectMany(d => d.Request_Event.OrderByDescending(o => o.date_time)).ToList();
-
-                    return events.First().date_time;
-
-                    //if (deets.Count > 0)
-                    //{
-                    //    List<Request_Event> events = deets.First().Request_Event.OrderBy(o => o.date_time).ToList();
-                    //    if (events.Count > 0)
-                    //    {
-                    //        return events.Last().date_time;
-                    //    }
-                    //}
+                var requestEvents = request.Request_Details.SelectMany(sm => sm.Request_Event);
+                if (requestEvents.Count() == 0)
+                {
+                    return request.date_time.HasValue ? request.date_time.Value : DateTime.Now;
                 }
 
-                throw new DateNotFoundException();
-                //return DateTime.Now;
+                return requestEvents.OrderByDescending(o => o.date_time).First().date_time;
             }
         }
 
