@@ -24,19 +24,17 @@ namespace SSISTeam2
                 List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>)Session["Confirmation"];
                 try
                 {
-                    if (itemList.Count == 0)
+                    if (itemList == null)
                     {
                         confirmationGV.Visible = false;
-                        Label1.Text = "There are not discrepencies for this month, confirm?";
+                        CheckLabel.Text = "There are not discrepancies for this month, confirm?";
                     }
                     confirmationGV.DataSource = itemList;
                     confirmationGV.DataBind();
-                    Label1.Text = itemList.Count.ToString();
 
                 }
                 catch (Exception exec)
                 {
-                    Label1.Text = "exception";
                 }
             }
             //else
@@ -70,7 +68,7 @@ namespace SSISTeam2
                 context.Monthly_Check_Records.Add(checkRecord);
                 context.SaveChanges();
 
-                Response.Redirect("Default.aspx");
+                Response.Redirect("/Views/StoreClerk/Dashboard.aspx");
             }
             else
             {
@@ -93,7 +91,7 @@ namespace SSISTeam2
                 foreach (MonthlyCheckModel i in itemList)
                 {
                     //get price of adjustment for MonthlyCheckModel
-    
+
                     double priceAdj = i.AveragePrice * Math.Abs(i.ActualQuantity - i.CurrentQuantity);
 
                     Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
@@ -139,11 +137,11 @@ namespace SSISTeam2
                     _sendEmail(User.Identity.Name, true);
                 }
 
+                context.Monthly_Check_Records.Add(checkRecord);
+                context.SaveChanges();
 
+                Response.Redirect("/Views/StoreClerk/Dashboard.aspx");
             }
-            context.Monthly_Check_Records.Add(checkRecord);
-            context.SaveChanges();
-
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
@@ -163,7 +161,6 @@ namespace SSISTeam2
             Session["Confirmation"] = itemList;
             confirmationGV.DataSource = itemList;
             confirmationGV.DataBind();
-            Label1.Text = itemList[index].Reason;
         }
 
         public static void _sendEmail(string username, bool allTheWayToManager)
@@ -171,6 +168,9 @@ namespace SSISTeam2
 
             /* Email logic */
             UserModel currentUserModel = new UserModel(username);
+
+            var depth = currentUserModel.FindDelegateOrDeptHead();
+            var sup = currentUserModel.FindStoreSupervisor();
 
             string superiorUserName = allTheWayToManager ? currentUserModel.FindDelegateOrDeptHead().Username : currentUserModel.FindStoreSupervisor().Username;
 
