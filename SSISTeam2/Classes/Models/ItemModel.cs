@@ -37,7 +37,9 @@ namespace SSISTeam2.Classes.Models
             reorderLevel = stock.reorder_level;
             reorderQuantity = stock.reorder_qty;
             //Changes for dashboard
-            prices = stock.Tender_List_Details.Where(w => w.deleted != "Y" && w.Tender_List.deleted != "Y" && w.Tender_List.tender_date.Year == DateTime.Now.Year).ToDictionary(x => x.Tender_List.Supplier, x => Convert.ToDouble(x.price));
+            var thingamabobs = stock.Tender_List_Details.Where(w => w.deleted != "Y" && w.Tender_List.deleted != "Y" && w.Tender_List.tender_date.Year == DateTime.Now.Year);
+            prices = thingamabobs.ToDictionary(x => x.Tender_List.Supplier, x => Convert.ToDouble(x.price));
+            //prices = stock.Tender_List_Details.Where(w => w.deleted != "Y" && w.Tender_List.deleted != "Y" && w.Tender_List.tender_date.Year == DateTime.Now.Year).ToDictionary(x => x.Tender_List.Supplier, x => Convert.ToDouble(x.price));
         }
 
         public ItemModel(Category category,
