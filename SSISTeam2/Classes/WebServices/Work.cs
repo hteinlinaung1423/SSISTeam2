@@ -13,6 +13,26 @@ namespace SSISTeam2.Classes.WebServices
 
         SSISEntities ctx = new SSISEntities();
 
+
+        //Htein LastRequest
+
+        public Request GetRequest()
+        {
+            return ctx.Requests.OrderBy(x => x.request_id).ToList().Last();
+        }
+
+        public Stock_Inventory GetStockInventory(string name)
+        {
+            return ctx.Stock_Inventory.Where(x => x.item_description == name).First();
+        }
+
+        public Request_Details GetLastRequestDetail()
+        {
+            return ctx.Request_Details.OrderBy(x => x.request_detail_id).ToList().Last();
+        }
+
+
+
         public List<string> GetCatName()
         {
             List<string> catname = new List<string>();
@@ -33,12 +53,35 @@ namespace SSISTeam2.Classes.WebServices
 
         public List<Request> GetAllRequest(string dept)
         {
-            List<Request> req = ctx.Requests.Where(x => x.dept_code == dept && x.current_status == "Pending").ToList<Request>();
+            List<Request> req = ctx.Requests.Where(x => x.dept_code == dept && x.current_status == "Pending").OrderByDescending(x=> x.date_time).ToList<Request>();
 
             return req;
 
 
         }
+
+        public List<Request> GetAllRequestByDeptCode(string dept)
+        {
+            List<Request> req = ctx.Requests.Where(x => x.dept_code == dept).OrderByDescending(x=>x.date_time).ToList<Request>();
+
+            return req;
+
+
+        }
+
+        public List<Request> GetAllRequestByUserName(string dept,string user)
+
+        {
+            
+
+            List<Request> req = ctx.Requests.Where(x => x.dept_code == dept && x.Dept_Registry.fullname==user).OrderByDescending(x => x.date_time).ToList<Request>();
+
+            return req;
+
+
+        }
+
+
 
         public Dept_Registry login(string user)
         {
@@ -223,7 +266,7 @@ namespace SSISTeam2.Classes.WebServices
         public List<Request_Details> GetRequestDetail(string id)
         {
             int req_id = Convert.ToInt32(id);
-            List<Request_Details> rd = ctx.Request_Details.Where(x => x.request_id == req_id).ToList<Request_Details>();
+            List<Request_Details> rd = ctx.Request_Details.Where(x => x.request_id == req_id && x.deleted=="N").ToList<Request_Details>();
 
             return rd;
         }
@@ -269,6 +312,16 @@ namespace SSISTeam2.Classes.WebServices
             Request req = ctx.Requests.Where(x => x.request_id == req_id).First();
             req.current_status = RequestStatus.APPROVED;
             ctx.SaveChanges();
+
+            List<Request_Details> rdetailList = ctx.Request_Details.Where(x => x.request_id == req_id).ToList();
+            foreach (Request_Details rdetail in rdetailList)
+            {
+                Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == rdetail.request_detail_id).First();
+                revent.status = RequestStatus.APPROVED;
+                revent.date_time = DateTime.Today;
+                ctx.SaveChanges();
+
+            }
         }
 
         public void Reject(String id)
@@ -279,6 +332,15 @@ namespace SSISTeam2.Classes.WebServices
             req.current_status = RequestStatus.REJECTED;
             req.rejected = "Y";
             ctx.SaveChanges();
+            List<Request_Details> rdetailList = ctx.Request_Details.Where(x => x.request_id == req_id).ToList();
+            foreach (Request_Details rdetail in rdetailList)
+            {
+                Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == rdetail.request_detail_id).First();
+                revent.status = RequestStatus.REJECTED;
+                revent.date_time = DateTime.Today;
+                ctx.SaveChanges();
+
+            }
         }
 
         //By Yin
@@ -322,8 +384,8 @@ namespace SSISTeam2.Classes.WebServices
                      join rqd in ctx.Request_Details on rq.request_id equals rqd.request_id
                      join rqe in ctx.Request_Event on rqd.request_detail_id equals rqe.request_detail_id
                      join st in ctx.Stock_Inventory on rqd.item_code equals st.item_code
-                     where de.name == deptname && rqe.status == "Disbursing" 
-                     where rq.current_status == "Approved" ||  rq.current_status== "PartDisbursed"
+                     where de.name == deptname && rqe.status == "Disbursing"
+                     where rq.current_status == "Approved" || rq.current_status == "PartDisbursed"
                      select new WCFDisburse
                      {
                          ItemName = st.item_description,
@@ -357,6 +419,17 @@ namespace SSISTeam2.Classes.WebServices
             ctx.SaveChanges();
         }
 
+        public void CreateRequestDetail(Request_Details r)
+        {
+            ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
+        }
+
+        public void CreateRequestEvent(Request_Event r)
+        {
+            ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
+            ctx.SaveChanges();
+        }
 
         public void updateAdjustment(String voucherId)
         {
@@ -382,5 +455,8 @@ namespace SSISTeam2.Classes.WebServices
         }
     }
 
-        
-    }
+
+
+}
+
+

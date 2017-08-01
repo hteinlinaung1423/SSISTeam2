@@ -28,7 +28,7 @@ namespace SSISTeam2.Classes.Models
             MembershipUser thisUser = Membership.GetUser(username);
             this.email = thisUser != null ? thisUser.Email : "sa44ssisteamtwo+" + username + "@gmail.com";
             this.department = dept;
-            //this.role = Roles.GetRolesForUser(username).First().ToString();
+            this.role = Roles.GetRolesForUser(username).First().ToString();
             //this.fullname = UserPrincipal.Current.DisplayName;
             this.fullname = user.fullname;
             if (role == null)
@@ -43,7 +43,7 @@ namespace SSISTeam2.Classes.Models
             string username = "";
             if (this.role != "Clerk")
             {
-                return null;
+                //return null;
             }
             List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == department.dept_code).ToList();
 
