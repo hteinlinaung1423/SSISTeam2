@@ -13,6 +13,15 @@ namespace SSISTeam2.Views.StoreClerk {
     public partial class TenderListForm {
         
         /// <summary>
+        /// panSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panSearch;
+        
+        /// <summary>
         /// add control.
         /// </summary>
         /// <remarks>
