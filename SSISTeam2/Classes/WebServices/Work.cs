@@ -93,7 +93,8 @@ namespace SSISTeam2.Classes.WebServices
             var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
             string headUserName = q.First();
 
-            var delegateHead = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
+            var depts = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).ToList();
+            var delegateHead = depts.Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
             string delegateUserName = delegateHead.First();
 
             var list = ctx.Dept_Registry

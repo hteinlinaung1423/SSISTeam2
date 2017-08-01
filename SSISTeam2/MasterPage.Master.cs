@@ -237,8 +237,14 @@ namespace SSISTeam2
             Response.Redirect("~/Views/StoreClerk/ViewPendingOrder.aspx");
         }
 
+        protected void btnMonthlyCheck_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/MonthlyCheck.aspx");
+        }
 
-
-
+        protected void btnViewAllAdjustments_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreManager/ViewAllAdjustment.aspx");
+        }
     }
 }

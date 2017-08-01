@@ -260,5 +260,10 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/StoreClerk/ConfirmDisbursement.aspx");
         }
+
+        protected void btnLowStock_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/lowstock.aspx");
+        }
     }
 }
