@@ -166,5 +166,40 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/Employee/RepViewDisbursements.aspx");
         }
+
+        protected void btnEmpDash_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/Dashboard.aspx");
+        }
+
+        protected void btnClerkDash_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
+        }
+
+        protected void btnNewRequest_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/MakeNewRequest.aspx");
+        }
+
+        protected void btnEmpRequestHistory_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
+        }
+
+        protected void btnEmpViewCatalogue_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/ViewCatalogue.aspx");
+        }
+
+        protected void btnGenerateRetrieval_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/GenerateRetrieval.aspx");
+        }
+
+        protected void btnStoreCart_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/Cart.aspx");
+        }
     }
 }

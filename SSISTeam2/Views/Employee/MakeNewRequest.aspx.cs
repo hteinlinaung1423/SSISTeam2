@@ -63,7 +63,7 @@ namespace SSISTeam2.Views.StoreClerk
                     /*
                     if (!User.Identity.IsAuthenticated)
                     {
-                        Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
+                        Response.Redirect("~/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
                     }*/
 
                     UserModel currentUser = new UserModel(User.Identity.Name);

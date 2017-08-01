@@ -24,7 +24,7 @@ namespace SSISTeam2.Views.Employee
             // need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/Employee/EmpDashboard.aspx");
+                Response.Redirect("~/login.aspx?return=Views/Employee/EmpDashboard.aspx");
             }
 
             string currentUser = Page.User.Identity.Name;

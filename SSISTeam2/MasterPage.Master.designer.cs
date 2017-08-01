@@ -67,13 +67,94 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton linkBtnDepRepView;
         
         /// <summary>
-        /// LinkButton2 control.
+        /// btnEmpDash control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.LinkButton btnEmpDash;
+        
+        /// <summary>
+        /// btnNewRequest_emp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnNewRequest_emp;
+        
+        /// <summary>
+        /// btnEmpRequestHistory_emp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnEmpRequestHistory_emp;
+        
+        /// <summary>
+        /// btnEmpViewCatalogue_emp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnEmpViewCatalogue_emp;
+        
+        /// <summary>
+        /// btnClerkDash control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnClerkDash;
+        
+        /// <summary>
+        /// btnNewRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnNewRequest;
+        
+        /// <summary>
+        /// btnEmpRequestHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnEmpRequestHistory;
+        
+        /// <summary>
+        /// btnEmpViewCatalogue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnEmpViewCatalogue;
+        
+        /// <summary>
+        /// btnGenerateRetrieval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGenerateRetrieval;
+        
+        /// <summary>
+        /// btnStoreCart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnStoreCart;
         
         /// <summary>
         /// LinkButtonDelegateAuth1 control.
@@ -83,6 +164,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonDelegateAuth1;
+        
+        /// <summary>
+        /// btnEmpViewCatalogue2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnEmpViewCatalogue2;
         
         /// <summary>
         /// LinkButtonn control.

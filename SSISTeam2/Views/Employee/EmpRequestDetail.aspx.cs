@@ -26,7 +26,7 @@ namespace SSISTeam2.Views.Employee
             /* need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
+                Response.Redirect("~/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
             }*/
 
             //UserModel currentUser = new UserModel(User.Identity.Name);
@@ -54,6 +54,9 @@ namespace SSISTeam2.Views.Employee
                          si.unit_of_measure,
                          re.orig_quantity
                      }).ToList();
+
+            q = q.Where(w => w.orig_quantity > 0).ToList();
+
             GridView2.DataSource = q;
             GridView2.DataBind();
         }
