@@ -48,7 +48,7 @@ namespace SSISTeam2.Classes.Models
             string username = "";
             if (this.role != "Clerk")
             {
-                return null;
+                //return null;
             }
             List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == department.dept_code).ToList();
 
