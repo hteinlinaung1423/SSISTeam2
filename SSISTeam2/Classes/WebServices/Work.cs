@@ -91,29 +91,29 @@ namespace SSISTeam2.Classes.WebServices
             return dr;
         }
         //Getting ApprovalDuties Status
-        public string CheckApprovalDutiesStatus()
-        {           
-            string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
-            try
-            {
-                var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
-                DateTime date = Convert.ToDateTime(result.ToString());
-                string endDate = date.ToString("yyyy-MM-dd");
-                if (endDate.CompareTo(currentDate) == -1)
-                {
-                    var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
-                    q.deleted = "Y";
-                    ctx.SaveChanges();
+        //public string CheckApprovalDutiesStatus()
+        //{           
+        //    string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+        //    try
+        //    {
+        //        var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
+        //        DateTime date = Convert.ToDateTime(result.ToString());
+        //        string endDate = date.ToString("yyyy-MM-dd");
+        //        if (endDate.CompareTo(currentDate) == -1)
+        //        {
+        //            var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
+        //            q.deleted = "Y";
+        //            ctx.SaveChanges();
 
-                }
-                return statusFlag = "T";
+        //        }
+        //        return statusFlag = "T";
 
-            }
-            catch
-            {
-                return statusFlag = "T";
-            }
-        }
+        //    }
+        //    catch
+        //    {
+        //        return statusFlag = "T";
+        //    }
+        //}
 
         public string GetDepHeadRole(string user)
         {

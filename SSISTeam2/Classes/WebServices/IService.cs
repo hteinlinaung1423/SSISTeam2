@@ -345,15 +345,15 @@ namespace SSISTeam2.Classes.WebServices
         string user_name;
         [DataMember]
         string role;
-        [DataMember]
-        string flag;
+       // [DataMember]
+       // string flag;
 
-        public WCF_User(string dept_code, string user_name, string role,string flag)
+        public WCF_User(string dept_code, string user_name, string role)
         {
             this.dept_code = dept_code;
             this.user_name = user_name;
             this.role = role;
-            this.flag = flag;
+           // this.flag = flag;
         }
 
 
