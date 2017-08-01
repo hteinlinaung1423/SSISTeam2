@@ -139,6 +139,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton btnEmpViewCatalogue;
         
         /// <summary>
+        /// ViewDeptList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ViewDeptList;
+        
+        /// <summary>
         /// btnGenerateRetrieval control.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btn_ViewPendingOrder;
+        
+        /// <summary>
+        /// btnViewTenderList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnViewTenderList;
         
         /// <summary>
         /// btnHeadDashboard control.
