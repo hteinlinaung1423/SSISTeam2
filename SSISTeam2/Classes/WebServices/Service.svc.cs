@@ -94,36 +94,39 @@ namespace SSISTeam2.Classes.WebServices
         WCF_User IService.login(string name, string pass)
         {
             //WCF_User user;
-            String flag;String updflag;
+            //String flag;String updflag;
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)
             {
 
                 string[] role = Roles.GetRolesForUser(name);
-                updflag = new Work().CheckApprovalDutiesStatus();
-                   if (updflag.Equals("T"))
-                   {
-                     flag = new Work().GetDepHeadRole(name);
-                     Dept_Registry dept = new Work().login(name);
-                     try
-                        {
-                            if (flag.Equals("Y"))
-                            {
-                                role[0] = "DeptHead";
-                                user = new WCF_User(dept.dept_code, name, role[0], flag);
-                            }
-                    }
-                    catch
-                        {
-                            flag = "N";
-                            
-                            user = new WCF_User(dept.dept_code, name, role[0], flag);
-                        }
-                    }
+                Dept_Registry dept = new Work().login(name);
+                user = new WCF_User(dept.dept_code, name, role[0]);
+                //Comment delegate role
+                //updflag = new Work().CheckApprovalDutiesStatus();
+                //   if (updflag.Equals("T"))
+                //   {
+                //     flag = new Work().GetDepHeadRole(name);
+                //     Dept_Registry dept = new Work().login(name);
+                //     try
+                //        {
+                //            if (flag.Equals("Y"))
+                //            {
+                //                role[0] = "DeptHead";
+                //                user = new WCF_User(dept.dept_code, name, role[0], flag);
+                //            }
+                //    }
+                //    catch
+                //        {
+                //            flag = "N";
+
+                //            user = new WCF_User(dept.dept_code, name, role[0], flag);
+                //        }
+                //    }
                 return user;
             }
-            else { return user = new WCF_User(null, "failed", null,null); }
+            else { return user = new WCF_User(null, "failed", null); }
         }
 
         // Heng Tiong's MonthlyCheck implementation
