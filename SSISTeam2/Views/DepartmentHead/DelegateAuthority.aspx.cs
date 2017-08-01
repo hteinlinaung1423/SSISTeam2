@@ -109,8 +109,9 @@ namespace SSISTeam2.Views.DepartmentHead
                         ChooseNewTable.Visible = false;
 
                         //get data for Current Delegate Table
+                        var q = ent.Approval_Duties.Where(ad => ad.username == delegateOrDeptHead && ad.deleted != "Y").First();
 
-                        var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
+                        //var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
 
                         checkDelegate = q.deleted.ToString();
 
