@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
-        <div class="panel-heading"><h3>File Discrepency</h3></div>
+        <div class="panel-heading"><h3>File Discrepancy</h3></div>
     </div>
     <asp:GridView ID="FileDiscrepencyGV" runat="server" 
         AutoGenerateColumns="False"

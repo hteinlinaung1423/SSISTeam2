@@ -231,5 +231,14 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/StoreClerk/GenerateDisbursement.aspx");
         }
+
+        protected void btn_ViewPendingOrder_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ViewPendingOrder.aspx");
+        }
+
+
+
+
     }
 }

@@ -72,10 +72,10 @@
 
                     <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
-                        <ItemTemplate>
+<%--                        <ItemTemplate>
                             <asp:Button ID="delete" runat="server" Text="Delete"
                                 CssClass="btn btn-danger"  OnClick="delete_OrderItem" />
-                        </ItemTemplate>
+                        </ItemTemplate>--%>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
