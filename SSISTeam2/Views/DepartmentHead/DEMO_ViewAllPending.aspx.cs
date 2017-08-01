@@ -16,7 +16,7 @@ namespace SSISTeam2.Views.DepartmentHead
         {
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/DepartmentHead/DEMO_ViewAllPending.aspx");
+                Response.Redirect("~/login.aspx?return=Views/DepartmentHead/DEMO_ViewAllPending.aspx");
             }
 
             UserModel user = new UserModel(User.Identity.Name);

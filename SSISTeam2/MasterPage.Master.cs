@@ -166,5 +166,70 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/Employee/RepViewDisbursements.aspx");
         }
+
+        protected void btnEmpDash_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/Dashboard.aspx");
+        }
+
+        protected void btnClerkDash_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
+        }
+
+        protected void btnNewRequest_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/MakeNewRequest.aspx");
+        }
+
+        protected void btnEmpRequestHistory_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
+        }
+
+        protected void btnEmpViewCatalogue_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/ViewCatalogue.aspx");
+        }
+
+        protected void btnGenerateRetrieval_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/GenerateRetrieval.aspx");
+        }
+
+        protected void btnStoreCart_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/Cart.aspx");
+        }
+
+        protected void btnHeadDashboard_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/DepartmentHead/HeadDashboard.aspx");
+        }
+
+        protected void btnApproveRequests_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
+        }
+
+        protected void btnGenerateReports_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Reporting/ReportsMain.aspx");
+        }
+
+        protected void btnMakeOrder_Mgr_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/MakeOrder.aspx");
+        }
+
+        protected void btnLowStocks_Mgr_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/lowstock.aspx");
+        }
+
+        protected void btnGenerateDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/GenerateDisbursement.aspx");
+        }
     }
 }

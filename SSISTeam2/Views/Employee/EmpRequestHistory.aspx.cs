@@ -39,7 +39,7 @@ namespace SSISTeam2.Views.Employee
             // need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
+                Response.Redirect("~/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
             }
 
             //UserModel currentUser = new UserModel(User.Identity.Name);
@@ -56,7 +56,9 @@ namespace SSISTeam2.Views.Employee
                          x.username,
                          x.date_time,
                          x.current_status
-                     }).ToList();
+                     })
+                     .Reverse()
+                     .ToList();
 
             GridView2.DataSource = q;
             GridView2.DataBind();
@@ -168,7 +170,7 @@ namespace SSISTeam2.Views.Employee
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("~/Default.aspx");
         }
 
 

@@ -57,7 +57,7 @@ namespace SSISTeam2.Views.StoreClerk
                 foreach (var itemGroup in itemGroups)
                 {
 
-                    int itemQty = itemGroup.Select(s => s.Quantity).Aggregate((a, b) => a + b);
+                    int itemQty = itemGroup.Select(s => s.Quantity).Where(w => w > 0).Aggregate((a, b) => a + b);
                     List<int> reqIds = itemGroup.Select(s => s.RequestId).ToList();
 
                     ConfirmDisbursementViewModel model = new ConfirmDisbursementViewModel();

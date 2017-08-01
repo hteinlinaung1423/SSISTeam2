@@ -42,7 +42,9 @@ namespace SSISTeam2.Views.DepartmentHead
                             de.orig_quantity,
                             st.unit_of_measure
                             
-                         }).ToList();
+                         })
+                         .Where(w => w.orig_quantity > 0)
+                         .ToList();
                 GridView1.DataSource = q;
                 GridView1.DataBind();
 
@@ -73,7 +75,9 @@ namespace SSISTeam2.Views.DepartmentHead
                                  de.orig_quantity,
                                  st.unit_of_measure
 
-                             }).ToList();
+                             })
+                             .Where(ww => ww.orig_quantity > 0)
+                             .ToList();
 
                     lbLastReqID.Text = lastApproveReqId.ToString();
                     var req = ent.Requests.Where(x => x.request_id == lastApproveReqId);

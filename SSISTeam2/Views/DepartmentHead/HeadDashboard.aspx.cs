@@ -24,7 +24,7 @@ namespace SSISTeam2.Views
             // need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/DepartmentHead/HeadDashboard.aspx");
+                Response.Redirect("~/login.aspx?return=Views/DepartmentHead/HeadDashboard.aspx");
             }
 
             string username = User.Identity.Name.ToString();

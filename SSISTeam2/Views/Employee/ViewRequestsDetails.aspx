@@ -63,13 +63,7 @@
 
           
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SSISConnectionString %>" 
-                SelectCommand="SELECT Requests.username, Requests.reason, Request_Event.quantity,
-                 Requests.current_status, Request_Event.date_time, Stock_Inventory.unit_of_measure, 
-                Stock_Inventory.item_description 
-                FROM Request_Details 
-                INNER JOIN Request_Event ON Request_Details.request_detail_id = Request_Event.request_detail_id 
-                INNER JOIN Requests ON Request_Details.request_id = Requests.request_id 
-                INNER JOIN Stock_Inventory ON Request_Details.item_code = Stock_Inventory.item_code">
+                SelectCommand="SELECT Requests.username, Requests.reason, Request_Event.quantity, Requests.current_status, Request_Event.date_time, Stock_Inventory.unit_of_measure, Stock_Inventory.item_description FROM Request_Details INNER JOIN Request_Event ON Request_Details.request_detail_id = Request_Event.request_detail_id INNER JOIN Requests ON Request_Details.request_id = Requests.request_id INNER JOIN Stock_Inventory ON Request_Details.item_code = Stock_Inventory.item_code WHERE (Request_Event.quantity &gt; 0)">
 
             </asp:SqlDataSource>
 

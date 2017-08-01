@@ -120,31 +120,39 @@ namespace SSISTeam2.Classes.Models
 
         public UserModel FindDelegateHead()
         {
-            DateTime today = DateTime.Today;
-            SSISEntities context = new SSISEntities();
-            string dept = this.department.dept_code;
-            List<Approval_Duties> approvedList= context.Approval_Duties.Where(x => x.dept_code == dept && x.deleted == "N").ToList();
-            List<Approval_Duties> validList = new List<Approval_Duties>();
-            for (int i = 0; i < approvedList.Count; i++)
+            try
             {
-                if (approvedList[i].start_date < today && approvedList[i].end_date > today)
+                DateTime today = DateTime.Today;
+                SSISEntities context = new SSISEntities();
+                string dept = this.department.dept_code;
+                List<Approval_Duties> approvedList = context.Approval_Duties.Where(x => x.dept_code == dept && x.deleted == "N").ToList();
+                List<Approval_Duties> validList = new List<Approval_Duties>();
+                for (int i = 0; i < approvedList.Count; i++)
                 {
-                    validList.Add(approvedList[i]);
+                    if (approvedList[i].start_date < today && approvedList[i].end_date > today)
+                    {
+                        validList.Add(approvedList[i]);
+                    }
                 }
-            }
 
-            DateTime currentApproved = validList.Max(x => x.created_date);
-            var listOfApproved = context.Approval_Duties.Where(x => x.created_date == currentApproved);
+                DateTime currentApproved = validList.Max(x => x.created_date);
+                var listOfApproved = context.Approval_Duties.Where(x => x.created_date == currentApproved);
 
-            if (listOfApproved.Count() > 0)
-            {
-                Approval_Duties currentRep = listOfApproved.First();
-                UserModel repUser = new UserModel(currentRep.username);
-                return repUser;
-            } else
+                if (listOfApproved.Count() > 0)
+                {
+                    Approval_Duties currentRep = listOfApproved.First();
+                    UserModel repUser = new UserModel(currentRep.username);
+                    return repUser;
+                }
+                else
+                {
+                    return null;
+                }
+            } catch (Exception)
             {
                 return null;
             }
+            
         }
 
         public UserModel FindDeptRep()
