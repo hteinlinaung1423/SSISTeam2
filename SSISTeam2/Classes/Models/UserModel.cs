@@ -170,19 +170,22 @@ namespace SSISTeam2.Classes.Models
                 List<Approval_Duties> validList = new List<Approval_Duties>();
                 for (int i = 0; i < approvedList.Count; i++)
                 {
-                    if (approvedList[i].start_date < today && approvedList[i].end_date > today)
+                    if (approvedList[i].start_date.Ticks <= today.Ticks && approvedList[i].end_date.Ticks > today.Ticks)
                     {
                         validList.Add(approvedList[i]);
                     }
                 }
 
                 DateTime currentApproved = validList.Max(x => x.created_date);
-                var listOfApproved = context.Approval_Duties.Where(x => x.created_date == currentApproved);
+                //var listOfApproved = context.Approval_Duties.Where(x => x.created_date == currentApproved);
+                var listOfApproved = validList.Where(x => x.created_date == currentApproved);
 
                 if (listOfApproved.Count() > 0)
                 {
-                    Approval_Duties currentRep = listOfApproved.First();
+                    Approval_Duties currentRep = listOfApproved.Last();
                     UserModel repUser = new UserModel(currentRep.username);
+
+                    repUser.role = "DeptHead";
                     return repUser;
                 }
                 else

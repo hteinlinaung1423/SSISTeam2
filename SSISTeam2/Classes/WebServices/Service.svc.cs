@@ -99,10 +99,11 @@ namespace SSISTeam2.Classes.WebServices
 
             if (validate)
             {
+                UserModel usermodel = new UserModel(name);
 
-                string[] role = Roles.GetRolesForUser(name);
-                Dept_Registry dept = new Work().login(name);
-                user = new WCF_User(dept.dept_code, name, role[0]);
+                //string[] role = Roles.GetRolesForUser(name);
+                //Dept_Registry dept = new Work().login(name);
+                //user = new WCF_User(dept.dept_code, name, role[0]);
                 //Comment delegate role
                 //updflag = new Work().CheckApprovalDutiesStatus();
                 //   if (updflag.Equals("T"))
@@ -124,8 +125,42 @@ namespace SSISTeam2.Classes.WebServices
                 //            user = new WCF_User(dept.dept_code, name, role[0], flag);
                 //        }
                 //    }
+                UserModel depthead = usermodel.FindDelegateOrDeptHead();
+
+                if (usermodel.Username == depthead.Username)
+                {
+                    user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role);
+                }
+                else
+                {
+                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role);
+                }
                 return user;
             }
+
+            //    string[] role = Roles.GetRolesForUser(name);
+            //    updflag = new Work().CheckApprovalDutiesStatus();
+            //       if (updflag.Equals("T"))
+            //       {
+            //         flag = new Work().GetDepHeadRole(name);
+            //         Dept_Registry dept = new Work().login(name);
+            //         try
+            //            {
+            //                if (flag.Equals("Y"))
+            //                {
+            //                    role[0] = "DeptHead";
+            //                    user = new WCF_User(dept.dept_code, name, role[0], flag);
+            //                }
+            //        }
+            //        catch
+            //            {
+            //                flag = "N";
+
+            //                user = new WCF_User(dept.dept_code, name, role[0], flag);
+            //            }
+            //        }
+            //    return user;
+            //}
             else { return user = new WCF_User(null, "failed", null); }
         }
 

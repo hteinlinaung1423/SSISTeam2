@@ -35,6 +35,10 @@ namespace SSISTeam2
                 MonthlyCheckGV.DataSource = itemList;
                 MonthlyCheckGV.DataBind();
 
+                UserModel user = new UserModel(HttpContext.Current.User.Identity.Name);
+                UserModel depthead = user.FindDelegateOrDeptHead();
+                CheckLabel.Text = depthead.Username;
+
 
                 today = DateTime.Today;
                 DateTB.Text = today.Date.ToString("dd/MM/yyyy");
