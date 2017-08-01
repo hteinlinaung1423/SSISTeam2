@@ -90,6 +90,7 @@ namespace SSISTeam2.Classes.WebServices
             Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
             return dr;
         }
+        //Getting ApprovalDuties Status
         public string CheckApprovalDutiesStatus()
         {           
             string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
