@@ -198,7 +198,7 @@
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Store actions</li>
                                 <li>
-                                    <asp:LinkButton ID="ViewDeptList" OnClick="btn_ViewDeptList_Click" runat="server" style="color: #000000; text-decoration: none;">View Department List</asp:LinkButton>
+                                    <asp:LinkButton ID="ViewDeptList" OnClick="ViewDeptList_Click" runat="server" style="color: #000000; text-decoration: none;">View Department List</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnGenerateRetrieval" OnClick="btnGenerateRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Retrieval Form</asp:LinkButton>
@@ -222,7 +222,7 @@
                                     <asp:LinkButton ID="btn_ViewPendingOrder" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnViewTenderList" OnClick="btn_ViewTenderList_Click" runat="server" style="color: #000000; text-decoration: none;">View Tender List</asp:LinkButton>
+                                    <asp:LinkButton ID="btnViewTenderList" OnClick="btnViewTenderList_Click" runat="server" style="color: #000000; text-decoration: none;">View Tender List</asp:LinkButton>
                                 </li>
 
                               
