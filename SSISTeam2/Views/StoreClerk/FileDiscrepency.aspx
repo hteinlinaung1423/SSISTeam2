@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
-        <div class="panel-heading"><h3>File Discrepency</h3></div>
+        <div class="panel-heading"><h3>File Discrepancy</h3></div>
     </div>
     <asp:GridView ID="FileDiscrepencyGV" runat="server" 
         AutoGenerateColumns="False"
@@ -56,6 +56,9 @@
             <asp:TemplateField HeaderText="Reason">
                 <ItemTemplate>
                     <asp:TextBox ID="reasonTB" runat="server" Text='<%# Eval("reason") %>' OnTextChanged="reasonTB_TextChanged" AutoPostBack="true"></asp:TextBox>
+                    </br>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please specify reason for discrepancy"
+                            ControlToValidate="reasonTB" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

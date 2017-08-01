@@ -37,7 +37,11 @@
                 </PagerTemplate>
 
                 <Columns>
-
+                    <asp:TemplateField ItemStyle-Width="5%" HeaderText="No.">
+               <ItemTemplate>
+                   <%#Container.DataItemIndex+1 %>
+               </ItemTemplate>
+            </asp:TemplateField>
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Item Code"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
@@ -83,7 +87,7 @@
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Order"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Button ID="Order" runat="server" Text="Add To Cart"
+                            <asp:Button ID="Order" runat="server" Text="Mark for Purchasing"
                                 OnClick="MakeOrder"
                                 CssClass="btn btn-primary" />
                         </ItemTemplate>
