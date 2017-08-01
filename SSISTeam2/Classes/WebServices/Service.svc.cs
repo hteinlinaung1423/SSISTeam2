@@ -101,9 +101,9 @@ namespace SSISTeam2.Classes.WebServices
             {
                 UserModel usermodel = new UserModel(name);
 
-                string[] role = Roles.GetRolesForUser(name);
-                Dept_Registry dept = new Work().login(name);
-                user = new WCF_User(dept.dept_code, name, role[0]);
+                //string[] role = Roles.GetRolesForUser(name);
+                //Dept_Registry dept = new Work().login(name);
+                //user = new WCF_User(dept.dept_code, name, role[0]);
                 //Comment delegate role
                 //updflag = new Work().CheckApprovalDutiesStatus();
                 //   if (updflag.Equals("T"))
@@ -129,11 +129,11 @@ namespace SSISTeam2.Classes.WebServices
 
                 if (usermodel.Username == depthead.Username)
                 {
-                    user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role, "Y");
+                    user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role);
                 }
                 else
                 {
-                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N");
+                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role);
                 }
                 return user;
             }
@@ -161,7 +161,7 @@ namespace SSISTeam2.Classes.WebServices
             //        }
             //    return user;
             //}
-            else { return user = new WCF_User(null, "failed", null, null); }
+            else { return user = new WCF_User(null, "failed", null); }
         }
 
         // Heng Tiong's MonthlyCheck implementation
