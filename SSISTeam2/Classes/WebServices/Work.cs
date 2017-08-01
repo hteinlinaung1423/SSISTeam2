@@ -162,7 +162,8 @@ namespace SSISTeam2.Classes.WebServices
             var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
             string headUserName = q.First();
 
-            var delegateHead = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
+            var depts = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).ToList();
+            var delegateHead = depts.Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
             string delegateUserName = delegateHead.First();
 
             var list = ctx.Dept_Registry
@@ -521,6 +522,19 @@ namespace SSISTeam2.Classes.WebServices
         {
             var q = ctx.Dept_Registry.Where(x => x.fullname.Equals(fullName)).Select(x => x.username);
             return q.First();
+        }
+
+        public void UpdateRequestDetail(string id, string qty)
+        {
+            int req_id = Convert.ToInt32(id);
+            
+            Request_Details req = ctx.Request_Details.Where(x => x.request_id == req_id).First();
+            req.orig_quantity = Convert.ToInt32( qty);
+            ctx.SaveChanges();
+
+            Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
+            revent.quantity = Convert.ToInt32(qty);
+            ctx.SaveChanges();
         }
     }
 

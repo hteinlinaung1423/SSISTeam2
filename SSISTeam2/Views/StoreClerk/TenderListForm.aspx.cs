@@ -58,17 +58,7 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            GridView1.EditIndex = e.NewEditIndex;
             this.BindGrid();
-            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).Visible = true;
-            List<Supplier> supplierList = entities.Suppliers.ToList();
-            List<string> supplierNameList = new List<string>();
-            foreach(Supplier s in supplierList)
-            {
-                supplierNameList.Add(s.name);
-            }
-            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).DataSource = supplierNameList;
-            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).DataBind();
         }
         protected void OnRowCancelingEdit(object sender, EventArgs e)
         {
@@ -171,27 +161,27 @@ namespace SSISTeam2.Views.StoreClerk
             var result = entities.Suppliers.Where(x => x.name.Contains(searchWord)).Select(x => x.supplier_id).ToList();
             var result2 = entities.Stock_Inventory.Where(x => x.item_description.Contains(searchWord)).Select(x => x.item_code).ToList();
             //var result4 = entities.Tender_List_Details.Where(x => x.price == changePrice).Select(x => x.price).ToList();
-            //var result3 = from t1 in entities.Tender_List
-            //              join t2 in entities.Tender_List_Details
-            //              on t1.tender_year_id equals t2.tender_year_id
-            //              join t3 in entities.Suppliers
-            //              on t1.supplier_id equals t3.supplier_id
-            //              join t4 in entities.Stock_Inventory
-            //              on t2.item_code equals t4.item_code
-            //              where t1.deleted.Equals("N")
-            //              && t2.deleted.Equals("N")
-            //              && t3.deleted.Equals("N")
-            //              && t4.deleted.Equals("N")
-            //              && (result.Contains(t1.supplier_id))
-            //              || (result2.Contains(t2.item_code))
-            //              || (result4.Contains(t2.price))
-            //              orderby t3.name
-            //              select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
+            var result3 = from t1 in entities.Tender_List
+                          join t2 in entities.Tender_List_Details
+                          on t1.tender_year_id equals t2.tender_year_id
+                          join t3 in entities.Suppliers
+                          on t1.supplier_id equals t3.supplier_id
+                          join t4 in entities.Stock_Inventory
+                          on t2.item_code equals t4.item_code
+                          where t1.deleted.Equals("N")
+                          && t2.deleted.Equals("N")
+                          && t3.deleted.Equals("N")
+                          && t4.deleted.Equals("N")
+                          && (result.Contains(t1.supplier_id))
+                          || (result2.Contains(t2.item_code))
+                          //|| (result4.Contains(t2.price))
+                          orderby t3.name
+                          select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
             GridView1.Columns[0].Visible = false;
             GridView1.Columns[1].Visible = false;
             GridView1.Columns[2].Visible = false;
             GridView1.Columns[3].Visible = false;
-            //GridView1.DataSource = result3.ToList();
+            GridView1.DataSource = result3.ToList();
             GridView1.DataBind();
 
         }
@@ -208,6 +198,26 @@ namespace SSISTeam2.Views.StoreClerk
             }
         }
 
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    GridViewRow row = e.Row;
+                    //(GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).Visible = true;
+                    List<Supplier> supplierList = entities.Suppliers.ToList();
+                    List<string> supplierNameList = new List<string>();
+                    foreach (Supplier s in supplierList)
+                    {
+                        supplierNameList.Add(s.name);
+                    }
+                    (row.FindControl("DropDownList1") as DropDownList).DataSource = supplierNameList;
+                    (row.FindControl("DropDownList1") as DropDownList).DataBind();
+                }
+            }
+
+        }
     }
 
 }

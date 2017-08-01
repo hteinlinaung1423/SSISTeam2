@@ -156,7 +156,7 @@
       <DependentUpon>SSISModel.edmx</DependentUpon>
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
-    <Content Include="ViewAllAdjustment.aspx" />
+    <Content Include="Views\StoreManager\ViewAllAdjustment.aspx" />
     <Content Include="Views\DepartmentHead\ApproveReject.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
     <Content Include="Views\StoreClerk\MonthlyCheck.aspx" />
@@ -425,11 +425,11 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewAllAdjustment.aspx.cs">
+    <Compile Include="Views\StoreManager\ViewAllAdjustment.aspx.cs">
       <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ViewAllAdjustment.aspx.designer.cs">
+    <Compile Include="Views\StoreManager\ViewAllAdjustment.aspx.designer.cs">
       <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
