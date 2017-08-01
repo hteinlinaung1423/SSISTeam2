@@ -120,7 +120,6 @@ namespace SSISTeam2.Classes.WebServices
         [WebInvoke(UriTemplate = "/RetriveTQty/Update/{loginUserName}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void UpdateRetrieveQty(List<WCFRetieve> retrievedList,string loginUserName);
 
-
         [OperationContract]
         [WebGet(UriTemplate = "/DisbCollectP", ResponseFormat = WebMessageFormat.Json)]
         List<String> GetDisbCollectP();
@@ -130,12 +129,16 @@ namespace SSISTeam2.Classes.WebServices
         List<String> GetDisbCollectDept(string cpid);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/DisbDeptDetail/{user}/{deptname}", ResponseFormat = WebMessageFormat.Json)]
-        List<WCFDisburse> GetDeptDetail(string user, string deptname);
+        [WebGet(UriTemplate = "/Department/{deptName}", ResponseFormat = WebMessageFormat.Json)]
+        WCFDepartment GetDeptNamebycode(string deptName);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/DisbDeptDetail/{user}/{deptCode}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFDisburse> GetDeptDetail(string user, string deptCode);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
+        void UpdateDisburseQty(string loginUserName, string deptCode, List<WCFDisburse> disburseList);
 
         [OperationContract]
         [WebGet(UriTemplate = "/ViewAllAdjustment/{role}", ResponseFormat = WebMessageFormat.Json)]
@@ -342,15 +345,15 @@ namespace SSISTeam2.Classes.WebServices
         string user_name;
         [DataMember]
         string role;
-        [DataMember]
-        string flag;
+       // [DataMember]
+       // string flag;
 
-        public WCF_User(string dept_code, string user_name, string role,string flag)
+        public WCF_User(string dept_code, string user_name, string role)
         {
             this.dept_code = dept_code;
             this.user_name = user_name;
             this.role = role;
-            this.flag = flag;
+           // this.flag = flag;
         }
 
 
@@ -612,16 +615,16 @@ public class WCFDisburse
     [DataMember]
     string itemName;
     [DataMember]
-    int retrievedQty;
+    string retrievedQty;
     [DataMember]
-    int disbursedQty;
+    string disbursedQty;
 
 
-    public WCFDisburse() : this("", 0, 0)
+    public WCFDisburse() : this("", "", "")
     {
 
     }
-    public WCFDisburse(string itemName, int retrievedQty, int disbursedQty)
+    public WCFDisburse(string itemName, string retrievedQty, string disbursedQty)
     {
         this.itemName = itemName;
         this.retrievedQty = retrievedQty;
@@ -642,7 +645,7 @@ public class WCFDisburse
         }
     }
 
-    public int RetrievedQty
+    public string RetrievedQty
     {
         get
         {
@@ -656,7 +659,7 @@ public class WCFDisburse
     }
 
 
-    public int DisbursedQty
+    public string DisbursedQty
     {
         get
         {
@@ -722,51 +725,114 @@ public class WCFDisburse
         }      
     }
 
-    [DataContract]
-    public class WCFInventoryAdjustmentDetailModel
+[DataContract]
+public class WCFInventoryAdjustmentDetailModel
+{
+
+    public string itemdesc;
+    public string qtyadjust;
+    public string priceadjust;
+    public string reason;
+
+
+    public WCFInventoryAdjustmentDetailModel(string itemdesc, string qtyadjust, string priceadjust, string reason)
     {
 
-        public string itemdesc;
-        public string qtyadjust;
-        public string priceadjust;
-        public string reason;
+        this.itemdesc = itemdesc;
+        this.qtyadjust = qtyadjust;
+        this.priceadjust = priceadjust;
+        this.reason = reason;
 
 
-        public WCFInventoryAdjustmentDetailModel(string itemdesc, string qtyadjust, string priceadjust, string reason)
+    }
+    [DataMember]
+    public string ItemDesc
+    {
+        get { return itemdesc; }
+        set { itemdesc = value; }
+    }
+    [DataMember]
+    public string QtyAdjust
+    {
+        get { return qtyadjust; }
+        set { qtyadjust = value; }
+    }
+    [DataMember]
+    public string PriceAdjust
+    {
+        get { return priceadjust; }
+        set { priceadjust = value; }
+    }
+    [DataMember]
+    public string Reason
+    {
+        get { return reason; }
+        set { reason = value; }
+    }
+}
+    //Yin
+    [DataContract]
+    public class WCFDepartment
+    {
+
+        private string deptCode;
+        private string repUser;
+        private string contactNumber;
+
+        public WCFDepartment() : this("", "", "")
         {
 
-            this.itemdesc = itemdesc;
-            this.qtyadjust = qtyadjust;
-            this.priceadjust = priceadjust;
-            this.reason = reason;
+        }
 
+    public WCFDepartment(string deptCode, string repUser, string contactNumber)
+        {
+
+            this.deptCode = deptCode;
+            this.repUser = repUser;
+            this.contactNumber = contactNumber;
 
         }
         [DataMember]
-        public string ItemDesc
+        public string DeptCode
         {
-            get { return itemdesc; }
-            set { itemdesc = value; }
+            get
+            {
+                return deptCode;
+            }
+
+            set
+            {
+                deptCode = value;
+            }
         }
         [DataMember]
-        public string QtyAdjust
+        public string RepUser
         {
-            get { return qtyadjust; }
-            set { qtyadjust = value; }
+            get
+            {
+                return repUser;
+            }
+
+            set
+            {
+                repUser = value;
+            }
         }
         [DataMember]
-        public string PriceAdjust
+        public string ContactNumber
         {
-            get { return priceadjust; }
-            set { priceadjust = value; }
+            get
+            {
+                return contactNumber;
+            }
+
+            set
+            {
+                contactNumber = value;
+            }
         }
-        [DataMember]
-        public string Reason
-        {
-            get { return reason; }
-            set { reason = value; }
-        }
-        
+
+
     }
 
 [DataContract]

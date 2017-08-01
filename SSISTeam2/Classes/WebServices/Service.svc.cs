@@ -94,14 +94,37 @@ namespace SSISTeam2.Classes.WebServices
         WCF_User IService.login(string name, string pass)
         {
             //WCF_User user;
-            string flag;
-            string updflag;
+            //String flag;String updflag;
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)
             {
                 UserModel usermodel = new UserModel(name);
 
+                string[] role = Roles.GetRolesForUser(name);
+                Dept_Registry dept = new Work().login(name);
+                user = new WCF_User(dept.dept_code, name, role[0]);
+                //Comment delegate role
+                //updflag = new Work().CheckApprovalDutiesStatus();
+                //   if (updflag.Equals("T"))
+                //   {
+                //     flag = new Work().GetDepHeadRole(name);
+                //     Dept_Registry dept = new Work().login(name);
+                //     try
+                //        {
+                //            if (flag.Equals("Y"))
+                //            {
+                //                role[0] = "DeptHead";
+                //                user = new WCF_User(dept.dept_code, name, role[0], flag);
+                //            }
+                //    }
+                //    catch
+                //        {
+                //            flag = "N";
+
+                //            user = new WCF_User(dept.dept_code, name, role[0], flag);
+                //        }
+                //    }
                 UserModel depthead = usermodel.FindDelegateOrDeptHead();
 
                 if (usermodel.Username == depthead.Username)
@@ -382,9 +405,9 @@ namespace SSISTeam2.Classes.WebServices
         //        ii++;
         //    }
 
-        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "test");
+        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "testr");
         //    rq.rejected_reason = itemCode;
-        //    rq.deleted = "H";
+        //    rq.deleted = "R";
         //    context.Requests.Add(rq);
         //    context.SaveChanges();
         //}
@@ -400,21 +423,16 @@ namespace SSISTeam2.Classes.WebServices
             return work.wgetCollectDept(cpid);
         }
 
+        public WCFDepartment GetDeptNamebycode(string deptName)
+        {
+            Department dept1 = context.Departments.SingleOrDefault(x => x.name == deptName);
+            Dept_Registry dr = context.Dept_Registry.SingleOrDefault(x => x.username == dept1.rep_user);
+            WCFDepartment wd = new WCFDepartment(dept1.dept_code, dr.fullname, dept1.contact_num);          
+            return wd;
+        }
+
         public List<WCFDisburse> GetDeptDetail(string user, string deptname)
         {
-            //List<WCFDisburse> list = work.wgetDepDetail(deptname);
-
-            //List<WCFDisburse> disSL = null;
-
-            //var q = (from x in list
-            //         group x by x.ItemName into g
-            //         select new WCFDisburse
-            //         {
-            //             ItemName = g.Key,
-            //             RetrievedQty = g.Sum(y => y.RetrievedQty)
-            //         }).ToList();
-
-            //return q.ToList<WCFDisburse>();
 
             return MobileConfirmation.getAllPossibleSignOffsForUserForDept(user, deptname);
         }
@@ -423,22 +441,23 @@ namespace SSISTeam2.Classes.WebServices
         public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
         {
             int ii = 0;
-            string[] keys = new string[disburseList.Count];
-            int[] values = new int[disburseList.Count];
+            string itemCode = null;
+            string[] itemCodeAry = new string[disburseList.Count];
+            int[] qtyAry = new int[disburseList.Count];
             Dictionary<string, int> dicList = new Dictionary<string, int>();
+
             foreach (WCFDisburse eachObj in disburseList)
             {
-                //Item
-                string itemDescription = eachObj.ItemName;
-                //change item description to item code
-                string itemCode = context.Stock_Inventory.Where(x => x.item_description == itemDescription).Select(x => x.item_code).ToString();
-                keys[ii] = itemCode;
 
-                //Quantity
-                values[ii] = eachObj.DisbursedQty;
+                string itemName = eachObj.ItemName;
+                itemCode = changeItemNametoCode(itemName);
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.DisbursedQty);
+                qtyAry[ii] = quantity;
 
                 //Add to dictionary
-                dicList.Add(keys[ii], values[ii]);
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
 
                 ii++;
             }
@@ -447,6 +466,32 @@ namespace SSISTeam2.Classes.WebServices
             MobileConfirmation.SignOffDisbursement(loginUserName, deptcode, dicList);
         }
 
+        //Testing
+        //public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
+        //{
+        //    int ii = 0;
+        //    Stock_Inventory st = null;
+        //    string itemCode = null;
+        //    string[] itemCodeAry = new string[disburseList.Count];
+
+        //    foreach (WCFDisburse eachObj in disburseList)
+        //    {
+        //        //Item
+        //        string itemDescription = eachObj.ItemName;
+        //        st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //        itemCode = st.item_code;
+        //        itemCodeAry[ii] = itemCode;
+        //        ii++;
+        //    }
+
+        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "testd");
+        //    rq.rejected_reason = itemCode;
+        //    rq.deleted = "D";
+        //    rq.current_status = deptcode;
+        //    rq.username = loginUserName;
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
+        //}
 
 
         // Htein Lin Aung Apply new Request

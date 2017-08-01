@@ -2,7 +2,7 @@
     MasterPageFile="~/MasterPage.Master" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-<%--    <title>View Pending Requests</title>--%>
+    <title>View Pending Requests</title>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <div class="panel panel-default">

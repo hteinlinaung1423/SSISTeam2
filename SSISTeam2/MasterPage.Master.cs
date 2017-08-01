@@ -246,5 +246,15 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/StoreManager/ViewAllAdjustment.aspx");
         }
+
+        protected void ViewDeptList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ViewDepartmentList.aspx");
+        }
+
+        protected void btnViewTenderList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/TenderListForm.aspx");
+        }
     }
 }
