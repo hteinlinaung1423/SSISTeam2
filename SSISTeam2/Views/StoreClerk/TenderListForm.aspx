@@ -61,20 +61,29 @@
 
                                 <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
 
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="table-responsive">
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10"
-                        HeaderStyle-CssClass="text-center-impt"
-                        CssClass="table table-responsive table-striped"
-                        GridLines="None"
-                        PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="OnRowCancelingEdit" OnRowUpdating="OnRowUpdating" OnRowDeleting="OnRowDeleting" OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found" OnRowDataBound="GridView1_RowDataBound">
-                        <EmptyDataRowStyle ForeColor="Red" />
-                        <HeaderStyle CssClass="text-center-impt"></HeaderStyle>
+                </td>
+              
+            </tr>
+        </table> 
+    </div>
+         
+             <div class="table-responsive">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10"
+                HeaderStyle-CssClass="text-center-impt"
+                CssClass="table table-responsive table-striped"
+                GridLines="None"
+                PagerStyle-HorizontalAlign="Center" 
+                PagerSettings-Position="TopAndBottom" 
+                OnRowEditing="GridView1_RowEditing" 
+                OnRowCancelingEdit="OnRowCancelingEdit" 
+                OnRowUpdating="OnRowUpdating" 
+                OnRowDeleting="OnRowDeleting" 
+                OnPageIndexChanging="OnPageIndexChanging" 
+                ShowHeaderWhenEmpty="True" 
+                EmptyDataText="No records Found" 
+                OnRowDataBound="GridView1_RowDataBound">
+                <emptydatarowstyle forecolor="Red"/>
+<HeaderStyle CssClass="text-center-impt"></HeaderStyle>
 
                         <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
 
@@ -177,19 +186,19 @@
                                     <asp:Label ID="Label6" runat="server" Text='<%# Eval("tender_date", "{0:dd/MM/yyyy}") %>' CssClass="text-bold"></asp:Label>
                                 </ItemTemplate>
 
-                                <ItemStyle Width="10%"></ItemStyle>
-                            </asp:TemplateField>
-
-
-                            <asp:TemplateField ItemStyle-Width="20%">
-                                <ItemTemplate>
-                                    <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-primary" />
-                                    <%-- <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-primary"/>    --%>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary" />
-                                    <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-primary" />
-                                </EditItemTemplate>
+<ItemStyle Width="10%"></ItemStyle>
+                    </asp:TemplateField>
+                    
+                    
+                     <asp:TemplateField ItemStyle-Width="10%">  
+                    <ItemTemplate >  
+                        <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-primary"/>
+                       <%-- <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-primary"/>    --%>
+                    </ItemTemplate>  
+                    <EditItemTemplate>  
+                        <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary"/>  
+                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-primary"/>  
+                    </EditItemTemplate>  
 
                                 <ItemStyle Width="20%"></ItemStyle>
                             </asp:TemplateField>
