@@ -80,7 +80,13 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         //void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username);
-        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheck, string username);
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyChecks, string username);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/FileDiscrepancies/Update/{username}", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void UpdateFileDiscrepancies(List<WCF_FileDiscrepancy> fileDiscrepancies, string username);
 
 
         [OperationContract]
@@ -208,6 +214,45 @@ namespace SSISTeam2.Classes.WebServices
         }
         [DataMember]
         public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+    }
+
+    [DataContract]
+    public class WCF_FileDiscrepancy
+    {
+        [DataMember]
+        public string itemName;
+        [DataMember]
+        public string adjustedQty;
+        [DataMember]
+        public string reason;
+
+        public WCF_FileDiscrepancy(string itemName, string adjustedQty, string reason)
+        {
+            this.itemName = itemName;
+            this.adjustedQty = adjustedQty;
+            this.reason = reason;
+        }
+
+        [DataMember]
+        string ItemName
+        {
+            get { return itemName; }
+            set { itemName = value; }
+        }
+
+        [DataMember]
+        string AdjustedQty
+        {
+            get { return adjustedQty; }
+            set { adjustedQty = value; }
+        }
+
+        [DataMember]
+        string Reason
         {
             get { return reason; }
             set { reason = value; }
