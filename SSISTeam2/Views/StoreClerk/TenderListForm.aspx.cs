@@ -44,7 +44,11 @@ namespace SSISTeam2.Views.StoreClerk
                          && t4.deleted.Equals("N")
                          orderby t3.name
                          select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
-            
+
+            GridView1.Columns[0].Visible = false;
+            GridView1.Columns[1].Visible = false;
+            GridView1.Columns[2].Visible = false;
+            GridView1.Columns[3].Visible = false;
             GridView1.DataSource = result.ToList();
             GridView1.DataBind();
         }
