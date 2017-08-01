@@ -103,6 +103,7 @@ namespace SSISTeam2.Classes.WebServices
                 string[] role = Roles.GetRolesForUser(name);
                 Dept_Registry dept = new Work().login(name);
                 user = new WCF_User(dept.dept_code, name, role[0]);
+                //Comment delegate role
                 //updflag = new Work().CheckApprovalDutiesStatus();
                 //   if (updflag.Equals("T"))
                 //   {
