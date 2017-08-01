@@ -175,7 +175,7 @@
                                 </li>
 
                                 <% }
-                                    if (Page.User.IsInRole("Clerk"))
+                                    if (Page.User.IsInRole("Clerk") || Page.User.IsInRole("Supervisor"))
                                     { %>
 
                                 <li>
@@ -202,27 +202,38 @@
                                     <asp:LinkButton ID="btnGenerateRetrieval" OnClick="btnGenerateRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Retrieval Form</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnStoreCart" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
+                                    <asp:LinkButton ID="btnGenerateDisbursement" OnClick="btnGenerateDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Disbursement Form</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="btnMakeOrder_Sup" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="btnStoreCart" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="btnLowStocks_Sup" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
                                 </li>
 
                                 <% }
 
                                     if (Page.User.IsInRole("DeptHead"))
                                     { %>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Department Head actions</li>
+
                                 <li>
-                                    <a href="~/Views/DepartmentHead/HeadDashboard.aspx">Your Dashboard</a>
+                                    <asp:LinkButton ID="btnHeadDashboard" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                 </li>
+
+                                <li class="divider"></li>
+
                                 <li>
-                                    <a href="~/Views/DepartmentHead/ViewPending.aspx">Approve Requests</a>
+                                    <asp:LinkButton ID="btnApproveRequests" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
                                 </li>
                                 <li>
 
                                     <asp:LinkButton ID="LinkButtonDelegateAuth1" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnEmpViewCatalogue2" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
+                                    <asp:LinkButton ID="btnEmpViewCatalogue_deptHead" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                  <li>
                                     <asp:LinkButton ID="LinkButtonn" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
@@ -232,25 +243,29 @@
 
                                     if (Page.User.IsInRole("Supervisor"))
                                     { %>
-
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Store actions</li>
+                                <li>
+                                    <asp:LinkButton ID="btnGenerateReports_Sup" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
+                                </li>
                                 <% }
 
                                     if (Page.User.IsInRole("Manager"))
                                     { %>
+                                <li>
+                                    <asp:LinkButton ID="btnHeadDashboard_Mgr" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
+                                </li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Manager actions</li>
 
                                 <li>
-                                    <a href="~/Views/DepartmentHead/ViewPending.aspx">Approve Request</a>
+                                    <asp:LinkButton ID="btnApproveRequests_Mgr" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="LinkButtonDelegateAuth2" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <a href="~/Views/Employee/EmpRequestHistory.aspx">View Pending Requests</a>
-                                </li>
-                                <li>
-                                    <a href="~/Views/Employee/ViewCatalogue.aspx">View Stationery Catalogue</a>
+                                    <asp:LinkButton ID="btnEmpViewCatalogue_Mgr" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="linkBtnChangeCollectPt2" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
@@ -258,16 +273,16 @@
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Store actions</li>
                                 <li>
-                                    <a href="~/Views/StoreClerk/lowstock.aspx">Low Stock Orders</a>
+                                    <asp:LinkButton ID="btnLowStocks_Mgr" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <a href="~/Views/StoreClerk/MakeOrder.aspx">Make Purchase Order</a>
+                                    <asp:LinkButton ID="btnMakeOrder_Mgr" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <a href="~/Views/StoreClerk/Cart.aspx">View Cart</a>
+                                    <asp:LinkButton ID="btnStoreCart_Mgr" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <a href="~/Views/Reporting/ReportsMain.aspx">Generate Reports</a>
+                                    <asp:LinkButton ID="btnGenerateReports" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
                                 </li>
                                 <% } %>
                                 

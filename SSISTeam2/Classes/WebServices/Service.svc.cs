@@ -218,6 +218,8 @@ namespace SSISTeam2.Classes.WebServices
                 int quantity = Convert.ToInt32(r.orig_quantity);
                 WCF_RequestDetail req = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
 
+                if (quantity == 0) continue;
+
                 rd.Add(req);
             }
 

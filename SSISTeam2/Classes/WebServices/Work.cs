@@ -328,7 +328,9 @@ namespace SSISTeam2.Classes.WebServices
                      {
                          ItemName = st.item_description,
                          RetrievedQty = rqe.quantity
-                     }).ToList();
+                     })
+                     .Where(w => w.RetrievedQty > 0)
+                     .ToList();
 
             return q.ToList<WCFDisburse>();
         }
