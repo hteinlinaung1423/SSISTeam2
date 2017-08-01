@@ -127,10 +127,9 @@ namespace SSISTeam2.Classes.WebServices
             return strings;
         }
 
-        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username)
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyChecks, string username)
         {
-            List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
-            bool discrepencyFound = false;
+            //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
 
             //WCF_MonthlyCheck model = monthlyCheckList[0];
 
@@ -169,9 +168,16 @@ namespace SSISTeam2.Classes.WebServices
 
             //}
             //this is the problem
-            work.UpdateMonthlyCheck(monthlyCheckList, username);
+            bool discrepencyFound = work.UpdateMonthlyCheck(monthlyChecks, username);
             //this is the problem
             work.UpdateMonthlyCheckRecord(username, discrepencyFound);
+        }
+
+        public void UpdateFileDiscrepancies(List<WCF_FileDiscrepancy> fileDiscrepancies, string username)
+        {
+            //for each itemDescription, get itemCode, get itemModel, get average price
+            //i need itemCode, quantity adjusted, reason, cost of adjustment
+            work.UpdateFileDiscrepancies(fileDiscrepancies, username);
         }
 
         public string[] GetDelgateEmployeeName(string deptcode)

@@ -59,15 +59,25 @@ namespace SSISTeam2.Classes.Models
                 }
             }
 
+            if (username == null)
+            {
+                return null;
+            }
+
             return new UserModel(username);
         }
 
-        public UserModel FindDeptHead()
+        public UserModel FindDelegateOrDeptHead()
         {
             SSISEntities context = new SSISEntities();
 
             // Check delegate table if there is a delegate entry for this time period
             // If yes, return that person
+            var delegateHead = FindDelegateHead();
+            if (delegateHead != null)
+            {
+                return delegateHead;
+            }
 
             string username = "";
             Department dept = this.department;
@@ -108,7 +118,7 @@ namespace SSISTeam2.Classes.Models
             return deptList;
         }
 
-        public UserModel FIndDelegateHead()
+        public UserModel FindDelegateHead()
         {
             DateTime today = DateTime.Today;
             SSISEntities context = new SSISEntities();
@@ -124,9 +134,17 @@ namespace SSISTeam2.Classes.Models
             }
 
             DateTime currentApproved = validList.Max(x => x.created_date);
-            Approval_Duties currentRep = context.Approval_Duties.Where(x => x.created_date == currentApproved).ToList().First();
-            UserModel repUser = new UserModel(currentRep.username);
-            return repUser;
+            var listOfApproved = context.Approval_Duties.Where(x => x.created_date == currentApproved);
+
+            if (listOfApproved.Count() > 0)
+            {
+                Approval_Duties currentRep = listOfApproved.First();
+                UserModel repUser = new UserModel(currentRep.username);
+                return repUser;
+            } else
+            {
+                return null;
+            }
         }
 
         public UserModel FindDeptRep()

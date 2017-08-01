@@ -26,7 +26,7 @@ namespace SSISTeam2.Views.DepartmentHead
             LabelContactName.Text = dept.contact_user.ToString();
             LabelPhNo.Text = dept.contact_num.ToString();
             LabelFaxNo.Text = dept.fax_num.ToString();
-            LabelHeadName.Text = dept.head_user.ToString();
+            //LabelHeadName.Text = dept.head_user.ToString();
             tbCollectP.Text = dept.Collection_Point1.location.ToString();
             tbRepName.Text = dept.rep_user.ToString();
 
