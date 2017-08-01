@@ -28,13 +28,18 @@ namespace SSISTeam2.Classes.Models
             MembershipUser thisUser = Membership.GetUser(username);
             this.email = thisUser != null ? thisUser.Email : "sa44ssisteamtwo+" + username + "@gmail.com";
             this.department = dept;
-            this.role = Roles.GetRolesForUser(username).First().ToString();
-            //this.fullname = UserPrincipal.Current.DisplayName;
-            this.fullname = user.fullname;
-            if (role == null)
+
+            var roles = Roles.GetRolesForUser(username);
+            if (roles.Count() > 0)
+            {
+                this.role = roles.First().ToString();
+            } else
             {
                 this.role = "Employee";
             }
+
+            //this.fullname = UserPrincipal.Current.DisplayName;
+            this.fullname = user.fullname;
         }
 
         public UserModel FindStoreSupervisor()

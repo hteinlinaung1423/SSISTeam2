@@ -213,6 +213,11 @@
                                 <li>
                                     <asp:LinkButton ID="btnLowStocks_Sup" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
                                 </li>
+                                <li>
+                                    <asp:LinkButton ID="btn_ViewPendingOrder" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
+                                </li>
+
+                              
 
                                 <% }
 
@@ -284,6 +289,10 @@
                                 <li>
                                     <asp:LinkButton ID="btnGenerateReports" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
                                 </li>
+                                 <li>
+                                    <asp:LinkButton ID="btnManVPO" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
+                                </li>
+
                                 <% } %>
                                 
                                 <%--Moved Logout Button to bottom of drop down list--%>

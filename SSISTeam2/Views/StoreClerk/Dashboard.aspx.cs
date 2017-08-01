@@ -219,13 +219,13 @@ namespace SSISTeam2
                 string currentDept = user.Department.dept_code;
                 var q = (from x in ctx.Requests
                          where username == x.username
-                         select new { x.request_id, x.date_time, x.reason, x.current_status }).Take(3).ToList();
+                         select new { x.request_id, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
                 GridView1.DataSource = q;
                 GridView1.DataBind();
 
                 var q2 = (from x in ctx.Requests
                           where currentDept == x.dept_code
-                          select new { x.request_id, x.username, x.date_time, x.reason, x.current_status }).Take(3).ToList();
+                          select new { x.request_id, x.username, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
                 GridView2.DataSource = q2;
                 GridView2.DataBind();
             }
@@ -239,6 +239,26 @@ namespace SSISTeam2
         protected void btnShowHistory_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Employee/EmpRequestHistory.aspx");
+        }
+
+        protected void btnShowAllToRetrieve_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/GenerateRetrieval.aspx");
+        }
+
+        protected void btnConfirmRetrieval_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ConfirmRetrieval.aspx");
+        }
+
+        protected void btnGenerateDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/GenerateDisbursement.aspx");
+        }
+
+        protected void btnConfirmDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ConfirmDisbursement.aspx");
         }
     }
 }

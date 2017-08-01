@@ -78,7 +78,7 @@ namespace SSISTeam2
 
             
             Session["ConfirmAdj"] = model;
-            Response.Redirect("AdjustmentDetail.aspx");
+            Response.Redirect("Views/StoreManager/AdjustmentDetail.aspx");
         }
 
         public List<AdjustmentModel> CheckForRole(List<AdjustmentModel> adjList)
@@ -86,6 +86,14 @@ namespace SSISTeam2
             List<AdjustmentModel> listManOrSup = new List<AdjustmentModel>();
 
             return listManOrSup;
+        }
+
+        protected void ViewAdjustmentGV_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            List<InventoryAdjustmentModel> itemList = (List<InventoryAdjustmentModel>)Session["ViewAdj"];
+            ViewAdjustmentGV.PageIndex = e.NewPageIndex;
+            ViewAdjustmentGV.DataSource = itemList;
+            ViewAdjustmentGV.DataBind();
         }
     }
 }

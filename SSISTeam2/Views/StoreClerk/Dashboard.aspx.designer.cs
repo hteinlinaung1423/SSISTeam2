@@ -148,6 +148,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.GridView gridViewToRetrieve_FromWarehouse;
         
         /// <summary>
+        /// btnShowAllToRetrieve control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnShowAllToRetrieve;
+        
+        /// <summary>
         /// lblNumToRetrieve control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridViewToRetrieve_ToConfirm;
+        
+        /// <summary>
+        /// btnConfirmRetrieval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnConfirmRetrieval;
         
         /// <summary>
         /// lblNumToConfirm control.
@@ -220,6 +238,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.GridView gridViewToDisburse_ToCollectionPt;
         
         /// <summary>
+        /// btnGenerateDisbursement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGenerateDisbursement;
+        
+        /// <summary>
         /// lblNumToDisburse control.
         /// </summary>
         /// <remarks>
@@ -245,6 +272,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridViewToDisburse_ToConfirm;
+        
+        /// <summary>
+        /// btnConfirmDisbursement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnConfirmDisbursement;
         
         /// <summary>
         /// lblNumToSignOff control.

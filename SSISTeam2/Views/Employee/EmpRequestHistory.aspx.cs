@@ -74,7 +74,10 @@ namespace SSISTeam2.Views.Employee
         protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             FillPage();
-            GridView2.PageIndex = e.NewPageIndex;
+            if (e.NewPageIndex < 0)
+                GridView2.PageIndex = 0;
+            else
+                GridView2.PageIndex = e.NewPageIndex;
             GridView2.DataBind();
         }
         protected void btnCreate_Click(object sender, EventArgs e)

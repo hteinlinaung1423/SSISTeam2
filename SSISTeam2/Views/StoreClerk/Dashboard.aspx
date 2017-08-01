@@ -223,8 +223,7 @@
                                 </Columns>
                             </asp:GridView>
                             <div class="panel-footer">
-                                <a href="Views/StoreClerk/GenerateRetrieval.aspx"><span class="btn btn-sm btn-primary">Show all to retrieve</span>
-                                </a>
+                                <asp:LinkButton ID="btnShowAllToRetrieve" Text="Show all to retrieve" OnClick="btnShowAllToRetrieve_Click" runat="server" CssClass="btn btn-sm btn-primary" />
                                 <asp:Label ID="lblNumToRetrieve" runat="server" Text=""></asp:Label>
 
                             </div>
@@ -255,8 +254,7 @@
                                 </Columns>
                             </asp:GridView>
                             <div class="panel-footer">
-                                <a href="Views/StoreClerk/ConfirmRetrieval.aspx"><span class="btn btn-sm btn-primary">Show all to confirm</span>
-                                </a>
+                                <asp:LinkButton ID="btnConfirmRetrieval" Text="Show all to confirm" OnClick="btnConfirmRetrieval_Click" runat="server" CssClass="btn btn-sm btn-primary" />
                                 <asp:Label ID="lblNumToConfirm" runat="server" Text=""></asp:Label>
 
                             </div>
@@ -298,8 +296,7 @@
                                 </Columns>
                             </asp:GridView>
                             <div class="panel-footer">
-                                <a href="Views/StoreClerk/GenerateDisbursement.aspx"><span class="btn btn-sm btn-primary">Show all to disburse</span>
-                                </a>
+                                <asp:LinkButton ID="btnGenerateDisbursement" Text="Show all to disburse" OnClick="btnGenerateDisbursement_Click" runat="server" CssClass="btn btn-sm btn-primary" />
                                 <asp:Label ID="lblNumToDisburse" runat="server" Text=""></asp:Label>
 
                             </div>
@@ -320,8 +317,7 @@
                                 </Columns>
                             </asp:GridView>
                             <div class="panel-footer">
-                                <a href="Views/StoreClerk/ConfirmDisbursement.aspx"><span class="btn btn-sm btn-primary">Show all to confirm</span>
-                                </a>
+                                <asp:LinkButton ID="btnConfirmDisbursement" Text="Show all to confirm" OnClick="btnConfirmDisbursement_Click" runat="server" CssClass="btn btn-sm btn-primary" />
                                 <asp:Label ID="lblNumToSignOff" runat="server" Text=""></asp:Label>
 
                             </div>
