@@ -194,6 +194,8 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void ddlCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             DropDownList ddl = sender as DropDownList;
             GridViewRow gvr = ddl.Parent.Parent as GridViewRow;
             Label num = gvr.FindControl("NumLabel") as Label;
@@ -215,6 +217,8 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void lbDescriptions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             ListBox lb = sender as ListBox;
             GridViewRow gvr = lb.Parent.Parent as GridViewRow;
             Label num = gvr.FindControl("NumLabel") as Label;
@@ -261,6 +265,8 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void btnNewRow_Click(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             List<MakeNewRequestModel> models = _getModelsFromSession();
             MakeNewRequestModel newModel = _makeNewModel(models.Count);
             models.Add(newModel);
@@ -275,8 +281,44 @@ namespace SSISTeam2.Views.StoreClerk
             _refreshGrid(models);
         }
 
+        private void _checkQtyRows()
+        {
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                Label rowNum = row.FindControl("NumLabel") as Label;
+                TextBox tb = row.FindControl("tbQuantity") as TextBox;
+
+                string text = tb.Text;
+
+                int rowNumInt = Convert.ToInt32(rowNum.Text);
+                List<MakeNewRequestModel> rowModels = _getModelsFromSession();
+                try
+                {
+                    MakeNewRequestModel model = rowModels[rowNumInt - 1];
+                    int qty = 0;
+                    if (int.TryParse(text, out qty) == false)
+                    { // Couldn't convert
+                        qty = model.Quantity;
+                    }
+
+                    model.Quantity = qty;
+
+                    Session[SESSION_MODELS] = rowModels;
+
+                    //_refreshGrid(rowModels);
+                } catch(Exception)
+                {
+
+                }
+
+            }
+        }
+
         protected void btnRemoveRow_Click(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
+            // Original
             Button btn = sender as Button;
             GridViewRow gvr = btn.Parent.Parent as GridViewRow;
             Label num = gvr.FindControl("NumLabel") as Label;
@@ -290,23 +332,32 @@ namespace SSISTeam2.Views.StoreClerk
                 btnNewRow.Enabled = true;
             }
 
-            models.RemoveAt(numInt - 1);
-
-            // Reset Num numbers
-            int i = 1;
-            foreach(var model in models)
+            try
             {
-                model.Num = i;
-                i++;
+                models.RemoveAt(numInt - 1);
+
+                // Reset Num numbers
+                int i = 1;
+                foreach(var model in models)
+                {
+                    model.Num = i;
+                    i++;
+                }
+
+                Session[SESSION_MODELS] = models;
+
+                _refreshGrid(models);
+            } catch (Exception)
+            {
+
             }
 
-            Session[SESSION_MODELS] = models;
-
-            _refreshGrid(models);
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             UserModel currentUserModel;
 
             List<MakeNewRequestModel> models = _getModelsFromSession();

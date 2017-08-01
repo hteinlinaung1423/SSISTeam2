@@ -51,6 +51,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
                 lbRqDate.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.date_time).First().ToString();
                 lbRqEmp.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
+                lblRequestReason.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.reason).First().ToString();
 
                 //get last approved Request details,but not receive from store
                 var lastApproveReq = ent.Requests.Where(x => x.current_status == "Approved" && x.dept_code == currentDeptcode).ToList();
