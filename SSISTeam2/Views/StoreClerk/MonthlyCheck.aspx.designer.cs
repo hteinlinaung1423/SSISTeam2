@@ -13,6 +13,15 @@ namespace SSISTeam2 {
     public partial class MonthlyCheck {
         
         /// <summary>
+        /// CheckLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CheckLabel;
+        
+        /// <summary>
         /// SortDDL control.
         /// </summary>
         /// <remarks>
@@ -47,14 +56,5 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button nextBtn;
-        
-        /// <summary>
-        /// testLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testLabel;
     }
 }
