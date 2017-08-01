@@ -28,29 +28,81 @@ namespace SSISTeam2.Classes.Models
             MembershipUser thisUser = Membership.GetUser(username);
             this.email = thisUser != null ? thisUser.Email : "sa44ssisteamtwo+" + username + "@gmail.com";
             this.department = dept;
-            //this.role = Roles.GetRolesForUser(username).First().ToString();
-            //this.fullname = UserPrincipal.Current.DisplayName;
-            this.fullname = user.fullname;
-            if (role == null)
+
+            var roles = Roles.GetRolesForUser(username);
+            if (roles.Count() > 0)
+            {
+                this.role = roles.First().ToString();
+            } else
             {
                 this.role = "Employee";
             }
+
+            //this.fullname = UserPrincipal.Current.DisplayName;
+            this.fullname = user.fullname;
         }
 
-        public UserModel FindDeptHead()
+        public UserModel FindStoreSupervisor()
         {
             SSISEntities context = new SSISEntities();
+            string username = "";
+            if (this.role != "Clerk")
+            {
+                //return null;
+            }
+            List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == department.dept_code).ToList();
+
+            foreach (Dept_Registry i in allDeptEmp)
+            {
+                var roles = Roles.GetRolesForUser(i.username);
+                if (roles.Length == 0) continue;
+
+                if (roles.First().ToString() == "Supervisor")
+                {
+                    username = i.username;
+                    break;
+                }
+            }
+
+            if (username == null)
+            {
+                return null;
+            }
+
+            return new UserModel(username);
+        }
+
+        public UserModel FindDelegateOrDeptHead()
+        {
+            SSISEntities context = new SSISEntities();
+
+            // Check delegate table if there is a delegate entry for this time period
+            // If yes, return that person
+            var delegateHead = FindDelegateHead();
+            if (delegateHead != null)
+            {
+                return delegateHead;
+            }
 
             string username = "";
             Department dept = this.department;
             List<Dept_Registry> allDeptEmp = context.Dept_Registry.Where(x => x.dept_code == dept.dept_code).ToList();
             foreach (Dept_Registry i in allDeptEmp)
             {
-                if (Roles.GetRolesForUser(i.username).First().ToString() == "DeptHead")
+                var roles = Roles.GetRolesForUser(i.username);
+                if (roles.Length == 0) continue;
+
+                if (roles.First().ToString() == "DeptHead")
                 {
                     username = i.username;
                     break;
                 }
+            }
+
+            // Backup search
+            if (username == "")
+            {
+                username = dept.head_user;
             }
 
             UserModel deptHead = new UserModel(username);
@@ -71,25 +123,41 @@ namespace SSISTeam2.Classes.Models
             return deptList;
         }
 
-        public UserModel FIndDelegateHead()
+        public UserModel FindDelegateHead()
         {
-            DateTime today = DateTime.Today;
-            SSISEntities context = new SSISEntities();
-            string dept = this.department.dept_code;
-            List<Approval_Duties> approvedList= context.Approval_Duties.Where(x => x.dept_code == dept && x.deleted == "N").ToList();
-            List<Approval_Duties> validList = new List<Approval_Duties>();
-            for (int i = 0; i < approvedList.Count; i++)
+            try
             {
-                if (approvedList[i].start_date < today && approvedList[i].end_date > today)
+                DateTime today = DateTime.Today;
+                SSISEntities context = new SSISEntities();
+                string dept = this.department.dept_code;
+                List<Approval_Duties> approvedList = context.Approval_Duties.Where(x => x.dept_code == dept && x.deleted == "N").ToList();
+                List<Approval_Duties> validList = new List<Approval_Duties>();
+                for (int i = 0; i < approvedList.Count; i++)
                 {
-                    validList.Add(approvedList[i]);
+                    if (approvedList[i].start_date < today && approvedList[i].end_date > today)
+                    {
+                        validList.Add(approvedList[i]);
+                    }
                 }
-            }
 
-            DateTime currentApproved = validList.Max(x => x.created_date);
-            Approval_Duties currentRep = context.Approval_Duties.Where(x => x.created_date == currentApproved).ToList().First();
-            UserModel repUser = new UserModel(currentRep.username);
-            return repUser;
+                DateTime currentApproved = validList.Max(x => x.created_date);
+                var listOfApproved = context.Approval_Duties.Where(x => x.created_date == currentApproved);
+
+                if (listOfApproved.Count() > 0)
+                {
+                    Approval_Duties currentRep = listOfApproved.First();
+                    UserModel repUser = new UserModel(currentRep.username);
+                    return repUser;
+                }
+                else
+                {
+                    return null;
+                }
+            } catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         public UserModel FindDeptRep()

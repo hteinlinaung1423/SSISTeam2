@@ -10,51 +10,33 @@
 namespace SSISTeam2 {
     
     
-    public partial class MonthlyCheck {
+    public partial class ApproveStockAdjustment {
         
         /// <summary>
-        /// SortDDL control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SortDDL;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// DateTB control.
+        /// Approve control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DateTB;
+        protected global::System.Web.UI.WebControls.Button Approve;
         
         /// <summary>
-        /// MonthlyCheckGV control.
+        /// Reject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MonthlyCheckGV;
-        
-        /// <summary>
-        /// nextBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button nextBtn;
-        
-        /// <summary>
-        /// testLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testLabel;
+        protected global::System.Web.UI.WebControls.Button Reject;
     }
 }

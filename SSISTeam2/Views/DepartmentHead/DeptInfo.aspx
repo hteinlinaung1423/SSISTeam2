@@ -28,10 +28,10 @@
             <asp:TableCell>: <asp:Label ID="LabelFaxNo" runat="server" Text="Label"></asp:Label></asp:TableCell>
         </asp:TableRow>
 
-       <asp:TableRow>
+       <%--<asp:TableRow>
             <asp:TableCell>Department Head Name</asp:TableCell>
             <asp:TableCell>: <asp:Label ID="LabelHeadName" runat="server" Text="Label"></asp:Label></asp:TableCell>
-        </asp:TableRow>
+        </asp:TableRow>--%>
         
         <asp:TableRow>
             <asp:TableCell>Collection Point</asp:TableCell>

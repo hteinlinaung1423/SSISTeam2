@@ -10,51 +10,42 @@
 namespace SSISTeam2 {
     
     
-    public partial class ApproveStockAdjustment {
+    public partial class MonthlyCheckConfirmation {
         
         /// <summary>
-        /// GridView1 control.
+        /// CheckLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Label CheckLabel;
         
         /// <summary>
-        /// testLbl control.
+        /// confirmationGV control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testLbl;
+        protected global::System.Web.UI.WebControls.GridView confirmationGV;
         
         /// <summary>
-        /// GridView2 control.
+        /// confirmBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.Button confirmBtn;
         
         /// <summary>
-        /// Approve control.
+        /// backBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Approve;
-        
-        /// <summary>
-        /// Reject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Reject;
+        protected global::System.Web.UI.WebControls.Button backBtn;
     }
 }

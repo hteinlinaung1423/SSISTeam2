@@ -24,7 +24,6 @@ namespace SSISTeam2
             List<AdjustmentModel> adjList = invModel.AdjModel;
           
 
-            testLbl.Text = adjList.Count.ToString();
             GridView1.DataSource = adjList;
             GridView1.DataBind();
 
@@ -36,14 +35,20 @@ namespace SSISTeam2
             Inventory_Adjustment inventoryAdjustment = context.Inventory_Adjustment.Where(x => x.voucher_id == invModel.VoucherID).ToList().First();
             inventoryAdjustment.status = "Approved";
             inventoryAdjustment.status_date = DateTime.Today;
-            testLbl.Text = "approved";
 
             context.SaveChanges();
+            Response.Redirect("/Views/DepartmentHead/HeadDashboard.aspx");
         }
 
         protected void Reject_Click(object sender, EventArgs e)
         {
+            InventoryAdjustmentModel invModel = (InventoryAdjustmentModel)Session["ConfirmAdj"];
+            Inventory_Adjustment inventoryAdjustment = context.Inventory_Adjustment.Where(x => x.voucher_id == invModel.VoucherID).ToList().First();
+            inventoryAdjustment.status = "Rejected";
+            inventoryAdjustment.status_date = DateTime.Today;
 
+            context.SaveChanges();
+            Response.Redirect("/Views/DepartmentHead/HeadDashboard.aspx");
         }
     }
 }

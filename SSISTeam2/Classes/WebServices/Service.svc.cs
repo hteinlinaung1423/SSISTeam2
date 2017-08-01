@@ -21,7 +21,7 @@ namespace SSISTeam2.Classes.WebServices
         SSISEntities context = new SSISEntities();
 
         Work work = new Work();
-
+        WCF_User user;
 
         List<string> IService.GetCatName()
         {
@@ -66,7 +66,7 @@ namespace SSISTeam2.Classes.WebServices
             foreach (Request r in req)
             {
                 string date = string.Format("{0:dd/MM/yyy}", r.date_time);
-                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason,r.current_status);
                 reqList.Add(request);
             }
 
@@ -75,20 +75,55 @@ namespace SSISTeam2.Classes.WebServices
 
         }
 
+        //WCF_User IService.login(string name, string pass)
+        //{
+        //    WCF_User user;
+        //    bool validate = Membership.ValidateUser(name, pass);
+
+        //    if (validate)
+        //    {
+
+        //        string[] role = Roles.GetRolesForUser(name);
+        //        Dept_Registry dept = new Work().login(name);
+        //        user = new WCF_User(dept.dept_code, name, role[0]);
+        //        return user;
+        //    }
+        //    else { return user = new WCF_User(null, "failed", null); }
+        //}
+
         WCF_User IService.login(string name, string pass)
         {
-            WCF_User user;
+            //WCF_User user;
+            String flag;String updflag;
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)
             {
 
                 string[] role = Roles.GetRolesForUser(name);
-                Dept_Registry dept = new Work().login(name);
-                user = new WCF_User(dept.dept_code, name, role[0]);
+                updflag = new Work().CheckApprovalDutiesStatus();
+                   if (updflag.Equals("T"))
+                   {
+                     flag = new Work().GetDepHeadRole(name);
+                     Dept_Registry dept = new Work().login(name);
+                     try
+                        {
+                            if (flag.Equals("Y"))
+                            {
+                                role[0] = "DeptHead";
+                                user = new WCF_User(dept.dept_code, name, role[0], flag);
+                            }
+                    }
+                    catch
+                        {
+                            flag = "N";
+                            
+                            user = new WCF_User(dept.dept_code, name, role[0], flag);
+                        }
+                    }
                 return user;
             }
-            else { return user = new WCF_User(null, "failed", null); }
+            else { return user = new WCF_User(null, "failed", null,null); }
         }
 
         // Heng Tiong's MonthlyCheck implementation
@@ -127,24 +162,57 @@ namespace SSISTeam2.Classes.WebServices
             return strings;
         }
 
-        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> listMonthlyCheck, string username)
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyChecks, string username)
         {
             //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
-            //bool discrepencyFound = false;
+
+            //WCF_MonthlyCheck model = monthlyCheckList[0];
+
+            //Adjustment_Details detail = new Adjustment_Details();
+            //detail.item_code = model.ItemCode;
+            //int adjusted = int.Parse(model.ActualQuantity) - int.Parse(model.CurrentQuantity);
+            //detail.quantity_adjusted = adjusted;
+            //detail.reason = model.Reason;
+            //detail.deleted = "N";
+
+            //Inventory_Adjustment inventory = new Inventory_Adjustment();
+            //inventory.deleted = "N";
+            //inventory.clerk_user = username;
+            //inventory.status = "Pending";
+            //inventory.date = DateTime.Today;
+            //inventory.status_date = DateTime.Today;
+
+            //inventory.Adjustment_Details.Add(detail);
+
+            //SSISEntities context = new SSISEntities();
+            //context.Adjustment_Details.Add(detail);
+            //context.Inventory_Adjustment.Add(inventory);
+            //context.SaveChanges();
+
 
             //foreach (WCF_MonthlyCheck i in monthlyCheckList)
             //{
-            //    if (i.ActualQuantity != i.CurrentQuantity)
+            //    int actualQty = int.Parse(i.actualQuantity);
+            //    int currentQty = int.Parse(i.currentQuantity);
+            //    if (actualQty != currentQty)
             //    {
             //        confirmList.Add(i);
             //        discrepencyFound = true;
             //    }
 
-            //    work.UpdateMonthlyCheck(confirmList, username);
-            //    work.UpdateMonthlyCheckRecord(username, discrepencyFound);
-            //}
 
-            work.CreateMonthlyCheckRecord(username);
+            //}
+            //this is the problem
+            bool discrepencyFound = work.UpdateMonthlyCheck(monthlyChecks, username);
+            //this is the problem
+            work.UpdateMonthlyCheckRecord(username, discrepencyFound);
+        }
+
+        public void UpdateFileDiscrepancies(List<WCF_FileDiscrepancy> fileDiscrepancies, string username)
+        {
+            //for each itemDescription, get itemCode, get itemModel, get average price
+            //i need itemCode, quantity adjusted, reason, cost of adjustment
+            work.UpdateFileDiscrepancies(fileDiscrepancies, username);
         }
 
         public string[] GetDelgateEmployeeName(string deptcode)
@@ -185,6 +253,8 @@ namespace SSISTeam2.Classes.WebServices
                 int quantity = Convert.ToInt32(r.orig_quantity);
                 WCF_RequestDetail req = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
 
+                if (quantity == 0) continue;
+
                 rd.Add(req);
             }
 
@@ -196,15 +266,15 @@ namespace SSISTeam2.Classes.WebServices
             try
             {
                 Approval_Duties c = work.ListAppDuties(deptcode);
-                return WCF_AppDuties.Make(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
+                return new  WCF_AppDuties(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
             }
             catch
             {
                 return null;
             }
-            
-            
-            
+
+
+
             //return Work.ListAppDuties(deptcode).ToArray<String>();
         }
 
@@ -394,7 +464,7 @@ namespace SSISTeam2.Classes.WebServices
             req.dept_code = r.DeptCode;
             req.reason = r.Reason;
             req.current_status = r.Status;
-            req.date_time =Convert.ToDateTime(r.Date);
+            req.date_time = Convert.ToDateTime(r.Date);
             req.deleted = "N";
             req.rejected = "N";
 
@@ -469,8 +539,34 @@ namespace SSISTeam2.Classes.WebServices
         {
             System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
             work.updateAdjustment(voucherId);
-           
 
+
+        }
+
+        public void CreateRequestDetail(WCFItemTotalQty req)
+        {
+            Request r = new Work().GetRequest();
+
+
+            Request_Details rdetail = new Request_Details();
+            rdetail.deleted = "N";
+            rdetail.request_id = r.request_id;
+            Stock_Inventory item = new Work().GetStockInventory(req.ItemDes);
+            rdetail.item_code = item.item_code;
+            rdetail.orig_quantity = Convert.ToInt32(req.TotalQty);
+
+            new Work().CreateRequestDetail(rdetail);
+
+            Request_Details newreq = new Work().GetLastRequestDetail();
+            Request_Event revent = new Request_Event();
+            revent.request_detail_id = newreq.request_detail_id;
+            revent.status = RequestStatus.PENDING;
+            revent.quantity = Convert.ToInt32(newreq.orig_quantity);
+            revent.date_time = Convert.ToDateTime(r.date_time);
+            revent.deleted = "N";
+            revent.username = r.username;
+
+            new Work().CreateRequestEvent(revent);
         }
 
         public void DeleteInventoryAdj(String voucherId)
@@ -480,7 +576,42 @@ namespace SSISTeam2.Classes.WebServices
 
 
         }
-       
 
+        public List<WCF_Request> GetRequestByDeptCode(string dept)
+        {
+            List<WCF_Request> reqList = new List<WCF_Request>();
+            List<Request> req = new Work().GetAllRequestByDeptCode(dept);
+
+            foreach (Request r in req)
+            {
+                string date = string.Format("{0:dd/MM/yyy}", r.date_time);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason, r.current_status);
+                reqList.Add(request);
+            }
+
+            return reqList;
+        }
+
+        public List<WCF_Request> GetRequestByUserName(string dept, string user)
+        {
+
+
+            List<WCF_Request> reqList = new List<WCF_Request>();
+            List<Request> req = new Work().GetAllRequestByUserName(dept,user);
+
+            foreach (Request r in req)
+            {
+                string date = string.Format("{0:dd/MM/yyy}", r.date_time);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason, r.current_status);
+                reqList.Add(request);
+            }
+
+            return reqList;
+        }
+
+        public void UpdateRequestDetail(string id, string qty)
+        {
+            new Work().UpdateRequestDetail(id, qty);
+        }
     }
 }

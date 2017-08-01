@@ -5,6 +5,7 @@ using SSISTeam2.Classes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -62,7 +63,7 @@ namespace SSISTeam2.Views.StoreClerk
                     /*
                     if (!User.Identity.IsAuthenticated)
                     {
-                        Response.Redirect("/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
+                        Response.Redirect("~/login.aspx?return=Views/StoreClerk/MakeNewRequest.aspx");
                     }*/
 
                     UserModel currentUser = new UserModel(User.Identity.Name);
@@ -193,6 +194,8 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void ddlCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             DropDownList ddl = sender as DropDownList;
             GridViewRow gvr = ddl.Parent.Parent as GridViewRow;
             Label num = gvr.FindControl("NumLabel") as Label;
@@ -214,6 +217,8 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void lbDescriptions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             ListBox lb = sender as ListBox;
             GridViewRow gvr = lb.Parent.Parent as GridViewRow;
             Label num = gvr.FindControl("NumLabel") as Label;
@@ -260,6 +265,8 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void btnNewRow_Click(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             List<MakeNewRequestModel> models = _getModelsFromSession();
             MakeNewRequestModel newModel = _makeNewModel(models.Count);
             models.Add(newModel);
@@ -274,8 +281,44 @@ namespace SSISTeam2.Views.StoreClerk
             _refreshGrid(models);
         }
 
+        private void _checkQtyRows()
+        {
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                Label rowNum = row.FindControl("NumLabel") as Label;
+                TextBox tb = row.FindControl("tbQuantity") as TextBox;
+
+                string text = tb.Text;
+
+                int rowNumInt = Convert.ToInt32(rowNum.Text);
+                List<MakeNewRequestModel> rowModels = _getModelsFromSession();
+                try
+                {
+                    MakeNewRequestModel model = rowModels[rowNumInt - 1];
+                    int qty = 0;
+                    if (int.TryParse(text, out qty) == false)
+                    { // Couldn't convert
+                        qty = model.Quantity;
+                    }
+
+                    model.Quantity = qty;
+
+                    Session[SESSION_MODELS] = rowModels;
+
+                    //_refreshGrid(rowModels);
+                } catch(Exception)
+                {
+
+                }
+
+            }
+        }
+
         protected void btnRemoveRow_Click(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
+            // Original
             Button btn = sender as Button;
             GridViewRow gvr = btn.Parent.Parent as GridViewRow;
             Label num = gvr.FindControl("NumLabel") as Label;
@@ -289,23 +332,32 @@ namespace SSISTeam2.Views.StoreClerk
                 btnNewRow.Enabled = true;
             }
 
-            models.RemoveAt(numInt - 1);
-
-            // Reset Num numbers
-            int i = 1;
-            foreach(var model in models)
+            try
             {
-                model.Num = i;
-                i++;
+                models.RemoveAt(numInt - 1);
+
+                // Reset Num numbers
+                int i = 1;
+                foreach(var model in models)
+                {
+                    model.Num = i;
+                    i++;
+                }
+
+                Session[SESSION_MODELS] = models;
+
+                _refreshGrid(models);
+            } catch (Exception)
+            {
+
             }
 
-            Session[SESSION_MODELS] = models;
-
-            _refreshGrid(models);
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            _checkQtyRows();
+
             UserModel currentUserModel;
 
             List<MakeNewRequestModel> models = _getModelsFromSession();
@@ -361,16 +413,34 @@ namespace SSISTeam2.Views.StoreClerk
                 context.SaveChanges();
             }
 
+            /* Email logic */
             string fromEmail = currentUserModel.Email;
             string fromName = currentUserModel.Fullname;
-            UserModel deptHead = currentUserModel.FindDeptHead();
+            UserModel deptHead = currentUserModel.FindDelegateOrDeptHead();
             string toEmail = deptHead.Email;
             string toName = deptHead.Fullname;
 
-            string subject = string.Format("");
-            string body = string.Format("");
+            string subject = string.Format("New pending request from {0}", fromName);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Dear " + toName + ",");
+            sb.AppendLine("<br />");
+            sb.AppendLine("<br />");
+            sb.AppendLine(string.Format("{0} has requested for some items, pending your approval.", fromName));
+            sb.AppendLine("<br />");
+            sb.AppendLine(string.Format("The request's reason is: {0}", tbReason.Text));
+            sb.AppendLine("<br />");
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view the request</a>.", "http://bit.ly/ssis-mgr-viewpending"));
+            sb.AppendLine("<br />");
+            sb.AppendLine("<br />");
+            sb.AppendLine("Thank you.");
+            sb.AppendLine("<br />");
+            sb.AppendLine("<br />");
+            sb.AppendLine("<i>This message was auto-generated by the Staionery Store Inventory System.</i>");
+
+            string body = sb.ToString();
 
             new Emailer(fromEmail, fromName).SendEmail(toEmail, toName, subject, body);
+            /* End of email logic */
 
             //Response.Redirect(Request.Url.ToString(), false);
             Response.Redirect("EmpRequestHistory.aspx", false);

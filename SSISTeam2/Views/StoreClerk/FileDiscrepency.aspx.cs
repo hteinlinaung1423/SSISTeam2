@@ -80,7 +80,9 @@ namespace SSISTeam2
                 //checkRecord.deleted = "N";
                 //checkRecord.discrepancy = "N";
 
-                Response.Redirect("Default.aspx");
+                Response.Redirect("~/Default.aspx");
+                Session["DisDetail"] = null;
+                Session[PUBLIC_SESSION_DISCREPANCY_DICT] = null;
             }
             else
             {
@@ -129,11 +131,15 @@ namespace SSISTeam2
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentSup);
                     context.SaveChanges();
+
+                    MonthlyCheckConfirmation._sendEmail(User.Identity.Name, false);
                 }
                 if (invAdjustmentMan.Adjustment_Details.Count != 0)
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentMan);
                     context.SaveChanges();
+
+                    MonthlyCheckConfirmation._sendEmail(User.Identity.Name, true);
                 }
             }
 

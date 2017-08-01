@@ -24,7 +24,7 @@ namespace SSISTeam2.Views
             // need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/DepartmentHead/HeadDashboard.aspx");
+                Response.Redirect("~/login.aspx?return=Views/DepartmentHead/HeadDashboard.aspx");
             }
 
             string username = User.Identity.Name.ToString();
@@ -36,7 +36,7 @@ namespace SSISTeam2.Views
             GridView1.DataSource = q;
             GridView1.DataBind();
             string pendingnum = GridView1.Rows.Count.ToString();
-            lblPendingNum.Text = "YOU HAVE "+ pendingnum + " REQUEST(S) TO VIEW";
+            lblPendingNum.Text = "You Have "+ pendingnum + " Requests(s) to View";
 
             string currentUser = Page.User.Identity.Name;
             string fullName = "";

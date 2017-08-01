@@ -139,9 +139,9 @@
     <Content Include="Classes\WebServices\MobileConfirmation_TEST.aspx" />
     <Content Include="Classes\WebServices\Service.svc" />
     <Content Include="CreateNewCategory.aspx" />
-    <Content Include="AdjustmentDetail.aspx" />
+    <Content Include="Views\StoreManager\AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
-    <Content Include="Dashboard.aspx" />
+    <Content Include="Views\StoreClerk\Dashboard.aspx" />
     <Content Include="Views\DepartmentHead\HeadDashboard.aspx" />
     <Content Include="Views\Employee\RepViewDisbursements.aspx" />
     <Content Include="Views\StoreClerk\AddNewTender.aspx" />
@@ -156,11 +156,11 @@
       <DependentUpon>SSISModel.edmx</DependentUpon>
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
-    <Content Include="ViewAllAdjustment.aspx" />
+    <Content Include="Views\StoreManager\ViewAllAdjustment.aspx" />
     <Content Include="Views\DepartmentHead\ApproveReject.aspx" />
     <Content Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx" />
-    <Content Include="MonthlyCheck.aspx" />
-    <Content Include="MonthlyCheckConfirmation.aspx" />
+    <Content Include="Views\StoreClerk\MonthlyCheck.aspx" />
+    <Content Include="Views\StoreClerk\MonthlyCheckConfirmation.aspx" />
     <Content Include="notifysuccess.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -233,11 +233,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdjustmentDetail.aspx.cs">
+    <Compile Include="Views\StoreManager\AdjustmentDetail.aspx.cs">
       <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdjustmentDetail.aspx.designer.cs">
+    <Compile Include="Views\StoreManager\AdjustmentDetail.aspx.designer.cs">
       <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Adjustment_Details.cs">
@@ -327,11 +327,11 @@
     <Compile Include="CreateChartReport.aspx.designer.cs">
       <DependentUpon>CreateChartReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard.aspx.cs">
+    <Compile Include="Views\StoreClerk\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Dashboard.aspx.designer.cs">
+    <Compile Include="Views\StoreClerk\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Delivery_Details.cs">
@@ -425,11 +425,11 @@
     <Compile Include="Tender_List_Details.cs">
       <DependentUpon>SSISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewAllAdjustment.aspx.cs">
+    <Compile Include="Views\StoreManager\ViewAllAdjustment.aspx.cs">
       <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ViewAllAdjustment.aspx.designer.cs">
+    <Compile Include="Views\StoreManager\ViewAllAdjustment.aspx.designer.cs">
       <DependentUpon>ViewAllAdjustment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.cs">
@@ -439,18 +439,18 @@
     <Compile Include="Views\DepartmentHead\DEMO_ApproveRequest.aspx.designer.cs">
       <DependentUpon>DEMO_ApproveRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MonthlyCheck.aspx.cs">
+    <Compile Include="Views\StoreClerk\MonthlyCheck.aspx.cs">
       <DependentUpon>MonthlyCheck.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MonthlyCheck.aspx.designer.cs">
+    <Compile Include="Views\StoreClerk\MonthlyCheck.aspx.designer.cs">
       <DependentUpon>MonthlyCheck.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MonthlyCheckConfirmation.aspx.cs">
+    <Compile Include="Views\StoreClerk\MonthlyCheckConfirmation.aspx.cs">
       <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MonthlyCheckConfirmation.aspx.designer.cs">
+    <Compile Include="Views\StoreClerk\MonthlyCheckConfirmation.aspx.designer.cs">
       <DependentUpon>MonthlyCheckConfirmation.aspx</DependentUpon>
     </Compile>
     <Compile Include="notifysuccess.aspx.cs">

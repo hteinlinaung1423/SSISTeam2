@@ -123,7 +123,8 @@
 
                         <ItemTemplate>
                             <asp:Button ID="delete" runat="server" Text="Delete"
-                                CssClass="btn btn-danger" OnClick="delete_Supplier" />
+                                CssClass="btn btn-danger" 
+                                OnClientClick="return confirm('Are you sure you want to cancel this request?');"/>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

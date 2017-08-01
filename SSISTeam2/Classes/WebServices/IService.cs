@@ -30,12 +30,24 @@ namespace SSISTeam2.Classes.WebServices
         void Reject(string id);
 
         [OperationContract]
+        [WebGet(UriTemplate = "/UpdateRequestDetail/{id}/{qty}", ResponseFormat =WebMessageFormat.Json)]
+        void UpdateRequestDetail(string id,string qty);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder/{id}", ResponseFormat = WebMessageFormat.Json)]
         List<Delivery_Details> GetDeliveryOrdersDetails(string id);
 
         [OperationContract]
         [WebGet(UriTemplate = "/PendingRequest/{dept}", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_Request> GetAllRequest(string dept);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetRequestByDeptCode/{dept}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_Request> GetRequestByDeptCode(string dept);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetRequestByUserName/{dept}/{user}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_Request> GetRequestByUserName(string dept,string user);
 
         [OperationContract]
         [WebGet(UriTemplate = "/RequestDetail/{id}", ResponseFormat = WebMessageFormat.Json)]
@@ -80,7 +92,13 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         //void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username);
-        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheck, string username);
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyChecks, string username);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/FileDiscrepancies/Update/{username}", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void UpdateFileDiscrepancies(List<WCF_FileDiscrepancy> fileDiscrepancies, string username);
 
 
         [OperationContract]
@@ -150,7 +168,13 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         void ApplyNewRequest(WCF_NewReqeust req);
- 
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/CreateRequestDetail", Method = "POST",
+       RequestFormat = WebMessageFormat.Json,
+       ResponseFormat = WebMessageFormat.Json)]
+        void CreateRequestDetail(WCFItemTotalQty req);
+        
     }
 
     [DataContract]
@@ -217,6 +241,45 @@ namespace SSISTeam2.Classes.WebServices
         }
     }
 
+    [DataContract]
+    public class WCF_FileDiscrepancy
+    {
+        [DataMember]
+        public string itemName;
+        [DataMember]
+        public string adjustedQty;
+        [DataMember]
+        public string reason;
+
+        public WCF_FileDiscrepancy(string itemName, string adjustedQty, string reason)
+        {
+            this.itemName = itemName;
+            this.adjustedQty = adjustedQty;
+            this.reason = reason;
+        }
+
+        [DataMember]
+        string ItemName
+        {
+            get { return itemName; }
+            set { itemName = value; }
+        }
+
+        [DataMember]
+        string AdjustedQty
+        {
+            get { return adjustedQty; }
+            set { adjustedQty = value; }
+        }
+
+        [DataMember]
+        string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+    }
+
 
     [DataContract]
     public class WCF_Item
@@ -257,14 +320,17 @@ namespace SSISTeam2.Classes.WebServices
         string requestdate;
         [DataMember]
         string reason;
+        [DataMember]
+        string status;
 
-        public WCF_Request(string user, int req_id, string requestdate, string reason)
+        public WCF_Request(string user, int req_id, string requestdate, string reason,string status)
         {
             this.user = user;
             this.req_id = req_id;
 
             this.requestdate = requestdate;
             this.reason = reason;
+            this.status = status;
         }
 
     }
@@ -279,12 +345,15 @@ namespace SSISTeam2.Classes.WebServices
         string user_name;
         [DataMember]
         string role;
+        [DataMember]
+        string flag;
 
-        public WCF_User(string dept_code, string user_name, string role)
+        public WCF_User(string dept_code, string user_name, string role,string flag)
         {
             this.dept_code = dept_code;
             this.user_name = user_name;
             this.role = role;
+            this.flag = flag;
         }
 
 
@@ -297,26 +366,25 @@ namespace SSISTeam2.Classes.WebServices
     {
 
         public string username;
-        public string startDate;
-        public string endDate;
-        public string deptCode;
-        public string createdDate;
-        public string deleted;
-        public string reason;
+         string startDate;
+         string endDate;
+         string deptCode;
+         string createdDate;
+         string deleted;
+         string reason;
 
-        public static WCF_AppDuties Make(string username, string startDate, string endDate, string deptCode, string createdDate, string deleted, string reason)
+        public WCF_AppDuties(string username, string startDate, string endDate, string deptCode, string createdDate,  string deleted,string reason)
         {
-            WCF_AppDuties c = new WCF_AppDuties();
-            c.username = username;
-            c.createdDate = createdDate;
-            c.deptCode = deptCode;
-            c.reason = reason;
-            c.startDate = startDate;
-            c.endDate = endDate;
-            c.deleted = deleted;
-            return c;
+            this.username = username;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.deptCode = deptCode;
+            this.createdDate = createdDate;
+            this.deleted = deleted;
+            this.reason = reason;
 
         }
+
         [DataMember]
         public string UserName
         {
@@ -353,12 +421,15 @@ namespace SSISTeam2.Classes.WebServices
             get { return createdDate; }
             set { createdDate = value; }
         }
+
         [DataMember]
         public string Deleted
         {
             get { return deleted; }
             set { deleted = value; }
         }
+
+
         [DataMember]
         public string Reason
         {
@@ -386,7 +457,22 @@ namespace SSISTeam2.Classes.WebServices
             this.quantity = quantity;
         }
 
-       
+        public String Itemdesc
+        {
+            get { return itemdesc; }
+            set { itemdesc = value; }
+        }
+
+        public int Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
+
+
+
+
+
 
     }
 
@@ -412,6 +498,7 @@ namespace SSISTeam2.Classes.WebServices
             this.retrieveQty = retrieveQty;
         }
 
+        [DataMember]
         public string ItemDes
         {
             get
@@ -425,6 +512,7 @@ namespace SSISTeam2.Classes.WebServices
             }
         }
 
+        [DataMember]
         public string TotalQty
         {
             get
@@ -746,5 +834,52 @@ public class WCFInventoryAdjustmentDetailModel
 
 
     }
+
+[DataContract]
+public class WCFItemTotalQty
+{
+    [DataMember]
+    string itemDes;
+    [DataMember]
+    string totalQty;
+
+    public WCFItemTotalQty() : this("", "")
+    {
+
+    }
+    public WCFItemTotalQty(string itemDes, string totalQty)
+    {
+        this.itemDes = itemDes;
+        this.totalQty = totalQty;
+    }
+
+    [DataMember]
+    public string ItemDes
+    {
+        get
+        {
+            return itemDes;
+        }
+
+        set
+        {
+            itemDes = value;
+        }
+    }
+
+    [DataMember]
+    public string TotalQty
+    {
+        get
+        {
+            return totalQty;
+        }
+
+        set
+        {
+            totalQty = value;
+        }
+    }
+}
 
 

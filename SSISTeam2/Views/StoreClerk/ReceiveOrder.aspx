@@ -104,7 +104,7 @@
 
 
                         <ItemTemplate>
-                            <asp:Button ID="btndelete" runat="server" Text="Delete"
+                            <asp:Button ID="btndelete" runat="server" Text="Item Rejected"
                                 CssClass="btn btn-danger" />
                         </ItemTemplate>
 
