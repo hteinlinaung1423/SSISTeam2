@@ -432,25 +432,25 @@ namespace SSISTeam2.Classes.WebServices
             return q.ToList<String>();
         }
 
-        public List<WCFDisburse> wgetDepDetail(string deptname)
-        {
-            var q = (from de in ctx.Departments
-                     join rq in ctx.Requests on de.dept_code equals rq.dept_code
-                     join rqd in ctx.Request_Details on rq.request_id equals rqd.request_id
-                     join rqe in ctx.Request_Event on rqd.request_detail_id equals rqe.request_detail_id
-                     join st in ctx.Stock_Inventory on rqd.item_code equals st.item_code
-                     where de.name == deptname && rqe.status == "Disbursing"
-                     where rq.current_status == "Approved" || rq.current_status == "PartDisbursed"
-                     select new WCFDisburse
-                     {
-                         ItemName = st.item_description,
-                         RetrievedQty = rqe.quantity
-                     })
-                     .Where(w => w.RetrievedQty > 0)
-                     .ToList();
+        //public List<WCFDisburse> wgetDepDetail(string deptname)
+        //{
+        //    var q = (from de in ctx.Departments
+        //             join rq in ctx.Requests on de.dept_code equals rq.dept_code
+        //             join rqd in ctx.Request_Details on rq.request_id equals rqd.request_id
+        //             join rqe in ctx.Request_Event on rqd.request_detail_id equals rqe.request_detail_id
+        //             join st in ctx.Stock_Inventory on rqd.item_code equals st.item_code
+        //             where de.name == deptname && rqe.status == "Disbursing"
+        //             where rq.current_status == "Approved" || rq.current_status == "PartDisbursed"
+        //             select new WCFDisburse
+        //             {
+        //                 ItemName = st.item_description,
+        //                 RetrievedQty = rqe.quantity.
+        //             })
+        //             .Where(w => w.RetrievedQty > 0)
+        //             .ToList();
 
-            return q.ToList<WCFDisburse>();
-        }
+        //    return q.ToList<WCFDisburse>();
+        //}
 
         public List<Inventory_Adjustment> GetAdjustmentList()
         {
