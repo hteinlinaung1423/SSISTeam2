@@ -15,7 +15,7 @@ namespace SSISTeam2.Views.Home
             {
                 Response.Redirect("~/Views/Employee/EmpDashboard.aspx");
             }
-            else if (User.IsInRole("Clerk"))
+            else if (User.IsInRole("Clerk") || User.IsInRole("Supervisor")) 
             {
                 Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
             }

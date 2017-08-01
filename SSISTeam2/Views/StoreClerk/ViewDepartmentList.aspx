@@ -10,11 +10,11 @@
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><h3>Department List</h3></div>
-        <div class="panel-body">
+<%--        <div class="panel-body">
             <p>
                 <asp:Button ID="add" runat="server" Text="Add New Department"
                     CssClass="btn btn-primary" />
-            </p>
+            </p>--%>
         </div>
 
         <!-- Table -->
@@ -82,28 +82,28 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="10%" ><%-- HeaderStyle-CssClass="text-center-impt">--%>
+<%--                    <asp:TemplateField ItemStyle-Width="10%" >HeaderStyle-CssClass="text-center-impt">
 
-                        <ItemTemplate>
+                       <ItemTemplate>
                             <asp:Button ID="edit" runat="server" Text="Edit"
                                 CssClass="btn btn-primary" />
                         </ItemTemplate>
                     </asp:TemplateField>
 
 
-                    <asp:TemplateField ItemStyle-Width="10%" ><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%" > HeaderStyle-CssClass="text-center-impt">
 
                         <ItemTemplate>
                             <asp:Button ID="delete" runat="server" Text="Delete"
                                 CssClass="btn btn-primary" />
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                 </Columns>
             </asp:GridView>
 
         </div>
 
-    </div>
+    
 
 
 
