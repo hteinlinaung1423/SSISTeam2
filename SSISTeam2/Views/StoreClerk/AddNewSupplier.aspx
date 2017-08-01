@@ -108,7 +108,9 @@
                 </div>
                 
                 <asp:Button runat="server" ID="SubmitButton" Text="Submit"  CssClass="btn btn-primary" OnClick="SubmitButton_Click"/>
-                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" />
+               <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Cancel" CssClass="btn btn-primary" />
+                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" />
+
             </div>
         </div>
 

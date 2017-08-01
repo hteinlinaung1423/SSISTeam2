@@ -129,11 +129,15 @@ namespace SSISTeam2
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentSup);
                     context.SaveChanges();
+
+                    MonthlyCheckConfirmation._sendEmail(User.Identity.Name, false);
                 }
                 if (invAdjustmentMan.Adjustment_Details.Count != 0)
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentMan);
                     context.SaveChanges();
+
+                    MonthlyCheckConfirmation._sendEmail(User.Identity.Name, true);
                 }
             }
 

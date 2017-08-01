@@ -193,6 +193,10 @@
                                     { %>
                                 <%--<li><asp:Button ID="ViewPending" runat="server" CausesValidation="false" Text="View Pending Request" CssClass="btn btn-block btn-primary" OnClick="ViewPendingReq"/></li>--%>
 
+                                <li>
+                                    <a href="/Dashboard.aspx">Your Dashboard</a>
+                                </li>
+
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Employee actions</li>
 
@@ -229,6 +233,8 @@
 
                                     if (Page.User.IsInRole("DeptHead"))
                                     { %>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Department Head actions</li>
                                 <li>
                                     <a href="/Views/DepartmentHead/HeadDashboard.aspx">Your Dashboard</a>
                                 </li>

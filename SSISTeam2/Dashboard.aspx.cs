@@ -22,6 +22,14 @@ namespace SSISTeam2
 
             SSISEntities context = new SSISEntities();
 
+            string currentUser2 = Page.User.Identity.Name;
+            string fullName = "";
+            using (SSISEntities ctx = new SSISEntities())
+            {
+                fullName = ctx.Dept_Registry.Find(currentUser2).fullname;
+            }
+            lblFullName.Text = "Welcome, " + fullName;
+
             /* Low Stocks */
             #region Low Stocks
             List<Stock_Inventory> stocks = context.Stock_Inventory.ToList();

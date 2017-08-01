@@ -32,7 +32,10 @@ namespace SSISTeam2.Views.StoreClerk
             var toAddress = "sa44ssisteamtwo+receive@gmail.com";
             string toName = "To Name";
             const string subject = "test mail";
-            const string body = "This is some message again";
+            //const string body = "This is some message again";
+            string body = "";
+
+            body += "<a href=\"http://google.com\">Hi</a>";
 
             new Emailer(fromAddress, fromName)
                 .SendEmail(toAddress, toName, subject, body);
