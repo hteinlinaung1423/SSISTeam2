@@ -207,6 +207,9 @@
                                     <asp:LinkButton ID="btnGenerateDisbursement" OnClick="btnGenerateDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Disbursement Form</asp:LinkButton>
                                 </li>
                                 <li>
+                                    <asp:LinkButton ID="btnMonthlyCheck" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Monthly Check</asp:LinkButton>
+                                </li>
+                                <li>
                                     <asp:LinkButton ID="btnMakeOrder_Sup" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
                                 </li>
                                 <li>
@@ -256,6 +259,9 @@
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Supervisor actions</li>
                                 <li>
+                                    <asp:LinkButton ID="btnViewAllAdjustments" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
+                                </li>
+                                <li>
                                     <asp:LinkButton ID="btnGenerateReports_Sup" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
                                 </li>
                                 <% }
@@ -290,6 +296,9 @@
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnStoreCart_Mgr" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="btnViewAllAdjustments_Mgr" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnGenerateReports" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>

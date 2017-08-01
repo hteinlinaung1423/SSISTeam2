@@ -90,6 +90,7 @@ namespace SSISTeam2.Classes.WebServices
             Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
             return dr;
         }
+        //Getting ApprovalDuties Status
         public string CheckApprovalDutiesStatus()
         {           
             string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
@@ -161,7 +162,8 @@ namespace SSISTeam2.Classes.WebServices
             var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
             string headUserName = q.First();
 
-            var delegateHead = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
+            var depts = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).ToList();
+            var delegateHead = depts.Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
             string delegateUserName = delegateHead.First();
 
             var list = ctx.Dept_Registry
@@ -414,20 +416,6 @@ namespace SSISTeam2.Classes.WebServices
         //By Yin
         public List<WCFRetieve> wgetEachItemQty(string currentUser)
         {
-            //var q = (from r in ctx.Requests
-            //         join x in ctx.Request_Details on r.request_id equals x.request_id
-            //         join y in ctx.Stock_Inventory on x.item_code equals y.item_code
-            //         join ee in ctx.Request_Event on x.request_detail_id equals ee.request_detail_id
-            //         where r.current_status == "Approved" && ee.status == "Retrieving"
-            //         group x by y.item_description into g
-            //         select new WCFRetieve
-            //         {
-            //             ItemDes = g.Key,
-            //             TotalQty = g.Sum(d => d.orig_quantity).ToString(),
-            //         }).ToList<WCFRetieve>();
-
-            //return q.ToList<WCFRetieve>();
-
             return MobileConfirmation.GetAllPossibleRetrievalsForUser(currentUser);
         }
 
@@ -445,25 +433,25 @@ namespace SSISTeam2.Classes.WebServices
             return q.ToList<String>();
         }
 
-        public List<WCFDisburse> wgetDepDetail(string deptname)
-        {
-            var q = (from de in ctx.Departments
-                     join rq in ctx.Requests on de.dept_code equals rq.dept_code
-                     join rqd in ctx.Request_Details on rq.request_id equals rqd.request_id
-                     join rqe in ctx.Request_Event on rqd.request_detail_id equals rqe.request_detail_id
-                     join st in ctx.Stock_Inventory on rqd.item_code equals st.item_code
-                     where de.name == deptname && rqe.status == "Disbursing"
-                     where rq.current_status == "Approved" || rq.current_status == "PartDisbursed"
-                     select new WCFDisburse
-                     {
-                         ItemName = st.item_description,
-                         RetrievedQty = rqe.quantity
-                     })
-                     .Where(w => w.RetrievedQty > 0)
-                     .ToList();
+        //public List<WCFDisburse> wgetDepDetail(string deptname)
+        //{
+        //    var q = (from de in ctx.Departments
+        //             join rq in ctx.Requests on de.dept_code equals rq.dept_code
+        //             join rqd in ctx.Request_Details on rq.request_id equals rqd.request_id
+        //             join rqe in ctx.Request_Event on rqd.request_detail_id equals rqe.request_detail_id
+        //             join st in ctx.Stock_Inventory on rqd.item_code equals st.item_code
+        //             where de.name == deptname && rqe.status == "Disbursing"
+        //             where rq.current_status == "Approved" || rq.current_status == "PartDisbursed"
+        //             select new WCFDisburse
+        //             {
+        //                 ItemName = st.item_description,
+        //                 RetrievedQty = rqe.quantity.
+        //             })
+        //             .Where(w => w.RetrievedQty > 0)
+        //             .ToList();
 
-            return q.ToList<WCFDisburse>();
-        }
+        //    return q.ToList<WCFDisburse>();
+        //}
 
         public List<Inventory_Adjustment> GetAdjustmentList()
         {
@@ -520,6 +508,19 @@ namespace SSISTeam2.Classes.WebServices
         {
             var q = ctx.Dept_Registry.Where(x => x.fullname.Equals(fullName)).Select(x => x.username);
             return q.First();
+        }
+
+        public void UpdateRequestDetail(string id, string qty)
+        {
+            int req_id = Convert.ToInt32(id);
+            
+            Request_Details req = ctx.Request_Details.Where(x => x.request_id == req_id).First();
+            req.orig_quantity = Convert.ToInt32( qty);
+            ctx.SaveChanges();
+
+            Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
+            revent.quantity = Convert.ToInt32(qty);
+            ctx.SaveChanges();
         }
     }
 

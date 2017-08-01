@@ -15,13 +15,17 @@ namespace SSISTeam2.Views.Home
             {
                 Response.Redirect("~/Views/Employee/EmpDashboard.aspx");
             }
-            else if (User.IsInRole("Clerk") || User.IsInRole("Supervisor")) 
+            else if (User.IsInRole("Clerk") || User.IsInRole("Supervisor"))
             {
                 Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
             }
-            else if (User.IsInRole("DeptHead"))
+            else if (User.IsInRole("DeptHead") || User.IsInRole("Manager"))
             {
                 Response.Redirect("~/Views/DepartmentHead/HeadDashboard.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/login.aspx");
             }
 
             SSISEntities context = new SSISEntities();

@@ -103,6 +103,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.Panel panelLowStocksBtn;
         
         /// <summary>
+        /// btnLowStock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLowStock;
+        
+        /// <summary>
         /// lblNumLowStock control.
         /// </summary>
         /// <remarks>

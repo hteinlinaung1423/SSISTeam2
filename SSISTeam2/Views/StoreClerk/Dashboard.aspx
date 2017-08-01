@@ -172,7 +172,7 @@
 
                         <div class="panel-footer">
                             <asp:Panel ID="panelLowStocksBtn" runat="server">
-                                <a href="Views/StoreClerk/lowstock.aspx"><span class="btn btn-primary">Show all</span></a>
+                                <asp:LinkButton ID="btnLowStock" Text="Show all" OnClick="btnLowStock_Click" runat="server" CssClass="btn btn-primary" />
                                 <asp:Label ID="lblNumLowStock" runat="server" Text=""></asp:Label>
                             </asp:Panel>
                         </div>

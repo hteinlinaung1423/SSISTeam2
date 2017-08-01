@@ -85,7 +85,7 @@
                                         <asp:ListItem Value="Clerk">Store Clerk</asp:ListItem>
                                         <asp:ListItem Value="DeptHead">Department Head</asp:ListItem>
                                         <asp:ListItem Value="Manager">Store Manager</asp:ListItem>
-                                        <asp:ListItem Value="Supervisor">Supervisor</asp:ListItem>
+                                        <asp:ListItem Value="Supervisor">Store Supervisor</asp:ListItem>
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Role"
                                         ErrorMessage="Role is required." ToolTip="Role is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Role is required.</asp:RequiredFieldValidator>
