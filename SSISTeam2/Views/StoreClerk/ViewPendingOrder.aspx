@@ -1,6 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="ViewPendingOrder.aspx.cs" enableEventValidation="false" Inherits="SSISTeam2.Views.StoreClerk.ViewPendingOrder" %>
 
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>View Pending Orders</title>
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">

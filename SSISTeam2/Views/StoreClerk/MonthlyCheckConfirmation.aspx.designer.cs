@@ -10,51 +10,42 @@
 namespace SSISTeam2 {
     
     
-    public partial class MonthlyCheck {
+    public partial class MonthlyCheckConfirmation {
         
         /// <summary>
-        /// SortDDL control.
+        /// CheckLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SortDDL;
+        protected global::System.Web.UI.WebControls.Label CheckLabel;
         
         /// <summary>
-        /// DateTB control.
+        /// confirmationGV control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DateTB;
+        protected global::System.Web.UI.WebControls.GridView confirmationGV;
         
         /// <summary>
-        /// MonthlyCheckGV control.
+        /// confirmBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MonthlyCheckGV;
+        protected global::System.Web.UI.WebControls.Button confirmBtn;
         
         /// <summary>
-        /// nextBtn control.
+        /// backBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button nextBtn;
-        
-        /// <summary>
-        /// testLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testLabel;
+        protected global::System.Web.UI.WebControls.Button backBtn;
     }
 }

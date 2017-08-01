@@ -127,24 +127,57 @@ namespace SSISTeam2.Classes.WebServices
             return strings;
         }
 
-        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> listMonthlyCheck, string username)
+        public void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyChecks, string username)
         {
             //List<WCF_MonthlyCheck> confirmList = new List<WCF_MonthlyCheck>();
-            //bool discrepencyFound = false;
+
+            //WCF_MonthlyCheck model = monthlyCheckList[0];
+
+            //Adjustment_Details detail = new Adjustment_Details();
+            //detail.item_code = model.ItemCode;
+            //int adjusted = int.Parse(model.ActualQuantity) - int.Parse(model.CurrentQuantity);
+            //detail.quantity_adjusted = adjusted;
+            //detail.reason = model.Reason;
+            //detail.deleted = "N";
+
+            //Inventory_Adjustment inventory = new Inventory_Adjustment();
+            //inventory.deleted = "N";
+            //inventory.clerk_user = username;
+            //inventory.status = "Pending";
+            //inventory.date = DateTime.Today;
+            //inventory.status_date = DateTime.Today;
+
+            //inventory.Adjustment_Details.Add(detail);
+
+            //SSISEntities context = new SSISEntities();
+            //context.Adjustment_Details.Add(detail);
+            //context.Inventory_Adjustment.Add(inventory);
+            //context.SaveChanges();
+
 
             //foreach (WCF_MonthlyCheck i in monthlyCheckList)
             //{
-            //    if (i.ActualQuantity != i.CurrentQuantity)
+            //    int actualQty = int.Parse(i.actualQuantity);
+            //    int currentQty = int.Parse(i.currentQuantity);
+            //    if (actualQty != currentQty)
             //    {
             //        confirmList.Add(i);
             //        discrepencyFound = true;
             //    }
 
-            //    work.UpdateMonthlyCheck(confirmList, username);
-            //    work.UpdateMonthlyCheckRecord(username, discrepencyFound);
-            //}
 
-            work.CreateMonthlyCheckRecord(username);
+            //}
+            //this is the problem
+            bool discrepencyFound = work.UpdateMonthlyCheck(monthlyChecks, username);
+            //this is the problem
+            work.UpdateMonthlyCheckRecord(username, discrepencyFound);
+        }
+
+        public void UpdateFileDiscrepancies(List<WCF_FileDiscrepancy> fileDiscrepancies, string username)
+        {
+            //for each itemDescription, get itemCode, get itemModel, get average price
+            //i need itemCode, quantity adjusted, reason, cost of adjustment
+            work.UpdateFileDiscrepancies(fileDiscrepancies, username);
         }
 
         public string[] GetDelgateEmployeeName(string deptcode)
@@ -184,6 +217,8 @@ namespace SSISTeam2.Classes.WebServices
             {
                 int quantity = Convert.ToInt32(r.orig_quantity);
                 WCF_RequestDetail req = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
+
+                if (quantity == 0) continue;
 
                 rd.Add(req);
             }
@@ -234,75 +269,75 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         //By Yin
-
-        public List<WCFRetieve> GetEachItemQty()
+ 
+        public List<WCFRetieve> GetEachItemQty(string user)
         {
-            return work.wgetEachItemQty();
+            return work.wgetEachItemQty(user);
         }
         //Update Retrieve Form
-        //public void UpdateRetrieveQty(string loginUserName, List<WCFRetieve> retrieveList)
-        //{ 
-        //    int ii = 0;
-        //    string[] keys = new string[retrieveList.Count];
-        //    int[] values = new int[retrieveList.Count];
-        //    Dictionary<string, int> dicList = new Dictionary<string, int>();
-        //    foreach (WCFRetieve eachObj in retrieveList)
-        //    {
-        //        //Item
-        //        string itemDescription =  eachObj.ItemDes;
-        //        //change item description to item code
-        //        string itemCode = context.Stock_Inventory.Where(x => x.item_description == itemDescription).Select(x => x.item_code).ToString();
-        //        keys[ii] = itemCode ;
-
-        //        //Quantity
-        //        values[ii] = eachObj.RetrieveQty;    
-
-        //        //Add to dictionary
-        //        dicList.Add(keys[ii], values[ii]);
-
-        //        ii++;
-        //    }
-
-        //    //Pass data to Mobile confirmation
-        //   string name = loginUserName;
-        //   MobileConfirmation.ConfirmRetrievalFromWarehouse( name, dicList);
-        //}
-        //Testing
-        public void UpdateRetrieveQty(string loginUserName, List<WCFRetieve> retrieveList)
+        public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
         {
             int ii = 0;
-            string[] keys = new string[retrieveList.Count];
-            int[] values = new int[retrieveList.Count];
+            string itemCode = null;
+            string[] itemCodeAry = new string[retrieveList.Count];
+            int[] qtyAry = new int[retrieveList.Count];
             Dictionary<string, int> dicList = new Dictionary<string, int>();
+
             foreach (WCFRetieve eachObj in retrieveList)
             {
-                //Item
-                string itemDescription = eachObj.ItemDes;
-                //change item description to item code
-                string itemCode = context.Stock_Inventory.Where(x => x.item_description == itemDescription).Select(x => x.item_code).ToString();
-                keys[ii] = itemCode;
 
-                //Quantity
-                values[ii] = eachObj.RetrieveQty;
+                string itemName = eachObj.ItemDes;
+                itemCode = changeItemNametoCode(itemName);
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.RetrieveQty);
+                qtyAry[ii] = quantity;
+
+                //Add to dictionary
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
 
                 ii++;
             }
 
-            Request_Event rqEvent = new Request_Event
-            {
-                request_detail_id = 33,
-                status = keys[1],
-                quantity = values[1],
-                date_time = DateTime.Now,
-                deleted = "Z",
-                username = loginUserName,
-                allocated = 0,
-                not_allocated = 0
-            };
+            //Pass data to Mobile confirmation
 
-            context.Request_Event.Add(rqEvent);
-            context.SaveChanges();
+            MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
         }
+
+        //chnage into Item Name to item COode
+        public string changeItemNametoCode(string itemName)
+        {
+
+            Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
+            string itemCode = st.item_code;
+            return itemCode;
+
+        }
+
+        //Testing
+        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
+        //{
+        //    int ii = 0;
+        //    Stock_Inventory st = null;
+        //    string itemCode = null;
+        //    string[] itemCodeAry = new string[retrieveList.Count];
+        //    //    //change item into item code
+        //    foreach (WCFRetieve eachObj in retrieveList)
+        //    {
+        //        //Item
+        //        string itemDescription = eachObj.ItemDes;
+        //        st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //        itemCode = st.item_code;
+        //        itemCodeAry[ii] = itemCode;
+        //        ii++;
+        //    }
+
+        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "test");
+        //    rq.rejected_reason = itemCode;
+        //    rq.deleted = "H";
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
+        //}
 
         public List<String> GetDisbCollectP()
         {
@@ -315,21 +350,23 @@ namespace SSISTeam2.Classes.WebServices
             return work.wgetCollectDept(cpid);
         }
 
-        public List<WCFDisburse> GetDeptDetail(string deptname)
+        public List<WCFDisburse> GetDeptDetail(string user, string deptname)
         {
-            List<WCFDisburse> list = work.wgetDepDetail(deptname);
+            //List<WCFDisburse> list = work.wgetDepDetail(deptname);
 
-            List<WCFDisburse> disSL = null;
+            //List<WCFDisburse> disSL = null;
 
-            var q = (from x in list
-                     group x by x.ItemName into g
-                     select new WCFDisburse
-                     {
-                         ItemName = g.Key,
-                         RetrievedQty = g.Sum(y => y.RetrievedQty)
-                     }).ToList();
+            //var q = (from x in list
+            //         group x by x.ItemName into g
+            //         select new WCFDisburse
+            //         {
+            //             ItemName = g.Key,
+            //             RetrievedQty = g.Sum(y => y.RetrievedQty)
+            //         }).ToList();
 
-            return q.ToList<WCFDisburse>();
+            //return q.ToList<WCFDisburse>();
+
+            return MobileConfirmation.getAllPossibleSignOffsForUserForDept(user, deptname);
         }
 
         //Update Disburse Form

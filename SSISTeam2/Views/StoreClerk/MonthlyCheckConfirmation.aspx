@@ -1,8 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MonthlyCheckConfirmation.aspx.cs" Inherits="SSISTeam2.MonthlyCheckConfirmation" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Confirmation of Monthly Check</title>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
         <div class="panel-heading"><h3>Monthly Check Comfirmation</h3></div>
     </div>
+    <div class="table-responsive ">
+        <div class="panel-heading"><h5><asp:Label ID="CheckLabel" runat="server" Text=""></asp:Label></h5></div>
+    </div>
+
     <asp:gridview runat="server" ID="confirmationGV" 
         AutoGenerateColumns="False"
         GridLines="None"
@@ -53,12 +61,14 @@
             <asp:TemplateField HeaderText="Reason">
                 <ItemTemplate>
                     <asp:TextBox ID="reasonTB" runat="server" Text='<%# Eval("reason") %>' AutoPostBack="True" OnTextChanged="reasonTB_TextChanged"></asp:TextBox>
+                    </br>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please specify reason for discrepancy"
+                            ControlToValidate="reasonTB" />
                 </ItemTemplate>
             </asp:TemplateField>
 
         </Columns>
     </asp:gridview>
-    <asp:Button ID="confirmBtn" runat="server" Text="Button" OnClick="confirmBtn_Click" CssClass="btn btn-primary"/>
-    <asp:Button ID="backBtn" runat="server" Text="Button" OnClick="backBtn_Click" CssClass="btn btn-primary"/>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:Button ID="confirmBtn" runat="server" Text="Confirm" OnClick="confirmBtn_Click" CssClass="btn btn-primary"/>
+    <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="backBtn_Click" CssClass="btn btn-primary"/>
 </asp:Content>

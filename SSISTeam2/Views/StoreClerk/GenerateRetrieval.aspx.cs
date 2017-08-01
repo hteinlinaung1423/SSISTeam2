@@ -16,7 +16,7 @@ namespace SSISTeam2.Views.StoreClerk
         {
             //if (!User.Identity.IsAuthenticated)
             //{
-            //    Response.Redirect("/login.aspx?return=/Views/StoreClerk/DEMO_MakeRetrievalForm.aspx");
+            //    Response.Redirect("~/login.aspx?return=/Views/StoreClerk/DEMO_MakeRetrievalForm.aspx");
             //}
 
             if (IsPostBack)
@@ -28,7 +28,7 @@ namespace SSISTeam2.Views.StoreClerk
             panelNormal.Visible = false;
             using (SSISEntities context = new SSISEntities())
             {
-                lblDebug.Text += User.Identity.Name;
+                //lblDebug.Text += User.Identity.Name;
 
                 var allocated = FacadeFactory.getAllocatedService(context).getAllAllocated();
                 if (allocated.Count == 0)

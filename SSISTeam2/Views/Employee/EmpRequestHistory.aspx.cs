@@ -39,7 +39,13 @@ namespace SSISTeam2.Views.Employee
             // need to login
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
+                Response.Redirect("~/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
+            }
+
+            // If user is not employee or storeclerk, remove make new request btn
+            if ( ! (User.IsInRole("Employee") || User.IsInRole("StoreClerk")))
+            {
+                btnCreate.Visible = false;
             }
 
             //UserModel currentUser = new UserModel(User.Identity.Name);
@@ -56,7 +62,9 @@ namespace SSISTeam2.Views.Employee
                          x.username,
                          x.date_time,
                          x.current_status
-                     }).ToList();
+                     })
+                     .OrderByDescending(o => o.date_time)
+                     .ToList();
 
             GridView2.DataSource = q;
             GridView2.DataBind();
@@ -166,9 +174,12 @@ namespace SSISTeam2.Views.Employee
             FillPage();
         }
 
-        
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
+        }
 
-       
+
 
     }
 

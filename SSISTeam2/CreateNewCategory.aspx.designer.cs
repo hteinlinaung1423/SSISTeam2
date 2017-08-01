@@ -13,15 +13,6 @@ namespace SSISTeam2 {
     public partial class CreateNewCategory {
         
         /// <summary>
-        /// Label3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>
@@ -47,14 +38,5 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button3;
-        
-        /// <summary>
-        /// vldPrice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPrice;
     }
 }

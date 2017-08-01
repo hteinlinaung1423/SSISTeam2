@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="register.aspx.cs" Inherits="SSISTeam2.register" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Register Your SSIS Account</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
     <div class="col-md-6 col-md-offset-4">

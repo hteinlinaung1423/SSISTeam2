@@ -1,5 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DeptInfo.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.DeptInfo"
     MasterPageFile="~/MasterPage.Master" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>Department Listing</title>--%>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
     <div class="panel-heading" style="font-size: xx-large">
@@ -24,10 +28,10 @@
             <asp:TableCell>: <asp:Label ID="LabelFaxNo" runat="server" Text="Label"></asp:Label></asp:TableCell>
         </asp:TableRow>
 
-       <asp:TableRow>
+       <%--<asp:TableRow>
             <asp:TableCell>Department Head Name</asp:TableCell>
             <asp:TableCell>: <asp:Label ID="LabelHeadName" runat="server" Text="Label"></asp:Label></asp:TableCell>
-        </asp:TableRow>
+        </asp:TableRow>--%>
         
         <asp:TableRow>
             <asp:TableCell>Collection Point</asp:TableCell>

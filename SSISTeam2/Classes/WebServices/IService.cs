@@ -88,7 +88,13 @@ namespace SSISTeam2.Classes.WebServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         //void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheckList, string username);
-        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyCheck, string username);
+        void UpdateMonthlyCheck(List<WCF_MonthlyCheck> monthlyChecks, string username);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/FileDiscrepancies/Update/{username}", Method = "POST",
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json)]
+        void UpdateFileDiscrepancies(List<WCF_FileDiscrepancy> fileDiscrepancies, string username);
 
 
         [OperationContract]
@@ -103,12 +109,12 @@ namespace SSISTeam2.Classes.WebServices
 
         //By Yin
         [OperationContract]
-        [WebGet(UriTemplate = "/RetriveTQty", ResponseFormat = WebMessageFormat.Json)]
-        List<WCFRetieve> GetEachItemQty();
+        [WebGet(UriTemplate = "/RetriveTQty/{user}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFRetieve> GetEachItemQty(string user);
 
-        //[OperationContract]
-        //[WebInvoke(UriTemplate = "/RetriveTQty/Update/{loginUserName}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        //void UpdateRetrieveQty(string loginUserName,List<WCFRetieve> retrieveList);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/RetriveTQty/Update/{loginUserName}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateRetrieveQty(List<WCFRetieve> retrievedList,string loginUserName);
 
 
         [OperationContract]
@@ -120,8 +126,12 @@ namespace SSISTeam2.Classes.WebServices
         List<String> GetDisbCollectDept(string cpid);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/DisbDeptDetail/{deptname}", ResponseFormat = WebMessageFormat.Json)]
-        List<WCFDisburse> GetDeptDetail(string deptname);
+        [WebGet(UriTemplate = "/DisbDeptDetail/{user}/{deptname}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCFDisburse> GetDeptDetail(string user, string deptname);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
 
         [OperationContract]
         [WebGet(UriTemplate = "/ViewAllAdjustment/{role}", ResponseFormat = WebMessageFormat.Json)]
@@ -222,6 +232,45 @@ namespace SSISTeam2.Classes.WebServices
         }
         [DataMember]
         public string Reason
+        {
+            get { return reason; }
+            set { reason = value; }
+        }
+    }
+
+    [DataContract]
+    public class WCF_FileDiscrepancy
+    {
+        [DataMember]
+        public string itemName;
+        [DataMember]
+        public string adjustedQty;
+        [DataMember]
+        public string reason;
+
+        public WCF_FileDiscrepancy(string itemName, string adjustedQty, string reason)
+        {
+            this.itemName = itemName;
+            this.adjustedQty = adjustedQty;
+            this.reason = reason;
+        }
+
+        [DataMember]
+        string ItemName
+        {
+            get { return itemName; }
+            set { itemName = value; }
+        }
+
+        [DataMember]
+        string AdjustedQty
+        {
+            get { return adjustedQty; }
+            set { adjustedQty = value; }
+        }
+
+        [DataMember]
+        string Reason
         {
             get { return reason; }
             set { reason = value; }
@@ -430,13 +479,13 @@ namespace SSISTeam2.Classes.WebServices
         [DataMember]
         string totalQty;
         [DataMember]
-        int retrieveQty;
+        string retrieveQty;
 
-        public WCFRetieve() : this("", "",0)
+        public WCFRetieve() : this("", "","")
         {
 
         }
-        public WCFRetieve(string itemDes, string totalQty, int retrieveQty)
+        public WCFRetieve(string itemDes, string totalQty, string retrieveQty)
         {
             this.itemDes = itemDes;
             this.totalQty = totalQty;
@@ -470,7 +519,7 @@ namespace SSISTeam2.Classes.WebServices
                 totalQty = value;
             }
         }
-        public int RetrieveQty
+        public string RetrieveQty
         {
             get
             {

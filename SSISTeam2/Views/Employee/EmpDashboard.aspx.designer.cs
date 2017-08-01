@@ -7,45 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2 {
+namespace SSISTeam2.Views.Employee {
     
     
-    public partial class MonthlyCheckConfirmation {
+    public partial class EmpDashboard {
         
         /// <summary>
-        /// confirmationGV control.
+        /// lblFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView confirmationGV;
+        protected global::System.Web.UI.WebControls.Label lblFullName;
         
         /// <summary>
-        /// confirmBtn control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button confirmBtn;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// backBtn control.
+        /// btnMakeNewReq control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button backBtn;
+        protected global::System.Web.UI.WebControls.Button btnMakeNewReq;
         
         /// <summary>
-        /// Label1 control.
+        /// GridView2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.GridView GridView2;
+        
+        /// <summary>
+        /// btnShowHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShowHistory;
     }
 }

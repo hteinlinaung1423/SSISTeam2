@@ -17,7 +17,7 @@ namespace SSISTeam2
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button3_Click(object sender, EventArgs e)
         {
             string cat_name = TextBox2.Text;
             //try
@@ -32,7 +32,7 @@ namespace SSISTeam2
 
                     entities.SaveChanges();
                 }
-            Response.Redirect("~/Views/StoreClerk/ChangeCategoryName1.aspx");
+            Response.Redirect("~/ChangeCategoryName1.aspx");
 
 
 
@@ -49,9 +49,9 @@ namespace SSISTeam2
 
 
 
-        //protected void Button2_Click1(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("ChangeCategoryName1.aspx");
-        //}
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ChangeCategoryName1.aspx");
+        }
     }
 }

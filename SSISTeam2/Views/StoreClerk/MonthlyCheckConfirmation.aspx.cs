@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using SSISTeam2.Classes.Models;
+using System.Text;
+using SSISTeam2.Classes;
 
 namespace SSISTeam2
 {
@@ -22,19 +24,17 @@ namespace SSISTeam2
                 List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>)Session["Confirmation"];
                 try
                 {
-                    if (itemList.Count == 0)
+                    if (itemList == null)
                     {
                         confirmationGV.Visible = false;
-                        Label1.Text = "There are not discrepencies for this month, confirm?";
+                        CheckLabel.Text = "There are not discrepancies for this month, confirm?";
                     }
                     confirmationGV.DataSource = itemList;
                     confirmationGV.DataBind();
-                    Label1.Text = itemList.Count.ToString();
 
                 }
                 catch (Exception exec)
                 {
-                    Label1.Text = "exception";
                 }
             }
             //else
@@ -68,10 +68,11 @@ namespace SSISTeam2
                 context.Monthly_Check_Records.Add(checkRecord);
                 context.SaveChanges();
 
-                Response.Redirect("Default.aspx");
+                Response.Redirect("/Views/StoreClerk/Dashboard.aspx");
             }
             else
             {
+                //UpdateMonthlyCheck(itemList, HttpContext.Current.User.Identity.Name);
                 Inventory_Adjustment invAdjustmentSup = new Inventory_Adjustment();
                 invAdjustmentSup.date = DateTime.Today;
                 invAdjustmentSup.clerk_user = HttpContext.Current.User.Identity.Name;
@@ -90,6 +91,7 @@ namespace SSISTeam2
                 foreach (MonthlyCheckModel i in itemList)
                 {
                     //get price of adjustment for MonthlyCheckModel
+
                     double priceAdj = i.AveragePrice * Math.Abs(i.ActualQuantity - i.CurrentQuantity);
 
                     Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
@@ -104,7 +106,8 @@ namespace SSISTeam2
                     if (priceAdj < 250)
                     {
                         invAdjustmentSup.Adjustment_Details.Add(adjDetails);
-                    } else if (priceAdj >= 250)
+                    }
+                    else if (priceAdj >= 250)
                     {
                         invAdjustmentMan.Adjustment_Details.Add(adjDetails);
                     }
@@ -123,18 +126,22 @@ namespace SSISTeam2
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentSup);
                     context.SaveChanges();
+
+                    _sendEmail(User.Identity.Name, false);
                 }
                 if (invAdjustmentMan.Adjustment_Details.Count != 0)
                 {
                     context.Inventory_Adjustment.Add(invAdjustmentMan);
                     context.SaveChanges();
+
+                    _sendEmail(User.Identity.Name, true);
                 }
 
+                context.Monthly_Check_Records.Add(checkRecord);
+                context.SaveChanges();
 
+                Response.Redirect("/Views/StoreClerk/Dashboard.aspx");
             }
-            context.Monthly_Check_Records.Add(checkRecord);
-            context.SaveChanges();
-
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
@@ -154,7 +161,100 @@ namespace SSISTeam2
             Session["Confirmation"] = itemList;
             confirmationGV.DataSource = itemList;
             confirmationGV.DataBind();
-            Label1.Text = itemList[index].Reason;
+        }
+
+        public static void _sendEmail(string username, bool allTheWayToManager)
+        {
+
+            /* Email logic */
+            UserModel currentUserModel = new UserModel(username);
+
+            var depth = currentUserModel.FindDelegateOrDeptHead();
+            var sup = currentUserModel.FindStoreSupervisor();
+
+            string superiorUserName = allTheWayToManager ? currentUserModel.FindDelegateOrDeptHead().Username : currentUserModel.FindStoreSupervisor().Username;
+
+            UserModel superior = new UserModel(superiorUserName);
+
+            string fromEmail = currentUserModel.Email;
+            string fromName = currentUserModel.Fullname;
+
+            string toEmail = superior.Email;
+            string toName = superior.Fullname;
+
+            string subject = string.Format("Inventory adjustment to review");
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Dear " + toName + ",");
+            sb.AppendLine("<br />");
+            sb.AppendLine("<br />");
+            sb.AppendLine(string.Format("{0} has filed an inventory adjustment. Please review and approve it.", fromName));
+            sb.AppendLine("<br />");
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view pending adjustments</a>.", "http://bit.ly/ssis-store-viewadjust"));
+            sb.AppendLine("<br />");
+            sb.AppendLine("<br />");
+            sb.AppendLine("Thank you.");
+            sb.AppendLine("<br />");
+            sb.AppendLine("<br />");
+            sb.AppendLine("<i>This message was auto-generated by the Staionery Store Inventory System.</i>");
+
+            string body = sb.ToString();
+
+            new Emailer(fromEmail, fromName).SendEmail(toEmail, toName, subject, body);
+            /* End of email logic */
+        }
+
+        public void UpdateMonthlyCheck(List<MonthlyCheckModel> list, string username)
+        {
+            Inventory_Adjustment inventoryAdjMan = new Inventory_Adjustment();
+            inventoryAdjMan.clerk_user = username;
+            inventoryAdjMan.deleted = "N";
+            inventoryAdjMan.status = "Pending";
+            inventoryAdjMan.date = DateTime.Today;
+            inventoryAdjMan.status_date = DateTime.Today;
+
+            Inventory_Adjustment inventoryAdjSup = new Inventory_Adjustment();
+            inventoryAdjMan.clerk_user = username;
+            inventoryAdjMan.deleted = "N";
+            inventoryAdjMan.status = "Pending";
+            inventoryAdjMan.date = DateTime.Today;
+            inventoryAdjMan.status_date = DateTime.Today;
+
+            foreach (MonthlyCheckModel i in list)
+            {
+                int adjusted = i.CurrentQuantity - i.ActualQuantity;
+
+                Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
+                MonthlyCheckModel itemModel = new MonthlyCheckModel(inventory);
+                double cost = Math.Abs(adjusted) * itemModel.AveragePrice;
+
+                Adjustment_Details adjustmentDetail = new Adjustment_Details();
+                adjustmentDetail.item_code = i.ItemCode;
+                adjustmentDetail.quantity_adjusted = adjusted;
+                adjustmentDetail.reason = i.Reason;
+                adjustmentDetail.deleted = "N";
+
+
+                if (cost >= 250)
+                {
+                    inventoryAdjMan.Adjustment_Details.Add(adjustmentDetail);
+                }
+                else if (cost < 250)
+                {
+                    inventoryAdjSup.Adjustment_Details.Add(adjustmentDetail);
+                }
+                context.Adjustment_Details.Add(adjustmentDetail);
+            }
+
+            if (inventoryAdjMan.Adjustment_Details.Count != 0)
+            {
+                context.Inventory_Adjustment.Add(inventoryAdjMan);
+                context.SaveChanges();
+            }
+            if (inventoryAdjSup.Adjustment_Details.Count != 0)
+            {
+                context.Inventory_Adjustment.Add(inventoryAdjSup);
+                context.SaveChanges();
+            }
         }
     }
 }

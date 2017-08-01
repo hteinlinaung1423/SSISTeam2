@@ -1,5 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="EmpRequestDetail.aspx.cs" Inherits="SSISTeam2.Views.Employee.EmpRequestDetail" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>Your Request Details</title>--%>
+</asp:Content>
 <asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1"
     runat="server">
     <div class="table-responsive ">

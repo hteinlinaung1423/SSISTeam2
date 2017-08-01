@@ -10,7 +10,8 @@ namespace SSISTeam2
 {
     public partial class ViewAllAdjustment : System.Web.UI.Page
     {
-        SSISEntities context; InventoryAdjustmentModel model;
+        SSISEntities context;
+        //InventoryAdjustmentModel model;
         protected void Page_Load(object sender, EventArgs e)
         {
             context = new SSISEntities();

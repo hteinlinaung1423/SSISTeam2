@@ -1,5 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeCollectionnRep.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ChangeCollection_Rep"
           MasterPageFile="~/MasterPage.Master" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>Change Collection Point and/or Representative</title>--%>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
      <div class="panel-heading"><h2> Collection Point and Representative </h2></div>
@@ -21,11 +25,11 @@
                 <asp:TableCell>Fax Number</asp:TableCell>
                 <asp:TableCell>: <asp:Label ID="LabelFaxNo" runat="server" Text="Label"></asp:Label></asp:TableCell>
             </asp:TableRow>
-            <asp:TableRow>
+            <%--<asp:TableRow>
                 <asp:TableCell>Department Head Name<br />
                 </asp:TableCell>
                 <asp:TableCell>: <asp:Label ID="LabelHeadName" runat="server" Text="Label"></asp:Label></asp:TableCell>
-            </asp:TableRow>
+            </asp:TableRow>--%>
             <asp:TableRow>
                 <asp:TableCell>Current Collection Point</asp:TableCell>
                <asp:TableCell>: <asp:Label ID="lbCollectP" runat="server" ReadOnly="True" Width="350"></asp:Label></asp:TableCell>

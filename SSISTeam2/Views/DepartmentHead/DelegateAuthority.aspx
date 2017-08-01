@@ -1,5 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DelegateAuthority.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.DelegateAuthority" 
          MasterPageFile="~/MasterPage.Master" Debug="true" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+<%--    <title>Delegation of Authority</title>--%>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
 
@@ -89,5 +93,6 @@
          </div> 
     
     <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label>
+     <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
   
  </asp:Content>
