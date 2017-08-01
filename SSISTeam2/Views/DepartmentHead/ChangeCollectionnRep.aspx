@@ -2,9 +2,8 @@
           MasterPageFile="~/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="panel panel-default">
-    <div class="panel-heading" style="font-size: xx-large">
-        <asp:Label ID="LabelDeptName" runat="server" Text="Label"></asp:Label> Department
-    </div>
+     <div class="panel-heading"><h2> Collection Point and Representative </h2></div>
+        <%--<asp:Label ID="LabelDeptName" runat="server" Text="Label"></asp:Label> Department--%>
 
         <div class="panel-body">
              

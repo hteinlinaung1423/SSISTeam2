@@ -87,7 +87,7 @@
 
             <asp:Panel ID="panelNormal" runat="server">
 
-                <asp:Button ID="btnSubmit" runat="server" Text="Make retrieval form" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Make Retrieval Form" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
 
             </asp:Panel>
         </div>

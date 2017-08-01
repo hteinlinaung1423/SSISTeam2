@@ -10,7 +10,7 @@ namespace SSISTeam2
 {
     public partial class ViewAllAdjustment : System.Web.UI.Page
     {
-        SSISEntities context;
+        SSISEntities context; InventoryAdjustmentModel model;
         protected void Page_Load(object sender, EventArgs e)
         {
             context = new SSISEntities();
@@ -22,6 +22,7 @@ namespace SSISTeam2
                 foreach (Inventory_Adjustment i in invAdjList)
                 {
                     InventoryAdjustmentModel model = new InventoryAdjustmentModel(i);
+                    //model = new InventoryAdjustmentModel(i);
                     if (User.IsInRole("DeptHead"))
                     {
                         foreach (AdjustmentModel j in model.AdjModel)
@@ -49,6 +50,10 @@ namespace SSISTeam2
                 Session["ViewAdj"] = invModelList;
                 ViewAdjustmentGV.DataSource = invModelList;
                 ViewAdjustmentGV.DataBind();
+
+                //invModelList.Add(model);
+                //GridView1.DataSource = invModelList;
+                //GridView1.DataBind();
             }
             //List<Adjustment_Details> adjList = context.Adjustment_Details.ToList();
             //List<AdjustmentModel> detailList = new List<AdjustmentModel>();
@@ -65,9 +70,12 @@ namespace SSISTeam2
             GridViewRow gridViewRow = (GridViewRow)(sender as Control).Parent.Parent;
             Label rowIndex = (Label) gridViewRow.FindControl("rowIndex");
             int index = int.Parse(rowIndex.Text) - 1;
-
+            
             List<InventoryAdjustmentModel> invModelList = (List<InventoryAdjustmentModel>)Session["ViewAdj"];
+            
             InventoryAdjustmentModel model = invModelList[index];
+
+            
             Session["ConfirmAdj"] = model;
             Response.Redirect("AdjustmentDetail.aspx");
         }

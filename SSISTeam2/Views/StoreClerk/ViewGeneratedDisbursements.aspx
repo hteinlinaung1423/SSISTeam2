@@ -90,6 +90,9 @@
                     <asp:Label runat="server" Text="This department has no generated disbursement forms."></asp:Label>
                     <br />
                     <span><a href="GenerateDisbursement.aspx">Generate some here</a>.</span>
+                    <br />
+                    <br />
+                    <span>Or <a href="ConfirmDisbursement.aspx">view all department confirmations here</a>.</span>
                 </div>
 
             </asp:Panel>

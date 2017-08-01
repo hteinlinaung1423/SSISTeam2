@@ -58,168 +58,22 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.Label lblFullName;
         
         /// <summary>
-        /// ViewHistory control.
+        /// linkBtnDepRepView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ViewHistory;
+        protected global::System.Web.UI.WebControls.LinkButton linkBtnDepRepView;
         
         /// <summary>
-        /// btnDepRepViewDisbursements control.
+        /// linkBtnChangeCollectPt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDepRepViewDisbursements;
-        
-        
-        /// <summary>
-        /// ViewCatalogue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ViewCatalogue;
-        
-        /// <summary>
-        /// ViewPending control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ViewPending;
-        protected global::System.Web.UI.WebControls.Button btnGenerateRetrieval;
-        
-        /// <summary>
-        /// GeneratePurchaseOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GeneratePurchaseOrder;
-        
-        /// <summary>
-        /// genReports control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button genReports;
-        
-        /// <summary>
-        /// ViewCatalogue2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ViewCatalogue2;
-        
-        /// <summary>
-        /// PendingApprove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PendingApprove;
-        
-        /// <summary>
-        /// Delegate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Delegate;
-        
-        /// <summary>
-        /// ViewCatalogue3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ViewCatalogue3;
-        
-        /// <summary>
-        /// ChangeCPnRep control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ChangeCPnRep;
-        
-        /// <summary>
-        /// manPendingApprove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button manPendingApprove;
-        
-        /// <summary>
-        /// manDelegate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button manDelegate;
-        
-        /// <summary>
-        /// manViewPending control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button manViewPending;
-        
-        /// <summary>
-        /// manGeneratePurchaseOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button manGeneratePurchaseOrder;
-        
-        /// <summary>
-        /// mangenReports control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button mangenReports;
-        
-        /// <summary>
-        /// ViewCatalogue4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ViewCatalogue4;
-        
-        /// <summary>
-        /// ChangeCPRep2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ChangeCPRep2;
+        protected global::System.Web.UI.WebControls.LinkButton linkBtnChangeCollectPt;
         
         /// <summary>
         /// logout control.

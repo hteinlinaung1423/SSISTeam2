@@ -38,8 +38,8 @@ namespace SSISTeam2.Classes.Models
         }
         public double GetPrice()
         {
-            double price = this.inventory.AveragePrice * Math.Abs(this.quantity);
-            return price;
+             double price = this.inventory.AveragePrice * Math.Abs(this.quantity);
+             return price;
         }
         public string GetQuantityString()
         {
