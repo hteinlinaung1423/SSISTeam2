@@ -73,13 +73,13 @@
                        <EditItemTemplate>
                             <asp:DropDownList ID="DropDownList1" Visible="false" runat="server">
                             </asp:DropDownList>
-                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("categoryName") %>' BackColor="Transparent" Height="30px" Width="100px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Category Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <%--<asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("categoryName") %>' BackColor="Transparent" Height="30px" Width="100px"></asp:TextBox>--%>
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Category Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Eval("categoryName") %>' CssClass="text-bold" Height="20px" Width="100px"></asp:Label>
-                            <asp:DropDownList ID="DropDownList2" runat="server">
-                            </asp:DropDownList>
+                            <%--<asp:DropDownList ID="DropDownList2" runat="server">
+                            </asp:DropDownList>--%>
                         </ItemTemplate>
 
 <ItemStyle Width="10%"></ItemStyle>
