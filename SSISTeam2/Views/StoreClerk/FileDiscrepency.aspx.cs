@@ -80,7 +80,7 @@ namespace SSISTeam2
                 //checkRecord.deleted = "N";
                 //checkRecord.discrepancy = "N";
 
-                Response.Redirect("~/Dashboard.aspx");
+                Response.Redirect("~/Default.aspx");
                 Session["DisDetail"] = null;
                 Session[PUBLIC_SESSION_DISCREPANCY_DICT] = null;
             }
@@ -147,7 +147,7 @@ namespace SSISTeam2
             Session["DisDetail"] = null;
             Session[PUBLIC_SESSION_DISCREPANCY_DICT] = null;
 
-            Response.Redirect("~/Dashboard.aspx");
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

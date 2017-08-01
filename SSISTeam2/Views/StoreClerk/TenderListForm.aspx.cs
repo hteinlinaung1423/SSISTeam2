@@ -58,16 +58,6 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            GridView1.EditIndex = e.NewEditIndex;
-            //(GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).Visible = true;
-            List<Supplier> supplierList = entities.Suppliers.ToList();
-            List<string> supplierNameList = new List<string>();
-            foreach(Supplier s in supplierList)
-            {
-                supplierNameList.Add(s.name);
-            }
-            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).DataSource = supplierNameList;
-            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).DataBind();
             this.BindGrid();
         }
         protected void OnRowCancelingEdit(object sender, EventArgs e)
@@ -208,6 +198,26 @@ namespace SSISTeam2.Views.StoreClerk
             }
         }
 
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    GridViewRow row = e.Row;
+                    //(GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).Visible = true;
+                    List<Supplier> supplierList = entities.Suppliers.ToList();
+                    List<string> supplierNameList = new List<string>();
+                    foreach (Supplier s in supplierList)
+                    {
+                        supplierNameList.Add(s.name);
+                    }
+                    (row.FindControl("DropDownList1") as DropDownList).DataSource = supplierNameList;
+                    (row.FindControl("DropDownList1") as DropDownList).DataBind();
+                }
+            }
+
+        }
     }
 
 }

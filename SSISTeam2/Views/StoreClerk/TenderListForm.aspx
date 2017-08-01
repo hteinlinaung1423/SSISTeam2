@@ -68,7 +68,7 @@
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
-                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="OnRowCancelingEdit" OnRowUpdating="OnRowUpdating" OnRowDeleting="OnRowDeleting" OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found">
+                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="OnRowCancelingEdit" OnRowUpdating="OnRowUpdating" OnRowDeleting="OnRowDeleting" OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found" OnRowDataBound="GridView1_RowDataBound">
                 <emptydatarowstyle forecolor="Red"/>
 <HeaderStyle CssClass="text-center-impt"></HeaderStyle>
 
@@ -118,9 +118,9 @@
                     </asp:TemplateField>  
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier Name"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("name") %>' BackColor="Transparent" Height="30px" Width="250px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Supplier Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
-                            <asp:DropDownList ID="DropDownList1" Visible="true" runat="server" CssClass="auto-style1">
+                            <%--<asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("name") %>' BackColor="Transparent" Height="30px" Width="250px"></asp:TextBox>--%>
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Supplier Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>--%>
+                            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="auto-style1">
                             </asp:DropDownList>
                         </EditItemTemplate>
                         <ItemTemplate>
