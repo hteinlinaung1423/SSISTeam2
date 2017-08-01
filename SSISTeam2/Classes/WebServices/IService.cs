@@ -38,6 +38,14 @@ namespace SSISTeam2.Classes.WebServices
         List<WCF_Request> GetAllRequest(string dept);
 
         [OperationContract]
+        [WebGet(UriTemplate = "/GetRequestByDeptCode/{dept}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_Request> GetRequestByDeptCode(string dept);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetRequestByUserName/{dept}/{user}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_Request> GetRequestByUserName(string dept,string user);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/RequestDetail/{id}", ResponseFormat = WebMessageFormat.Json)]
         List<WCF_RequestDetail> GetRequestDetail(string id);
 
@@ -260,14 +268,17 @@ namespace SSISTeam2.Classes.WebServices
         string requestdate;
         [DataMember]
         string reason;
+        [DataMember]
+        string status;
 
-        public WCF_Request(string user, int req_id, string requestdate, string reason)
+        public WCF_Request(string user, int req_id, string requestdate, string reason,string status)
         {
             this.user = user;
             this.req_id = req_id;
 
             this.requestdate = requestdate;
             this.reason = reason;
+            this.status = status;
         }
 
     }
@@ -299,7 +310,7 @@ namespace SSISTeam2.Classes.WebServices
     public class WCF_AppDuties
     {
 
-         string username;
+        public string username;
          string startDate;
          string endDate;
          string deptCode;
@@ -705,5 +716,52 @@ public class WCFDisburse
         }
         
     }
+
+[DataContract]
+public class WCFItemTotalQty
+{
+    [DataMember]
+    string itemDes;
+    [DataMember]
+    string totalQty;
+
+    public WCFItemTotalQty() : this("", "")
+    {
+
+    }
+    public WCFItemTotalQty(string itemDes, string totalQty)
+    {
+        this.itemDes = itemDes;
+        this.totalQty = totalQty;
+    }
+
+    [DataMember]
+    public string ItemDes
+    {
+        get
+        {
+            return itemDes;
+        }
+
+        set
+        {
+            itemDes = value;
+        }
+    }
+
+    [DataMember]
+    public string TotalQty
+    {
+        get
+        {
+            return totalQty;
+        }
+
+        set
+        {
+            totalQty = value;
+        }
+    }
+}
 
 

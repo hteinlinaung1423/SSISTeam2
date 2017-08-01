@@ -14,8 +14,12 @@ namespace SSISTeam2.Views.StoreClerk
         {
             if (User.Identity.IsAuthenticated)
             {
-                GridView1.DataSource = s.Purchase_Order.Where(x => x.deleted != "Y" && x.clerk_user == User.Identity.Name).ToList<Purchase_Order>();
-                GridView1.DataBind();
+                if (!IsPostBack)
+                {
+                    GridView1.DataSource = s.Purchase_Order.Where(x => x.deleted != "Y" && x.clerk_user == User.Identity.Name).ToList<Purchase_Order>();
+                    GridView1.DataBind();
+                }
+              
             }
           
         }
@@ -46,6 +50,22 @@ namespace SSISTeam2.Views.StoreClerk
             s.SaveChanges();
 
             Response.Redirect("~/Views/StoreClerk/ViewPendingOrder.aspx");
+        }
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0)
+            {
+                GridView1.PageIndex = 0;
+            }
+            else
+            {
+                GridView1.PageIndex = e.NewPageIndex;
+            }
+
+            GridView1.DataSource = s.Purchase_Order.Where(x => x.deleted != "Y" && x.clerk_user == User.Identity.Name).ToList<Purchase_Order>();
+            GridView1.DataBind();
+
         }
     }
 }

@@ -66,7 +66,7 @@ namespace SSISTeam2.Classes.WebServices
             foreach (Request r in req)
             {
                 string date = string.Format("{0:dd/MM/yyy}", r.date_time);
-                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason,r.current_status);
                 reqList.Add(request);
             }
 
@@ -196,15 +196,15 @@ namespace SSISTeam2.Classes.WebServices
             try
             {
                 Approval_Duties c = work.ListAppDuties(deptcode);
-                return WCF_AppDuties.Make(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
+                return new  WCF_AppDuties(c.username, c.start_date.ToString(), c.end_date.ToString(), c.dept_code, c.created_date.ToString(), c.deleted, c.reason);
             }
             catch
             {
                 return null;
             }
-            
-            
-            
+
+
+
             //return Work.ListAppDuties(deptcode).ToArray<String>();
         }
 
@@ -234,7 +234,7 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         //By Yin
- 
+
         public List<WCFRetieve> GetEachItemQty()
         {
             return work.wgetEachItemQty();
@@ -370,7 +370,7 @@ namespace SSISTeam2.Classes.WebServices
             req.dept_code = r.DeptCode;
             req.reason = r.Reason;
             req.current_status = r.Status;
-            req.date_time =Convert.ToDateTime(r.Date);
+            req.date_time = Convert.ToDateTime(r.Date);
             req.deleted = "N";
             req.rejected = "N";
 
@@ -445,7 +445,7 @@ namespace SSISTeam2.Classes.WebServices
         {
             System.Diagnostics.Debug.WriteLine("Testingnnnnnnnn");
             work.updateAdjustment(voucherId);
-           
+
 
         }
 
@@ -453,15 +453,15 @@ namespace SSISTeam2.Classes.WebServices
         {
             Request r = new Work().GetRequest();
 
-         
-                Request_Details rdetail = new Request_Details();
-                rdetail.deleted = "N";
-                rdetail.request_id = r.request_id;
-                Stock_Inventory item = new Work().GetStockInventory(req.ItemDes);
-                rdetail.item_code = item.item_code;
-                rdetail.orig_quantity =Convert.ToInt32( req.TotalQty);
 
-                new Work().CreateRequestDetail(rdetail);
+            Request_Details rdetail = new Request_Details();
+            rdetail.deleted = "N";
+            rdetail.request_id = r.request_id;
+            Stock_Inventory item = new Work().GetStockInventory(req.ItemDes);
+            rdetail.item_code = item.item_code;
+            rdetail.orig_quantity = Convert.ToInt32(req.TotalQty);
+
+            new Work().CreateRequestDetail(rdetail);
 
             Request_Details newreq = new Work().GetLastRequestDetail();
             Request_Event revent = new Request_Event();
@@ -473,6 +473,7 @@ namespace SSISTeam2.Classes.WebServices
             revent.username = r.username;
 
             new Work().CreateRequestEvent(revent);
+        }
 
         public void DeleteInventoryAdj(String voucherId)
         {
@@ -481,8 +482,37 @@ namespace SSISTeam2.Classes.WebServices
 
 
         }
-       
 
+        public List<WCF_Request> GetRequestByDeptCode(string dept)
+        {
+            List<WCF_Request> reqList = new List<WCF_Request>();
+            List<Request> req = new Work().GetAllRequestByDeptCode(dept);
+
+            foreach (Request r in req)
+            {
+                string date = string.Format("{0:dd/MM/yyy}", r.date_time);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason, r.current_status);
+                reqList.Add(request);
+            }
+
+            return reqList;
+        }
+
+        public List<WCF_Request> GetRequestByUserName(string dept, string user)
+        {
+
+
+            List<WCF_Request> reqList = new List<WCF_Request>();
+            List<Request> req = new Work().GetAllRequestByUserName(dept,user);
+
+            foreach (Request r in req)
+            {
+                string date = string.Format("{0:dd/MM/yyy}", r.date_time);
+                WCF_Request request = new WCF_Request(r.username, r.request_id, date, r.reason, r.current_status);
+                reqList.Add(request);
+            }
+
+            return reqList;
         }
     }
 }
