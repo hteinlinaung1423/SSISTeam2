@@ -2,10 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Tender List</title>
+ <title>Tender List</title>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
-    runat="server">
+    runat="server">            <asp:Panel ID="panSearch" runat="server" DefaultButton="Button1" Width="100%">
+
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><h3>Tender List</h3></div>
@@ -33,9 +35,9 @@
                     <td><div style="text-align:left;position: absolute; margin: 0 auto; left: 1000px; right: 0; bottom: 362px;"><asp:Button ID="add" runat="server" Text="Add New Tender" CssClass="btn btn-primary" OnClick="AddNewTender_Click" /> </div></td>
                 </tr>
             </table>
-              <p></p> --%>
+              <p></p> --%>               
+
             <div class="panel-body">
-            
                 <asp:Button ID="add" runat="server" Text="Add New Tender"
                     CssClass="btn btn-primary" OnClick="AddNewTender_Click" />
             <br /><br />
@@ -51,13 +53,16 @@
                     </div>
                 </td>
                 <td>
-                    
+                                                    
+
                     <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
+
                 </td>
               
             </tr>
-        </table>  
+        </table> 
     </div>
+         
              <div class="table-responsive">
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10"
                 HeaderStyle-CssClass="text-center-impt"
@@ -115,10 +120,10 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("name") %>' BackColor="Transparent" Height="30px" Width="250px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Supplier Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:DropDownList ID="DropDownList1" Visible="true" runat="server" CssClass="auto-style1">
+                            </asp:DropDownList>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:DropDownList ID="DropDownList1" Visible="false" runat="server" CssClass="auto-style1">
-                            </asp:DropDownList>
                             <asp:Label ID="Label1" runat="server" Text='<%# Eval("name") %>' CssClass="text-bold" Width="250px"></asp:Label>
                         </ItemTemplate>
 
@@ -181,7 +186,7 @@
 
                         <ItemTemplate>
                             <asp:LinkButton ID="btn_Delete" runat="server" Text="Delete"
-                                CommandName="Delete" CommandArgument='<%# Bind("request_id") %>'
+                                CommandName="Delete" CommandArgument='<%# Bind("tender_id") %>'
                                 
                                 CssClass="btn btn-danger"
                                 OnClientClick="return confirm('Are you sure you want to delete this record?');" />
@@ -197,10 +202,9 @@
 
         </div>
         </div>
-
         <!-- Table -->
 
-       
+       </asp:Panel>
 
    
 </asp:Content>
