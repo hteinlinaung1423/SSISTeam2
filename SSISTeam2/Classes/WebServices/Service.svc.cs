@@ -551,5 +551,10 @@ namespace SSISTeam2.Classes.WebServices
 
             return reqList;
         }
+
+        public void UpdateRequestDetail(string id, string qty)
+        {
+            new Work().UpdateRequestDetail(id, qty);
+        }
     }
 }

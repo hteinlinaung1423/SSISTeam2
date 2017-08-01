@@ -30,6 +30,10 @@ namespace SSISTeam2.Classes.WebServices
         void Reject(string id);
 
         [OperationContract]
+        [WebGet(UriTemplate = "/UpdateRequestDetail/{id}/{qty}", ResponseFormat =WebMessageFormat.Json)]
+        void UpdateRequestDetail(string id,string qty);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder/{id}", ResponseFormat = WebMessageFormat.Json)]
         List<Delivery_Details> GetDeliveryOrdersDetails(string id);
 
@@ -168,10 +172,6 @@ namespace SSISTeam2.Classes.WebServices
        ResponseFormat = WebMessageFormat.Json)]
         void CreateRequestDetail(WCFItemTotalQty req);
         
-
-        [OperationContract]
-        [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
     }
 
     [DataContract]
