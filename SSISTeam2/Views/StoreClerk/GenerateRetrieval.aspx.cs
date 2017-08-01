@@ -16,7 +16,7 @@ namespace SSISTeam2.Views.StoreClerk
         {
             //if (!User.Identity.IsAuthenticated)
             //{
-            //    Response.Redirect("/login.aspx?return=/Views/StoreClerk/DEMO_MakeRetrievalForm.aspx");
+            //    Response.Redirect("~/login.aspx?return=/Views/StoreClerk/DEMO_MakeRetrievalForm.aspx");
             //}
 
             if (IsPostBack)

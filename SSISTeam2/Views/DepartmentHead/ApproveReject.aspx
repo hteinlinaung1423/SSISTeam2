@@ -1,7 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApproveReject.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ApproveReject" 
      MasterPageFile="~/MasterPage.Master" %>
 
-
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+   <%-- <title>Approve/Reject Request</title>--%>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <div class="panel panel-default">
     <div class="panel-heading"><h3>Approve Reject </h3></div>
@@ -9,11 +12,13 @@
     <div class="panel-body">     
         <asp:Label ID="lblInfo" runat="server" Font-Size="Medium" />
         <br />
-        Requested ID: <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        Request ID: <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         <br />
-        Requested Date: <asp:Label ID="lbRqDate" runat="server" Text="-"></asp:Label>
+        Request Date: <asp:Label ID="lbRqDate" runat="server" Text="-"></asp:Label>
          <br />
-         Requested Employee: <asp:Label ID="lbRqEmp" runat="server" Text="-"></asp:Label>
+         Request Employee: <asp:Label ID="lbRqEmp" runat="server" Text="-"></asp:Label>
+         <br />
+        Request Reason: <asp:Label ID="lblRequestReason" runat="server" Text="-"></asp:Label>
          <br />
             <div class="table-responsive">
                 <asp:GridView ID="GridView1" runat="server"
@@ -62,8 +67,8 @@
         <br />
      <asp:Table ID="Table1" runat="server">
              <asp:TableRow>
-                <asp:TableCell HorizontalAlign="Left"><asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" CssClass="btn btn-default" /></asp:TableCell>
-                <asp:TableCell HorizontalAlign="Center"> <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" CssClass="btn btn-default"/></asp:TableCell>
+                <asp:TableCell HorizontalAlign="Left"><asp:Button ID="btnApprove" runat="server" Text="Approve" OnClick="btnApprove_Click" CssClass="btn btn-success" /></asp:TableCell>
+                <asp:TableCell HorizontalAlign="Center"> <asp:Button ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" CssClass="btn btn-danger"/></asp:TableCell>
  		        <asp:TableCell HorizontalAlign="Right"><asp:Button ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CssClass="btn btn-default" /></asp:TableCell>
              </asp:TableRow>
          </asp:Table>
@@ -75,7 +80,7 @@
     <hr />
 
      <div class="panel panel-default">
-           <div class="panel-heading"><h3> This is Last Approved Request ,but Not Received From Store</h3></div> 
+           <div class="panel-heading"><h3>Most recently approved request, pending disbursement from store</h3></div> 
          <asp:Label ID="lbLastApp" runat="server" Font-Size="Medium" ></asp:Label>
              
        <br />

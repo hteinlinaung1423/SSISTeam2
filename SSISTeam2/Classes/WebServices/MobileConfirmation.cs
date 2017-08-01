@@ -10,6 +10,70 @@ namespace SSISTeam2.Classes.WebServices
 {
     public class MobileConfirmation
     {
+        public static List<WCFRetieve> GetAllPossibleRetrievalsForUser(string currentUser)
+        {
+            List<WCFRetieve> wcfList = new List<WCFRetieve>();
+
+            using (SSISEntities context = new SSISEntities())
+            {
+
+                var allocated = FacadeFactory.getRetrievalService(context).getAllRetrievingByClerk(currentUser);
+
+                var itemGroups = allocated.SelectMany(sm =>
+                    sm.Items
+                    .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name })
+                ).GroupBy(k => k.ItemCode, v => v).ToList();
+
+
+                foreach (var itemGroup in itemGroups)
+                {
+
+                    int itemQty = itemGroup.Select(s => s.Quantity).Aggregate((a, b) => a + b);
+                    //List<int> reqIds = itemGroup.Select(s => s.RequestId).ToList();
+                    WCFRetieve wcfItem = new WCFRetieve();
+
+                    wcfItem.ItemDes = itemGroup.First().Description;
+                    wcfItem.TotalQty = itemQty.ToString();
+
+                    wcfList.Add(wcfItem);
+                }
+            }
+
+            return wcfList;
+        }
+
+        public static List<WCFDisburse> getAllPossibleSignOffsForUserForDept(string currentUser, string currentDeptCode)
+        {
+            List<WCFDisburse> wcfList = new List<WCFDisburse>();
+
+            using (SSISEntities context = new SSISEntities())
+            {
+                DisbursementModelCollection disbursingList = FacadeFactory.getDisbursementService(context).getAllThatCanBeSignedOff(currentUser);
+
+                var itemGroups = disbursingList.SelectMany(sm =>
+                    sm.Items
+                    .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name })
+                ).GroupBy(k => new { k.ItemCode, k.Description, DeptCode = k.dept_code }, v => v)
+                .ToList();
+
+                foreach (var itemGroup in itemGroups)
+                {
+                    // If the dept code is not correct, just SKIP
+                    if (itemGroup.Key.DeptCode != currentDeptCode) continue;
+
+                    int itemQty = itemGroup.Select(s => s.Quantity).Aggregate((a, b) => a + b);
+
+                    WCFDisburse wcfItem = new WCFDisburse();
+                    wcfItem.ItemName = itemGroup.Key.Description;
+                    wcfItem.RetrievedQty = itemQty;
+
+                    wcfList.Add(wcfItem);
+                }
+            }
+
+            return wcfList;
+        }
+
         public static bool SignOffDisbursement(string currentUser, string currentDeptCode, Dictionary<string, int> itemCodeAndQuantities)
         {
             using (SSISEntities context = new SSISEntities())

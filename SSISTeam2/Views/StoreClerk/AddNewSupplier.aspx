@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="AddNewSupplier.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.AddNewSupplier" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Add a New Supplier</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
@@ -105,7 +108,9 @@
                 </div>
                 
                 <asp:Button runat="server" ID="SubmitButton" Text="Submit"  CssClass="btn btn-primary" OnClick="SubmitButton_Click"/>
-                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" />
+               <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Cancel" CssClass="btn btn-primary" />
+                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" />
+
             </div>
         </div>
 

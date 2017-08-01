@@ -65,13 +65,21 @@ namespace SSISTeam2.Views.StoreClerk
         {
             GridView1.EditIndex = e.NewEditIndex;
             this.BindGrid();
+            List<Category> categoryList = entities.Categories.ToList();
+            List<string> categoryNameList = new List<string>();
+            foreach(Category c in categoryList)
+            {
+                categoryNameList.Add(c.cat_name);
+            } 
+            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).Visible = true;
+            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).DataSource = categoryNameList;
+            (GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).DataBind();
         }
 
         protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             GridViewRow row = GridView1.Rows[e.RowIndex];
-
-            string categoryName = (row.FindControl("TextBox1") as TextBox).Text;
+            string categoryName = (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
             string description = (row.FindControl("TextBox2") as TextBox).Text;
             int curQty = Convert.ToInt32((row.FindControl("TextBox6") as TextBox).Text);
             int reorderLevel = Convert.ToInt32((row.FindControl("TextBox3") as TextBox).Text);
@@ -79,7 +87,6 @@ namespace SSISTeam2.Views.StoreClerk
             string unitOfMeasure = (row.FindControl("TextBox5") as TextBox).Text;
             string itemCode = (row.FindControl("Label1") as Label).Text;
             int categoryID = Convert.ToInt32((row.FindControl("Label9") as Label).Text);
-
             var result1 = entities.Stock_Inventory.SingleOrDefault(x => x.item_code == itemCode);
             result1.current_qty = curQty;
             result1.reorder_level = reorderLevel;
@@ -87,14 +94,12 @@ namespace SSISTeam2.Views.StoreClerk
             result1.unit_of_measure = unitOfMeasure;
             result1.item_description = description;
             entities.SaveChanges();
-
             var result2 = entities.Categories.SingleOrDefault(x => x.cat_id == categoryID);
             result2.cat_name = categoryName;
             entities.SaveChanges();
-
             GridView1.EditIndex = -1;
             this.BindGrid();
-
+            (row.FindControl("DropDownList1") as DropDownList).Visible = false;
         }
         protected void OnRowCancelingEdit(object sender, EventArgs e)
         {

@@ -7,108 +7,99 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.DepartmentHead {
+namespace SSISTeam2.Views {
     
     
-    public partial class ChangeCollection_Rep {
+    public partial class HeadDashboard {
         
         /// <summary>
-        /// Table control.
+        /// lblFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table;
+        protected global::System.Web.UI.WebControls.Label lblFullName;
         
         /// <summary>
-        /// LabelContactName control.
+        /// lblPendingNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelContactName;
+        protected global::System.Web.UI.WebControls.Label lblPendingNum;
         
         /// <summary>
-        /// LabelPhNo control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelPhNo;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// LabelFaxNo control.
+        /// btnViewAllPending control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelFaxNo;
+        protected global::System.Web.UI.WebControls.Button btnViewAllPending;
         
         /// <summary>
-        /// lbCollectP control.
+        /// btnViewAllReq control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCollectP;
+        protected global::System.Web.UI.WebControls.Button btnViewAllReq;
         
         /// <summary>
-        /// ddlCollectPoint control.
+        /// lblrep control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCollectPoint;
+        protected global::System.Web.UI.WebControls.Label lblrep;
         
         /// <summary>
-        /// lbRepName control.
+        /// lblcolpoint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbRepName;
+        protected global::System.Web.UI.WebControls.Label lblcolpoint;
         
         /// <summary>
-        /// ddlRepName control.
+        /// btnchangecoll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRepName;
+        protected global::System.Web.UI.WebControls.Button btnchangecoll;
         
         /// <summary>
-        /// btnCancel control.
+        /// lbldelegation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Label lbldelegation;
         
         /// <summary>
-        /// btnSave control.
+        /// btndelegate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
-        
-        /// <summary>
-        /// lbDDLError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDDLError;
+        protected global::System.Web.UI.WebControls.Button btndelegate;
     }
 }

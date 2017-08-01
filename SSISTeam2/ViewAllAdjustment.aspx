@@ -1,7 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="ViewAllAdjustment.aspx.cs" Inherits="SSISTeam2.ViewAllAdjustment" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Adjustment Listing</title>
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
-        <div class="panel-heading"><h3>View All Adjustment</h3></div>
+        <div class="panel-heading"><h3>View All Pending Adjustment</h3></div>
     </div>
     <asp:GridView ID="ViewAdjustmentGV" runat="server" 
         AutoGenerateColumns="False"
@@ -11,7 +16,7 @@
         HeaderStyle-CssClass="text-center-impt"
         CssClass="table table-responsive table-striped"
         PagerStyle-HorizontalAlign="Center" 
-        PagerSettings-Position="TopAndBottom"
+        PagerSettings-Position="TopAndBottom" OnPageIndexChanging="ViewAdjustmentGV_PageIndexChanging" 
         >
         <Columns>
             <asp:TemplateField HeaderText="No.">
@@ -34,7 +39,7 @@
 
             <asp:TemplateField HeaderText="Date">
                 <ItemTemplate>
-                    <asp:Label runat="server" Text='<%# Eval("date") %>'></asp:Label>
+                    <asp:Label runat="server" Text='<%# Eval("date", "{0:MMMM d, yyyy}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             

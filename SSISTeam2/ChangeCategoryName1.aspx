@@ -1,6 +1,10 @@
 ﻿<%@ Page Language="C#"  AutoEventWireup="true" CodeBehind="ChangeCategoryName1.aspx.cs" Inherits="SSISTeam2.ChangeCategoryName1" 
     MasterPageFile="~/MasterPage.master"%>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Edit Category Name</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
@@ -20,9 +24,11 @@
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped" 
                 GridLines="None"
-               PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom"  >
+               PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"  >
 
-             <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
+                          <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next"/>
+
+<PagerStyle HorizontalAlign="Center"></PagerStyle>
                 <PagerTemplate>
                     <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
                     <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
@@ -73,6 +79,8 @@
                BackColor="#99CCCC"></FooterStyle>
             <PagerStyle ForeColor="#003399" HorizontalAlign="Left" 
                BackColor="#99CCCC"></PagerStyle>
+
+
             <HeaderStyle ForeColor="#CCCCFF" Font-Bold="True" 
                BackColor="#003399"></HeaderStyle>
             <SelectedRowStyle ForeColor="#CCFF99" Font-Bold="True" 

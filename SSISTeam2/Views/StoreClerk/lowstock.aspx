@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" MasterPageFile="~/MasterPage.master" CodeBehind="lowstock.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.lowstock" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Inventory Low on Stock</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
     <div class="panel panel-primary">
@@ -34,7 +37,11 @@
                 </PagerTemplate>
 
                 <Columns>
-
+                    <asp:TemplateField ItemStyle-Width="5%" HeaderText="No.">
+               <ItemTemplate>
+                   <%#Container.DataItemIndex+1 %>
+               </ItemTemplate>
+            </asp:TemplateField>
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Item Code"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
@@ -80,7 +87,7 @@
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Order"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Button ID="Order" runat="server" Text="Add To Cart"
+                            <asp:Button ID="Order" runat="server" Text="Mark for Purchasing"
                                 OnClick="MakeOrder"
                                 CssClass="btn btn-primary" />
                         </ItemTemplate>

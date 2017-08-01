@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditOrder.aspx.cs" MasterPageFile="~/MasterPage.master" enableEventValidation="false" Inherits="SSISTeam2.Views.StoreClerk.EditOrder" %>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
+    runat="server">
+    <title>Edit Purchase Order</title>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
@@ -69,10 +72,10 @@
 
                     <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
-                        <ItemTemplate>
+<%--                        <ItemTemplate>
                             <asp:Button ID="delete" runat="server" Text="Delete"
                                 CssClass="btn btn-danger"  OnClick="delete_OrderItem" />
-                        </ItemTemplate>
+                        </ItemTemplate>--%>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>

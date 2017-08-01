@@ -124,7 +124,7 @@ namespace SSISTeam2.Views.Employee
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("~/Default.aspx");
         }
 
         protected void lboxRecents_SelectedIndexChanged(object sender, EventArgs e)
