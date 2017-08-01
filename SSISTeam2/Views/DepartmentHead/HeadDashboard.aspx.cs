@@ -36,7 +36,7 @@ namespace SSISTeam2.Views
             GridView1.DataSource = q;
             GridView1.DataBind();
             string pendingnum = GridView1.Rows.Count.ToString();
-            lblPendingNum.Text = "YOU HAVE "+ pendingnum + " REQUEST(S) TO VIEW";
+            lblPendingNum.Text = "You Have "+ pendingnum + " Requests(s) to View";
 
             string currentUser = Page.User.Identity.Name;
             string fullName = "";

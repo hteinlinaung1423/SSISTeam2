@@ -42,6 +42,12 @@ namespace SSISTeam2.Views.Employee
                 Response.Redirect("~/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
             }
 
+            // If user is not employee or storeclerk, remove make new request btn
+            if ( ! (User.IsInRole("Employee") || User.IsInRole("StoreClerk")))
+            {
+                btnCreate.Visible = false;
+            }
+
             //UserModel currentUser = new UserModel(User.Identity.Name);
 
             //string username = "Sally";//testing
@@ -57,7 +63,7 @@ namespace SSISTeam2.Views.Employee
                          x.date_time,
                          x.current_status
                      })
-                     .Reverse()
+                     .OrderByDescending(o => o.date_time)
                      .ToList();
 
             GridView2.DataSource = q;
