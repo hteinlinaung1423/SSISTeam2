@@ -35,11 +35,7 @@
       
         }
 
-        .well
-        {
-            position:fixed;
-            bottom: 0;
-        }
+       
 
         .footer{
             /*border-top-style:groove;*/
