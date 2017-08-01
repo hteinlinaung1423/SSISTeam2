@@ -80,7 +80,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
                     //get login department all employee , remove Depthead name in Delegate
 
-                    allEmpFullName = ent.Dept_Registry.Where(b => b.dept_code == currentDeptCode).Select(x => x.fullname).ToList<String>();
+                    allEmpFullName = ent.Dept_Registry.Where(b => b.dept_code == currentDeptCode).Select(x => x.username).ToList<String>();
 
                     headName = user.Department.head_user;
                     allEmpFullName.Remove(headName);
@@ -236,16 +236,17 @@ namespace SSISTeam2.Views.DepartmentHead
             string subject = string.Format("Approval duties assignment");
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Dear " + toName + ",");
-            sb.AppendLine();
+            sb.AppendLine("<br />");
+            sb.AppendLine("<br />");
             sb.AppendLine(string.Format("Your department head has appointed you to take over staionery approval duties from {0} to {1}.", tbStartDate.Text, tbEndDate.Text));
             if (hasReason)
             {
-                sb.AppendLine();
+                sb.AppendLine("<br />");
                 sb.AppendLine(string.Format("The reason given was: {0}", tbReason.Text));
             }
-            sb.AppendLine();
+            sb.AppendLine("<br />");
             sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to login to the system</a>.", "http://bit.ly/ssis-login"));
-            sb.AppendLine();
+            sb.AppendLine("<br />");
             sb.AppendLine("Thank you.");
             sb.AppendLine();
             sb.AppendLine();

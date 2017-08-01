@@ -48,8 +48,17 @@ namespace SSISTeam2.Classes.WebServices
         public List<String> ListEmployeeName(string deptcode)
         {
             var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
-            String headuserName = q.First();
-            var list = ctx.Dept_Registry.Where(c => c.dept_code.Equals(deptcode) && c.fullname != headuserName).Select(c => c.fullname).ToList<String>();
+            string headUserName = q.First();
+
+            var delegateHead = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
+            string delegateUserName = delegateHead.First();
+
+            var list = ctx.Dept_Registry
+                .Where(c => 
+                c.dept_code.Equals(deptcode)
+                && c.username != headUserName
+                && c.username != delegateUserName
+                ).Select(c => c.fullname).ToList<String>();
             return list;
         }
 
