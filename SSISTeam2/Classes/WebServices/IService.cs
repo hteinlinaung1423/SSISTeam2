@@ -167,11 +167,7 @@ namespace SSISTeam2.Classes.WebServices
        RequestFormat = WebMessageFormat.Json,
        ResponseFormat = WebMessageFormat.Json)]
         void CreateRequestDetail(WCFItemTotalQty req);
-        
 
-        [OperationContract]
-        [WebInvoke(UriTemplate = "/DisburseTQty/Update/{loginUserName}/{deptCode}", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList);
     }
 
     [DataContract]
