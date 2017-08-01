@@ -226,20 +226,6 @@ namespace SSISTeam2.Classes.WebServices
         //By Yin
         public List<WCFRetieve> wgetEachItemQty(string currentUser)
         {
-            //var q = (from r in ctx.Requests
-            //         join x in ctx.Request_Details on r.request_id equals x.request_id
-            //         join y in ctx.Stock_Inventory on x.item_code equals y.item_code
-            //         join ee in ctx.Request_Event on x.request_detail_id equals ee.request_detail_id
-            //         where r.current_status == "Approved" && ee.status == "Retrieving"
-            //         group x by y.item_description into g
-            //         select new WCFRetieve
-            //         {
-            //             ItemDes = g.Key,
-            //             TotalQty = g.Sum(d => d.orig_quantity).ToString(),
-            //         }).ToList<WCFRetieve>();
-
-            //return q.ToList<WCFRetieve>();
-
             return MobileConfirmation.GetAllPossibleRetrievalsForUser(currentUser);
         }
 
@@ -269,7 +255,7 @@ namespace SSISTeam2.Classes.WebServices
                      select new WCFDisburse
                      {
                          ItemName = st.item_description,
-                         RetrievedQty = rqe.quantity
+                         RetrievedQty = rqe.quantity.ToString()
                      }).ToList();
 
             return q.ToList<WCFDisburse>();

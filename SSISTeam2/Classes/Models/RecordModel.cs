@@ -58,8 +58,8 @@ namespace SSISTeam2.Classes.Models
                     //}
                 }
 
-                throw new DateNotFoundException();
-                //return DateTime.Now;
+                //throw new DateNotFoundException();
+                return DateTime.Now;
             }
         }
 
@@ -81,8 +81,8 @@ namespace SSISTeam2.Classes.Models
                     }
                 }
 
-                throw new DateNotFoundException();
-                //return DateTime.Now;
+                //throw new DateNotFoundException();
+                return DateTime.Now;
             }
         }
 
