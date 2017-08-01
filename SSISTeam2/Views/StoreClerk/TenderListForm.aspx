@@ -68,7 +68,16 @@
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
-                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="OnRowCancelingEdit" OnRowUpdating="OnRowUpdating" OnRowDeleting="OnRowDeleting" OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found" OnRowDataBound="GridView1_RowDataBound">
+                PagerStyle-HorizontalAlign="Center" 
+                PagerSettings-Position="TopAndBottom" 
+                OnRowEditing="GridView1_RowEditing" 
+                OnRowCancelingEdit="OnRowCancelingEdit" 
+                OnRowUpdating="OnRowUpdating" 
+                OnRowDeleting="OnRowDeleting" 
+                OnPageIndexChanging="OnPageIndexChanging" 
+                ShowHeaderWhenEmpty="True" 
+                EmptyDataText="No records Found" 
+                OnRowDataBound="GridView1_RowDataBound">
                 <emptydatarowstyle forecolor="Red"/>
 <HeaderStyle CssClass="text-center-impt"></HeaderStyle>
 
@@ -82,40 +91,12 @@
                     <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                 </PagerTemplate>
                  <Columns>
-                       <asp:TemplateField ItemStyle-Width="10%" HeaderText="No"> 
-                
+                      <asp:TemplateField HeaderText="No.">
                         <ItemTemplate>
-                            <asp:Label ID="Label11" runat="server" Text='<%# Eval("tender_year_id") %>'></asp:Label>
-                        </ItemTemplate>
-
-<ItemStyle Width="10%"></ItemStyle>
-                    </asp:TemplateField>
-
-                      <asp:TemplateField ItemStyle-Width="10%" HeaderText="No"> 
-                
-                        <ItemTemplate>
-                            <asp:Label ID="Label10" runat="server" Text='<%# Eval("tender_id") %>'></asp:Label>
-                        </ItemTemplate>
-
-<ItemStyle Width="10%"></ItemStyle>
-                    </asp:TemplateField>
-
-                       <asp:TemplateField ItemStyle-Width="10%" HeaderText="No"> 
-                
-                        <ItemTemplate>
-                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("item_code") %>'></asp:Label>
-                        </ItemTemplate>
-
-<ItemStyle Width="10%"></ItemStyle>
-                    </asp:TemplateField>
-                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="No"> 
-                
-                        <ItemTemplate>
-                            <asp:Label ID="Label9" runat="server" Text='<%# Eval("supplier_id") %>'></asp:Label>
-                        </ItemTemplate>
-
-<ItemStyle Width="10%"></ItemStyle>
-                    </asp:TemplateField>  
+                            <%#Container.DataItemIndex+1 %>
+                       </ItemTemplate>
+                      </asp:TemplateField>
+                     
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier Name"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         <EditItemTemplate>
                             <%--<asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("name") %>' BackColor="Transparent" Height="30px" Width="250px"></asp:TextBox>--%>
@@ -138,7 +119,6 @@
                         <ItemTemplate>
                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("item_description") %>' CssClass="text-bold" Height="20px" Width="250px"></asp:Label>
                         </ItemTemplate>
-
 <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
 
@@ -169,7 +149,7 @@
                     </asp:TemplateField>
                     
                     
-                     <asp:TemplateField ItemStyle-Width="20%">  
+                     <asp:TemplateField ItemStyle-Width="10%">  
                     <ItemTemplate >  
                         <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-primary"/>
                        <%-- <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-primary"/>    --%>
