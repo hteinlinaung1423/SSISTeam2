@@ -21,7 +21,7 @@ namespace SSISTeam2.Classes.WebServices
         SSISEntities context = new SSISEntities();
 
         Work work = new Work();
-
+        WCF_User user;
 
         List<string> IService.GetCatName()
         {
@@ -75,20 +75,55 @@ namespace SSISTeam2.Classes.WebServices
 
         }
 
+        //WCF_User IService.login(string name, string pass)
+        //{
+        //    WCF_User user;
+        //    bool validate = Membership.ValidateUser(name, pass);
+
+        //    if (validate)
+        //    {
+
+        //        string[] role = Roles.GetRolesForUser(name);
+        //        Dept_Registry dept = new Work().login(name);
+        //        user = new WCF_User(dept.dept_code, name, role[0]);
+        //        return user;
+        //    }
+        //    else { return user = new WCF_User(null, "failed", null); }
+        //}
+
         WCF_User IService.login(string name, string pass)
         {
-            WCF_User user;
+            //WCF_User user;
+            String flag;String updflag;
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)
             {
 
                 string[] role = Roles.GetRolesForUser(name);
-                Dept_Registry dept = new Work().login(name);
-                user = new WCF_User(dept.dept_code, name, role[0]);
+                updflag = new Work().CheckApprovalDutiesStatus();
+                   if (updflag.Equals("T"))
+                   {
+                     flag = new Work().GetDepHeadRole(name);
+                     Dept_Registry dept = new Work().login(name);
+                     try
+                        {
+                            if (flag.Equals("Y"))
+                            {
+                                role[0] = "DeptHead";
+                                user = new WCF_User(dept.dept_code, name, role[0], flag);
+                            }
+                    }
+                    catch
+                        {
+                            flag = "N";
+                            
+                            user = new WCF_User(dept.dept_code, name, role[0], flag);
+                        }
+                    }
                 return user;
             }
-            else { return user = new WCF_User(null, "failed", null); }
+            else { return user = new WCF_User(null, "failed", null,null); }
         }
 
         // Heng Tiong's MonthlyCheck implementation

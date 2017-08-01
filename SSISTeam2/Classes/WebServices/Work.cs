@@ -12,6 +12,7 @@ namespace SSISTeam2.Classes.WebServices
     {
 
         SSISEntities ctx = new SSISEntities();
+        string statusFlag = "F";
 
         public List<string> GetCatName()
         {
@@ -42,9 +43,76 @@ namespace SSISTeam2.Classes.WebServices
 
         public Dept_Registry login(string user)
         {
+
             Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
             return dr;
         }
+        public string CheckApprovalDutiesStatus()
+        {           
+            string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+            try
+            {
+                var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
+                DateTime date = Convert.ToDateTime(result.ToString());
+                string endDate = date.ToString("yyyy-MM-dd");
+                if (endDate.CompareTo(currentDate) == -1)
+                {
+                    var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
+                    q.deleted = "Y";
+                    ctx.SaveChanges();
+
+                }
+                return statusFlag = "T";
+
+            }
+            catch
+            {
+                return statusFlag = "T";
+            }
+        }
+
+        public string GetDepHeadRole(string user)
+        {
+            
+            string flag = null;
+            try
+            {
+                var result = ctx.Approval_Duties.Where(x => x.username == user && x.deleted == "N").Count();
+                if (result != 0)
+                {
+                    flag = "Y";                   
+                }
+            }
+            catch
+            {
+                flag = "N";           
+            }
+            return flag;
+        }
+        
+        //public Dept_Registry login(string user)
+        //{
+        //    String falg = "Y";int count = 0;
+
+        //    Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
+        //    try
+        //    {
+        //        var result = ctx.Approval_Duties.Where(x => x.username == user && x.deleted == "N").Count();
+        //        if (result != 0)
+        //        {
+
+        //            return dr;
+        //        }
+
+
+        //    }catch
+        //    {
+
+        //    }
+
+        //    Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
+        //    return dr;
+        //}
         public List<String> ListEmployeeName(string deptcode)
         {
             var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
