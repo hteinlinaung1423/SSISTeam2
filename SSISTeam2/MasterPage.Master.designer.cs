@@ -355,6 +355,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton btnStoreCart_Mgr;
         
         /// <summary>
+        /// btnManVPO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnManVPO;
+        
+        /// <summary>
         /// btnViewAllAdjustments_Mgr control.
         /// </summary>
         /// <remarks>
@@ -371,15 +380,6 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnGenerateReports;
-        
-        /// <summary>
-        /// btnManVPO control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnManVPO;
         
         /// <summary>
         /// linkBtnLogOut control.

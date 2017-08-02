@@ -14,15 +14,18 @@ namespace SSISTeam2.Classes.Models
         private Department department;
         private string role;
 
+        public List<string> ROLES = new List<string>(new string[] { "DeptHead", "Manager", "Supervisor", "Clerk", "Employee" });
+        //public static readonly string[] ROLES = { "DeptHead", "Manager", "Supervisor", "Clerk", "Employee" };
+
+        //public enum UserRoles { DeptHead, Manager, Supervisor, Clerk, Employee }
+
         public UserModel(string username)
         {
             SSISEntities context = new SSISEntities();
             Dept_Registry user = context.Dept_Registry.Where(x => x.username == username).ToList().First();
             Department dept = context.Departments.Where(x => x.dept_code == user.dept_code).ToList().First();
 
-            //Membership.FindUsersByName(username);
-
-
+            //Membership.FindUsersByName(username);            
             this.username = user.username;
             // Cannot enable yet, as members do not exist in asp.net db
             MembershipUser thisUser = Membership.GetUser(username);
@@ -32,7 +35,8 @@ namespace SSISTeam2.Classes.Models
             var roles = Roles.GetRolesForUser(username);
             if (roles.Count() > 0)
             {
-                this.role = roles.First().ToString();
+                var filteredRoles = ROLES.Where(w => roles.Contains(w));
+                this.role = filteredRoles.Count() > 0 ? filteredRoles.First() : ROLES.Last();
             } else
             {
                 this.role = "Employee";
@@ -40,6 +44,39 @@ namespace SSISTeam2.Classes.Models
 
             //this.fullname = UserPrincipal.Current.DisplayName;
             this.fullname = user.fullname;
+        }
+
+        public bool isDeptHead()
+        {
+            // If this user is a delegate head, or if he is the department head
+            return this.username == this.FindDelegateOrDeptHead().username || this.username == this.department.head_user || this.role == ROLES[0];
+        }
+        public bool isEmployee()
+        {
+            return this.role == "Employee";
+        }
+        public bool isDepartmentRep()
+        {
+            using (SSISEntities ctx = new SSISEntities())
+            {
+                // Check if user is department rep
+                int count = ctx.Departments.Where(d => d.rep_user == username).Count();
+
+                return count > 0;
+            }
+
+        }
+        public bool isStoreManager()
+        {
+            return this.role == "Manager";
+        }
+        public bool isStoreSupervisor()
+        {
+            return this.role == "Supervisor";
+        }
+        public bool isStoreClerk()
+        {
+            return this.role == "Clerk";
         }
 
         public UserModel FindStoreSupervisor()

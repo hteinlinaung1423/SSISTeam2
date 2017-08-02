@@ -93,18 +93,25 @@ namespace SSISTeam2.Views.DepartmentHead
                     var w = ent.Approval_Duties.Where(x => x.duty_id == lastDutyId).First();
 
 
+                    // Find out if dept has a delegate
+                    var delegateOrDeptHead = user.FindDelegateOrDeptHead().Username;
+                    var head = user.Department.head_user;
+
+                    bool hasDelegate = delegateOrDeptHead != head;
+
 
                     //if current delegate already exist, cannot delegate another
 
-                    if (w.deleted.ToString() == "N")
+                    if (hasDelegate)//w.deleted.ToString() == "N")
 
                     {
 
                         ChooseNewTable.Visible = false;
 
                         //get data for Current Delegate Table
+                        var q = ent.Approval_Duties.Where(ad => ad.username == delegateOrDeptHead && ad.deleted != "Y").First();
 
-                        var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
+                        //var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
 
                         checkDelegate = q.deleted.ToString();
 
@@ -129,6 +136,7 @@ namespace SSISTeam2.Views.DepartmentHead
                 }
                 catch
                 {
+                    ChooseNewTable.Visible = true;
 
                     lbCheckDelegate.Text = "There is no Current Delegate! ";
                     CurrentTable.Visible = false;

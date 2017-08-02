@@ -514,12 +514,25 @@ namespace SSISTeam2.Classes.WebServices
         {
             int req_id = Convert.ToInt32(id);
             
-            Request_Details req = ctx.Request_Details.Where(x => x.request_id == req_id).First();
+            Request_Details req = ctx.Request_Details.Where(x => x.request_detail_id == req_id).First();
             req.orig_quantity = Convert.ToInt32( qty);
             ctx.SaveChanges();
 
             Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
             revent.quantity = Convert.ToInt32(qty);
+            ctx.SaveChanges();
+        }
+
+        public void DeleteRequestDetail(string id)
+        {
+            int req_id = Convert.ToInt32(id);
+
+            Request_Details req = ctx.Request_Details.Where(x => x.request_detail_id == req_id).First();
+            req.deleted = "Y";
+            ctx.SaveChanges();
+
+            Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
+            revent.deleted = "Y";
             ctx.SaveChanges();
         }
     }
