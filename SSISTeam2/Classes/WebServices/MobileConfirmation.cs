@@ -58,6 +58,8 @@ namespace SSISTeam2.Classes.WebServices
 
                 foreach (var itemGroup in itemGroups)
                 {
+                    //chnage dept code into dept name
+
                     // If the dept code is not correct, just SKIP
                     if (itemGroup.Key.DeptCode != currentDeptCode) continue;
 
@@ -65,7 +67,7 @@ namespace SSISTeam2.Classes.WebServices
 
                     WCFDisburse wcfItem = new WCFDisburse();
                     wcfItem.ItemName = itemGroup.Key.Description;
-                    wcfItem.RetrievedQty = itemQty;
+                    wcfItem.RetrievedQty = itemQty.ToString();
 
                     wcfList.Add(wcfItem);
                 }

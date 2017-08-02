@@ -44,6 +44,7 @@ namespace SSISTeam2.Views.StoreClerk
                          && t4.deleted.Equals("N")
                          orderby t3.name
                          select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
+
             GridView1.Columns[0].Visible = false;
             GridView1.Columns[1].Visible = false;
             GridView1.Columns[2].Visible = false;
@@ -58,6 +59,7 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            GridView1.EditIndex = e.NewEditIndex;
             this.BindGrid();
         }
         protected void OnRowCancelingEdit(object sender, EventArgs e)
@@ -69,8 +71,8 @@ namespace SSISTeam2.Views.StoreClerk
         {
             GridViewRow row = GridView1.Rows[e.RowIndex];
 
-
-            string supplierId = (row.FindControl("Label9") as Label).Text;
+            string supplierId = (row.FindControl("DropDownList1") as DropDownList).SelectedValue;
+            //string supplierId = (row.FindControl("Label9") as Label).Text;
             //string supplierName = dropDowns[0].SelectedValue.
             string supplierName= (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
             //Label9.Text = supplierId;
@@ -91,25 +93,37 @@ namespace SSISTeam2.Views.StoreClerk
             //});
             //string supplierName = dropDowns[0].SelectedValue;
 
-           //using (SSISEntities s = new SSISEntities())
-           //{
-           //    Supplier supplierToEdit = s.Suppliers.Find(supplierId);
+            //using (SSISEntities s = new SSISEntities())
+            //{
+            //    Supplier supplierToEdit = s.Suppliers.Find(supplierId);
 
-           //   supplierToEdit.
-           //}
-           
+            //   supplierToEdit.
+            //}
 
-            var result1 = entities.Suppliers.SingleOrDefault(x => x.supplier_id == supplierId);
-            result1.name = supplierName;
-            entities.SaveChanges();
+            var tender = entities.Tender_List_Details.SingleOrDefault(x => x.tender_id == tenderId);
+
+            // find tender_year_id for the latest one, with the supplier_id
+
+            var tenderYearItem = entities.Tender_List.Where(x => x.supplier_id == supplierId).OrderByDescending(o => o.tender_date);
+                
+            if (tenderYearItem.Count() > 0)
+            {
+                tender.tender_year_id = tenderYearItem.First().tender_year_id;
+            }
+
+            tender.price = price;
+
+            //var result1 = entities.Suppliers.SingleOrDefault(x => x.supplier_id == supplierId);
+            //result1.supplier_id = supplierId;
+            //entities.SaveChanges();
 
             var result2 = entities.Stock_Inventory.SingleOrDefault(x => x.item_code == itemCode);
             result2.item_description = itemDescription;
             entities.SaveChanges();
 
-            var result3 = entities.Tender_List_Details.SingleOrDefault(x => x.tender_id == tenderId);
-            result3.price = price;
-            entities.SaveChanges();
+            //var result3 = entities.Tender_List_Details.SingleOrDefault(x => x.tender_id == tenderId);
+            //result3.price = price;
+            //entities.SaveChanges();
 
             var result4 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
             result4.tender_date = tenderDate;
@@ -212,11 +226,14 @@ namespace SSISTeam2.Views.StoreClerk
                     {
                         supplierNameList.Add(s.name);
                     }
-                    (row.FindControl("DropDownList1") as DropDownList).DataSource = supplierNameList;
-                    (row.FindControl("DropDownList1") as DropDownList).DataBind();
+
+                    DropDownList ddl = row.FindControl("DropDownList1") as DropDownList;
+                    ddl.DataSource = supplierList;
+                    ddl.DataTextField = "name";
+                    ddl.DataValueField = "supplier_id";
+                    ddl.DataBind();
                 }
             }
-
         }
     }
 

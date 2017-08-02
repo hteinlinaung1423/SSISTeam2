@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>SSIS</title>
+    <%--<title>SSIS</title>--%>
     <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
     </asp:ContentPlaceHolder>
 
@@ -92,9 +92,30 @@
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
                 }*/
-        .grey-text
-        {
+        .grey-text {
             color: grey !important;
+        }
+
+        @media screen and (max-width: 991px) {
+            .columns {
+                height: 300px;
+                overflow-y: scroll;
+            }
+
+            .dropdown-menu {
+                background-color: white !important;
+            }
+
+        }
+
+        @media screen and (min-width: 992px) {
+            .columns {
+                -moz-column-count: 2; /* Firefox */
+                -webkit-column-count: 2; /* Safari and Chrome */
+                column-count: 2;
+                width: 500px;
+                /*height: 300px;*/
+            }
         }
     </style>
 
@@ -150,39 +171,51 @@
                        <%-- <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color:white">Messages</span> <span class="badge btn-default">4</span></a></li>--%>
                         
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" style="color:white" aria-hidden="true"></span><span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <%--<span class="glyphicon glyphicon-user" style="color:white" aria-hidden="true"></span>--%>
+                                <span style="color:white">MENU</span>
+                                <span class="caret"></span></a>
 
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu columns">
+
+                                <% if (userModel.isDepartmentRep())
+                                    { %>
+
                                 <li>
                                     <asp:LinkButton ID="linkBtnDepRepView" OnClick="btnDepRepViewDisbursements_Click" runat="server" style="color: #000000; text-decoration: none;">View Recent Disbursements</asp:LinkButton>
                                 </li>
-                                <% if (Page.User.IsInRole("Employee"))
-                                    { %>
-                                 <li>
-                                     <asp:LinkButton ID="btnEmpDash" OnClick="btnEmpDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Employee actions</li>
+                                <% } %>
 
-                                <li>
-                                    <asp:LinkButton ID="btnNewRequest_emp" OnClick="btnNewRequest_Click" runat="server" style="color: #000000; text-decoration: none;">New Stationery Request</asp:LinkButton>
-                                </li>
-                                <li>
-                                    <asp:LinkButton ID="btnEmpRequestHistory_emp" OnClick="btnEmpRequestHistory_Click" runat="server" style="color: #000000; text-decoration: none;">View Department Requests</asp:LinkButton>
-                                </li>
-                                <li>
-                                    <asp:LinkButton ID="btnEmpViewCatalogue_emp" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
-                                </li>
+                                <% if (userModel.isEmployee())
+                                    { %>
+
+                                     <li>
+                                         <asp:LinkButton ID="btnEmpDash" OnClick="btnEmpDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
+                                    </li>
+                                    <%--<li class="divider"></li>--%>
+                                <br />
+                                    <li class="dropdown-header">Employee actions</li>
+
+                                    <li>
+                                        <asp:LinkButton ID="btnNewRequest_emp" OnClick="btnNewRequest_Click" runat="server" style="color: #000000; text-decoration: none;">New Stationery Request</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton ID="btnEmpRequestHistory_emp" OnClick="btnEmpRequestHistory_Click" runat="server" style="color: #000000; text-decoration: none;">View Department Requests</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton ID="btnEmpViewCatalogue_emp" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
+                                    </li>
 
                                 <% }
-                                    if (Page.User.IsInRole("Clerk") || Page.User.IsInRole("Supervisor"))
+                                    if (userModel.isStoreClerk() || userModel.isStoreSupervisor())
                                     { %>
 
                                 <li>
                                     <asp:LinkButton ID="btnClerkDash" OnClick="btnClerkDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                 </li>
 
-                                <li class="divider"></li>
+                                <%--<li class="divider"></li>--%>
+                                <br />
                                 <li class="dropdown-header">Employee actions</li>
 
                                 <li>
@@ -194,10 +227,13 @@
                                 <li>
                                     <asp:LinkButton ID="btnEmpViewCatalogue" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
-
-                                <li class="divider"></li>
+                                
+                                <%--<li class="divider"></li>--%>
+                                <br />
                                 <li class="dropdown-header">Store actions</li>
-
+                                <li>
+                                    <asp:LinkButton ID="ViewDeptList" OnClick="ViewDeptList_Click" runat="server" style="color: #000000; text-decoration: none;">View Department List</asp:LinkButton>
+                                </li>
                                 <li>
                                     <asp:LinkButton ID="btnGenerateRetrieval" OnClick="btnGenerateRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Retrieval Form</asp:LinkButton>
                                 </li>
@@ -219,19 +255,24 @@
                                 <li>
                                     <asp:LinkButton ID="btn_ViewPendingOrder" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
                                 </li>
+                                <li>
+                                    <asp:LinkButton ID="btnViewTenderList" OnClick="btnViewTenderList_Click" runat="server" style="color: #000000; text-decoration: none;">View Tender List</asp:LinkButton>
+                                </li>
 
                               
 
                                 <% }
 
-                                    if (Page.User.IsInRole("DeptHead"))
+                                    if (userModel.isDeptHead())
                                     { %>
 
                                 <li>
                                     <asp:LinkButton ID="btnHeadDashboard" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                 </li>
 
-                                <li class="divider"></li>
+                                <%--<li class="divider"></li>--%>
+                                <br />
+                                <li class="dropdown-header">Department Head actions</li>
 
                                 <li>
                                     <asp:LinkButton ID="btnApproveRequests" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
@@ -249,9 +290,10 @@
 
                                 <% }
 
-                                    if (Page.User.IsInRole("Supervisor"))
+                                    if (userModel.isStoreSupervisor())
                                     { %>
-                                <li class="divider"></li>
+                                <%--<li class="divider"></li>--%>
+                                <br />
                                 <li class="dropdown-header">Supervisor actions</li>
                                 <li>
                                     <asp:LinkButton ID="btnViewAllAdjustments" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
@@ -261,12 +303,13 @@
                                 </li>
                                 <% }
 
-                                    if (Page.User.IsInRole("Manager"))
+                                    if (userModel.isStoreManager())
                                     { %>
                                 <li>
                                     <asp:LinkButton ID="btnHeadDashboard_Mgr" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                 </li>
-                                <li class="divider"></li>
+                                <%--<li class="divider"></li>--%>
+                                <br />
                                 <li class="dropdown-header">Manager actions</li>
 
                                 <li>
@@ -281,7 +324,8 @@
                                 <li>
                                     <asp:LinkButton ID="linkBtnChangeCollectPt2" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
                                 </li>
-                                <li class="divider"></li>
+                                <%--<li class="divider"></li>--%>
+                                <br />
                                 <li class="dropdown-header">Store actions</li>
                                 <li>
                                     <asp:LinkButton ID="btnLowStocks_Mgr" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
@@ -293,13 +337,13 @@
                                     <asp:LinkButton ID="btnStoreCart_Mgr" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
                                 </li>
                                 <li>
+                                    <asp:LinkButton ID="btnManVPO" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
+                                </li>
+                                <li>
                                     <asp:LinkButton ID="btnViewAllAdjustments_Mgr" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnGenerateReports" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
-                                </li>
-                                 <li>
-                                    <asp:LinkButton ID="btnManVPO" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
                                 </li>
 
                                 <% } %>

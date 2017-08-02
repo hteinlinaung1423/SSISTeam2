@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RetrieveRequestDemo.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.RetrieveRequestDemo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DEMO_RetrieveRequest.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.RetrieveRequestDemo" %>
 
 <!DOCTYPE html>
 

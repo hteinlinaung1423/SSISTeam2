@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-<%--    <title>Request History</title>--%>
+    <title>Request History</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
