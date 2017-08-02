@@ -20,9 +20,16 @@ namespace SSISTeam2.Views.Employee
                 BindGrid();
             }
         }
-
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            BindGrid();
+            if (e.NewPageIndex < 0)
+                GridView1.PageIndex = 0;
+            else
+                GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+        }
         private void BindGrid()
-
         {
 
             List<Stock_Inventory> SIList = entities.Stock_Inventory.Where(x => x.deleted.Equals("N")).ToList();
@@ -76,14 +83,24 @@ namespace SSISTeam2.Views.Employee
             
             public string categoryName { get; set; }
             public string Description { get; set; }
-            
-
-
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Default.aspx");
+        }
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0)
+            {
+                GridView1.PageIndex = 0;
+            }
+            else
+            {
+                GridView1.PageIndex = e.NewPageIndex;
+            }
+            this.BindGrid();
         }
 
 

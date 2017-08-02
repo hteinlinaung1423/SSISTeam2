@@ -175,6 +175,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton btnGenerateDisbursement;
         
         /// <summary>
+        /// btnConfirmDisbursement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnConfirmDisbursement;
+        
+        /// <summary>
         /// btnMonthlyCheck control.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnMonthlyCheck;
+        
+        /// <summary>
+        /// btnLowStocks_Sup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLowStocks_Sup;
         
         /// <summary>
         /// btnMakeOrder_Sup control.
@@ -200,15 +218,6 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnStoreCart;
-        
-        /// <summary>
-        /// btnLowStocks_Sup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLowStocks_Sup;
         
         /// <summary>
         /// btn_ViewPendingOrder control.

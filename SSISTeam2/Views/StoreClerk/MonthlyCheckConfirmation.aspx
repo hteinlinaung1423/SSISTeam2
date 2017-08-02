@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
-        <div class="panel-heading"><h3>Monthly Check Comfirmation</h3></div>
+        <div class="panel-heading"><h3>Monthly Check Confirmation</h3></div>
     </div>
     <div class="table-responsive ">
         <div class="panel-heading"><h5><asp:Label ID="CheckLabel" runat="server" Text=""></asp:Label></h5></div>
