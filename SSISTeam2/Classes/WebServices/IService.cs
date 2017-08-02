@@ -34,6 +34,10 @@ namespace SSISTeam2.Classes.WebServices
         void UpdateRequestDetail(string id,string qty);
 
         [OperationContract]
+        [WebGet(UriTemplate = "/DeleteRequestDetail/{id}", ResponseFormat = WebMessageFormat.Json)]
+        void DeleteRequestDetail(string id);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/DeliveryOrder/{id}", ResponseFormat = WebMessageFormat.Json)]
         List<Delivery_Details> GetDeliveryOrdersDetails(string id);
 
@@ -444,14 +448,17 @@ namespace SSISTeam2.Classes.WebServices
         string itemdesc;
         [DataMember]
         int quantity;
+        [DataMember]
+        int req_detail_id;
 
-        
-        
 
-        public WCF_RequestDetail(string itemdesc, int quantity)
+
+
+        public WCF_RequestDetail(string itemdesc, int quantity,int req_detail_id)
         {
             this.itemdesc = itemdesc;
             this.quantity = quantity;
+            this.req_detail_id = req_detail_id;
         }
 
         public String Itemdesc

@@ -86,6 +86,19 @@ namespace SSISTeam2.Views.Employee
             Response.Redirect("~/Default.aspx");
         }
 
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0)
+            {
+                GridView1.PageIndex = 0;
+            }
+            else
+            {
+                GridView1.PageIndex = e.NewPageIndex;
+            }
+            this.BindGrid();
+        }
+
 
     }
 }
