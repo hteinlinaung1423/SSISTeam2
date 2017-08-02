@@ -48,7 +48,8 @@ namespace SSISTeam2.Classes.Models
 
         public bool isDeptHead()
         {
-            return this.username == this.FindDelegateOrDeptHead().username;
+            // If this user is a delegate head, or if he is the department head
+            return this.username == this.FindDelegateOrDeptHead().username || this.username == this.department.head_user || this.role == ROLES[0];
         }
         public bool isEmployee()
         {
