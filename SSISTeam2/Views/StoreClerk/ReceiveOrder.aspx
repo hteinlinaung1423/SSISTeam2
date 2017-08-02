@@ -100,15 +100,7 @@
 
 
 
-                    <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
-
-
-                        <ItemTemplate>
-                            <asp:Button ID="btndelete" runat="server" Text="Item Rejected"
-                                CssClass="btn btn-danger" />
-                        </ItemTemplate>
-
-                    </asp:TemplateField>
+                 
 
                 </Columns>
             </asp:GridView>

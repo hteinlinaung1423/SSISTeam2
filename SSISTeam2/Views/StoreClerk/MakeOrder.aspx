@@ -83,7 +83,7 @@
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Order"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Button ID="Order" runat="server" Text="Add To Cart"
+                            <asp:Button ID="Order" runat="server" Text="Mark for Purchasing"
                                 OnClick="CreateOrder"
                                 CssClass="btn btn-primary" />
                         </ItemTemplate>

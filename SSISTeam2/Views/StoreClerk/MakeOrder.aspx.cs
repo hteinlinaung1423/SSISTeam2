@@ -14,7 +14,7 @@ namespace SSISTeam2.Views.StoreClerk
         {
 
             if(!IsPostBack)
-            GridView1.DataSource = s.Stock_Inventory.Where(x => x.current_qty > x.reorder_level).ToList<Stock_Inventory>();
+            GridView1.DataSource = s.Stock_Inventory.Where(x => x.deleted!="N").ToList<Stock_Inventory>();
             GridView1.DataBind();
         }
 

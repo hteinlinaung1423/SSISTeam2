@@ -186,7 +186,7 @@
                                     { %>
 
                                 <li>
-                                    <asp:LinkButton ID="linkBtnDepRepView" OnClick="btnDepRepViewDisbursements_Click" runat="server" style="color: #000000; text-decoration: none;">View Recent Disbursements</asp:LinkButton>
+                                    <asp:LinkButton ID="linkBtnDepRepView" CausesValidation="false" OnClick="btnDepRepViewDisbursements_Click" runat="server" style="color: #000000; text-decoration: none;">View Recent Disbursements</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="linkBtnChangeCollectionPoint" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point</asp:LinkButton>
@@ -197,20 +197,20 @@
                                     { %>
 
                                      <li>
-                                         <asp:LinkButton ID="btnEmpDash" OnClick="btnEmpDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
+                                         <asp:LinkButton ID="btnEmpDash" CausesValidation="false" OnClick="btnEmpDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                     </li>
                                     <%--<li class="divider"></li>--%>
                                 <br />
                                     <li class="dropdown-header">Employee actions</li>
 
                                     <li>
-                                        <asp:LinkButton ID="btnNewRequest_emp" OnClick="btnNewRequest_Click" runat="server" style="color: #000000; text-decoration: none;">New Stationery Request</asp:LinkButton>
+                                        <asp:LinkButton ID="btnNewRequest_emp" CausesValidation="false" OnClick="btnNewRequest_Click" runat="server" style="color: #000000; text-decoration: none;">New Stationery Request</asp:LinkButton>
                                     </li>
                                     <li>
-                                        <asp:LinkButton ID="btnEmpRequestHistory_emp" OnClick="btnEmpRequestHistory_Click" runat="server" style="color: #000000; text-decoration: none;">View Department Requests</asp:LinkButton>
+                                        <asp:LinkButton ID="btnEmpRequestHistory_emp" CausesValidation="false" OnClick="btnEmpRequestHistory_Click" runat="server" style="color: #000000; text-decoration: none;">View Department Requests</asp:LinkButton>
                                     </li>
                                     <li>
-                                        <asp:LinkButton ID="btnEmpViewCatalogue_emp" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
+                                        <asp:LinkButton ID="btnEmpViewCatalogue_emp" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                     </li>
                                      </li>
                                     <li>
@@ -222,7 +222,7 @@
                                     { %>
 
                                 <li>
-                                    <asp:LinkButton ID="btnClerkDash" OnClick="btnClerkDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
+                                    <asp:LinkButton ID="btnClerkDash" CausesValidation="false" OnClick="btnClerkDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                 </li>
 
                                 <%--<li class="divider"></li>--%>
@@ -230,48 +230,48 @@
                                 <li class="dropdown-header">Employee actions</li>
 
                                 <li>
-                                    <asp:LinkButton ID="btnNewRequest" OnClick="btnNewRequest_Click" runat="server" style="color: #000000; text-decoration: none;">New Stationery Request</asp:LinkButton>
+                                    <asp:LinkButton ID="btnNewRequest" CausesValidation="false" OnClick="btnNewRequest_Click" runat="server" style="color: #000000; text-decoration: none;">New Stationery Request</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnEmpRequestHistory" OnClick="btnEmpRequestHistory_Click" runat="server" style="color: #000000; text-decoration: none;">View Department Requests</asp:LinkButton>
+                                    <asp:LinkButton ID="btnEmpRequestHistory" CausesValidation="false" OnClick="btnEmpRequestHistory_Click" runat="server" style="color: #000000; text-decoration: none;">View Department Requests</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnEmpViewCatalogue" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
+                                    <asp:LinkButton ID="btnEmpViewCatalogue" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                 
                                 <%--<li class="divider"></li>--%>
                                 <br />
                                 <li class="dropdown-header">Store actions</li>
                                 <li>
-                                    <asp:LinkButton ID="ViewDeptList" OnClick="ViewDeptList_Click" runat="server" style="color: #000000; text-decoration: none;">View Department List</asp:LinkButton>
+                                    <asp:LinkButton ID="ViewDeptList" CausesValidation="false" OnClick="ViewDeptList_Click" runat="server" style="color: #000000; text-decoration: none;">View Department List</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnGenerateRetrieval" OnClick="btnGenerateRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Retrieval Form</asp:LinkButton>
+                                    <asp:LinkButton ID="btnGenerateRetrieval" CausesValidation="false" OnClick="btnGenerateRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Retrieval Form</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnGenerateDisbursement" OnClick="btnGenerateDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Disbursement Form</asp:LinkButton>
+                                    <asp:LinkButton ID="btnGenerateDisbursement" CausesValidation="false" OnClick="btnGenerateDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Disbursement Form</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnConfirmDisbursement" OnClock="btnConfirmDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Confirm Disbursement</asp:LinkButton>
+                                    <asp:LinkButton ID="btnConfirmDisbursement" CausesValidation="false" OnClock="btnConfirmDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Confirm Disbursement</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnMonthlyCheck" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Monthly Stocktake</asp:LinkButton>
+                                    <asp:LinkButton ID="btnMonthlyCheck" CausesValidation="false" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Monthly Stocktake</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnLowStocks_Sup" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
+                                    <asp:LinkButton ID="btnLowStocks_Sup" CausesValidation="false" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Ordering</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnMakeOrder_Sup" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
+                                    <asp:LinkButton ID="btnMakeOrder_Sup" CausesValidation="false" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnStoreCart" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
+                                    <asp:LinkButton ID="btnStoreCart" CausesValidation="false" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
                                 </li>
                                 
                                 <li>
-                                    <asp:LinkButton ID="btn_ViewPendingOrder" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
+                                    <asp:LinkButton ID="btn_ViewPendingOrder" CausesValidation="false" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Order History</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnViewTenderList" OnClick="btnViewTenderList_Click" runat="server" style="color: #000000; text-decoration: none;">View Tender List</asp:LinkButton>
+                                    <asp:LinkButton ID="btnViewTenderList" CausesValidation="false" OnClick="btnViewTenderList_Click" runat="server" style="color: #000000; text-decoration: none;">View Tender List</asp:LinkButton>
                                 </li>
 
                               
@@ -282,7 +282,7 @@
                                     { %>
 
                                 <li>
-                                    <asp:LinkButton ID="btnHeadDashboard" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
+                                    <asp:LinkButton ID="btnHeadDashboard" CausesValidation="false" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                 </li>
 
                                 <%--<li class="divider"></li>--%>
@@ -290,21 +290,21 @@
                                 <li class="dropdown-header">Department Head actions</li>
 
                                 <li>
-                                    <asp:LinkButton ID="btnApproveRequests" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
+                                    <asp:LinkButton ID="btnApproveRequests" CausesValidation="false" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
                                 </li>
 
                                 <% if (! userModel.isDelegateHead()) { %>
                                 <li>
 
-                                    <asp:LinkButton ID="LinkButtonDelegateAuth1" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonDelegateAuth1" CausesValidation="false" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
                                 <% } %>
 
                                 <li>
-                                    <asp:LinkButton ID="btnEmpViewCatalogue_deptHead" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
+                                    <asp:LinkButton ID="btnEmpViewCatalogue_deptHead" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                  <li>
-                                    <asp:LinkButton ID="LinkButtonn" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonn" CausesValidation="false" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
                                 </li>
 
                                 <% }
@@ -315,68 +315,71 @@
                                 <br />
                                 <li class="dropdown-header">Supervisor actions</li>
                                 <li>
-                                    <asp:LinkButton ID="btnViewAllAdjustments" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
+                                    <asp:LinkButton ID="btnViewAllAdjustments" CausesValidation="false" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnGenerateReports_Sup" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
+                                    <asp:LinkButton ID="btnGenerateReports_Sup" CausesValidation="false" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
                                 </li>
                                 <% }
 
                                     if (userModel.isStoreManager())
                                     { %>
                                 <li>
-                                    <asp:LinkButton ID="btnHeadDashboard_Mgr" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
+                                    <asp:LinkButton ID="btnHeadDashboard_Mgr" CausesValidation="false" OnClick="btnHeadDashboard_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                 </li>
                                 <%--<li class="divider"></li>--%>
                                 <br />
-                                <li class="dropdown-header">Manager actions</li>
-
+                                <li class="dropdown-header">Store actions</li>
                                 <li>
-                                    <asp:LinkButton ID="btnApproveRequests_Mgr" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
+                                    <asp:LinkButton ID="btnLowStocks_Mgr" CausesValidation="false" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="btnMakeOrder_Mgr" CausesValidation="false" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
                                 </li>
 
                                 <% if (! userModel.isDelegateHead()) { %>
                                 <li>
-                                    <asp:LinkButton ID="LinkButtonDelegateAuth2" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
+                                    <asp:LinkButton ID="btnStoreCart_Mgr" CausesValidation="false" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
                                 </li>
                                 <% } %>
 
                                 <li>
-                                    <asp:LinkButton ID="btnEmpViewCatalogue_Mgr" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
+                                    <asp:LinkButton ID="btnManVPO" CausesValidation="false" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Order History</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="linkBtnChangeCollectPt2" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
+                                    <asp:LinkButton ID="btnViewAllAdjustments_Mgr" CausesValidation="false" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
                                 </li>
                                 <%--<li class="divider"></li>--%>
                                 <br />
                                 <br />
                                 <br />
-                                <li class="dropdown-header">Store actions</li>
+                                </li>
+                                <li class="dropdown-header">Manager actions</li>
+
                                 <li>
-                                    <asp:LinkButton ID="btnLowStocks_Mgr" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
+                                    <asp:LinkButton ID="btnApproveRequests_Mgr" CausesValidation="false" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnMakeOrder_Mgr" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonDelegateAuth2" CausesValidation="false" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnStoreCart_Mgr" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
+                                    <asp:LinkButton ID="btnEmpViewCatalogue_Mgr" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnManVPO" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
+                                    <asp:LinkButton ID="linkBtnChangeCollectPt2" CausesValidation="false" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnViewAllAdjustments_Mgr" OnClick="btnViewAllAdjustments_Click" runat="server" style="color: #000000; text-decoration: none;">View Inventory Adjustments</asp:LinkButton>
+                                    <asp:LinkButton ID="btnGenerateReports" CausesValidation="false" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
                                 </li>
-                                <li>
-                                    <asp:LinkButton ID="btnGenerateReports" OnClick="btnGenerateReports_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Reports</asp:LinkButton>
-                                </li>
+                                
+                                
 
                                 <% } %>
                                 
                                 <%--Moved Logout Button to bottom of drop down list--%>
                                 <li class="divider"></li>
                                 <li>
-                                <asp:LinkButton ID="linkBtnLogOut" OnClick="Logout" runat="server" CssClass="danger" style="color: #cc1010; text-decoration: none; font-weight: bold;">Logout</asp:LinkButton>
+                                <asp:LinkButton ID="linkBtnLogOut" CausesValidation="false" OnClick="Logout" runat="server" CssClass="danger" style="color: #cc1010; text-decoration: none; font-weight: bold;">Logout</asp:LinkButton>
                                 </li>
 
                             </ul>

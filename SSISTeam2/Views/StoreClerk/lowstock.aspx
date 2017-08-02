@@ -7,7 +7,7 @@
     runat="server">
     <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">Reorder Report List</div>
+        <div class="panel-heading">Low Stock Ordering - Items to be Restocked</div>
         <div class="panel-body">
             
             <asp:Label ID="lblResult" runat="server" class="btn btn-block alert-success" Visible="false"></asp:Label>

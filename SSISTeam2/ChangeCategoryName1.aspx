@@ -16,7 +16,9 @@
     <br />
         <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
         <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
-
+    <br />
+    <br />
+        <asp:label id="Message" forecolor="Red"  runat="server"/>
     <br />
     <br />
         <%--<asp:Button ID="Button2" runat="server" Text="Add New Category" OnClick="Button2_Click" />--%>
