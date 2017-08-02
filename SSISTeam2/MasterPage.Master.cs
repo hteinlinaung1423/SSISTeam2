@@ -259,5 +259,10 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/StoreClerk/TenderListForm.aspx");
         }
+
+        protected void btnConfirmDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ConfirmDisbursement.aspx");
+        }
     }
 }

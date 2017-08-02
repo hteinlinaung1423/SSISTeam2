@@ -7,7 +7,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
-
+    <asp:Panel ID="Panel1" runat="server" DefaultButton ="Button1">
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
@@ -60,7 +60,11 @@
                 </PagerTemplate>
 
                 <Columns>
-
+                     <asp:TemplateField HeaderText="No.">
+                   <ItemTemplate>
+                       <%#Container.DataItemIndex+1 %>
+                   </ItemTemplate>
+                </asp:TemplateField>
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier ID"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
@@ -133,5 +137,5 @@
         </div>
 
     </div>
-
+    </asp:Panel>
 </asp:Content>

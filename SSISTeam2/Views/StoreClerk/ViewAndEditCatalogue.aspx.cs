@@ -81,22 +81,24 @@ namespace SSISTeam2.Views.StoreClerk
             GridViewRow row = GridView1.Rows[e.RowIndex];
             string categoryName = (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
             string description = (row.FindControl("TextBox2") as TextBox).Text;
-            int curQty = Convert.ToInt32((row.FindControl("TextBox6") as TextBox).Text);
+            //int curQty = Convert.ToInt32((row.FindControl("TextBox6") as TextBox).Text);
             int reorderLevel = Convert.ToInt32((row.FindControl("TextBox3") as TextBox).Text);
             int reorderQuantity = Convert.ToInt32((row.FindControl("TextBox4") as TextBox).Text);
             string unitOfMeasure = (row.FindControl("TextBox5") as TextBox).Text;
             string itemCode = (row.FindControl("Label1") as Label).Text;
-            int categoryID = Convert.ToInt32((row.FindControl("Label9") as Label).Text);
+            //int categoryID = Convert.ToInt32((row.FindControl("Label9") as Label).Text);
             var result1 = entities.Stock_Inventory.SingleOrDefault(x => x.item_code == itemCode);
-            result1.current_qty = curQty;
+           // result1.current_qty = curQty;
             result1.reorder_level = reorderLevel;
             result1.reorder_qty = reorderQuantity;
             result1.unit_of_measure = unitOfMeasure;
             result1.item_description = description;
             entities.SaveChanges();
-            var result2 = entities.Categories.SingleOrDefault(x => x.cat_id == categoryID);
-            result2.cat_name = categoryName;
-            entities.SaveChanges();
+            Category c = entities.Categories.Where(x => x.cat_name == categoryName).First();
+            result1.cat_id = c.cat_id;
+            //var result2 = entities.Categories.SingleOrDefault(x => x.cat_id == categoryID);
+            //result2.cat_name = categoryName;
+            //entities.SaveChanges();
             GridView1.EditIndex = -1;
             this.BindGrid();
             (row.FindControl("DropDownList1") as DropDownList).Visible = false;
@@ -112,7 +114,7 @@ namespace SSISTeam2.Views.StoreClerk
             GridViewRow row = GridView1.Rows[e.RowIndex];
 
             string itemCode = (row.FindControl("Label1") as Label).Text;
-            Label4.Text = itemCode;
+           
             var result1 = entities.Stock_Inventory.SingleOrDefault(x => x.item_code == itemCode);
             result1.deleted = "Y";
             entities.SaveChanges();
@@ -136,7 +138,7 @@ namespace SSISTeam2.Views.StoreClerk
         protected void Search_Click(object sender, EventArgs e)
         {
             string searchWord = TextBox1.Text;
-            Label2.Text = searchWord;
+            
             list = new List<ViewandEditCatalogueForShow>();
             var catList = entities.Categories.Where(x => x.deleted == "N" && x.cat_name.Contains(searchWord)).Select(x => x.cat_id).ToList();
             var result2 = (from t1 in entities.Categories

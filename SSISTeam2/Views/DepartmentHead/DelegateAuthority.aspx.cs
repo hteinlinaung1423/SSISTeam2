@@ -164,9 +164,9 @@ namespace SSISTeam2.Views.DepartmentHead
 
             //Select Dropdown List Validation
 
-            try
+            //try
 
-            {
+            //{
                 if (delegateFullName.Equals("Select---"))
                 {
                     Label1.Text = "Please Choose One Delegate!";
@@ -220,11 +220,11 @@ namespace SSISTeam2.Views.DepartmentHead
                 }
 
 
-            }
-            catch (Exception ex)
-            {
-                ex.StackTrace.ToString();
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ex.StackTrace.ToString();
+            //}
 
         }
 

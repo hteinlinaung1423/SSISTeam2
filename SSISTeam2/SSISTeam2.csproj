@@ -141,6 +141,7 @@
     <Content Include="Classes\WebServices\Service.svc" />
     <Content Include="CreateNewCategory.aspx" />
     <Content Include="notauthorized.aspx" />
+    <Content Include="DEMO_RolesTest.aspx" />
     <Content Include="Views\StoreClerk\DeptDetails.aspx" />
     <Content Include="Views\StoreManager\AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
