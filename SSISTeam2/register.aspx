@@ -72,6 +72,12 @@
                                         ErrorMessage="Full Name is required." ToolTip="Full Name is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Full Name is required.</asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
+                                    <asp:Label ID="MobileNoLabel" runat="server" AssociatedControlID="MobileNo">                       Mobile Number:</asp:Label>
+                                    <asp:TextBox ID="MobileNo" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="MobileNo"
+                                        ErrorMessage="Mobile Number is required." ToolTip="Mobile Number is required." ValidationGroup="CreateUserWizard1" Style="color: red">* Mobile Number is required.</asp:RequiredFieldValidator>
+                                </div>
+                                <div class="form-group">
                                     <asp:Label ID="DepartmentLabel" runat="server" AssociatedControlID="Department">                       Department:</asp:Label>
                                     <asp:DropDownList ID="Department" runat="server" CssClass="form-control" DataSourceID="SqlDataSource1" DataTextField="name" DataValueField="dept_code"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Department"
