@@ -112,6 +112,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton btnEmpViewCatalogue_emp;
         
         /// <summary>
+        /// btnChnageCollectp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnChnageCollectp;
+        
+        /// <summary>
         /// btnClerkDash control.
         /// </summary>
         /// <remarks>
