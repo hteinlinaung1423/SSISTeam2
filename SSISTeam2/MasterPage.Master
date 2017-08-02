@@ -205,6 +205,10 @@
                                     <li>
                                         <asp:LinkButton ID="btnEmpViewCatalogue_emp" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                     </li>
+                                     </li>
+                                    <li>
+                                        <asp:LinkButton ID="btnChnageCollectp" OnClick="btnChnageCollectp_Click" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point</asp:LinkButton>
+                                    </li>
 
                                 <% }
                                     if (userModel.isStoreClerk() || userModel.isStoreSupervisor())

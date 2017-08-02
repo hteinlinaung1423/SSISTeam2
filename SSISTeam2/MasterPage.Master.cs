@@ -147,12 +147,6 @@ namespace SSISTeam2
         }
         protected void ChangeCPRep(object sender, EventArgs e)
         {
-            //Yin
-            SSISEntities context = new SSISEntities();
-            string loginUser = Page.User.Identity.Name;
-            string logindepCode = context.Dept_Registry.Where(b => b.username == loginUser).Select(c => c.dept_code).First().ToString();
-            Department dept = context.Departments.Where(d => d.dept_code == logindepCode).Single();
-            Session["sDept"] = dept;
             Response.Redirect("~/Views/DepartmentHead/ChangeCollectionnRep.aspx");
         }
 
@@ -258,6 +252,11 @@ namespace SSISTeam2
         protected void btnViewTenderList_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/StoreClerk/TenderListForm.aspx");
+        }
+
+        protected void btnChnageCollectp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Employee/ChangeCollectionPoint.aspx");
         }
     }
 }

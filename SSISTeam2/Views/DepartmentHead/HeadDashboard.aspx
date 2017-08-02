@@ -96,7 +96,7 @@
                 <div class="panel-body">
                     Delegation:
                     <asp:Label ID="lbldelegation" runat="server" Text="No delegation for now"></asp:Label>
-
+                    <br />
                 </div>
 
                 <div class="panel-footer">
