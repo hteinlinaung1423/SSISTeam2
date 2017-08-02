@@ -31,6 +31,8 @@ namespace SSISTeam2.Classes.WebServices
                     }
                 }
 
+                context.SaveChanges();
+
                 var retrieving = FacadeFactory.getRetrievalService(context).getAllRetrievingByClerk(currentUser);
 
                 var itemGroups = retrieving.SelectMany(sm =>

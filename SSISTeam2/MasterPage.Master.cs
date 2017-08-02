@@ -256,7 +256,7 @@ namespace SSISTeam2
 
         protected void btnConfirmDisbursement_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ConfirmDisbursement.aspx");
+            Response.Redirect("~/Views/StoreClerk/ConfirmDisbursement.aspx");
         }
 
         protected void btnChnageCollectp_Click(object sender, EventArgs e)
