@@ -57,7 +57,7 @@
                 <ItemTemplate>
                     <asp:TextBox ID="reasonTB" runat="server" Text='<%# Eval("reason") %>' OnTextChanged="reasonTB_TextChanged" AutoPostBack="true"></asp:TextBox>
                     </br>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please specify reason for discrepancy"
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="Red" ErrorMessage="Please specify reason for discrepancy"
                             ControlToValidate="reasonTB" />
                 </ItemTemplate>
             </asp:TemplateField>

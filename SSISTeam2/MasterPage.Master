@@ -113,8 +113,12 @@
                 -moz-column-count: 2; /* Firefox */
                 -webkit-column-count: 2; /* Safari and Chrome */
                 column-count: 2;
-                width: 500px;
+                width:500px;
                 /*height: 300px;*/
+            }
+            .dropdown-menu {
+                background-color: white !important;
+                white-space: normal;
             }
         }
     </style>
@@ -241,7 +245,13 @@
                                     <asp:LinkButton ID="btnGenerateDisbursement" OnClick="btnGenerateDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Disbursement Form</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnMonthlyCheck" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Monthly Check</asp:LinkButton>
+                                    <asp:LinkButton ID="btnConfirmDisbursement" OnClock="btnConfirmDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Confirm Disbursement</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="btnMonthlyCheck" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Monthly Stocktake</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="btnLowStocks_Sup" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnMakeOrder_Sup" OnClick="btnMakeOrder_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Make Purchase Order</asp:LinkButton>
@@ -249,9 +259,7 @@
                                 <li>
                                     <asp:LinkButton ID="btnStoreCart" OnClick="btnStoreCart_Click" runat="server" style="color: #000000; text-decoration: none;">View Cart</asp:LinkButton>
                                 </li>
-                                <li>
-                                    <asp:LinkButton ID="btnLowStocks_Sup" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
-                                </li>
+                                
                                 <li>
                                     <asp:LinkButton ID="btn_ViewPendingOrder" OnClick="btn_ViewPendingOrder_Click" runat="server" style="color: #000000; text-decoration: none;">View Pending Orders</asp:LinkButton>
                                 </li>
@@ -285,7 +293,7 @@
                                     <asp:LinkButton ID="btnEmpViewCatalogue_deptHead" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                  <li>
-                                    <asp:LinkButton ID="LinkButtonn" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonn" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
                                 </li>
 
                                 <% }
@@ -322,7 +330,7 @@
                                     <asp:LinkButton ID="btnEmpViewCatalogue_Mgr" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="linkBtnChangeCollectPt2" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
+                                    <asp:LinkButton ID="linkBtnChangeCollectPt2" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
                                 </li>
                                 <%--<li class="divider"></li>--%>
                                 <br />
