@@ -172,7 +172,7 @@ namespace SSISTeam2
 
         protected void btnEmpDash_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/Employee/Dashboard.aspx");
+            Response.Redirect("~/Views/Employee/EmpDashboard.aspx");
         }
 
         protected void btnClerkDash_Click(object sender, EventArgs e)
