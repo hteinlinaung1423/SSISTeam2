@@ -41,7 +41,7 @@
               <p></p> --%>
 
                 <div class="panel-body">
-                    <asp:Button ID="add" runat="server" Text="Add New Tender"
+                    <asp:Button ID="add" runat="server" Text="Add New Item"
                         CssClass="btn btn-primary" OnClick="AddNewTender_Click" />
                     <br />
                     <br />

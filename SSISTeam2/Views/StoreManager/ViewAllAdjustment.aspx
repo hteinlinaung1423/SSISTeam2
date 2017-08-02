@@ -43,7 +43,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             
-            <asp:TemplateField HeaderText="Highest Single Cost of Adjustment">
+            <asp:TemplateField HeaderText="Highest Single Cost of Adjustment" ItemStyle-Width="25%">
                 <ItemTemplate>
                     <asp:Label runat="server" Text='<%# Eval("highestCost") %>'></asp:Label>
                 </ItemTemplate>
