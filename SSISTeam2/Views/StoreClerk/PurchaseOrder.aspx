@@ -6,11 +6,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">Create New Purchase Order</div>
+        <div class="panel-heading"><h3>Create New Purchase Order</h3></div>
         <div class="panel-body">
-            <p>Step 2 of 3: Add Items</p>
+            <h4>Step 2 of 3: Add Items</h4>
             <p>
                 <asp:Label ID="LabelOrderSummary" runat="server" Text=""></asp:Label>
             </p>

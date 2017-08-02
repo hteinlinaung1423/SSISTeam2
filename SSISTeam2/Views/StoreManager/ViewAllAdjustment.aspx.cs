@@ -78,7 +78,7 @@ namespace SSISTeam2
 
             
             Session["ConfirmAdj"] = model;
-            Response.Redirect("Views/StoreManager/AdjustmentDetail.aspx");
+            Response.Redirect("AdjustmentDetail.aspx");
         }
 
         public List<AdjustmentModel> CheckForRole(List<AdjustmentModel> adjList)

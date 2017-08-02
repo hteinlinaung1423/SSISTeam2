@@ -1,14 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeBehind="AddNewTender.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.AddNewTender" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Add New Tender</title>
+    <title>Add New Item</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><h3>Tender List</h3></div>
+        <div class="panel-heading"><h3>Item Details</h3></div>
 
         <div class="panel-body">
                 <div class="form-group">
