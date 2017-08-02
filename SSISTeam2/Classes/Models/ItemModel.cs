@@ -39,16 +39,44 @@ namespace SSISTeam2.Classes.Models
             //Changes for dashboard
             var stockItems = stock.Tender_List_Details.Where(w => w.deleted != "Y" && w.Tender_List.deleted != "Y" && w.Tender_List.tender_date.Year == DateTime.Now.Year);
 
-            foreach (var stockItem in stockItems)
+            prices = new Dictionary<Supplier, double>();
+
+            using (SSISEntities context = new SSISEntities())
             {
-                if (! prices.ContainsKey(stockItem.Tender_List.Supplier))
+                // get tender list details associated with this item code
+
+                IEnumerable<Tender_List_Details> details = context.Tender_List_Details
+                    .Where(w => w.Tender_List.tender_date.Year == DateTime.Now.Year && w.Tender_List.deleted != "Y"
+                    && w.item_code == itemCode && w.deleted != "Y")
+                    // Get distinct
+                    .GroupBy(d => d.Tender_List.supplier_id)
+                    .Select(group => group.FirstOrDefault());
+
+                Supplier sup = context.Suppliers.First();
+
+                if (details.Count() == 0)
                 {
-                    prices.Add(stockItem.Tender_List.Supplier, Convert.ToDouble(stockItem.price));
+                    // cannot find for whatever reason
+                    prices.Add(sup, 0.0);
+                } else
+                {
+                    // can find
+                    foreach (var detail in details)
+                    {
+                        prices.Add(detail.Tender_List.Supplier, Convert.ToDouble(detail.price));
+                    }
                 }
             }
 
 
-            prices = new Dictionary<Supplier, double>();
+            //foreach (var stockItem in stockItems)
+            //{
+            //    if (! prices.ContainsKey(stockItem.Tender_List.Supplier))
+            //    {
+            //        prices.Add(stockItem.Tender_List.Supplier, Convert.ToDouble(stockItem.price));
+            //    }
+            //}
+
             //prices = stockItems.ToDictionary(x => x.Tender_List.Supplier, x => Convert.ToDouble(x.price));
             //prices = stock.Tender_List_Details.Where(w => w.deleted != "Y" && w.Tender_List.deleted != "Y" && w.Tender_List.tender_date.Year == DateTime.Now.Year).ToDictionary(x => x.Tender_List.Supplier, x => Convert.ToDouble(x.price));
         }
@@ -225,7 +253,14 @@ namespace SSISTeam2.Classes.Models
         {
             get
             {
-                return prices.Values.Average();
+                var values = prices.Values;
+                if (values.Count == 0)
+                {
+                    return 0.0;
+                } else
+                {
+                    return values.Average();
+                }
             }
         }
 
