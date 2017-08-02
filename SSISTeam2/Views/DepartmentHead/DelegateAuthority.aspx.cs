@@ -97,7 +97,6 @@ namespace SSISTeam2.Views.DepartmentHead
                     //if current delegate already exist, cannot delegate another
 
                     if (w.deleted.ToString() == "N")
-
                     {
 
                         ChooseNewTable.Visible = false;
