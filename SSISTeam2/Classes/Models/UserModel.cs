@@ -10,7 +10,6 @@ namespace SSISTeam2.Classes.Models
     {
         private string username, fullname;
         private string email;
-        private string contactNumber;
         private Department department;
         private string role;
         private string mobilenum;
@@ -275,16 +274,16 @@ namespace SSISTeam2.Classes.Models
             }
         }
 
-        public string ContactNumber
+        public string MobileNum
         {
             get
             {
-                return contactNumber;
+                return mobilenum;
             }
 
             set
             {
-                contactNumber = value;
+                mobilenum = value;
             }
         }
 

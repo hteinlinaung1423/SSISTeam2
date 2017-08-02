@@ -39,6 +39,7 @@ namespace SSISTeam2.Classes.Models
             //Changes for dashboard
             var stockItems = stock.Tender_List_Details.Where(w => w.deleted != "Y" && w.Tender_List.deleted != "Y" && w.Tender_List.tender_date.Year == DateTime.Now.Year);
 
+            prices = new Dictionary<Supplier, double>();
             foreach (var stockItem in stockItems)
             {
                 if (! prices.ContainsKey(stockItem.Tender_List.Supplier))
