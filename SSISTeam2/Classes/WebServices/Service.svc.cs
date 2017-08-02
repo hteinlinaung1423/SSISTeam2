@@ -94,36 +94,74 @@ namespace SSISTeam2.Classes.WebServices
         WCF_User IService.login(string name, string pass)
         {
             //WCF_User user;
-            String flag;String updflag;
+            //String flag;String updflag;
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)
             {
+                UserModel usermodel = new UserModel(name);
 
-                string[] role = Roles.GetRolesForUser(name);
-                updflag = new Work().CheckApprovalDutiesStatus();
-                   if (updflag.Equals("T"))
-                   {
-                     flag = new Work().GetDepHeadRole(name);
-                     Dept_Registry dept = new Work().login(name);
-                     try
-                        {
-                            if (flag.Equals("Y"))
-                            {
-                                role[0] = "DeptHead";
-                                user = new WCF_User(dept.dept_code, name, role[0], flag);
-                            }
-                    }
-                    catch
-                        {
-                            flag = "N";
-                            
-                            user = new WCF_User(dept.dept_code, name, role[0], flag);
-                        }
-                    }
+                //string[] role = Roles.GetRolesForUser(name);
+                //Dept_Registry dept = new Work().login(name);
+                //user = new WCF_User(dept.dept_code, name, role[0]);
+                //Comment delegate role
+                //updflag = new Work().CheckApprovalDutiesStatus();
+                //   if (updflag.Equals("T"))
+                //   {
+                //     flag = new Work().GetDepHeadRole(name);
+                //     Dept_Registry dept = new Work().login(name);
+                //     try
+                //        {
+                //            if (flag.Equals("Y"))
+                //            {
+                //                role[0] = "DeptHead";
+                //                user = new WCF_User(dept.dept_code, name, role[0], flag);
+                //            }
+                //    }
+                //    catch
+                //        {
+                //            flag = "N";
+
+                //            user = new WCF_User(dept.dept_code, name, role[0], flag);
+                //        }
+                //    }
+                UserModel depthead = usermodel.FindDelegateOrDeptHead();
+
+                if (usermodel.Username == depthead.Username)
+                {
+                    user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role);
+                }
+                else
+                {
+                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role);
+                }
                 return user;
             }
-            else { return user = new WCF_User(null, "failed", null,null); }
+
+            //    string[] role = Roles.GetRolesForUser(name);
+            //    updflag = new Work().CheckApprovalDutiesStatus();
+            //       if (updflag.Equals("T"))
+            //       {
+            //         flag = new Work().GetDepHeadRole(name);
+            //         Dept_Registry dept = new Work().login(name);
+            //         try
+            //            {
+            //                if (flag.Equals("Y"))
+            //                {
+            //                    role[0] = "DeptHead";
+            //                    user = new WCF_User(dept.dept_code, name, role[0], flag);
+            //                }
+            //        }
+            //        catch
+            //            {
+            //                flag = "N";
+
+            //                user = new WCF_User(dept.dept_code, name, role[0], flag);
+            //            }
+            //        }
+            //    return user;
+            //}
+            else { return user = new WCF_User(null, "failed", null); }
         }
 
         // Heng Tiong's MonthlyCheck implementation
@@ -251,7 +289,7 @@ namespace SSISTeam2.Classes.WebServices
             foreach (Request_Details r in rd_List)
             {
                 int quantity = Convert.ToInt32(r.orig_quantity);
-                WCF_RequestDetail req = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity);
+                WCF_RequestDetail req = new WCF_RequestDetail(r.Stock_Inventory.item_description, quantity,r.request_detail_id);
 
                 if (quantity == 0) continue;
 
@@ -612,6 +650,11 @@ namespace SSISTeam2.Classes.WebServices
         public void UpdateRequestDetail(string id, string qty)
         {
             new Work().UpdateRequestDetail(id, qty);
+        }
+
+        public void DeleteRequestDetail(string id)
+        {
+            new Work().DeleteRequestDetail(id);
         }
     }
 }

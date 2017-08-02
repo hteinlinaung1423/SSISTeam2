@@ -139,6 +139,7 @@
     <Content Include="Classes\WebServices\MobileConfirmation_TEST.aspx" />
     <Content Include="Classes\WebServices\Service.svc" />
     <Content Include="CreateNewCategory.aspx" />
+    <Content Include="Views\StoreClerk\DeptDetails.aspx" />
     <Content Include="Views\StoreManager\AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
     <Content Include="Views\StoreClerk\Dashboard.aspx" />
@@ -220,8 +221,7 @@
     <Content Include="Views\StoreClerk\PurchaseOrder.aspx" />
     <Content Include="Views\StoreClerk\PurchaseOrderSuccess.aspx" />
     <Content Include="Views\StoreClerk\ReceiveOrder.aspx" />
-    <Content Include="Views\StoreClerk\RetrieveRequestDemo.aspx" />
-    <Content Include="Views\StoreClerk\StationaryRetrievalForm.aspx" />
+    <Content Include="Views\StoreClerk\DEMO_RetrieveRequest.aspx" />
     <Content Include="Views\StoreClerk\TenderListForm.aspx" />
     <Content Include="Views\StoreClerk\ViewAndEditCatalogue.aspx" />
     <Content Include="Views\StoreClerk\ViewDepartmentList.aspx" />
@@ -233,6 +233,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\StoreClerk\DeptDetails.aspx.cs">
+      <DependentUpon>DeptDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\DeptDetails.aspx.designer.cs">
+      <DependentUpon>DeptDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\StoreManager\AdjustmentDetail.aspx.cs">
       <DependentUpon>AdjustmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -691,20 +698,13 @@
     <Compile Include="Views\StoreClerk\ReceiveOrder.aspx.designer.cs">
       <DependentUpon>ReceiveOrder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.cs">
-      <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\DEMO_RetrieveRequest.aspx.cs">
+      <DependentUpon>DEMO_RetrieveRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\StoreClerk\RetrieveRequestDemo.aspx.designer.cs">
-      <DependentUpon>RetrieveRequestDemo.aspx</DependentUpon>
+    <Compile Include="Views\StoreClerk\DEMO_RetrieveRequest.aspx.designer.cs">
+      <DependentUpon>DEMO_RetrieveRequest.aspx</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.cs">
-      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\StoreClerk\StationaryRetrievalForm.aspx.designer.cs">
-      <DependentUpon>StationaryRetrievalForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -843,6 +843,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.3.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.3.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>2.0</SsdtUnitTestVersion>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

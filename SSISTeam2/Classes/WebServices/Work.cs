@@ -91,29 +91,29 @@ namespace SSISTeam2.Classes.WebServices
             return dr;
         }
         //Getting ApprovalDuties Status
-        public string CheckApprovalDutiesStatus()
-        {           
-            string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
-            try
-            {
-                var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
-                DateTime date = Convert.ToDateTime(result.ToString());
-                string endDate = date.ToString("yyyy-MM-dd");
-                if (endDate.CompareTo(currentDate) == -1)
-                {
-                    var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
-                    q.deleted = "Y";
-                    ctx.SaveChanges();
+        //public string CheckApprovalDutiesStatus()
+        //{           
+        //    string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+        //    try
+        //    {
+        //        var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
+        //        DateTime date = Convert.ToDateTime(result.ToString());
+        //        string endDate = date.ToString("yyyy-MM-dd");
+        //        if (endDate.CompareTo(currentDate) == -1)
+        //        {
+        //            var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
+        //            q.deleted = "Y";
+        //            ctx.SaveChanges();
 
-                }
-                return statusFlag = "T";
+        //        }
+        //        return statusFlag = "T";
 
-            }
-            catch
-            {
-                return statusFlag = "T";
-            }
-        }
+        //    }
+        //    catch
+        //    {
+        //        return statusFlag = "T";
+        //    }
+        //}
 
         public string GetDepHeadRole(string user)
         {
@@ -514,12 +514,25 @@ namespace SSISTeam2.Classes.WebServices
         {
             int req_id = Convert.ToInt32(id);
             
-            Request_Details req = ctx.Request_Details.Where(x => x.request_id == req_id).First();
+            Request_Details req = ctx.Request_Details.Where(x => x.request_detail_id == req_id).First();
             req.orig_quantity = Convert.ToInt32( qty);
             ctx.SaveChanges();
 
             Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
             revent.quantity = Convert.ToInt32(qty);
+            ctx.SaveChanges();
+        }
+
+        public void DeleteRequestDetail(string id)
+        {
+            int req_id = Convert.ToInt32(id);
+
+            Request_Details req = ctx.Request_Details.Where(x => x.request_detail_id == req_id).First();
+            req.deleted = "Y";
+            ctx.SaveChanges();
+
+            Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
+            revent.deleted = "Y";
             ctx.SaveChanges();
         }
     }

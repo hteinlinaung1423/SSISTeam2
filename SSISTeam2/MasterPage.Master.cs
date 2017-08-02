@@ -12,6 +12,8 @@ namespace SSISTeam2
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+        public UserModel userModel;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -26,21 +28,22 @@ namespace SSISTeam2
                     fullName = ctx.Dept_Registry.Find(currentUser).fullname;
 
                     // Check if user is department rep
-                    int count = ctx.Departments.Where(d => d.rep_user == currentUser).Count();
-                    if (count > 0)
-                    {
-                        // is a dept rep
-                        linkBtnDepRepView.Visible = true;
-                        //btnDepRepViewDisbursements.Visible = true;
-                    } else
-                    {
-                        linkBtnDepRepView.Visible = false;
-                        //btnDepRepViewDisbursements.Visible = false;
-                    }
+                    //int count = ctx.Departments.Where(d => d.rep_user == currentUser).Count();
+                    //if (count > 0)
+                    //{
+                    //    // is a dept rep
+                    //    linkBtnDepRepView.Visible = true;
+                    //    //btnDepRepViewDisbursements.Visible = true;
+                    //} else
+                    //{
+                    //    linkBtnDepRepView.Visible = false;
+                    //    //btnDepRepViewDisbursements.Visible = false;
+                    //}
                 }
 
                 lblFullName.Text = "Welcome, "+fullName;
-               
+
+                userModel = new UserModel(Page.User.Identity.Name);
 
             }
             
@@ -245,6 +248,16 @@ namespace SSISTeam2
         protected void btnViewAllAdjustments_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/StoreManager/ViewAllAdjustment.aspx");
+        }
+
+        protected void ViewDeptList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ViewDepartmentList.aspx");
+        }
+
+        protected void btnViewTenderList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/TenderListForm.aspx");
         }
     }
 }
