@@ -166,7 +166,7 @@ namespace SSISTeam2
 
         protected void btnEmpDash_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/Employee/Dashboard.aspx");
+            Response.Redirect("~/Views/Employee/EmpDashboard.aspx");
         }
 
         protected void btnClerkDash_Click(object sender, EventArgs e)
@@ -252,6 +252,11 @@ namespace SSISTeam2
         protected void btnViewTenderList_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/StoreClerk/TenderListForm.aspx");
+        }
+
+        protected void btnConfirmDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ConfirmDisbursement.aspx");
         }
 
         protected void btnChnageCollectp_Click(object sender, EventArgs e)

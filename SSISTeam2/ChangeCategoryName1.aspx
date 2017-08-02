@@ -3,28 +3,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Edit Category Name</title>
+    <title>Maintain Category Name</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
 
-  
+    <asp:Panel ID="Panel1" runat="server" DefaultButton ="Button1">
         <!-- Default panel contents -->
         <div class="panel-heading"><h3>View Catagory</h3></div>
-      
-
-     <div>
+        <asp:Button ID="Button2" runat="server" Text="Add New Category" CssClass="btn btn-primary" OnClick="Button2_Click" />
+        <br />
+    <br />
         <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-        <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Button1_Click" />
+        <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
+
+    <br />
+    <br />
         <%--<asp:Button ID="Button2" runat="server" Text="Add New Category" OnClick="Button2_Click" />--%>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-           DataKeyNames="cat_id" OnRowDeleting="OnRowDeleting"
-            OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancelingEdit"  AllowPaging="true"
+        <asp:GridView ID="GridView1" runat="server" 
+            AutoGenerateColumns="False" 
+           DataKeyNames="cat_id" 
+            OnRowDeleting="OnRowDeleting"
+            OnRowEditing="OnRowEditing" 
+            OnRowUpdating="OnRowUpdating" 
+            OnRowCancelingEdit="OnRowCancelingEdit"  
+            AllowPaging="true"
                 PageSize="10"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped" 
                 GridLines="None"
-               PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"  >
+               PagerStyle-HorizontalAlign="Center" 
+            PagerSettings-Position="TopAndBottom"  
+            OnPageIndexChanging="GridView1_PageIndexChanging">
 
                           <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next"/>
 
@@ -35,15 +45,10 @@
                     <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
                     <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                 </PagerTemplate>
-              <%--  <PagerTemplate>
-                    <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
-                    <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
-                    <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
-                    <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
-                </PagerTemplate>>--%>
-                 
+             
             <Columns>
-                <asp:TemplateField ItemStyle-Width="10%" HeaderText="cat_id" SortExpression="cat_id">
+                 
+                <asp:TemplateField ItemStyle-Width="10%" HeaderText="Category ID" SortExpression="cat_id">
  <%--                   <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("cat_id") %>' BackColor="Yellow"></asp:TextBox>
                     </EditItemTemplate>--%>
@@ -52,7 +57,7 @@
                         Text='<%# Eval("cat_id")  %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField ItemStyle-Width="10%" HeaderText="cat_name" SortExpression="cat_name">
+                <asp:TemplateField ItemStyle-Width="20%" HeaderText="Category Name" SortExpression="cat_name">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox2" runat="server"
                         Text='<%# Eval("cat_name")  %>' BackColor="Yellow"></asp:TextBox>
@@ -64,11 +69,13 @@
                 </asp:TemplateField>
                
                 <%--<asp:CommandField ShowDeleteButton="True" ShowEditButton="True"  />--%>
-                <asp:TemplateField ItemStyle-Width="50%">  
+                <asp:TemplateField ItemStyle-Width="30%">  
                     <ItemTemplate >  
                         <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-primary"/>
-                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-danger"/>    
+                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-danger"
+                            OnClientClick="return confirm('Are you sure you want to cancel this request?');" />    
                     </ItemTemplate>  
+
                     <EditItemTemplate>  
                         <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary"/>  
                         <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-primary"/>  
@@ -87,14 +94,7 @@
                 BackColor="#009999"></SelectedRowStyle>
             <RowStyle ForeColor="#003399" BackColor="White"></RowStyle>--%>
         </asp:GridView>
-        <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="446px">
-        </asp:DetailsView>
-
-
-        
-        <asp:Button ID="Button2" runat="server" Text="Add New Category" CssClass="btn btn-primary" OnClick="Button2_Click" />
         
         <br/>
-    </div> 
-    
+    </asp:Panel>
 </asp:Content>

@@ -103,6 +103,7 @@
           <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
           <Property Name="fullname" Type="nvarchar" MaxLength="200" />
+          <Property Name="mobile_no" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Favourites">
           <Key>
@@ -899,6 +900,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Request_Event" Relationship="Self.FK_Request_Event_Dept_Registry" FromRole="Dept_Registry" ToRole="Request_Event" />
           <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Dept_Registry" FromRole="Dept_Registry" ToRole="Requests" />
           <Property Name="fullname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="mobile_no" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Favourite">
           <Key>
@@ -1694,6 +1696,7 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Dept_Registry">
             <EntityTypeMapping TypeName="SSISModel.Dept_Registry">
               <MappingFragment StoreEntitySet="Dept_Registry">
+                <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
                 <ScalarProperty Name="fullname" ColumnName="fullname" />
                 <ScalarProperty Name="dept_code" ColumnName="dept_code" />
                 <ScalarProperty Name="username" ColumnName="username" />

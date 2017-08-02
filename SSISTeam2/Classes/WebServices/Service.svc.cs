@@ -95,6 +95,7 @@ namespace SSISTeam2.Classes.WebServices
         {
             //WCF_User user;
             //String flag;String updflag;
+              String flag="N";
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)

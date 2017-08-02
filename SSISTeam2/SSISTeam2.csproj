@@ -135,10 +135,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\404.aspx" />
     <Content Include="ChangeCategoryName1.aspx" />
     <Content Include="Classes\WebServices\MobileConfirmation_TEST.aspx" />
     <Content Include="Classes\WebServices\Service.svc" />
     <Content Include="CreateNewCategory.aspx" />
+    <Content Include="notauthorized.aspx" />
+    <Content Include="DEMO_RolesTest.aspx" />
     <Content Include="Views\Employee\ChangeCollectionPoint.aspx" />
     <Content Include="Views\StoreClerk\DeptDetails.aspx" />
     <Content Include="Views\StoreManager\AdjustmentDetail.aspx" />
@@ -234,6 +237,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="notauthorized.aspx.cs">
+      <DependentUpon>notauthorized.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="notauthorized.aspx.designer.cs">
+      <DependentUpon>notauthorized.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Employee\ChangeCollectionPoint.aspx.cs">
       <DependentUpon>ChangeCollectionPoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
