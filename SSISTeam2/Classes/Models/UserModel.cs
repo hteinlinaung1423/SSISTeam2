@@ -10,9 +10,9 @@ namespace SSISTeam2.Classes.Models
     {
         private string username, fullname;
         private string email;
-        private string contactNumber;
         private Department department;
         private string role;
+        private string mobilenum;
 
         public List<string> ROLES = new List<string>(new string[] { "DeptHead", "Manager", "Supervisor", "Clerk", "Employee" });
         //public static readonly string[] ROLES = { "DeptHead", "Manager", "Supervisor", "Clerk", "Employee" };
@@ -44,6 +44,10 @@ namespace SSISTeam2.Classes.Models
 
             //this.fullname = UserPrincipal.Current.DisplayName;
             this.fullname = user.fullname;
+            if (user.mobile_no == null)
+                this.mobilenum = "";
+            else
+                this.mobilenum = user.mobile_no;
         }
 
         public bool isDeptHead()
@@ -270,16 +274,16 @@ namespace SSISTeam2.Classes.Models
             }
         }
 
-        public string ContactNumber
+        public string MobileNum
         {
             get
             {
-                return contactNumber;
+                return mobilenum;
             }
 
             set
             {
-                contactNumber = value;
+                mobilenum = value;
             }
         }
 

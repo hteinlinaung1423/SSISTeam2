@@ -50,9 +50,10 @@ namespace SSISTeam2.Views
             }
             lblFullName.Text = "Welcome, " + fullName;
 
-                Department dept = ent.Departments.Where(x => currentDept == x.dept_code).First();
+            Department dept = ent.Departments.Where(x => currentDept == x.dept_code).First();
             Collection_Point colpoint = ent.Collection_Point.Where(y => y.collection_pt_id == dept.collection_point).First();
-            lblrep.Text = dept.rep_user;
+            Dept_Registry dr = ent.Dept_Registry.Where(x => x.username == dept.rep_user).First();
+            lblrep.Text = dr.fullname;
             lblcolpoint.Text = colpoint.location + " (" + colpoint.day_of_week +")";
 
             var deldept = (from x in ent.Approval_Duties select x.dept_code).ToList();

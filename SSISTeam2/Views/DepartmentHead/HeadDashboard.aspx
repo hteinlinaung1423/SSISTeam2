@@ -46,7 +46,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Employee">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblempname" runat="server" Text='<%# Eval("username") %>'></asp:Label>
+                                    <asp:Label ID="lblempname" runat="server" Text='<%# Eval("fullname") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Date">
@@ -97,7 +97,7 @@
                 <div class="panel-body">
                     Delegation:
                     <asp:Label ID="lbldelegation" runat="server" Text="No delegation for now"></asp:Label>
-
+                    <br />
                 </div>
 
                 <div class="panel-footer">

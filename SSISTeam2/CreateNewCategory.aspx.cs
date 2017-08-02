@@ -46,10 +46,8 @@ namespace SSISTeam2
 
         }
 
-
-
-
-        protected void Button1_Click1(object sender, EventArgs e)
+        
+        protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/ChangeCategoryName1.aspx");
         }
