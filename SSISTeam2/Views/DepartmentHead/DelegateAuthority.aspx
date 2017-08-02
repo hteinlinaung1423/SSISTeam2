@@ -12,7 +12,7 @@
     <div class="panel-body">
          <asp:Label ID="lbCheckDelegate" runat="server" Font-Size="Medium" CssClass="alert-info" Font-Italic="True" ></asp:Label>
 
-        <asp:Table ID="CurrentTable" runat="server" class="active" style="table-layout: auto; font-size: large;" CssClass="table-responsive">
+        <asp:Table ID="CurrentTable" runat="server" class="active" style="table-layout: auto; font-size: large;" CssClass="table table-responsive table-striped">
                
             <asp:TableRow>
                 <asp:TableCell>Created Date </asp:TableCell>
@@ -40,10 +40,17 @@
             </asp:TableRow>
 
             <asp:TableRow>
-                <asp:TableCell><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click" CssClass="btn btn-default"/></asp:TableCell>
+                <asp:TableCell>Delegation</asp:TableCell>
+                <asp:TableCell>: <asp:Label ID="lbDelgActive" runat="server" Text="-" ></asp:Label></asp:TableCell>
+            </asp:TableRow>
+
+            <asp:TableRow>
+                <asp:TableCell></asp:TableCell>
+                <asp:TableCell HorizontalAlign="Left"><asp:Button runat="server" Text="Delete" ID="btnDelete" OnClick="btnDelete_Click" CssClass="btn btn-default"/></asp:TableCell>
             </asp:TableRow>
 
         </asp:Table>
+        
     </div>
 
     <div>
@@ -89,10 +96,12 @@
         </asp:Table>
 
         <asp:Label ID="lbDateError" runat="server" ForeColor="#FF3300"></asp:Label>
+        <br />
+        <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label>
     </div> 
          </div> 
     
-    <asp:Label ID="Label1" runat="server" ForeColor="#FF3300"></asp:Label>
+   
      <asp:Button runat="server" Text="Back" CssClass="btn btn-primary" OnClick="btnBack_Click" />
   
  </asp:Content>

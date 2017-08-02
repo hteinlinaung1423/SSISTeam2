@@ -11,54 +11,34 @@ namespace SSISTeam2
     {
         SSISEntities s = new SSISEntities();
 
-        //public object GridView1 { get; private set; }
-
         protected void Page_Load(object sender, EventArgs e)
 
         {
             if (!this.IsPostBack)
             {
-                //GridView1.DataSource = s.Categories.ToList();
-                //GridView1.DataBind();
                 BindGrid();
 
             }
         }
 
-
-
         private void BindGrid()
 
         {
-            GridView1.DataSource = s.Categories.Where(x => x.deleted !="Y").ToList();
+            
+            GridView1.DataSource = s.Categories.Where(x => x.deleted != "Y").ToList();
             GridView1.DataBind();
         }
 
 
-        //protected void LinkButton1_Click(object sender, EventArgs e)
-        //{
-        //    s.SaveChanges();
-        //}
-
-        //protected void LinkButton2_Click(object sender, EventArgs e)
-        //{
-        //    s.SaveChanges();
-        //}
-
-        //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int cat_Id = (int)GridView1.SelectedDataKey.Value;
-
-        //    GridView1.DataSource = 
-        //    //using (Categories entities = new Categories())
-        //    //{
-
-        //    //    DetailsView1.DataSource = new Order[] { order };
-        //    //    DetailsView1.DataBind();
-        //    //}
-
-        //}
-
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            BindGrid();
+            if (e.NewPageIndex < 0)
+                GridView1.PageIndex = 0;
+            else
+                GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+        }
         protected void OnRowEditing(object sender, GridViewEditEventArgs e)
 
         {
@@ -99,8 +79,20 @@ namespace SSISTeam2
             using (SSISEntities entities = new SSISEntities())
             {
                 Category category = entities.Categories.Where(p => p.cat_id == cat_id).First<Category>();
-                category.deleted = "Y";
-                entities.SaveChanges();
+                //check if there are any items under this cat 
+                int checkcatid= category.cat_id;
+                List<Stock_Inventory> lsi = entities.Stock_Inventory.Where(x => x.cat_id == checkcatid).ToList();
+                if (lsi.Count == 0)
+                {
+                    category.deleted = "Y";
+                    entities.SaveChanges();
+                    Message.Text = "";
+                }
+                else
+                {
+                    Message.Text = "You cannot delete a category that has items within it.";
+                }
+                
             }
             this.BindGrid();
         }
@@ -111,63 +103,22 @@ namespace SSISTeam2
             if (TextBox3.Text != null)
             {
 
-
+                
                 GridView1.DataSource = SearchCatagories(TextBox3.Text);
                 GridView1.DataBind();
             }
+            Message.Text = "";
         }
         public List<Category> SearchCatagories(string name)
         {
-            return s.Categories.Where(x => x.cat_name == name).ToList();
+            List<Category> lc = s.Categories.Where(s => s.cat_name.Contains(name)).ToList();
+            return lc;
+            
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("CreateNewCategory.aspx");
         }
-
-        protected void On(object sender, GridViewCancelEditEventArgs e)
-        {
-
-        }
-
-        
-
-
-
-
-        //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int cat_id = (int)GridView1.SelectedDataKey.Value;
-        //    using (SSISEntities entities = new SSISEntities())
-        //    {
-        //        Category category = entities.Categories.Where(p => p.cat_id == cat_id).First<Category>();
-        //        DetailsView1.DataSource = new Category[] { cat_id };
-        //        DetailsView1.DataBind();
-        //    }
     }
-
-
-
-    //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-
-    //}
-
-
 }
-
-
-
-
-
-//protected void Button1_Click(object sender, EventArgs e)
-//    {
-//        if (TextBox1.Text != null)
-//        {
-//            GridView1.DataSource = s.SearchCatagories(TextBox1.Text);
-//            GridView1.DataBind();
-//        }
-//    }
-//}
-

@@ -95,7 +95,13 @@
                             <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                         </PagerTemplate>
                         <Columns>
-                            <asp:TemplateField ItemStyle-Width="10%" HeaderText="No">
+                           
+                             <asp:TemplateField HeaderText="No.">
+                                <ItemTemplate>
+                                   <%#Container.DataItemIndex+1 %>
+                                </ItemTemplate>
+                             </asp:TemplateField>
+                             <asp:TemplateField ItemStyle-Width="10%" HeaderText="No">
                                 <EditItemTemplate>
                                     <asp:Label ID="Label11" runat="server" Text='<%# Eval("tender_year_id") %>'></asp:Label>
                                 </EditItemTemplate>

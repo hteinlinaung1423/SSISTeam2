@@ -23,17 +23,19 @@ namespace SSISTeam2
             DropDownList Department = (DropDownList)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Department");
             DropDownList Role = (DropDownList)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Role");
             TextBox Fullname = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Fullname");
+            TextBox MobileNum = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("MobileNo");
 
             string department = Department.SelectedValue;
             string role = Role.SelectedValue;
             string fullname = Fullname.Text;
-
+            string mobilenum = MobileNum.Text;
 
             Dept_Registry user = new Dept_Registry();
             user.username = username;
             user.fullname = fullname;
             user.dept_code = department;
             user.deleted = "N";
+            user.mobile_no = mobilenum;
             context.Dept_Registry.Add(user);
             context.SaveChanges();
 

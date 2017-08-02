@@ -10,9 +10,9 @@ namespace SSISTeam2.Classes.Models
     {
         private string username, fullname;
         private string email;
-        private string contactNumber;
         private Department department;
         private string role;
+        private string mobilenum;
 
         public List<string> ROLES = new List<string>(new string[] { "DeptHead", "Manager", "Supervisor", "Clerk", "Employee" });
         //public static readonly string[] ROLES = { "DeptHead", "Manager", "Supervisor", "Clerk", "Employee" };
@@ -44,16 +44,41 @@ namespace SSISTeam2.Classes.Models
 
             //this.fullname = UserPrincipal.Current.DisplayName;
             this.fullname = user.fullname;
+            if (user.mobile_no == null)
+                this.mobilenum = "";
+            else
+                this.mobilenum = user.mobile_no;
         }
 
         public bool isDeptHead()
         {
             // If this user is a delegate head, or if he is the department head
-            return this.username == this.FindDelegateOrDeptHead().username || this.username == this.department.head_user || this.role == ROLES[0];
+            return
+                this.username == this.FindDelegateOrDeptHead().username
+                || this.username == this.department.head_user
+                || this.role == "DeptHead"
+                || this.role == "Manager"
+                ;
+        }
+        public bool isDeptHeadButNotStoreManager()
+        {
+            // If this user is a delegate head, or if he is the department head
+            return (
+                this.username == this.FindDelegateOrDeptHead().username
+                || this.username == this.department.head_user
+                || this.role == "DeptHead"
+                )
+                && this.role != "Manager"
+                && this.department.dept_code != "STOR";
+        }
+        public bool isDelegateHead()
+        {
+            // If he is a depthead, but he is not the original head
+            return isDeptHead() && this.username != this.department.head_user;
         }
         public bool isEmployee()
         {
-            return this.role == "Employee";
+            return this.role == "Employee" && !isDeptHead();
         }
         public bool isDepartmentRep()
         {
@@ -68,15 +93,15 @@ namespace SSISTeam2.Classes.Models
         }
         public bool isStoreManager()
         {
-            return this.role == "Manager";
+            return this.role == "Manager" || ( isDeptHead() && this.department.dept_code == "STOR" );
         }
         public bool isStoreSupervisor()
         {
-            return this.role == "Supervisor";
+            return this.role == "Supervisor" && !isDeptHead();
         }
         public bool isStoreClerk()
         {
-            return this.role == "Clerk";
+            return this.role == "Clerk" && !isStoreSupervisor() && !isDeptHead();
         }
 
         public UserModel FindStoreSupervisor()
@@ -249,16 +274,16 @@ namespace SSISTeam2.Classes.Models
             }
         }
 
-        public string ContactNumber
+        public string MobileNum
         {
             get
             {
-                return contactNumber;
+                return mobilenum;
             }
 
             set
             {
-                contactNumber = value;
+                mobilenum = value;
             }
         }
 
