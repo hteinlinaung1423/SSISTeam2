@@ -142,6 +142,7 @@
     <Content Include="CreateNewCategory.aspx" />
     <Content Include="notauthorized.aspx" />
     <Content Include="DEMO_RolesTest.aspx" />
+    <Content Include="Views\Employee\ChangeCollectionPoint.aspx" />
     <Content Include="Views\StoreClerk\DeptDetails.aspx" />
     <Content Include="Views\StoreManager\AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
@@ -249,6 +250,13 @@
     </Compile>
     <Compile Include="notauthorized.aspx.designer.cs">
       <DependentUpon>notauthorized.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\ChangeCollectionPoint.aspx.cs">
+      <DependentUpon>ChangeCollectionPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\ChangeCollectionPoint.aspx.designer.cs">
+      <DependentUpon>ChangeCollectionPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreClerk\DeptDetails.aspx.cs">
       <DependentUpon>DeptDetails.aspx</DependentUpon>

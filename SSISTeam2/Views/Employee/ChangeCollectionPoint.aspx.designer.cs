@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SSISTeam2.Views.DepartmentHead {
+namespace SSISTeam2.Views.Employee {
     
     
-    public partial class ChangeCollection_Rep {
+    public partial class ChangeCollectionPoint {
         
         /// <summary>
         /// Table control.
@@ -76,24 +76,6 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Label lbRepName;
         
         /// <summary>
-        /// tablerowNewRep control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow tablerowNewRep;
-        
-        /// <summary>
-        /// ddlRepName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRepName;
-        
-        /// <summary>
         /// btnCancel control.
         /// </summary>
         /// <remarks>
@@ -112,12 +94,12 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// lbDDLError1 control.
+        /// lbDDLError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDDLError1;
+        protected global::System.Web.UI.WebControls.Label lbDDLError;
     }
 }
