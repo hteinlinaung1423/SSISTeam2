@@ -46,7 +46,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Employee">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblempname" runat="server" Text='<%# Eval("fullname") %>'></asp:Label>
+                                    <asp:Label ID="lblempname" runat="server" Text='<%# Eval("username") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Date">
