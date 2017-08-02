@@ -353,9 +353,6 @@
                                 <br />
                                 <br />
                                 <br />
-                                <li class="dropdown-header">Store actions</li>
-                                <li>
-                                    <asp:LinkButton ID="btnLowStocks_Mgr" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Orders</asp:LinkButton>
                                 </li>
                                 <li class="dropdown-header">Manager actions</li>
 
