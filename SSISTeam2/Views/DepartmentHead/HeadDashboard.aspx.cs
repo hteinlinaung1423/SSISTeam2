@@ -10,9 +10,13 @@ namespace SSISTeam2.Views
 {
     public partial class HeadDashboard : System.Web.UI.Page
     {
+        public UserModel userModel;
+
         SSISEntities ent = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
+            userModel = new UserModel(User.Identity.Name);
+
             if (!IsPostBack)
             {
                 FillPage();

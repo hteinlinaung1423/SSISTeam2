@@ -184,6 +184,9 @@
                                 <li>
                                     <asp:LinkButton ID="linkBtnDepRepView" OnClick="btnDepRepViewDisbursements_Click" runat="server" style="color: #000000; text-decoration: none;">View Recent Disbursements</asp:LinkButton>
                                 </li>
+                                <li>
+                                    <asp:LinkButton ID="linkBtnChangeCollectionPoint" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point</asp:LinkButton>
+                                </li>
                                 <% } %>
 
                                 <% if (userModel.isEmployee())
@@ -263,7 +266,7 @@
 
                                 <% }
 
-                                    if (userModel.isDeptHead())
+                                    if (userModel.isDeptHeadButNotStoreManager())
                                     { %>
 
                                 <li>
@@ -277,15 +280,19 @@
                                 <li>
                                     <asp:LinkButton ID="btnApproveRequests" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
                                 </li>
+
+                                <% if (! userModel.isDelegateHead()) { %>
                                 <li>
 
                                     <asp:LinkButton ID="LinkButtonDelegateAuth1" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
+                                <% } %>
+
                                 <li>
                                     <asp:LinkButton ID="btnEmpViewCatalogue_deptHead" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                  <li>
-                                    <asp:LinkButton ID="LinkButtonn" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButtonn" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
                                 </li>
 
                                 <% }
@@ -315,16 +322,22 @@
                                 <li>
                                     <asp:LinkButton ID="btnApproveRequests_Mgr" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
                                 </li>
+
+                                <% if (! userModel.isDelegateHead()) { %>
                                 <li>
                                     <asp:LinkButton ID="LinkButtonDelegateAuth2" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
+                                <% } %>
+
                                 <li>
                                     <asp:LinkButton ID="btnEmpViewCatalogue_Mgr" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="linkBtnChangeCollectPt2" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Representative</asp:LinkButton>
+                                    <asp:LinkButton ID="linkBtnChangeCollectPt2" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
                                 </li>
                                 <%--<li class="divider"></li>--%>
+                                <br />
+                                <br />
                                 <br />
                                 <li class="dropdown-header">Store actions</li>
                                 <li>

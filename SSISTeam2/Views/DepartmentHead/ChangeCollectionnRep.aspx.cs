@@ -17,7 +17,8 @@ namespace SSISTeam2.Views.DepartmentHead
         int currentCollectId = 0;
         string loginUSer = null;
         string headName = null;
-     
+        UserModel user;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,11 +26,14 @@ namespace SSISTeam2.Views.DepartmentHead
             if (!IsPostBack)
             {
                 loginUSer = User.Identity.Name;
-                UserModel user = new UserModel(loginUSer);
+                user = new UserModel(loginUSer);
                 headName = user.FindDelegateOrDeptHead().Username;
+                var realHeadName = user.Department.head_user;
+
 
                 //
-                Department sdept = (Department) Session["sDept"];
+                //Department sdept = (Department) Session["sDept"];
+                Department sdept = user.Department;
                 //LabelDeptName.Text = sdept.name.ToString();
                 LabelContactName.Text = sdept.contact_user.ToString();
                 LabelPhNo.Text = sdept.contact_num.ToString();
@@ -42,21 +46,39 @@ namespace SSISTeam2.Views.DepartmentHead
                 lbRepName.Text = sdept.rep_user.ToString();
 
 
- 
-                        //get all collection point
-                        ddlCollectPoint.DataSource = ent.Collection_Point.ToList<Collection_Point>();
-                        ddlCollectPoint.DataTextField = "location";
-                        ddlCollectPoint.DataValueField = "collection_pt_id";
-                        ddlCollectPoint.DataBind();
+
+                //get all collection point
+                ddlCollectPoint.DataSource = ent.Collection_Point.ToList<Collection_Point>();
+                ddlCollectPoint.DataTextField = "location";
+                ddlCollectPoint.DataValueField = "collection_pt_id";
+                ddlCollectPoint.DataBind();
 
 
-                  //get all employee depend on * department & remove department head name
-                     List<String> empList = ent.Dept_Registry.Where(a => a.dept_code == sdept.dept_code).Select(y=>y.fullname).ToList<String>();
-                    empList.Remove(headName);                     
-                    ddlRepName.DataSource = empList;
-                    ddlRepName.DataBind();
-         
-              
+                //get all employee depend on * department & remove department head name
+                List<String> empList = ent.Dept_Registry.Where(a => a.dept_code == sdept.dept_code).Select(y => y.fullname).ToList<String>();
+                empList.Remove(headName);
+                if (empList.Contains(realHeadName))
+                {
+                    empList.Remove(realHeadName);
+                }
+                ddlRepName.DataSource = empList;
+                //UserModel repUser = new UserModel(sdept.rep_user);
+                ddlRepName.DataBind();
+                //ddlRepName.SelectedValue = (empList.IndexOf(repUser.Fullname) + 1).ToString();
+
+                if (user.isDepartmentRep())
+                {
+                    ddlRepName.Enabled = false;
+                }
+                else if (!user.isDeptHead())
+                {
+                    ddlRepName.Enabled = false;
+                    ddlCollectPoint.Enabled = false;
+                    btnSave.Enabled = false;
+                }
+
+
+
             }
         }
 
@@ -64,34 +86,40 @@ namespace SSISTeam2.Views.DepartmentHead
         {
 
             //save/update changed collection point & representative in database
-            string selectColPoint = ddlCollectPoint.SelectedValue.ToString();           
+            string selectColPoint = ddlCollectPoint.SelectedValue.ToString();
             string repFullName = ddlRepName.SelectedItem.ToString();
 
 
             try
             {
                 //Collection Point
-                if (selectColPoint.Equals("0") || repFullName.Equals("0"))
+                if (selectColPoint.Equals("0") || repFullName.Equals("Select---"))
                 {
                     lbDDLError.Text = "Please select the required field!";
                 }
 
                 //show Full Name- save username
-                Dept_Registry depReg = ent.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
-                string repUserName = depReg.username;
 
                 Department sdept = (Department)Session["sDept"];
                 var result = ent.Departments.SingleOrDefault(c => c.name == sdept.name);
-                result.rep_user = repUserName;
                 result.collection_point = Int16.Parse(selectColPoint);
+
                 ent.SaveChanges();
                 lbDDLError.Text = "Sucessfully Save!";
 
-                _sendEmail(User.Identity.Name, repUserName);
+                if (!user.isDepartmentRep())
+                {
+                    // Only change this is the guy is a rep user. Otherwise
+                    Dept_Registry depReg = ent.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
+                    string repUserName = depReg.username;
+                    result.rep_user = repUserName;
+                    _sendEmail(User.Identity.Name, repUserName);
+                }
+
             }
             catch
             {
-               
+
 
             }
 

@@ -24,7 +24,8 @@
                 <a data-toggle="collapse" href="#collapseLatestPending">
                     <h3 class="panel-title">
                         <asp:Label ID="lblPendingNum" runat="server"></asp:Label>
-                        <span class="glyphicon glyphicon-chevron-down" style="float: right;" /></h3>
+                        </h3>
+                        <span class="glyphicon glyphicon-chevron-down" style="float: right;" />
                 </a>
             </div>
             <div id="collapseLatestPending" class="panel-collapse collapse in">
@@ -74,7 +75,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <a data-toggle="collapse" href="#collapseDeptInfo">
-                    <h3 class="panel-title">Department Information<span class="glyphicon glyphicon-chevron-down" style="float: right;" /></h3>
+                    <h3 class="panel-title">Department Information</h3>
+                <span class="glyphicon glyphicon-chevron-down" style="float: right;" />
                 </a>
             </div>
             <div id="collapseDeptInfo" class="panel-collapse collapse in">
@@ -92,7 +94,6 @@
                     <asp:Button ID="btnchangecoll" runat="server" Text="Change Collection Point & Representative" CssClass="btn btn-primary" OnClick="btnchangecoll_Click" />
                 </div>
 
-
                 <div class="panel-body">
                     Delegation:
                     <asp:Label ID="lbldelegation" runat="server" Text="No delegation for now"></asp:Label>
@@ -100,11 +101,17 @@
                 </div>
 
                 <div class="panel-footer">
+                <% if (! userModel.isDelegateHead())
+                    { %>
                     <asp:Button ID="btndelegate" runat="server" Text="Maintain Delegation" CssClass="btn btn-primary" OnClick="btndelegate_Click" />
+                <% } %>
                 </div>
+
             </div>
 
         </div>
     </div>
+
+    </span></span>
 
 </asp:Content>

@@ -49,11 +49,32 @@ namespace SSISTeam2.Classes.Models
         public bool isDeptHead()
         {
             // If this user is a delegate head, or if he is the department head
-            return this.username == this.FindDelegateOrDeptHead().username || this.username == this.department.head_user || this.role == ROLES[0];
+            return
+                this.username == this.FindDelegateOrDeptHead().username
+                || this.username == this.department.head_user
+                || this.role == "DeptHead"
+                || this.role == "Manager"
+                ;
+        }
+        public bool isDeptHeadButNotStoreManager()
+        {
+            // If this user is a delegate head, or if he is the department head
+            return (
+                this.username == this.FindDelegateOrDeptHead().username
+                || this.username == this.department.head_user
+                || this.role == "DeptHead"
+                )
+                && this.role != "Manager"
+                && this.department.dept_code != "STOR";
+        }
+        public bool isDelegateHead()
+        {
+            // If he is a depthead, but he is not the original head
+            return isDeptHead() && this.username != this.department.head_user;
         }
         public bool isEmployee()
         {
-            return this.role == "Employee";
+            return this.role == "Employee" && !isDeptHead();
         }
         public bool isDepartmentRep()
         {
@@ -68,15 +89,15 @@ namespace SSISTeam2.Classes.Models
         }
         public bool isStoreManager()
         {
-            return this.role == "Manager";
+            return this.role == "Manager" || ( isDeptHead() && this.department.dept_code == "STOR" );
         }
         public bool isStoreSupervisor()
         {
-            return this.role == "Supervisor";
+            return this.role == "Supervisor" && !isDeptHead();
         }
         public bool isStoreClerk()
         {
-            return this.role == "Clerk";
+            return this.role == "Clerk" && !isStoreSupervisor() && !isDeptHead();
         }
 
         public UserModel FindStoreSupervisor()
