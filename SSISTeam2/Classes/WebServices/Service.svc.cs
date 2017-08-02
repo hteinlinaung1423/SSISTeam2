@@ -366,7 +366,8 @@ namespace SSISTeam2.Classes.WebServices
         //    {
 
         //        string itemName = eachObj.ItemDes;
-        //        itemCode = changeItemNametoCode(itemName);
+        //        //itemCode = changeItemNametoCode(itemName);
+        //        itemCode = eachObj.ItemCode;
         //        itemCodeAry[ii] = itemCode;
 
         //        int quantity = Int16.Parse(eachObj.RetrieveQty);
@@ -383,36 +384,36 @@ namespace SSISTeam2.Classes.WebServices
         //    MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
         //}
 
-        //chnage into Item Name to item COode
-        public string changeItemNametoCode(string itemName)
-        {
+        ////chnage into Item Name to item COode
+        //public string changeItemNametoCode(string itemName)
+        //{
 
-            Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
-            string itemCode = st.item_code;
-            return itemCode;
+        //    Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
+        //    string itemCode = st.item_code;
+        //    return itemCode;
 
-        }
+        //}
 
         //Testing
         public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
         {
-            int ii = 0;
-            Stock_Inventory st = null;
-            string itemCode = null;
-            string[] itemCodeAry = new string[retrieveList.Count];
-            //    //change item into item code
-            foreach (WCFRetieve eachObj in retrieveList)
-            {
-                //Item
-                string itemDescription = eachObj.ItemDes;
-                st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
-                itemCode = st.item_code;
-                itemCodeAry[ii] = itemCode;
-                ii++;
-            }
+            //int ii = 0;
+            //Stock_Inventory st = null;
+            //string itemCode = null;
+            //string[] itemCodeAry = new string[retrieveList.Count];
+            ////    //change item into item code
+            //foreach (WCFRetieve eachObj in retrieveList)
+            //{
+            //    //Item
+            //    string itemDescription = eachObj.ItemDes;
+            //    st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+            //    itemCode = st.item_code;
+            //    itemCodeAry[ii] = itemCode;
+            //    ii++;
+            //}
 
-            Request rq = context.Requests.SingleOrDefault(x => x.reason == "testr");
-            rq.rejected_reason = itemCode;
+            Request rq = context.Requests.SingleOrDefault(x => x.request_id==38);
+            rq.rejected_reason = "rrrr";
             rq.deleted = "R";
             context.Requests.Add(rq);
             context.SaveChanges();
@@ -456,7 +457,8 @@ namespace SSISTeam2.Classes.WebServices
         //    {
 
         //        string itemName = eachObj.ItemName;
-        //        itemCode = changeItemNametoCode(itemName);
+        //        //itemCode = changeItemNametoCode(itemName);
+        //        itemCode = eachObj.ItemCode;
         //        itemCodeAry[ii] = itemCode;
 
         //        int quantity = Int16.Parse(eachObj.DisbursedQty);
@@ -476,22 +478,23 @@ namespace SSISTeam2.Classes.WebServices
         public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
         {
             int ii = 0;
-            Stock_Inventory st = null;
-            string itemCode = null;
-            string[] itemCodeAry = new string[disburseList.Count];
+            //Stock_Inventory st = null;
+            //string itemCode = null;
+            //string[] itemCodeAry = new string[disburseList.Count];
 
-            foreach (WCFDisburse eachObj in disburseList)
-            {
-                //Item
-                string itemDescription = eachObj.ItemName;
-                st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
-                itemCode = st.item_code;
-                itemCodeAry[ii] = itemCode;
-                ii++;
-            }
+            //foreach (WCFDisburse eachObj in disburseList)
+            //{
+            //    //Item
+            //    string itemDescription = eachObj.ItemName;
+            //    //st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+            //    //itemCode = st.item_code;
+            //    itemCode = eachObj.ItemCode;
+            //    itemCodeAry[ii] = itemCode;
+            //    ii++;
+            //}
 
             Request rq = context.Requests.SingleOrDefault(x => x.reason == "testd");
-            rq.rejected_reason = itemCode;
+            rq.rejected_reason = "zzzz";
             rq.deleted = "D";
             rq.current_status = deptcode;
             rq.username = loginUserName;

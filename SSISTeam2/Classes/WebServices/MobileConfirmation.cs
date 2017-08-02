@@ -34,6 +34,7 @@ namespace SSISTeam2.Classes.WebServices
 
                     wcfItem.ItemDes = itemGroup.First().Description;
                     wcfItem.TotalQty = itemQty.ToString();
+                    wcfItem.ItemCode = itemGroup.Key;
 
                     wcfList.Add(wcfItem);
                 }
@@ -68,6 +69,7 @@ namespace SSISTeam2.Classes.WebServices
                     WCFDisburse wcfItem = new WCFDisburse();
                     wcfItem.ItemName = itemGroup.Key.Description;
                     wcfItem.RetrievedQty = itemQty.ToString();
+                    wcfItem.ItemCode = itemGroup.Key.ItemCode;
 
                     wcfList.Add(wcfItem);
                 }
