@@ -13,7 +13,6 @@ namespace SSISTeam2.Views.StoreClerk
     {
         SSISEntities entities = new SSISEntities();
         DateTime tenderDate;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -45,10 +44,10 @@ namespace SSISTeam2.Views.StoreClerk
                          orderby t3.name
                          select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
 
-            GridView1.Columns[0].Visible = false;
             GridView1.Columns[1].Visible = false;
             GridView1.Columns[2].Visible = false;
             GridView1.Columns[3].Visible = false;
+            GridView1.Columns[4].Visible = false;
             GridView1.DataSource = result.ToList();
             GridView1.DataBind();
         }
@@ -191,10 +190,10 @@ namespace SSISTeam2.Views.StoreClerk
                           //|| (result4.Contains(t2.price))
                           orderby t3.name
                           select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
-            GridView1.Columns[0].Visible = false;
             GridView1.Columns[1].Visible = false;
             GridView1.Columns[2].Visible = false;
             GridView1.Columns[3].Visible = false;
+            GridView1.Columns[4].Visible = false;
             GridView1.DataSource = result3.ToList();
             GridView1.DataBind();
 
