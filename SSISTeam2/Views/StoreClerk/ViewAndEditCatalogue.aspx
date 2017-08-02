@@ -5,9 +5,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
-    <div class="panel panel-default">
+    <asp:Panel ID="Panel1" runat="server" DefaultButton ="Button1">
+         <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><h3>View Catalogue List</h3></div>
+        <div class="panel-heading"><h3>View Store Catalogue</h3></div>
         <div class="panel-body">
            <p></p>
             <table>
@@ -16,7 +17,7 @@
                     
                     <td>
                         <div class="input-group">
-                            <asp:TextBox ID="TextBox1" class="form-control" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                             <span class="input-group-addon">
                                 <i class="fa fa-search"></i>
                             </span>
@@ -26,10 +27,6 @@
                     <td>
                         <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
                     </td>
-                    
-
-                   
-                    
                 </tr>
             </table>
               <p></p> 
@@ -52,7 +49,11 @@
                     <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                 </PagerTemplate>
                  <Columns>
-                     
+                     <asp:TemplateField HeaderText="No.">
+                   <ItemTemplate>
+                       <%#Container.DataItemIndex+1 %>
+                   </ItemTemplate>
+                </asp:TemplateField>
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Item Number"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         <ItemTemplate>
                             <asp:Label ID="Label1" runat="server" Text='<%# Eval("itemNumber") %>' CssClass="text-bold" Width="70px"></asp:Label>
@@ -60,16 +61,7 @@
 
 <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
-
-                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="No"> 
-                
-                        <ItemTemplate>
-                            <asp:Label ID="Label9" runat="server" Text='<%# Eval("CategoryId") %>'></asp:Label>
-                        </ItemTemplate>
-
-<ItemStyle Width="10%"></ItemStyle>
-                    </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="CategoryName"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Category Name"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                        <EditItemTemplate>
                             <asp:DropDownList ID="DropDownList1" Visible="false" runat="server">
                             </asp:DropDownList>
@@ -80,13 +72,9 @@
                             <asp:Label ID="Label2" runat="server" Text='<%# Eval("categoryName") %>' CssClass="text-bold" Height="20px" Width="100px"></asp:Label>
                             <%--<asp:DropDownList ID="DropDownList2" runat="server">
                             </asp:DropDownList>--%>
-                        </ItemTemplate>
-
-<ItemStyle Width="10%"></ItemStyle>
+                        </ItemTemplate><ItemStyle Width="10%">
+                        </ItemStyle>
                     </asp:TemplateField>
-
-                    
-
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Description"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox2" runat="server" Text='<%# Eval("Description") %>' BackColor="Transparent" Height="30px" Width="200px"></asp:TextBox>
@@ -98,20 +86,14 @@
 
 <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
-                     <asp:TemplateField ItemStyle-Width="80%" HeaderText="Current Quantity"><%-- HeaderStyle-CssClass="text-center-impt">--%>
-                        
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox6" runat="server" Text='<%# Eval("CQ") %>' BackColor="Transparent" Height="30px" Width="50px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Current Quantity is required" ControlToValidate="TextBox3" ForeColor="Red"></asp:RequiredFieldValidator>
-                        </EditItemTemplate>
+                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Current Quantity"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         <ItemTemplate>
                             <asp:Label ID="Label7" runat="server" Text='<%# Eval("CQ") %>' CssClass="text-bold" Width="150px"></asp:Label>
                         </ItemTemplate>
-
 <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="80%" HeaderText="Reorder Level"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Reorder Level"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox3" runat="server" Text='<%# Eval("RL") %>' BackColor="Transparent" Height="30px" Width="50px"></asp:TextBox>
@@ -123,7 +105,7 @@
 
 <ItemStyle Width="10%"></ItemStyle>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-Width="80%" HeaderText="Reorder Quantity"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Reorder Quantity"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                         
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox4" runat="server" Text='<%# Eval("RQ") %>' BackColor="Transparent" Height="30px" Width="50px"></asp:TextBox>
@@ -164,8 +146,6 @@
                 
             </asp:GridView>
                  <asp:GridView ID="GridView2" runat="server"></asp:GridView>
-                 <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-                 <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
             </div>
 
         </div>
@@ -174,6 +154,7 @@
         <!-- Table -->
 
        
-
+    </asp:Panel>
+   
    
 </asp:Content>
