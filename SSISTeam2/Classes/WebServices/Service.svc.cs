@@ -91,56 +91,96 @@ namespace SSISTeam2.Classes.WebServices
         //    else { return user = new WCF_User(null, "failed", null); }
         //}
 
+        //WCF_User IService.login(string name, string pass)
+        //{
+        //    //WCF_User user;
+        //    //String flag;String updflag;
+        //      String updflag = "N";
+        //    bool validate = Membership.ValidateUser(name, pass);
+
+        //    if (validate)
+        //    {
+        //       // updflag = new Work().CheckApprovalDutiesStatus();
+        //        //if (updflag.Equals("T"))
+        //       // {
+        //            UserModel usermodel = new UserModel(name);
+        //            UserModel depthead = usermodel.FindDelegateOrDeptHead();
+        //            if (usermodel.Role == "DeptHead")
+        //            {
+        //                user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N");
+        //            }
+        //            else
+        //            {
+        //                if (usermodel.Username == depthead.Username)
+        //                {
+        //                    user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role, "Y");
+        //                }
+        //                else
+        //                {
+        //                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N");
+        //                }
+        //            }
+        //       // }
+
+
+        //        //string[] role = Roles.GetRolesForUser(name);
+        //        //Dept_Registry dept = new Work().login(name);
+        //        //user = new WCF_User(dept.dept_code, name, role[0]);
+        //        //Comment delegate role
+        //        //updflag = new Work().CheckApprovalDutiesStatus();
+        //        //   if (updflag.Equals("T"))
+        //        //   {
+        //        //     flag = new Work().GetDepHeadRole(name);
+        //        //     Dept_Registry dept = new Work().login(name);
+        //        //     try
+        //        //        {
+        //        //            if (flag.Equals("Y"))
+        //        //            {
+        //        //                role[0] = "DeptHead";
+        //        //                user = new WCF_User(dept.dept_code, name, role[0], flag);
+        //        //            }
+        //        //    }
+        //        //    catch
+        //        //        {
+        //        //            flag = "N";
+
+        //        //            user = new WCF_User(dept.dept_code, name, role[0], flag);
+        //        //        }
+        //        //    }
+
+        //        return user;
+        //    }
+
         WCF_User IService.login(string name, string pass)
         {
             //WCF_User user;
-            //String flag;String updflag;
-              String flag="N";
+            String updflag;
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)
             {
-                UserModel usermodel = new UserModel(name);
-
-                //string[] role = Roles.GetRolesForUser(name);
-                //Dept_Registry dept = new Work().login(name);
-                //user = new WCF_User(dept.dept_code, name, role[0]);
-                //Comment delegate role
-                //updflag = new Work().CheckApprovalDutiesStatus();
-                //   if (updflag.Equals("T"))
-                //   {
-                //     flag = new Work().GetDepHeadRole(name);
-                //     Dept_Registry dept = new Work().login(name);
-                //     try
-                //        {
-                //            if (flag.Equals("Y"))
-                //            {
-                //                role[0] = "DeptHead";
-                //                user = new WCF_User(dept.dept_code, name, role[0], flag);
-                //            }
-                //    }
-                //    catch
-                //        {
-                //            flag = "N";
-
-                //            user = new WCF_User(dept.dept_code, name, role[0], flag);
-                //        }
-                //    }
-                UserModel depthead = usermodel.FindDelegateOrDeptHead();
-                if (usermodel.Role == "DeptHead")
-                {
-                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N", usermodel.MobileNum);
-                } else
-                {
-                    if (usermodel.Username == depthead.Username)
+               updflag = new Work().CheckApprovalDutiesStatus();
+               if (updflag.Equals("T"))
+               {
+                    UserModel usermodel = new UserModel(name);
+                    UserModel depthead = usermodel.FindDelegateOrDeptHead();
+                    if (usermodel.Role == "DeptHead")
                     {
-                        user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role, "Y", usermodel.MobileNum);
+                        user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N",usermodel.MobileNum);
                     }
                     else
                     {
-                        user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N", usermodel.MobileNum);
+                        if (usermodel.Username == depthead.Username)
+                        {
+                            user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role, "Y", usermodel.MobileNum);
+                        }
+                        else
+                        {
+                            user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N", usermodel.MobileNum);
+                        }
                     }
                 }
+                    
                 return user;
             }
 
@@ -167,7 +207,7 @@ namespace SSISTeam2.Classes.WebServices
             //        }
             //    return user;
             //}
-            else { return user = new WCF_User(null, "failed", null, null, null); }
+            else { return user = new WCF_User(null, "failed", null, null,null); }
         }
 
         // Heng Tiong's MonthlyCheck implementation
@@ -354,70 +394,70 @@ namespace SSISTeam2.Classes.WebServices
             return work.wgetEachItemQty(user);
         }
         //Update Retrieve Form
-        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
-        //{
-        //    int ii = 0;
-        //    string itemCode = null;
-        //    string[] itemCodeAry = new string[retrieveList.Count];
-        //    int[] qtyAry = new int[retrieveList.Count];
-        //    Dictionary<string, int> dicList = new Dictionary<string, int>();
-
-        //    foreach (WCFRetieve eachObj in retrieveList)
-        //    {
-
-        //        string itemName = eachObj.ItemDes;
-        //        //itemCode = changeItemNametoCode(itemName);
-        //        itemCode = eachObj.ItemCode;
-        //        itemCodeAry[ii] = itemCode;
-
-        //        int quantity = Int16.Parse(eachObj.RetrieveQty);
-        //        qtyAry[ii] = quantity;
-
-        //        //Add to dictionary
-        //        dicList.Add(itemCodeAry[ii], qtyAry[ii]);
-
-        //        ii++;
-        //    }
-
-        //    //Pass data to Mobile confirmation
-
-        //    MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
-        //}
-
-        ////chnage into Item Name to item COode
-        //public string changeItemNametoCode(string itemName)
-        //{
-
-        //    Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
-        //    string itemCode = st.item_code;
-        //    return itemCode;
-
-        //}
-
-        //Testing
         public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
         {
-            //int ii = 0;
-            //Stock_Inventory st = null;
-            //string itemCode = null;
-            //string[] itemCodeAry = new string[retrieveList.Count];
-            ////    //change item into item code
-            //foreach (WCFRetieve eachObj in retrieveList)
-            //{
-            //    //Item
-            //    string itemDescription = eachObj.ItemDes;
-            //    st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
-            //    itemCode = st.item_code;
-            //    itemCodeAry[ii] = itemCode;
-            //    ii++;
-            //}
+            int ii = 0;
+            string itemCode = null;
+            string[] itemCodeAry = new string[retrieveList.Count];
+            int[] qtyAry = new int[retrieveList.Count];
+            Dictionary<string, int> dicList = new Dictionary<string, int>();
 
-            Request rq = context.Requests.SingleOrDefault(x => x.request_id==38);
-            rq.rejected_reason = "rrrr";
-            rq.deleted = "R";
-            context.Requests.Add(rq);
-            context.SaveChanges();
+            foreach (WCFRetieve eachObj in retrieveList)
+            {
+
+                string itemName = eachObj.ItemDes;
+                //itemCode = changeItemNametoCode(itemName);
+                itemCode = eachObj.ItemCode;
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.RetrieveQty);
+                qtyAry[ii] = quantity;
+
+                //Add to dictionary
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
+
+                ii++;
+            }
+
+            //Pass data to Mobile confirmation
+
+            MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
         }
+
+        //chnage into Item Name to item COode
+        public string changeItemNametoCode(string itemName)
+        {
+
+            Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
+            string itemCode = st.item_code;
+            return itemCode;
+
+        }
+
+        //Testing
+        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
+        //{
+        //    //int ii = 0;
+        //    //Stock_Inventory st = null;
+        //    //string itemCode = null;
+        //    //string[] itemCodeAry = new string[retrieveList.Count];
+        //    ////    //change item into item code
+        //    //foreach (WCFRetieve eachObj in retrieveList)
+        //    //{
+        //    //    //Item
+        //    //    string itemDescription = eachObj.ItemDes;
+        //    //    st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //    //    itemCode = st.item_code;
+        //    //    itemCodeAry[ii] = itemCode;
+        //    //    ii++;
+        //    //}
+
+        //    Request rq = context.Requests.SingleOrDefault(x => x.request_id==38);
+        //    rq.rejected_reason = "rrrr";
+        //    rq.deleted = "R";
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
+        //}
 
         public List<String> GetDisbCollectP()
         {
@@ -445,62 +485,62 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         //Update Disburse Form
-        //public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
-        //{
-        //    int ii = 0;
-        //    string itemCode = null;
-        //    string[] itemCodeAry = new string[disburseList.Count];
-        //    int[] qtyAry = new int[disburseList.Count];
-        //    Dictionary<string, int> dicList = new Dictionary<string, int>();
-
-        //    foreach (WCFDisburse eachObj in disburseList)
-        //    {
-
-        //        string itemName = eachObj.ItemName;
-        //        //itemCode = changeItemNametoCode(itemName);
-        //        itemCode = eachObj.ItemCode;
-        //        itemCodeAry[ii] = itemCode;
-
-        //        int quantity = Int16.Parse(eachObj.DisbursedQty);
-        //        qtyAry[ii] = quantity;
-
-        //        //Add to dictionary
-        //        dicList.Add(itemCodeAry[ii], qtyAry[ii]);
-
-        //        ii++;
-        //    }
-
-        //    //Pass data to Mobile confirmation
-        //    MobileConfirmation.SignOffDisbursement(loginUserName, deptcode, dicList);
-        //}
-
-        //Testing
         public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
         {
             int ii = 0;
-            //Stock_Inventory st = null;
-            //string itemCode = null;
-            //string[] itemCodeAry = new string[disburseList.Count];
+            string itemCode = null;
+            string[] itemCodeAry = new string[disburseList.Count];
+            int[] qtyAry = new int[disburseList.Count];
+            Dictionary<string, int> dicList = new Dictionary<string, int>();
 
-            //foreach (WCFDisburse eachObj in disburseList)
-            //{
-            //    //Item
-            //    string itemDescription = eachObj.ItemName;
-            //    //st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
-            //    //itemCode = st.item_code;
-            //    itemCode = eachObj.ItemCode;
-            //    itemCodeAry[ii] = itemCode;
-            //    ii++;
-            //}
+            foreach (WCFDisburse eachObj in disburseList)
+            {
 
-            Request rq = context.Requests.SingleOrDefault(x => x.reason == "testd");
-            rq.rejected_reason = "zzzz";
-            rq.deleted = "D";
-            rq.current_status = deptcode;
-            rq.username = loginUserName;
-            context.Requests.Add(rq);
-            context.SaveChanges();
+                string itemName = eachObj.ItemName;
+                //itemCode = changeItemNametoCode(itemName);
+                itemCode = eachObj.ItemCode;
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.DisbursedQty);
+                qtyAry[ii] = quantity;
+
+                //Add to dictionary
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
+
+                ii++;
+            }
+
+            //Pass data to Mobile confirmation
+            MobileConfirmation.SignOffDisbursement(loginUserName, deptcode, dicList);
         }
+
+        //Testing
+        //public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
+        //{
+        //    int ii = 0;
+        //    //Stock_Inventory st = null;
+        //    //string itemCode = null;
+        //    //string[] itemCodeAry = new string[disburseList.Count];
+
+        //    //foreach (WCFDisburse eachObj in disburseList)
+        //    //{
+        //    //    //Item
+        //    //    string itemDescription = eachObj.ItemName;
+        //    //    //st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //    //    //itemCode = st.item_code;
+        //    //    itemCode = eachObj.ItemCode;
+        //    //    itemCodeAry[ii] = itemCode;
+        //    //    ii++;
+        //    //}
+
+        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "testd");
+        //    rq.rejected_reason = "zzzz";
+        //    rq.deleted = "D";
+        //    rq.current_status = deptcode;
+        //    rq.username = loginUserName;
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
+        //}
 
 
         // Htein Lin Aung Apply new Request

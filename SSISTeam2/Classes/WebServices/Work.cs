@@ -115,6 +115,30 @@ namespace SSISTeam2.Classes.WebServices
         //    }
         //}
 
+        public string CheckApprovalDutiesStatus()
+        {
+            string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+            try
+            {
+                var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
+                DateTime date = Convert.ToDateTime(result.ToString());
+                string endDate = date.ToString("yyyy-MM-dd");
+                if (endDate.CompareTo(currentDate) < 0)
+                {
+                    var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
+                    q.deleted = "Y";
+                    ctx.SaveChanges();
+
+                }
+                return statusFlag = "T";
+
+            }
+            catch
+            {
+                return statusFlag = "T";
+            }
+        }
+
         public string GetDepHeadRole(string user)
         {
             
@@ -298,7 +322,7 @@ namespace SSISTeam2.Classes.WebServices
             {
                 int adjusted = int.Parse(i.adjustedQty);
 
-                Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_description == i.itemName).ToList().First();
+                Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_code == i.itemCode).ToList().First();
                 inventory.current_qty += adjusted;
 
                 MonthlyCheckModel itemModel = new MonthlyCheckModel(inventory);

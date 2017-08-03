@@ -253,17 +253,34 @@ namespace SSISTeam2.Classes.WebServices
     public class WCF_FileDiscrepancy
     {
         [DataMember]
+        public string itemCode;
+        [DataMember]
         public string itemName;
+        [DataMember]
+        public string retrievedQty;
+        [DataMember]
+        public string disbursedQty;
         [DataMember]
         public string adjustedQty;
         [DataMember]
         public string reason;
 
-        public WCF_FileDiscrepancy(string itemName, string adjustedQty, string reason)
+
+        public WCF_FileDiscrepancy(string itemCode, string itemName, string retrievedQty, string disbursedQty,string adjustedQty, string reason)
         {
+            this.itemCode = itemCode;
             this.itemName = itemName;
+            this.retrievedQty = retrievedQty;
+            this.disbursedQty = disbursedQty;
             this.adjustedQty = adjustedQty;
             this.reason = reason;
+        }
+
+        [DataMember]
+        string ItemCode
+        {
+            get { return itemCode; }
+            set { itemCode = value; }
         }
 
         [DataMember]
@@ -271,6 +288,20 @@ namespace SSISTeam2.Classes.WebServices
         {
             get { return itemName; }
             set { itemName = value; }
+        }
+
+        [DataMember]
+        string RetrievedQty
+        {
+            get { return retrievedQty; }
+            set { retrievedQty = value; }
+        }
+
+        [DataMember]
+        string DisbursedQty
+        {
+            get { return disbursedQty; }
+            set { disbursedQty = value; }
         }
 
         [DataMember]

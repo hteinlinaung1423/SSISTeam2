@@ -25,12 +25,14 @@
                     <asp:ListItem Text="Select---" Value="0"></asp:ListItem></asp:DropDownList>
                     <asp:Label ID="lblerror3" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
                      </div>
+            
                 <div class="form-group">
                     <label for="label_tenderDate">Tender Date: </label>
-                    <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" TextMode="Date" AutoPostBack="true"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Tender Date is Required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
                     <asp:Label ID="lblerror1" runat="server" Text="" ForeColor="#FF3300"></asp:Label>
                 </div>
+                </
                 <div class="form-group">
                     <label for="label_price">Price: </label>
                     <asp:TextBox ID="TextBox2" class="form-control" runat="server"></asp:TextBox>
@@ -38,16 +40,24 @@
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please Enter digit only" ControlToValidate="TextBox2" ValidationExpression="[0-9]*\.?[0-9]*" ForeColor="Red" ValidationGroup="valGroup1"></asp:RegularExpressionValidator>
                 </div>
                
-                <div class="form-group">
+                <%--<div class="form-group">
                     <label for="label_rank">Rank: </label>
                     <asp:TextBox ID="TextBox3" class="form-control" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Rank is Required" ControlToValidate="TextBox3" ForeColor="Red"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Please Enter Digit Only." ControlToValidate="TextBox3" ValidationExpression="\d*" ForeColor="Red" ValidationGroup="valGroup1"></asp:RegularExpressionValidator>
-                </div>
-           
+                </div>--%>
+                <%--<div class="form-group">
+                     <asp:Label ID="Label1" runat="server" Text="Label" ForeColor="Red"></asp:Label>
+                </div>--%>
+               
+                     <asp:Label ID="Label1" runat="server" Text="" ForeColor="Red"></asp:Label>
+              
+                <div class="form-group">
                 <asp:Button runat="server" ID="SubmitButton" Text="Submit"  CssClass="btn btn-primary" OnClick="InsertNewTender_Click"/>
                 <asp:Button runat="server" ID="CancelButton" Text="Cancel"  CssClass="btn btn-primary" OnClick="Cancel_Click" CausesValidation="false"/>
-        
+               </div>
+            
+            <%--<asp:GridView ID="GridView1" runat="server"></asp:GridView>--%>
             </div>
         <!-- Table -->
     </div>
