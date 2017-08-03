@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.EFFacades;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
@@ -127,6 +128,8 @@ namespace SSISTeam2.Views.StoreClerk
             var result4 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
             result4.tender_date = tenderDate;
             entities.SaveChanges();
+
+            FacadeFactory.GetTenderListService().RedoRankingsForTenderList();
 
             GridView1.EditIndex = -1;
             this.BindGrid();

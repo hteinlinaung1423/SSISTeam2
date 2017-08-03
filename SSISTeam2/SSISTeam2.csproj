@@ -238,13 +238,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-  <Compile Include="Classes\dev\dev_FillTenderDetailsPrelim.aspx.cs">
+    <Compile Include="Classes\dev\dev_FillTenderDetailsPrelim.aspx.cs">
       <DependentUpon>dev_FillTenderDetailsPrelim.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Classes\dev\dev_FillTenderDetailsPrelim.aspx.designer.cs">
       <DependentUpon>dev_FillTenderDetailsPrelim.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\EFFServices\ITenderListService.cs" />
+    <Compile Include="Classes\EFFServices\TenderListService.cs" />
     <Compile Include="DEMO_RolesTest.aspx.cs">
       <DependentUpon>DEMO_RolesTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.EFFacades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -44,12 +45,12 @@ namespace SSISTeam2.Views.StoreClerk
             //For dropdown list checking
             if (supplierName.Equals("Select---"))
             {
-                lblerror2.Text = "PLeae choose one supplier name!";
+                lblerror2.Text = "Please choose one supplier name!";
                 
             }
             if (itemDescription.Equals("Select---"))
             {
-                lblerror3.Text = "PLeae choose one item description!";
+                lblerror3.Text = "Please choose one item description!";
                
             }
             if (selectStartDate.CompareTo(currentDate) == -1)
@@ -88,6 +89,9 @@ namespace SSISTeam2.Views.StoreClerk
                         entities.Tender_List.Add(tender);
                         entities.Tender_List_Details.Add(tenderDetail);
                         entities.SaveChanges();
+
+                        FacadeFactory.GetTenderListService().RedoRankingsForTenderList();
+
                         Response.Redirect("TenderListForm.aspx");
                     }
                 }

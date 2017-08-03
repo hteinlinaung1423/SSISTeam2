@@ -55,7 +55,7 @@
                                         <asp:Label runat="server" Text='<%# Eval("UnitOfMeasure") %>' EnableViewState="false"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Quantity">
+                                <asp:TemplateField HeaderText="Quantity" ItemStyle-Width="10%">
                                     <ItemTemplate>
                                         <asp:TextBox ID="tbQuantity" runat="server" Text='<%# Eval("Quantity") %>'
                                             max='<%# Eval("Quantity") %>'
