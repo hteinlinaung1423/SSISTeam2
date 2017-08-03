@@ -33,7 +33,6 @@
                         <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
                     </td>
                     
-
                    
                     <td><div style="text-align:left;position: absolute; margin: 0 auto; left: 1000px; right: 0; bottom: 362px;"><asp:Button ID="add" runat="server" Text="Add New Tender" CssClass="btn btn-primary" OnClick="AddNewTender_Click" /> </div></td>
                 </tr>

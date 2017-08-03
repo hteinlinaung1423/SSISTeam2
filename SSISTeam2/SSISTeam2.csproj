@@ -145,6 +145,7 @@
     <Content Include="DEMO_RolesTest.aspx" />
     <Content Include="Views\Employee\ChangeCollectionPoint.aspx" />
     <Content Include="Views\StoreClerk\DeptDetails.aspx" />
+    <Content Include="Views\StoreClerk\WebForm1.aspx" />
     <Content Include="Views\StoreManager\AdjustmentDetail.aspx" />
     <Content Include="CreateChartReport.aspx" />
     <Content Include="Views\StoreClerk\Dashboard.aspx" />
@@ -245,6 +246,8 @@
     <Compile Include="Classes\dev\dev_FillTenderDetailsPrelim.aspx.designer.cs">
       <DependentUpon>dev_FillTenderDetailsPrelim.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\EFFServices\ITenderListService.cs" />
+    <Compile Include="Classes\EFFServices\TenderListService.cs" />
     <Compile Include="DEMO_RolesTest.aspx.cs">
       <DependentUpon>DEMO_RolesTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -279,6 +282,13 @@
     </Compile>
     <Compile Include="Views\StoreClerk\DeptDetails.aspx.designer.cs">
       <DependentUpon>DeptDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreClerk\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\StoreClerk\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\StoreManager\AdjustmentDetail.aspx.cs">
       <DependentUpon>AdjustmentDetail.aspx</DependentUpon>

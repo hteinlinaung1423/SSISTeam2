@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.EFFacades;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
@@ -20,10 +21,10 @@ namespace SSISTeam2.Views.StoreClerk
                 this.BindGrid();
                 String searchWord = TextBox1.Text;
                 var result = entities.Suppliers.Where(x => x.name.Contains(searchWord)).Select(x => x.name).ToList();
-                
+
             }
             List<Supplier> supList = entities.Suppliers.ToList();
-            
+
         }
 
 
@@ -73,7 +74,7 @@ namespace SSISTeam2.Views.StoreClerk
             string supplierId = (row.FindControl("DropDownList1") as DropDownList).SelectedValue;
             //string supplierId = (row.FindControl("Label9") as Label).Text;
             //string supplierName = dropDowns[0].SelectedValue.
-            string supplierName= (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
+            string supplierName = (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
             //Label9.Text = supplierId;
             //Label1.Text = supplierName;
             //string supplierName= (row.FindControl("TextBox1") as TextBox).Text;
@@ -104,7 +105,7 @@ namespace SSISTeam2.Views.StoreClerk
             // find tender_year_id for the latest one, with the supplier_id
 
             var tenderYearItem = entities.Tender_List.Where(x => x.supplier_id == supplierId).OrderByDescending(o => o.tender_date);
-                
+
             if (tenderYearItem.Count() > 0)
             {
                 tender.tender_year_id = tenderYearItem.First().tender_year_id;
@@ -127,6 +128,8 @@ namespace SSISTeam2.Views.StoreClerk
             var result4 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
             result4.tender_date = tenderDate;
             entities.SaveChanges();
+
+            FacadeFactory.GetTenderListService().RedoRankingsForTenderList();
 
             GridView1.EditIndex = -1;
             this.BindGrid();
@@ -237,4 +240,3 @@ namespace SSISTeam2.Views.StoreClerk
     }
 
 }
-

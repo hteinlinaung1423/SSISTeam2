@@ -124,5 +124,34 @@ namespace SSISTeam2.Classes.dev
                 context.SaveChanges();
             }
         }
+
+        protected void btnSetRanks_Click(object sender, EventArgs e)
+        {
+            // Get all items
+            // Group by item code
+            // For each item code, sort its contents by price
+            // With the sorted, rank in order 1, 2, 3
+            // Save changes
+
+            using (SSISEntities context = new SSISEntities())
+            {
+                // For all item codes that are not set, go and add things to stuff
+                var groups = context.Tender_List_Details.GroupBy(x => x.item_code).ToList();
+
+                foreach (var group in groups)
+                {
+                    var sorted = group.OrderBy(o => o.price).ToList();
+
+                    int rank = 1;
+                    foreach (var item in sorted)
+                    {
+                        item.rank = rank;
+                        rank++;
+                    }
+                }
+
+                context.SaveChanges();
+            }
+        }
     }
 }

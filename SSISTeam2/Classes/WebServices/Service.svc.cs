@@ -91,56 +91,96 @@ namespace SSISTeam2.Classes.WebServices
         //    else { return user = new WCF_User(null, "failed", null); }
         //}
 
+        //WCF_User IService.login(string name, string pass)
+        //{
+        //    //WCF_User user;
+        //    //String flag;String updflag;
+        //      String updflag = "N";
+        //    bool validate = Membership.ValidateUser(name, pass);
+
+        //    if (validate)
+        //    {
+        //       // updflag = new Work().CheckApprovalDutiesStatus();
+        //        //if (updflag.Equals("T"))
+        //       // {
+        //            UserModel usermodel = new UserModel(name);
+        //            UserModel depthead = usermodel.FindDelegateOrDeptHead();
+        //            if (usermodel.Role == "DeptHead")
+        //            {
+        //                user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N");
+        //            }
+        //            else
+        //            {
+        //                if (usermodel.Username == depthead.Username)
+        //                {
+        //                    user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role, "Y");
+        //                }
+        //                else
+        //                {
+        //                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N");
+        //                }
+        //            }
+        //       // }
+
+
+        //        //string[] role = Roles.GetRolesForUser(name);
+        //        //Dept_Registry dept = new Work().login(name);
+        //        //user = new WCF_User(dept.dept_code, name, role[0]);
+        //        //Comment delegate role
+        //        //updflag = new Work().CheckApprovalDutiesStatus();
+        //        //   if (updflag.Equals("T"))
+        //        //   {
+        //        //     flag = new Work().GetDepHeadRole(name);
+        //        //     Dept_Registry dept = new Work().login(name);
+        //        //     try
+        //        //        {
+        //        //            if (flag.Equals("Y"))
+        //        //            {
+        //        //                role[0] = "DeptHead";
+        //        //                user = new WCF_User(dept.dept_code, name, role[0], flag);
+        //        //            }
+        //        //    }
+        //        //    catch
+        //        //        {
+        //        //            flag = "N";
+
+        //        //            user = new WCF_User(dept.dept_code, name, role[0], flag);
+        //        //        }
+        //        //    }
+
+        //        return user;
+        //    }
+
         WCF_User IService.login(string name, string pass)
         {
             //WCF_User user;
-            //String flag;String updflag;
-              String flag="N";
+            String updflag;
             bool validate = Membership.ValidateUser(name, pass);
 
             if (validate)
             {
-                UserModel usermodel = new UserModel(name);
-
-                //string[] role = Roles.GetRolesForUser(name);
-                //Dept_Registry dept = new Work().login(name);
-                //user = new WCF_User(dept.dept_code, name, role[0]);
-                //Comment delegate role
-                //updflag = new Work().CheckApprovalDutiesStatus();
-                //   if (updflag.Equals("T"))
-                //   {
-                //     flag = new Work().GetDepHeadRole(name);
-                //     Dept_Registry dept = new Work().login(name);
-                //     try
-                //        {
-                //            if (flag.Equals("Y"))
-                //            {
-                //                role[0] = "DeptHead";
-                //                user = new WCF_User(dept.dept_code, name, role[0], flag);
-                //            }
-                //    }
-                //    catch
-                //        {
-                //            flag = "N";
-
-                //            user = new WCF_User(dept.dept_code, name, role[0], flag);
-                //        }
-                //    }
-                UserModel depthead = usermodel.FindDelegateOrDeptHead();
-                if (usermodel.Role == "DeptHead")
-                {
-                    user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N", usermodel.MobileNum);
-                } else
-                {
-                    if (usermodel.Username == depthead.Username)
+               updflag = new Work().CheckApprovalDutiesStatus();
+               if (updflag.Equals("T"))
+               {
+                    UserModel usermodel = new UserModel(name);
+                    UserModel depthead = usermodel.FindDelegateOrDeptHead();
+                    if (usermodel.Role == "DeptHead")
                     {
-                        user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role, "Y", usermodel.MobileNum);
+                        user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N",usermodel.MobileNum);
                     }
                     else
                     {
-                        user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N", usermodel.MobileNum);
+                        if (usermodel.Username == depthead.Username)
+                        {
+                            user = new WCF_User(depthead.Department.dept_code, depthead.Username, depthead.Role, "Y", usermodel.MobileNum);
+                        }
+                        else
+                        {
+                            user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N", usermodel.MobileNum);
+                        }
                     }
                 }
+                    
                 return user;
             }
 
@@ -167,7 +207,7 @@ namespace SSISTeam2.Classes.WebServices
             //        }
             //    return user;
             //}
-            else { return user = new WCF_User(null, "failed", null, null, null); }
+            else { return user = new WCF_User(null, "failed", null, null,null); }
         }
 
         // Heng Tiong's MonthlyCheck implementation
