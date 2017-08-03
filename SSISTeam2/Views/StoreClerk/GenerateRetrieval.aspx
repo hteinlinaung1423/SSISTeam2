@@ -17,7 +17,7 @@
 
     <asp:Label ID="lblDebug" Text="" runat="server" />
 
-     <%--<%= Page.User.Identity.Name %>--%>
+    <%--<%= Page.User.Identity.Name %>--%>
 
     <div class="row">
         <div class="col-xs-12">
@@ -30,7 +30,24 @@
     <div class="row">
         <div class="col-md-10">
 
-            <asp:GridView ID="gvToRetrieve" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped">
+            <asp:GridView ID="gvToRetrieve" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped"
+                AllowPaging="true"
+                OnDataBound="GridView_EditBooks_DataBound"
+                PageSize="3"
+                OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found"
+                PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
+
+                <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
+                <PagerTemplate>
+                    <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
+                    <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
+                    <asp:DropDownList ID="DropDownList_JumpToPage" runat="server" OnSelectedIndexChanged="DropDownList_JumpToPage_SelectedIndexChanged" AutoPostBack="True" CssClass="btn btn-default btn-sm"></asp:DropDownList>
+
+                    <asp:Label ID="Paging_CurrentPage" Text="" runat="server"><%# " / " + gvToRetrieve.PageCount %></asp:Label>
+                    <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
+                    <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
+                </PagerTemplate>
+
                 <Columns>
                     <asp:TemplateField HeaderText="No.">
                         <ItemTemplate>
@@ -79,8 +96,7 @@
                     <asp:Label runat="server" Text="There are no items that need to be retrieved right now."></asp:Label>
                     <%--<asp:Button ID="btnGoToGenerate" Text="Go to generate a retrieval" runat="server" CssClass="btn btn-warning" />--%>
                 </div>
-                <span>
-                    If you generated a form, you can <a href="ConfirmRetrieval.aspx">confirm the quantities here</a>.
+                <span>If you generated a form, you can <a href="ConfirmRetrieval.aspx">confirm the quantities here</a>.
                 </span>
 
             </asp:Panel>
