@@ -279,7 +279,7 @@
                                     <asp:LinkButton ID="CategoryListing" CausesValidation="false" OnClick="btnViewCatList_Click" runat="server" style="color: #000000; text-decoration: none;">Maintain Category Listing</asp:LinkButton>
                                 </li>
                         <li>
-                                    <asp:LinkButton ID="MaintainStoreCatalgoe" CausesValidation="false" OnClick="btnMaintainCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">Maintain Category Listing</asp:LinkButton>
+                                    <asp:LinkButton ID="MaintainStoreCatalgoe" CausesValidation="false" OnClick="btnMaintainCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">Maintain Store Catalogue</asp:LinkButton>
                                 </li>
 
 
