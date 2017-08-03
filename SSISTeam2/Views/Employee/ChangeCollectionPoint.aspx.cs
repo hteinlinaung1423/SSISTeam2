@@ -23,22 +23,22 @@ namespace SSISTeam2.Views.Employee
         Department sdept = null;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
 
             loginUSer = User.Identity.Name;
             UserModel user = new UserModel(loginUSer);
             headUSerName = user.FindDelegateOrDeptHead().Username;
             sdept = user.Department;
-
-           LabelContactName.Text = sdept.contact_user.ToString();
+            string fullname = ent.Dept_Registry.Where(x => x.username == sdept.contact_user).Select(x => x.fullname).First().ToString();
+            LabelContactName.Text = fullname;
             LabelPhNo.Text = sdept.contact_num.ToString();
             LabelFaxNo.Text = sdept.fax_num.ToString();
 
 
             currentCollectId = sdept.collection_point;
 
-            string currentCollectP = ent.Collection_Point.Where(x => x.collection_pt_id == currentCollectId).Select(y => y.location).First();
-
-            lbCollectP.Text = currentCollectP;
+            Collection_Point cp = ent.Collection_Point.SingleOrDefault(x => x.collection_pt_id == currentCollectId);
+            lbCollectP.Text = cp.location + " (" + cp.day_of_week + ")";
 
             lbRepName.Text = changeUsernameToFullName(sdept.rep_user.ToString());
 
@@ -55,33 +55,28 @@ namespace SSISTeam2.Views.Employee
         {
 
             //save/update changed collection point & representative in database
-            string selectColPoint = ddlCollectPoint.SelectedValue.ToString();
-            try
+            int selectColPoint = ddlCollectPoint.SelectedIndex;
+            
 
+            if (selectColPoint == 0 )
             {
 
-                if (selectColPoint.Equals("0") )
-                {
+                lbDDLError.Text = "Please select the required field!";
 
-                    lbDDLError.Text = "Please select the collection point!";
-
-                }
+            }
+            else
+            {
                 //show Full Name- save username
-                repFullName = lbRepName.Text.ToString();
                 Dept_Registry depReg = ent.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
                 string repUserName = depReg.username;
 
                 var result = ent.Departments.SingleOrDefault(c => c.name == sdept.name);
-                result.collection_point = Int16.Parse(selectColPoint);
+                result.rep_user = repUserName;
+                result.collection_point = selectColPoint;
                 ent.SaveChanges();
                 lbDDLError.Text = "Sucessfully Save!";
             }
 
-            catch
-
-            {
-
-            }
 
         }
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -93,15 +88,17 @@ namespace SSISTeam2.Views.Employee
         public void  ddlDataBinding()
         {
             //get all collection point
-
-            ddlCollectPoint.DataSource = ent.Collection_Point.ToList<Collection_Point>();
-
-            ddlCollectPoint.DataTextField = "location";
-
-            ddlCollectPoint.DataValueField = "collection_pt_id";
-
+            List<Collection_Point> cpWdateList = ent.Collection_Point.ToList<Collection_Point>();
+            List<string> stList = new List<string>();
+            foreach (Collection_Point each in cpWdateList)
+            {
+                string s1 = each.location;
+                string s2 = each.day_of_week;
+                string s = s1 + " (" + s2 + ")";
+                stList.Add(s);
+            }
+            ddlCollectPoint.DataSource = stList;
             ddlCollectPoint.DataBind();
-
         }
 
         public string changeUsernameToFullName(string username)

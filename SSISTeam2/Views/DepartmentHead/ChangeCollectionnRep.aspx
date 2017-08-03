@@ -32,11 +32,11 @@
             </asp:TableRow>--%>
             <asp:TableRow>
                 <asp:TableCell>Current Collection Point</asp:TableCell>
-               <asp:TableCell>: <asp:Label ID="lbCollectP" runat="server" ReadOnly="True" Width="350"></asp:Label></asp:TableCell>
+               <asp:TableCell>: <asp:Label ID="lbCollectP" runat="server" ReadOnly="True" Width="450"></asp:Label></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>New Collection Point</asp:TableCell>
-                <asp:TableCell> <asp:DropDownList ID="ddlCollectPoint" runat="server" AutoPostBack="True" AppendDataBoundItems="true" CssClass="form-control" Width="300px">
+                <asp:TableCell> <asp:DropDownList ID="ddlCollectPoint" runat="server" AutoPostBack="True" AppendDataBoundItems="true" CssClass="form-control" Width="370px">
                     <asp:ListItem Text="Select---" Value="0"></asp:ListItem>
                       </asp:DropDownList></asp:TableCell>
             </asp:TableRow>
@@ -58,7 +58,7 @@
             </asp:TableRow>
        </asp:Table>
         <asp:Label ID="lbDDLError1" runat="server" ForeColor="#FF3300"></asp:Label>
-             
+
     </div>
         </div>
         

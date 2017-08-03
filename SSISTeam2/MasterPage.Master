@@ -205,6 +205,7 @@
                                         <asp:LinkButton ID="btnEmpViewCatalogue_emp" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                     </li>
                                      </li>
+
                                      <% if (userModel.isDepartmentRep())
                                     { %>
                                 <li class="dropdown-header">Department Representative actions</li>
@@ -217,6 +218,8 @@
                                 <% } %>
 
                                 <% }
+
+
                                     if (userModel.isStoreClerk() || userModel.isStoreSupervisor())
                                     { %>
 
@@ -308,6 +311,7 @@
                                     <asp:LinkButton ID="LinkButtonDelegateAuth1" CausesValidation="false" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
                                 <% } %>
+
 
                                 <li>
                                     <asp:LinkButton ID="btnEmpViewCatalogue_deptHead" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
