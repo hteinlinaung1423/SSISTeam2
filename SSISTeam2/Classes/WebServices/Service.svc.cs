@@ -394,70 +394,70 @@ namespace SSISTeam2.Classes.WebServices
             return work.wgetEachItemQty(user);
         }
         //Update Retrieve Form
-        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
-        //{
-        //    int ii = 0;
-        //    string itemCode = null;
-        //    string[] itemCodeAry = new string[retrieveList.Count];
-        //    int[] qtyAry = new int[retrieveList.Count];
-        //    Dictionary<string, int> dicList = new Dictionary<string, int>();
-
-        //    foreach (WCFRetieve eachObj in retrieveList)
-        //    {
-
-        //        string itemName = eachObj.ItemDes;
-        //        //itemCode = changeItemNametoCode(itemName);
-        //        itemCode = eachObj.ItemCode;
-        //        itemCodeAry[ii] = itemCode;
-
-        //        int quantity = Int16.Parse(eachObj.RetrieveQty);
-        //        qtyAry[ii] = quantity;
-
-        //        //Add to dictionary
-        //        dicList.Add(itemCodeAry[ii], qtyAry[ii]);
-
-        //        ii++;
-        //    }
-
-        //    //Pass data to Mobile confirmation
-
-        //    MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
-        //}
-
-        ////chnage into Item Name to item COode
-        //public string changeItemNametoCode(string itemName)
-        //{
-
-        //    Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
-        //    string itemCode = st.item_code;
-        //    return itemCode;
-
-        //}
-
-        //Testing
         public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
         {
-            //int ii = 0;
-            //Stock_Inventory st = null;
-            //string itemCode = null;
-            //string[] itemCodeAry = new string[retrieveList.Count];
-            ////    //change item into item code
-            //foreach (WCFRetieve eachObj in retrieveList)
-            //{
-            //    //Item
-            //    string itemDescription = eachObj.ItemDes;
-            //    st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
-            //    itemCode = st.item_code;
-            //    itemCodeAry[ii] = itemCode;
-            //    ii++;
-            //}
+            int ii = 0;
+            string itemCode = null;
+            string[] itemCodeAry = new string[retrieveList.Count];
+            int[] qtyAry = new int[retrieveList.Count];
+            Dictionary<string, int> dicList = new Dictionary<string, int>();
 
-            Request rq = context.Requests.SingleOrDefault(x => x.request_id==38);
-            rq.rejected_reason = "rrrr";
-            rq.deleted = "R";
-            context.Requests.Add(rq);
-            context.SaveChanges();
+            foreach (WCFRetieve eachObj in retrieveList)
+            {
+
+                string itemName = eachObj.ItemDes;
+                //itemCode = changeItemNametoCode(itemName);
+                itemCode = eachObj.ItemCode;
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.RetrieveQty);
+                qtyAry[ii] = quantity;
+
+                //Add to dictionary
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
+
+                ii++;
+            }
+
+            //Pass data to Mobile confirmation
+
+            MobileConfirmation.ConfirmRetrievalFromWarehouse(loginUserName, dicList);
         }
+
+        //chnage into Item Name to item COode
+        public string changeItemNametoCode(string itemName)
+        {
+
+            Stock_Inventory st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemName);
+            string itemCode = st.item_code;
+            return itemCode;
+
+        }
+
+        //Testing
+        //public void UpdateRetrieveQty(List<WCFRetieve> retrieveList, string loginUserName)
+        //{
+        //    //int ii = 0;
+        //    //Stock_Inventory st = null;
+        //    //string itemCode = null;
+        //    //string[] itemCodeAry = new string[retrieveList.Count];
+        //    ////    //change item into item code
+        //    //foreach (WCFRetieve eachObj in retrieveList)
+        //    //{
+        //    //    //Item
+        //    //    string itemDescription = eachObj.ItemDes;
+        //    //    st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //    //    itemCode = st.item_code;
+        //    //    itemCodeAry[ii] = itemCode;
+        //    //    ii++;
+        //    //}
+
+        //    Request rq = context.Requests.SingleOrDefault(x => x.request_id==38);
+        //    rq.rejected_reason = "rrrr";
+        //    rq.deleted = "R";
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
+        //}
 
         public List<String> GetDisbCollectP()
         {
@@ -485,62 +485,62 @@ namespace SSISTeam2.Classes.WebServices
         }
 
         //Update Disburse Form
-        //public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
-        //{
-        //    int ii = 0;
-        //    string itemCode = null;
-        //    string[] itemCodeAry = new string[disburseList.Count];
-        //    int[] qtyAry = new int[disburseList.Count];
-        //    Dictionary<string, int> dicList = new Dictionary<string, int>();
-
-        //    foreach (WCFDisburse eachObj in disburseList)
-        //    {
-
-        //        string itemName = eachObj.ItemName;
-        //        //itemCode = changeItemNametoCode(itemName);
-        //        itemCode = eachObj.ItemCode;
-        //        itemCodeAry[ii] = itemCode;
-
-        //        int quantity = Int16.Parse(eachObj.DisbursedQty);
-        //        qtyAry[ii] = quantity;
-
-        //        //Add to dictionary
-        //        dicList.Add(itemCodeAry[ii], qtyAry[ii]);
-
-        //        ii++;
-        //    }
-
-        //    //Pass data to Mobile confirmation
-        //    MobileConfirmation.SignOffDisbursement(loginUserName, deptcode, dicList);
-        //}
-
-        //Testing
         public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
         {
             int ii = 0;
-            //Stock_Inventory st = null;
-            //string itemCode = null;
-            //string[] itemCodeAry = new string[disburseList.Count];
+            string itemCode = null;
+            string[] itemCodeAry = new string[disburseList.Count];
+            int[] qtyAry = new int[disburseList.Count];
+            Dictionary<string, int> dicList = new Dictionary<string, int>();
 
-            //foreach (WCFDisburse eachObj in disburseList)
-            //{
-            //    //Item
-            //    string itemDescription = eachObj.ItemName;
-            //    //st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
-            //    //itemCode = st.item_code;
-            //    itemCode = eachObj.ItemCode;
-            //    itemCodeAry[ii] = itemCode;
-            //    ii++;
-            //}
+            foreach (WCFDisburse eachObj in disburseList)
+            {
 
-            Request rq = context.Requests.SingleOrDefault(x => x.reason == "testd");
-            rq.rejected_reason = "zzzz";
-            rq.deleted = "D";
-            rq.current_status = deptcode;
-            rq.username = loginUserName;
-            context.Requests.Add(rq);
-            context.SaveChanges();
+                string itemName = eachObj.ItemName;
+                //itemCode = changeItemNametoCode(itemName);
+                itemCode = eachObj.ItemCode;
+                itemCodeAry[ii] = itemCode;
+
+                int quantity = Int16.Parse(eachObj.DisbursedQty);
+                qtyAry[ii] = quantity;
+
+                //Add to dictionary
+                dicList.Add(itemCodeAry[ii], qtyAry[ii]);
+
+                ii++;
+            }
+
+            //Pass data to Mobile confirmation
+            MobileConfirmation.SignOffDisbursement(loginUserName, deptcode, dicList);
         }
+
+        //Testing
+        //public void UpdateDisburseQty(string loginUserName, string deptcode, List<WCFDisburse> disburseList)
+        //{
+        //    int ii = 0;
+        //    //Stock_Inventory st = null;
+        //    //string itemCode = null;
+        //    //string[] itemCodeAry = new string[disburseList.Count];
+
+        //    //foreach (WCFDisburse eachObj in disburseList)
+        //    //{
+        //    //    //Item
+        //    //    string itemDescription = eachObj.ItemName;
+        //    //    //st = context.Stock_Inventory.SingleOrDefault(x => x.item_description == itemDescription);
+        //    //    //itemCode = st.item_code;
+        //    //    itemCode = eachObj.ItemCode;
+        //    //    itemCodeAry[ii] = itemCode;
+        //    //    ii++;
+        //    //}
+
+        //    Request rq = context.Requests.SingleOrDefault(x => x.reason == "testd");
+        //    rq.rejected_reason = "zzzz";
+        //    rq.deleted = "D";
+        //    rq.current_status = deptcode;
+        //    rq.username = loginUserName;
+        //    context.Requests.Add(rq);
+        //    context.SaveChanges();
+        //}
 
 
         // Htein Lin Aung Apply new Request

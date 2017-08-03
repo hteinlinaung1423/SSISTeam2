@@ -322,7 +322,7 @@ namespace SSISTeam2.Classes.WebServices
             {
                 int adjusted = int.Parse(i.adjustedQty);
 
-                Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_description == i.itemName).ToList().First();
+                Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_code == i.itemCode).ToList().First();
                 inventory.current_qty += adjusted;
 
                 MonthlyCheckModel itemModel = new MonthlyCheckModel(inventory);
