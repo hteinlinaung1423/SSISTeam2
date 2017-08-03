@@ -102,7 +102,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
                 //Collection Point
 
-                if (selectColPoint.Equals("0") || repFullName.Equals("0"))
+                if (selectColPoint.Equals("0") || repFullName.Equals("Select---"))
                 {
                   
                     lbDDLError1.Text = "Please select the required field!";

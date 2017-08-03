@@ -159,10 +159,12 @@ namespace SSISTeam2.Classes.WebServices
 
             if (validate)
             {
-               updflag = new Work().CheckApprovalDutiesStatus();
+                
+                UserModel usermodel = new UserModel(name);
+                updflag = new Work().CheckApprovalDutiesStatus(usermodel.Department.dept_code);
                if (updflag.Equals("T"))
                {
-                    UserModel usermodel = new UserModel(name);
+                    //UserModel usermodel = new UserModel(name);
                     UserModel depthead = usermodel.FindDelegateOrDeptHead();
                     if (usermodel.Role == "DeptHead")
                     {
@@ -704,6 +706,19 @@ namespace SSISTeam2.Classes.WebServices
         public void DeleteRequestDetail(string id)
         {
             new Work().DeleteRequestDetail(id);
+        }
+
+        public List<WCF_Partner> GetWorkingPartner(string name, string deptName)
+        {
+            List<WCF_Partner> pList = new List<WCF_Partner>();
+           List<Dept_Registry> drList= new Work().GetWorkingPartner( name,  deptName);
+            foreach (Dept_Registry dr in drList)
+            {
+                UserModel usermodel = new UserModel(dr.username);
+                WCF_Partner partner = new WCF_Partner(dr.fullname, dr.mobile_no,usermodel.Role,usermodel.Email);
+                pList.Add(partner);
+            }
+            return pList;
         }
     }
 }
