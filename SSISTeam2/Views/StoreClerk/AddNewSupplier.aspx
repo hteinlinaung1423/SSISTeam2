@@ -103,12 +103,12 @@
                     <asp:TextBox ID="tb_address" class="form-control" runat="server"></asp:TextBox>
                 </div>
                 <div class="form-group">
-                    <label for="label_gst">GST Registraion Number: </label>
+                    <label for="label_gst">GST Registration Number: </label>
                     <asp:TextBox ID="tb_gst" class="form-control" runat="server"></asp:TextBox>
                 </div>
                 
                 <asp:Button runat="server" ID="SubmitButton" Text="Submit"  CssClass="btn btn-primary" OnClick="SubmitButton_Click"/>
-               <asp:Button ID="CancelButton" runat="server" Text="Cancel" CssClass="btn btn-primary" OnClick="CancelButton_Click" />
+               <asp:Button ID="CancelButton" CausesValidation="false" runat="server" Text="Cancel" CssClass="btn btn-primary" OnClick="CancelButton_Click" />
                  <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" />
 
             </div>
