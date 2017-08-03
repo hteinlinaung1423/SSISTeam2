@@ -159,9 +159,9 @@ namespace SSISTeam2.Classes.WebServices
 
             if (validate)
             {
-               // updflag = new Work().CheckApprovalDutiesStatus();
-               // if (updflag.Equals("T"))
-               // {
+               updflag = new Work().CheckApprovalDutiesStatus();
+               if (updflag.Equals("T"))
+               {
                     UserModel usermodel = new UserModel(name);
                     UserModel depthead = usermodel.FindDelegateOrDeptHead();
                     if (usermodel.Role == "DeptHead")
@@ -179,7 +179,7 @@ namespace SSISTeam2.Classes.WebServices
                             user = new WCF_User(usermodel.Department.dept_code, usermodel.Username, usermodel.Role, "N", usermodel.MobileNum);
                         }
                     }
-               // }
+                }
                     
                 return user;
             }
