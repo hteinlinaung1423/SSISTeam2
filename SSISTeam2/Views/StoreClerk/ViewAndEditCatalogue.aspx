@@ -8,7 +8,7 @@
     <asp:Panel ID="Panel1" runat="server" DefaultButton ="Button1">
          <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><h3>View Store Catalogue</h3></div>
+        <div class="panel-heading"><h3>Maintain Store Catalogue</h3></div>
         <div class="panel-body">
            <p></p>
             <table>

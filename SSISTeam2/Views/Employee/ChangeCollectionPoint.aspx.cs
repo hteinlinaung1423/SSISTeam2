@@ -107,7 +107,8 @@ namespace SSISTeam2.Views.Employee
         public string changeUsernameToFullName(string username)
         {
 
-            return ent.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname).First().ToString();
+            var emplist = ent.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname);
+            return emplist.First();
         }
     }
 }
