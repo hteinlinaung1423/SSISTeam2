@@ -37,7 +37,7 @@ namespace SSISTeam2
             inventoryAdjustment.status_date = DateTime.Today;
 
             context.SaveChanges();
-            Response.Redirect("/Views/DepartmentHead/HeadDashboard.aspx");
+            Response.Redirect("~/Views/DepartmentHead/HeadDashboard.aspx");
         }
 
         protected void Reject_Click(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace SSISTeam2
             inventoryAdjustment.status_date = DateTime.Today;
 
             context.SaveChanges();
-            Response.Redirect("/Views/DepartmentHead/HeadDashboard.aspx");
+            Response.Redirect("~/Views/DepartmentHead/HeadDashboard.aspx");
         }
     }
 }

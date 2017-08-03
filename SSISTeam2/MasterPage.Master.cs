@@ -17,10 +17,25 @@ namespace SSISTeam2
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            bool isPersistent = false;
+
+            //var formsAuthCookie = Response.Cookies[FormsAuthentication.FormsCookieName];
+            //if (formsAuthCookie != null)
+            //{
+            //    var existingTicket = FormsAuthentication.Decrypt(formsAuthCookie.Value);
+
+            //    if (existingTicket != null)
+            //    {
+            //        isPersistent = existingTicket.IsPersistent;
+            //    }
+            //}
+
+
             if (Page.User.Identity.Name == "")
             {
                 FormsAuthentication.SignOut();
             }
+
             if (Page.User.Identity.Name != null && Page.User.Identity.Name != "")
             {
                 // Somebody is signed in
@@ -38,7 +53,7 @@ namespace SSISTeam2
 
                 if (Page.User.Identity.Name != storedUserName)
                 {
-                    FormsAuthentication.SetAuthCookie(storedUserName, false);
+                    FormsAuthentication.SetAuthCookie(storedUserName, isPersistent);
                 }
             }
         }
@@ -314,6 +329,15 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/StoreClerk/ViewAndEditCatalogue.aspx");
         }
-        
+
+        protected void btnConfirmRetrieval_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ConfirmRetrieval.aspx");
+        }
+
+        protected void btnViewDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ViewGeneratedDisbursements.aspx");
+        }
     }
 }

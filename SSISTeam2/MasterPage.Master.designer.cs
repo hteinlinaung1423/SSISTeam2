@@ -157,6 +157,15 @@ namespace SSISTeam2 {
         protected global::System.Web.UI.WebControls.LinkButton btnGenerateRetrieval;
         
         /// <summary>
+        /// btnConfirmRetrieval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnConfirmRetrieval;
+        
+        /// <summary>
         /// btnGenerateDisbursement control.
         /// </summary>
         /// <remarks>
@@ -164,6 +173,15 @@ namespace SSISTeam2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnGenerateDisbursement;
+        
+        /// <summary>
+        /// btnViewDisbursement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnViewDisbursement;
         
         /// <summary>
         /// btnConfirmDisbursement control.
