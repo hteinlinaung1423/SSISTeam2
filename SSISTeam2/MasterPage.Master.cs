@@ -54,7 +54,14 @@ namespace SSISTeam2
                 string fullName = "";
                 using (SSISEntities ctx = new SSISEntities())
                 {
-                    fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                    try
+                    {
+                        fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                    } catch (Exception)
+                    {
+                        FormsAuthentication.SignOut();
+                        Response.Redirect("~/login.aspx");
+                    }
 
                     // Check if user is department rep
                     //int count = ctx.Departments.Where(d => d.rep_user == currentUser).Count();
