@@ -167,6 +167,7 @@ namespace SSISTeam2.Views.StoreClerk
            // }
        // }
 
+        //Check tender List
         public bool checkTenderList(string year)
         {
             flag = false;
