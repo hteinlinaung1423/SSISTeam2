@@ -170,6 +170,7 @@ namespace SSISTeam2
 
             //    if (loginUserame == delegat.Username)
             //    {
+
             //        Response.Redirect("~/Views/DepartmentHead/ViewPending.aspx");
             //    }
 
@@ -189,11 +190,9 @@ namespace SSISTeam2
         protected void DelegateAuth(object sender, EventArgs e)
         {
             //Yin
-            if(Page.User.IsInRole("DeptHead"))
-            {
+
                 Response.Redirect("~/Views/DepartmentHead/DelegateAuthority.aspx");
-            }
-            Response.Redirect("~/Login.aspx");
+
 
         }
         protected void ChangeCPRep(object sender, EventArgs e)
