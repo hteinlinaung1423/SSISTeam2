@@ -559,6 +559,15 @@ namespace SSISTeam2.Classes.WebServices
             revent.deleted = "Y";
             ctx.SaveChanges();
         }
+
+
+        public List<Dept_Registry> GetWorkingPartner(string user, string dept_code)
+        {
+            List<Dept_Registry> drList = ctx.Dept_Registry.Where(x => x.username != user && x.dept_code == dept_code).ToList<Dept_Registry>();
+            return drList;
+        }
+
+
     }
 
 

@@ -705,5 +705,18 @@ namespace SSISTeam2.Classes.WebServices
         {
             new Work().DeleteRequestDetail(id);
         }
+
+        public List<WCF_Partner> GetWorkingPartner(string name, string deptName)
+        {
+            List<WCF_Partner> pList = new List<WCF_Partner>();
+           List<Dept_Registry> drList= new Work().GetWorkingPartner( name,  deptName);
+            foreach (Dept_Registry dr in drList)
+            {
+                UserModel usermodel = new UserModel(dr.username);
+                WCF_Partner partner = new WCF_Partner(dr.fullname, dr.mobile_no,usermodel.Role,usermodel.Email);
+                pList.Add(partner);
+            }
+            return pList;
+        }
     }
 }

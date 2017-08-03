@@ -7,7 +7,7 @@
     runat="server">
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><h3>Create New Category</h3></div>
+        <div class="panel-heading"><h3>Add New Category</h3></div>
         <div class="panel-body">
           
 
