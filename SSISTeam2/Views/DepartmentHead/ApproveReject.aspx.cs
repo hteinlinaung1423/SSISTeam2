@@ -131,6 +131,7 @@ namespace SSISTeam2.Views.DepartmentHead
                 e.status = "Approved";
             }
             ent.SaveChanges();
+            Response.Redirect("ViewPending.aspx");
         }
 
         //Reject
