@@ -10,7 +10,7 @@
 
     <asp:Panel ID="Panel1" runat="server" DefaultButton ="Button1">
         <!-- Default panel contents -->
-        <div class="panel-heading"><h3>View Catagory</h3></div>
+        <div class="panel-heading"><h3>Maintain Category Listing</h3></div>
         <asp:Button ID="Button2" runat="server" Text="Add New Category" CssClass="btn btn-primary" OnClick="Button2_Click" />
         <br />
     <br />
