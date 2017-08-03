@@ -171,7 +171,7 @@ namespace SSISTeam2.Classes.Models
                 List<Approval_Duties> validList = new List<Approval_Duties>();
                 for (int i = 0; i < approvedList.Count; i++)
                 {
-                    if (approvedList[i].start_date.Ticks <= today.Ticks && approvedList[i].end_date.Ticks > today.Ticks)
+                    if (approvedList[i].start_date.Ticks <= today.Ticks && approvedList[i].end_date.Ticks >= today.Ticks)
                     {
                         validList.Add(approvedList[i]);
                     }

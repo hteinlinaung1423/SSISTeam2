@@ -33,7 +33,6 @@
                         <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="Search_Click" />
                     </td>
                     
-
                    
                     <td><div style="text-align:left;position: absolute; margin: 0 auto; left: 1000px; right: 0; bottom: 362px;"><asp:Button ID="add" runat="server" Text="Add New Tender" CssClass="btn btn-primary" OnClick="AddNewTender_Click" /> </div></td>
                 </tr>
@@ -41,7 +40,7 @@
               <p></p> --%>
 
                 <div class="panel-body">
-                    <asp:Button ID="add" runat="server" Text="Add New Tender"
+                    <asp:Button ID="add" runat="server" Text="Add New Item"
                         CssClass="btn btn-primary" OnClick="AddNewTender_Click" />
                     <br />
                     <br />
@@ -95,7 +94,13 @@
                             <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                         </PagerTemplate>
                         <Columns>
-                            <asp:TemplateField ItemStyle-Width="10%" HeaderText="No">
+                           
+                             <asp:TemplateField HeaderText="No.">
+                                <ItemTemplate>
+                                   <%#Container.DataItemIndex+1 %>
+                                </ItemTemplate>
+                             </asp:TemplateField>
+                             <asp:TemplateField ItemStyle-Width="10%" HeaderText="No">
                                 <EditItemTemplate>
                                     <asp:Label ID="Label11" runat="server" Text='<%# Eval("tender_year_id") %>'></asp:Label>
                                 </EditItemTemplate>
