@@ -7,7 +7,7 @@
     runat="server">
     <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">Reorder Report List</div>
+        <div class="panel-heading">Low Stock Ordering - Items to be Restocked</div>
         <div class="panel-body">
             
             <asp:Label ID="lblResult" runat="server" class="btn btn-block alert-success" Visible="false"></asp:Label>
@@ -22,7 +22,7 @@
             <asp:GridView ID="GridView1" runat="server"
                 AutoGenerateColumns="false"
                 AllowPaging="true"
-                PageSize="10"
+                PageSize="5"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"

@@ -76,6 +76,15 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Label lbRepName;
         
         /// <summary>
+        /// tablerowNewRep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow tablerowNewRep;
+        
+        /// <summary>
         /// ddlRepName control.
         /// </summary>
         /// <remarks>
@@ -103,12 +112,12 @@ namespace SSISTeam2.Views.DepartmentHead {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// lbDDLError control.
+        /// lbDDLError1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDDLError;
+        protected global::System.Web.UI.WebControls.Label lbDDLError1;
     }
 }

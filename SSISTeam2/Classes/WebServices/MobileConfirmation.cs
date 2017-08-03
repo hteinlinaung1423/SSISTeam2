@@ -12,14 +12,30 @@ namespace SSISTeam2.Classes.WebServices
     {
         public static List<WCFRetieve> GetAllPossibleRetrievalsForUser(string currentUser)
         {
+
+
+
             List<WCFRetieve> wcfList = new List<WCFRetieve>();
 
             using (SSISEntities context = new SSISEntities())
             {
+                //Move all from allocated to retrieving automatically
+                var allocated = FacadeFactory.getAllocatedService(context).getAllAllocated();
+                if (allocated.Count > 0)
+                {
+                    foreach (var allocModel in allocated)
+                    {
+                        List<string> items = allocModel.Items.Select(s => s.Key.ItemCode).ToList();
 
-                var allocated = FacadeFactory.getRetrievalService(context).getAllRetrievingByClerk(currentUser);
+                        FacadeFactory.getRequestMovementService(context).moveFromAllocatedToRetrieving(allocModel.RequestId, items, currentUser);
+                    }
+                }
 
-                var itemGroups = allocated.SelectMany(sm =>
+                context.SaveChanges();
+
+                var retrieving = FacadeFactory.getRetrievalService(context).getAllRetrievingByClerk(currentUser);
+
+                var itemGroups = retrieving.SelectMany(sm =>
                     sm.Items
                     .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name })
                 ).GroupBy(k => k.ItemCode, v => v).ToList();
@@ -34,6 +50,7 @@ namespace SSISTeam2.Classes.WebServices
 
                     wcfItem.ItemDes = itemGroup.First().Description;
                     wcfItem.TotalQty = itemQty.ToString();
+                    wcfItem.ItemCode = itemGroup.Key;
 
                     wcfList.Add(wcfItem);
                 }
@@ -68,6 +85,7 @@ namespace SSISTeam2.Classes.WebServices
                     WCFDisburse wcfItem = new WCFDisburse();
                     wcfItem.ItemName = itemGroup.Key.Description;
                     wcfItem.RetrievedQty = itemQty.ToString();
+                    wcfItem.ItemCode = itemGroup.Key.ItemCode;
 
                     wcfList.Add(wcfItem);
                 }

@@ -28,5 +28,10 @@ namespace SSISTeam2.Classes.EFFacades
         {
             return new RequestMovementService(context);
         }
+
+        public static ITenderListService GetTenderListService()
+        {
+            return new TenderListService();
+        }
     }
 }

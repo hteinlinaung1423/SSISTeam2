@@ -351,13 +351,16 @@ namespace SSISTeam2.Classes.WebServices
         string role;
         [DataMember]
         string flag;
+        [DataMember]
+        string mobile_num;
 
-        public WCF_User(string dept_code, string user_name, string role, string flag)
+        public WCF_User(string dept_code, string user_name, string role, string flag, string mobile_num)
         {
             this.dept_code = dept_code;
             this.user_name = user_name;
             this.role = role;
             this.flag = flag;
+            this.mobile_num = mobile_num;
         }
 
 
@@ -488,24 +491,26 @@ namespace SSISTeam2.Classes.WebServices
     public class WCFRetieve
     {
         [DataMember]
-        string itemDes;
+        private string itemDes;
         [DataMember]
-        string totalQty;
+        private string totalQty;
         [DataMember]
-        string retrieveQty;
+        private string retrieveQty;
+        [DataMember]
+        private string itemCode;
 
-        public WCFRetieve() : this("", "","")
+        public WCFRetieve() : this("", "","","")
         {
 
         }
-        public WCFRetieve(string itemDes, string totalQty, string retrieveQty)
+        public WCFRetieve(string itemDes, string totalQty, string retrieveQty, string itemCode)
         {
             this.itemDes = itemDes;
             this.totalQty = totalQty;
             this.retrieveQty = retrieveQty;
+            this.itemCode = itemCode;
         }
 
-        [DataMember]
         public string ItemDes
         {
             get
@@ -519,7 +524,6 @@ namespace SSISTeam2.Classes.WebServices
             }
         }
 
-        [DataMember]
         public string TotalQty
         {
             get
@@ -544,6 +548,20 @@ namespace SSISTeam2.Classes.WebServices
                 retrieveQty = value;
             }
         }
+
+        public string ItemCode
+        {
+            get
+            {
+                return itemCode;
+            }
+
+            set
+            {
+                itemCode = value;
+            }
+        }
+
 
     }
 
@@ -625,17 +643,20 @@ public class WCFDisburse
     string retrievedQty;
     [DataMember]
     string disbursedQty;
+    [DataMember]
+    string itemCode;
 
 
-    public WCFDisburse() : this("", "", "")
+    public WCFDisburse() : this("", "", "","")
     {
 
     }
-    public WCFDisburse(string itemName, string retrievedQty, string disbursedQty)
+    public WCFDisburse(string itemName, string retrievedQty, string disbursedQty, string itemCode)
     {
         this.itemName = itemName;
         this.retrievedQty = retrievedQty;
         this.disbursedQty = disbursedQty;
+        this.itemCode = itemCode;
     }
 
 
@@ -675,6 +696,18 @@ public class WCFDisburse
         set
         {
             disbursedQty = value;
+        }
+    }
+    public string ItemCode
+    {
+        get
+        {
+            return itemCode;
+        }
+
+        set
+        {
+            itemCode = value;
         }
     }
 }

@@ -9,7 +9,7 @@
     <div class="panel panel-primary">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            <h3>Create New Purchase Order</h3>
+            <h3>View Items Marked for Purchase</h3>
         </div>
         <div class="panel-body">
             <h4>Step 1 of 3: Add Items</h4>
@@ -105,7 +105,7 @@
             <div class="panel panel-primary">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    Items in Purchase Order
+                    Items in Cart
                 </div>
                 <div class="panel-body">
 

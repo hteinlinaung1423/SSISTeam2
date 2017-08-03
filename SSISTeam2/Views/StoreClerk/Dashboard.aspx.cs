@@ -71,24 +71,29 @@ namespace SSISTeam2
             /* Items for retrieving */
             var allocated = FacadeFactory.getAllocatedService(context).getAllAllocated();
 
-            bool anyAllocated = allocated.Count > 0 ? true : false;
+            bool anyAllocated = false;
 
-            var allocatedItems = allocated.SelectMany(sm =>
-                    sm.Items
-                    .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value
-                    //, sm.Department.dept_code, sm.RequestId, sm.Department.name
+            if (allocated != null)
+            {
+                anyAllocated = allocated.Count > 0;
+
+                var allocatedItems = allocated.SelectMany(sm =>
+                        sm.Items
+                        .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value
+                        //, sm.Department.dept_code, sm.RequestId, sm.Department.name
+                        })
+                    )
+                    .GroupBy(k => k.ItemCode, v => v)
+                    .Select(s => s.Aggregate((a, b) => {
+                        int Quantity = a.Quantity + b.Quantity;
+                        return new { a.ItemCode, a.Description, Quantity };
                     })
-                )
-                .GroupBy(k => k.ItemCode, v => v)
-                .Select(s => s.Aggregate((a, b) => {
-                    int Quantity = a.Quantity + b.Quantity;
-                    return new { a.ItemCode, a.Description, Quantity };
-                })
-                )
-                .ToList();
+                    )
+                    .ToList();
+                gridViewToRetrieve_FromWarehouse.DataSource = allocatedItems.Take(3);
+                gridViewToRetrieve_FromWarehouse.DataBind();
+            }
 
-            gridViewToRetrieve_FromWarehouse.DataSource = allocatedItems.Take(3);
-            gridViewToRetrieve_FromWarehouse.DataBind();
 
             /* Items to confirm */
             var toConfirm = FacadeFactory.getRetrievalService(context).getAllRetrievingByClerk(currentUser);
@@ -206,6 +211,7 @@ namespace SSISTeam2
             {
                 Response.Redirect("~/login.aspx?return=Views/Employee/EmpDashboard.aspx");
             }
+          
 
             string currentUser = Page.User.Identity.Name;
             string fullName = "";

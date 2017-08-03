@@ -13,9 +13,12 @@ namespace SSISTeam2.Views.StoreClerk
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if(!IsPostBack)
-            GridView1.DataSource = s.Stock_Inventory.Where(x => x.current_qty > x.reorder_level).ToList<Stock_Inventory>();
-            GridView1.DataBind();
+            if (!IsPostBack)
+            {
+                GridView1.DataSource = s.Stock_Inventory.Where(x => x.deleted == "N").ToList<Stock_Inventory>();
+                GridView1.DataBind();
+            }
+            
         }
 
         protected void CreateOrder(object sender, EventArgs e)

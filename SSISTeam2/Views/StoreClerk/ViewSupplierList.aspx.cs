@@ -20,7 +20,7 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void Add_New_Supplier_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Views/StoreClerk/AddNewSupplier.aspx");
+            Response.Redirect("AddNewSupplier.aspx");
         }
 
         protected void Edit_Supplier(object sender, EventArgs e)

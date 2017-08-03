@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeCollectionnRep.aspx.cs" Inherits="SSISTeam2.Views.DepartmentHead.ChangeCollection_Rep"
-          MasterPageFile="~/MasterPage.Master" %>
+          MasterPageFile="~/MasterPage.Master" Debug="true" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
     <title>Change Collection Point and/or Representative</title>
@@ -45,8 +45,8 @@
                  <asp:TableCell>: <asp:Label ID="lbRepName" runat="server" ReadOnly="True" Width="350"></asp:Label></asp:TableCell>
             </asp:TableRow>
 
-            <asp:TableRow>
-                <asp:TableCell>New Representative Name</asp:TableCell>
+            <asp:TableRow ID="tablerowNewRep">
+                <asp:TableCell >New Representative Name</asp:TableCell>
                 <asp:TableCell> <asp:DropDownList ID="ddlRepName" runat="server" AutoPostBack="True" AppendDataBoundItems="true" CssClass="form-control" Width="300px">
                      <asp:ListItem Text="Select---" Value="0"></asp:ListItem>
                       </asp:DropDownList></asp:TableCell>
@@ -57,7 +57,8 @@
          
             </asp:TableRow>
        </asp:Table>
-        <asp:Label ID="lbDDLError" runat="server" ForeColor="#FF3300"></asp:Label>
+        <asp:Label ID="lbDDLError1" runat="server" ForeColor="#FF3300"></asp:Label>
+             
     </div>
         </div>
         

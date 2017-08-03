@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>View Pending Orders</title>
+    <title>View Order History</title>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
@@ -78,7 +78,7 @@
                     <asp:TemplateField ItemStyle-Width="10%"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
-                            <asp:Button ID="detail" runat="server" Text="View Detail"
+                            <asp:Button ID="detail" runat="server" Text="Update Status/View Details"
                                 CssClass="btn btn-primary" OnClick="Edit_Order"  />
                         </ItemTemplate>
                     </asp:TemplateField>

@@ -86,7 +86,7 @@ namespace SSISTeam2.Classes.EFFServices
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new RetrievalModelCollection(new List<RetrievalModel>());
             }
 
             List<RetrievalModel> results = new List<RetrievalModel>();

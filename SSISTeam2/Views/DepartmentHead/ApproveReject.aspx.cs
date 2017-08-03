@@ -50,7 +50,9 @@ namespace SSISTeam2.Views.DepartmentHead
 
 
                 lbRqDate.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.date_time).First().ToString();
-                lbRqEmp.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
+                //change username to fullname
+                string userName = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
+                lbRqEmp.Text = ent.Dept_Registry.Where(x => x.username == userName).Select(x => x.fullname).First().ToString();
                 lblRequestReason.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.reason).First().ToString();
 
                 //get last approved Request details,but not receive from store
@@ -75,7 +77,6 @@ namespace SSISTeam2.Views.DepartmentHead
                                  st.item_description,
                                  de.orig_quantity,
                                  st.unit_of_measure
-
                              })
                              .Where(ww => ww.orig_quantity > 0)
                              .ToList();
