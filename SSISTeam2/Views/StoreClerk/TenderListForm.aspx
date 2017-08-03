@@ -67,7 +67,7 @@
     </div>
          
              <div class="table-responsive">
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="10"
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="2"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
@@ -79,8 +79,7 @@
                 OnRowDeleting="OnRowDeleting" 
                 OnPageIndexChanging="OnPageIndexChanging" 
                 ShowHeaderWhenEmpty="True" 
-                EmptyDataText="No records Found" 
-                OnRowDataBound="GridView1_RowDataBound">
+                EmptyDataText="No records Found">
                 <emptydatarowstyle forecolor="Red"/>
 <HeaderStyle CssClass="text-center-impt"></HeaderStyle>
 
@@ -145,8 +144,9 @@
                                 <EditItemTemplate>
                                     <%--<asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("name") %>' BackColor="Transparent" Height="30px" Width="250px"></asp:TextBox>--%>
                                     <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Supplier Name is required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>--%>
-                                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="auto-style1">
-                                    </asp:DropDownList>
+                                   <%-- <asp:DropDownList ID="DropDownList1" runat="server" CssClass="auto-style1">
+                                    </asp:DropDownList>--%>
+                                    <asp:Label ID="Labe20" runat="server" Text='<%# Eval("name") %>' CssClass="text-bold"></asp:Label>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" Text='<%# Eval("name") %>' CssClass="text-bold" Width="250px"></asp:Label>
