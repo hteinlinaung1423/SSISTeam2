@@ -13,7 +13,6 @@ namespace SSISTeam2.Views.StoreClerk
     public partial class TenderListForm : System.Web.UI.Page
     {
         SSISEntities entities = new SSISEntities();
-        DateTime tenderDate;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -27,29 +26,57 @@ namespace SSISTeam2.Views.StoreClerk
 
         }
 
-
-
         private void BindGrid()
         {
-            var result = from t1 in entities.Tender_List
-                         join t2 in entities.Tender_List_Details
-                         on t1.tender_year_id equals t2.tender_year_id
-                         join t3 in entities.Suppliers
-                         on t1.supplier_id equals t3.supplier_id
-                         join t4 in entities.Stock_Inventory
-                         on t2.item_code equals t4.item_code
-                         where t1.deleted.Equals("N")
-                         && t2.deleted.Equals("N")
-                         && t3.deleted.Equals("N")
-                         && t4.deleted.Equals("N")
-                         orderby t3.name
-                         select new { t2.tender_id, t1.tender_year_id,t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
+            string searchWord = TextBox1.Text;
+            if (!string.IsNullOrEmpty(searchWord)){
+                decimal changePrice;
+                bool isDouble = Decimal.TryParse(searchWord, out changePrice);
+                var result = entities.Suppliers.Where(x => x.name.Contains(searchWord)).Select(x => x.supplier_id).ToList();
+                var result2 = entities.Stock_Inventory.Where(x => x.item_description.Contains(searchWord)).Select(x => x.item_code).ToList();
+                var result3 = from t1 in entities.Tender_List
+                              join t2 in entities.Tender_List_Details
+                              on t1.tender_year_id equals t2.tender_year_id
+                              join t3 in entities.Suppliers
+                              on t1.supplier_id equals t3.supplier_id
+                              join t4 in entities.Stock_Inventory
+                              on t2.item_code equals t4.item_code
+                              where t2.deleted.Equals("N")
+                              && t3.deleted.Equals("N")
+                              && t4.deleted.Equals("N")
+                              && (result.Contains(t1.supplier_id))
+                              || (result2.Contains(t2.item_code))
+                              //|| (result4.Contains(t2.price))
+                              orderby t3.name
+                              select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
+                GridView1.Columns[1].Visible = false;
+                GridView1.Columns[2].Visible = false;
+                GridView1.Columns[3].Visible = false;
+                GridView1.Columns[4].Visible = false;
+                GridView1.DataSource = result3.ToList();              
+            }
+            else
+            {
+                var result = from t1 in entities.Tender_List
+                             join t2 in entities.Tender_List_Details
+                             on t1.tender_year_id equals t2.tender_year_id
+                             join t3 in entities.Suppliers
+                             on t1.supplier_id equals t3.supplier_id
+                             join t4 in entities.Stock_Inventory
+                             on t2.item_code equals t4.item_code
+                             where t2.deleted.Equals("N")
+                             && t3.deleted.Equals("N")
+                             && t4.deleted.Equals("N")
+                             orderby t3.name
+                             select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
 
-            GridView1.Columns[1].Visible = false;
-            GridView1.Columns[2].Visible = false;
-            GridView1.Columns[3].Visible = false;
-            GridView1.Columns[4].Visible = false;
-            GridView1.DataSource = result.ToList();
+                GridView1.Columns[1].Visible = false;
+                GridView1.Columns[2].Visible = false;
+                GridView1.Columns[3].Visible = false;
+                GridView1.Columns[4].Visible = false;
+                GridView1.DataSource = result.ToList();
+            }
+            
             GridView1.DataBind();
         }
         protected void AddNewTender_Click(object sender, EventArgs e)
@@ -224,6 +251,49 @@ namespace SSISTeam2.Views.StoreClerk
             this.BindGrid();
 
         }
+
+        protected void DropDownList_JumpToPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = GridView1.TopPagerRow;
+            GridViewRow bottomPagerRow = GridView1.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if ((DropDownList)sender == bottomJumpToPage)
+            {
+                GridView1.PageIndex = bottomJumpToPage.SelectedIndex;
+            }
+            else
+            {
+                GridView1.PageIndex = topJumpToPage.SelectedIndex;
+
+            }
+            this.BindGrid();
+        }
+
+        protected void GridView_EditBooks_DataBound(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = GridView1.TopPagerRow;
+            GridViewRow bottomPagerRow = GridView1.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if (topJumpToPage != null)
+            {
+                for (int i = 0; i < GridView1.PageCount; i++)
+                {
+                    ListItem item = new ListItem("Page " + (i + 1));
+                    topJumpToPage.Items.Add(item);
+                    bottomJumpToPage.Items.Add(item);
+                }
+            }
+
+            topJumpToPage.SelectedIndex = GridView1.PageIndex;
+            bottomJumpToPage.SelectedIndex = GridView1.PageIndex;
+        }
+
         protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             if (e.NewPageIndex < 0)
@@ -234,53 +304,47 @@ namespace SSISTeam2.Views.StoreClerk
             {
                 GridView1.PageIndex = e.NewPageIndex;
             }
-            if (!IsPostBack)
-            {
-                this.BindGrid();
-            }else
-            {
-                this.BindSearchGrid();
-            }
 
+            this.BindGrid();
+        }
+        //private void BindSearchGrid()
+        //{
             
+        //    string searchWord = TextBox1.Text;
+        //    decimal changePrice;
+        //    bool isDouble = Decimal.TryParse(searchWord, out changePrice);
 
-        }
-        private void BindSearchGrid()
-        {
-            string searchWord = TextBox1.Text;
-            decimal changePrice;
-            bool isDouble = Decimal.TryParse(searchWord, out changePrice);
+        //    var result = entities.Suppliers.Where(x => x.name.Contains(searchWord)).Select(x => x.supplier_id).ToList();
+        //    var result2 = entities.Stock_Inventory.Where(x => x.item_description.Contains(searchWord)).Select(x => x.item_code).ToList();
+        //    //var result4 = entities.Tender_List_Details.Where(x => x.price == changePrice).Select(x => x.price).ToList();
+        //    var result3 = from t1 in entities.Tender_List
+        //                  join t2 in entities.Tender_List_Details
+        //                  on t1.tender_year_id equals t2.tender_year_id
+        //                  join t3 in entities.Suppliers
+        //                  on t1.supplier_id equals t3.supplier_id
+        //                  join t4 in entities.Stock_Inventory
+        //                  on t2.item_code equals t4.item_code
+        //                  where t2.deleted.Equals("N")
+        //                  && t3.deleted.Equals("N")
+        //                  && t4.deleted.Equals("N")
+        //                  && (result.Contains(t1.supplier_id))
+        //                  || (result2.Contains(t2.item_code))
+        //                  //|| (result4.Contains(t2.price))
+        //                  orderby t3.name
+        //                  select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
+        //    GridView1.Columns[1].Visible = false;
+        //    GridView1.Columns[2].Visible = false;
+        //    GridView1.Columns[3].Visible = false;
+        //    GridView1.Columns[4].Visible = false;
+        //    GridView1.DataSource = result3.ToList();
+        //    GridView1.DataBind();
+        //}
 
-            var result = entities.Suppliers.Where(x => x.name.Contains(searchWord)).Select(x => x.supplier_id).ToList();
-            var result2 = entities.Stock_Inventory.Where(x => x.item_description.Contains(searchWord)).Select(x => x.item_code).ToList();
-            //var result4 = entities.Tender_List_Details.Where(x => x.price == changePrice).Select(x => x.price).ToList();
-            var result3 = from t1 in entities.Tender_List
-                          join t2 in entities.Tender_List_Details
-                          on t1.tender_year_id equals t2.tender_year_id
-                          join t3 in entities.Suppliers
-                          on t1.supplier_id equals t3.supplier_id
-                          join t4 in entities.Stock_Inventory
-                          on t2.item_code equals t4.item_code
-                          where t1.deleted.Equals("N")
-                          && t2.deleted.Equals("N")
-                          && t3.deleted.Equals("N")
-                          && t4.deleted.Equals("N")
-                          && (result.Contains(t1.supplier_id))
-                          || (result2.Contains(t2.item_code))
-                          //|| (result4.Contains(t2.price))
-                          orderby t3.name
-                          select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
-            GridView1.Columns[1].Visible = false;
-            GridView1.Columns[2].Visible = false;
-            GridView1.Columns[3].Visible = false;
-            GridView1.Columns[4].Visible = false;
-            GridView1.DataSource = result3.ToList();
-            GridView1.DataBind();
-        }
+        
         protected void Search_Click(object sender, EventArgs e)
         {
-
-            this.BindSearchGrid();
+            
+            this.BindGrid();
         }
         public class DropDownListItem
         {

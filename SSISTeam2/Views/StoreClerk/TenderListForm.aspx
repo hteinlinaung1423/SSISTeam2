@@ -67,7 +67,7 @@
     </div>
          
              <div class="table-responsive">
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="2"
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnDataBound="GridView_EditBooks_DataBound" AllowPaging="True" PageSize="2"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
@@ -89,6 +89,8 @@
                         <PagerTemplate>
                             <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
                             <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
+                            <asp:DropDownList ID="DropDownList_JumpToPage" runat="server" OnSelectedIndexChanged="DropDownList_JumpToPage_SelectedIndexChanged" AutoPostBack="True" CssClass="btn btn-default btn-sm"></asp:DropDownList>
+                            <asp:Label ID="Paging_CurrentPage" Text="" runat="server"><%# " / " + GridView1.PageCount %></asp:Label>
                             <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
                             <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                         </PagerTemplate>
