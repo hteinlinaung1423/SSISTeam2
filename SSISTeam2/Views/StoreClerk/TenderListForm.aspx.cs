@@ -43,7 +43,7 @@ namespace SSISTeam2.Views.StoreClerk
                          && t3.deleted.Equals("N")
                          && t4.deleted.Equals("N")
                          orderby t3.name
-                         select new { t2.tender_id, t1.tender_year_id, t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
+                         select new { t2.tender_id, t1.tender_year_id,t3.supplier_id, t3.name, t2.item_code, t4.item_description, t2.price, t1.tender_date };
 
             GridView1.Columns[1].Visible = false;
             GridView1.Columns[2].Visible = false;
@@ -67,18 +67,89 @@ namespace SSISTeam2.Views.StoreClerk
             GridView1.EditIndex = -1;
             this.BindGrid();
         }
+        //protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
+        //{
+        //    GridViewRow row = GridView1.Rows[e.RowIndex];
+
+        //    string supplierId = (row.FindControl("DropDownList1") as DropDownList).SelectedValue;
+        //    //string supplierId = (row.FindControl("Label9") as Label).Text;
+        //    //string supplierName = dropDowns[0].SelectedValue.
+        //    string supplierName = (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
+        //    //Label9.Text = supplierId;
+        //    //Label1.Text = supplierName;
+        //    //string supplierName= (row.FindControl("TextBox1") as TextBox).Text;
+        //    string itemCode = (row.FindControl("Label8") as Label).Text;
+        //    string itemDescription = (row.FindControl("TextBox3") as TextBox).Text;
+        //    int tenderId = Convert.ToInt32((row.FindControl("Label10") as Label).Text);
+        //    decimal price = Convert.ToDecimal((row.FindControl("TextBox5") as TextBox).Text);
+        //    int tenderYearId = Convert.ToInt32((row.FindControl("Label11") as Label).Text);
+        //    DateTime tenderDate = Convert.ToDateTime((row.FindControl("Label6") as Label).Text);
+
+        //    //string[] dropDownNames = { "DropDownList1" };
+        //    //List<DropDownList> dropDowns = new List<DropDownList>();
+        //    //dropDownNames.ToList().ForEach(name =>
+        //    //{
+        //    //    dropDowns.Add((DropDownList)row.FindControl(name));
+        //    //});
+        //    //string supplierName = dropDowns[0].SelectedValue;
+
+        //    //using (SSISEntities s = new SSISEntities())
+        //    //{
+        //    //    Supplier supplierToEdit = s.Suppliers.Find(supplierId);
+
+        //    //   supplierToEdit.
+        //    //}
+
+        //    var tender = entities.Tender_List_Details.SingleOrDefault(x => x.tender_id == tenderId);
+
+        //    // find tender_year_id for the latest one, with the supplier_id
+
+        //    var tenderYearItem = entities.Tender_List.Where(x => x.supplier_id == supplierId).OrderByDescending(o => o.tender_date);
+
+        //    if (tenderYearItem.Count() > 0)
+        //    {
+        //        tender.tender_year_id = tenderYearItem.First().tender_year_id;
+        //    }
+
+        //    tender.price = price;
+
+        //    //var result1 = entities.Suppliers.SingleOrDefault(x => x.supplier_id == supplierId);
+        //    //result1.supplier_id = supplierId;
+        //    //entities.SaveChanges();
+
+        //    var result2 = entities.Stock_Inventory.SingleOrDefault(x => x.item_code == itemCode);
+        //    result2.item_description = itemDescription;
+        //    entities.SaveChanges();
+
+        //    //var result3 = entities.Tender_List_Details.SingleOrDefault(x => x.tender_id == tenderId);
+        //    //result3.price = price;
+        //    //entities.SaveChanges();
+
+        //    var result4 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
+        //    result4.tender_date = tenderDate;
+        //    entities.SaveChanges();
+
+        //    FacadeFactory.GetTenderListService().RedoRankingsForTenderList();
+
+        //    GridView1.EditIndex = -1;
+        //    this.BindGrid();
+
+        //}
+
         protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             GridViewRow row = GridView1.Rows[e.RowIndex];
 
-            string supplierId = (row.FindControl("DropDownList1") as DropDownList).SelectedValue;
+            // supplierId = (row.FindControl("DropDownList1") as DropDownList).SelectedValue;
             //string supplierId = (row.FindControl("Label9") as Label).Text;
             //string supplierName = dropDowns[0].SelectedValue.
-            string supplierName = (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
+           // string supplierName = (row.FindControl("DropDownList1") as DropDownList).SelectedItem.Text;
             //Label9.Text = supplierId;
             //Label1.Text = supplierName;
             //string supplierName= (row.FindControl("TextBox1") as TextBox).Text;
             string itemCode = (row.FindControl("Label8") as Label).Text;
+            //string supplierId = (row.FindControl("Labe9") as Label).Text;
+            //string supplierName = (row.FindControl("Labe20") as Label).Text;
             string itemDescription = (row.FindControl("TextBox3") as TextBox).Text;
             int tenderId = Convert.ToInt32((row.FindControl("Label10") as Label).Text);
             decimal price = Convert.ToDecimal((row.FindControl("TextBox5") as TextBox).Text);
@@ -102,14 +173,14 @@ namespace SSISTeam2.Views.StoreClerk
 
             var tender = entities.Tender_List_Details.SingleOrDefault(x => x.tender_id == tenderId);
 
-            // find tender_year_id for the latest one, with the supplier_id
+            //// find tender_year_id for the latest one, with the supplier_id
 
-            var tenderYearItem = entities.Tender_List.Where(x => x.supplier_id == supplierId).OrderByDescending(o => o.tender_date);
+            //var tenderYearItem = entities.Tender_List.Where(x => x.supplier_id == supplierId).OrderByDescending(o => o.tender_date);
 
-            if (tenderYearItem.Count() > 0)
-            {
-                tender.tender_year_id = tenderYearItem.First().tender_year_id;
-            }
+            //if (tenderYearItem.Count() > 0)
+            //{
+            //    tender.tender_year_id = tenderYearItem.First().tender_year_id;
+            //}
 
             tender.price = price;
 
@@ -125,9 +196,9 @@ namespace SSISTeam2.Views.StoreClerk
             //result3.price = price;
             //entities.SaveChanges();
 
-            var result4 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
-            result4.tender_date = tenderDate;
-            entities.SaveChanges();
+            //var result4 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
+            //result4.tender_date = tenderDate;
+            //entities.SaveChanges();
 
             FacadeFactory.GetTenderListService().RedoRankingsForTenderList();
 
@@ -135,15 +206,14 @@ namespace SSISTeam2.Views.StoreClerk
             this.BindGrid();
 
         }
-
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             GridViewRow row = GridView1.Rows[e.RowIndex];
 
-            int tenderYearId = Convert.ToInt32((row.FindControl("Label11") as Label).Text);
-            var result1 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
-            result1.deleted = "Y";
-            entities.SaveChanges();
+            //int tenderYearId = Convert.ToInt32((row.FindControl("Label11") as Label).Text);
+            //var result1 = entities.Tender_List.SingleOrDefault(x => x.tender_year_id == tenderYearId);
+            //result1.deleted = "Y";
+            //entities.SaveChanges();
 
             int tenderId = Convert.ToInt32((row.FindControl("Label10") as Label).Text);
             var result2 = entities.Tender_List_Details.SingleOrDefault(x => x.tender_id == tenderId);
@@ -164,11 +234,18 @@ namespace SSISTeam2.Views.StoreClerk
             {
                 GridView1.PageIndex = e.NewPageIndex;
             }
+            if (!IsPostBack)
+            {
+                this.BindGrid();
+            }else
+            {
+                this.BindSearchGrid();
+            }
 
-            this.BindGrid();
+            
 
         }
-        protected void Search_Click(object sender, EventArgs e)
+        private void BindSearchGrid()
         {
             string searchWord = TextBox1.Text;
             decimal changePrice;
@@ -199,7 +276,11 @@ namespace SSISTeam2.Views.StoreClerk
             GridView1.Columns[4].Visible = false;
             GridView1.DataSource = result3.ToList();
             GridView1.DataBind();
+        }
+        protected void Search_Click(object sender, EventArgs e)
+        {
 
+            this.BindSearchGrid();
         }
         public class DropDownListItem
         {
@@ -214,29 +295,29 @@ namespace SSISTeam2.Views.StoreClerk
             }
         }
 
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
-                {
-                    GridViewRow row = e.Row;
-                    //(GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).Visible = true;
-                    List<Supplier> supplierList = entities.Suppliers.ToList();
-                    List<string> supplierNameList = new List<string>();
-                    foreach (Supplier s in supplierList)
-                    {
-                        supplierNameList.Add(s.name);
-                    }
+        //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+        //        {
+        //            GridViewRow row = e.Row;
+        //            //(GridView1.Rows[e.NewEditIndex].FindControl("DropDownList1") as DropDownList).Visible = true;
+        //            List<Supplier> supplierList = entities.Suppliers.ToList();
+        //            List<string> supplierNameList = new List<string>();
+        //            foreach (Supplier s in supplierList)
+        //            {
+        //                supplierNameList.Add(s.name);
+        //            }
 
-                    DropDownList ddl = row.FindControl("DropDownList1") as DropDownList;
-                    ddl.DataSource = supplierList;
-                    ddl.DataTextField = "name";
-                    ddl.DataValueField = "supplier_id";
-                    ddl.DataBind();
-                }
-            }
-        }
+        //            DropDownList ddl = row.FindControl("DropDownList1") as DropDownList;
+        //            ddl.DataSource = supplierList;
+        //            ddl.DataTextField = "name";
+        //            ddl.DataValueField = "supplier_id";
+        //            ddl.DataBind();
+        //        }
+        //    }
+        //}
     }
 
 }
