@@ -67,7 +67,7 @@
     </div>
          
              <div class="table-responsive">
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnDataBound="GridView_EditBooks_DataBound" AllowPaging="True" PageSize="2"
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnDataBound="GridView_EditBooks_DataBound" AllowPaging="True" PageSize="10"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
