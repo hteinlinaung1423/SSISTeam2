@@ -39,7 +39,7 @@
                         </div>
                         <br />
                         
-                        <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="Login1" class="btn btn-default"/>
+                        <asp:Button ID="LoginButton" OnClick="LoginButton_Click" runat="server" CommandName="Login" Text="Log In" ValidationGroup="Login1" class="btn btn-default"/>
                             </asp:Panel>
                     </div>
                 </div>
