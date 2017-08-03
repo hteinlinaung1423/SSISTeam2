@@ -27,7 +27,7 @@ namespace SSISTeam2.Classes.EFFServices
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new AllocatedModelCollection(new List<AllocatedModel>());
             }
 
             List<AllocatedModel> results = new List<AllocatedModel>();
@@ -170,7 +170,7 @@ namespace SSISTeam2.Classes.EFFServices
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException("No records exist");
-                return null;
+                return new AllocatedModelCollection(new List<AllocatedModel>());
             }
 
             List<AllocatedModel> results = new List<AllocatedModel>();
@@ -197,7 +197,7 @@ namespace SSISTeam2.Classes.EFFServices
             if (efRequests.Count == 0)
             {
                 //throw new ItemNotFoundException();
-                return null;
+                return new AllocatedModelCollection(new List<AllocatedModel>());
             }
 
             List<AllocatedModel> results = new List<AllocatedModel>();
