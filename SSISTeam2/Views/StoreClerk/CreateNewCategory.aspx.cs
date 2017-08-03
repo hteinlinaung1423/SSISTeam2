@@ -32,7 +32,7 @@ namespace SSISTeam2
 
                     entities.SaveChanges();
                 }
-            Response.Redirect("~/ChangeCategoryName1.aspx");
+            Response.Redirect("ChangeCategoryName1.aspx");
 
 
 
@@ -49,7 +49,7 @@ namespace SSISTeam2
         
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ChangeCategoryName1.aspx");
+            Response.Redirect("ChangeCategoryName1.aspx");
         }
     }
 }

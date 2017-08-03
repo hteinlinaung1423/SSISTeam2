@@ -263,5 +263,21 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/Employee/ChangeCollectionPoint.aspx");
         }
+
+        protected void btnViewSuppList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ViewSupplierList.aspx");
+        }
+
+        protected void btnViewCatList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ChangeCategoryName1.aspx");
+        }
+
+        protected void btnMaintainCatalogue_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ViewAndEditCatalogue.aspx");
+        }
+        
     }
 }

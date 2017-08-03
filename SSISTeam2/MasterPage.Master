@@ -153,8 +153,8 @@
                         { %>
 
                     <div class="navbar-form navbar-right">
-                        <asp:Button ID="Button1" runat="server" Text="Login" CausesValidation="false" CssClass="form-control btn-default" OnClick="Login" />
-                        <asp:Button ID="Button2" runat="server" Text="Register" CausesValidation="false" CssClass="form-control btn-default" OnClick="Register" />
+<%--                        <asp:Button ID="Button1" runat="server" Text="Login" CausesValidation="false" CssClass="form-control btn-default" OnClick="Login" />--%>
+<%--                        <asp:Button ID="Button2" runat="server" Text="Register" CausesValidation="false" CssClass="form-control btn-default" OnClick="Register" />--%>
 
 
                     </div>
@@ -182,16 +182,7 @@
 
                             <ul class="dropdown-menu columns">
 
-                                <% if (userModel.isDepartmentRep())
-                                    { %>
-
-                                <li>
-                                    <asp:LinkButton ID="linkBtnDepRepView" CausesValidation="false" OnClick="btnDepRepViewDisbursements_Click" runat="server" style="color: #000000; text-decoration: none;">View Recent Disbursements</asp:LinkButton>
-                                </li>
-                                <li>
-                                    <asp:LinkButton ID="linkBtnChangeCollectionPoint" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point</asp:LinkButton>
-                                </li>
-                                <% } %>
+                               
 
                                 <% if (userModel.isEmployee())
                                     { %>
@@ -199,6 +190,7 @@
                                      <li>
                                          <asp:LinkButton ID="btnEmpDash" CausesValidation="false" OnClick="btnEmpDash_Click" runat="server" style="color: #000000; text-decoration: none;">Your Dashboard</asp:LinkButton>
                                     </li>
+                                
                                     <%--<li class="divider"></li>--%>
                                 <br />
                                     <li class="dropdown-header">Employee actions</li>
@@ -213,9 +205,16 @@
                                         <asp:LinkButton ID="btnEmpViewCatalogue_emp" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                     </li>
                                      </li>
-                                    <li>
+                                     <% if (userModel.isDepartmentRep())
+                                    { %>
+                                <li class="dropdown-header">Department Representative actions</li>
+                                <li>
+                                    <asp:LinkButton ID="linkBtnDepRepView" CausesValidation="false" OnClick="btnDepRepViewDisbursements_Click" runat="server" style="color: #000000; text-decoration: none;">View Recent Disbursements</asp:LinkButton>
+                                </li>
+                        <li>
                                         <asp:LinkButton ID="btnChnageCollectp" OnClick="btnChnageCollectp_Click" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point</asp:LinkButton>
                                     </li>
+                                <% } %>
 
                                 <% }
                                     if (userModel.isStoreClerk() || userModel.isStoreSupervisor())
@@ -245,6 +244,9 @@
                                 <li>
                                     <asp:LinkButton ID="ViewDeptList" CausesValidation="false" OnClick="ViewDeptList_Click" runat="server" style="color: #000000; text-decoration: none;">View Department List</asp:LinkButton>
                                 </li>
+                        <li>
+                                    <asp:LinkButton ID="ViewSuppList" CausesValidation="false" OnClick="btnViewSuppList_Click" runat="server" style="color: #000000; text-decoration: none;">View Supplier List</asp:LinkButton>
+                                </li>
                                 <li>
                                     <asp:LinkButton ID="btnGenerateRetrieval" CausesValidation="false" OnClick="btnGenerateRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Retrieval Form</asp:LinkButton>
                                 </li>
@@ -273,6 +275,13 @@
                                 <li>
                                     <asp:LinkButton ID="btnViewTenderList" CausesValidation="false" OnClick="btnViewTenderList_Click" runat="server" style="color: #000000; text-decoration: none;">View Tender List</asp:LinkButton>
                                 </li>
+                        <li>
+                                    <asp:LinkButton ID="CategoryListing" CausesValidation="false" OnClick="btnViewCatList_Click" runat="server" style="color: #000000; text-decoration: none;">Maintain Category Listing</asp:LinkButton>
+                                </li>
+                        <li>
+                                    <asp:LinkButton ID="MaintainStoreCatalgoe" CausesValidation="false" OnClick="btnMaintainCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">Maintain Category Listing</asp:LinkButton>
+                                </li>
+
 
                               
 
