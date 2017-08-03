@@ -141,7 +141,7 @@
     <Content Include="Classes\WebServices\MobileConfirmation_TEST.aspx" />
     <Content Include="Classes\WebServices\Service.svc" />
     <Content Include="CreateNewCategory.aspx" />
-    <Content Include="notauthorized.aspx" />
+    <Content Include="Views\notauthorized.aspx" />
     <Content Include="DEMO_RolesTest.aspx" />
     <Content Include="Views\Employee\ChangeCollectionPoint.aspx" />
     <Content Include="Views\StoreClerk\DeptDetails.aspx" />
@@ -261,11 +261,11 @@
     <Compile Include="Views\404.aspx.designer.cs">
       <DependentUpon>404.aspx</DependentUpon>
     </Compile>
-    <Compile Include="notauthorized.aspx.cs">
+    <Compile Include="Views\notauthorized.aspx.cs">
       <DependentUpon>notauthorized.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="notauthorized.aspx.designer.cs">
+    <Compile Include="Views\notauthorized.aspx.designer.cs">
       <DependentUpon>notauthorized.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\ChangeCollectionPoint.aspx.cs">

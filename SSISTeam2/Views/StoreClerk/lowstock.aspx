@@ -22,7 +22,7 @@
             <asp:GridView ID="GridView1" runat="server"
                 AutoGenerateColumns="false"
                 AllowPaging="true"
-                PageSize="10"
+                PageSize="5"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"

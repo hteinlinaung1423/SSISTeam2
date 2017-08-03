@@ -103,6 +103,48 @@ namespace SSISTeam2.Views.Employee
             this.BindGrid();
         }
 
+        protected void DropDownList_JumpToPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = GridView1.TopPagerRow;
+            GridViewRow bottomPagerRow = GridView1.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if ((DropDownList)sender == bottomJumpToPage)
+            {
+                GridView1.PageIndex = bottomJumpToPage.SelectedIndex;
+            }
+            else
+            {
+                GridView1.PageIndex = topJumpToPage.SelectedIndex;
+
+            }
+            this.BindGrid();
+        }
+
+        protected void GridView_EditBooks_DataBound(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = GridView1.TopPagerRow;
+            GridViewRow bottomPagerRow = GridView1.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if (topJumpToPage != null)
+            {
+                for (int i = 0; i < GridView1.PageCount; i++)
+                {
+                    ListItem item = new ListItem("Page " + (i + 1));
+                    topJumpToPage.Items.Add(item);
+                    bottomJumpToPage.Items.Add(item);
+                }
+            }
+
+            topJumpToPage.SelectedIndex = GridView1.PageIndex;
+            bottomJumpToPage.SelectedIndex = GridView1.PageIndex;
+        }
+
 
     }
 }
