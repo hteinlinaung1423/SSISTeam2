@@ -254,7 +254,7 @@
                                     <asp:LinkButton ID="btnGenerateDisbursement" CausesValidation="false" OnClick="btnGenerateDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Disbursement Form</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnConfirmDisbursement" CausesValidation="false" OnClock="btnConfirmDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Confirm Disbursement</asp:LinkButton>
+                                    <asp:LinkButton ID="btnConfirmDisbursement" CausesValidation="false" OnClick="btnConfirmDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Confirm Disbursement</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnMonthlyCheck" CausesValidation="false" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Monthly Stocktake</asp:LinkButton>

@@ -7,12 +7,41 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 using SSISTeam2.Classes.Models;
+using System.Web.Security;
 
 namespace SSISTeam2
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
         public UserModel userModel;
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (Page.User.Identity.Name == "")
+            {
+                FormsAuthentication.SignOut();
+            }
+            if (Page.User.Identity.Name != null && Page.User.Identity.Name != "")
+            {
+                // Somebody is signed in
+                string normalisedUserName = Page.User.Identity.Name.ToLower();
+                string storedUserName = normalisedUserName;
+                using (SSISEntities context = new SSISEntities())
+                {
+                    var users = context.Dept_Registry.Where(w => w.username.ToLower() == normalisedUserName);
+                    if (users.Count() > 0)
+                    {
+                        var user = users.First();
+                        storedUserName = user.username;
+                    }
+                }
+
+                if (Page.User.Identity.Name != storedUserName)
+                {
+                    FormsAuthentication.SetAuthCookie(storedUserName, false);
+                }
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -254,14 +283,14 @@ namespace SSISTeam2
             Response.Redirect("~/Views/StoreClerk/TenderListForm.aspx");
         }
 
-        protected void btnConfirmDisbursement_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Views/StoreClerk/ConfirmDisbursement.aspx");
-        }
-
         protected void btnChnageCollectp_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Employee/ChangeCollectionPoint.aspx");
+        }
+
+        protected void btnConfirmDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ConfirmDisbursement.aspx");
         }
 
         protected void btnViewSuppList_Click(object sender, EventArgs e)
