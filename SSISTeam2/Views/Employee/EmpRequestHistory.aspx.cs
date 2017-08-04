@@ -54,19 +54,20 @@ namespace SSISTeam2.Views.Employee
             string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
             string currentDept = user.Department.dept_code;
-            var q = (from x in ent.Requests
+            var listOfRequests = (from x in ent.Requests
                      where x.dept_code == currentDept
                      select new
                      {
                          x.request_id,
                          x.username,
+                         x.Dept_Registry.fullname,
                          x.date_time,
                          x.current_status
                      })
                      .OrderByDescending(o => o.date_time)
                      .ToList();
 
-            GridView2.DataSource = q;
+            GridView2.DataSource = listOfRequests;
             GridView2.DataBind();
 
 

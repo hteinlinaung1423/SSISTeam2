@@ -50,8 +50,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
 
             //sdept = (Department)Session["sDept"];
-            string fullname = ent.Dept_Registry.Where(x => x.username == sdept.contact_user).Select(x => x.fullname).First().ToString();
-            LabelContactName.Text = fullname;
+            LabelContactName.Text = new UserModel(sdept.contact_user).Fullname;
             LabelPhNo.Text = sdept.contact_num.ToString();
             LabelFaxNo.Text = sdept.fax_num.ToString();
             currentCollectId = sdept.collection_point;
@@ -126,6 +125,13 @@ namespace SSISTeam2.Views.DepartmentHead
         private void _sendEmail(string username, string repUserName)
 
         {
+            string cpId = ddlCollectPoint.SelectedValue;
+            Collection_Point cp;
+
+            using (SSISEntities context = new SSISEntities())
+            {
+                cp = context.Collection_Point.Find(cpId);
+            }
 
             /* Email logic */
 
@@ -159,7 +165,11 @@ namespace SSISTeam2.Views.DepartmentHead
 
             sb.AppendLine("<br />");
 
-            sb.AppendLine(string.Format("The collection point for your department is: ", ddlCollectPoint.SelectedItem.ToString()));
+            sb.AppendLine(string.Format("The collection point for your department is: {0}", cp.location));
+
+            sb.AppendLine("<br />");
+
+            sb.AppendLine(string.Format("The collection time is: {0} on {1}", cp.date_time.ToShortTimeString(), cp.day_of_week));
 
             sb.AppendLine("<br />");
 

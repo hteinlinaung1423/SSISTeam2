@@ -1,16 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MonthlyCheck.aspx.cs" Inherits="SSISTeam2.MonthlyCheck" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Monthly Stationery Check</title>
+    <title>Stationery Stocktake</title>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
-        <div class="panel-heading"><h3>Monthly Stocktake</h3></div>
-        <div class="panel-heading"><h4><asp:Label ID="CheckLabel" runat="server" Text=""></asp:Label></h4></div>
+        <div class="panel-heading"><h3>Stationery Stocktake</h3></div>
+        <div class="panel-heading"><h4><asp:Label ID="CheckLabel" runat="server" Text="" CssClass="alert alert-info"></asp:Label></h4></div>
 
     </div>
-        Sort By:
+<%--        Sort By:
         <asp:DropDownList ID="SortDDL" runat="server">
             <asp:ListItem>Category</asp:ListItem>
             <asp:ListItem Value="Name">Item Name</asp:ListItem>
@@ -19,7 +19,7 @@
         </asp:DropDownList>
         Date:
         <asp:TextBox ID="DateTB" runat="server"></asp:TextBox>
-        <br />
+        <br />--%>
     <asp:GridView ID="MonthlyCheckGV" runat="server" 
         AutoGenerateColumns="false" 
         AllowPaging="True" 

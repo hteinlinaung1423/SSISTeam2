@@ -65,7 +65,7 @@
 
             <asp:TableRow>
                 <asp:TableCell>Choose Delegate Employee</asp:TableCell>
-                <asp:TableCell> <asp:DropDownList ID="ddlEmployee" runat="server" AppendDataBoundItems="true" BackColor="#DCE0DC" CssClass="form-control">
+                <asp:TableCell> <asp:DropDownList ID="ddlEmployee" runat="server" AppendDataBoundItems="true" CssClass="form-control">
                     <asp:ListItem Text="Select---" Value="0"></asp:ListItem>
                                  </asp:DropDownList></asp:TableCell>
             </asp:TableRow>

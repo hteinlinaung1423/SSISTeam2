@@ -17,10 +17,25 @@ namespace SSISTeam2
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            bool isPersistent = false;
+
+            //var formsAuthCookie = Response.Cookies[FormsAuthentication.FormsCookieName];
+            //if (formsAuthCookie != null)
+            //{
+            //    var existingTicket = FormsAuthentication.Decrypt(formsAuthCookie.Value);
+
+            //    if (existingTicket != null)
+            //    {
+            //        isPersistent = existingTicket.IsPersistent;
+            //    }
+            //}
+
+
             if (Page.User.Identity.Name == "")
             {
                 FormsAuthentication.SignOut();
             }
+
             if (Page.User.Identity.Name != null && Page.User.Identity.Name != "")
             {
                 // Somebody is signed in
@@ -38,7 +53,7 @@ namespace SSISTeam2
 
                 if (Page.User.Identity.Name != storedUserName)
                 {
-                    FormsAuthentication.SetAuthCookie(storedUserName, false);
+                    FormsAuthentication.SetAuthCookie(storedUserName, isPersistent);
                 }
             }
         }
@@ -54,7 +69,14 @@ namespace SSISTeam2
                 string fullName = "";
                 using (SSISEntities ctx = new SSISEntities())
                 {
-                    fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                    try
+                    {
+                        fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                    } catch (Exception)
+                    {
+                        FormsAuthentication.SignOut();
+                        Response.Redirect("~/login.aspx");
+                    }
 
                     // Check if user is department rep
                     //int count = ctx.Departments.Where(d => d.rep_user == currentUser).Count();
@@ -306,6 +328,15 @@ namespace SSISTeam2
         {
             Response.Redirect("~/Views/StoreClerk/ViewAndEditCatalogue.aspx");
         }
-        
+
+        protected void btnConfirmRetrieval_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ConfirmRetrieval.aspx");
+        }
+
+        protected void btnViewDisbursement_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/StoreClerk/ViewGeneratedDisbursements.aspx");
+        }
     }
 }

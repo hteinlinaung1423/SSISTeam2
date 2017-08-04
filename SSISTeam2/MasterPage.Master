@@ -19,6 +19,12 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
 
+    <!-- jQuery -->
+    <script
+        src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -253,14 +259,20 @@
                                 <li>
                                     <asp:LinkButton ID="btnGenerateRetrieval" CausesValidation="false" OnClick="btnGenerateRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Retrieval Form</asp:LinkButton>
                                 </li>
+                        <li>
+                                    <asp:LinkButton ID="btnConfirmRetrieval" CausesValidation="false" OnClick="btnConfirmRetrieval_Click" runat="server" style="color: #000000; text-decoration: none;">Confirm Retrieval</asp:LinkButton>
+                                </li>
                                 <li>
                                     <asp:LinkButton ID="btnGenerateDisbursement" CausesValidation="false" OnClick="btnGenerateDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Generate Disbursement Form</asp:LinkButton>
+                                </li>
+                        <li>
+                                    <asp:LinkButton ID="btnViewDisbursement" CausesValidation="false" OnClick="btnViewDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">View Generated Disbursements</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnConfirmDisbursement" CausesValidation="false" OnClick="btnConfirmDisbursement_Click" runat="server" style="color: #000000; text-decoration: none;">Confirm Disbursement</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="btnMonthlyCheck" CausesValidation="false" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Monthly Stocktake</asp:LinkButton>
+                                    <asp:LinkButton ID="btnMonthlyCheck" CausesValidation="false" OnClick="btnMonthlyCheck_Click" runat="server" style="color: #000000; text-decoration: none;">Conduct Stocktake</asp:LinkButton>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="btnLowStocks_Sup" CausesValidation="false" OnClick="btnLowStocks_Mgr_Click" runat="server" style="color: #000000; text-decoration: none;">Low Stock Ordering</asp:LinkButton>
@@ -366,15 +378,17 @@
                                 <br />
                                 <br />
                                 <br />
-                                </li>
+                                <%--</li>--%>
                                 <li class="dropdown-header">Manager actions</li>
 
                                 <li>
                                     <asp:LinkButton ID="btnApproveRequests_Mgr" CausesValidation="false" OnClick="btnApproveRequests_Click" runat="server" style="color: #000000; text-decoration: none;">Approve Requests</asp:LinkButton>
                                 </li>
+                                <% if (! userModel.isDelegateHead()) { %>
                                 <li>
                                     <asp:LinkButton ID="LinkButtonDelegateAuth2" CausesValidation="false" OnClick="DelegateAuth" runat="server" style="color: #000000; text-decoration: none;">Delegate Authority</asp:LinkButton>
                                 </li>
+                                <% } %>
                                 <li>
                                     <asp:LinkButton ID="btnEmpViewCatalogue_Mgr" CausesValidation="false" OnClick="btnEmpViewCatalogue_Click" runat="server" style="color: #000000; text-decoration: none;">View Stationery Catalogue</asp:LinkButton>
                                 </li>
@@ -429,11 +443,11 @@
       
     </form>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<%--    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--%>
 
 </body>
 </html>

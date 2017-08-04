@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MonthlyCheckConfirmation.aspx.cs" Inherits="SSISTeam2.MonthlyCheckConfirmation" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Confirmation of Monthly Check</title>
+    <title>Confirmation of Stocktake</title>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
-        <div class="panel-heading"><h3>Monthly Check Confirmation</h3></div>
+        <div class="panel-heading"><h3>Stocktake Confirmation</h3></div>
     </div>
     <div class="table-responsive ">
         <div class="panel-heading"><h5><asp:Label ID="CheckLabel" runat="server" Text=""></asp:Label></h5></div>

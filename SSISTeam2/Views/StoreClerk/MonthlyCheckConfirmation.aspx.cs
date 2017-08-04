@@ -68,7 +68,7 @@ namespace SSISTeam2
                 context.Monthly_Check_Records.Add(checkRecord);
                 context.SaveChanges();
 
-                Response.Redirect("/Views/StoreClerk/Dashboard.aspx");
+                Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
             }
             else
             {
@@ -140,7 +140,7 @@ namespace SSISTeam2
                 context.Monthly_Check_Records.Add(checkRecord);
                 context.SaveChanges();
 
-                Response.Redirect("/Views/StoreClerk/Dashboard.aspx");
+                Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
             }
         }
 
