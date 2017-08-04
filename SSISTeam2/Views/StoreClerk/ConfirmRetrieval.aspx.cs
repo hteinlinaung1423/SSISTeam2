@@ -67,6 +67,72 @@ namespace SSISTeam2.Views.StoreClerk
 
         }
 
+
+        // For paganation
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0)
+            {
+                gvToRetrieve.PageIndex = 0;
+            }
+            else
+            {
+                gvToRetrieve.PageIndex = e.NewPageIndex;
+            }
+
+            _refreshGrid((List<ConfirmRetrievalViewModel>)Session[SESSION_RETRIEVING_LIST]);
+
+        }
+
+        // for paganation
+
+        protected void GridView_EditBooks_DataBound(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = gvToRetrieve.TopPagerRow;
+            GridViewRow bottomPagerRow = gvToRetrieve.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if (topJumpToPage != null)
+            {
+                for (int i = 0; i < gvToRetrieve.PageCount; i++)
+                {
+                    ListItem item = new ListItem("Page " + (i + 1));
+                    topJumpToPage.Items.Add(item);
+                    bottomJumpToPage.Items.Add(item);
+                }
+            }
+
+            topJumpToPage.SelectedIndex = gvToRetrieve.PageIndex;
+            bottomJumpToPage.SelectedIndex = gvToRetrieve.PageIndex;
+        }
+
+
+        protected void DropDownList_JumpToPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = gvToRetrieve.TopPagerRow;
+            GridViewRow bottomPagerRow = gvToRetrieve.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if ((DropDownList)sender == bottomJumpToPage)
+            {
+                gvToRetrieve.PageIndex = bottomJumpToPage.SelectedIndex;
+            }
+            else
+            {
+                gvToRetrieve.PageIndex = topJumpToPage.SelectedIndex;
+
+            }
+
+            _refreshGrid((List<ConfirmRetrievalViewModel>)Session[SESSION_RETRIEVING_LIST]);
+
+
+        }
+
         private void _refreshGrid(List<ConfirmRetrievalViewModel> list)
         {
             gvToRetrieve.DataSource = list;
