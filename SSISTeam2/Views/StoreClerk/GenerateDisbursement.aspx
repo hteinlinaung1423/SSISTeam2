@@ -30,7 +30,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <asp:DropDownList ID="ddlCollectionPoint" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCollectionPoint_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
         </div>
     </div>
@@ -114,6 +114,7 @@
             <asp:Panel ID="panelNormal" runat="server">
 
                 <asp:Button ID="btnSubmit" runat="server" Text="Generate disbursment forms" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
+                <asp:Button ID="btnSubmitAll" runat="server" Text="Generate all disbursment forms" OnClick="btnSubmitAll_Click" CssClass="btn btn-sm btn-success" />
 
             </asp:Panel>
 

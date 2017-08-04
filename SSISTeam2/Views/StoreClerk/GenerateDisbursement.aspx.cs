@@ -30,6 +30,17 @@ namespace SSISTeam2.Views.StoreClerk
 
                 if (collectionPts.Count == 0) return;
 
+                //var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursementsForCollectionPoint(collectionPts.First().collection_pt_id);
+                var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursements();
+
+                var itemGroups = retrieved.SelectMany(sm =>
+                    sm.Items
+                    .Select(s => new { s.Key.ItemCode, s.Key.Description, s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name, sm.CollectionPtId })
+                ).GroupBy(k => k.ItemCode, v => v).ToList();
+
+                /* Filter active collection points */
+                List<int> activeCollectionPoints = itemGroups.SelectMany(sm => sm.Select(s => s.CollectionPtId)).Distinct().ToList();
+
                 // If the user is tagged to a collection point, add it into the location name
                 string currentUser = User.Identity.Name;
 
@@ -37,7 +48,11 @@ namespace SSISTeam2.Views.StoreClerk
                 {
                     if (collectionPt.username == currentUser)
                     {
-                        collectionPt.location += " (Assigned to you)";
+                        collectionPt.location += " [Assigned to you]";
+                    }
+                    if ( ! activeCollectionPoints.Contains(collectionPt.collection_pt_id))
+                    {
+                        collectionPt.location += " (Empty)";
                     }
                 }
 
@@ -47,14 +62,6 @@ namespace SSISTeam2.Views.StoreClerk
                 ddlCollectionPoint.DataValueField = "collection_pt_id";
                 ddlCollectionPoint.DataTextField = "location";
                 ddlCollectionPoint.DataBind();
-
-                //var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursementsForCollectionPoint(collectionPts.First().collection_pt_id);
-                var retrieved = FacadeFactory.getDisbursementService(context).getAllPossibleDisbursements();
-
-                var itemGroups = retrieved.SelectMany(sm =>
-                    sm.Items
-                    .Select(s => new { s.Key.ItemCode, s.Key.Description, s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name, sm.CollectionPtId })
-                ).GroupBy(k => k.ItemCode, v => v).ToList();
 
                 List<GenerateDisbursementViewModel> list = new List<GenerateDisbursementViewModel>();
 
@@ -188,13 +195,16 @@ namespace SSISTeam2.Views.StoreClerk
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            // Get current collection point
+            int collectionPtId = Convert.ToInt32(ddlCollectionPoint.SelectedValue);
+
             // Get all the models
             List<GenerateDisbursementViewModel> list = Session[SESSION_COLLECTION_PT_LIST] as List<GenerateDisbursementViewModel>;
             // Convert to ids and items to retrieve
             var listByRequestIds = list
                 .SelectMany(sm => sm.RequestIds
-                .Select(s => new { RequestId = s, sm.ItemCode, sm.Include }))
-                .Where(w => w.Include)
+                .Select(s => new { RequestId = s, sm.ItemCode, sm.Include, sm.CollectionPtId }))
+                .Where(w => w.Include && w.CollectionPtId == collectionPtId)
                 .GroupBy(k => k.RequestId, v => v.ItemCode);
 
             using (SSISEntities context = new SSISEntities())
@@ -221,6 +231,30 @@ namespace SSISTeam2.Views.StoreClerk
             Session[SESSION_CURRENT_COLLECTION_PT] = newCollectionPtId;
 
             _refreshGrid(list);
+        }
+
+        protected void btnSubmitAll_Click(object sender, EventArgs e)
+        {
+            // Get all the models
+            List<GenerateDisbursementViewModel> list = Session[SESSION_COLLECTION_PT_LIST] as List<GenerateDisbursementViewModel>;
+            // Convert to ids and items to retrieve
+            var listByRequestIds = list
+                .SelectMany(sm => sm.RequestIds
+                .Select(s => new { RequestId = s, sm.ItemCode, sm.Include, sm.CollectionPtId }))
+                .Where(w => w.Include)
+                .GroupBy(k => k.RequestId, v => v.ItemCode);
+
+            using (SSISEntities context = new SSISEntities())
+            {
+                foreach (var request in listByRequestIds)
+                {
+                    FacadeFactory.getRequestMovementService(context).moveFromRetrievedToDisbursing(request.Key, request.ToList(), User.Identity.Name);
+                }
+
+                context.SaveChanges();
+            }
+
+            Response.Redirect(Request.Url.ToString(), false);
         }
     }
 

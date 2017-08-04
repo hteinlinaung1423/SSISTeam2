@@ -33,24 +33,9 @@ namespace SSISTeam2.Views.StoreClerk
                 // If the user is tagged to a collection point, add it into the location name
                 string currentUser = User.Identity.Name;
 
-                foreach (var collectionPt in collectionPts)
-                {
-                    if (collectionPt.username == currentUser)
-                    {
-                        collectionPt.location += " (Assigned to you)";
-                    }
-                }
-
-                ddlCollectionPoints.DataSource = collectionPts;
-                ddlCollectionPoints.DataValueField = "collection_pt_id";
-                ddlCollectionPoints.DataTextField = "location";
-                ddlCollectionPoints.DataBind();
-
-
                 int currentCollectionPtId = collectionPts.First().collection_pt_id;
                 // Get the department codes that are related to this value
                 List<Department> departments = departmentList.Where(w => w.collection_point == currentCollectionPtId).ToList();
-
 
                 // Get all that can be disbursed given the current user
                 DisbursementModelCollection disbursingList = FacadeFactory.getDisbursementService(context).getAllThatCanBeSignedOff(currentUser);
@@ -61,8 +46,28 @@ namespace SSISTeam2.Views.StoreClerk
 
                 var itemGroups = disbursingList.SelectMany(sm =>
                     sm.Items
-                    .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name })
+                    .Select(s => new { s.Key.ItemCode, s.Key.Description, Quantity = s.Value, sm.Department.dept_code, sm.RequestId, sm.Department.name, sm.CollectionPtId })
                 ).GroupBy(k => new { k.ItemCode, k.Description, DeptCode = k.dept_code }, v => v).ToList();
+
+                /* Filter active collection points */
+                List<int> activeCollectionPoints = itemGroups.SelectMany(sm => sm.Select(s => s.CollectionPtId)).Distinct().ToList();
+
+                foreach (var collectionPt in collectionPts)
+                {
+                    if (collectionPt.username == currentUser)
+                    {
+                        collectionPt.location += " [Assigned to you]";
+                    }
+                    if ( ! activeCollectionPoints.Contains(collectionPt.collection_pt_id))
+                    {
+                        collectionPt.location += " (Empty)";
+                    }
+                }
+
+                ddlCollectionPoints.DataSource = collectionPts;
+                ddlCollectionPoints.DataValueField = "collection_pt_id";
+                ddlCollectionPoints.DataTextField = "location";
+                ddlCollectionPoints.DataBind();
 
                 List<ConfirmDisbursementViewModel> list = new List<ConfirmDisbursementViewModel>();
 
@@ -121,6 +126,18 @@ namespace SSISTeam2.Views.StoreClerk
         }
 
         private void _refrehDepartmentsDropDown(List<Department> departments) {
+            List<ConfirmDisbursementViewModel> list = Session[SESSION_DISBURSING_LIST] as List<ConfirmDisbursementViewModel>;
+
+            List<string> activeDeptCodes = list.Select(s => s.DeptCode).ToList();
+
+            foreach (var dept in departments)
+            {
+                if ( ! activeDeptCodes.Contains(dept.dept_code))
+                {
+                    dept.name += " (Empty)";
+                }
+            }
+
             ddlDepartments.DataSource = departments;
             ddlDepartments.DataValueField = "dept_code";
             ddlDepartments.DataTextField = "name";

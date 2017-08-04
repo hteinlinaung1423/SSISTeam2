@@ -30,7 +30,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-5 col-md-6">
             <asp:DropDownList ID="ddlCollectionPoints" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCollectionPoints_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
         </div>
     </div>

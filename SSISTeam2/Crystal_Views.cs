@@ -12,18 +12,15 @@ namespace SSISTeam2
     using System;
     using System.Collections.Generic;
     
-    public partial class Volume_Request
+    public partial class Crystal_Views
     {
-        public string cat_name { get; set; }
-        public string name { get; set; }
+        public Nullable<int> orig_quantity { get; set; }
         public int quantity { get; set; }
-        public System.DateTime date_time { get; set; }
-        public string item_description { get; set; }
-        public string username { get; set; }
-        public string dept_code { get; set; }
-        public string status { get; set; }
         public string current_status { get; set; }
         public string item_code { get; set; }
-        public Nullable<int> orig_quantity { get; set; }
+        public string item_description { get; set; }
+        public string name { get; set; }
+        public System.DateTime date_time { get; set; }
+        public string cat_name { get; set; }
     }
 }

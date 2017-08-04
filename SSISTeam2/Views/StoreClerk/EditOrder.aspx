@@ -87,6 +87,8 @@
             
             <asp:Button ID="finish" runat="server" Text="Receive Delivery Orders" 
                 CssClass="btn btn-primary" OnClick="ReceiveOrder" />
+
+            <input type="button" class="btn btn-sm btn-info" onclick="print();" value="Print Page" />
         </div>
 
 

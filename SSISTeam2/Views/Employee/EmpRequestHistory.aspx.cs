@@ -54,20 +54,31 @@ namespace SSISTeam2.Views.Employee
             string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
             string currentDept = user.Department.dept_code;
-            var q = (from x in ent.Requests
+            var listOfRequests = (from x in ent.Requests
                      where x.dept_code == currentDept
                      select new
                      {
                          x.request_id,
                          x.username,
+                         x.Dept_Registry.fullname,
                          x.date_time,
                          x.current_status
                      })
                      .OrderByDescending(o => o.date_time)
                      .ToList();
-
-            GridView2.DataSource = q;
-            GridView2.DataBind();
+            if (listOfRequests != null && listOfRequests.Count > 0)
+            {
+                GridView2.DataSource = listOfRequests;
+                GridView2.DataBind();
+                PanelNothing.Visible = false;
+              
+            }
+            else
+            {
+                PanelSearch.Visible = false;
+                lblnothing.Text = "Nothing to display!";
+            }
+           
 
 
         }
@@ -140,6 +151,7 @@ namespace SSISTeam2.Views.Employee
                      {
                          x.request_id,
                          x.username,
+                         x.Dept_Registry.fullname,
                          x.date_time,
                          x.current_status
                      });
@@ -147,8 +159,9 @@ namespace SSISTeam2.Views.Employee
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                q = q.Where(s => s.username.Contains(searchString));
+                q = q.Where(s => s.username.Contains(searchString)).OrderBy(x=>x.date_time);
             }
+
             GridView2.DataSource = q.ToList();
             GridView2.DataBind();
         }
@@ -182,6 +195,55 @@ namespace SSISTeam2.Views.Employee
             Response.Redirect("~/Default.aspx");
         }
 
+
+        //Paganitation
+        protected void GridView_EditBooks_DataBound(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = GridView2.TopPagerRow;
+            GridViewRow bottomPagerRow = GridView2.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if (topJumpToPage != null)
+            {
+                for (int i = 0; i < GridView2.PageCount; i++)
+                {
+                    ListItem item = new ListItem("Page " + (i + 1));
+                    topJumpToPage.Items.Add(item);
+                    bottomJumpToPage.Items.Add(item);
+                }
+            }
+
+            topJumpToPage.SelectedIndex = GridView2.PageIndex;
+            bottomJumpToPage.SelectedIndex = GridView2.PageIndex;
+        }
+
+
+        protected void DropDownList_JumpToPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = GridView2.TopPagerRow;
+            GridViewRow bottomPagerRow = GridView2.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if ((DropDownList)sender == bottomJumpToPage)
+            {
+                GridView2.PageIndex = bottomJumpToPage.SelectedIndex;
+            }
+            else
+            {
+                GridView2.PageIndex = topJumpToPage.SelectedIndex;
+
+            }
+
+            FillPage();
+
+
+
+
+        }
 
 
     }

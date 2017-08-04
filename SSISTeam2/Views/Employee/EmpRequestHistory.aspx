@@ -15,8 +15,15 @@
         <asp:Button ID="btnCreate" runat="server" Text="Create New Request" OnClick="btnCreate_Click" CssClass="btn btn-success"/>
         <br />
         <br />
-        Search by name: <asp:TextBox ID="searchtext" runat="server"></asp:TextBox>
-        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-default" />  
+        <asp:Panel ID="PanelSearch" runat="server">
+             Search by name: <asp:TextBox ID="searchtext" runat="server"></asp:TextBox>
+        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-default" /> 
+        </asp:Panel>
+        
+        <asp:Panel ID="PanelNothing" runat="server">
+            <asp:Label ID="lblnothing" runat="server" Text="Label"></asp:Label>
+        </asp:Panel>
+        
         <br />
         <br />
         <asp:GridView ID="GridView2" runat="server" 
@@ -25,13 +32,14 @@
             GridLines="None"
             AutoGenerateColumns="false"
             AllowPaging="true"
-            PageSize="10"
+            PageSize="3"
             HeaderStyle-CssClass="text-center-impt"
             CssClass="table table-responsive table-striped"
             PagerStyle-HorizontalAlign="Center" 
             PagerSettings-Position="TopAndBottom" 
             OnRowCancelingEdit="GridView2_RowCancelingEdit"
             OnPageIndexChanging="GridView2_PageIndexChanging"
+              OnDataBound="GridView_EditBooks_DataBound"
  
          
             >
@@ -44,6 +52,9 @@
                     <PagerTemplate>
                         <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
                         <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
+                         <asp:DropDownList ID="DropDownList_JumpToPage" runat="server" OnSelectedIndexChanged="DropDownList_JumpToPage_SelectedIndexChanged" AutoPostBack="True" CssClass="btn btn-default btn-sm"></asp:DropDownList>
+
+                    <asp:Label ID="Paging_CurrentPage" Text="" runat="server"><%# " / " + GridView2.PageCount %></asp:Label>
                         <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
                         <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                     </PagerTemplate>
@@ -63,7 +74,7 @@
                         </asp:TemplateField>
                 <asp:TemplateField HeaderText="Request Employee" SortExpression="username">
                             <ItemTemplate>
-                                <asp:Label ID="lblempname" runat="server" Text='<%# Eval("username") %>'></asp:Label>
+                                <asp:Label ID="lblempname" runat="server" Text='<%# Eval("fullname") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                 <asp:TemplateField HeaderText="Date" SortExpression="date_time">

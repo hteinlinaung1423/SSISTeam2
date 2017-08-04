@@ -16,7 +16,7 @@
    <br />
     Status:  <asp:Label ID="lblstatus" runat="server" Text='<%# Eval("current_status") %>'></asp:Label>
    <br />
-    Employee Name: <asp:Label ID="lblemployeename" runat="server" Text='<%# Eval("username") %>'></asp:Label>
+    Employee Name: <asp:Label ID="lblemployeename" runat="server" Text='<%# Eval("fullname") %>'></asp:Label>
    <br />
     Comments:  <asp:Label ID="lblcomment" runat="server" Text='<%# Eval("reason") %>'></asp:Label>
     <br />

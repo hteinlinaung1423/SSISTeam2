@@ -312,5 +312,6 @@ namespace SSISTeam2.Classes.Models
                 fullname = value;
             }
         }
+
     }
 }
