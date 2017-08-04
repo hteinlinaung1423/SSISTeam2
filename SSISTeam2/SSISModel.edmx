@@ -246,31 +246,25 @@
           <Property Name="deleted" Type="nchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Volume_Request">
+warning 6002: The table/view 'SSIS.dbo.Crystal_Views' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Crystal_Views">
           <Key>
-            <PropertyRef Name="cat_name" />
-            <PropertyRef Name="name" />
             <PropertyRef Name="quantity" />
-            <PropertyRef Name="date_time" />
-            <PropertyRef Name="item_description" />
-            <PropertyRef Name="username" />
-            <PropertyRef Name="dept_code" />
-            <PropertyRef Name="status" />
             <PropertyRef Name="current_status" />
             <PropertyRef Name="item_code" />
+            <PropertyRef Name="item_description" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="date_time" />
+            <PropertyRef Name="cat_name" />
           </Key>
-          <Property Name="cat_name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="orig_quantity" Type="int" />
           <Property Name="quantity" Type="int" Nullable="false" />
-          <Property Name="date_time" Type="datetime" Nullable="false" />
-          <Property Name="item_description" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="dept_code" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="status" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="current_status" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="item_code" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="orig_quantity" Type="int" />
+          <Property Name="item_description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="date_time" Type="datetime" Nullable="false" />
+          <Property Name="cat_name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Adjustment_Details_Inventory_Adjustment">
           <End Role="Inventory_Adjustment" Type="Self.Inventory_Adjustment" Multiplicity="1" />
@@ -642,20 +636,17 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tender_List" EntityType="Self.Tender_List" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tender_List_Details" EntityType="Self.Tender_List_Details" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Volume_Request" EntityType="Self.Volume_Request" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="Crystal_Views" EntityType="Self.Crystal_Views" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Volume_Request].[cat_name] AS [cat_name], 
-    [Volume_Request].[name] AS [name], 
-    [Volume_Request].[quantity] AS [quantity], 
-    [Volume_Request].[date_time] AS [date_time], 
-    [Volume_Request].[item_description] AS [item_description], 
-    [Volume_Request].[username] AS [username], 
-    [Volume_Request].[dept_code] AS [dept_code], 
-    [Volume_Request].[status] AS [status], 
-    [Volume_Request].[current_status] AS [current_status], 
-    [Volume_Request].[item_code] AS [item_code], 
-    [Volume_Request].[orig_quantity] AS [orig_quantity]
-    FROM [dbo].[Volume_Request] AS [Volume_Request]</DefiningQuery>
+    [Crystal_Views].[orig_quantity] AS [orig_quantity], 
+    [Crystal_Views].[quantity] AS [quantity], 
+    [Crystal_Views].[current_status] AS [current_status], 
+    [Crystal_Views].[item_code] AS [item_code], 
+    [Crystal_Views].[item_description] AS [item_description], 
+    [Crystal_Views].[name] AS [name], 
+    [Crystal_Views].[date_time] AS [date_time], 
+    [Crystal_Views].[cat_name] AS [cat_name]
+    FROM [dbo].[Crystal_Views] AS [Crystal_Views]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Adjustment_Details_Inventory_Adjustment" Association="Self.FK_Adjustment_Details_Inventory_Adjustment">
             <End Role="Inventory_Adjustment" EntitySet="Inventory_Adjustment" />
@@ -891,6 +882,8 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <Property Name="dept_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="mobile_no" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Approval_Duties" Relationship="Self.FK_Approval_Duties_Dept_Registry" FromRole="Dept_Registry" ToRole="Approval_Duties" />
           <NavigationProperty Name="Collection_Point" Relationship="Self.FK_Collection_Point_Dept_Registry" FromRole="Dept_Registry" ToRole="Collection_Point" />
           <NavigationProperty Name="Delivery_Orders" Relationship="Self.FK_Delivery_Orders_Dept_Registry" FromRole="Dept_Registry" ToRole="Delivery_Orders" />
@@ -899,8 +892,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Purchase_Order" Relationship="Self.FK_Purchase_Order_Dept_Registry" FromRole="Dept_Registry" ToRole="Purchase_Order" />
           <NavigationProperty Name="Request_Event" Relationship="Self.FK_Request_Event_Dept_Registry" FromRole="Dept_Registry" ToRole="Request_Event" />
           <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Dept_Registry" FromRole="Dept_Registry" ToRole="Requests" />
-          <Property Name="fullname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="mobile_no" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Favourite">
           <Key>
@@ -1075,31 +1066,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <NavigationProperty Name="Purchase_Order_Details" Relationship="Self.FK_Purchase_Order_Details_Tender_List_Details" FromRole="Tender_List_Details" ToRole="Purchase_Order_Details" />
           <NavigationProperty Name="Stock_Inventory" Relationship="Self.FK_Tender_List_Details_Stock_Inventory" FromRole="Tender_List_Details" ToRole="Stock_Inventory" />
           <NavigationProperty Name="Tender_List" Relationship="Self.FK_Tender_List_Details_Tender_List" FromRole="Tender_List_Details" ToRole="Tender_List" />
-        </EntityType>
-        <EntityType Name="Volume_Request">
-          <Key>
-            <PropertyRef Name="cat_name" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="quantity" />
-            <PropertyRef Name="date_time" />
-            <PropertyRef Name="item_description" />
-            <PropertyRef Name="username" />
-            <PropertyRef Name="dept_code" />
-            <PropertyRef Name="status" />
-            <PropertyRef Name="current_status" />
-            <PropertyRef Name="item_code" />
-          </Key>
-          <Property Name="cat_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="item_description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dept_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="current_status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="item_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="orig_quantity" Type="Int32" />
         </EntityType>
         <Association Name="FK_Adjustment_Details_Inventory_Adjustment">
           <End Role="Inventory_Adjustment" Type="Self.Inventory_Adjustment" Multiplicity="1" />
@@ -1471,7 +1437,6 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="Tender_List" EntityType="Self.Tender_List" />
           <EntitySet Name="Tender_List_Details" EntityType="Self.Tender_List_Details" />
-          <EntitySet Name="Volume_Request" EntityType="Self.Volume_Request" />
           <AssociationSet Name="FK_Adjustment_Details_Inventory_Adjustment" Association="Self.FK_Adjustment_Details_Inventory_Adjustment">
             <End Role="Inventory_Adjustment" EntitySet="Inventory_Adjustment" />
             <End Role="Adjustment_Details" EntitySet="Adjustment_Details" />
@@ -1588,7 +1553,27 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
             <End Role="Tender_List" EntitySet="Tender_List" />
             <End Role="Tender_List_Details" EntitySet="Tender_List_Details" />
           </AssociationSet>
+          <EntitySet Name="Crystal_Views" EntityType="SSISModel.Crystal_Views" />
         </EntityContainer>
+        <EntityType Name="Crystal_Views">
+          <Key>
+            <PropertyRef Name="quantity" />
+            <PropertyRef Name="current_status" />
+            <PropertyRef Name="item_code" />
+            <PropertyRef Name="item_description" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="date_time" />
+            <PropertyRef Name="cat_name" />
+          </Key>
+          <Property Name="orig_quantity" Type="Int32" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="current_status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="item_code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="item_description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cat_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1696,11 +1681,11 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
           <EntitySetMapping Name="Dept_Registry">
             <EntityTypeMapping TypeName="SSISModel.Dept_Registry">
               <MappingFragment StoreEntitySet="Dept_Registry">
-                <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
                 <ScalarProperty Name="dept_code" ColumnName="dept_code" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1856,19 +1841,16 @@ warning 6002: The table/view 'SSIS.dbo.Volume_Request' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Volume_Request">
-            <EntityTypeMapping TypeName="SSISModel.Volume_Request">
-              <MappingFragment StoreEntitySet="Volume_Request">
+          <EntitySetMapping Name="Crystal_Views">
+            <EntityTypeMapping TypeName="SSISModel.Crystal_Views">
+              <MappingFragment StoreEntitySet="Crystal_Views">
                 <ScalarProperty Name="cat_name" ColumnName="cat_name" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="item_description" ColumnName="item_description" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="dept_code" ColumnName="dept_code" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="current_status" ColumnName="current_status" />
                 <ScalarProperty Name="item_code" ColumnName="item_code" />
+                <ScalarProperty Name="current_status" ColumnName="current_status" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="orig_quantity" ColumnName="orig_quantity" />
               </MappingFragment>
             </EntityTypeMapping>

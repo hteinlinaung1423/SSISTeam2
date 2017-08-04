@@ -12,18 +12,10 @@ namespace SSISTeam2.Views.StoreClerk
         SSISEntities ctx = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-            var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
-            DateTime date = Convert.ToDateTime(result.ToString());
-            string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
-            string endDate = date.ToString("yyyy-MM-dd");
-            Label1.Text = endDate;
-            if (endDate.CompareTo(currentDate) < 0)
-            {
-                var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
-                q.deleted = "Y";
-                ctx.SaveChanges();
+            var catList = ctx.Categories.Where(x => x.deleted == "N" && x.cat_name.Contains("E")).Select(x => x.cat_id).ToList();
+            GridView1.DataSource = catList;
+            GridView1.DataBind();
 
-            }
         }
     }
 }

@@ -22,7 +22,7 @@
             <asp:ListItem Value="Name">Item Name</asp:ListItem>
             <asp:ListItem>Quantity</asp:ListItem>
             <asp:ListItem Value="Accounted">Accounted For</asp:ListItem>
-        </asp:DropDownList>
+        </asp:DropDownList>--%>
         Date:
         <asp:TextBox ID="DateTB" runat="server"></asp:TextBox>
         <br />--%>
