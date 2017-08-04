@@ -28,55 +28,79 @@
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="row">
-                <div class="col-md-7">
 
-                    <asp:GridView ID="gvToRetrieve" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped">
-                        <Columns>
-                            <asp:TemplateField HeaderText="No.">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Item">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("ItemDescription") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <%--<asp:TemplateField HeaderText="Total Quantity">
+            <div class="table-responsive">
+
+
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <asp:GridView ID="gvToRetrieve" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped"
+                            AllowPaging="true"
+                            OnDataBound="GridView_EditBooks_DataBound"
+                            PageSize="3"
+                            OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found"
+                            PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
+
+
+                            <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
+                            <PagerTemplate>
+                                <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
+                                <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
+                                <asp:DropDownList ID="DropDownList_JumpToPage" runat="server" OnSelectedIndexChanged="DropDownList_JumpToPage_SelectedIndexChanged" AutoPostBack="True" CssClass="btn btn-default btn-sm"></asp:DropDownList>
+
+                                <asp:Label ID="Paging_CurrentPage" Text="" runat="server"><%# " / " + gvToRetrieve.PageCount %></asp:Label>
+                                <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
+                                <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
+                            </PagerTemplate>
+
+                            <Columns>
+                                <asp:TemplateField HeaderText="No.">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Item">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("ItemDescription") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <%--<asp:TemplateField HeaderText="Total Quantity">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTotalQty" runat="server" Text='<%# Eval("QuantityExpected") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>--%>
-                            <asp:TemplateField HeaderText="Quantity">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblQtyExpected" runat="server" Text='<%# Eval("QuantityExpected") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Actual Quantity" ItemStyle-Width="30%">
-                                <ItemTemplate>
-                                    <div class="input-group">
-                                        <asp:TextBox runat="server"
-                                            AutoPostBack="true"
-                                            OnTextChanged="tbQtyActual_TextChanged"
-                                            ID="tbQtyActual"
-                                            Text='<%# Eval("QuantityActual") %>'
-                                            TextMode="Number"
-                                            min="0"
-                                            max='<%# Eval("QuantityExpected") %>'
-                                            step="1"
-                                            CssClass="form-control"
-                                            />
-                                        <span class="input-group-btn">
-                                            <asp:Button ID="btnResetRowQty" Text="Reset" runat="server" OnClick="btnResetRowQty_Click" CssClass="btn btn-default" />
-                                        </span>
-                                    </div>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                                <asp:TemplateField HeaderText="Quantity">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblQtyExpected" runat="server" Text='<%# Eval("QuantityExpected") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Actual Quantity" ItemStyle-Width="30%">
+                                    <ItemTemplate>
+                                        <div class="input-group">
+                                            <asp:TextBox runat="server"
+                                                AutoPostBack="true"
+                                                OnTextChanged="tbQtyActual_TextChanged"
+                                                ID="tbQtyActual"
+                                                Text='<%# Eval("QuantityActual") %>'
+                                                TextMode="Number"
+                                                min="0"
+                                                max='<%# Eval("QuantityExpected") %>'
+                                                step="1"
+                                                CssClass="form-control" />
+                                            <span class="input-group-btn">
+                                                <asp:Button ID="btnResetRowQty" Text="Reset" runat="server" OnClick="btnResetRowQty_Click" CssClass="btn btn-default" />
+                                            </span>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
                 </div>
+
             </div>
+
 
             <div class="row">
                 <div class="col-md-4">
@@ -87,7 +111,7 @@
 
                         <div class="alert alert-warning">
                             <asp:Label runat="server" Text="There were no items marked for retrieval by you."></asp:Label>
-                            
+
                             <br />
                             <br />
 
@@ -101,7 +125,7 @@
                     <asp:Panel ID="panelNormal" runat="server">
 
                         <asp:Button ID="btnSubmit" runat="server" Text="Confirm retrieval quantities" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
-                    
+
                     </asp:Panel>
 
                 </div>
