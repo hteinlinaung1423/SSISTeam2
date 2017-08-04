@@ -54,7 +54,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Quantity On Hand"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Available Quantity"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
                         <ItemTemplate>
                             <asp:Label ID="Label_CurrentQuantity" runat="server" Text='<%# Eval("current_qty") %>' CssClass="alert-danger"></asp:Label>
