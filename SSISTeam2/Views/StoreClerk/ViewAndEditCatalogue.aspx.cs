@@ -21,6 +21,7 @@ namespace SSISTeam2.Views.StoreClerk
         private void BindGrid()
 
         {
+            //Added for next button click
             string searchWord = TextBox1.Text;
             if (!string.IsNullOrEmpty(searchWord))
             {
