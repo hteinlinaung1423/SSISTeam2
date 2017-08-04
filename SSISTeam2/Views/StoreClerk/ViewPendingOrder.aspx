@@ -16,7 +16,14 @@
             <p>
                 Your Orders               
             </p>
+            <asp:Panel ID="panelNoData" runat="server">
+                <br />
+                <p>
+                    <asp:Label ID="lblNoData" runat="server" Text="There are no previous orders to view." CssClass="alert alert-warning"></asp:Label>
+                </p>
+            </asp:Panel>
         </div>
+
 
         <div class="table-responsive">
 

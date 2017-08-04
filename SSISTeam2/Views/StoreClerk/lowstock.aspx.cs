@@ -12,23 +12,34 @@ namespace SSISTeam2.Views.StoreClerk
     {
         SSISEntities s = new SSISEntities();
         List<Stock_Inventory> lowStocks;
+        List<ItemModel> lowStocksModels;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 List<Stock_Inventory> stocks = s.Stock_Inventory.ToList();
-                 lowStocks = new List<Stock_Inventory>();
+                lowStocks = new List<Stock_Inventory>();
+                lowStocksModels = new List<ItemModel>();
+
                 foreach (var stock in stocks)
                 {
                     ItemModel im = new ItemModel(stock);
                     if (im.AvailableQuantity < im.ReorderLevel)
                     {
                         lowStocks.Add(stock);
+                        lowStocksModels.Add(im);
                     }
                 }
 
-                GridView1.DataSource = lowStocks; //s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
-                GridView1.DataBind();
+                if (lowStocks != null && lowStocks.Count > 0)
+                {
+                    lblNoData.Visible = false;
+                    GridView1.DataSource = lowStocksModels; //s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
+                    GridView1.DataBind();
+                } else
+                {
+                    lblNoData.Visible = true;
+                }
             }
             
            
@@ -110,17 +121,18 @@ namespace SSISTeam2.Views.StoreClerk
             }
 
             List<Stock_Inventory> stocks = s.Stock_Inventory.ToList();
-            lowStocks = new List<Stock_Inventory>();
+            lowStocksModels = new List<ItemModel>();
+
             foreach (var stock in stocks)
             {
                 ItemModel im = new ItemModel(stock);
                 if (im.AvailableQuantity < im.ReorderLevel)
                 {
-                    lowStocks.Add(stock);
+                    lowStocksModels.Add(im);
                 }
             }
 
-            GridView1.DataSource = lowStocks;
+            GridView1.DataSource = lowStocksModels;
             GridView1.DataBind();
 
         }
@@ -168,19 +180,19 @@ namespace SSISTeam2.Views.StoreClerk
 
 
             List<Stock_Inventory> stocks = s.Stock_Inventory.ToList();
-            lowStocks = new List<Stock_Inventory>();
+            lowStocksModels = new List<ItemModel>();
+
             foreach (var stock in stocks)
             {
                 ItemModel im = new ItemModel(stock);
                 if (im.AvailableQuantity < im.ReorderLevel)
                 {
-                    lowStocks.Add(stock);
+                    lowStocksModels.Add(im);
                 }
             }
 
-            GridView1.DataSource = lowStocks; //s.Stock_Inventory.Where(x => x.current_qty < x.reorder_level).ToList<Stock_Inventory>();
+            GridView1.DataSource = lowStocksModels;
             GridView1.DataBind();
-
         }
     }
 }
