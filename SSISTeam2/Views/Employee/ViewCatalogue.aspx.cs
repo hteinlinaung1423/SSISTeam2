@@ -31,6 +31,7 @@ namespace SSISTeam2.Views.Employee
         }
         private void BindGrid()
         {
+            //Changes for paging next button click
             string searchWord = TextBox1.Text;
             if (!string.IsNullOrEmpty(searchWord))
             {
