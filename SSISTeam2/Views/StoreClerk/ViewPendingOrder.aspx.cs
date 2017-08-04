@@ -16,8 +16,16 @@ namespace SSISTeam2.Views.StoreClerk
             {
                 if (!IsPostBack)
                 {
-                    GridView1.DataSource = s.Purchase_Order.Where(x => x.deleted != "Y" && x.clerk_user == User.Identity.Name).ToList<Purchase_Order>();
-                    GridView1.DataBind();
+                    var orders = s.Purchase_Order.Where(x => x.deleted != "Y" && x.clerk_user == User.Identity.Name).ToList<Purchase_Order>();
+                    if (orders != null && orders.Count > 0)
+                    {
+                        panelNoData.Visible = false;
+                        GridView1.DataSource = orders;
+                        GridView1.DataBind();
+                    } else
+                    {
+                        panelNoData.Visible = true;
+                    }
                 }
               
             }
