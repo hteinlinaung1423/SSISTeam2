@@ -112,11 +112,12 @@ namespace SSISTeam2.Views.DepartmentHead
             {
                 changeAppStatusEvent(detAry[i]);
             }          
-            ent.SaveChanges();
-            //
+  
             lbAppRej.Text = "Successfully Approved!";
 
             _sendEmail(true, User.Identity.Name, req);
+            ent.SaveChanges();
+            Response.Redirect("ViewPending.aspx");
         }
 
         public void changeAppStatusEvent(int detailId)
@@ -130,8 +131,8 @@ namespace SSISTeam2.Views.DepartmentHead
             {
                 e.status = "Approved";
             }
-            ent.SaveChanges();
-            Response.Redirect("ViewPending.aspx");
+            //ent.SaveChanges();
+            
         }
 
         //Reject
