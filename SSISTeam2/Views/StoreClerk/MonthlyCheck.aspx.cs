@@ -71,13 +71,13 @@ namespace SSISTeam2
             Session["Confirmation"] = confirmList;
             Response.Redirect("MonthlyCheckConfirmation.aspx");
         }
-        protected void MonthlyCheckGV_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>)Session["Monthly"];
-            MonthlyCheckGV.PageIndex = e.NewPageIndex;
-            MonthlyCheckGV.DataSource = itemList;
-            MonthlyCheckGV.DataBind();
-        }
+        //protected void MonthlyCheckGV_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //    List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>)Session["Monthly"];
+        //    MonthlyCheckGV.PageIndex = e.NewPageIndex;
+        //    MonthlyCheckGV.DataSource = itemList;
+        //    MonthlyCheckGV.DataBind();
+        //}
         protected void MonthlyCheckGV_OnTextChange(object sender, EventArgs e)
         {
             GridViewRow gridViewRow = (GridViewRow)(sender as Control).Parent.Parent;
@@ -128,5 +128,74 @@ namespace SSISTeam2
             //    MonthlyCheckGV.Columns[4].Visible = false;
             //}
         }
+
+
+        // for paganation
+
+        protected void GridView_EditBooks_DataBound(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = MonthlyCheckGV.TopPagerRow;
+            GridViewRow bottomPagerRow = MonthlyCheckGV.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if (topJumpToPage != null)
+            {
+                for (int i = 0; i < MonthlyCheckGV.PageCount; i++)
+                {
+                    ListItem item = new ListItem("Page " + (i + 1));
+                    topJumpToPage.Items.Add(item);
+                    bottomJumpToPage.Items.Add(item);
+                }
+            }
+
+            topJumpToPage.SelectedIndex = MonthlyCheckGV.PageIndex;
+            bottomJumpToPage.SelectedIndex = MonthlyCheckGV.PageIndex;
+        }
+
+
+        protected void DropDownList_JumpToPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow topPagerRow = MonthlyCheckGV.TopPagerRow;
+            GridViewRow bottomPagerRow = MonthlyCheckGV.BottomPagerRow;
+
+            DropDownList topJumpToPage = (DropDownList)topPagerRow.FindControl("DropDownList_JumpToPage");
+            DropDownList bottomJumpToPage = (DropDownList)bottomPagerRow.FindControl("DropDownList_JumpToPage");
+
+            if ((DropDownList)sender == bottomJumpToPage)
+            {
+                MonthlyCheckGV.PageIndex = bottomJumpToPage.SelectedIndex;
+            }
+            else
+            {
+                MonthlyCheckGV.PageIndex = topJumpToPage.SelectedIndex;
+
+            }
+
+            MonthlyCheckGV.DataSource = (List<MonthlyCheckModel>)Session["Monthly"]; ;
+
+            MonthlyCheckGV.DataBind();
+
+        }
+
+        // For paganation
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0)
+            {
+                MonthlyCheckGV.PageIndex = 0;
+            }
+            else
+            {
+                MonthlyCheckGV.PageIndex = e.NewPageIndex;
+            }
+
+            MonthlyCheckGV.DataSource= (List<MonthlyCheckModel>)Session["Monthly"]; ;
+
+            MonthlyCheckGV.DataBind();
+        }
+
     }
 }
