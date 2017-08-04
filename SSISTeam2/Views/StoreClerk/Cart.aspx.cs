@@ -40,7 +40,7 @@ namespace SSISTeam2.Views.StoreClerk
                     DropDownList1.DataSource = itemnameList;
                     DropDownList1.DataBind();
                     string itemname = itemnameList[0];
-                    GridView1.DataSource = ctx.Tender_List_Details.Where(x => x.Stock_Inventory.item_description == itemname).Select(x => new { x.tender_id, x.item_code, x.Stock_Inventory.item_description, x.Tender_List.Supplier.name, x.rank, x.price }).ToList();
+                    GridView1.DataSource = ctx.Tender_List_Details.Where(x => x.Stock_Inventory.item_description == itemname).Select(x => new { x.tender_id, x.item_code, x.Stock_Inventory.item_description, x.Tender_List.Supplier.name, x.Tender_List.Supplier.contact_num, x.rank, x.price }).ToList();
                     GridView1.DataBind();
 
 
@@ -65,7 +65,7 @@ namespace SSISTeam2.Views.StoreClerk
             string name = DropDownList1.SelectedValue;
 
             SSISEntities s = new SSISEntities();
-            var list = s.Tender_List_Details.Where(x => x.Stock_Inventory.item_description == name).Select(x => new { x.tender_id, x.item_code, x.Stock_Inventory.item_description, x.Tender_List.Supplier.name, x.rank, x.price }).ToList();
+            var list = s.Tender_List_Details.Where(x => x.Stock_Inventory.item_description == name).Select(x => new { x.tender_id, x.item_code, x.Stock_Inventory.item_description, x.Tender_List.Supplier.name, x.Tender_List.Supplier.contact_num, x.rank, x.price }).ToList();
 
 
             GridView1.DataSource = list;

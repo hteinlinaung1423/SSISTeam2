@@ -178,7 +178,11 @@ namespace SSISTeam2.Classes.WebServices
        RequestFormat = WebMessageFormat.Json,
        ResponseFormat = WebMessageFormat.Json)]
         void CreateRequestDetail(WCFItemTotalQty req);
-        
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/GetWorkingPartner/{name}/{deptName}", ResponseFormat = WebMessageFormat.Json)]
+        List<WCF_Partner> GetWorkingPartner(string name, string deptName);
+
     }
 
     [DataContract]
@@ -950,6 +954,31 @@ public class WCFItemTotalQty
         {
             totalQty = value;
         }
+    }
+}
+
+[DataContract]
+public class WCF_Partner
+{
+    [DataMember]
+    private string user;
+    [DataMember]
+    private string ph_no;
+    [DataMember]
+    private string role;
+    [DataMember]
+    private string email;
+
+
+    public WCF_Partner(string user, string ph_no,string role,string email)
+    {
+
+        this.user = user;
+        this.ph_no = ph_no;
+        this.role = role;
+        this.email = email;
+
+
     }
 }
 

@@ -115,17 +115,17 @@ namespace SSISTeam2.Classes.WebServices
         //    }
         //}
 
-        public string CheckApprovalDutiesStatus()
+        public string CheckApprovalDutiesStatus(String deptcode)
         {
             string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
             try
             {
-                var result = ctx.Approval_Duties.Where(x => x.deleted == "N").Select(x => x.end_date).Max();
+                var result = ctx.Approval_Duties.Where(x => x.deleted == "N"&&x.dept_code.Equals(deptcode)).Select(x => x.end_date).Max();
                 DateTime date = Convert.ToDateTime(result.ToString());
                 string endDate = date.ToString("yyyy-MM-dd");
                 if (endDate.CompareTo(currentDate) < 0)
                 {
-                    var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
+                    var q = ctx.Approval_Duties.Where(x => x.deleted == "N" && x.dept_code.Equals(deptcode)).First();
                     q.deleted = "Y";
                     ctx.SaveChanges();
 
@@ -559,6 +559,15 @@ namespace SSISTeam2.Classes.WebServices
             revent.deleted = "Y";
             ctx.SaveChanges();
         }
+
+
+        public List<Dept_Registry> GetWorkingPartner(string user, string dept_code)
+        {
+            List<Dept_Registry> drList = ctx.Dept_Registry.Where(x => x.username != user && x.dept_code == dept_code).ToList<Dept_Registry>();
+            return drList;
+        }
+
+
     }
 
 

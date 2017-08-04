@@ -1,16 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="MonthlyCheck.aspx.cs" Inherits="SSISTeam2.MonthlyCheck" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Monthly Stationery Check</title>
+    <title>Stationery Stocktake</title>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive ">
-        <div class="panel-heading"><h3>Monthly Stocktake</h3></div>
-        <div class="panel-heading"><h4><asp:Label ID="CheckLabel" runat="server" Text=""></asp:Label></h4></div>
+        <div class="panel-heading">
+            <h3>Stationery Stocktake</h3>
+        </div>
+        <div class="panel-heading">
+            <h4>
+                <asp:Label ID="CheckLabel" runat="server" Text="" CssClass="alert alert-info"></asp:Label></h4>
+        </div>
 
     </div>
-        <%--Sort By:
+    <%--        Sort By:
         <asp:DropDownList ID="SortDDL" runat="server">
             <asp:ListItem>Category</asp:ListItem>
             <asp:ListItem Value="Name">Item Name</asp:ListItem>
@@ -19,29 +25,31 @@
         </asp:DropDownList>--%>
         Date:
         <asp:TextBox ID="DateTB" runat="server"></asp:TextBox>
-        <br />
-    <asp:GridView ID="MonthlyCheckGV" runat="server" 
-        AutoGenerateColumns="false" 
-        AllowPaging="True" 
-        PageSize="10" 
+        <br />--%>
+    <asp:GridView ID="MonthlyCheckGV" runat="server"
+        AutoGenerateColumns="false"
+        AllowPaging="True"
+        PageSize="5"
         HeaderStyle-CssClass="text-center-impt"
         CssClass="table table-responsive table-striped"
         GridLines="None"
-        PagerStyle-HorizontalAlign="Center" 
-        PagerSettings-Position="TopAndBottom" 
-        OnPageIndexChanging="MonthlyCheckGV_PageIndexChanging" OnDataBinding="MonthlyCheckGV_DataBinding">
-        
-<%--        <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
+        PagerStyle-HorizontalAlign="Center"
+        PagerSettings-Position="TopAndBottom"
+        OnDataBound="GridView_EditBooks_DataBound"
+        OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found"
+        OnDataBinding="MonthlyCheckGV_DataBinding">
+
+        <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="Last" PreviousPageText="Previous" NextPageText="Next" />
         <PagerTemplate>
             <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
             <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
-            
+
             <asp:DropDownList ID="DropDownList_JumpToPage" runat="server" OnSelectedIndexChanged="DropDownList_JumpToPage_SelectedIndexChanged" AutoPostBack="True" CssClass="btn btn-default btn-sm"></asp:DropDownList>
 
-            <asp:Label ID="Paging_CurrentPage" Text="" runat="server"><%# " / " + GridView_EditBooks.PageCount %></asp:Label>
+            <asp:Label ID="Paging_CurrentPage" Text="" runat="server"><%# " / " + MonthlyCheckGV.PageCount %></asp:Label>
             <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
             <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
-        </PagerTemplate>--%>
+        </PagerTemplate>
 
         <Columns>
 
@@ -77,10 +85,10 @@
 
         </Columns>
 
-<PagerSettings Position="TopAndBottom"></PagerSettings>
+        <PagerSettings Position="TopAndBottom"></PagerSettings>
 
-<PagerStyle HorizontalAlign="Center"></PagerStyle>
+        <PagerStyle HorizontalAlign="Center"></PagerStyle>
     </asp:GridView>
-    
-    <asp:Button ID="nextBtn" runat="server" Text="Next" OnClick="nextBtn_Click" CssClass="btn btn-primary"/>
+
+    <asp:Button ID="nextBtn" runat="server" Text="Next" OnClick="nextBtn_Click" CssClass="btn btn-primary" />
 </asp:Content>

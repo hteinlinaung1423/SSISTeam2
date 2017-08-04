@@ -146,6 +146,7 @@
       <LastGenOutput>SSISModel.cs</LastGenOutput>
     </Content>
     <Content Include="Views\404.aspx" />
+    <Content Include="Views\Employee\WebForm1.aspx" />
     <Content Include="Views\StoreClerk\ChangeCategoryName1.aspx" />
     <Content Include="Classes\dev\dev_FillTenderDetailsPrelim.aspx" />
     <Content Include="Classes\WebServices\MobileConfirmation_TEST.aspx" />
@@ -342,6 +343,13 @@
     </Compile>
     <Compile Include="Views\404.aspx.designer.cs">
       <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Employee\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\notauthorized.aspx.cs">
       <DependentUpon>notauthorized.aspx</DependentUpon>

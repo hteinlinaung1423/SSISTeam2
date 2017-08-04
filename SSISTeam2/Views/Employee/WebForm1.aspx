@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="SSISTeam2.Views.StoreClerk.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="SSISTeam2.Views.Employee.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,6 @@
     <form id="form1" runat="server">
     <div>
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-        <asp:GridView ID="GridView1" runat="server"></asp:GridView>
     </div>
     </form>
 </body>

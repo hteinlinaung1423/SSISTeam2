@@ -38,7 +38,7 @@ namespace SSISTeam2.Views.Employee
             lblreqid.Text = req.request_id.ToString();
             lblDate.Text = req.date_time.ToString();
             lblstatus.Text = req.current_status;
-            lblemployeename.Text = req.username;
+            lblemployeename.Text = req.Dept_Registry.fullname;
             lblcomment.Text = req.reason;
             
             var q = (from x in ent.Requests

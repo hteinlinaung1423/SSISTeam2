@@ -22,7 +22,9 @@
             <asp:GridView ID="GridView1" runat="server"
                 AutoGenerateColumns="false"
                 AllowPaging="true"
+                 OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found"
                 PageSize="5"
+                 OnDataBound="GridView_EditBooks_DataBound"
                 HeaderStyle-CssClass="text-center-impt"
                 CssClass="table table-responsive table-striped"
                 GridLines="None"
@@ -32,6 +34,9 @@
                 <PagerTemplate>
                     <asp:Button Text="First" runat="server" CommandName="Page" CommandArgument="First" CssClass="btn btn-default btn-sm" />
                     <asp:Button Text="Prev" runat="server" CommandName="Page" CommandArgument="Prev" CssClass="btn btn-default btn-sm" />
+                     <asp:DropDownList ID="DropDownList_JumpToPage" runat="server" OnSelectedIndexChanged="DropDownList_JumpToPage_SelectedIndexChanged" AutoPostBack="True" CssClass="btn btn-default btn-sm"></asp:DropDownList>
+
+                    <asp:Label ID="Paging_CurrentPage" Text="" runat="server"><%# " / " + GridView1.PageCount %></asp:Label>
                     <asp:Button Text="Next" runat="server" CommandName="Page" CommandArgument="Next" CssClass="btn btn-default btn-sm" />
                     <asp:Button Text="Last" runat="server" CommandName="Page" CommandArgument="Last" CssClass="btn btn-default btn-sm" />
                 </PagerTemplate>
@@ -70,12 +75,12 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier ID"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                    <%--<asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier ID">
 
                         <ItemTemplate>
                             <asp:Label ID="Label_SupplierID" runat="server" Text='<%# Eval("supplier_id") %>' CssClass="text-bold"></asp:Label>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
 
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Item Description"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
