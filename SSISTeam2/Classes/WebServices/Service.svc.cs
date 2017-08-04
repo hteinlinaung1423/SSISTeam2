@@ -159,10 +159,12 @@ namespace SSISTeam2.Classes.WebServices
 
             if (validate)
             {
-               updflag = new Work().CheckApprovalDutiesStatus();
+                
+                UserModel usermodel = new UserModel(name);
+                updflag = new Work().CheckApprovalDutiesStatus(usermodel.Department.dept_code);
                if (updflag.Equals("T"))
                {
-                    UserModel usermodel = new UserModel(name);
+                    //UserModel usermodel = new UserModel(name);
                     UserModel depthead = usermodel.FindDelegateOrDeptHead();
                     if (usermodel.Role == "DeptHead")
                     {

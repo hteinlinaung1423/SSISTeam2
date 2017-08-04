@@ -48,6 +48,8 @@ namespace SSISTeam2.Views.Employee
 
                 IOrderedEnumerable<IGrouping<string, DisbursementModel>> datesGroupedByName = groupedByDate.First().GroupBy(k => k.Username).OrderBy(o => o.Key);
 
+                Session[SESSION_GROUPED_BY_NAME] = datesGroupedByName;
+
                 var names = datesGroupedByName.ToDictionary(k => k.Key, v => v.First().UserModel.Fullname);
 
                 //lblDebug.Text = names.Count.ToString();

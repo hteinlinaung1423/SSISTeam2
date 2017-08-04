@@ -33,39 +33,6 @@ namespace SSISTeam2
             /* Emp side Dash */
             FillPage();
 
-            /* Low Stocks */
-            #region Low Stocks
-            List<Stock_Inventory> stocks = context.Stock_Inventory.ToList();
-            List<ItemModel> lowStocks = new List<ItemModel>();
-
-            foreach (var stock in stocks)
-            {
-                ItemModel im = new ItemModel(stock);
-                if (im.AvailableQuantity < im.ReorderLevel)
-                {
-                    lowStocks.Add(im);
-                }
-            }
-
-            gridViewLowStocks.DataSource = lowStocks.OrderBy(o => o.AvailableQuantity).Take(5);
-            gridViewLowStocks.DataBind();
-
-            if (lowStocks.Count > 0)
-            {
-                panelLowStocksEmpty.Visible = false;
-                panelLowStocksNormal.Visible = true;
-                panelLowStocksBtn.Visible = true;
-                panelLowStocks.CssClass = "panel panel-warning";
-                gridViewLowStocks.HeaderRow.CssClass = "warning";
-                lblNumLowStock.Text = string.Format("({0} in total)", lowStocks.Count);
-            } else
-            {
-                panelLowStocksEmpty.Visible = true;
-                panelLowStocksNormal.Visible = false;
-                panelLowStocksBtn.Visible = false;
-            }
-            #endregion
-
             /* Items to retrieve */
             #region Items to retrieve
             /* Items for retrieving */
@@ -200,6 +167,39 @@ namespace SSISTeam2
             else
             {
                 panelToDisburse_ToConfirm.Visible = false;
+            }
+            #endregion
+
+            /* Low Stocks */
+            #region Low Stocks
+            List<Stock_Inventory> stocks = context.Stock_Inventory.ToList();
+            List<ItemModel> lowStocks = new List<ItemModel>();
+
+            foreach (var stock in stocks)
+            {
+                ItemModel im = new ItemModel(stock);
+                if (im.AvailableQuantity < im.ReorderLevel)
+                {
+                    lowStocks.Add(im);
+                }
+            }
+
+            gridViewLowStocks.DataSource = lowStocks.OrderBy(o => o.AvailableQuantity).Take(5);
+            gridViewLowStocks.DataBind();
+
+            if (lowStocks.Count > 0)
+            {
+                panelLowStocksEmpty.Visible = false;
+                panelLowStocksNormal.Visible = true;
+                panelLowStocksBtn.Visible = true;
+                panelLowStocks.CssClass = "panel panel-warning";
+                gridViewLowStocks.HeaderRow.CssClass = "warning";
+                lblNumLowStock.Text = string.Format("({0} in total)", lowStocks.Count);
+            } else
+            {
+                panelLowStocksEmpty.Visible = true;
+                panelLowStocksNormal.Visible = false;
+                panelLowStocksBtn.Visible = false;
             }
             #endregion
         }

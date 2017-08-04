@@ -37,11 +37,11 @@ namespace SSISTeam2
 
                 UserModel user = new UserModel(HttpContext.Current.User.Identity.Name);
                 UserModel depthead = user.FindDelegateOrDeptHead();
-                CheckLabel.Text = depthead.Username;
+                //CheckLabel.Text = depthead.Username;
 
 
-                today = DateTime.Today;
-                DateTB.Text = today.Date.ToString("dd/MM/yyyy");
+                //today = DateTime.Today;
+                //DateTB.Text = today.Date.ToString("dd/MM/yyyy");
 
                 itemList = (List<MonthlyCheckModel>)Session["Monthly"];
                 //Session["Monthly"] = itemList;
@@ -114,7 +114,7 @@ namespace SSISTeam2
             if (recordMonth == todayMonth)
             {
                 //MonthlyCheckGV.Enabled = false;
-                nextBtn.Enabled = false;
+                //nextBtn.Enabled = false;
                 CheckLabel.Text = "Monthly check has already been done this month";
                 return true;
             }
@@ -123,10 +123,10 @@ namespace SSISTeam2
 
         protected void MonthlyCheckGV_DataBinding(object sender, EventArgs e)
         {
-            if (checkDone)
-            {
-                MonthlyCheckGV.Columns[4].Visible = false;
-            }
+            //if (checkDone)
+            //{
+            //    MonthlyCheckGV.Columns[4].Visible = false;
+            //}
         }
     }
 }

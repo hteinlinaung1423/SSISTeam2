@@ -65,7 +65,9 @@
                         <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier Name">
 
                             <ItemTemplate>
-                                <asp:Label ID="Label_Supplier" runat="server" Text='<%# Eval("name") %>' CssClass="text-bold"></asp:Label>
+                                <a href="#" data-toggle="tooltip" title='<%# "Contact: " + Eval("contact_num") %>'>
+                                    <asp:Label ID="Label_Supplier" runat="server" Text='<%# Eval("name") %>' CssClass="text-bold"></asp:Label>
+                                </a>
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -178,6 +180,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 
 
 </asp:Content>

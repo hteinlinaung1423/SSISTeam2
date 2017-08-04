@@ -24,8 +24,8 @@
                 <a data-toggle="collapse" href="#collapseLatestPending">
                     <h3 class="panel-title">
                         <asp:Label ID="lblPendingNum" runat="server"></asp:Label>
-                        </h3>
                         <span class="glyphicon glyphicon-chevron-down" style="float: right;" />
+                        </h3>
                 </a>
             </div>
             <div id="collapseLatestPending" class="panel-collapse collapse in">
@@ -75,8 +75,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <a data-toggle="collapse" href="#collapseDeptInfo">
-                    <h3 class="panel-title">Department Information</h3>
-                <span class="glyphicon glyphicon-chevron-down" style="float: right;" />
+                    <h3 class="panel-title">Department Information
+                    <span class="glyphicon glyphicon-chevron-down" style="float: right;" />
+                    </h3>
                 </a>
             </div>
             <div id="collapseDeptInfo" class="panel-collapse collapse in">

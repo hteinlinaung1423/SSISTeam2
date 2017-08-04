@@ -63,7 +63,7 @@
                         </asp:TemplateField>
                 <asp:TemplateField HeaderText="Request Employee" SortExpression="username">
                             <ItemTemplate>
-                                <asp:Label ID="lblempname" runat="server" Text='<%# Eval("username") %>'></asp:Label>
+                                <asp:Label ID="lblempname" runat="server" Text='<%# Eval("fullname") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                 <asp:TemplateField HeaderText="Date" SortExpression="date_time">

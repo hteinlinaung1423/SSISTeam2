@@ -118,6 +118,11 @@
                             <a href="GenerateRetrieval.aspx">
                                 <span class="btn btn-warning">Go to generate a retrieval</span>
                             </a>
+
+                            <br />
+                            <br />
+
+                            Or go to <a href="GenerateDisbursement.aspx">generate some disbursement forms</a>.
                         </div>
 
                     </asp:Panel>
