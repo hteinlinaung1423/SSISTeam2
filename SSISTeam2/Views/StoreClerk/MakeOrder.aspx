@@ -71,12 +71,12 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier ID"><%-- HeaderStyle-CssClass="text-center-impt">--%>
+                   <%-- <asp:TemplateField ItemStyle-Width="10%" HeaderText="Supplier ID">--%><%-- HeaderStyle-CssClass="text-center-impt">--%>
 
-                        <ItemTemplate>
+                      <%--  <ItemTemplate>
                             <asp:Label ID="Label_SupplierID" runat="server" Text='<%# Eval("supplier_id") %>' CssClass="text-bold"></asp:Label>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
 
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Item Description"><%-- HeaderStyle-CssClass="text-center-impt">--%>
 

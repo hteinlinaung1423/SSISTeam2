@@ -154,7 +154,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Parameters___name {
+        public CrystalDecisions.Shared.IParameterField Parameter_DateFrom {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -162,7 +162,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Parameters___date_time {
+        public CrystalDecisions.Shared.IParameterField Parameter_DateTo {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -170,7 +170,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_My_Parameter___name {
+        public CrystalDecisions.Shared.IParameterField Parameter_Crystal_View___name {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -178,7 +178,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_My_Parameter___date_time {
+        public CrystalDecisions.Shared.IParameterField Parameter_Crystal_View___date_time {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -186,7 +186,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DateFrom {
+        public CrystalDecisions.Shared.IParameterField Parameter_CV___name {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -194,7 +194,7 @@ namespace SSISTeam2.Views.Reporting.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DateTo {
+        public CrystalDecisions.Shared.IParameterField Parameter_CV___date_time {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
