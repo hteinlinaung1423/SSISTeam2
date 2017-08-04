@@ -31,51 +31,59 @@ namespace SSISTeam2.Views.Employee
         }
         private void BindGrid()
         {
-
-            List<Stock_Inventory> SIList = entities.Stock_Inventory.Where(x => x.deleted.Equals("N")).ToList();
-            list = new List<ViewCatalogueForShow>();
-            foreach (Stock_Inventory si in SIList)
+            string searchWord = TextBox1.Text;
+            if (!string.IsNullOrEmpty(searchWord))
             {
-                ViewCatalogueForShow vec = new ViewCatalogueForShow();
-                
-                vec.Description = si.item_description;
+                list = new List<ViewCatalogueForShow>();
+                var catList = entities.Categories.Where(x => x.deleted == "N" && x.cat_name.Contains(searchWord)).Select(x => x.cat_id).ToList();
+                var result2 = (from t1 in entities.Categories
+                               join t2 in entities.Stock_Inventory
+                               on t1.cat_id equals t2.cat_id
+                               where t1.deleted.Equals("N")
+                               && t2.deleted.Equals("N")
+                               && (catList.Contains(t2.cat_id))
+                               || t2.item_description.Contains(searchWord)
+                               orderby t1.cat_name
+                               select new { t1.cat_name, t2.item_description }).ToList();
 
-                vec.categoryName = (from t1 in entities.Categories
-                                    where t1.deleted.Equals("N")
-                                     && (t1.cat_id == si.cat_id)
-                                    select new { t1.cat_name }).ToList().First().cat_name;
-                list.Add(vec);
+                for (int i = 0; i < result2.Count(); i++)
+                {
+                    ViewCatalogueForShow vec = new ViewCatalogueForShow();
+                    vec.categoryName = result2[i].cat_name;
+                    vec.Description = result2[i].item_description;
+                    list.Add(vec);
+                }
+
+                GridView1.DataSource = list;
+                
+            }else
+            {
+                List<Stock_Inventory> SIList = entities.Stock_Inventory.Where(x => x.deleted.Equals("N")).ToList();
+                list = new List<ViewCatalogueForShow>();
+                foreach (Stock_Inventory si in SIList)
+                {
+                    ViewCatalogueForShow vec = new ViewCatalogueForShow();
+
+                    vec.Description = si.item_description;
+
+                    vec.categoryName = (from t1 in entities.Categories
+                                        where t1.deleted.Equals("N")
+                                         && (t1.cat_id == si.cat_id)
+                                        select new { t1.cat_name }).ToList().First().cat_name;
+                    list.Add(vec);
+                }
+                GridView1.DataSource = list;
+                
             }
-            GridView1.DataSource = list;
             GridView1.DataBind();
+
         }
 
         protected void Search_Click(object sender, EventArgs e)
         {
-            string searchWord = TextBox1.Text;
+            this.BindGrid();
             
-            list = new List<ViewCatalogueForShow>();
-            var catList = entities.Categories.Where(x => x.deleted == "N" && x.cat_name.Contains(searchWord)).Select(x => x.cat_id).ToList();
-            var result2 = (from t1 in entities.Categories
-                           join t2 in entities.Stock_Inventory
-                           on t1.cat_id equals t2.cat_id
-                           where t1.deleted.Equals("N")
-                           && t2.deleted.Equals("N")
-                           && (catList.Contains(t2.cat_id))
-                           || t2.item_description.Contains(searchWord)
-                           orderby t1.cat_name
-                           select new {t1.cat_name, t2.item_description}).ToList();
-
-            for (int i = 0; i < result2.Count(); i++)
-            {
-                ViewCatalogueForShow vec = new ViewCatalogueForShow();
-                vec.categoryName = result2[i].cat_name;
-                vec.Description = result2[i].item_description;
-                list.Add(vec);
-            }
-
-            GridView1.DataSource = list;
-            GridView1.DataBind();
+            
         }
 
         class ViewCatalogueForShow
