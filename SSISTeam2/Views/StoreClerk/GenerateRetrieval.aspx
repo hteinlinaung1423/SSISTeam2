@@ -33,7 +33,7 @@
                 <asp:GridView ID="gvToRetrieve" runat="server" AutoGenerateColumns="false" GridLines="None" CssClass="table table-responsive table-striped"
                     AllowPaging="true"
                     OnDataBound="GridView_EditBooks_DataBound"
-                    PageSize="3"
+                    PageSize="5"
                     OnPageIndexChanging="OnPageIndexChanging" ShowHeaderWhenEmpty="True" EmptyDataText="No records Found"
                     PagerStyle-HorizontalAlign="Center" PagerSettings-Position="TopAndBottom">
 
