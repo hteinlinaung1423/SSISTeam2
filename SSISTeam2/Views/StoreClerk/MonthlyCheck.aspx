@@ -10,13 +10,13 @@
         <div class="panel-heading"><h4><asp:Label ID="CheckLabel" runat="server" Text=""></asp:Label></h4></div>
 
     </div>
-        Sort By:
+        <%--Sort By:
         <asp:DropDownList ID="SortDDL" runat="server">
             <asp:ListItem>Category</asp:ListItem>
             <asp:ListItem Value="Name">Item Name</asp:ListItem>
             <asp:ListItem>Quantity</asp:ListItem>
             <asp:ListItem Value="Accounted">Accounted For</asp:ListItem>
-        </asp:DropDownList>
+        </asp:DropDownList>--%>
         Date:
         <asp:TextBox ID="DateTB" runat="server"></asp:TextBox>
         <br />
