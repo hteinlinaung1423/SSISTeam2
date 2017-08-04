@@ -27,7 +27,7 @@
 
             <asp:TableRow>
                 <asp:TableCell>Current Collection Point</asp:TableCell>
-               <asp:TableCell>: <asp:Label ID="lbCollectP" runat="server" ReadOnly="True" Width="450"></asp:Label></asp:TableCell>
+               <asp:TableCell>: <asp:Label ID="lbCollectP" runat="server" ReadOnly="True" Width="400"></asp:Label></asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>New Collection Point</asp:TableCell>

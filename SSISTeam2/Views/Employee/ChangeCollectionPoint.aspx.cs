@@ -38,7 +38,7 @@ namespace SSISTeam2.Views.Employee
             currentCollectId = sdept.collection_point;
 
             Collection_Point cp = ent.Collection_Point.SingleOrDefault(x => x.collection_pt_id == currentCollectId);
-            lbCollectP.Text = cp.location + " (" + cp.day_of_week + ")";
+            lbCollectP.Text = cp.location + " (" + cp.day_of_week + " -" + cp.date_time.TimeOfDay + " )";
 
             lbRepName.Text = changeUsernameToFullName(sdept.rep_user.ToString());
 
