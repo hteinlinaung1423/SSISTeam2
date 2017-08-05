@@ -139,7 +139,8 @@ namespace SSISTeam2
 
                 context.Monthly_Check_Records.Add(checkRecord);
                 context.SaveChanges();
-
+                Session["Confirmation"] = null;
+                Session["Monthly"] = null;
                 Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
             }
         }
