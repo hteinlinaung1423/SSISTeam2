@@ -61,14 +61,20 @@
             <asp:TemplateField HeaderText="Reason">
                 <ItemTemplate>
                     <asp:TextBox ID="reasonTB" runat="server" Text='<%# Eval("reason") %>' AutoPostBack="True" OnTextChanged="reasonTB_TextChanged"></asp:TextBox>
-                    </br>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please specify reason for discrepancy"
-                            ControlToValidate="reasonTB" />
+                    <br>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="reasonTB" ErrorMessage="Please specify reason for discrepancy" ForeColor="Red" ValidationGroup="reasonVal" />
+
                 </ItemTemplate>
             </asp:TemplateField>
 
         </Columns>
+
+<HeaderStyle CssClass="text-center-impt"></HeaderStyle>
+
+<PagerSettings Position="TopAndBottom"></PagerSettings>
+
+<PagerStyle HorizontalAlign="Center"></PagerStyle>
     </asp:gridview>
-    <asp:Button ID="confirmBtn" runat="server" Text="Confirm" OnClick="confirmBtn_Click" CssClass="btn btn-primary"/>
-    <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="backBtn_Click" CssClass="btn btn-primary"/>
+    <asp:Button ID="confirmBtn" ValidationGroup="reasonVal" runat="server" Text="Confirm" OnClick="confirmBtn_Click" CssClass="btn btn-primary"/>
+    <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="backBtn_Click" CssClass="btn btn-danger"/>
 </asp:Content>

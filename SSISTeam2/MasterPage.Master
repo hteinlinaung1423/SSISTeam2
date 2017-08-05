@@ -331,6 +331,16 @@
                                  <li>
                                     <asp:LinkButton ID="LinkButtonn" CausesValidation="false" OnClick="ChangeCPRep" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point & Rep</asp:LinkButton>
                                 </li>
+                        
+                                <% if (userModel.isDepartmentRep()) { %>
+                                <li class="dropdown-header">Department Representative actions</li>
+                                <li>
+                                    <asp:LinkButton ID="LinkButton1" CausesValidation="false" OnClick="btnDepRepViewDisbursements_Click" runat="server" style="color: #000000; text-decoration: none;">View Recent Disbursements</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="LinkButton2" OnClick="btnChnageCollectp_Click" runat="server" style="color: #000000; text-decoration: none;">Change Collection Point</asp:LinkButton>
+                                </li>
+                                <% } %>
 
                                 <% }
 

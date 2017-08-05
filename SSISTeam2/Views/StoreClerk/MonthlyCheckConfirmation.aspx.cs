@@ -146,7 +146,7 @@ namespace SSISTeam2
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("MonthlyCheck.aspx");
+            Response.Redirect("~/Views/StoreClerk/MonthlyCheck.aspx");
         }
 
         protected void reasonTB_TextChanged(object sender, EventArgs e)

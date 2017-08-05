@@ -19,7 +19,10 @@ namespace SSISTeam2.Views.StoreClerk
 
                 int orderID = Convert.ToInt32(Session["order"]);
 
+                DateTime today = DateTime.Today;
+                string todayDate = string.Format("{0:MMMM d,yyyy}", today);
 
+                deliverydate.Text = todayDate;
                 var list= ctx.Purchase_Order_Details.Where(x => x.order_id == orderID && x.status == "Pending").Select(x => new { x.order_details_id, x.Tender_List_Details.Stock_Inventory.item_description, x.quantity }).ToList();
                 if (list.Count == 0)
                 {
