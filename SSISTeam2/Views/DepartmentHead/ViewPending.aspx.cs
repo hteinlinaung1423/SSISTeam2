@@ -10,7 +10,7 @@ namespace SSISTeam2.Views.DepartmentHead
 {
     public partial class ViewPending : System.Web.UI.Page
     {
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         string userName = null;
         string currentDeptCode = null;
         string id = null;
@@ -26,7 +26,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
             if (!IsPostBack)
             {
-                var q = (from r in ent.Requests
+                var requestInfo = (from r in context.Requests
                          where r.dept_code == currentDeptCode && (r.current_status == "Pending" || r.current_status == RequestStatus.UPDATED)
                          select new
                          {
@@ -35,11 +35,11 @@ namespace SSISTeam2.Views.DepartmentHead
                              r.current_status,
                              r.date_time
                          }).ToList();
-                if(q.Count==0)
+                if(requestInfo.Count==0)
                 {
                     Label1.Text = "No Pending request!";
                 }
-                    GridView1.DataSource = q;
+                    GridView1.DataSource = requestInfo;
                     GridView1.DataBind();
 
 

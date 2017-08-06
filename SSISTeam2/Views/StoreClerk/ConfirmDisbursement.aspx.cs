@@ -131,7 +131,7 @@ namespace SSISTeam2.Views.StoreClerk
             List<Dept_Registry> usersList = Session[SESSION_USER_LIST] as List<Dept_Registry>;
 
             Department dep = deptList.Find(f => f.dept_code == selectedDeptCode);
-            lblRepName.Text = "Representative: " + dep.rep_user; //lblRepName.Text = "Representative: " + usersList.Find(f => f.username == dep.rep_user).fullname;
+            lblRepName.Text = "Representative: " + new UserModel(dep.rep_user).Fullname; //lblRepName.Text = "Representative: " + usersList.Find(f => f.username == dep.rep_user).fullname;
             lblCollectionPtLocation.Text = "Collection point: " + collectionPtList.Find(f => f.collection_pt_id == dep.collection_point).location;
 
             if (filtered.Count == 0)

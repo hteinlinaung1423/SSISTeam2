@@ -10,7 +10,7 @@ namespace SSISTeam2.Views.StoreClerk
 {
     public partial class ViewDepartmentList : System.Web.UI.Page
     {
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,8 +32,8 @@ namespace SSISTeam2.Views.StoreClerk
             //string username = User.Identity.Name.ToString();
             //UserModel user = new UserModel(username);
             //string currentDept = user.Department.dept_code;
-            var q = (from x in ent.Departments
-                     join y in ent.Collection_Point on x.collection_point equals y.collection_pt_id 
+            var deptInfos = (from x in context.Departments
+                     join y in context.Collection_Point on x.collection_point equals y.collection_pt_id 
                      select new
                      {
                          x.dept_code,
@@ -43,7 +43,7 @@ namespace SSISTeam2.Views.StoreClerk
                      })
                      .ToList();
 
-            GridView1.DataSource = q;
+            GridView1.DataSource = deptInfos;
             GridView1.DataBind();
         }
 

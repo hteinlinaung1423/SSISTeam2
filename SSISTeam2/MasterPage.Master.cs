@@ -19,25 +19,20 @@ namespace SSISTeam2
         {
             bool isPersistent = false;
 
-            //var formsAuthCookie = Response.Cookies[FormsAuthentication.FormsCookieName];
-            //if (formsAuthCookie != null)
-            //{
-            //    var existingTicket = FormsAuthentication.Decrypt(formsAuthCookie.Value);
-
-            //    if (existingTicket != null)
-            //    {
-            //        isPersistent = existingTicket.IsPersistent;
-            //    }
-            //}
-
-
-            if (Page.User.Identity.Name == "")
+            if (Page.User.Identity.IsAuthenticated && Page.User.Identity.Name != null && Page.User.Identity.Name != "")
             {
-                FormsAuthentication.SignOut();
-            }
 
-            if (Page.User.Identity.Name != null && Page.User.Identity.Name != "")
-            {
+                //var formsAuthCookie = Response.Cookies[FormsAuthentication.FormsCookieName];
+                //if (formsAuthCookie != null)
+                //{
+                //    var existingTicket = FormsAuthentication.Decrypt(formsAuthCookie.Value);
+
+                //    if (existingTicket != null)
+                //    {
+                //        isPersistent = existingTicket.IsPersistent;
+                //    }
+                //}
+
                 // Somebody is signed in
                 string normalisedUserName = Page.User.Identity.Name.ToLower();
                 string storedUserName = normalisedUserName;
@@ -67,11 +62,11 @@ namespace SSISTeam2
                 string currentUser = Page.User.Identity.Name;
 
                 string fullName = "";
-                using (SSISEntities ctx = new SSISEntities())
+                using (SSISEntities context = new SSISEntities())
                 {
                     try
                     {
-                        fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                        fullName = context.Dept_Registry.Find(currentUser).fullname;
                     } catch (Exception)
                     {
                         FormsAuthentication.SignOut();

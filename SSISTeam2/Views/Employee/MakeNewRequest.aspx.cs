@@ -39,6 +39,13 @@ namespace SSISTeam2.Views.StoreClerk
             if (!IsPostBack)
             { // New entry into page
 
+                // Check that user is not a d head or dlg head or whatever
+                UserModel userModel = new UserModel(User.Identity.Name);
+                if (userModel.isDelegateHead() || userModel.isDeptHead() || userModel.isStoreManager())
+                {
+                    Response.Redirect("~/Views/notauthorized.aspx");
+                }
+
                 int requestId = 0;
                 // Get any request string
                 string requestToEdit = Request.QueryString["edit"];
@@ -159,7 +166,7 @@ namespace SSISTeam2.Views.StoreClerk
             
         }
 
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void GridViewRequest_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -283,7 +290,7 @@ namespace SSISTeam2.Views.StoreClerk
 
         private void _checkQtyRows()
         {
-            foreach (GridViewRow row in GridView1.Rows)
+            foreach (GridViewRow row in GridViewRequest.Rows)
             {
                 Label rowNum = row.FindControl("NumLabel") as Label;
                 TextBox tb = row.FindControl("tbQuantity") as TextBox;
@@ -429,7 +436,7 @@ namespace SSISTeam2.Views.StoreClerk
             sb.AppendLine("<br />");
             sb.AppendLine(string.Format("The request's reason is: {0}", tbReason.Text));
             sb.AppendLine("<br />");
-            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view the request</a>.", "http://bit.ly/ssis-mgr-viewpending"));
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view the request</a>.", "https://rebrand.ly/ssis-mgr-viewpending"));
             sb.AppendLine("<br />");
             sb.AppendLine("<br />");
             sb.AppendLine("Thank you.");
@@ -537,12 +544,12 @@ namespace SSISTeam2.Views.StoreClerk
 
         private void _refreshGrid(List<MakeNewRequestModel> models)
         {
-            GridView1.DataSource = models;
-            GridView1.DataBind();
+            GridViewRequest.DataSource = models;
+            GridViewRequest.DataBind();
 
-            if (GridView1.Rows.Count == 1)
+            if (GridViewRequest.Rows.Count == 1)
             {
-                (GridView1.Rows[0].FindControl("btnRemoveRow") as Button).Visible = false;
+                (GridViewRequest.Rows[0].FindControl("btnRemoveRow") as Button).Visible = false;
             }
         }
 

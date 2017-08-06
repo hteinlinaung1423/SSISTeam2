@@ -23,15 +23,23 @@ namespace SSISTeam2
             if (!IsPostBack)
             {
                 checkDone = CheckIfMonthlyDone();
-                List<MonthlyCheckModel> itemList = new List<MonthlyCheckModel>();
-                List<Stock_Inventory> stockList = context.Stock_Inventory.Where(x => x.deleted == "N").ToList();
-                foreach (Stock_Inventory i in stockList)
+                List<MonthlyCheckModel> itemList = (List<MonthlyCheckModel>) Session["Monthly"];
+
+                if (itemList == null)
                 {
-                    MonthlyCheckModel item = new MonthlyCheckModel(i);
-                    itemList.Add(item);
+                    itemList = new List<MonthlyCheckModel>();
+
+                    List<Stock_Inventory> stockList = context.Stock_Inventory.Where(x => x.deleted == "N").ToList();
+                    foreach (Stock_Inventory i in stockList)
+                    {
+                        MonthlyCheckModel item = new MonthlyCheckModel(i);
+                        itemList.Add(item);
+                    }
+
+                    Session["Monthly"] = itemList;
                 }
 
-                Session["Monthly"] = itemList;
+
                 MonthlyCheckGV.DataSource = itemList;
                 MonthlyCheckGV.DataBind();
 

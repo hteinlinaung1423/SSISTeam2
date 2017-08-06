@@ -30,8 +30,8 @@ namespace SSISTeam2.Views.StoreClerk
 
             string itemcode = ((Label)gvr.FindControl("Label_ItemCode")).Text;
 
-            SSISEntities ctx = new SSISEntities();
-            Stock_Inventory item = ctx.Stock_Inventory.Where(x => x.item_code == itemcode).First();
+            SSISEntities context = new SSISEntities();
+            Stock_Inventory item = context.Stock_Inventory.Where(x => x.item_code == itemcode).First();
 
             HashSet<Stock_Inventory> itemList = (HashSet<Stock_Inventory>)Session["item"];
 

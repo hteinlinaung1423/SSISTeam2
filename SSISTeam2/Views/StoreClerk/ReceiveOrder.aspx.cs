@@ -9,7 +9,7 @@ namespace SSISTeam2.Views.StoreClerk
 {
     public partial class ReceiveOrder : System.Web.UI.Page
     {
-        SSISEntities ctx = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -19,8 +19,11 @@ namespace SSISTeam2.Views.StoreClerk
 
                 int orderID = Convert.ToInt32(Session["order"]);
 
+                DateTime today = DateTime.Today;
+                string todayDate = string.Format("{0:MMMM d,yyyy}", today);
 
-                var list= ctx.Purchase_Order_Details.Where(x => x.order_id == orderID && x.status == "Pending").Select(x => new { x.order_details_id, x.Tender_List_Details.Stock_Inventory.item_description, x.quantity }).ToList();
+                deliverydate.Text = todayDate;
+                var list= context.Purchase_Order_Details.Where(x => x.order_id == orderID && x.status == "Pending").Select(x => new { x.order_details_id, x.Tender_List_Details.Stock_Inventory.item_description, x.quantity }).ToList();
                 if (list.Count == 0)
                 {
                     confirm.Visible = false;
@@ -44,20 +47,20 @@ namespace SSISTeam2.Views.StoreClerk
             d.order_id = orderID;
             d.receive_date = DateTime.Parse(deliverydate.Text);
 
-            ctx.Delivery_Orders.Add(d);
-            ctx.SaveChanges();
+            context.Delivery_Orders.Add(d);
+            context.SaveChanges();
 
-            List<Purchase_Order_Details> podList = ctx.Purchase_Order_Details.Where(x => x.order_id == orderID).ToList<Purchase_Order_Details>();
+            List<Purchase_Order_Details> podList = context.Purchase_Order_Details.Where(x => x.order_id == orderID).ToList<Purchase_Order_Details>();
 
             foreach (Purchase_Order_Details pod in podList)
             {
                 pod.status = "Completed";
-                ctx.SaveChanges();
+                context.SaveChanges();
             }
 
 
             //Get DeliveryOrderID
-            Delivery_Orders order = ctx.Delivery_Orders.Where(x => x.clerk_user == User.Identity.Name).OrderBy(x => x.delivery_id).ToList().Last();
+            Delivery_Orders order = context.Delivery_Orders.Where(x => x.clerk_user == User.Identity.Name).OrderBy(x => x.delivery_id).ToList().Last();
 
         
 
@@ -80,12 +83,12 @@ namespace SSISTeam2.Views.StoreClerk
                 string remarks = r.Text;
                 int orderDetail = Convert.ToInt32(orderdetailid.Text);
 
-                Stock_Inventory item = ctx.Stock_Inventory.Where(x => x.item_description == itemName).First();
+                Stock_Inventory item = context.Stock_Inventory.Where(x => x.item_description == itemName).First();
                 int currentQuantity = item.current_qty;
                 item.current_qty = currentQuantity + quantity;
-                ctx.SaveChanges();
+                context.SaveChanges();
 
-                Purchase_Order_Details pod = ctx.Purchase_Order_Details.Where(x => x.order_details_id == orderDetail).First();
+                Purchase_Order_Details pod = context.Purchase_Order_Details.Where(x => x.order_details_id == orderDetail).First();
 
                 Delivery_Details dd = new Delivery_Details();
                 dd.delivery_id = order.delivery_id;
@@ -94,8 +97,8 @@ namespace SSISTeam2.Views.StoreClerk
                 dd.quantity = quantity;
                 dd.remarks = remarks;
 
-                ctx.Delivery_Details.Add(dd);
-                ctx.SaveChanges();
+                context.Delivery_Details.Add(dd);
+                context.SaveChanges();
 
             }
 

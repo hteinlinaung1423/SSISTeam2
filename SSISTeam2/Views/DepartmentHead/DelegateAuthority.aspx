@@ -90,7 +90,7 @@
 
             <asp:TableRow>
                 <asp:TableCell HorizontalAlign="Right"> <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-warning" Width="150px" OnClick="btnCancel_Click"/></asp:TableCell>
-                <asp:TableCell> <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" Width="150px" CssClass="btn btn-default"/></asp:TableCell>
+                <asp:TableCell> <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" Width="150px" CssClass="btn btn-success"/></asp:TableCell>
                 
             </asp:TableRow>
         </asp:Table>

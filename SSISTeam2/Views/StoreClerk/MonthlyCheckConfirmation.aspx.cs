@@ -139,14 +139,15 @@ namespace SSISTeam2
 
                 context.Monthly_Check_Records.Add(checkRecord);
                 context.SaveChanges();
-
+                Session["Confirmation"] = null;
+                Session["Monthly"] = null;
                 Response.Redirect("~/Views/StoreClerk/Dashboard.aspx");
             }
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("MonthlyCheck.aspx");
+            Response.Redirect("~/Views/StoreClerk/MonthlyCheck.aspx");
         }
 
         protected void reasonTB_TextChanged(object sender, EventArgs e)
@@ -189,7 +190,7 @@ namespace SSISTeam2
             sb.AppendLine("<br />");
             sb.AppendLine(string.Format("{0} has filed an inventory adjustment. Please review and approve it.", fromName));
             sb.AppendLine("<br />");
-            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view pending adjustments</a>.", "http://bit.ly/ssis-store-viewadjust"));
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view pending adjustments</a>.", "https://rebrand.ly/ssis-store-viewadjust"));
             sb.AppendLine("<br />");
             sb.AppendLine("<br />");
             sb.AppendLine("Thank you.");

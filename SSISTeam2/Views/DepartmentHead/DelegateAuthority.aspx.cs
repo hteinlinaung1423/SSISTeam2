@@ -45,7 +45,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
 
 
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
 
 
 
@@ -112,7 +112,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
             //get login department all employee , remove Depthead name in Delegate
 
-            allEmpFullName = ent.Dept_Registry.Where(b => b.dept_code == currentDeptCode).Select(x => x.fullname).ToList<String>();       
+            allEmpFullName = context.Dept_Registry.Where(b => b.dept_code == currentDeptCode).Select(x => x.fullname).ToList<String>();       
             headFullName = changeUsernameToFullName(loginHeadUsername);
             allEmpFullName.Remove(headFullName);
 
@@ -125,8 +125,8 @@ namespace SSISTeam2.Views.DepartmentHead
                     //get Last delgate id whethere have or not depend on department
 
 
-                    int lastDutyId = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode).Max(x => x.duty_id);
-                    var w = ent.Approval_Duties.Where(x => x.duty_id == lastDutyId).First();
+                    int lastDutyId = context.Approval_Duties.Where(x => x.dept_code == currentDeptCode).Max(x => x.duty_id);
+                    var w = context.Approval_Duties.Where(x => x.duty_id == lastDutyId).First();
 
                     // Find out if dept has a delegate
                     //var delegateOrDeptHead = user.FindDelegateOrDeptHead().Username;
@@ -143,24 +143,24 @@ namespace SSISTeam2.Views.DepartmentHead
 
 
                         //get data for Current Delegate Table
-                        var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
-                        //var q = ent.Approval_Duties.Where(ad => ad.username == delegateOrDeptHead && ad.deleted != "Y").First();
+                        var approvalDuty = context.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
+                        //var approvalDuty = ent.Approval_Duties.Where(ad => ad.username == delegateOrDeptHead && ad.deleted != "Y").First();
 
-                        checkDelegate = q.deleted.ToString();
-                        currentDutyId = q.duty_id;
+                        checkDelegate = approvalDuty.deleted.ToString();
+                        currentDutyId = approvalDuty.duty_id;
 
                         //show data for Current Delegate Table
 
-                        lbCurDate.Text = q.created_date.ToString("dd-MM-yyyy");
-                        lbCurDelegate.Text = changeUsernameToFullName(q.username.ToString());
+                        lbCurDate.Text = approvalDuty.created_date.ToString("dd-MM-yyyy");
+                        lbCurDelegate.Text = changeUsernameToFullName(approvalDuty.username.ToString());
 
-                        lbCurReason.Text = q.reason.ToString();
+                        lbCurReason.Text = approvalDuty.reason.ToString();
 
-                        lbCurStart.Text = q.start_date.ToString("dd-MM-yyyy");
+                        lbCurStart.Text = approvalDuty.start_date.ToString("dd-MM-yyyy");
 
-                        lbCurEnd.Text = q.end_date.ToString("dd-MM-yyyy");
+                        lbCurEnd.Text = approvalDuty.end_date.ToString("dd-MM-yyyy");
 
-                        if (DateTime.Now > q.start_date && DateTime.Now < q.end_date)
+                        if (DateTime.Now > approvalDuty.start_date && DateTime.Now < approvalDuty.end_date)
                         {
                             lbDelgActive.Text = "Active!";
                             lbDelgActive.ForeColor = System.Drawing.Color.Red;
@@ -292,7 +292,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
                                 lbDateError.Text = "";
 
-                                Dept_Registry depReg = ent.Dept_Registry.SingleOrDefault(x => x.fullname == delegateFullName);
+                                Dept_Registry depReg = context.Dept_Registry.SingleOrDefault(x => x.fullname == delegateFullName);
                                 delegateUserName = depReg.username;
 
                                 Approval_Duties ad = new Approval_Duties
@@ -316,8 +316,8 @@ namespace SSISTeam2.Views.DepartmentHead
 
                                 };
 
-                                ent.Approval_Duties.Add(ad);
-                                ent.SaveChanges();
+                                context.Approval_Duties.Add(ad);
+                                context.SaveChanges();
                                 lbDateError.Text = "Successfully Saved!";
                            
 
@@ -345,15 +345,15 @@ namespace SSISTeam2.Views.DepartmentHead
 
 
 
-            var q = ent.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
+            var approvalDuty = context.Approval_Duties.Where(x => x.dept_code == currentDeptCode && x.deleted == "N").First();
 
 
 
-            q.deleted = "Y";
+            approvalDuty.deleted = "Y";
 
 
 
-            ent.SaveChanges();
+            context.SaveChanges();
 
             CurrentTable.Visible = false;
 
@@ -368,7 +368,7 @@ namespace SSISTeam2.Views.DepartmentHead
         public string changeUsernameToFullName(string username)
         {
 
-            return ent.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname).First().ToString();
+            return context.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname).First().ToString();
         }
 
      protected void btnCancel_Click(object sender, EventArgs e)
@@ -383,7 +383,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
         {
 
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("~/Default.aspx");
 
         }
 
@@ -437,7 +437,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
             sb.AppendLine("<br />");
 
-            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to login to the system</a>.", "http://bit.ly/ssis-login"));
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to login to the system</a>.", "https://rebrand.ly/ssis-login"));
 
             sb.AppendLine("<br />");
 

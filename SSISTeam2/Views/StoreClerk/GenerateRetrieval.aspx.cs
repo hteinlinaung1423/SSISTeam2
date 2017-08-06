@@ -241,6 +241,11 @@ namespace SSISTeam2.Views.StoreClerk
 
             Response.Redirect(Request.Url.ToString(), false);
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
+        }
     }
 
     class RetrievalFormViewModel

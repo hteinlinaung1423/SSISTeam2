@@ -46,7 +46,7 @@ namespace SSISTeam2
         protected void LoginButton_Click(object sender, EventArgs e)
         {
 
-            FormsAuthentication.SetAuthCookie(User.Identity.Name.ToLower(), true);
+            //FormsAuthentication.SetAuthCookie(User.Identity.Name.ToLower(), true);
         }
     }
 }
