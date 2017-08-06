@@ -474,8 +474,8 @@ namespace SSISTeam2.Classes.WebServices
 
         public WCFDepartment GetDeptNamebycode(string deptName)
         {
-            Department dept1 = context.Departments.SingleOrDefault(x => x.name == deptName);
-            Dept_Registry dr = context.Dept_Registry.SingleOrDefault(x => x.username == dept1.rep_user);
+            Department dept1 = context.Departments.Where(x => x.name == deptName).First();
+            Dept_Registry dr = context.Dept_Registry.Where(x => x.username == dept1.rep_user).First();
             WCFDepartment wd = new WCFDepartment(dept1.dept_code, dr.fullname, dept1.contact_num);          
             return wd;
         }

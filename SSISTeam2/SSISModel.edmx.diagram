@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1fe9418e270044b8a7f193d96fd87935" Name="Diagram1">
+      <Diagram DiagramId="1fe9418e270044b8a7f193d96fd87935" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="SSISModel.Adjustment_Details" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Alert" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SSISModel.Approval_Duties" Width="1.5" PointX="7.5" PointY="13.25" IsExpanded="true" />
