@@ -24,9 +24,9 @@
             <ContentTemplate>
                 <div class="row">
                     <div class="table-responsive">
-                        <asp:GridView ID="GridView1" runat="server"
+                        <asp:GridView ID="GridViewRequest" runat="server"
                             AutoGenerateColumns="false"
-                            OnRowDataBound="GridView1_RowDataBound"
+                            OnRowDataBound="GridViewRequest_RowDataBound"
                             CssClass="table table-responsive table-striped"
                             GridLines="None"
                             BorderColor="White">

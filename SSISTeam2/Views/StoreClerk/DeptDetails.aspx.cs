@@ -9,7 +9,7 @@ namespace SSISTeam2.Views.StoreClerk
 {
     public partial class DeptDetails : System.Web.UI.Page
     {
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
             //selectreqid = Int16.Parse(Request.QueryString["key"]); 
@@ -22,8 +22,8 @@ namespace SSISTeam2.Views.StoreClerk
 
         private void FillPage(string deptcode)
         {
-            Department d = ent.Departments.Find(deptcode);
-            Collection_Point cp = ent.Collection_Point.Where(x => x.collection_pt_id == d.collection_point).First();
+            Department d = context.Departments.Find(deptcode);
+            Collection_Point cp = context.Collection_Point.Where(x => x.collection_pt_id == d.collection_point).First();
             lbldeptcode.Text = d.dept_code;
             lbldeptname.Text = d.name;
             lblhead.Text = d.head_user ;

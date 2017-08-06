@@ -22,12 +22,10 @@ namespace SSISTeam2
 
             SSISEntities context = new SSISEntities();
 
-            string currentUser2 = Page.User.Identity.Name;
             string fullName = "";
-            using (SSISEntities ctx = new SSISEntities())
-            {
-                fullName = ctx.Dept_Registry.Find(currentUser2).fullname;
-            }
+
+            fullName = context.Dept_Registry.Find(currentUser).fullname;
+
             lblFullName.Text = "Welcome, " + fullName;
 
             /* Emp side Dash */
@@ -59,6 +57,8 @@ namespace SSISTeam2
                     .ToList();
                 gridViewToRetrieve_FromWarehouse.DataSource = allocatedItems.Take(3);
                 gridViewToRetrieve_FromWarehouse.DataBind();
+
+                lblNumToRetrieve.Text = string.Format("({0} in total)", allocatedItems.Count);
             }
 
 
@@ -91,7 +91,7 @@ namespace SSISTeam2
             {
                 panelToRetrieve.CssClass = "panel panel-info";
                 panelToRetrieve_Empty.Visible = false;
-                lblNumToRetrieve.Text = string.Format("({0} in total)", allocated.Count);
+                
             } else
             {
                 panelToRetrieve_FromWarehouse.Visible = false;
@@ -162,7 +162,7 @@ namespace SSISTeam2
             {
                 panelToDisburse.CssClass = "panel panel-success";
                 panelToDisburse_Empty.Visible = false;
-                lblNumToSignOff.Text = string.Format("({0} in total)", disbursingList.Count);
+                lblNumToSignOff.Text = string.Format("({0} in total)", toBeSignedOff.Count);
             }
             else
             {
@@ -202,6 +202,8 @@ namespace SSISTeam2
                 panelLowStocksBtn.Visible = false;
             }
             #endregion
+
+            context.Dispose();
         }
 
         private void FillPage()
@@ -215,23 +217,23 @@ namespace SSISTeam2
 
             string currentUser = Page.User.Identity.Name;
             string fullName = "";
-            using (SSISEntities ctx = new SSISEntities())
+            using (SSISEntities context = new SSISEntities())
             {
-                fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                fullName = context.Dept_Registry.Find(currentUser).fullname;
                 lblFullName.Text = "Welcome, " + fullName;
 
                 string username = User.Identity.Name.ToString();
                 UserModel user = new UserModel(username);
                 string currentDept = user.Department.dept_code;
-                var q = (from x in ctx.Requests
+                var requestInfos = (from x in context.Requests
                          where username == x.username
                          select new { x.request_id, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
-                GridView1.DataSource = q;
+                GridView1.DataSource = requestInfos;
                 GridView1.DataBind();
 
-                var q2 = (from x in ctx.Requests
+                var q2 = (from x in context.Requests
                           where currentDept == x.dept_code
-                          select new { x.request_id, x.username, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
+                          select new { x.request_id, x.username, x.Dept_Registry.fullname, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
                 GridView2.DataSource = q2;
                 GridView2.DataBind();
             }

@@ -10,7 +10,7 @@ namespace SSISTeam2.Views.StoreClerk
     public partial class Cart : System.Web.UI.Page
     {
 
-        SSISEntities ctx = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -40,7 +40,7 @@ namespace SSISTeam2.Views.StoreClerk
                     DropDownList1.DataSource = itemnameList;
                     DropDownList1.DataBind();
                     string itemname = itemnameList[0];
-                    GridView1.DataSource = ctx.Tender_List_Details.Where(x => x.Stock_Inventory.item_description == itemname).Select(x => new { x.tender_id, x.item_code, x.Stock_Inventory.item_description, x.Tender_List.Supplier.name, x.Tender_List.Supplier.contact_num, x.rank, x.price }).ToList();
+                    GridView1.DataSource = context.Tender_List_Details.Where(x => x.Stock_Inventory.item_description == itemname).Select(x => new { x.tender_id, x.item_code, x.Stock_Inventory.item_description, x.Tender_List.Supplier.name, x.Tender_List.Supplier.contact_num, x.rank, x.price }).ToList();
                     GridView1.DataBind();
 
 
@@ -85,7 +85,7 @@ namespace SSISTeam2.Views.StoreClerk
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
             int itemcode = Convert.ToInt32(((Label)gvr.FindControl("Label_tenderId")).Text);
-            Tender_List_Details td = ctx.Tender_List_Details.Where(x => x.tender_id == itemcode).First();
+            Tender_List_Details td = context.Tender_List_Details.Where(x => x.tender_id == itemcode).First();
 
 
             HashSet<OrderDetailsView> itemList = (HashSet<OrderDetailsView>)Session["tender"];

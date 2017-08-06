@@ -111,10 +111,20 @@ namespace SSISTeam2.Views.StoreClerk
             CheckBox chkBox = sender as CheckBox;
             GridViewRow gvr = chkBox.Parent.Parent as GridViewRow;
 
+            int currentCollectionPtId = (int)Session[SESSION_CURRENT_COLLECTION_PT];
+
             int selectedIndex = gvr.DataItemIndex;
 
+            var filtered = list;
+            if (currentCollectionPtId > 0)
+            {
+                filtered = list.Where(w => w.CollectionPtId == currentCollectionPtId).ToList();
+            }
+
+
+
             // Flip the include boolean
-            list[selectedIndex].Include = !list[selectedIndex].Include;
+            filtered[selectedIndex].Include = !filtered[selectedIndex].Include;
 
             Session[SESSION_COLLECTION_PT_LIST] = list;
 

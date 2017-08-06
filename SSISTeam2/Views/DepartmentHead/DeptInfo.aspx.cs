@@ -9,7 +9,7 @@ namespace SSISTeam2.Views.DepartmentHead
 {
     public partial class DeptInfo : System.Web.UI.Page
     {
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         Department dept = null;
 
 
@@ -17,10 +17,10 @@ namespace SSISTeam2.Views.DepartmentHead
         {
             //???
             string loginuserDHead = "Jerry";
-            string logindepCode = ent.Dept_Registry.Where(b => b.username == loginuserDHead).Select(c => c.dept_code).First().ToString();
+            string logindepCode = context.Dept_Registry.Where(b => b.username == loginuserDHead).Select(c => c.dept_code).First().ToString();
 
             //get login a department
-            dept = ent.Departments.Where(d => d.dept_code == logindepCode).Single();
+            dept = context.Departments.Where(d => d.dept_code == logindepCode).Single();
 
             LabelDeptName.Text = dept.name.ToString();
             LabelContactName.Text = dept.contact_user.ToString();
