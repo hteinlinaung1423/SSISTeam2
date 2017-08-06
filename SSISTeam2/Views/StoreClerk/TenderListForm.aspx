@@ -173,9 +173,11 @@
 
                             <asp:TemplateField ItemStyle-Width="10%" HeaderText="Price"><%-- HeaderStyle-CssClass="text-center-impt">--%>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox5" runat="server" Text='<%# Eval("price") %>' BackColor="Transparent" Height="30px" Width="150px"></asp:TextBox>
+                                    <%--<asp:TextBox ID="TextBox5" runat="server" Text='<%# Eval("price") %>' BackColor="Transparent" Height="30px" Width="150px"></asp:TextBox>--%>
+                                    <asp:TextBox ID="TextBox5" type="number" ng-model="myDecimal" placeholder="Decimal" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.001" runat="server" Text='<%# Eval("price") %>' BackColor="Transparent" Height="30px" Width="150px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Price is required" ControlToValidate="TextBox5" ForeColor="Red"></asp:RequiredFieldValidator>
-                                </EditItemTemplate>
+                                   <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please Enter digit only" ControlToValidate="TextBox5" ValidationExpression="[0-9]*\.?[0-9]*" ForeColor="Red" ValidationGroup="valGroup1"></asp:RegularExpressionValidator>                                  --%>
+                                    </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label5" runat="server" Text='<%# Eval("price") %>' CssClass="text-bold"></asp:Label>
                                 </ItemTemplate>
