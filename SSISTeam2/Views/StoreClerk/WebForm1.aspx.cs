@@ -9,10 +9,10 @@ namespace SSISTeam2.Views.StoreClerk
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        SSISEntities ctx = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-            var catList = ctx.Categories.Where(x => x.deleted == "N" && x.cat_name.Contains("E")).Select(x => x.cat_id).ToList();
+            var catList = context.Categories.Where(x => x.deleted == "N" && x.cat_name.Contains("E")).Select(x => x.cat_id).ToList();
             GridView1.DataSource = catList;
             GridView1.DataBind();
 

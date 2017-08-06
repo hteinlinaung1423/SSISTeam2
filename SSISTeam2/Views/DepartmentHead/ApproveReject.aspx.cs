@@ -13,7 +13,7 @@ namespace SSISTeam2.Views.DepartmentHead
 {
     public partial class ApproveReject : System.Web.UI.Page
     {
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         int selectReqId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,10 +31,10 @@ namespace SSISTeam2.Views.DepartmentHead
             if (!IsPostBack)
             {
                 //get current selected Request details
-                var q = (from r in ent.Requests
-                         join de in ent.Request_Details on r.request_id equals de.request_id
-                         join st in ent.Stock_Inventory on de.item_code equals st.item_code
-                         join v in ent.Request_Event on de.request_detail_id equals v.request_detail_id
+                var itemAndQuantities = (from r in context.Requests
+                         join de in context.Request_Details on r.request_id equals de.request_id
+                         join st in context.Stock_Inventory on de.item_code equals st.item_code
+                         join v in context.Request_Event on de.request_detail_id equals v.request_detail_id
                          where de.request_id==selectReqId
                          select new
                          {    
@@ -45,18 +45,18 @@ namespace SSISTeam2.Views.DepartmentHead
                          })
                          .Where(w => w.orig_quantity > 0)
                          .ToList();
-                GridView1.DataSource = q;
+                GridView1.DataSource = itemAndQuantities;
                 GridView1.DataBind();
 
 
-                lbRqDate.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.date_time).First().ToString();
+                lbRqDate.Text = context.Requests.Where(x => x.request_id == selectReqId).Select(y => y.date_time).First().ToString();
                 //change username to fullname
-                string userName = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
-                lbRqEmp.Text = ent.Dept_Registry.Where(x => x.username == userName).Select(x => x.fullname).First().ToString();
-                lblRequestReason.Text = ent.Requests.Where(x => x.request_id == selectReqId).Select(y => y.reason).First().ToString();
+                string userName = context.Requests.Where(x => x.request_id == selectReqId).Select(y => y.username).First().ToString();
+                lbRqEmp.Text = context.Dept_Registry.Where(x => x.username == userName).Select(x => x.fullname).First().ToString();
+                lblRequestReason.Text = context.Requests.Where(x => x.request_id == selectReqId).Select(y => y.reason).First().ToString();
 
                 //get last approved Request details,but not receive from store
-                var lastApproveReq = ent.Requests.Where(x => x.current_status == "Approved" && x.dept_code == currentDeptcode).ToList();
+                var lastApproveReq = context.Requests.Where(x => x.current_status == "Approved" && x.dept_code == currentDeptcode).ToList();
                 if (lastApproveReq.Count == 0)
                 {
                     Table2.Visible = false;
@@ -67,10 +67,10 @@ namespace SSISTeam2.Views.DepartmentHead
                 {
                     int lastApproveReqId = lastApproveReq.Max(y => y.request_id);
 
-                    var w = (from r in ent.Requests
-                             join de in ent.Request_Details on r.request_id equals de.request_id
-                             join st in ent.Stock_Inventory on de.item_code equals st.item_code
-                             join v in ent.Request_Event on de.request_detail_id equals v.request_detail_id
+                    var w = (from r in context.Requests
+                             join de in context.Request_Details on r.request_id equals de.request_id
+                             join st in context.Stock_Inventory on de.item_code equals st.item_code
+                             join v in context.Request_Event on de.request_detail_id equals v.request_detail_id
                              where de.request_id == lastApproveReqId
                              select new
                              {
@@ -82,7 +82,7 @@ namespace SSISTeam2.Views.DepartmentHead
                              .ToList();
 
                     lbLastReqID.Text = lastApproveReqId.ToString();
-                    var req = ent.Requests.Where(x => x.request_id == lastApproveReqId);
+                    var req = context.Requests.Where(x => x.request_id == lastApproveReqId);
                     lbLastReqDate.Text = req.First().date_time.ToString();
                     lbLastReqEmp.Text = req.First().username;
 
@@ -98,15 +98,15 @@ namespace SSISTeam2.Views.DepartmentHead
         protected void btnApprove_Click(object sender, EventArgs e)
         {
             //change status in "Request"
-            var req = ent.Requests.SingleOrDefault(x => x.request_id == selectReqId);
+            var req = context.Requests.SingleOrDefault(x => x.request_id == selectReqId);
             req.current_status = "Approved";
             req.rejected_reason = tbReason.Text;
 
             //change status in "Request Event"
-            var q = from r in ent.Requests
-                            join de in ent.Request_Details on selectReqId equals de.request_id
+            var requestDetailIds = from r in context.Requests
+                            join de in context.Request_Details on selectReqId equals de.request_id
                             select de.request_detail_id;
-            List<int> reqDetails = q.ToList();
+            List<int> reqDetails = requestDetailIds.ToList();
             int[] detAry =reqDetails.ToArray();
             for (int i=0; i<detAry.Length; i++)
             {
@@ -116,17 +116,17 @@ namespace SSISTeam2.Views.DepartmentHead
             lbAppRej.Text = "Successfully Approved!";
 
             _sendEmail(true, User.Identity.Name, req);
-            ent.SaveChanges();
+            context.SaveChanges();
             Response.Redirect("ViewPending.aspx");
         }
 
         public void changeAppStatusEvent(int detailId)
         {
-            var q = from de in ent.Request_Details
-                     join ev in ent.Request_Event on detailId equals ev.request_detail_id
+            var requestEvent = from de in context.Request_Details
+                     join ev in context.Request_Event on detailId equals ev.request_detail_id
                      select ev;
 
-            List<Request_Event> eve = q.ToList();
+            List<Request_Event> eve = requestEvent.ToList();
             foreach(Request_Event e in eve)
             {
                 e.status = "Approved";
@@ -139,22 +139,22 @@ namespace SSISTeam2.Views.DepartmentHead
         protected void btnReject_Click(object sender, EventArgs e)
         {
             //change status in "Request"
-            var req = ent.Requests.SingleOrDefault(x => x.request_id == selectReqId);
+            var req = context.Requests.SingleOrDefault(x => x.request_id == selectReqId);
             req.current_status = "Rejected";
             req.rejected = "Y";
             req.rejected_reason = tbReason.Text;
 
             //change status in "Request Event"
-            var q = from r in ent.Requests
-                    join de in ent.Request_Details on selectReqId equals de.request_id
+            var requestDetailIds = from r in context.Requests
+                    join de in context.Request_Details on selectReqId equals de.request_id
                     select de.request_detail_id;
-            List<int> reqDetails = q.ToList();
+            List<int> reqDetails = requestDetailIds.ToList();
             int[] detAry = reqDetails.ToArray();
             for (int i = 0; i < detAry.Length; i++)
             {
                 changeRejStatusEvent(detAry[i]);
             }
-            ent.SaveChanges();
+            context.SaveChanges();
             //
             lbAppRej.Text = "Successfully Rejected!";
 
@@ -162,16 +162,16 @@ namespace SSISTeam2.Views.DepartmentHead
         }
         public void changeRejStatusEvent(int detailId)
         {
-            var q = from de in ent.Request_Details
-                    join ev in ent.Request_Event on detailId equals ev.request_detail_id
+            var requestEvents = from de in context.Request_Details
+                    join ev in context.Request_Event on detailId equals ev.request_detail_id
                     select ev;
 
-            List<Request_Event> eve = q.ToList();
+            List<Request_Event> eve = requestEvents.ToList();
             foreach (Request_Event e in eve)
             {
                 e.status = "Rejected";
             }
-            ent.SaveChanges();
+            context.SaveChanges();
         }
 
         protected void btnBack_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace SSISTeam2.Views.Employee
     public partial class ChangeCollectionPoint : System.Web.UI.Page
     {
 
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
 
         int currentCollectId = 0;
 
@@ -39,7 +39,7 @@ namespace SSISTeam2.Views.Employee
 
             currentCollectId = sdept.collection_point;
 
-            Collection_Point cp = ent.Collection_Point.SingleOrDefault(x => x.collection_pt_id == currentCollectId);
+            Collection_Point cp = context.Collection_Point.SingleOrDefault(x => x.collection_pt_id == currentCollectId);
             lbCollectP.Text = cp.location + " (" + cp.day_of_week + " -" + cp.date_time.TimeOfDay + " )";
 
             lbRepName.Text = changeUsernameToFullName(sdept.rep_user.ToString());
@@ -69,13 +69,13 @@ namespace SSISTeam2.Views.Employee
             else
             {
                 //show Full Name- save username
-                Dept_Registry depReg = ent.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
+                Dept_Registry depReg = context.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
                 string repUserName = depReg.username;
 
-                var result = ent.Departments.SingleOrDefault(c => c.name == sdept.name);
+                var result = context.Departments.SingleOrDefault(c => c.name == sdept.name);
                 result.rep_user = repUserName;
                 result.collection_point = selectColPoint;
-                ent.SaveChanges();
+                context.SaveChanges();
                 lbDDLError.Text = "Sucessfully Save!";
 
                 _sendEmail(User.Identity.Name, repUserName);
@@ -92,7 +92,7 @@ namespace SSISTeam2.Views.Employee
         public void  ddlDataBinding()
         {
             //get all collection point
-            List<Collection_Point> cpWdateList = ent.Collection_Point.ToList<Collection_Point>();
+            List<Collection_Point> cpWdateList = context.Collection_Point.ToList<Collection_Point>();
             List<string> stList = new List<string>();
             foreach (Collection_Point each in cpWdateList)
             {
@@ -108,7 +108,7 @@ namespace SSISTeam2.Views.Employee
         public string changeUsernameToFullName(string username)
         {
 
-            var emplist = ent.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname);
+            var emplist = context.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname);
             return emplist.First();
         }
 

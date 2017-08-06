@@ -12,7 +12,7 @@ namespace SSISTeam2.Views
     {
         public UserModel userModel;
 
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
             userModel = new UserModel(User.Identity.Name);
@@ -34,32 +34,32 @@ namespace SSISTeam2.Views
             string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
             string currentDept = user.Department.dept_code;
-            var q = (from o in ent.Requests
+            var requestInfo = (from o in context.Requests
                      where (currentDept == o.dept_code) && (o.current_status == RequestStatus.PENDING | o.current_status == RequestStatus.UPDATED)
                      select new { o.request_id, o.username , o.date_time, o.reason}).ToList();
-            GridView1.DataSource = q;
+            GridView1.DataSource = requestInfo;
             GridView1.DataBind();
             string pendingnum = GridView1.Rows.Count.ToString();
             lblPendingNum.Text = "You Have "+ pendingnum + " Requests(s) to View";
 
             string currentUser = Page.User.Identity.Name;
             string fullName = "";
-            using (SSISEntities ctx = new SSISEntities())
+            using (SSISEntities context = new SSISEntities())
             {
-                fullName = ctx.Dept_Registry.Find(currentUser).fullname;
+                fullName = context.Dept_Registry.Find(currentUser).fullname;
             }
             lblFullName.Text = "Welcome, " + fullName;
 
-            Department dept = ent.Departments.Where(x => currentDept == x.dept_code).First();
-            Collection_Point colpoint = ent.Collection_Point.Where(y => y.collection_pt_id == dept.collection_point).First();
-            Dept_Registry dr = ent.Dept_Registry.Where(x => x.username == dept.rep_user).First();
+            Department dept = context.Departments.Where(x => currentDept == x.dept_code).First();
+            Collection_Point colpoint = context.Collection_Point.Where(y => y.collection_pt_id == dept.collection_point).First();
+            Dept_Registry dr = context.Dept_Registry.Where(x => x.username == dept.rep_user).First();
             lblrep.Text = dr.fullname;
             lblcolpoint.Text = colpoint.location + " (" + colpoint.day_of_week + " - " + colpoint.date_time.ToShortTimeString() +")";
 
-            var deldept = (from x in ent.Approval_Duties select x.dept_code).ToList();
+            var deldept = (from x in context.Approval_Duties select x.dept_code).ToList();
             if (deldept.Contains(currentDept))
             {
-                List<Approval_Duties> ads = ent.Approval_Duties.Where(x => currentDept == x.dept_code).ToList();
+                List<Approval_Duties> ads = context.Approval_Duties.Where(x => currentDept == x.dept_code).ToList();
                 foreach (Approval_Duties ad in ads)
                 {
                     DateTime start = ad.start_date;

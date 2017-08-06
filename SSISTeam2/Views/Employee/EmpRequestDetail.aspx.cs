@@ -10,7 +10,7 @@ namespace SSISTeam2.Views.Employee
 {
     public partial class EmpRequestDetail : System.Web.UI.Page
     {
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
             //selectreqid = Int16.Parse(Request.QueryString["key"]); 
@@ -34,19 +34,19 @@ namespace SSISTeam2.Views.Employee
             //string username = User.Identity.Name.ToString();
             //UserModel user = new UserModel(username);
             
-            Request req = ent.Requests.Find(reqid);
+            Request req = context.Requests.Find(reqid);
             lblreqid.Text = req.request_id.ToString();
             lblDate.Text = req.date_time.ToString();
             lblstatus.Text = req.current_status;
             lblemployeename.Text = req.Dept_Registry.fullname;
             lblcomment.Text = req.reason;
             
-            var q = (from x in ent.Requests
+            var itemInfos = (from x in context.Requests
                      where x.request_id  == reqid
-                     join re in ent.Request_Details on x.request_id equals re.request_id
-                     join de in ent.Request_Event on re.request_detail_id equals de.request_detail_id 
-                     join si in ent.Stock_Inventory on re.item_code equals si.item_code 
-                     join cat in ent.Categories on si.cat_id equals cat.cat_id
+                     join re in context.Request_Details on x.request_id equals re.request_id
+                     join de in context.Request_Event on re.request_detail_id equals de.request_detail_id 
+                     join si in context.Stock_Inventory on re.item_code equals si.item_code 
+                     join cat in context.Categories on si.cat_id equals cat.cat_id
                      select new
                      {
                          cat.cat_name ,
@@ -55,9 +55,9 @@ namespace SSISTeam2.Views.Employee
                          re.orig_quantity
                      }).ToList();
 
-            q = q.Where(w => w.orig_quantity > 0).ToList();
+            itemInfos = itemInfos.Where(w => w.orig_quantity > 0).ToList();
 
-            GridView2.DataSource = q;
+            GridView2.DataSource = itemInfos;
             GridView2.DataBind();
         }
 

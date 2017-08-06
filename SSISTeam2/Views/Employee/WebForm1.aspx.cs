@@ -15,8 +15,8 @@ namespace SSISTeam2.Views.Employee
             String name = "zeck";
             UserModel usermodel = new UserModel(name);
             String dept_code = usermodel.Department.dept_code;
-            SSISEntities ctx = new SSISEntities();
-            var result = ctx.Approval_Duties.Where(x => x.deleted == "N" && x.dept_code.Equals("dept_code")).Select(x => x.end_date).Max();
+            SSISEntities context = new SSISEntities();
+            var result = context.Approval_Duties.Where(x => x.deleted == "N" && x.dept_code.Equals("dept_code")).Select(x => x.end_date).Max();
             Label1.Text = result.ToString();
 
         }

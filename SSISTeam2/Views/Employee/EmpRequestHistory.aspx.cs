@@ -13,7 +13,7 @@ namespace SSISTeam2.Views.Employee
 {
     public partial class EmpRequestHistory : System.Web.UI.Page
     {
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         //string username = "yht";//testing
         //string currentDept = "REGR";//testing
         
@@ -55,7 +55,7 @@ namespace SSISTeam2.Views.Employee
             string username = User.Identity.Name.ToString();
             UserModel user = new UserModel(username);
             string currentDept = user.Department.dept_code;
-            var listOfRequests = (from x in ent.Requests
+            var listOfRequests = (from x in context.Requests
                      where x.dept_code == currentDept
                      select new
                      {
@@ -108,37 +108,37 @@ namespace SSISTeam2.Views.Employee
         {
 
             //change status in request table
-            var req = ent.Requests.SingleOrDefault(x => x.request_id == requestID);
+            var req = context.Requests.SingleOrDefault(x => x.request_id == requestID);
             req.current_status = RequestStatus.CANCELLED;
 
             //change status in request event table
-            var q = from r in ent.Requests
+            var requestDetailIds = from r in context.Requests
                     where r.request_id == requestID
-                    join de in ent.Request_Details on r.request_id equals de.request_id
+                    join de in context.Request_Details on r.request_id equals de.request_id
                     select de.request_detail_id;
-            List<int> reqDetails = q.ToList();
+            List<int> reqDetails = requestDetailIds.ToList();
             int[] detailidint = reqDetails.ToArray();
             foreach (int i in detailidint)
             {
                 cancelRequest(i);
             }
-            ent.SaveChanges();
+            context.SaveChanges();
             //lbltest.Text = detailids.Count.ToString(); //test
             FillPage();
         }
 
         public void cancelRequest(int detailid)
         {
-            var p = from de in ent.Request_Details
+            var p = from de in context.Request_Details
                     where de.request_detail_id == detailid
-                    join ev in ent.Request_Event on de.request_detail_id equals ev.request_detail_id
+                    join ev in context.Request_Event on de.request_detail_id equals ev.request_detail_id
                     select ev;
             List<Request_Event> events = p.ToList();
             foreach (Request_Event e in events)
             {
                 e.status = RequestStatus.CANCELLED;
             }
-            ent.SaveChanges();
+            context.SaveChanges();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -146,7 +146,7 @@ namespace SSISTeam2.Views.Employee
             string username = User.Identity.Name.ToString();
             //string username = "Sally";
             UserModel user = new UserModel(username);
-            var q = (from x in ent.Requests
+            var requestInfos = (from x in context.Requests
                      where x.dept_code == user.Department.dept_code
                      select new
                      {
@@ -160,10 +160,10 @@ namespace SSISTeam2.Views.Employee
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                q = q.Where(s => s.username.Contains(searchString)).OrderBy(x=>x.date_time);
+                requestInfos = requestInfos.Where(s => s.username.Contains(searchString)).OrderBy(x=>x.date_time);
             }
 
-            GridView2.DataSource = q.ToList();
+            GridView2.DataSource = requestInfos.ToList();
             GridView2.DataBind();
         }
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)

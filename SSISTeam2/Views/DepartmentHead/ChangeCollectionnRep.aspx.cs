@@ -26,7 +26,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
     {
 
-        SSISEntities ent = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         Department sdept = null;
 
         int currentCollectId = 0;
@@ -55,7 +55,7 @@ namespace SSISTeam2.Views.DepartmentHead
             LabelFaxNo.Text = sdept.fax_num.ToString();
             currentCollectId = sdept.collection_point;
 
-            Collection_Point cp = ent.Collection_Point.SingleOrDefault(x => x.collection_pt_id == currentCollectId);
+            Collection_Point cp = context.Collection_Point.SingleOrDefault(x => x.collection_pt_id == currentCollectId);
             lbCollectP.Text = cp.location + " ("+ cp.day_of_week+" -"+cp.date_time.TimeOfDay+" )";
             lbRepName.Text = changeUsernameToFullName(sdept.rep_user.ToString());
 
@@ -72,7 +72,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
             //get all collection point
 
-            List<Collection_Point> cpWdateList = ent.Collection_Point.ToList<Collection_Point>();
+            List<Collection_Point> cpWdateList = context.Collection_Point.ToList<Collection_Point>();
             List<string> stList = new List<string>();
             foreach (Collection_Point each in cpWdateList)
             {
@@ -85,7 +85,7 @@ namespace SSISTeam2.Views.DepartmentHead
             ddlCollectPoint.DataBind();
 
             //get all employee depend on * department & remove department head name
-            List<String> empList = ent.Dept_Registry.Where(a => a.dept_code == sdept.dept_code).Select(y => y.fullname).ToList<String>();          
+            List<String> empList = context.Dept_Registry.Where(a => a.dept_code == sdept.dept_code).Select(y => y.fullname).ToList<String>();          
             empList.Remove(changeUsernameToFullName(headUSerName));
             ddlRepName.DataSource = empList;
             ddlRepName.DataBind();
@@ -108,13 +108,13 @@ namespace SSISTeam2.Views.DepartmentHead
             else
             {
                 //show Full Name- save username
-                Dept_Registry depReg = ent.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
+                Dept_Registry depReg = context.Dept_Registry.SingleOrDefault(x => x.fullname == repFullName);
                 string repUserName = depReg.username;
 
-                var result = ent.Departments.SingleOrDefault(c => c.name == sdept.name);
+                var result = context.Departments.SingleOrDefault(c => c.name == sdept.name);
                 result.rep_user = repUserName;
                 result.collection_point = selectColPoint;
-                ent.SaveChanges();
+                context.SaveChanges();
                 lbDDLError1.Text = "Sucessfully Save!";
 
                 _sendEmail(User.Identity.Name, repUserName);
@@ -209,7 +209,7 @@ namespace SSISTeam2.Views.DepartmentHead
         public string changeUsernameToFullName(string username)
         {
 
-            return ent.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname).First().ToString();
+            return context.Dept_Registry.Where(x => x.username == username).Select(y => y.fullname).First().ToString();
         }
     }
 

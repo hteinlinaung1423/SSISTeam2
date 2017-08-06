@@ -82,10 +82,10 @@ namespace SSISTeam2.Classes.Models
         }
         public bool isDepartmentRep()
         {
-            using (SSISEntities ctx = new SSISEntities())
+            using (SSISEntities context = new SSISEntities())
             {
                 // Check if user is department rep
-                int count = ctx.Departments.Where(d => d.rep_user == username).Count();
+                int count = context.Departments.Where(d => d.rep_user == username).Count();
 
                 return count > 0;
             }

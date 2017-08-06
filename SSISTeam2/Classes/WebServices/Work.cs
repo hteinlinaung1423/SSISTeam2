@@ -11,7 +11,7 @@ namespace SSISTeam2.Classes.WebServices
     public class Work
     {
 
-        SSISEntities ctx = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         string statusFlag = "F";
 
 
@@ -19,17 +19,17 @@ namespace SSISTeam2.Classes.WebServices
 
         public Request GetRequest()
         {
-            return ctx.Requests.OrderBy(x => x.request_id).ToList().Last();
+            return context.Requests.OrderBy(x => x.request_id).ToList().Last();
         }
 
         public Stock_Inventory GetStockInventory(string name)
         {
-            return ctx.Stock_Inventory.Where(x => x.item_description == name).First();
+            return context.Stock_Inventory.Where(x => x.item_description == name).First();
         }
 
         public Request_Details GetLastRequestDetail()
         {
-            return ctx.Request_Details.OrderBy(x => x.request_detail_id).ToList().Last();
+            return context.Request_Details.OrderBy(x => x.request_detail_id).ToList().Last();
         }
 
 
@@ -37,7 +37,7 @@ namespace SSISTeam2.Classes.WebServices
         public List<string> GetCatName()
         {
             List<string> catname = new List<string>();
-            List<Category> catList = ctx.Categories.ToList<Category>();
+            List<Category> catList = context.Categories.ToList<Category>();
             foreach (Category cat in catList)
             {
                 string name = cat.cat_name;
@@ -48,13 +48,13 @@ namespace SSISTeam2.Classes.WebServices
 
         public List<Stock_Inventory> GetItemDetail(string name)
         {
-            List<Stock_Inventory> itemList = ctx.Stock_Inventory.Where(x => x.Category.cat_name == name).ToList<Stock_Inventory>();
+            List<Stock_Inventory> itemList = context.Stock_Inventory.Where(x => x.Category.cat_name == name).ToList<Stock_Inventory>();
             return itemList;
         }
 
         public List<Request> GetAllRequest(string dept)
         {
-            List<Request> req = ctx.Requests.Where(x => x.dept_code == dept && x.current_status == "Pending").OrderByDescending(x=> x.date_time).ToList<Request>();
+            List<Request> req = context.Requests.Where(x => x.dept_code == dept && x.current_status == "Pending").OrderByDescending(x=> x.date_time).ToList<Request>();
 
             return req;
 
@@ -63,7 +63,7 @@ namespace SSISTeam2.Classes.WebServices
 
         public List<Request> GetAllRequestByDeptCode(string dept)
         {
-            List<Request> req = ctx.Requests.Where(x => x.dept_code == dept).OrderByDescending(x=>x.date_time).ToList<Request>();
+            List<Request> req = context.Requests.Where(x => x.dept_code == dept).OrderByDescending(x=>x.date_time).ToList<Request>();
 
             return req;
 
@@ -75,7 +75,7 @@ namespace SSISTeam2.Classes.WebServices
         {
             
 
-            List<Request> req = ctx.Requests.Where(x => x.dept_code == dept && x.Dept_Registry.fullname==user).OrderByDescending(x => x.date_time).ToList<Request>();
+            List<Request> req = context.Requests.Where(x => x.dept_code == dept && x.Dept_Registry.fullname==user).OrderByDescending(x => x.date_time).ToList<Request>();
 
             return req;
 
@@ -87,7 +87,7 @@ namespace SSISTeam2.Classes.WebServices
         public Dept_Registry login(string user)
         {
 
-            Dept_Registry dr = ctx.Dept_Registry.Where(x => x.username == user).First();
+            Dept_Registry dr = context.Dept_Registry.Where(x => x.username == user).First();
             return dr;
         }
         //Getting ApprovalDuties Status
@@ -101,7 +101,7 @@ namespace SSISTeam2.Classes.WebServices
         //        string endDate = date.ToString("yyyy-MM-dd");
         //        if (endDate.CompareTo(currentDate) == -1)
         //        {
-        //            var q = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
+        //            var approvalDuty = ctx.Approval_Duties.Where(x => x.deleted == "N").First();
         //            q.deleted = "Y";
         //            ctx.SaveChanges();
 
@@ -120,14 +120,14 @@ namespace SSISTeam2.Classes.WebServices
             string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
             try
             {
-                var result = ctx.Approval_Duties.Where(x => x.deleted == "N"&&x.dept_code.Equals(deptcode)).Select(x => x.end_date).Max();
+                var result = context.Approval_Duties.Where(x => x.deleted == "N"&&x.dept_code.Equals(deptcode)).Select(x => x.end_date).Max();
                 DateTime date = Convert.ToDateTime(result.ToString());
                 string endDate = date.ToString("yyyy-MM-dd");
                 if (endDate.CompareTo(currentDate) < 0)
                 {
-                    var q = ctx.Approval_Duties.Where(x => x.deleted == "N" && x.dept_code.Equals(deptcode)).First();
-                    q.deleted = "Y";
-                    ctx.SaveChanges();
+                    var deptApprovals = context.Approval_Duties.Where(x => x.deleted == "N" && x.dept_code.Equals(deptcode)).First();
+                    deptApprovals.deleted = "Y";
+                    context.SaveChanges();
 
                 }
                 return statusFlag = "T";
@@ -145,7 +145,7 @@ namespace SSISTeam2.Classes.WebServices
             string flag = null;
             try
             {
-                var result = ctx.Approval_Duties.Where(x => x.username == user && x.deleted == "N").Count();
+                var result = context.Approval_Duties.Where(x => x.username == user && x.deleted == "N").Count();
                 if (result != 0)
                 {
                     flag = "Y";                   
@@ -183,14 +183,14 @@ namespace SSISTeam2.Classes.WebServices
         //}
         public List<String> ListEmployeeName(string deptcode)
         {
-            var q = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
-            string headUserName = q.First();
+            var headDeptUser = context.Departments.Where(x => x.dept_code.Equals(deptcode)).Select(x => x.head_user);
+            string headUserName = headDeptUser.First();
 
-            var depts = ctx.Departments.Where(x => x.dept_code.Equals(deptcode)).ToList();
+            var depts = context.Departments.Where(x => x.dept_code.Equals(deptcode)).ToList();
             var delegateHead = depts.Select(x => new UserModel(x.head_user).FindDelegateOrDeptHead().Username);
             string delegateUserName = delegateHead.First();
 
-            var list = ctx.Dept_Registry
+            var list = context.Dept_Registry
                 .Where(c => 
                 c.dept_code.Equals(deptcode)
                 && c.username != headUserName
@@ -201,8 +201,8 @@ namespace SSISTeam2.Classes.WebServices
 
         public void CreateAppDuties(Approval_Duties ap)
         {
-            ctx.Entry(ap).State = System.Data.Entity.EntityState.Added;
-            ctx.SaveChanges();
+            context.Entry(ap).State = System.Data.Entity.EntityState.Added;
+            context.SaveChanges();
         }
 
 
@@ -210,7 +210,7 @@ namespace SSISTeam2.Classes.WebServices
         public List<MonthlyCheckModel> GetAllMonthlyCheck()
         {
             List<MonthlyCheckModel> modelList = new List<MonthlyCheckModel>();
-            List<Stock_Inventory> inventoryList = ctx.Stock_Inventory.Where(x => x.deleted == "N").ToList();
+            List<Stock_Inventory> inventoryList = context.Stock_Inventory.Where(x => x.deleted == "N").ToList();
 
             foreach (Stock_Inventory i in inventoryList)
             {
@@ -246,7 +246,7 @@ namespace SSISTeam2.Classes.WebServices
                 if (adjusted == 0)
                     continue;
 
-                Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
+                Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.ItemCode).ToList().First();
                 inventory.current_qty = actual;
 
                 MonthlyCheckModel itemModel = new MonthlyCheckModel(inventory);
@@ -266,18 +266,18 @@ namespace SSISTeam2.Classes.WebServices
                 {
                     invAdjustmentMan.Adjustment_Details.Add(adjDetails);
                 }
-                ctx.Adjustment_Details.Add(adjDetails);
+                context.Adjustment_Details.Add(adjDetails);
             }
 
             if (invAdjustmentSup.Adjustment_Details.Count != 0)
             {
-                ctx.Inventory_Adjustment.Add(invAdjustmentSup);
-                ctx.SaveChanges();
+                context.Inventory_Adjustment.Add(invAdjustmentSup);
+                context.SaveChanges();
             }
             if (invAdjustmentMan.Adjustment_Details.Count != 0)
             {
-                ctx.Inventory_Adjustment.Add(invAdjustmentMan);
-                ctx.SaveChanges();
+                context.Inventory_Adjustment.Add(invAdjustmentMan);
+                context.SaveChanges();
             }
 
             if (invAdjustmentSup.Adjustment_Details.Count != 0 || invAdjustmentMan.Adjustment_Details.Count != 0)
@@ -298,8 +298,8 @@ namespace SSISTeam2.Classes.WebServices
             else
                 yesOrNo = "N";
             checkRecords.discrepancy = yesOrNo;
-            ctx.Monthly_Check_Records.Add(checkRecords);
-            ctx.SaveChanges();
+            context.Monthly_Check_Records.Add(checkRecords);
+            context.SaveChanges();
         }
 
         public void UpdateFileDiscrepancies(List<WCF_FileDiscrepancy> fileDiscrepancies, string username)
@@ -322,7 +322,7 @@ namespace SSISTeam2.Classes.WebServices
             {
                 int adjusted = int.Parse(i.adjustedQty);
 
-                Stock_Inventory inventory = ctx.Stock_Inventory.Where(x => x.item_code == i.itemCode).ToList().First();
+                Stock_Inventory inventory = context.Stock_Inventory.Where(x => x.item_code == i.itemCode).ToList().First();
                 inventory.current_qty += adjusted;
 
                 MonthlyCheckModel itemModel = new MonthlyCheckModel(inventory);
@@ -342,25 +342,25 @@ namespace SSISTeam2.Classes.WebServices
                 {
                     invAdjustmentMan.Adjustment_Details.Add(adjDetails);
                 }
-                ctx.Adjustment_Details.Add(adjDetails);
+                context.Adjustment_Details.Add(adjDetails);
             }
 
             if (invAdjustmentSup.Adjustment_Details.Count != 0)
             {
-                ctx.Inventory_Adjustment.Add(invAdjustmentSup);
-                ctx.SaveChanges();
+                context.Inventory_Adjustment.Add(invAdjustmentSup);
+                context.SaveChanges();
             }
             if (invAdjustmentMan.Adjustment_Details.Count != 0)
             {
-                ctx.Inventory_Adjustment.Add(invAdjustmentMan);
-                ctx.SaveChanges();
+                context.Inventory_Adjustment.Add(invAdjustmentMan);
+                context.SaveChanges();
             }
         }
 
         public List<Request_Details> GetRequestDetail(string id)
         {
             int req_id = Convert.ToInt32(id);
-            List<Request_Details> rd = ctx.Request_Details.Where(x => x.request_id == req_id && x.deleted=="N").ToList<Request_Details>();
+            List<Request_Details> rd = context.Request_Details.Where(x => x.request_id == req_id && x.deleted=="N").ToList<Request_Details>();
 
             return rd;
         }
@@ -370,8 +370,8 @@ namespace SSISTeam2.Classes.WebServices
 
             try
             {
-                var q = ctx.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == ctx.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
-                return q;
+                var deptApprovalMax = context.Approval_Duties.Where(x => x.dept_code.Equals(deptcode) && x.duty_id == context.Approval_Duties.Select(y => y.duty_id).Max()).ToList<Approval_Duties>()[0];
+                return deptApprovalMax;
             }
             catch
             {
@@ -393,9 +393,9 @@ namespace SSISTeam2.Classes.WebServices
 
         public void UpdateDuty(String deptCode)
         {
-            var q = ctx.Approval_Duties.Where(x => x.dept_code == deptCode && x.deleted == "N").First();
-            q.deleted = "Y";
-            ctx.SaveChanges();
+            var latestDeptApproval = context.Approval_Duties.Where(x => x.dept_code == deptCode && x.deleted == "N").First();
+            latestDeptApproval.deleted = "Y";
+            context.SaveChanges();
 
         }
 
@@ -403,17 +403,17 @@ namespace SSISTeam2.Classes.WebServices
         {
             int req_id = Convert.ToInt32(id);
             Request r = new Request();
-            Request req = ctx.Requests.Where(x => x.request_id == req_id).First();
+            Request req = context.Requests.Where(x => x.request_id == req_id).First();
             req.current_status = RequestStatus.APPROVED;
-            ctx.SaveChanges();
+            context.SaveChanges();
 
-            List<Request_Details> rdetailList = ctx.Request_Details.Where(x => x.request_id == req_id).ToList();
+            List<Request_Details> rdetailList = context.Request_Details.Where(x => x.request_id == req_id).ToList();
             foreach (Request_Details rdetail in rdetailList)
             {
-                Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == rdetail.request_detail_id).First();
+                Request_Event revent = context.Request_Event.Where(x => x.request_detail_id == rdetail.request_detail_id).First();
                 revent.status = RequestStatus.APPROVED;
                 revent.date_time = DateTime.Today;
-                ctx.SaveChanges();
+                context.SaveChanges();
 
             }
         }
@@ -422,17 +422,17 @@ namespace SSISTeam2.Classes.WebServices
         {
             int req_id = Convert.ToInt32(id);
             Request r = new Request();
-            Request req = ctx.Requests.Where(x => x.request_id == req_id).First();
+            Request req = context.Requests.Where(x => x.request_id == req_id).First();
             req.current_status = RequestStatus.REJECTED;
             req.rejected = "Y";
-            ctx.SaveChanges();
-            List<Request_Details> rdetailList = ctx.Request_Details.Where(x => x.request_id == req_id).ToList();
+            context.SaveChanges();
+            List<Request_Details> rdetailList = context.Request_Details.Where(x => x.request_id == req_id).ToList();
             foreach (Request_Details rdetail in rdetailList)
             {
-                Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == rdetail.request_detail_id).First();
+                Request_Event revent = context.Request_Event.Where(x => x.request_detail_id == rdetail.request_detail_id).First();
                 revent.status = RequestStatus.REJECTED;
                 revent.date_time = DateTime.Today;
-                ctx.SaveChanges();
+                context.SaveChanges();
 
             }
         }
@@ -445,21 +445,21 @@ namespace SSISTeam2.Classes.WebServices
 
         public List<String> wgetCollectP()
         {
-            var q = ctx.Collection_Point.Select(x => x.location).ToList<String>();
-            return q.ToList<String>();
+            var collectionPt = context.Collection_Point.Select(x => x.location).ToList<String>();
+            return collectionPt.ToList<String>();
         }
 
         public List<String> wgetCollectDept(string cpid)
         {
             int i = Int16.Parse(cpid);
-            var q = ctx.Departments.Where(x => x.collection_point == i)
+            var deptNames = context.Departments.Where(x => x.collection_point == i)
                 .Select(y => y.name);
-            return q.ToList<String>();
+            return deptNames.ToList<String>();
         }
 
         //public List<WCFDisburse> wgetDepDetail(string deptname)
         //{
-        //    var q = (from de in ctx.Departments
+        //    var deptNames = (from de in ctx.Departments
         //             join rq in ctx.Requests on de.dept_code equals rq.dept_code
         //             join rqd in ctx.Request_Details on rq.request_id equals rqd.request_id
         //             join rqe in ctx.Request_Event on rqd.request_detail_id equals rqe.request_detail_id
@@ -479,14 +479,14 @@ namespace SSISTeam2.Classes.WebServices
 
         public List<Inventory_Adjustment> GetAdjustmentList()
         {
-            var invAdjList = ctx.Inventory_Adjustment.Where(x => x.deleted == "N" & x.status == "Pending").ToList();
+            var invAdjList = context.Inventory_Adjustment.Where(x => x.deleted == "N" & x.status == "Pending").ToList();
             return invAdjList;
         }
 
         public List<Adjustment_Details> GetViewAdjustmentDetailList(string id)
         {
             int voucherId = Convert.ToInt32(id);
-            var invAdjList = ctx.Adjustment_Details.Where(x => x.voucher_id.Equals(voucherId)).ToList();
+            var invAdjList = context.Adjustment_Details.Where(x => x.voucher_id.Equals(voucherId)).ToList();
             return invAdjList;
 
         }
@@ -495,75 +495,75 @@ namespace SSISTeam2.Classes.WebServices
 
         public void ApplyNewRequest(Request r)
         {
-            ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
-            ctx.SaveChanges();
+            context.Entry(r).State = System.Data.Entity.EntityState.Added;
+            context.SaveChanges();
         }
 
         public void CreateRequestDetail(Request_Details r)
         {
-            ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
-            ctx.SaveChanges();
+            context.Entry(r).State = System.Data.Entity.EntityState.Added;
+            context.SaveChanges();
         }
 
         public void CreateRequestEvent(Request_Event r)
         {
-            ctx.Entry(r).State = System.Data.Entity.EntityState.Added;
-            ctx.SaveChanges();
+            context.Entry(r).State = System.Data.Entity.EntityState.Added;
+            context.SaveChanges();
         }
 
         public void updateAdjustment(String voucherId)
         {
             int vId = Convert.ToInt32(voucherId);
-            var q = ctx.Inventory_Adjustment.Where(x => x.voucher_id == vId).First();
-            q.status = "Approved";
-            ctx.SaveChanges();
+            var nextVoucher = context.Inventory_Adjustment.Where(x => x.voucher_id == vId).First();
+            nextVoucher.status = "Approved";
+            context.SaveChanges();
 
         }
 
         public void deleteAdjustment(String voucherId)
         {
             int vId = Convert.ToInt32(voucherId);
-            var q = ctx.Inventory_Adjustment.Where(x => x.voucher_id == vId).First();
-            q.status = "Rejected";
-            ctx.SaveChanges();
+            var nextVoucher = context.Inventory_Adjustment.Where(x => x.voucher_id == vId).First();
+            nextVoucher.status = "Rejected";
+            context.SaveChanges();
 
         }
         public string GetUserName(String fullName)
         {
-            var q = ctx.Dept_Registry.Where(x => x.fullname.Equals(fullName)).Select(x => x.username);
-            return q.First();
+            var username = context.Dept_Registry.Where(x => x.fullname.Equals(fullName)).Select(x => x.username);
+            return username.First();
         }
 
         public void UpdateRequestDetail(string id, string qty)
         {
             int req_id = Convert.ToInt32(id);
             
-            Request_Details req = ctx.Request_Details.Where(x => x.request_detail_id == req_id).First();
+            Request_Details req = context.Request_Details.Where(x => x.request_detail_id == req_id).First();
             req.orig_quantity = Convert.ToInt32( qty);
-            ctx.SaveChanges();
+            context.SaveChanges();
 
-            Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
+            Request_Event revent = context.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
             revent.quantity = Convert.ToInt32(qty);
-            ctx.SaveChanges();
+            context.SaveChanges();
         }
 
         public void DeleteRequestDetail(string id)
         {
             int req_id = Convert.ToInt32(id);
 
-            Request_Details req = ctx.Request_Details.Where(x => x.request_detail_id == req_id).First();
+            Request_Details req = context.Request_Details.Where(x => x.request_detail_id == req_id).First();
             req.deleted = "Y";
-            ctx.SaveChanges();
+            context.SaveChanges();
 
-            Request_Event revent = ctx.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
+            Request_Event revent = context.Request_Event.Where(x => x.request_detail_id == req.request_detail_id).First();
             revent.deleted = "Y";
-            ctx.SaveChanges();
+            context.SaveChanges();
         }
 
 
         public List<Dept_Registry> GetWorkingPartner(string user, string dept_code)
         {
-            List<Dept_Registry> drList = ctx.Dept_Registry.Where(x => x.username != user && x.dept_code == dept_code).ToList<Dept_Registry>();
+            List<Dept_Registry> drList = context.Dept_Registry.Where(x => x.username != user && x.dept_code == dept_code).ToList<Dept_Registry>();
             return drList;
         }
 

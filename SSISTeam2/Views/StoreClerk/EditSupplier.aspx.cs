@@ -9,14 +9,14 @@ namespace SSISTeam2.Views.StoreClerk
 {
     public partial class EditSupplier : System.Web.UI.Page
     {
-        SSISEntities ctx = new SSISEntities();
+        SSISEntities context = new SSISEntities();
         string supplier_code;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 string supplierId = Request.QueryString["supplier"];
-                Supplier s = ctx.Suppliers.Where(x => x.supplier_id == supplierId).First();
+                Supplier s = context.Suppliers.Where(x => x.supplier_id == supplierId).First();
                 supplier_code = s.supplier_id;
                 tb_supplierId.Text = s.supplier_id;
                 tb_contactName.Text = s.contact_name;
@@ -42,7 +42,7 @@ namespace SSISTeam2.Views.StoreClerk
             string Gst = tb_gst.Text;
             supplier_code=Request.QueryString["supplier"];
 
-            Supplier s = ctx.Suppliers.Where(x=> x.supplier_id ==supplier_code).First();
+            Supplier s = context.Suppliers.Where(x=> x.supplier_id ==supplier_code).First();
 
                
                 s.name = SupplierName;
@@ -53,7 +53,7 @@ namespace SSISTeam2.Views.StoreClerk
                 s.gst_reg_num = Gst;
 
 
-                ctx.SaveChanges();
+                context.SaveChanges();
 
 
 
