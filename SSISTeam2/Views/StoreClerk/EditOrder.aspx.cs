@@ -23,7 +23,12 @@ namespace SSISTeam2.Views.StoreClerk
                 GridView1.DataBind();
                 if (list.Count != 0)
                 {
-                    finish.Visible = true;
+                    if (list.First().status != "Pending")
+                    {
+                        finish.Enabled = false;
+                        finish.Visible = false;
+                    } else
+                        finish.Visible = true;
                 }
                 else
                 {

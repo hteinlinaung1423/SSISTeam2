@@ -24,7 +24,7 @@ namespace SSISTeam2
                 {
                     InventoryAdjustmentModel model = new InventoryAdjustmentModel(i);
                     //model = new InventoryAdjustmentModel(i);
-                    if (User.IsInRole("DeptHead"))
+                    if (User.IsInRole("Manager"))
                     {
                         foreach (AdjustmentModel j in model.AdjModel)
                         {

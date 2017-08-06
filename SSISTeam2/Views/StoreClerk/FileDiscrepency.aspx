@@ -49,7 +49,7 @@
 
             <asp:TemplateField HeaderText="Average Price">
                 <ItemTemplate>
-                    <asp:Label runat="server" Text='<%# Eval("averagePrice") %>'></asp:Label>
+                    <asp:Label runat="server" Text='<%# Eval("averagePrice", "{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
 
