@@ -22,15 +22,6 @@ namespace SSISTeam2.Views.StoreClerk {
         protected global::System.Web.UI.WebControls.Label lbldeptname;
         
         /// <summary>
-        /// lbldeptcode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbldeptcode;
-        
-        /// <summary>
         /// lblhead control.
         /// </summary>
         /// <remarks>

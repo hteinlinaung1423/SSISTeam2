@@ -52,7 +52,7 @@
                     <asp:TemplateField HeaderText="Representative Name">
 
                         <ItemTemplate>
-                            <asp:Label ID="Label_RepUser" runat="server" Text='<%# Eval("rep_user") %>'></asp:Label>
+                            <asp:Label ID="Label_RepUser" runat="server" Text='<%# Eval("fullname") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
 

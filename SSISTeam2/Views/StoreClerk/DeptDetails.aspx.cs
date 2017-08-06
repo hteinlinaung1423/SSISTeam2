@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSISTeam2.Classes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,14 +25,13 @@ namespace SSISTeam2.Views.StoreClerk
         {
             Department d = context.Departments.Find(deptcode);
             Collection_Point cp = context.Collection_Point.Where(x => x.collection_pt_id == d.collection_point).First();
-            lbldeptcode.Text = d.dept_code;
             lbldeptname.Text = d.name;
-            lblhead.Text = d.head_user ;
-            lblrep.Text = d.rep_user ;
-            lblconname.Text = d.contact_user;
+            lblhead.Text = new UserModel( d.head_user ).Fullname;
+            lblrep.Text = new UserModel(d.rep_user).Fullname;
+            lblconname.Text = new UserModel(d.contact_user).Fullname;
             lblconnum.Text = d.contact_num;
             lblfax.Text = d.fax_num ;
-            lblcollpoint.Text = cp.location;
+            lblcollpoint.Text = cp.location + " on " + cp.day_of_week + " at " + cp.date_time.ToShortTimeString();
         }
 
         protected void btnBack_Click(object sender, EventArgs e)

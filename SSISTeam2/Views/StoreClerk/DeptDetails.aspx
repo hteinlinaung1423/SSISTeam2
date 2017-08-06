@@ -13,9 +13,6 @@
     Department Name: <asp:Label ID="lbldeptname" runat="server" Text='<%# Eval("name") %>' ></asp:Label>
     <br />
     <br />
-    Department Code: <asp:Label ID="lbldeptcode" runat="server" Text='<%# Eval("dept_code") %>'></asp:Label>
-    <br />
-    <br />
     Department Head: <asp:Label ID="lblhead" runat="server" Text='<%# Eval("head_user") %>'></asp:Label>
     <br />
     <br />

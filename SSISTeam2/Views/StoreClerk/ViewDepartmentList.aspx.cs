@@ -33,12 +33,14 @@ namespace SSISTeam2.Views.StoreClerk
             //UserModel user = new UserModel(username);
             //string currentDept = user.Department.dept_code;
             var deptInfos = (from x in context.Departments
-                     join y in context.Collection_Point on x.collection_point equals y.collection_pt_id 
+                     join y in context.Collection_Point on x.collection_point equals y.collection_pt_id
+                     join z in context.Dept_Registry on x.rep_user equals z.username 
                      select new
                      {
                          x.dept_code,
                          x.name,
                          x.rep_user ,
+                         z.fullname,
                          y.location
                      })
                      .ToList();
