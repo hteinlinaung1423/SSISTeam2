@@ -81,7 +81,7 @@ namespace SSISTeam2.Views.StoreClerk
         //    }
 
         //    GridView1.DataBind();
-        //}
+        ////}
         private void BindGrid()
         {
             string searchWord = TextBox1.Text;
