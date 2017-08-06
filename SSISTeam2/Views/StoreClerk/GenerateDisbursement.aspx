@@ -113,8 +113,10 @@
 
             <asp:Panel ID="panelNormal" runat="server">
 
-                <asp:Button ID="btnSubmit" runat="server" Text="Generate disbursment forms" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
-                <asp:Button ID="btnSubmitAll" runat="server" Text="Generate all disbursment forms" OnClick="btnSubmitAll_Click" CssClass="btn btn-sm btn-success" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Generate selected disbursment forms" OnClick="btnSubmit_Click" CssClass="btn btn-success" />
+                <br />
+                <br />
+                <asp:Button ID="btnSubmitAll" runat="server" Text="Generate selected disbursment forms for all collection points" OnClick="btnSubmitAll_Click" CssClass="btn btn-sm btn-success" />
 
             </asp:Panel>
 

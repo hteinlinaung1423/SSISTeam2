@@ -2,14 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead"
     runat="server">
-    <title>Your Account has been Created</title>
+    <title>Not Authorized</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
     runat="server">
     <div class="col-md-6 col-md-offset-3">
 
         <div class="jumbotron alert-danger">
-            <h3>Opps! You are not authorized to do this!.</h3>       
+            <h3>Oops! You are not authorized to do this!</h3>       
         </div>
 
     </div>

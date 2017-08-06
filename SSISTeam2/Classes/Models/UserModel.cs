@@ -22,7 +22,7 @@ namespace SSISTeam2.Classes.Models
         public UserModel(string username)
         {
             SSISEntities context = new SSISEntities();
-            Dept_Registry user = context.Dept_Registry.Where(x => x.username == username).ToList().First();
+            Dept_Registry user = context.Dept_Registry.Where(x => x.username.ToLower() == username.ToLower()).ToList().First();
             Department dept = context.Departments.Where(x => x.dept_code == user.dept_code).ToList().First();
 
             //Membership.FindUsersByName(username);            

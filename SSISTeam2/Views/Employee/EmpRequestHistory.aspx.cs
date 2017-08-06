@@ -42,8 +42,9 @@ namespace SSISTeam2.Views.Employee
                 Response.Redirect("~/login.aspx?return=Views/Employee/EmpRequestHistory.aspx");
             }
 
-            // If user is not employee or storeclerk, remove make new request btn
-            if ( ! (User.IsInRole("Employee") || User.IsInRole("StoreClerk")))
+            // If user is not employee or storeclerk, remove make new request btn, or if he's a delegate head
+            UserModel userModel = new UserModel(User.Identity.Name);
+            if ( ! (User.IsInRole("Employee") || User.IsInRole("StoreClerk")) || userModel.isDelegateHead())
             {
                 btnCreate.Visible = false;
             }

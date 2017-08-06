@@ -59,6 +59,8 @@ namespace SSISTeam2
                     .ToList();
                 gridViewToRetrieve_FromWarehouse.DataSource = allocatedItems.Take(3);
                 gridViewToRetrieve_FromWarehouse.DataBind();
+
+                lblNumToRetrieve.Text = string.Format("({0} in total)", allocatedItems.Count);
             }
 
 
@@ -91,7 +93,7 @@ namespace SSISTeam2
             {
                 panelToRetrieve.CssClass = "panel panel-info";
                 panelToRetrieve_Empty.Visible = false;
-                lblNumToRetrieve.Text = string.Format("({0} in total)", allocated.Count);
+                
             } else
             {
                 panelToRetrieve_FromWarehouse.Visible = false;
@@ -162,7 +164,7 @@ namespace SSISTeam2
             {
                 panelToDisburse.CssClass = "panel panel-success";
                 panelToDisburse_Empty.Visible = false;
-                lblNumToSignOff.Text = string.Format("({0} in total)", disbursingList.Count);
+                lblNumToSignOff.Text = string.Format("({0} in total)", toBeSignedOff.Count);
             }
             else
             {
@@ -231,7 +233,7 @@ namespace SSISTeam2
 
                 var q2 = (from x in ctx.Requests
                           where currentDept == x.dept_code
-                          select new { x.request_id, x.username, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
+                          select new { x.request_id, x.username, x.Dept_Registry.fullname, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
                 GridView2.DataSource = q2;
                 GridView2.DataBind();
             }

@@ -383,7 +383,7 @@ namespace SSISTeam2.Views.DepartmentHead
 
         {
 
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("~/Default.aspx");
 
         }
 

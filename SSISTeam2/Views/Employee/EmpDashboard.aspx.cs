@@ -46,7 +46,7 @@ namespace SSISTeam2.Views.Employee
 
             var q2 = (from x in ent.Requests
                      where currentDept  == x.dept_code
-                     select new { x.request_id,x.username , x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
+                     select new { x.request_id, x.username, x.Dept_Registry.fullname, x.date_time, x.reason, x.current_status }).OrderByDescending(o => o.date_time).Take(3).ToList();
             GridView2.DataSource = q2;
             GridView2.DataBind();
         }

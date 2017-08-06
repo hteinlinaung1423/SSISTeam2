@@ -132,7 +132,7 @@ namespace SSISTeam2.Views.StoreClerk
 
             foreach (var dept in departments)
             {
-                if ( ! activeDeptCodes.Contains(dept.dept_code))
+                if ( ! activeDeptCodes.Contains(dept.dept_code) && ! dept.name.Contains("(Empty)"))
                 {
                     dept.name += " (Empty)";
                 }

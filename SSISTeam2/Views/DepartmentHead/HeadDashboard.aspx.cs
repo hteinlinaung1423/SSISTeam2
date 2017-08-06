@@ -54,7 +54,7 @@ namespace SSISTeam2.Views
             Collection_Point colpoint = ent.Collection_Point.Where(y => y.collection_pt_id == dept.collection_point).First();
             Dept_Registry dr = ent.Dept_Registry.Where(x => x.username == dept.rep_user).First();
             lblrep.Text = dr.fullname;
-            lblcolpoint.Text = colpoint.location + " (" + colpoint.day_of_week +")";
+            lblcolpoint.Text = colpoint.location + " (" + colpoint.day_of_week + " - " + colpoint.date_time.ToShortTimeString() +")";
 
             var deldept = (from x in ent.Approval_Duties select x.dept_code).ToList();
             if (deldept.Contains(currentDept))

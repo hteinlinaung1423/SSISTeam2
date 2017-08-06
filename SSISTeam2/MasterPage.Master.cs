@@ -31,12 +31,12 @@ namespace SSISTeam2
             //}
 
 
-            if (Page.User.Identity.Name == "")
-            {
-                FormsAuthentication.SignOut();
-            }
+            //if (Page.User.Identity.Name == "")
+            //{
+            //    FormsAuthentication.SignOut();
+            //}
 
-            if (Page.User.Identity.Name != null && Page.User.Identity.Name != "")
+            if (Page.User.Identity.IsAuthenticated && Page.User.Identity.Name != null && Page.User.Identity.Name != "")
             {
                 // Somebody is signed in
                 string normalisedUserName = Page.User.Identity.Name.ToLower();

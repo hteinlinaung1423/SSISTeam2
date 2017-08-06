@@ -39,6 +39,13 @@ namespace SSISTeam2.Views.StoreClerk
             if (!IsPostBack)
             { // New entry into page
 
+                // Check that user is not a d head or dlg head or whatever
+                UserModel userModel = new UserModel(User.Identity.Name);
+                if (userModel.isDelegateHead() || userModel.isDeptHead() || userModel.isStoreManager())
+                {
+                    Response.Redirect("~/Views/notauthorized.aspx");
+                }
+
                 int requestId = 0;
                 // Get any request string
                 string requestToEdit = Request.QueryString["edit"];
