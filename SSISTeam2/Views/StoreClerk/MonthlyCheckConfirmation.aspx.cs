@@ -190,7 +190,7 @@ namespace SSISTeam2
             sb.AppendLine("<br />");
             sb.AppendLine(string.Format("{0} has filed an inventory adjustment. Please review and approve it.", fromName));
             sb.AppendLine("<br />");
-            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view pending adjustments</a>.", "http://bit.ly/ssis-store-viewadjust"));
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view pending adjustments</a>.", "https://rebrand.ly/ssis-store-viewadjust"));
             sb.AppendLine("<br />");
             sb.AppendLine("<br />");
             sb.AppendLine("Thank you.");

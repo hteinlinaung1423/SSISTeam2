@@ -163,7 +163,7 @@ namespace SSISTeam2.Views.Employee
 
             sb.AppendLine("<br />");
 
-            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to login to the system</a>.", "http://bit.ly/ssis-login"));
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to login to the system</a>.", "https://rebrand.ly/ssis-login"));
 
             sb.AppendLine("<br />");
 

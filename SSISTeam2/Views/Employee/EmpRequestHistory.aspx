@@ -32,7 +32,7 @@
             GridLines="None"
             AutoGenerateColumns="false"
             AllowPaging="true"
-            PageSize="3"
+            PageSize="5"
             HeaderStyle-CssClass="text-center-impt"
             CssClass="table table-responsive table-striped"
             PagerStyle-HorizontalAlign="Center" 

@@ -209,7 +209,7 @@ namespace SSISTeam2.Views.DepartmentHead
             sb.AppendLine("<br />");
             sb.AppendLine(string.Format("The request's id is {0}, with the reason: {1}", req.request_id, req.reason));
             sb.AppendLine("<br />");
-            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view your requests</a>.", "http://bit.ly/ssis-deptrequests"));
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view your requests</a>.", "https://rebrand.ly/ssis-deptrequests"));
             sb.AppendLine("<br />");
             sb.AppendLine("<br />");
             sb.AppendLine("Thank you.");

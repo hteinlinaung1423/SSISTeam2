@@ -152,7 +152,7 @@ namespace SSISTeam2.Views.StoreClerk
             sb.AppendLine(string.Format("You have sent a purchase order."));
             sb.AppendLine("<br />");
             sb.AppendLine("<br />");
-            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view the request</a>.", "http://bit.ly/ssis-store-receiveorder"));
+            sb.AppendLine(string.Format("Please <a href=\"{0}\">follow this link to view the request</a>.", "https://rebrand.ly/ssis-store-receiveorder"));
             sb.AppendLine("<br />");
             sb.AppendLine("<br />");
             sb.AppendLine("Thank you.");
