@@ -319,7 +319,7 @@ namespace SSISTeam2.Views.DepartmentHead
                                 context.Approval_Duties.Add(ad);
                                 context.SaveChanges();
                                 lbDateError.Text = "Successfully Saved!";
-                           
+                        _sendEmail(loginUserName, delegateUserName);
 
                     }
 
